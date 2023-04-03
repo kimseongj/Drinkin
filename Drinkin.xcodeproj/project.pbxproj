@@ -22,6 +22,14 @@
 		1C5CAAF329DB1F710053F19A /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 1C5CAAF229DB1F710053F19A /* KakaoSDKTemplate */; };
 		1C5CAAF529DB1F710053F19A /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 1C5CAAF429DB1F710053F19A /* KakaoSDKUser */; };
 		1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0029DB51680053F19A /* EndpointMakeable.swift */; };
+		1C5CAB0429DB51D10053F19A /* PreferCocktailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0329DB51D10053F19A /* PreferCocktailRepository.swift */; };
+		1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0529DB51D50053F19A /* LoginRepository.swift */; };
+		1C5CAB0829DB51DD0053F19A /* MainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0729DB51DD0053F19A /* MainRepository.swift */; };
+		1C5CAB0C29DB52700053F19A /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0B29DB52700053F19A /* ProductRepository.swift */; };
+		1C5CAB0E29DB52770053F19A /* ToolModalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0D29DB52770053F19A /* ToolModalRepository.swift */; };
+		1C5CAB1029DB52800053F19A /* IngredientModalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0F29DB52800053F19A /* IngredientModalRepository.swift */; };
+		1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */; };
+		1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +42,14 @@
 		1C5CAADD29DB1AE50053F19A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C5CAAF629DB208A0053F19A /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		1C5CAB0029DB51680053F19A /* EndpointMakeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointMakeable.swift; sourceTree = "<group>"; };
+		1C5CAB0329DB51D10053F19A /* PreferCocktailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferCocktailRepository.swift; sourceTree = "<group>"; };
+		1C5CAB0529DB51D50053F19A /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		1C5CAB0729DB51DD0053F19A /* MainRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRepository.swift; sourceTree = "<group>"; };
+		1C5CAB0B29DB52700053F19A /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
+		1C5CAB0D29DB52770053F19A /* ToolModalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolModalRepository.swift; sourceTree = "<group>"; };
+		1C5CAB0F29DB52800053F19A /* IngredientModalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientModalRepository.swift; sourceTree = "<group>"; };
+		1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalRepository.swift; sourceTree = "<group>"; };
+		1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +123,7 @@
 		1C5CAAFB29DB50CC0053F19A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				1C5CAB0229DB51C40053F19A /* Repository */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -117,6 +134,21 @@
 				1C5CAB0029DB51680053F19A /* EndpointMakeable.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		1C5CAB0229DB51C40053F19A /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				1C5CAB0329DB51D10053F19A /* PreferCocktailRepository.swift */,
+				1C5CAB0529DB51D50053F19A /* LoginRepository.swift */,
+				1C5CAB0729DB51DD0053F19A /* MainRepository.swift */,
+				1C5CAB0B29DB52700053F19A /* ProductRepository.swift */,
+				1C5CAB0D29DB52770053F19A /* ToolModalRepository.swift */,
+				1C5CAB0F29DB52800053F19A /* IngredientModalRepository.swift */,
+				1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */,
+				1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,10 +235,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
+				1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */,
 				1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */,
+				1C5CAB0E29DB52770053F19A /* ToolModalRepository.swift in Sources */,
+				1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */,
+				1C5CAB1029DB52800053F19A /* IngredientModalRepository.swift in Sources */,
 				1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */,
 				1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */,
+				1C5CAB0829DB51DD0053F19A /* MainRepository.swift in Sources */,
+				1C5CAB0C29DB52700053F19A /* ProductRepository.swift in Sources */,
+				1C5CAB0429DB51D10053F19A /* PreferCocktailRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
