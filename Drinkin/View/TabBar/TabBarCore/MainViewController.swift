@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol MainViewDelegate: AnyObject {
     func pushChooseCocktailVC()
