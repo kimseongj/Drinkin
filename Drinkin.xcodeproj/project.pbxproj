@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */; };
+		1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */; };
+		1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */; };
+		1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19229DEECF800E381C2 /* TabBarController.swift */; };
+		1C04C19629DEED2700E381C2 /* HomeBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */; };
+		1C04C19829DEED3300E381C2 /* CocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19729DEED3300E381C2 /* CocktailViewController.swift */; };
+		1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19929DEED3D00E381C2 /* MainViewController.swift */; };
+		1C04C19C29DEEDAE00E381C2 /* LoggedInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */; };
 		1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */; };
 		1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */; };
 		1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD329DB1AE30053F19A /* ViewController.swift */; };
@@ -33,6 +41,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewController.swift; sourceTree = "<group>"; };
+		1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildModalViewController.swift; sourceTree = "<group>"; };
+		1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolModalViewController.swift; sourceTree = "<group>"; };
+		1C04C19229DEECF800E381C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarViewController.swift; sourceTree = "<group>"; };
+		1C04C19729DEED3300E381C2 /* CocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailViewController.swift; sourceTree = "<group>"; };
+		1C04C19929DEED3D00E381C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInCell.swift; sourceTree = "<group>"; };
 		1C5CAACC29DB1AE30053F19A /* Drinkin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +88,85 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C04C18229DEEC2200E381C2 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		1C04C18429DEEC2D00E381C2 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		1C04C18529DEEC2F00E381C2 /* New Group2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group2";
+			sourceTree = "<group>";
+		};
+		1C04C18629DEEC3100E381C2 /* New Group3 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group3";
+			sourceTree = "<group>";
+		};
+		1C04C18729DEEC3400E381C2 /* New Group4 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group4";
+			sourceTree = "<group>";
+		};
+		1C04C18829DEEC3700E381C2 /* New Group5 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group5";
+			sourceTree = "<group>";
+		};
+		1C04C18929DEEC3A00E381C2 /* New Group6 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group6";
+			sourceTree = "<group>";
+		};
+		1C04C18A29DEEC3C00E381C2 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				1C04C19429DEED0500E381C2 /* TabBarCore */,
+				1C04C19229DEECF800E381C2 /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		1C04C18B29DEEC3F00E381C2 /* ModalView */ = {
+			isa = PBXGroup;
+			children = (
+				1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */,
+				1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */,
+				1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */,
+			);
+			path = ModalView;
+			sourceTree = "<group>";
+		};
+		1C04C19429DEED0500E381C2 /* TabBarCore */ = {
+			isa = PBXGroup;
+			children = (
+				1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */,
+				1C04C19729DEED3300E381C2 /* CocktailViewController.swift */,
+				1C04C19929DEED3D00E381C2 /* MainViewController.swift */,
+				1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */,
+			);
+			path = TabBarCore;
+			sourceTree = "<group>";
+		};
 		1C5CAAC329DB1AE30053F19A = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +211,15 @@
 		1C5CAAFA29DB50B00053F19A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1C04C18B29DEEC3F00E381C2 /* ModalView */,
+				1C04C18A29DEEC3C00E381C2 /* TabBar */,
+				1C04C18929DEEC3A00E381C2 /* New Group6 */,
+				1C04C18829DEEC3700E381C2 /* New Group5 */,
+				1C04C18729DEEC3400E381C2 /* New Group4 */,
+				1C04C18629DEEC3100E381C2 /* New Group3 */,
+				1C04C18529DEEC2F00E381C2 /* New Group2 */,
+				1C04C18429DEEC2D00E381C2 /* New Group1 */,
+				1C04C18229DEEC2200E381C2 /* New Group */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -236,14 +340,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */,
+				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
 				1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */,
+				1C04C19829DEED3300E381C2 /* CocktailViewController.swift in Sources */,
+				1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */,
 				1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */,
 				1C5CAB0E29DB52770053F19A /* ToolModalRepository.swift in Sources */,
+				1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */,
+				1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */,
 				1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */,
+				1C04C19629DEED2700E381C2 /* HomeBarViewController.swift in Sources */,
 				1C5CAB1029DB52800053F19A /* IngredientModalRepository.swift in Sources */,
 				1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */,
+				1C04C19C29DEEDAE00E381C2 /* LoggedInCell.swift in Sources */,
 				1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */,
+				1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */,
 				1C5CAB0829DB51DD0053F19A /* MainRepository.swift in Sources */,
 				1C5CAB0C29DB52700053F19A /* ProductRepository.swift in Sources */,
 				1C5CAB0429DB51D10053F19A /* PreferCocktailRepository.swift in Sources */,
