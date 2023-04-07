@@ -15,8 +15,11 @@
 		1C04C19829DEED3300E381C2 /* CocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19729DEED3300E381C2 /* CocktailViewController.swift */; };
 		1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19929DEED3D00E381C2 /* MainViewController.swift */; };
 		1C04C19C29DEEDAE00E381C2 /* LoggedInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */; };
-		1C04C19F29DEF79900E381C2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1C04C19E29DEF79900E381C2 /* SnapKit */; };
-		1C04C1A129DEF79900E381C2 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1C04C1A029DEF79900E381C2 /* SnapKit-Dynamic */; };
+		1C0809DA29E03FFB00265706 /* KakaoAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809D929E03FFB00265706 /* KakaoAuthViewModel.swift */; };
+		1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809DB29E041E000265706 /* LoginViewController.swift */; };
+		1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E029E043DF00265706 /* AppCoordinator.swift */; };
+		1C0809E329E043FF00265706 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E229E043FF00265706 /* Coordinator.swift */; };
+		1C0809E629E044B300265706 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0809E529E044B300265706 /* SnapKit */; };
 		1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */; };
 		1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */; };
 		1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD329DB1AE30053F19A /* ViewController.swift */; };
@@ -51,6 +54,10 @@
 		1C04C19729DEED3300E381C2 /* CocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailViewController.swift; sourceTree = "<group>"; };
 		1C04C19929DEED3D00E381C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInCell.swift; sourceTree = "<group>"; };
+		1C0809D929E03FFB00265706 /* KakaoAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthViewModel.swift; sourceTree = "<group>"; };
+		1C0809DB29E041E000265706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1C0809E029E043DF00265706 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		1C0809E229E043FF00265706 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1C5CAACC29DB1AE30053F19A /* Drinkin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,8 +91,7 @@
 				1C5CAAEB29DB1F710053F19A /* KakaoSDKNavi in Frameworks */,
 				1C5CAAEF29DB1F710053F19A /* KakaoSDKStory in Frameworks */,
 				1C5CAAF529DB1F710053F19A /* KakaoSDKUser in Frameworks */,
-				1C04C1A129DEF79900E381C2 /* SnapKit-Dynamic in Frameworks */,
-				1C04C19F29DEF79900E381C2 /* SnapKit in Frameworks */,
+				1C0809E629E044B300265706 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,11 +140,12 @@
 			path = "New Group5";
 			sourceTree = "<group>";
 		};
-		1C04C18929DEEC3A00E381C2 /* New Group6 */ = {
+		1C04C18929DEEC3A00E381C2 /* LoginView */ = {
 			isa = PBXGroup;
 			children = (
+				1C0809DB29E041E000265706 /* LoginViewController.swift */,
 			);
-			path = "New Group6";
+			path = LoginView;
 			sourceTree = "<group>";
 		};
 		1C04C18A29DEEC3C00E381C2 /* TabBar */ = {
@@ -171,6 +178,39 @@
 			path = TabBarCore;
 			sourceTree = "<group>";
 		};
+		1C0809D829E03FDB00265706 /* KakaoAuthViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1C0809D929E03FFB00265706 /* KakaoAuthViewModel.swift */,
+			);
+			path = KakaoAuthViewModel;
+			sourceTree = "<group>";
+		};
+		1C0809DD29E0438E00265706 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				1C0809DE29E043AE00265706 /* TabBarCoordinator */,
+				1C0809DF29E043BA00265706 /* ModalCoordinator */,
+				1C0809E229E043FF00265706 /* Coordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		1C0809DE29E043AE00265706 /* TabBarCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1C0809E029E043DF00265706 /* AppCoordinator.swift */,
+			);
+			path = TabBarCoordinator;
+			sourceTree = "<group>";
+		};
+		1C0809DF29E043BA00265706 /* ModalCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModalCoordinator;
+			sourceTree = "<group>";
+		};
 		1C5CAAC329DB1AE30053F19A = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +230,7 @@
 		1C5CAACE29DB1AE30053F19A /* Drinkin */ = {
 			isa = PBXGroup;
 			children = (
+				1C0809D829E03FDB00265706 /* KakaoAuthViewModel */,
 				1C5CAAFF29DB51560053F19A /* Network */,
 				1C5CAAFB29DB50CC0053F19A /* Data */,
 				1C5CAAF929DB50A80053F19A /* Domain */,
@@ -215,9 +256,10 @@
 		1C5CAAFA29DB50B00053F19A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1C0809DD29E0438E00265706 /* Flow */,
 				1C04C18B29DEEC3F00E381C2 /* ModalView */,
 				1C04C18A29DEEC3C00E381C2 /* TabBar */,
-				1C04C18929DEEC3A00E381C2 /* New Group6 */,
+				1C04C18929DEEC3A00E381C2 /* LoginView */,
 				1C04C18829DEEC3700E381C2 /* New Group5 */,
 				1C04C18729DEEC3400E381C2 /* New Group4 */,
 				1C04C18629DEEC3100E381C2 /* New Group3 */,
@@ -285,8 +327,7 @@
 				1C5CAAF029DB1F710053F19A /* KakaoSDKTalk */,
 				1C5CAAF229DB1F710053F19A /* KakaoSDKTemplate */,
 				1C5CAAF429DB1F710053F19A /* KakaoSDKUser */,
-				1C04C19E29DEF79900E381C2 /* SnapKit */,
-				1C04C1A029DEF79900E381C2 /* SnapKit-Dynamic */,
+				1C0809E529E044B300265706 /* SnapKit */,
 			);
 			productName = Drinkin;
 			productReference = 1C5CAACC29DB1AE30053F19A /* Drinkin.app */;
@@ -318,7 +359,7 @@
 			mainGroup = 1C5CAAC329DB1AE30053F19A;
 			packageReferences = (
 				1C5CAAE329DB1F710053F19A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
-				1C04C19D29DEF79900E381C2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1C0809E429E044B300265706 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 1C5CAACD29DB1AE30053F19A /* Products */;
 			projectDirPath = "";
@@ -352,10 +393,13 @@
 				1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */,
 				1C04C19829DEED3300E381C2 /* CocktailViewController.swift in Sources */,
 				1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */,
+				1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */,
 				1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */,
+				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
 				1C5CAB0E29DB52770053F19A /* ToolModalRepository.swift in Sources */,
 				1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */,
 				1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */,
+				1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */,
 				1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */,
 				1C04C19629DEED2700E381C2 /* HomeBarViewController.swift in Sources */,
 				1C5CAB1029DB52800053F19A /* IngredientModalRepository.swift in Sources */,
@@ -365,6 +409,7 @@
 				1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */,
 				1C5CAB0829DB51DD0053F19A /* MainRepository.swift in Sources */,
 				1C5CAB0C29DB52700053F19A /* ProductRepository.swift in Sources */,
+				1C0809DA29E03FFB00265706 /* KakaoAuthViewModel.swift in Sources */,
 				1C5CAB0429DB51D10053F19A /* PreferCocktailRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,7 +626,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1C04C19D29DEF79900E381C2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		1C0809E429E044B300265706 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -600,15 +645,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1C04C19E29DEF79900E381C2 /* SnapKit */ = {
+		1C0809E529E044B300265706 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1C04C19D29DEF79900E381C2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 1C0809E429E044B300265706 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		1C04C1A029DEF79900E381C2 /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1C04C19D29DEF79900E381C2 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 		1C5CAAE429DB1F710053F19A /* KakaoSDK */ = {
 			isa = XCSwiftPackageProductDependency;
