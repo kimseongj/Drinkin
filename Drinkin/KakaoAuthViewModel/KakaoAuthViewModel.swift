@@ -13,6 +13,10 @@ import KakaoSDKUser
 class KakaoAuthViewModel: ObservableObject {
     var subscriptions = Set<AnyCancellable>()
     
+    init() {
+        print("KakaoAuthVM - init() called")
+    }
+    
     func handleKakaoLogin() {
         print("KakoAuthVM - handleKakao")
         

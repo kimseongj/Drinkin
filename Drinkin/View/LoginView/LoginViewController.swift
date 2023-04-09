@@ -10,6 +10,8 @@ import SnapKit
 
 class LoginViewController: UIViewController {
     
+    let kakaoAuthVM = KakaoAuthViewModel()
+    
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -37,18 +39,22 @@ class LoginViewController: UIViewController {
     lazy var kakaoLogoutButton: UIButton = {
         let button = UIButton()
         button.setTitle("카카오 로그아웃", for: .normal)
+        button.backgroundColor = .yellow
+        button.titleLabel?.textColor = .black
         button.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         configureUI()
     }
     
     @objc
     private func loginButtonClicked() {
         print("loginButtonClicked")
+        kakaoAuthVM.handleKakaoLogin()
     }
     
     @objc
@@ -69,11 +75,6 @@ class LoginViewController: UIViewController {
         }
     }
 }
-
-
-
-
-
 
 import SwiftUI
 
