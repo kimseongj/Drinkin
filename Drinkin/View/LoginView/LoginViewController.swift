@@ -60,6 +60,7 @@ class LoginViewController: UIViewController {
     @objc
     private func logoutButtonClicked() {
         print("logoutButtonClicked")
+        
     }
     
     private func configureUI() {
