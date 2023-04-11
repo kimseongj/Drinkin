@@ -43,6 +43,7 @@
 		1C5CAB1029DB52800053F19A /* IngredientModalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0F29DB52800053F19A /* IngredientModalRepository.swift */; };
 		1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */; };
 		1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */; };
+		1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		1C5CAB0F29DB52800053F19A /* IngredientModalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientModalRepository.swift; sourceTree = "<group>"; };
 		1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalRepository.swift; sourceTree = "<group>"; };
 		1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRepository.swift; sourceTree = "<group>"; };
+		1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCorrdinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				1C0809E029E043DF00265706 /* AppCoordinator.swift */,
+				1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */,
 			);
 			path = TabBarCoordinator;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */,
 				1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,

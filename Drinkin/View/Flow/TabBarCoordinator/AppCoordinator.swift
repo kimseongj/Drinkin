@@ -18,20 +18,8 @@ class AppCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-//        let tabBarController = TabBarController()
-//        self.window?.rootViewController = tabBarController
-//        AppCoordinator.tabBarHeight = tabBarController.tabBar.frame.size.height
+        let tabBarController = TabBarController()
+        self.window?.rootViewController = tabBarController
+        AppCoordinator.tabBarHeight = tabBarController.tabBar.frame.size.height
     }
-
-    
-    
-    
-    
-    
-    
-//    func chooseCocktail() {
-//        let vc = PreferredCocktailSelectionViewController()
-//        vc.coordinator = self
-//        navigationController.present(vc, animated: true)
-//    }
 }
