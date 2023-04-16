@@ -52,6 +52,11 @@
 		1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E629E94B4700D3E1D2 /* SkillModalVCCoordinator.swift */; };
 		1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E829E94B5400D3E1D2 /* GlassModalVCCoordinator.swift */; };
 		1CCE88EB29E953E400D3E1D2 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88EA29E953E400D3E1D2 /* Provider.swift */; };
+		1CCE88ED29EBA7AB00D3E1D2 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88EC29EBA7AB00D3E1D2 /* Parser.swift */; };
+		1CCE88EF29EBAB7900D3E1D2 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88EE29EBAB7900D3E1D2 /* ProductDetailViewController.swift */; };
+		1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F029EBABCE00D3E1D2 /* TipAndContentsView.swift */; };
+		1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */; };
+		1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +98,11 @@
 		1CCE88E629E94B4700D3E1D2 /* SkillModalVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88E829E94B5400D3E1D2 /* GlassModalVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88EA29E953E400D3E1D2 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		1CCE88EC29EBA7AB00D3E1D2 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		1CCE88EE29EBAB7900D3E1D2 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		1CCE88F029EBABCE00D3E1D2 /* TipAndContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentsView.swift; sourceTree = "<group>"; };
+		1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
+		1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignmentLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,11 +161,14 @@
 			path = "New Group4";
 			sourceTree = "<group>";
 		};
-		1C04C18829DEEC3700E381C2 /* New Group5 */ = {
+		1C04C18829DEEC3700E381C2 /* ProductDetailPageView */ = {
 			isa = PBXGroup;
 			children = (
+				1CCE88EE29EBAB7900D3E1D2 /* ProductDetailViewController.swift */,
+				1CCE88F029EBABCE00D3E1D2 /* TipAndContentsView.swift */,
+				1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */,
 			);
-			path = "New Group5";
+			path = ProductDetailPageView;
 			sourceTree = "<group>";
 		};
 		1C04C18929DEEC3A00E381C2 /* LoginView */ = {
@@ -286,12 +299,13 @@
 				1C04C18B29DEEC3F00E381C2 /* ModalView */,
 				1C04C18A29DEEC3C00E381C2 /* TabBar */,
 				1C04C18929DEEC3A00E381C2 /* LoginView */,
-				1C04C18829DEEC3700E381C2 /* New Group5 */,
+				1C04C18829DEEC3700E381C2 /* ProductDetailPageView */,
 				1C04C18729DEEC3400E381C2 /* New Group4 */,
 				1C04C18629DEEC3100E381C2 /* New Group3 */,
 				1C04C18529DEEC2F00E381C2 /* New Group2 */,
 				1C04C18429DEEC2D00E381C2 /* New Group1 */,
 				1C04C18229DEEC2200E381C2 /* New Group */,
+				1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -309,6 +323,7 @@
 			children = (
 				1C5CAB0029DB51680053F19A /* EndpointMakeable.swift */,
 				1CCE88EA29E953E400D3E1D2 /* Provider.swift */,
+				1CCE88EC29EBA7AB00D3E1D2 /* Parser.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -416,7 +431,9 @@
 			files = (
 				1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */,
 				1CCE88E329E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift in Sources */,
+				1CCE88EF29EBAB7900D3E1D2 /* ProductDetailViewController.swift in Sources */,
 				1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */,
+				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
 				1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */,
@@ -444,8 +461,11 @@
 				1CCE88E529E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift in Sources */,
 				1C5CAB0C29DB52700053F19A /* ProductRepository.swift in Sources */,
 				1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */,
+				1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */,
 				1C0809DA29E03FFB00265706 /* KakaoAuthViewModel.swift in Sources */,
 				1C5CAB0429DB51D10053F19A /* PreferCocktailRepository.swift in Sources */,
+				1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */,
+				1CCE88ED29EBA7AB00D3E1D2 /* Parser.swift in Sources */,
 				1CCE88DD29E9498D00D3E1D2 /* CocktailVCCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
