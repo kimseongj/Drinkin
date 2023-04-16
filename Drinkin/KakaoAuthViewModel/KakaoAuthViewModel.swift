@@ -11,7 +11,10 @@ import KakaoSDKAuth
 import KakaoSDKUser
 
 class KakaoAuthViewModel: ObservableObject {
+    static var validAccessToken: String?
+    
     var subscriptions = Set<AnyCancellable>()
+    var loginService = LoginService()
     
     init() {
         print("KakaoAuthVM - init() called")
@@ -41,11 +44,11 @@ class KakaoAuthViewModel: ObservableObject {
                 else {
                     print("loginWithKakaoAccount() success.")
                     
-                    //do something
-                    _ = oauthToken
+                    guard let accessToken = oauthToken?.accessToken else { return }
+            
+                    self.loginService.fetch1(accessToken: accessToken) { return }
                 }
             }
         }
     }
-    
 }
