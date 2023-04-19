@@ -44,6 +44,18 @@
 		1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */; };
 		1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */; };
 		1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */; };
+		1C9BAB0F29EFAD7400E979AC /* PreferBaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB0E29EFAD7400E979AC /* PreferBaseCollectionView.swift */; };
+		1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1029EFADA500E979AC /* LoadingView.swift */; };
+		1C9BAB1629EFAE6400E979AC /* ToolCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1529EFAE6400E979AC /* ToolCollectionView.swift */; };
+		1C9BAB1829EFAE8000E979AC /* ToolCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1729EFAE8000E979AC /* ToolCollectionViewCell.swift */; };
+		1C9BAB1A29EFAE8A00E979AC /* ToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1929EFAE8A00E979AC /* ToolView.swift */; };
+		1C9BAB1C29EFAEC500E979AC /* SkillCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1B29EFAEC500E979AC /* SkillCollectionView.swift */; };
+		1C9BAB1E29EFAECF00E979AC /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1D29EFAECF00E979AC /* SkillCollectionViewCell.swift */; };
+		1C9BAB2029EFAED500E979AC /* SkillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1F29EFAED500E979AC /* SkillView.swift */; };
+		1C9BAB2229EFB31400E979AC /* GlassCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2129EFB31400E979AC /* GlassCollectionView.swift */; };
+		1C9BAB2429EFB32F00E979AC /* GlassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2329EFB32F00E979AC /* GlassCollectionViewCell.swift */; };
+		1C9BAB2629EFB34C00E979AC /* GlassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2529EFB34C00E979AC /* GlassView.swift */; };
+		1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2729EFB58000E979AC /* CocktailInformationView.swift */; };
 		1CCE88DD29E9498D00D3E1D2 /* CocktailVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DC29E9498D00D3E1D2 /* CocktailVCCoordinator.swift */; };
 		1CCE88DF29E949A900D3E1D2 /* HomeBarVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DE29E949A900D3E1D2 /* HomeBarVCCoordinator.swift */; };
 		1CCE88E129E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */; };
@@ -58,7 +70,7 @@
 		1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */; };
 		1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */; };
 		1CCE88F729EBB25C00D3E1D2 /* PreferCocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */; };
-		1CCE88FA29EBB2C200D3E1D2 /* CocktailScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F929EBB2C200D3E1D2 /* CocktailScrollView.swift */; };
+		1CCE88FA29EBB2C200D3E1D2 /* CocktailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionView.swift */; };
 		1CCE88FC29EBB2EF00D3E1D2 /* PreferBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FB29EBB2EF00D3E1D2 /* PreferBaseView.swift */; };
 		1CCE88FE29EBB32300D3E1D2 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */; };
 		1CCE890029EBBC3C00D3E1D2 /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */; };
@@ -66,6 +78,7 @@
 		1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890329EBBD9800D3E1D2 /* LoginService.swift */; };
 		1CCE890629EBC13C00D3E1D2 /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */; };
 		1CCE890829EBC49400D3E1D2 /* RefreshEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */; };
+		1CCE890A29EBD9BF00D3E1D2 /* 12312312Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +112,18 @@
 		1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalRepository.swift; sourceTree = "<group>"; };
 		1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRepository.swift; sourceTree = "<group>"; };
 		1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCorrdinator.swift; sourceTree = "<group>"; };
+		1C9BAB0E29EFAD7400E979AC /* PreferBaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferBaseCollectionView.swift; sourceTree = "<group>"; };
+		1C9BAB1029EFADA500E979AC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		1C9BAB1529EFAE6400E979AC /* ToolCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolCollectionView.swift; sourceTree = "<group>"; };
+		1C9BAB1729EFAE8000E979AC /* ToolCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolCollectionViewCell.swift; sourceTree = "<group>"; };
+		1C9BAB1929EFAE8A00E979AC /* ToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolView.swift; sourceTree = "<group>"; };
+		1C9BAB1B29EFAEC500E979AC /* SkillCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillCollectionView.swift; sourceTree = "<group>"; };
+		1C9BAB1D29EFAECF00E979AC /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
+		1C9BAB1F29EFAED500E979AC /* SkillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillView.swift; sourceTree = "<group>"; };
+		1C9BAB2129EFB31400E979AC /* GlassCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCollectionView.swift; sourceTree = "<group>"; };
+		1C9BAB2329EFB32F00E979AC /* GlassCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCollectionViewCell.swift; sourceTree = "<group>"; };
+		1C9BAB2529EFB34C00E979AC /* GlassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassView.swift; sourceTree = "<group>"; };
+		1C9BAB2729EFB58000E979AC /* CocktailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailInformationView.swift; sourceTree = "<group>"; };
 		1CCE88DC29E9498D00D3E1D2 /* CocktailVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88DE29E949A900D3E1D2 /* HomeBarVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVCCoordinator.swift; sourceTree = "<group>"; };
@@ -113,7 +138,7 @@
 		1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignmentLayout.swift; sourceTree = "<group>"; };
 		1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferCocktailViewController.swift; sourceTree = "<group>"; };
-		1CCE88F929EBB2C200D3E1D2 /* CocktailScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailScrollView.swift; sourceTree = "<group>"; };
+		1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailCollectionView.swift; sourceTree = "<group>"; };
 		1CCE88FB29EBB2EF00D3E1D2 /* PreferBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferBaseView.swift; sourceTree = "<group>"; };
 		1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
@@ -121,6 +146,7 @@
 		1CCE890329EBBD9800D3E1D2 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
 		1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshEndpoint.swift; sourceTree = "<group>"; };
+		1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 12312312Endpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,25 +191,28 @@
 			path = "New Group2";
 			sourceTree = "<group>";
 		};
-		1C04C18629DEEC3100E381C2 /* New Group3 */ = {
+		1C04C18629DEEC3100E381C2 /* LoadingView */ = {
 			isa = PBXGroup;
 			children = (
+				1C9BAB1029EFADA500E979AC /* LoadingView.swift */,
 			);
-			path = "New Group3";
+			path = LoadingView;
 			sourceTree = "<group>";
 		};
-		1C04C18729DEEC3400E381C2 /* PreferCoctailView */ = {
+		1C04C18729DEEC3400E381C2 /* PreferCoctailSelectionView */ = {
 			isa = PBXGroup;
 			children = (
-				1CCE88F829EBB27C00D3E1D2 /* View */,
+				1C9BAB0D29EFAD5300E979AC /* PreferBaseCollectionView */,
+				1CCE88F829EBB27C00D3E1D2 /* CocktailCollectionView */,
 				1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */,
 			);
-			path = PreferCoctailView;
+			path = PreferCoctailSelectionView;
 			sourceTree = "<group>";
 		};
 		1C04C18829DEEC3700E381C2 /* ProductDetailPageView */ = {
 			isa = PBXGroup;
 			children = (
+				1C9BAB0B29EFA93400E979AC /* CocktailInformationView */,
 				1CCE88EE29EBAB7900D3E1D2 /* ProductDetailViewController.swift */,
 				1CCE88F029EBABCE00D3E1D2 /* TipAndContentsView.swift */,
 				1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */,
@@ -321,8 +350,8 @@
 				1C04C18A29DEEC3C00E381C2 /* TabBar */,
 				1C04C18929DEEC3A00E381C2 /* LoginView */,
 				1C04C18829DEEC3700E381C2 /* ProductDetailPageView */,
-				1C04C18729DEEC3400E381C2 /* PreferCoctailView */,
-				1C04C18629DEEC3100E381C2 /* New Group3 */,
+				1C04C18729DEEC3400E381C2 /* PreferCoctailSelectionView */,
+				1C04C18629DEEC3100E381C2 /* LoadingView */,
 				1C04C18529DEEC2F00E381C2 /* New Group2 */,
 				1C04C18429DEEC2D00E381C2 /* New Group1 */,
 				1C04C18229DEEC2200E381C2 /* New Group */,
@@ -342,13 +371,12 @@
 		1C5CAAFF29DB51560053F19A /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				1C9BAAEA29EC15EA00E979AC /* LoginEndpoint */,
 				1C5CAB0029DB51680053F19A /* EndpointMakeable.swift */,
 				1CCE88EA29E953E400D3E1D2 /* Provider.swift */,
 				1CCE88EC29EBA7AB00D3E1D2 /* Parser.swift */,
-				1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */,
 				1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */,
 				1CCE890329EBBD9800D3E1D2 /* LoginService.swift */,
-				1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -368,14 +396,81 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
-		1CCE88F829EBB27C00D3E1D2 /* View */ = {
+		1C9BAAEA29EC15EA00E979AC /* LoginEndpoint */ = {
 			isa = PBXGroup;
 			children = (
-				1CCE88F929EBB2C200D3E1D2 /* CocktailScrollView.swift */,
+				1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */,
+				1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */,
+				1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */,
+			);
+			path = LoginEndpoint;
+			sourceTree = "<group>";
+		};
+		1C9BAB0B29EFA93400E979AC /* CocktailInformationView */ = {
+			isa = PBXGroup;
+			children = (
+				1C9BAB0C29EFA94200E979AC /* CollectionView */,
+				1C9BAB2729EFB58000E979AC /* CocktailInformationView.swift */,
+			);
+			path = CocktailInformationView;
+			sourceTree = "<group>";
+		};
+		1C9BAB0C29EFA94200E979AC /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1C9BAB1229EFAE3400E979AC /* ToolView */,
+				1C9BAB1429EFAE4C00E979AC /* SkillView */,
+				1C9BAB1329EFAE3F00E979AC /* GlassView */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		1C9BAB0D29EFAD5300E979AC /* PreferBaseCollectionView */ = {
+			isa = PBXGroup;
+			children = (
 				1CCE88FB29EBB2EF00D3E1D2 /* PreferBaseView.swift */,
 				1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */,
+				1C9BAB0E29EFAD7400E979AC /* PreferBaseCollectionView.swift */,
 			);
-			path = View;
+			path = PreferBaseCollectionView;
+			sourceTree = "<group>";
+		};
+		1C9BAB1229EFAE3400E979AC /* ToolView */ = {
+			isa = PBXGroup;
+			children = (
+				1C9BAB1529EFAE6400E979AC /* ToolCollectionView.swift */,
+				1C9BAB1729EFAE8000E979AC /* ToolCollectionViewCell.swift */,
+				1C9BAB1929EFAE8A00E979AC /* ToolView.swift */,
+			);
+			path = ToolView;
+			sourceTree = "<group>";
+		};
+		1C9BAB1329EFAE3F00E979AC /* GlassView */ = {
+			isa = PBXGroup;
+			children = (
+				1C9BAB2129EFB31400E979AC /* GlassCollectionView.swift */,
+				1C9BAB2329EFB32F00E979AC /* GlassCollectionViewCell.swift */,
+				1C9BAB2529EFB34C00E979AC /* GlassView.swift */,
+			);
+			path = GlassView;
+			sourceTree = "<group>";
+		};
+		1C9BAB1429EFAE4C00E979AC /* SkillView */ = {
+			isa = PBXGroup;
+			children = (
+				1C9BAB1B29EFAEC500E979AC /* SkillCollectionView.swift */,
+				1C9BAB1D29EFAECF00E979AC /* SkillCollectionViewCell.swift */,
+				1C9BAB1F29EFAED500E979AC /* SkillView.swift */,
+			);
+			path = SkillView;
+			sourceTree = "<group>";
+		};
+		1CCE88F829EBB27C00D3E1D2 /* CocktailCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionView.swift */,
+			);
+			path = CocktailCollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,14 +560,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */,
+				1CCE890A29EBD9BF00D3E1D2 /* 12312312Endpoint.swift in Sources */,
 				1CCE88E329E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift in Sources */,
 				1CCE88EF29EBAB7900D3E1D2 /* ProductDetailViewController.swift in Sources */,
+				1C9BAB2029EFAED500E979AC /* SkillView.swift in Sources */,
+				1C9BAB1C29EFAEC500E979AC /* SkillCollectionView.swift in Sources */,
+				1C9BAB1E29EFAECF00E979AC /* SkillCollectionViewCell.swift in Sources */,
+				1C9BAB2429EFB32F00E979AC /* GlassCollectionViewCell.swift in Sources */,
 				1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */,
 				1CCE88FE29EBB32300D3E1D2 /* BaseCell.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
 				1CCE88F729EBB25C00D3E1D2 /* PreferCocktailViewController.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
+				1C9BAB2629EFB34C00E979AC /* GlassView.swift in Sources */,
 				1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */,
 				1CCE88DF29E949A900D3E1D2 /* HomeBarVCCoordinator.swift in Sources */,
 				1CCE88EB29E953E400D3E1D2 /* Provider.swift in Sources */,
@@ -481,12 +582,15 @@
 				1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */,
 				1CCE88E129E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift in Sources */,
 				1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */,
-				1CCE88FA29EBB2C200D3E1D2 /* CocktailScrollView.swift in Sources */,
+				1CCE88FA29EBB2C200D3E1D2 /* CocktailCollectionView.swift in Sources */,
 				1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */,
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
 				1C5CAB0E29DB52770053F19A /* ToolModalRepository.swift in Sources */,
+				1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */,
 				1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */,
+				1C9BAB0F29EFAD7400E979AC /* PreferBaseCollectionView.swift in Sources */,
 				1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */,
+				1C9BAB1A29EFAE8A00E979AC /* ToolView.swift in Sources */,
 				1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */,
 				1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */,
 				1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */,
@@ -505,9 +609,13 @@
 				1C5CAB0C29DB52700053F19A /* ProductRepository.swift in Sources */,
 				1CCE890229EBBCCA00D3E1D2 /* HTTPMethod.swift in Sources */,
 				1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */,
+				1C9BAB1629EFAE6400E979AC /* ToolCollectionView.swift in Sources */,
+				1C9BAB2229EFB31400E979AC /* GlassCollectionView.swift in Sources */,
+				1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */,
 				1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */,
 				1C0809DA29E03FFB00265706 /* KakaoAuthViewModel.swift in Sources */,
 				1C5CAB0429DB51D10053F19A /* PreferCocktailRepository.swift in Sources */,
+				1C9BAB1829EFAE8000E979AC /* ToolCollectionViewCell.swift in Sources */,
 				1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */,
 				1CCE88ED29EBA7AB00D3E1D2 /* Parser.swift in Sources */,
 				1CCE88DD29E9498D00D3E1D2 /* CocktailVCCoordinator.swift in Sources */,

@@ -16,6 +16,8 @@ struct Provider {
             
             guard let httpURLResponse = response as? HTTPURLResponse, (200...299).contains(httpURLResponse.statusCode) else { return }
             
+            print(httpURLResponse.statusCode)
+            
             guard let validData = data, let parsedData = parser.parse(data: validData) else { return }
             completion(parsedData)
         }

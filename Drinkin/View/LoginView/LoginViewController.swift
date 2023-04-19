@@ -85,11 +85,9 @@ class TestViewController: UIViewController {
         
         let loginService = LoginService()
         
-        loginService.fetch2(accessToken: abc) {
-            return
-        }
-        
-        print(abc)
+//        loginService.fetch2(accessToken: abc) {
+//            return
+//        }
     }
     
     override func viewDidLoad() {
@@ -98,9 +96,6 @@ class TestViewController: UIViewController {
         abc()
     }
 }
-
-
-
 
 
 import SwiftUI

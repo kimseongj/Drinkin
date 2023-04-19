@@ -32,8 +32,9 @@ class KakaoAuthViewModel: ObservableObject {
                 else {
                     print("loginWithKakaoTalk() success.")
                     
-                    //do something
-                    _ = oauthToken
+                    guard let accessToken = oauthToken?.accessToken else { return }
+                    
+                    self.loginService.fetch(accessToken: accessToken) { return }
                 }
             }
         } else { // 카카오톡 실행이 안될 경우
@@ -46,7 +47,7 @@ class KakaoAuthViewModel: ObservableObject {
                     
                     guard let accessToken = oauthToken?.accessToken else { return }
             
-                    self.loginService.fetch1(accessToken: accessToken) { return }
+                    self.loginService.fetch(accessToken: accessToken) { return }
                 }
             }
         }

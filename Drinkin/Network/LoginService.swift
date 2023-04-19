@@ -11,27 +11,18 @@ class LoginService {
     let provider = Provider()
     static var accessToken: String?
     
-    func fetch1(accessToken: String, completion: @escaping () -> Void) {
-        var loginEndpoint = LoginEndpoint()
-        loginEndpoint.insertTokenQueryValue(token: accessToken)
+    func fetch(accessToken: String, completion: @escaping () -> Void) {
+        var accessTokenConversionEndpoint = AccessTokenConversionEndpoint()
+        accessTokenConversionEndpoint.insertTokenQueryValue(token: accessToken)
         
-        provider.fetchData(endpoint: loginEndpoint,
+        provider.fetchData(endpoint: accessTokenConversionEndpoint,
                            parser: Parser<LoginToken>()) { parsedData in
             LoginService.accessToken = parsedData.accessToken
 
             completion()
         }
     }
-    
-    func fetch2(accessToken: String, completion: @escaping () -> Void) {
-        var refreshEndpoint = RefreshEndpoint()
-        refreshEndpoint.insertAuthorization(key: accessToken)
-        
-        provider.fetchData(endpoint: refreshEndpoint,
-                           parser: Parser<LoginToken>()) { parsedData in
-            
-            print(parsedData)
-            completion()
-        }
-    }
 }
+
+
+
