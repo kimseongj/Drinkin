@@ -3,11 +3,11 @@
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/11.
-//
+
 
 import UIKit
 
-class MainVCCoordinator: Coordinator, MainViewDelegate{
+class MainVCCoordinator: Coordinator, MainViewDelegate {
     
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
