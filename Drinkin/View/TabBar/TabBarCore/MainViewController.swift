@@ -70,10 +70,10 @@ class MainViewController: UIViewController {
         return logoImage
     }()
     
-    private var recommendCocktailCollectionView: UICollectionView = { // 일단 컬렉션 뷰까지는 만들어지는거 확인했다잉
+    private var recommendCocktailCollectionView: UICollectionView = { 
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 8
+        flowLayout.minimumLineSpacing = 0
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         view.isScrollEnabled = true
@@ -99,13 +99,9 @@ class MainViewController: UIViewController {
         
         if MainViewController.login {
             configureLoggedinUI()
-            print("로그인")
         } else {
             configureUnLoggedinUI()
-            print("로그인 안됨")
         }
-        print("viewWillAppear")
-        print(MainViewController.login)
     }
     
     //MARK:- UnLoggedinUI
@@ -193,9 +189,14 @@ class MainViewController: UIViewController {
     }
     
     @objc func startButtonAction() {
-        delegate?.pushChooseCocktailVC()//self.navigationController!)
-        print("asd")
+        guard let validDelegate = delegate else {
+            print("delegate가 nil입니다.")
+            return
+        }
+        
+        validDelegate.pushChooseCocktailVC()//self.navigationController!)
     }
+    
     @objc func seeMoreButtonAction() {
         delegate?.pushProductDetailVC()
         print("SeeMoreButon was Pushed")

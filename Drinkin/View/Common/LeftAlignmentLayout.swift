@@ -12,7 +12,7 @@ class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         self.minimumLineSpacing = 10
-        self.sectionInset = UIEdgeInsets(top: 12.0, left: 16.0, bottom: 0.0, right: 16.0)
+        self.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let attributes = super.layoutAttributesForElements(in: rect)
         
         var leftMargin = sectionInset.left

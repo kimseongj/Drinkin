@@ -19,11 +19,9 @@ struct LoginToken: Decodable {
 
 struct RefreshToken: Decodable {
     let userID: Int
-    let detail: String
     
     private enum CodingKeys: String, CodingKey {
         case userID = "user_id"
-        case detail
     }
 }
 

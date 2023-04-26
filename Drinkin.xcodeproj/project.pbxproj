@@ -44,6 +44,8 @@
 		1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */; };
 		1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */; };
 		1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */; };
+		1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */; };
+		1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */; };
 		1C9BAB0F29EFAD7400E979AC /* PreferBaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB0E29EFAD7400E979AC /* PreferBaseCollectionView.swift */; };
 		1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1029EFADA500E979AC /* LoadingView.swift */; };
 		1C9BAB1629EFAE6400E979AC /* ToolCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1529EFAE6400E979AC /* ToolCollectionView.swift */; };
@@ -112,6 +114,8 @@
 		1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalRepository.swift; sourceTree = "<group>"; };
 		1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRepository.swift; sourceTree = "<group>"; };
 		1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCorrdinator.swift; sourceTree = "<group>"; };
+		1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowRectangleView.swift; sourceTree = "<group>"; };
+		1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRectangleView.swift; sourceTree = "<group>"; };
 		1C9BAB0E29EFAD7400E979AC /* PreferBaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferBaseCollectionView.swift; sourceTree = "<group>"; };
 		1C9BAB1029EFADA500E979AC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		1C9BAB1529EFAE6400E979AC /* ToolCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolCollectionView.swift; sourceTree = "<group>"; };
@@ -170,11 +174,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1C04C18229DEEC2200E381C2 /* New Group */ = {
+		1C04C18229DEEC2200E381C2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */,
 			);
-			path = "New Group";
+			path = Common;
 			sourceTree = "<group>";
 		};
 		1C04C18429DEEC2D00E381C2 /* New Group1 */ = {
@@ -184,11 +189,13 @@
 			path = "New Group1";
 			sourceTree = "<group>";
 		};
-		1C04C18529DEEC2F00E381C2 /* New Group2 */ = {
+		1C04C18529DEEC2F00E381C2 /* RectangleView */ = {
 			isa = PBXGroup;
 			children = (
+				1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */,
+				1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */,
 			);
-			path = "New Group2";
+			path = RectangleView;
 			sourceTree = "<group>";
 		};
 		1C04C18629DEEC3100E381C2 /* LoadingView */ = {
@@ -337,7 +344,7 @@
 		1C5CAAF929DB50A80053F19A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */,
+				1C66711029F8225A00B0E41F /* Entity */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -352,10 +359,9 @@
 				1C04C18829DEEC3700E381C2 /* ProductDetailPageView */,
 				1C04C18729DEEC3400E381C2 /* PreferCoctailSelectionView */,
 				1C04C18629DEEC3100E381C2 /* LoadingView */,
-				1C04C18529DEEC2F00E381C2 /* New Group2 */,
+				1C04C18529DEEC2F00E381C2 /* RectangleView */,
 				1C04C18429DEEC2D00E381C2 /* New Group1 */,
-				1C04C18229DEEC2200E381C2 /* New Group */,
-				1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */,
+				1C04C18229DEEC2200E381C2 /* Common */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -394,6 +400,14 @@
 				1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		1C66711029F8225A00B0E41F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */,
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		1C9BAAEA29EC15EA00E979AC /* LoginEndpoint */ = {
@@ -577,6 +591,7 @@
 				1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */,
 				1CCE88DF29E949A900D3E1D2 /* HomeBarVCCoordinator.swift in Sources */,
 				1CCE88EB29E953E400D3E1D2 /* Provider.swift in Sources */,
+				1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */,
 				1C04C19829DEED3300E381C2 /* CocktailViewController.swift in Sources */,
 				1CCE88FC29EBB2EF00D3E1D2 /* PreferBaseView.swift in Sources */,
 				1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */,
@@ -593,6 +608,7 @@
 				1C9BAB1A29EFAE8A00E979AC /* ToolView.swift in Sources */,
 				1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */,
 				1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */,
+				1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */,
 				1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */,
 				1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */,
 				1CCE890829EBC49400D3E1D2 /* RefreshEndpoint.swift in Sources */,
