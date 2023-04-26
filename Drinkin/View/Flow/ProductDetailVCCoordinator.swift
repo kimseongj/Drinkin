@@ -20,7 +20,6 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailViewDelegate {
     func start() {
         let productDetailViewController = ProductDetailViewController()
         
-        
         productDetailViewController.cocktailInformationView.toolView.delegate = self
         productDetailViewController.cocktailInformationView.skillView.delegate = self
         productDetailViewController.cocktailInformationView.glassView.delegate = self

@@ -89,7 +89,7 @@ class LoggedInCell: UICollectionViewCell {
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-100)
+            make.bottom.equalToSuperview().offset(-300)
         }
         
         seeMoreButton.snp.makeConstraints { make in
@@ -118,7 +118,6 @@ class WholeStackView: UIStackView {
         super.init(frame: .zero)
         setWholeStackView()
         configureUI()
-        self.backgroundColor = .white
     }
     
     required init(coder: NSCoder) {
@@ -134,6 +133,7 @@ class WholeStackView: UIStackView {
         self.distribution = .fillProportionally
         self.spacing = 20
         self.axis = .vertical
+        self.alignment = .top
     }
     
 }
@@ -216,7 +216,7 @@ class SummaryOfCocktailView: UIView {
         let abvLabel = UILabel()
         abvLabel.font = UIFont.systemFont(ofSize: 14)
         abvLabel.textColor = .black
-        abvLabel.text = "도  수"
+        abvLabel.text = "도   수"
         
         return abvLabel
     }()
@@ -231,7 +231,7 @@ class SummaryOfCocktailView: UIView {
         let sugarContentLabel = UILabel()
         sugarContentLabel.font = UIFont.systemFont(ofSize: 14)
         sugarContentLabel.textColor = .black
-        sugarContentLabel.text = "당  도"
+        sugarContentLabel.text = "당   도"
         
         return sugarContentLabel
     }()
@@ -287,6 +287,14 @@ class SummaryOfCocktailView: UIView {
     }
 }
 
+
+
+
+
+
+
+
+
 //MARK: - HoldedIngredientView
 class HoldedIngredientView: UIStackView {
     private func setWholStackView() {
@@ -294,34 +302,26 @@ class HoldedIngredientView: UIStackView {
         self.spacing = 10
         self.axis = .vertical
     }
-}
-
-class HoldedIngredientCell: UICollectionViewCell {
-    static let indentifier = "ToolCell"
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.cellSetting()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func cellSetting() {
-        self.backgroundColor = .lightGray
-        self.layer.cornerRadius = 14
-        self.layer.borderWidth = 1.4
-        self.addSubview(label)
-        
-        label.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-        }
-    }
-    
-    var label: UILabel = {
+    private lazy var baseLabel: UILabel = {
         let label = UILabel()
-        label.sizeToFit()
+        label.font = .preferredFont(forTextStyle: .title3)
+        
+        return label
+    }()
+    
+    private lazy var ingredientLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title3)
+        
+        return label
+    }()
+    
+    private lazy var garnishLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title3)
+        
         return label
     }()
 }
+

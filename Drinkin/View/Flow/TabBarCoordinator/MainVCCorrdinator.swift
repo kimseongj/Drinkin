@@ -23,7 +23,6 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
     func startPush() -> UINavigationController {
         let mainViewController = MainViewController()
         mainViewController.delegate = self
-        
         navigationController.setViewControllers([mainViewController], animated: false)
         
         return navigationController
