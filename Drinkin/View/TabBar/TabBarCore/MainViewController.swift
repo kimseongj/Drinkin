@@ -128,10 +128,8 @@ class MainViewController: UIViewController {
         }
         
         skeletonView.snp.makeConstraints { make in
-            make.top.equalTo(safeArea).offset(140)
-            make.trailing.equalToSuperview().offset(-30)
-            make.leading.equalToSuperview().offset(30)
-            make.bottom.equalTo(safeArea).offset(-140)
+            make.width.equalToSuperview().multipliedBy(0.85)
+            make.height.equalToSuperview().multipliedBy(0.63)
             make.centerY.centerX.equalToSuperview()
         }
         
@@ -150,7 +148,7 @@ class MainViewController: UIViewController {
             make.height.equalTo(39)
             make.width.equalTo(108)
             make.top.equalTo(recommendLabel2.snp.bottom).offset(10)
-        }
+        }     
     }
     
     //MARK:- LoginUI

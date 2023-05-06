@@ -19,6 +19,8 @@ class LevelOneView: UIStackView {
         }
         
     private func configureUI() {
+        self.spacing = 4
+        
         let yellowRectangleView = YellowRectangleView()
         let emptyRectangleView = EmptyRectangleView()
         
@@ -39,6 +41,8 @@ class LevelTwoView: UIStackView {
     }
     
     private func configureUI() {
+        self.spacing = 4
+        
         let yellowRectangleView = YellowRectangleView()
         let emptyRectangleView = EmptyRectangleView()
         
@@ -59,6 +63,8 @@ class LevelThreeView: UIStackView {
     }
     
     private func configureUI() {
+        self.spacing = 4
+        
         let yellowRectangleView = YellowRectangleView()
         let emptyRectangleView = EmptyRectangleView()
         
