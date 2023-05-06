@@ -109,7 +109,6 @@ struct ViewControllerRepresentable: UIViewControllerRepresentable {
     }
 }
 
-
 struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
     static var previews: some View {
         ViewControllerRepresentable()

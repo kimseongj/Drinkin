@@ -44,6 +44,7 @@
 		1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */; };
 		1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */; };
 		1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */; };
+		1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6636532A067F4B00C85374 /* SelectedView.swift */; };
 		1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */; };
 		1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */; };
 		1C9BAB0F29EFAD7400E979AC /* PreferBaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB0E29EFAD7400E979AC /* PreferBaseCollectionView.swift */; };
@@ -72,7 +73,7 @@
 		1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */; };
 		1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */; };
 		1CCE88F729EBB25C00D3E1D2 /* PreferCocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */; };
-		1CCE88FA29EBB2C200D3E1D2 /* CocktailCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionView.swift */; };
+		1CCE88FA29EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift */; };
 		1CCE88FC29EBB2EF00D3E1D2 /* PreferBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FB29EBB2EF00D3E1D2 /* PreferBaseView.swift */; };
 		1CCE88FE29EBB32300D3E1D2 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */; };
 		1CCE890029EBBC3C00D3E1D2 /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */; };
@@ -114,6 +115,7 @@
 		1C5CAB1129DB52870053F19A /* SkillModalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalRepository.swift; sourceTree = "<group>"; };
 		1C5CAB1329DB52E30053F19A /* MainViewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewRepository.swift; sourceTree = "<group>"; };
 		1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCorrdinator.swift; sourceTree = "<group>"; };
+		1C6636532A067F4B00C85374 /* SelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedView.swift; sourceTree = "<group>"; };
 		1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowRectangleView.swift; sourceTree = "<group>"; };
 		1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRectangleView.swift; sourceTree = "<group>"; };
 		1C9BAB0E29EFAD7400E979AC /* PreferBaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferBaseCollectionView.swift; sourceTree = "<group>"; };
@@ -142,7 +144,7 @@
 		1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignmentLayout.swift; sourceTree = "<group>"; };
 		1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferCocktailViewController.swift; sourceTree = "<group>"; };
-		1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailCollectionView.swift; sourceTree = "<group>"; };
+		1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailCollectionViewCell.swift; sourceTree = "<group>"; };
 		1CCE88FB29EBB2EF00D3E1D2 /* PreferBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferBaseView.swift; sourceTree = "<group>"; };
 		1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
@@ -482,7 +484,8 @@
 		1CCE88F829EBB27C00D3E1D2 /* CocktailCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionView.swift */,
+				1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift */,
+				1C6636532A067F4B00C85374 /* SelectedView.swift */,
 			);
 			path = CocktailCollectionView;
 			sourceTree = "<group>";
@@ -597,7 +600,7 @@
 				1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */,
 				1CCE88E129E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift in Sources */,
 				1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */,
-				1CCE88FA29EBB2C200D3E1D2 /* CocktailCollectionView.swift in Sources */,
+				1CCE88FA29EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift in Sources */,
 				1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */,
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
 				1C5CAB0E29DB52770053F19A /* ToolModalRepository.swift in Sources */,
@@ -608,6 +611,7 @@
 				1C9BAB1A29EFAE8A00E979AC /* ToolView.swift in Sources */,
 				1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */,
 				1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */,
+				1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */,
 				1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */,
 				1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */,
 				1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */,

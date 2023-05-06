@@ -14,6 +14,7 @@ final class BaseCell: UICollectionViewCell {
     let baseNameLabel: UILabel = {
         let baseNameLabel = UILabel()
         baseNameLabel.sizeToFit()
+        baseNameLabel.font = UIFont(name: "Pretendard-Bold", size: 14)
         return baseNameLabel
     }()
     
@@ -27,10 +28,11 @@ final class BaseCell: UICollectionViewCell {
     }
     
     func cellSetting() {
-        self.backgroundColor = .lightGray
-        self.layer.cornerRadius = 14
-        self.layer.borderWidth = 1.4
+        self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+        self.layer.cornerRadius = 4
         self.addSubview(baseNameLabel)
+        
+        
         
         baseNameLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
