@@ -20,35 +20,35 @@ class MainViewController: UIViewController {
     static var login: Bool = false
     
     //MARK:- UnNLoggedinUI
-    lazy var unLoggedInView = UIView()
+    private let unLoggedInView = UIView()
     
-    lazy var logoImage1: UIImageView = {
+    private let logoImage1: UIImageView = {
         let logoImage = UIImageView()
         logoImage.image = UIImage(named: "drinkinLogo")
         return logoImage
     }()
     
-    lazy var skeletonView: UIImageView = {
+    private let skeletonView: UIImageView = {
         let skeletonView = UIImageView()
         skeletonView.image = UIImage(named: "skeletonView")
         return skeletonView
     }()
     
-    lazy var recommendLabel1: UILabel = {
+    private let recommendLabel1: UILabel = {
         let recommendLabel = UILabel()
         recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
         recommendLabel.text = "마셔봤던 칵테일을 선택하고"
         return recommendLabel
     }()
     
-    lazy var recommendLabel2: UILabel = {
+    private let recommendLabel2: UILabel = {
         let recommendLabel = UILabel()
         recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
         recommendLabel.text = "다양한 칵테일을 추천받아보세요"
         return recommendLabel
     }()
     
-    lazy var startButton: UIButton = {
+    private let startButton: UIButton = {
         let startButton = UIButton()
         startButton.setTitle("시작하기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
@@ -62,9 +62,9 @@ class MainViewController: UIViewController {
     
     
     //MARK:- LoggedinView
-    lazy var loggedInView = UIView()
+    private let loggedInView = UIView()
     
-    lazy var logoImage2: UIImageView = {
+    private let logoImage2: UIImageView = {
         let logoImage = UIImageView()
         logoImage.image = UIImage(named: "drinkinLogo")
         return logoImage

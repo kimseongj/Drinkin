@@ -11,6 +11,18 @@ final class BaseCell: UICollectionViewCell {
     
     static let id = "BaseCell"
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                self.backgroundColor = .black
+                baseNameLabel.textColor = .white
+            } else {
+                self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+                baseNameLabel.textColor = .black
+            }
+        }
+    }
+    
     let baseNameLabel: UILabel = {
         let baseNameLabel = UILabel()
         baseNameLabel.sizeToFit()
@@ -27,12 +39,10 @@ final class BaseCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func cellSetting() {
+    private func cellSetting() {
         self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
         self.layer.cornerRadius = 4
         self.addSubview(baseNameLabel)
-        
-        
         
         baseNameLabel.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
