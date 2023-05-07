@@ -16,6 +16,7 @@ class PreferCocktailSelectionViewController: UIViewController {
         let mainLabel = UILabel()
         mainLabel.font = UIFont.boldSystemFont(ofSize: 20)
         mainLabel.text = "마셔봤던 칵테일 선택"
+        
         return mainLabel
     }()
     
@@ -25,6 +26,7 @@ class PreferCocktailSelectionViewController: UIViewController {
         subLabel.font = UIFont.boldSystemFont(ofSize: 14)
         subLabel.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
         subLabel.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
+        
         return subLabel
     }()
     

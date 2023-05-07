@@ -21,12 +21,14 @@ class LevelOneView: UIStackView {
     private func configureUI() {
         self.spacing = 4
         
-        let yellowRectangleView = YellowRectangleView()
-        let emptyRectangleView = EmptyRectangleView()
+        let firstRectangleView = YellowRectangleView()
+        let secondRectangleView = EmptyRectangleView()
+        let thirdRectangleView = EmptyRectangleView()
         
-        self.addArrangedSubview(yellowRectangleView)
-        self.addArrangedSubview(emptyRectangleView)
-        self.addArrangedSubview(emptyRectangleView)
+        
+        self.addArrangedSubview(firstRectangleView)
+        self.addArrangedSubview(secondRectangleView)
+        self.addArrangedSubview(thirdRectangleView)
     }
 }
 
@@ -43,12 +45,13 @@ class LevelTwoView: UIStackView {
     private func configureUI() {
         self.spacing = 4
         
-        let yellowRectangleView = YellowRectangleView()
-        let emptyRectangleView = EmptyRectangleView()
+        let firstRectangleView = YellowRectangleView()
+        let secondRectangleView = YellowRectangleView()
+        let thirdRectangleView = EmptyRectangleView()
         
-        self.addArrangedSubview(yellowRectangleView)
-        self.addArrangedSubview(yellowRectangleView)
-        self.addArrangedSubview(emptyRectangleView)
+        self.addArrangedSubview(firstRectangleView)
+        self.addArrangedSubview(secondRectangleView)
+        self.addArrangedSubview(thirdRectangleView)
     }
 }
 
@@ -65,11 +68,12 @@ class LevelThreeView: UIStackView {
     private func configureUI() {
         self.spacing = 4
         
-        let yellowRectangleView = YellowRectangleView()
-        let emptyRectangleView = EmptyRectangleView()
+        let firstRectangleView = YellowRectangleView()
+        let secondRectangleView = YellowRectangleView()
+        let thirdRectangleView = YellowRectangleView()
         
-        self.addArrangedSubview(yellowRectangleView)
-        self.addArrangedSubview(yellowRectangleView)
-        self.addArrangedSubview(yellowRectangleView)
+        self.addArrangedSubview(firstRectangleView)
+        self.addArrangedSubview(secondRectangleView)
+        self.addArrangedSubview(thirdRectangleView)
     }
 }

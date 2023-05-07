@@ -1,17 +1,16 @@
 //
-//  PreferBaseCollectionView.swift
+//  HoldedCollectionView.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/19.
+//  Created by kimseongjun on 2023/05/07.
 //
 
 import UIKit
 
-class PreferBaseCollectionView: UICollectionView {
-    
-    override var contentSize: CGSize {
+class HoldedCollectionView: UICollectionView {
+    override var contentSize: CGSize{
         didSet {
-            if oldValue.width != self.contentSize.width {
+            if oldValue.height != self.contentSize.height {
                 invalidateIntrinsicContentSize()
             }
         }

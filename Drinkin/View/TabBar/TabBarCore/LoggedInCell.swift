@@ -206,11 +206,7 @@ class SummaryOfCocktailView: UIView {
         return levelLabel
     }()
     
-    var levelImageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        return imageView
-    }()
+    var levelGradeView = UIStackView()
     
     var abvLabel: UILabel = {
         let abvLabel = UILabel()
@@ -221,11 +217,7 @@ class SummaryOfCocktailView: UIView {
         return abvLabel
     }()
     
-    var abvImageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        return imageView
-    }()
+    var abvGradeView = UIStackView()
     
     var sugarContentLabel: UILabel = {
         let sugarContentLabel = UILabel()
@@ -236,28 +228,30 @@ class SummaryOfCocktailView: UIView {
         return sugarContentLabel
     }()
     
-    var sugarContentImageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        return imageView
-    }()
+    var sugarContentGradeView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        checkLevel()
         configureUI()
-        self.backgroundColor = .white
+
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
+        self.backgroundColor = .white
+        
         self.addSubview(subtitleLabel)
         self.addSubview(titleLabel)
         self.addSubview(levelLabel)
         self.addSubview(abvLabel)
         self.addSubview(sugarContentLabel)
+        self.addSubview(levelGradeView)
+        self.addSubview(abvGradeView)
+        self.addSubview(sugarContentGradeView)
         
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(2)
@@ -284,11 +278,31 @@ class SummaryOfCocktailView: UIView {
             make.leading.equalToSuperview().offset(2)
             make.bottom.equalToSuperview().offset(-2)
         }
+        
+        levelGradeView.snp.makeConstraints { make in
+            make.leading.equalTo(levelLabel.snp.trailing).offset(12)
+            make.centerY.equalTo(levelLabel.snp.centerY)
+        }
+        
+        abvGradeView.snp.makeConstraints { make in
+            make.leading.equalTo(abvLabel.snp.trailing).offset(12)
+            make.centerY.equalTo(abvLabel.snp.centerY)
+        }
+        
+        sugarContentGradeView.snp.makeConstraints { make in
+            make.leading.equalTo(sugarContentLabel.snp.trailing).offset(12)
+            make.centerY.equalTo(sugarContentLabel.snp.centerY)
+        }
+    }
+    
+    private func checkLevel() {
+        levelGradeView = LevelThreeView()
+        abvGradeView = LevelOneView()
+        sugarContentGradeView = LevelTwoView()
+        
+        // viewModel.난이도....
     }
 }
-
-
-
 
 
 

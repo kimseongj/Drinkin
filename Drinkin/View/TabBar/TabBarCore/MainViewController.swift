@@ -4,7 +4,6 @@
 //
 //  Created by kimseongjun on 2023/04/06.
 
-
 import UIKit
 import SnapKit
 
@@ -17,9 +16,11 @@ class MainViewController: UIViewController {
 
     var delegate: MainViewDelegate?
     
+    let levelOneView = LevelThreeView()
+    
     static var login: Bool = false
     
-    //MARK:- UnNLoggedinUI
+    //MARK:- UnLoggedinUI
     private let unLoggedInView = UIView()
     
     private let logoImage1: UIImageView = {
@@ -109,6 +110,7 @@ class MainViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(unLoggedInView)
+        unLoggedInView.addSubview(levelOneView)
         unLoggedInView.addSubview(logoImage1)
         unLoggedInView.addSubview(skeletonView)
         skeletonView.addSubview(recommendLabel1)
@@ -148,7 +150,12 @@ class MainViewController: UIViewController {
             make.height.equalTo(39)
             make.width.equalTo(108)
             make.top.equalTo(recommendLabel2.snp.bottom).offset(10)
-        }     
+        }
+        
+        levelOneView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(60)
+        }
     }
     
     //MARK:- LoginUI
@@ -192,7 +199,7 @@ class MainViewController: UIViewController {
             return
         }
         
-        validDelegate.pushChooseCocktailVC()//self.navigationController!)
+        validDelegate.pushChooseCocktailVC()
     }
     
     @objc func seeMoreButtonAction() {

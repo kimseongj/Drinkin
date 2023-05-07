@@ -65,9 +65,9 @@ class SelectCircleView: UIView {
         context.setLineWidth(2)
         context.setLineJoin(.round)
         context.setLineCap(.square)
-        context.move(to: CGPoint(x: bounds.width * 0.15, y: bounds.height * 0.5))
-        context.addLine(to: CGPoint(x: bounds.width * 0.4, y: bounds.height * 0.8))
-        context.addLine(to: CGPoint(x: bounds.width * 0.8, y: bounds.height * 0.3))
+        context.move(to: CGPoint(x: bounds.width * 0.3, y: bounds.height * 0.55))
+        context.addLine(to: CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.7))
+        context.addLine(to: CGPoint(x: bounds.width * 0.7 , y: bounds.height * 0.35))
         context.drawPath(using: .stroke)
     }
 }

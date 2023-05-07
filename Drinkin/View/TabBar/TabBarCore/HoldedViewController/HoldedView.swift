@@ -1,32 +1,32 @@
 //
-//  GlassView.swift
+//  HoldedView.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/19.
+//  Created by kimseongjun on 2023/05/07.
 //
 
 import UIKit
 import SnapKit
 
-class GlassView: UIView {
+class HoldedView: UIView {
     
     var delegate: ProductDetailViewDelegate?
     
-    var glassLabelView: UIView = {
+    let labelView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         return view
     }()
     
-    var glassCollectionView: GlassCollectionView = {
+    var holdedCollectionView: HoldedCollectionView = {
         let layout = UICollectionViewLayout()
-        let collecionView = GlassCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
+        let collecionView = HoldedCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
         collecionView.backgroundColor = .white
         collecionView.layoutIfNeeded()
         return collecionView
     }()
     
-    let glassLabel: UILabel = {
+    let titleLabel: UILabel = {
         let bl = UILabel()
         bl.text = "재료"
         bl.textColor = .black
@@ -48,33 +48,33 @@ class GlassView: UIView {
     }
     
     func configureUI() {
-        self.addSubview(glassLabelView)
-        glassLabelView.addSubview(glassLabel)
-        self.addSubview(glassCollectionView)
+        self.addSubview(labelView)
+        labelView.addSubview(titleLabel)
+        self.addSubview(holdedCollectionView)
         
         
-        glassLabelView.snp.makeConstraints { make in
+        labelView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.top.equalToSuperview().offset(24)
-            make.bottom.equalTo(glassCollectionView)
+            make.bottom.equalTo(holdedCollectionView)
             make.width.equalTo(62)
         }
         
-        glassLabel.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
         }
         
-        glassCollectionView.snp.makeConstraints { make in
+        holdedCollectionView.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
             make.top.equalToSuperview().offset(24)
-            make.leading.equalTo(glassLabelView.snp.trailing)
+            make.leading.equalTo(labelView.snp.trailing)
         }
         
     }
     
     func setGlassCollectionView() {
-        glassCollectionView.register(GlassCollectionViewCell.self, forCellWithReuseIdentifier: "GlassCell")
+        holdedCollectionView.register(GlassCollectionViewCell.self, forCellWithReuseIdentifier: "GlassCell")
         glassCollectionView.delegate = self
         glassCollectionView.dataSource = self
     }
@@ -112,3 +112,4 @@ extension GlassView: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
         delegate?.pushGlassModalVC()
     }
 }
+

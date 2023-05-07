@@ -23,7 +23,7 @@ class GlassCollectionViewCell: UICollectionViewCell {
     
     func cellSetting() {
         self.backgroundColor = .lightGray
-        self.layer.cornerRadius = 14
+        self.layer.cornerRadius = 4
         self.layer.borderWidth = 1.4
         self.addSubview(label)
         
@@ -34,6 +34,7 @@ class GlassCollectionViewCell: UICollectionViewCell {
     
     var label: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Pretendard-Bold", size: 14)
         label.sizeToFit()
         return label
     }()
