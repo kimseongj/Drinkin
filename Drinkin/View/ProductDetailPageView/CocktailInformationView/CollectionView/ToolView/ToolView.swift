@@ -86,7 +86,6 @@ extension ToolView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = toolCollectionView.dequeueReusableCell(withReuseIdentifier: "ToolCell", for: indexPath) as! ToolCollectionViewCell
         cell.label.text = baseButtonName[indexPath.row]
-        cell.layoutIfNeeded()
         return cell
     }
     

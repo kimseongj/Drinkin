@@ -66,3 +66,29 @@ struct Provider1 {
 //            .eraseToAnyPublisher()
 //    }
 //}
+
+struct Repository {
+
+    func fetchPublisher<T: Decodable>(endpoint: EndpointMakeable, dataType: T) -> AnyPublisher<T, Error> {
+        
+        let urlRequest = endpoint.makeURLRequest()
+        
+        return URLSession.shared.dataTaskPublisher(for: urlRequest!).map { $0.data }
+            .decode(type: T.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+}
+
+class Repoistory {
+    let repository = Repository()
+    var subscriber: Set<AnyCancellable> = .init()
+}
+    
+    //    func fetchDailyBoxOffice(completion: @escaping (DailyBoxOffice) -> Void) {
+    //        repository.fetchPublisher(endpoint: <#EndpointMakeable#>, dataType: <#_#>).sink { completion in
+    //            print("Rceived completion: \(completion)")
+    //        } receiveValue: { dailyBoxOffice in
+    //            completion(dailyBoxOffice)
+    //        }.store(in: &subscriber)
+    //    }
+    //}

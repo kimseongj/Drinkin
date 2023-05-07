@@ -8,7 +8,7 @@
 import Foundation
 
 import UIKit
-    
+
 class PreferCocktailSelectionViewController: UIViewController {
     
     //MARK:- mainLabel
@@ -16,6 +16,7 @@ class PreferCocktailSelectionViewController: UIViewController {
         let mainLabel = UILabel()
         mainLabel.font = UIFont.boldSystemFont(ofSize: 20)
         mainLabel.text = "마셔봤던 칵테일 선택"
+        
         return mainLabel
     }()
     
@@ -25,6 +26,7 @@ class PreferCocktailSelectionViewController: UIViewController {
         subLabel.font = UIFont.boldSystemFont(ofSize: 14)
         subLabel.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
         subLabel.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
+        
         return subLabel
     }()
     
@@ -33,16 +35,29 @@ class PreferCocktailSelectionViewController: UIViewController {
         let exitButton = UIButton()
         exitButton.setImage(UIImage(systemName: "multiply"), for: .normal)
         exitButton.addTarget(self, action: #selector(pushExitButton), for: .touchUpInside)
-        //(self, action: #selector(pushExitButton(), for: .touchUpInside)
         
         return exitButton
     }()
     
     //MARK:- baseCollectionView
     let preferBaseView = PreferBaseView()
-        
+    
     //MARK:- cocktailCollectionView
-    let cocktailCollectionView = CocktailCollectionView()
+    private lazy var cocktailCollectionView: UICollectionView = {
+        let flowLayout = setUpCompositionalIconLayout()
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.isScrollEnabled = true
+        collectionView.allowsMultipleSelection = true
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInset = .zero
+        collectionView.clipsToBounds = true
+        collectionView.register(CocktailCollectionViewCell.self, forCellWithReuseIdentifier: "CocktailCell")
+        
+        return collectionView
+    }()
+    
     
     private let completeSelectionButton: UIButton = {
         let completeSelectionButton = UIButton()
@@ -136,7 +151,28 @@ extension PreferCocktailSelectionViewController: UICollectionViewDelegate, UICol
         let screenSize: CGRect = UIScreen.main.bounds
         let cellHeight = screenSize.height / 4
         let cellWidth = (screenSize.width - 70) / 3
-
+        
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+}
+
+extension PreferCocktailSelectionViewController {
+    private func setUpCompositionalIconLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout {
+            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
+            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+            
+            let groupHeight =  NSCollectionLayoutDimension.fractionalWidth(1/2)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: groupHeight)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+            let section = NSCollectionLayoutSection(group: group)
+            
+            return section
+        }
+        return layout
     }
 }

@@ -22,7 +22,7 @@ class ToolCollectionViewCell: UICollectionViewCell {
     
     func cellSetting() {
         self.backgroundColor = .lightGray
-        self.layer.cornerRadius = 14
+        self.layer.cornerRadius = 4
         self.layer.borderWidth = 1.4
         self.addSubview(label)
         

@@ -25,7 +25,7 @@ class PreferBaseView: UIView {
         return view
     }()
     
-    private let data = ["위스키 베이스", "리큐르 베이스", "보드카 베이스", "진 베이스", "asdasf", "asdasfqwe", "qwexzcsad", "qweasdxzc"]
+    private let data = ["전체", "위스키 베이스", "리큐르 베이스", "보드카 베이스", "진 베이스", "asdasf", "asdasfqwe", "qwexzcsad", "qweasdxzc"]
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,11 +70,11 @@ extension PreferBaseView: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         let baseName = self.data[indexPath.row]
         
-        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)]
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]
         
         let baseNameSize = (baseName as NSString).size(withAttributes: attributes as [NSAttributedString.Key: Any])
         
-        return CGSize(width: baseNameSize.width + 32, height: 40 )
+        return CGSize(width: baseNameSize.width + 32, height: 34 )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

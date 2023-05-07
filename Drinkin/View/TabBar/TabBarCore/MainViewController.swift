@@ -4,7 +4,6 @@
 //
 //  Created by kimseongjun on 2023/04/06.
 
-
 import UIKit
 import SnapKit
 
@@ -17,38 +16,40 @@ class MainViewController: UIViewController {
 
     var delegate: MainViewDelegate?
     
+    let levelOneView = LevelThreeView()
+    
     static var login: Bool = false
     
-    //MARK:- UnNLoggedinUI
-    lazy var unLoggedInView = UIView()
+    //MARK:- UnLoggedinUI
+    private let unLoggedInView = UIView()
     
-    lazy var logoImage1: UIImageView = {
+    private let logoImage1: UIImageView = {
         let logoImage = UIImageView()
         logoImage.image = UIImage(named: "drinkinLogo")
         return logoImage
     }()
     
-    lazy var skeletonView: UIImageView = {
+    private let skeletonView: UIImageView = {
         let skeletonView = UIImageView()
         skeletonView.image = UIImage(named: "skeletonView")
         return skeletonView
     }()
     
-    lazy var recommendLabel1: UILabel = {
+    private let recommendLabel1: UILabel = {
         let recommendLabel = UILabel()
         recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
         recommendLabel.text = "마셔봤던 칵테일을 선택하고"
         return recommendLabel
     }()
     
-    lazy var recommendLabel2: UILabel = {
+    private let recommendLabel2: UILabel = {
         let recommendLabel = UILabel()
         recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
         recommendLabel.text = "다양한 칵테일을 추천받아보세요"
         return recommendLabel
     }()
     
-    lazy var startButton: UIButton = {
+    private let startButton: UIButton = {
         let startButton = UIButton()
         startButton.setTitle("시작하기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
@@ -62,9 +63,9 @@ class MainViewController: UIViewController {
     
     
     //MARK:- LoggedinView
-    lazy var loggedInView = UIView()
+    private let loggedInView = UIView()
     
-    lazy var logoImage2: UIImageView = {
+    private let logoImage2: UIImageView = {
         let logoImage = UIImageView()
         logoImage.image = UIImage(named: "drinkinLogo")
         return logoImage
@@ -109,6 +110,7 @@ class MainViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(unLoggedInView)
+        unLoggedInView.addSubview(levelOneView)
         unLoggedInView.addSubview(logoImage1)
         unLoggedInView.addSubview(skeletonView)
         skeletonView.addSubview(recommendLabel1)
@@ -128,10 +130,8 @@ class MainViewController: UIViewController {
         }
         
         skeletonView.snp.makeConstraints { make in
-            make.top.equalTo(safeArea).offset(140)
-            make.trailing.equalToSuperview().offset(-30)
-            make.leading.equalToSuperview().offset(30)
-            make.bottom.equalTo(safeArea).offset(-140)
+            make.width.equalToSuperview().multipliedBy(0.85)
+            make.height.equalToSuperview().multipliedBy(0.63)
             make.centerY.centerX.equalToSuperview()
         }
         
@@ -150,6 +150,11 @@ class MainViewController: UIViewController {
             make.height.equalTo(39)
             make.width.equalTo(108)
             make.top.equalTo(recommendLabel2.snp.bottom).offset(10)
+        }
+        
+        levelOneView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(60)
         }
     }
     
@@ -194,7 +199,7 @@ class MainViewController: UIViewController {
             return
         }
         
-        validDelegate.pushChooseCocktailVC()//self.navigationController!)
+        validDelegate.pushChooseCocktailVC()
     }
     
     @objc func seeMoreButtonAction() {
