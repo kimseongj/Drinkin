@@ -1,15 +1,15 @@
 //
 //  SkillView.swift
-//  Drinkin
+//  TestLeftAlignment
 //
-//  Created by kimseongjun on 2023/04/19.
+//  Created by kimseongjun on 2023/05/08.
 //
 
 import UIKit
 import SnapKit
 
 class SkillView: UIView {
-
+    
     var delegate: ProductDetailViewDelegate?
     
     var skillLabelView: UIView = {
@@ -33,12 +33,11 @@ class SkillView: UIView {
         sl.font = UIFont.systemFont(ofSize: 17)
         return sl
     }()
-
+    
     let skillButtonName = ["asd", "asdzxc", "asdqweqwe", "123sdasdzxc", "asdasfasd", "123asdaszxczxasd123", "Serbossa American good"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
         configureUI()
         setSkillCollectionView()
     }
@@ -46,12 +45,12 @@ class SkillView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func configureUI() {
+        self.backgroundColor = .white
         self.addSubview(skillLabelView)
         skillLabelView.addSubview(skillLabel)
         self.addSubview(skillCollectionView)
-        
         
         skillLabelView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
@@ -70,15 +69,16 @@ class SkillView: UIView {
             make.top.equalToSuperview().offset(24)
             make.leading.equalTo(skillLabelView.snp.trailing)
         }
-        
     }
     
     func setSkillCollectionView() {
         skillCollectionView.register(SkillCollectionViewCell.self, forCellWithReuseIdentifier: "SkillCell")
         skillCollectionView.delegate = self
         skillCollectionView.dataSource = self
+        if let flowLayout = skillCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
     }
-    
 }
 
 extension SkillView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
@@ -89,24 +89,9 @@ extension SkillView: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = skillCollectionView.dequeueReusableCell(withReuseIdentifier: "SkillCell", for: indexPath) as! SkillCollectionViewCell
         cell.label.text = skillButtonName[indexPath.row]
-        cell.layoutIfNeeded()
+        
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let skillButtonName = self.skillButtonName[indexPath.row]
-        
-        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]
-        
-        let skillButtonNameSize = (skillButtonName as NSString).size(withAttributes: attributes as [NSAttributedString.Key: Any])
-        
-        return CGSize(width: skillButtonNameSize.width + 32, height: 30 )
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            15
-        }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.pushSkillModalVC()

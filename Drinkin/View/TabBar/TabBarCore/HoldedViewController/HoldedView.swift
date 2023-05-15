@@ -70,46 +70,29 @@ class HoldedView: UIView {
             make.top.equalToSuperview().offset(24)
             make.leading.equalTo(labelView.snp.trailing)
         }
-        
     }
     
     func setGlassCollectionView() {
         holdedCollectionView.register(GlassCollectionViewCell.self, forCellWithReuseIdentifier: "GlassCell")
-        glassCollectionView.delegate = self
-        glassCollectionView.dataSource = self
+        holdedCollectionView.delegate = self
+        holdedCollectionView.dataSource = self
+        
+        if let flowLayout = holdedCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
     }
     
 }
 
-extension GlassView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+extension HoldedView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ingredientButtonName.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = glassCollectionView.dequeueReusableCell(withReuseIdentifier: "GlassCell", for: indexPath) as! GlassCollectionViewCell
+        let cell = holdedCollectionView.dequeueReusableCell(withReuseIdentifier: "HoldedViewCell", for: indexPath) as! HoldedCollectionViewCell
         cell.label.text = ingredientButtonName[indexPath.row]
-        cell.layoutIfNeeded()
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let ingredientButtonName = self.ingredientButtonName[indexPath.row]
-        
-        let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]
-        
-        let ingredientButtonNameSize = (ingredientButtonName as NSString).size(withAttributes: attributes as [NSAttributedString.Key: Any])
-        
-        return CGSize(width: ingredientButtonNameSize.width + 32, height: 30 )
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        15
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.pushGlassModalVC()
     }
 }
 

@@ -304,11 +304,6 @@ class SummaryOfCocktailView: UIView {
     }
 }
 
-
-
-
-
-
 //MARK: - HoldedIngredientView
 class HoldedIngredientView: UIStackView {
     private func setWholStackView() {

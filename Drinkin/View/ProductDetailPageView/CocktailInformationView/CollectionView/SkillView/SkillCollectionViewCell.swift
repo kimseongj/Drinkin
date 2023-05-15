@@ -12,6 +12,13 @@ class SkillCollectionViewCell: UICollectionViewCell {
     
     static let indentifier = "SkillCell"
     
+    private let yellowRectangleView = YellowRectangleView()
+    var label: UILabel = {
+        let label = UILabel()
+        label.sizeToFit()
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.cellSetting()
@@ -28,14 +35,10 @@ class SkillCollectionViewCell: UICollectionViewCell {
         self.addSubview(label)
         
         label.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(2)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-2)
         }
     }
-    
-    var label: UILabel = {
-        let label = UILabel()
-        label.sizeToFit()
-        return label
-    }()
-    
 }

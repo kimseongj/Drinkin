@@ -26,9 +26,9 @@ class GlassCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 4
         self.layer.borderWidth = 1.4
         self.addSubview(label)
-        
+
         label.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+            //make.centerX.centerY.equalToSuperview()
         }
     }
     

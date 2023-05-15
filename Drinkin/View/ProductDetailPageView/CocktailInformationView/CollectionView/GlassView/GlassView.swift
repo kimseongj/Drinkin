@@ -94,14 +94,24 @@ extension GlassView: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
         
-        let ingredientButtonName = self.ingredientButtonName[indexPath.row]
+        let labelText = self.ingredientButtonName[indexPath.row]
         
-        let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]
+        return calculateCellWidth(index: indexPath.row)
+    }
+    
+    func calculateCellWidth(index: Int) -> CGSize {
         
-        let ingredientButtonNameSize = (ingredientButtonName as NSString).size(withAttributes: attributes as [NSAttributedString.Key: Any])
+                let ingredientButtonName = self.ingredientButtonName[index]
         
-        return CGSize(width: ingredientButtonNameSize.width + 32, height: 30 )
+                let attributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]
+        
+                let ingredientButtonNameSize = (ingredientButtonName as NSString).size(withAttributes: attributes as [NSAttributedString.Key: Any])
+        
+        let yellowViewRectangleSize = YellowRectangleView().bounds.width
+        
+                return CGSize(width: ingredientButtonNameSize.width + 32 + yellowViewRectangleSize, height: 30 )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
