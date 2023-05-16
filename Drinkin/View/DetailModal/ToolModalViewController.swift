@@ -9,6 +9,12 @@ import UIKit
 
 class ToolModalViewController: UIViewController {
     
+    private enum ModalType {
+        static let toolModalType = "tool"
+        static let buildModalType = "build"
+        static let glassModalType = "glass"
+    }
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
