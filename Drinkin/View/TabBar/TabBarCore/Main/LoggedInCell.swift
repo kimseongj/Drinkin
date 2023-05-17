@@ -305,32 +305,36 @@ class SummaryOfCocktailView: UIView {
 }
 
 //MARK: - HoldedIngredientView
-class HoldedIngredientView: UIStackView {
-    private func setWholStackView() {
-        self.distribution = .fillProportionally
-        self.spacing = 10
-        self.axis = .vertical
+class HoldedIngredientView: UIView {
+    let baseView = UIView()
+    let ingredientView = UIView()
+    let garnishView = UIView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        configureUI()
     }
     
-    private lazy var baseLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        
-        return label
-    }()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    private lazy var ingredientLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
+    private func configureUI() {
+        baseView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+        }
         
-        return label
-    }()
-    
-    private lazy var garnishLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
+        ingredientView.snp.makeConstraints { make in
+            make.top.equalTo(baseView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+        }
         
-        return label
-    }()
+        garnishView.snp.makeConstraints { make in
+            make.top.equalTo(ingredientView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
+            
+        }
+    }
 }
 

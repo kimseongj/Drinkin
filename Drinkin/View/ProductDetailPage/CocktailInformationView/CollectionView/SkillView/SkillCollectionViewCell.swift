@@ -11,8 +11,7 @@ import SnapKit
 class SkillCollectionViewCell: UICollectionViewCell {
     
     static let indentifier = "SkillCell"
-    
-    private let yellowRectangleView = YellowRectangleView()
+ 
     var label: UILabel = {
         let label = UILabel()
         label.sizeToFit()
