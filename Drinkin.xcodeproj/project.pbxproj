@@ -65,6 +65,10 @@
 		1C9BAB2429EFB32F00E979AC /* GlassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2329EFB32F00E979AC /* GlassCollectionViewCell.swift */; };
 		1C9BAB2629EFB34C00E979AC /* GlassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2529EFB34C00E979AC /* GlassView.swift */; };
 		1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2729EFB58000E979AC /* CocktailInformationView.swift */; };
+		1CC9D3E82A19024C00654A5D /* HoldCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3E72A19024C00654A5D /* HoldCollectionView.swift */; };
+		1CC9D3EA2A19027400654A5D /* HoldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3E92A19027400654A5D /* HoldCollectionViewCell.swift */; };
+		1CC9D3EE2A19035600654A5D /* IdetifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3ED2A19035600654A5D /* IdetifierType.swift */; };
+		1CC9D3F02A1903EE00654A5D /* HoldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3EF2A1903EE00654A5D /* HoldView.swift */; };
 		1CCE88DD29E9498D00D3E1D2 /* CocktailVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DC29E9498D00D3E1D2 /* CocktailVCCoordinator.swift */; };
 		1CCE88DF29E949A900D3E1D2 /* HomeBarVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DE29E949A900D3E1D2 /* HomeBarVCCoordinator.swift */; };
 		1CCE88E129E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */; };
@@ -143,6 +147,10 @@
 		1C9BAB2329EFB32F00E979AC /* GlassCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCollectionViewCell.swift; sourceTree = "<group>"; };
 		1C9BAB2529EFB34C00E979AC /* GlassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassView.swift; sourceTree = "<group>"; };
 		1C9BAB2729EFB58000E979AC /* CocktailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailInformationView.swift; sourceTree = "<group>"; };
+		1CC9D3E72A19024C00654A5D /* HoldCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldCollectionView.swift; sourceTree = "<group>"; };
+		1CC9D3E92A19027400654A5D /* HoldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldCollectionViewCell.swift; sourceTree = "<group>"; };
+		1CC9D3ED2A19035600654A5D /* IdetifierType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdetifierType.swift; sourceTree = "<group>"; };
+		1CC9D3EF2A1903EE00654A5D /* HoldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldView.swift; sourceTree = "<group>"; };
 		1CCE88DC29E9498D00D3E1D2 /* CocktailVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88DE29E949A900D3E1D2 /* HomeBarVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVCCoordinator.swift; sourceTree = "<group>"; };
@@ -326,8 +334,8 @@
 		1C16A8672A13ACDA001640E2 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				1CC9D3E62A1901BF00654A5D /* LoggedinCell */,
 				1C04C19929DEED3D00E381C2 /* MainViewController.swift */,
-				1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */,
 				1C57317B2A07447A00C19EE1 /* HoldedViewController */,
 				1C16A86A2A13AD3D001640E2 /* LoggedinMainView.swift */,
 				1C16A86C2A13ADA5001640E2 /* UnloggedinMainView.swift */,
@@ -381,6 +389,7 @@
 		1C5CAACE29DB1AE30053F19A /* Drinkin */ = {
 			isa = PBXGroup;
 			children = (
+				1CC9D3EB2A19033100654A5D /* Common */,
 				1C0809D829E03FDB00265706 /* KakaoAuthViewModel */,
 				1C5CAAFF29DB51560053F19A /* Network */,
 				1C5CAAFB29DB50CC0053F19A /* Data */,
@@ -534,6 +543,33 @@
 			path = SkillView;
 			sourceTree = "<group>";
 		};
+		1CC9D3E62A1901BF00654A5D /* LoggedinCell */ = {
+			isa = PBXGroup;
+			children = (
+				1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */,
+				1CC9D3E72A19024C00654A5D /* HoldCollectionView.swift */,
+				1CC9D3E92A19027400654A5D /* HoldCollectionViewCell.swift */,
+				1CC9D3EF2A1903EE00654A5D /* HoldView.swift */,
+			);
+			path = LoggedinCell;
+			sourceTree = "<group>";
+		};
+		1CC9D3EB2A19033100654A5D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1CC9D3EC2A19034900654A5D /* Protocol */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1CC9D3EC2A19034900654A5D /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				1CC9D3ED2A19035600654A5D /* IdetifierType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		1CCE88F829EBB27C00D3E1D2 /* CocktailCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,6 +670,7 @@
 				1CCE88E329E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift in Sources */,
 				1CCE88EF29EBAB7900D3E1D2 /* ProductDetailViewController.swift in Sources */,
 				1C9BAB2029EFAED500E979AC /* SkillView.swift in Sources */,
+				1CC9D3F02A1903EE00654A5D /* HoldView.swift in Sources */,
 				1C9BAB1C29EFAEC500E979AC /* SkillCollectionView.swift in Sources */,
 				1C5731812A0744E100C19EE1 /* HoldedView.swift in Sources */,
 				1C9BAB1E29EFAECF00E979AC /* SkillCollectionViewCell.swift in Sources */,
@@ -679,6 +716,7 @@
 				1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */,
 				1C04C19C29DEEDAE00E381C2 /* LoggedInCell.swift in Sources */,
 				1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */,
+				1CC9D3E82A19024C00654A5D /* HoldCollectionView.swift in Sources */,
 				1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */,
 				1CCE890029EBBC3C00D3E1D2 /* LoginEndpoint.swift in Sources */,
 				1C57317D2A0744CC00C19EE1 /* HoldedCollectionView.swift in Sources */,
@@ -692,11 +730,13 @@
 				1C9BAB1629EFAE6400E979AC /* ToolCollectionView.swift in Sources */,
 				1C9BAB2229EFB31400E979AC /* GlassCollectionView.swift in Sources */,
 				1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */,
+				1CC9D3EA2A19027400654A5D /* HoldCollectionViewCell.swift in Sources */,
 				1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */,
 				1C0809DA29E03FFB00265706 /* KakaoAuthViewModel.swift in Sources */,
 				1C5CAB0429DB51D10053F19A /* PreferCocktailRepository.swift in Sources */,
 				1C9BAB1829EFAE8000E979AC /* ToolCollectionViewCell.swift in Sources */,
 				1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */,
+				1CC9D3EE2A19035600654A5D /* IdetifierType.swift in Sources */,
 				1CCE88ED29EBA7AB00D3E1D2 /* Parser.swift in Sources */,
 				1CCE88DD29E9498D00D3E1D2 /* CocktailVCCoordinator.swift in Sources */,
 			);

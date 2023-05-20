@@ -9,9 +9,7 @@ import UIKit
 import SnapKit
 
 class LoggedInCell: UICollectionViewCell {
-    
-    static let cellId = "LoggedInCell"
-    
+
     let wholeStackView = WholeStackView()
     
     let mainStackView: UIStackView = {
@@ -25,40 +23,6 @@ class LoggedInCell: UICollectionViewCell {
     func setCellBorder() {
         self.layer.borderWidth = 3
     }
-    
-    let cocktailImage: UIImageView = {
-        let cocktailImage = UIImageView()
-        cocktailImage.contentMode = .scaleAspectFit
-        cocktailImage.backgroundColor = .lightGray
-        return cocktailImage
-    }()
-    
-    var baseLabel: UILabel = {
-        let baseLabel = UILabel()
-        baseLabel.font = UIFont.systemFont(ofSize: 14)
-        baseLabel.textColor = .black
-        baseLabel.text = "당  도"
-        
-        return baseLabel
-    }()
-    
-    var ingredientLabel: UILabel = {
-        let ingredientLabel = UILabel()
-        ingredientLabel.font = UIFont.systemFont(ofSize: 14)
-        ingredientLabel.textColor = .black
-        ingredientLabel.text = "당  도"
-        
-        return ingredientLabel
-    }()
-    
-    var garnishLabel: UILabel = {
-        let garnishLabel = UILabel()
-        garnishLabel.font = UIFont.systemFont(ofSize: 14)
-        garnishLabel.textColor = .black
-        garnishLabel.text = "당  도"
-        
-        return garnishLabel
-    }()
     
     var seeMoreButton: UIButton = {
         let seeMoreButton = UIButton()
@@ -101,9 +65,10 @@ class LoggedInCell: UICollectionViewCell {
     }
 }
 
-//MARK: - WholeStackView
+//MARK: - 제일 큰 스택뷰
 class WholeStackView: UIStackView {
     let mainStackView = MainStackView()
+    let holdStackView = HoldStackView()
     var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
@@ -127,6 +92,7 @@ class WholeStackView: UIStackView {
     func configureUI() {
         self.addArrangedSubview(mainStackView)
         self.addArrangedSubview(descriptionLabel)
+        self.addArrangedSubview(holdStackView)
     }
     
     private func setWholeStackView() {
@@ -138,7 +104,7 @@ class WholeStackView: UIStackView {
     
 }
 
-//MARK: - MainStackView
+//MARK: - 이미지뷰랑 설명뷰 합쳐놓은 거
 class MainStackView: UIStackView {
     let cocktailImage: UIImageView = {
         let cocktailImage = UIImageView()
@@ -147,7 +113,7 @@ class MainStackView: UIStackView {
         return cocktailImage
     }()
     
-    let labelView = SummaryOfCocktailView()
+    let summaryOfCocktailView = SummaryOfCocktailView()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -170,7 +136,7 @@ class MainStackView: UIStackView {
     
     func configureUI() {
         self.addArrangedSubview(cocktailImage)
-        self.addArrangedSubview(labelView)
+        self.addArrangedSubview(summaryOfCocktailView)
         
         cocktailImage.snp.makeConstraints{ make in
             make.height.equalTo(70)
@@ -179,7 +145,7 @@ class MainStackView: UIStackView {
     }
 }
 
-//MARK: - SummaryOfCocktailView
+//MARK: - 갓파더 뷰 내용
 class SummaryOfCocktailView: UIView {
     var subtitleLabel: UILabel = {
         let subtitleLabel = UILabel()
@@ -305,10 +271,10 @@ class SummaryOfCocktailView: UIView {
 }
 
 //MARK: - HoldedIngredientView
-class HoldedIngredientView: UIView {
-    let baseView = UIView()
-    let ingredientView = UIView()
-    let garnishView = UIView()
+class HoldStackView: UIView {
+    let baseView = HoldView()
+    let ingredientView = HoldView()
+    let garnishView = HoldView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -321,6 +287,10 @@ class HoldedIngredientView: UIView {
     }
     
     private func configureUI() {
+        self.addSubview(baseView)
+        self.addSubview(ingredientView)
+        self.addSubview(garnishView)
+        
         baseView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
         }

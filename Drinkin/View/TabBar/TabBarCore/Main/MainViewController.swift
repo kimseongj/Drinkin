@@ -16,16 +16,11 @@ class MainViewController: UIViewController {
 
     var delegate: MainViewDelegate?
 
-    static var login: Bool = false
-    
-    //MARK:- LoggedinView
-    private let loggedInView = UIView()
-    
-    private let logoImage2: UIImageView = {
-        let logoImage = UIImageView()
-        logoImage.image = UIImage(named: "drinkinLogo")
-        return logoImage
-    }()
+    static var login: Bool = true
+ 
+    private let loggedinMainView = LoggedinMainView()
+    private let unloggedinMainView = UnloggedinMainView()
+
     
     private var recommendCocktailCollectionView: UICollectionView = { 
         let flowLayout = UICollectionViewFlowLayout()
@@ -66,14 +61,29 @@ class MainViewController: UIViewController {
         view = unloggedinMainView
     }
     
-    private func fetchLoggedinMainView() {
-        let loggedinMainView = LoggedinMainView(frame: view.bounds)
+    private func configureUnloggedinMainView() {
+        view.addSubview(unloggedinMainView)
         
+        unloggedinMainView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
+        }
+    }
+    
+    private func fetchLoggedinMainView() {
+        configureLoggedinMainView()
         loggedinMainView.configureUI()
         loggedinMainView.sendDelegate(delegate)
         loggedinMainView.setupRecommendCocktailCollectionView()
-        view = loggedinMainView
+    }
+    
+    private func configureLoggedinMainView() {
+        view.addSubview(loggedinMainView)
         
+        loggedinMainView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
+        }
     }
 }
 
