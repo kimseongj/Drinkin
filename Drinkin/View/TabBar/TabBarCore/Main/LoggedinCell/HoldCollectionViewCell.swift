@@ -9,12 +9,14 @@ import UIKit
 import SnapKit
 
 class HoldCollectionViewCell: UICollectionViewCell {
-
+    
     var label: UILabel = {
         let label = UILabel()
         label.sizeToFit()
         return label
     }()
+    
+    private let yellowRectangleView = YellowRectangleView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,15 +28,18 @@ class HoldCollectionViewCell: UICollectionViewCell {
     }
     
     func cellSetting() {
-        self.backgroundColor = .lightGray
-        self.layer.cornerRadius = 4
-        self.layer.borderWidth = 1.4
-        self.addSubview(label)
+        contentView.addSubview(yellowRectangleView)
+        contentView.addSubview(label)
+        
+        yellowRectangleView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalTo(label.snp.leading).offset(-4)
+        }
         
         label.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(2)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-2)
         }
     }

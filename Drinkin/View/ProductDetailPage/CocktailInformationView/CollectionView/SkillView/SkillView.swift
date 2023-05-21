@@ -27,11 +27,11 @@ class SkillView: UIView {
     }()
     
     let skillLabel: UILabel = {
-        let sl = UILabel()
-        sl.text = "기법"
-        sl.textColor = .black
-        sl.font = UIFont.systemFont(ofSize: 17)
-        return sl
+        let label = UILabel()
+        label.text = "기법"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 17)
+        return label
     }()
     
     let skillButtonName = ["asd", "asdzxc", "asdqweqwe", "123sdasdzxc", "asdasfasd", "123asdaszxczxasd123", "Serbossa American good"]
@@ -72,7 +72,7 @@ class SkillView: UIView {
     }
     
     func setSkillCollectionView() {
-        skillCollectionView.register(SkillCollectionViewCell.self, forCellWithReuseIdentifier: "SkillCell")
+        skillCollectionView.register(SkillCollectionViewCell.self, forCellWithReuseIdentifier: SkillCollectionViewCell.identifier)
         skillCollectionView.delegate = self
         skillCollectionView.dataSource = self
         if let flowLayout = skillCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -87,7 +87,7 @@ extension SkillView: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = skillCollectionView.dequeueReusableCell(withReuseIdentifier: "SkillCell", for: indexPath) as! SkillCollectionViewCell
+        let cell = skillCollectionView.dequeueReusableCell(withReuseIdentifier: SkillCollectionViewCell.identifier, for: indexPath) as! SkillCollectionViewCell
         cell.label.text = skillButtonName[indexPath.row]
         
         return cell

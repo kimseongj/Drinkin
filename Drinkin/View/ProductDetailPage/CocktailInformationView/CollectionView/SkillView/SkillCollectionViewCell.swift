@@ -9,9 +9,7 @@ import UIKit
 import SnapKit
 
 class SkillCollectionViewCell: UICollectionViewCell {
-    
-    static let indentifier = "SkillCell"
- 
+
     var label: UILabel = {
         let label = UILabel()
         label.sizeToFit()

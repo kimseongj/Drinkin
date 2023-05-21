@@ -19,6 +19,7 @@ class IntroductionView: UIView {
     let cocktailTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "갓파더"
+        
         return label
     }()
     
@@ -97,6 +98,7 @@ class IntroductionView: UIView {
         cocktailImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.centerX.equalToSuperview()
+            make.height.width.equalTo(120)
         }
         
         cocktailTitleLabel.snp.makeConstraints { make in

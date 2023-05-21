@@ -28,11 +28,12 @@ class HoldView: UIView {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 17)
+        label.text = "테스트"
         
         return label
     }()
     
-    let holdButtonName = ["asd", "asdzxc", "asdqweqwe", "123sdasdzxc", "asdasfasd", "123asdaszxczxasd123", "Serbossa American good"]
+    let holdButtonName = ["스카치 위스키", "아미레또", "세르보사 아메리카 굿"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,20 +53,19 @@ class HoldView: UIView {
         
         holdLabelView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.top.equalToSuperview().offset(24)
+            make.top.equalToSuperview()
             make.bottom.equalTo(holdCollectionView)
-            make.width.equalTo(62)
         }
         
         holdLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalTo(holdCollectionView.snp.leading).offset(-16)
+            make.top.equalToSuperview().offset(2)
         }
         
         holdCollectionView.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
-            make.top.equalToSuperview().offset(24)
-            make.leading.equalTo(holdLabelView.snp.trailing)
+            make.top.equalToSuperview()
         }
     }
     

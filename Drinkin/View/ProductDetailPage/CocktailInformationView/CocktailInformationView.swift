@@ -18,8 +18,8 @@ class CocktailInformationView: UIView {
         return title
     }()
     
-    let toolView = ToolView()
-    let glassView = GlassView()
+    let toolView = SkillView()
+    let glassView = SkillView()
     let skillView = SkillView()
     
     override init(frame: CGRect) {

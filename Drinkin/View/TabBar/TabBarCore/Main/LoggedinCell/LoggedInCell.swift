@@ -24,7 +24,7 @@ class LoggedInCell: UICollectionViewCell {
         self.layer.borderWidth = 3
     }
     
-    var seeMoreButton: UIButton = {
+    let seeMoreButton: UIButton = {
         let seeMoreButton = UIButton()
         seeMoreButton.setTitle("자세히 보기", for: .normal)
         seeMoreButton.setTitleColor(.white, for: .normal)
@@ -53,7 +53,7 @@ class LoggedInCell: UICollectionViewCell {
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-300)
+            make.bottom.equalTo(seeMoreButton.snp.top)
         }
         
         seeMoreButton.snp.makeConstraints { make in
@@ -66,42 +66,69 @@ class LoggedInCell: UICollectionViewCell {
 }
 
 //MARK: - 제일 큰 스택뷰
-class WholeStackView: UIStackView {
-    let mainStackView = MainStackView()
-    let holdStackView = HoldStackView()
-    var descriptionLabel: UILabel = {
+final class WholeStackView: UIView {
+    private let mainStackView = MainStackView()
+    private let holdStackView = HoldStackView()
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 2
         label.textColor = .black
         label.text = "스카치 위스키의 향 위에 아마레또의 달달한 아몬드향을 더했다. 아마레또는 생각보다 더 달다. 단 맛..."
-        
+
         return label
     }()
-    
+    private let baseView = HoldView()
+    private let ingredientView = HoldView()
+    private let garnishView = HoldView()
+
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        setWholeStackView()
         configureUI()
     }
-    
+
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func configureUI() {
-        self.addArrangedSubview(mainStackView)
-        self.addArrangedSubview(descriptionLabel)
-        self.addArrangedSubview(holdStackView)
+        self.addSubview(mainStackView)
+        self.addSubview(descriptionLabel)
+        self.addSubview(baseView)
+        self.addSubview(ingredientView)
+        self.addSubview(garnishView)
+        
+        mainStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(24)
+            make.leading.equalToSuperview().offset(14)
+            make.trailing.equalToSuperview().offset(-14)
+        }
+        
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(mainStackView.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(14)
+            make.trailing.equalToSuperview().offset(-14)
+        }
+        
+        baseView.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
+        
+        ingredientView.snp.makeConstraints { make in
+            make.top.equalTo(baseView.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
+        
+        garnishView.snp.makeConstraints { make in
+            make.top.equalTo(ingredientView.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+        }
+        
     }
-    
-    private func setWholeStackView() {
-        self.distribution = .fillProportionally
-        self.spacing = 20
-        self.axis = .vertical
-        self.alignment = .top
-    }
-    
 }
 
 //MARK: - 이미지뷰랑 설명뷰 합쳐놓은 거
@@ -139,8 +166,8 @@ class MainStackView: UIStackView {
         self.addArrangedSubview(summaryOfCocktailView)
         
         cocktailImage.snp.makeConstraints{ make in
-            make.height.equalTo(70)
-            make.width.equalTo(70)
+            make.height.equalTo(120)
+            make.width.equalTo(120)
         }
     }
 }
@@ -157,7 +184,7 @@ class SummaryOfCocktailView: UIView {
     
     var titleLabel: UILabel = {
         let title = UILabel()
-        title.font = UIFont.systemFont(ofSize: 20)
+        title.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 17)
         title.textColor = .black
         title.text = "갓파더"
         return title
