@@ -21,5 +21,4 @@ class HoldCollectionView: UICollectionView {
         layoutIfNeeded()
         return contentSize
     }
-    
 }

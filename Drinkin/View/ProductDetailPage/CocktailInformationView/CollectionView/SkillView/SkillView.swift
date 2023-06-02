@@ -22,7 +22,7 @@ class SkillView: UIView {
         let layout = UICollectionViewLayout()
         let scv = SkillCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
         scv.backgroundColor = .white
-        scv.layoutIfNeeded()
+ 
         return scv
     }()
     

@@ -21,5 +21,4 @@ class SkillCollectionView: UICollectionView {
         layoutIfNeeded()
         return contentSize
     }
-    
 }

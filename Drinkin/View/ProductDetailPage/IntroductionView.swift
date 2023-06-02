@@ -18,6 +18,7 @@ class IntroductionView: UIView {
     
     let cocktailTitleLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 17)
         label.text = "갓파더"
         
         return label

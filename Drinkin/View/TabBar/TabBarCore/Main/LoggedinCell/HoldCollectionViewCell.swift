@@ -12,7 +12,9 @@ class HoldCollectionViewCell: UICollectionViewCell {
     
     var label: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
         label.sizeToFit()
+        
         return label
     }()
     

@@ -53,13 +53,14 @@ class HoldView: UIView {
         
         holdLabelView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
+            make.trailing.equalTo(holdCollectionView.snp.leading).offset(-16)
             make.top.equalToSuperview()
             make.bottom.equalTo(holdCollectionView)
+            make.width.equalTo(40)
         }
         
         holdLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.trailing.equalTo(holdCollectionView.snp.leading).offset(-16)
             make.top.equalToSuperview().offset(2)
         }
         
