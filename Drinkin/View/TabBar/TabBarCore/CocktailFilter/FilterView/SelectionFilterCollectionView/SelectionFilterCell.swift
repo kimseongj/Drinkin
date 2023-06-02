@@ -1,16 +1,13 @@
 //
-//  BaseCell.swift
+//  SelectionFilterCell.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/16.
+//  Created by kimseongjun on 2023/06/02.
 //
 
 import UIKit
 
-final class BaseCell: UICollectionViewCell {
-    
-    static let id = "BaseCell"
-    
+class SelectionFilterCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -45,10 +42,11 @@ final class BaseCell: UICollectionViewCell {
         self.addSubview(baseNameLabel)
         
         baseNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(2)
+            make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().offset(-10)
-            make.bottom.equalToSuperview().offset(-2)
+            make.bottom.equalToSuperview().offset(-10)
         }
     }
 }
+

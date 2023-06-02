@@ -1,5 +1,5 @@
 //
-//  PreferBaseCollectionView.swift
+//  SelectionFilterCollectionView.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/06/02.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class PreferBaseView: UIView {
+class SelectionFilterView: UIView {
     
     //MARK:- baseCollectionView
-    var preferBaseCollectionView: UICollectionView =  {
+    var selectionFilterCollectionView: UICollectionView =  {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 8
@@ -20,17 +20,17 @@ class PreferBaseView: UIView {
         view.showsHorizontalScrollIndicator = false
         view.contentInset = .zero
         view.clipsToBounds = true
-        view.register(BaseCell.self, forCellWithReuseIdentifier: "BaseCell")
-
+        view.register(SelectionFilterCell.self, forCellWithReuseIdentifier: SelectionFilterCell.identifier)
+  
         return view
     }()
     
-    private let data = ["전체", "위스키 베이스", "리큐르 베이스", "보드카 베이스", "진 베이스", "asdasf", "asdasfqwe", "qwexzcsad", "qweasdxzc"]
+    private let data = ["전체", "위스키 베이스", "리큐르 베이스", "보드카 베이스", "진 베이스"]
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        setBaseCollectionView()
+        setSelectionFilterCollectionView()
     }
     
     required init?(coder: NSCoder) {
@@ -38,35 +38,35 @@ class PreferBaseView: UIView {
     }
     
     func configureUI() {
-        addSubview(preferBaseCollectionView)
+        addSubview(selectionFilterCollectionView)
         
-        preferBaseCollectionView.snp.makeConstraints { make in
+        selectionFilterCollectionView.snp.makeConstraints { make in
             make.top.leading.trailing.bottom.equalToSuperview()
         }
     }
     
-    func setBaseCollectionView() {
-        preferBaseCollectionView.register(BaseCell.self, forCellWithReuseIdentifier: "BaseCell")
-        preferBaseCollectionView.delegate = self
-        preferBaseCollectionView.dataSource = self
+    func setSelectionFilterCollectionView() {
+        selectionFilterCollectionView.register(SelectionFilterCell.self, forCellWithReuseIdentifier: SelectionFilterCell.identifier)
+        selectionFilterCollectionView.delegate = self
+        selectionFilterCollectionView.dataSource = self
         
-        if let flowLayout = preferBaseCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let flowLayout = selectionFilterCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
 
 }
 
-extension PreferBaseView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SelectionFilterView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = preferBaseCollectionView.dequeueReusableCell(withReuseIdentifier: BaseCell.id, for: indexPath) as! BaseCell
-        cell.baseNameLabel.text = data[indexPath.row]
-        cell.layoutIfNeeded()
+        let cell = selectionFilterCollectionView.dequeueReusableCell(withReuseIdentifier: SelectionFilterCell.identifier, for: indexPath) as! SelectionFilterCell
+        cell.baseNameLabel.text = data[indexPath.row] + " ▼"
+
         return cell
     }
     

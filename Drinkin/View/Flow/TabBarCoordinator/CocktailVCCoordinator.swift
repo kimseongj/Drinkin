@@ -19,9 +19,9 @@ class CocktailVCCoordinator: Coordinator {
     }
     
     func startPush() -> UINavigationController {
-        let cocktailViewController = CocktailViewController()
+        let filterViewController = FilterViewController()
         //cocktailViewController.delegate = self
-        navigationController.setViewControllers([cocktailViewController], animated: false)
+        navigationController.setViewControllers([filterViewController], animated: false)
         
         return navigationController
     }
