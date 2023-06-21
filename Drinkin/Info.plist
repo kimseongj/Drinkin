@@ -5,6 +5,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>RixYeoljeongdo_Pro Regular.otf</string>
+		<string>Pretendard-Bold.otf</string>
+		<string>Pretendard-ExtraBold.otf</string>
+		<string>Pretendard-SemiBold.otf</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>

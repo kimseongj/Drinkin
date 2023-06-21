@@ -1,15 +1,17 @@
 //
-//  SkillCollectionViewCell.swift
+//  HoldedCollectionViewCell.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/19.
+//  Created by kimseongjun on 2023/05/20.
 //
 
 import UIKit
 import SnapKit
 
-class SkillCollectionViewCell: UICollectionViewCell {
-
+class HoldCollectionViewCell: UICollectionViewCell {
+    
+    static let indentifier = "SkillCell"
+ 
     var label: UILabel = {
         let label = UILabel()
         label.sizeToFit()

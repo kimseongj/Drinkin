@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class FilteredCocktailCell: UICollectionViewCell {
+class FilteredCocktailCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         
@@ -55,19 +55,26 @@ class FilteredCocktailCell: UICollectionViewCell {
     private lazy var ingredientLabel: UILabel = makeSubtitleLabel()
     private let ingredientGradeView = LevelOneView()
     
-//    override init(frame: CGRect) {
-//
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    //    override init(frame: CGRect) {
+    //
+    //    }
+    //
+    //    required init?(coder: NSCoder) {
+    //        fatalError("init(coder:) has not been implemented")
+    //    }
     
     private func makeSubtitleLabel() -> UILabel {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         
         return label
+    }
+    
+    private func configureSubtitleText() {
+        levelLabel.text = "난이도"
+        sugarContentLabel.text = "당  도"
+        abvLabel.text = "도  수"
+        ingredientLabel.text = "재  료"
     }
     
     private func makeLevelView(title: String, gradeView: LevelOneView) -> UIView {
@@ -78,12 +85,18 @@ class FilteredCocktailCell: UICollectionViewCell {
         return view
     }
     
+    func configureLevel() {
+        
+    }
+    
     private func configureUI() {
         contentView.addSubview(mainStackView)
         mainStackView.addArrangedSubview(firstSubStackView)
         mainStackView.addArrangedSubview(secondSubStackView)
         firstSubStackView.addArrangedSubview(levelView)
-        
+        firstSubStackView.addArrangedSubview(sugarContentView)
+        secondSubStackView.addArrangedSubview(abvView)
+        secondSubStackView.addArrangedSubview(ingredienView)
     }
 }
 

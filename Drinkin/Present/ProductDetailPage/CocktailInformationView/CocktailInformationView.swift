@@ -21,6 +21,7 @@ class CocktailInformationView: UIView {
     let toolView = SkillView()
     let glassView = SkillView()
     let skillView = SkillView()
+    //let abvView =
     
     override init(frame: CGRect) {
         super.init(frame: frame)

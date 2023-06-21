@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class FilterViewController: UIViewController {
+//    private dataSource: UITableViewDiffableDataSource<Section, >!
+    
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -42,6 +44,8 @@ class FilterViewController: UIViewController {
         configureUI()
     }
     
+    private let tableView = UITableView()
+    
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         
@@ -65,11 +69,19 @@ class FilterViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-16)
             $0.height.equalTo(60)
         }
-        
-        
     }
     
+//    private func configureDataSource() {
+//        tableView.register
+//    }
 }
+
+extension FilterViewController: UITableViewDelegate {
+    
+}
+
+
+
 
 class BaseSortModalView: UIViewController {
     

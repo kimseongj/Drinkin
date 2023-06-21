@@ -30,11 +30,11 @@ class SkillView: UIView {
         let label = UILabel()
         label.text = "기법"
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont(name: "Pretendard-ExtraBold", size: 15)
         return label
     }()
     
-    let skillButtonName = ["asd", "asdzxc", "asdqweqwe", "123sdasdzxc", "asdasfasd", "123asdaszxczxasd123", "Serbossa American good"]
+    let skillButtonName = ["asd", "asdzxc"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)

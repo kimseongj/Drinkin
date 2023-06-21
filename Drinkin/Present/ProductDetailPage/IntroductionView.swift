@@ -13,12 +13,14 @@ class IntroductionView: UIView {
     let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .systemGray3
+        
         return imageView
     }()
     
     let cocktailTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 17)
+        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 24)
         label.text = "갓파더"
         
         return label
@@ -27,15 +29,11 @@ class IntroductionView: UIView {
     let cocktailTDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = """
-여러분은 평소에 맥주를 즐겨드시나요? 저도 맥주를 참 좋아하는데요. 가끔 기분 전환이 필요할 때, 바로 오늘 소개해드릴 세르바사 콘 리몬을 만들어 마시곤 해요.
-
-세르바사 콘 리몬은 스페인의 바나 레스토랑에서 쉽게 찾아볼 수 있어요. 그래서 이름도 스페인어인데 우리말로는 간단해요. 바로, ‘레몬을 넣은 맥주'죠.
-
-레몬 향의 상쾌함과 라거 맥주의 청량감이 함께 어우러진 이 칵테일은, 남녀노소 모두 부담 없이 즐길 수 있답니다.
-
-저도 기회만 된다면, 스페인 현지에서 즐겨보고 싶네요.
+스카치 위스키의 향 위에 아마레또의 달달한 아몬드 향을 더했다. 아마레또는 생각보다 더 달다. 단 맛이 싫다면 아마레또의 비율을 줄여보자.
 """
         label.numberOfLines = 0
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        
         return label
     }()
     
@@ -51,27 +49,26 @@ class IntroductionView: UIView {
     let ingredientLabel: UILabel = {
         let label = UILabel()
         label.text = "스카치 위스키"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 20)
+        
         return label
     }()
     
     let receipeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "레시피"
+        label.font = UIFont(name: "Pretendard-ExtraBold", size: 20)
+        
         return label
     }()
     
     let receipeDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont(name: "Pretendard-Bold", size: 15)
         label.text = """
-여러분은 평소에 맥주를 즐겨드시나요? 저도 맥주를 참 좋아하는데요. 가끔 기분 전환이 필요할 때, 바로 오늘 소개해드릴 세르바사 콘 리몬을 만들어 마시곤 해요.
-
-세르바사 콘 리몬은 스페인의 바나 레스토랑에서 쉽게 찾아볼 수 있어요. 그래서 이름도 스페인어인데 우리말로는 간단해요. 바로, ‘레몬을 넣은 맥주'죠.
-
-레몬 향의 상쾌함과 라거 맥주의 청량감이 함께 어우러진 이 칵테일은, 남녀노소 모두 부담 없이 즐길 수 있답니다.
-
-저도 기회만 된다면, 스페인 현지에서 즐겨보고 싶네요.
+1. 올드패션드 글라스에 얼음을 채운다.
+2. 스카치 위스키 35ml, 디사론노 35ml를 순서대로 넣는다.
+3. 바 스푼으로 적당히 저어준다.
 """
         label.numberOfLines = 0
         return label

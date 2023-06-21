@@ -60,8 +60,10 @@ class LoginViewController: UIViewController {
     @objc
     private func logoutButtonClicked() {
         print("logoutButtonClicked")
-        let testViewController = TestViewController()
-        self.present(testViewController, animated: true)
+        
+        
+//        let testViewController = TestViewController()
+//        self.present(testViewController, animated: true)
     }
     
     private func configureUI() {
@@ -85,9 +87,6 @@ class TestViewController: UIViewController {
         
         let loginService = LoginService()
         
-//        loginService.fetch2(accessToken: abc) {
-//            return
-//        }
     }
     
     override func viewDidLoad() {
