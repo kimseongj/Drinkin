@@ -41,21 +41,19 @@ class UnloggedinMainView: UIView {
         let startButton = UIButton()
         startButton.setTitle("시작하기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
+        startButton.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
         startButton.backgroundColor = .black
         startButton.layer.cornerRadius = 20
         startButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
         startButton.layer.borderWidth = 3
         startButton.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
+        
+        
         return startButton
     }()
     
     @objc func startButtonAction() {
-        guard let validDelegate = delegate else {
-            print("delegate가 nil입니다.")
-            return
-        }
-        
-        validDelegate.pushChooseCocktailVC()
+        delegate?.pushChooseCocktailVC()
     }
     
     func configureUI() {
@@ -72,13 +70,13 @@ class UnloggedinMainView: UIView {
         logoImage1.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(safeArea)
-            make.height.equalTo(30)
-            make.width.equalTo(100)
+            make.height.equalTo(25)
+            make.width.equalTo(120)
         }
         
         skeletonView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.85)
-            make.height.equalToSuperview().multipliedBy(0.63)
+            make.height.equalTo(self.bounds.width)
             make.centerY.centerX.equalToSuperview()
         }
         

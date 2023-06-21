@@ -80,9 +80,6 @@ extension FilterViewController: UITableViewDelegate {
     
 }
 
-
-
-
 class BaseSortModalView: UIViewController {
     
 }

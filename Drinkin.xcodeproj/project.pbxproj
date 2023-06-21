@@ -22,6 +22,7 @@
 		1C0809E629E044B300265706 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0809E529E044B300265706 /* SnapKit */; };
 		1C16A86B2A13AD3D001640E2 /* LoggedinMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16A86A2A13AD3D001640E2 /* LoggedinMainView.swift */; };
 		1C16A86D2A13ADA5001640E2 /* UnloggedinMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16A86C2A13ADA5001640E2 /* UnloggedinMainView.swift */; };
+		1C2696372A43111A00C1FC00 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C2696362A43111A00C1FC00 /* Pretendard-Black.otf */; };
 		1C57317A2A06879400C19EE1 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5731792A06879400C19EE1 /* LevelView.swift */; };
 		1C5906A52A21D5B3001F048B /* FilteredCocktailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */; };
 		1C5906A72A21DBE0001F048B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A62A21DBE0001F048B /* FilterViewModel.swift */; };
@@ -118,6 +119,7 @@
 		1C0809E229E043FF00265706 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1C16A86A2A13AD3D001640E2 /* LoggedinMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedinMainView.swift; sourceTree = "<group>"; };
 		1C16A86C2A13ADA5001640E2 /* UnloggedinMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloggedinMainView.swift; sourceTree = "<group>"; };
+		1C2696362A43111A00C1FC00 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		1C5731792A06879400C19EE1 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
 		1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCocktailCell.swift; sourceTree = "<group>"; };
 		1C5906A62A21DBE0001F048B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
@@ -390,7 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				1CC9D3F12A19C92900654A5D /* Resource */,
-				1CC9D3EB2A19033100654A5D /* Common */,
+				1CC9D3EB2A19033100654A5D /* Utils */,
 				1C0809D829E03FDB00265706 /* KakaoAuthViewModel */,
 				1C5CAAFF29DB51560053F19A /* Network */,
 				1C5CAAFB29DB50CC0053F19A /* Data */,
@@ -574,13 +576,13 @@
 			path = LoggedinCell;
 			sourceTree = "<group>";
 		};
-		1CC9D3EB2A19033100654A5D /* Common */ = {
+		1CC9D3EB2A19033100654A5D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */,
 				1CC9D3EC2A19034900654A5D /* Protocol */,
 			);
-			path = Common;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		1CC9D3EC2A19034900654A5D /* Protocol */ = {
@@ -603,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */,
+				1C2696362A43111A00C1FC00 /* Pretendard-Black.otf */,
 				1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */,
 				1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */,
 				1CC9D3F52A1A4A7300654A5D /* RixYeoljeongdo_Pro Regular.otf */,
@@ -706,6 +709,7 @@
 				1C5CAAD929DB1AE50053F19A /* Assets.xcassets in Resources */,
 				1CDDB92E2A3AD87F0007983A /* Pretendard-SemiBold.otf in Resources */,
 				1CDDB92B2A3AD7370007983A /* Pretendard-ExtraBold.otf in Resources */,
+				1C2696372A43111A00C1FC00 /* Pretendard-Black.otf in Resources */,
 				1CC9D3F62A1A4A7300654A5D /* RixYeoljeongdo_Pro Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
