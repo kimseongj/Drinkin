@@ -45,10 +45,10 @@ final class BaseCell: UICollectionViewCell {
         self.addSubview(baseNameLabel)
         
         baseNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(2)
+            make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().offset(-10)
-            make.bottom.equalToSuperview().offset(-2)
+            make.bottom.equalToSuperview().offset(-10)
         }
     }
 }
