@@ -27,7 +27,7 @@ class HoldView: UIView {
     let holdLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont(name: "Pretendard-ExtraBold", size: 14)
         label.text = "테스트"
         
         return label

@@ -47,8 +47,8 @@ class LoggedinMainView: UIView {
         logoImage2.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(safeArea)
-            make.height.equalTo(30)
-            make.width.equalTo(100)
+            make.height.equalTo(25)
+            make.width.equalTo(120)
         }
         
         recommendCocktailCollectionView.snp.makeConstraints { make in

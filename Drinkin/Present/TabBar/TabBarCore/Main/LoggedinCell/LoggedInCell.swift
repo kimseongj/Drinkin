@@ -99,33 +99,33 @@ final class WholeStackView: UIView {
         self.addSubview(garnishView)
         
         mainStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(24)
-            make.leading.equalToSuperview().offset(14)
-            make.trailing.equalToSuperview().offset(-14)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(mainStackView.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(14)
-            make.trailing.equalToSuperview().offset(-14)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
         
         baseView.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
         
         ingredientView.snp.makeConstraints { make in
             make.top.equalTo(baseView.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
         
         garnishView.snp.makeConstraints { make in
             make.top.equalTo(ingredientView.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
         
     }
@@ -320,6 +320,7 @@ class HoldStackView: UIView {
         
         baseView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
+            
         }
         
         ingredientView.snp.makeConstraints { make in
