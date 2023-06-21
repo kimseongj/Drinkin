@@ -145,15 +145,7 @@ extension PreferCocktailSelectionViewController: UICollectionViewDelegate, UICol
         let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "CocktailCell", for: indexPath) as! CocktailCollectionViewCell
         cell.cocktailNameLabel.text = "asd"
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenSize: CGRect = UIScreen.main.bounds
-        let cellHeight = screenSize.height / 4
-        let cellWidth = (screenSize.width - 70) / 3
-        
-        return CGSize(width: cellWidth, height: cellHeight)
-    }
+    } 
 }
 
 extension PreferCocktailSelectionViewController {

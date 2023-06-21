@@ -14,12 +14,14 @@ class UnloggedinMainView: UIView {
     private let logoImage1: UIImageView = {
         let logoImage = UIImageView()
         logoImage.image = UIImage(named: "drinkinLogo")
+        
         return logoImage
     }()
     
     private let skeletonView: UIImageView = {
         let skeletonView = UIImageView()
         skeletonView.image = UIImage(named: "skeletonView")
+        
         return skeletonView
     }()
     
@@ -27,6 +29,7 @@ class UnloggedinMainView: UIView {
         let recommendLabel = UILabel()
         recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
         recommendLabel.text = "마셔봤던 칵테일을 선택하고"
+        
         return recommendLabel
     }()
     
@@ -34,6 +37,7 @@ class UnloggedinMainView: UIView {
         let recommendLabel = UILabel()
         recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
         recommendLabel.text = "다양한 칵테일을 추천받아보세요"
+        
         return recommendLabel
     }()
     
@@ -47,7 +51,6 @@ class UnloggedinMainView: UIView {
         startButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
         startButton.layer.borderWidth = 3
         startButton.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
-        
         
         return startButton
     }()
