@@ -33,7 +33,7 @@ class HoldView: UIView {
         return label
     }()
     
-    let holdButtonName = ["스카치 위스키", "아미레또", "세르보사 아메리카 굿"]
+    let holdButtonName = ["스카치 위스키", "아미레또", "세르보사"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
