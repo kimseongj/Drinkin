@@ -7,10 +7,12 @@
 
 import UIKit
 import SnapKit
+import AuthenticationServices
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     let navigationController1 = UINavigationController()
     let kakaoAuthVM = KakaoAuthViewModel()
+    let appleAuthVM = AppleAuthViewModel()
     
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -32,6 +34,13 @@ class LoginViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(named: "kakao_login_medium_wide"), for: .normal)
         button.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var appleLoginbutton: ASAuthorizationAppleIDButton = {
+        let button = ASAuthorizationAppleIDButton()
+        button.addTarget(self, action: #selector(appleLoginButtonClicked), for: .touchUpInside)
         
         return button
     }()
@@ -60,10 +69,13 @@ class LoginViewController: UIViewController {
     @objc
     private func logoutButtonClicked() {
         print("logoutButtonClicked")
+    }
+    
+    @objc
+    private func appleLoginButtonClicked() {
+        print("appleClicked")
         
-        
-//        let testViewController = TestViewController()
-//        self.present(testViewController, animated: true)
+        appleAuthVM.performRequests()
     }
     
     private func configureUI() {
@@ -71,28 +83,23 @@ class LoginViewController: UIViewController {
         
         stackView.addArrangedSubview(kakaoLoginStatusLabel)
         stackView.addArrangedSubview(kakaoLoginButton)
+        stackView.addArrangedSubview(appleLoginbutton)
         stackView.addArrangedSubview(kakaoLogoutButton)
         
         stackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
         }
+        
+        appleLoginbutton.snp.makeConstraints {
+            $0.width.equalTo(300)
+            $0.height.equalTo(45)
+        }
     }
 }
 
-class TestViewController: UIViewController {
-    func abc() {
-        
-        guard let abc = LoginService.accessToken else { return }
-        
-        let loginService = LoginService()
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        abc()
+extension LoginViewController:  ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
-
