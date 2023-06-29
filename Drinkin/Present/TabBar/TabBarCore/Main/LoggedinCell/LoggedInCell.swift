@@ -127,7 +127,6 @@ final class WholeStackView: UIView {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-        
     }
 }
 

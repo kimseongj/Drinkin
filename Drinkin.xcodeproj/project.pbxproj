@@ -20,8 +20,8 @@
 		1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E029E043DF00265706 /* AppCoordinator.swift */; };
 		1C0809E329E043FF00265706 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E229E043FF00265706 /* Coordinator.swift */; };
 		1C0809E629E044B300265706 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1C0809E529E044B300265706 /* SnapKit */; };
-		1C16A86B2A13AD3D001640E2 /* LoggedinMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16A86A2A13AD3D001640E2 /* LoggedinMainView.swift */; };
-		1C16A86D2A13ADA5001640E2 /* UnloggedinMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16A86C2A13ADA5001640E2 /* UnloggedinMainView.swift */; };
+		1C16A86B2A13AD3D001640E2 /* LoggedinMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16A86A2A13AD3D001640E2 /* LoggedinMainViewController.swift */; };
+		1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16A86C2A13ADA5001640E2 /* UnloggedinMainViewController.swift */; };
 		1C2696372A43111A00C1FC00 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C2696362A43111A00C1FC00 /* Pretendard-Black.otf */; };
 		1C26963A2A4315F300C1FC00 /* PreferCocktailSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2696392A4315F300C1FC00 /* PreferCocktailSelectionViewModel.swift */; };
 		1C26963D2A4973FA00C1FC00 /* AppleAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C26963C2A4973FA00C1FC00 /* AppleAuthViewModel.swift */; };
@@ -119,8 +119,8 @@
 		1C0809DB29E041E000265706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C0809E029E043DF00265706 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		1C0809E229E043FF00265706 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		1C16A86A2A13AD3D001640E2 /* LoggedinMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedinMainView.swift; sourceTree = "<group>"; };
-		1C16A86C2A13ADA5001640E2 /* UnloggedinMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloggedinMainView.swift; sourceTree = "<group>"; };
+		1C16A86A2A13AD3D001640E2 /* LoggedinMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedinMainViewController.swift; sourceTree = "<group>"; };
+		1C16A86C2A13ADA5001640E2 /* UnloggedinMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloggedinMainViewController.swift; sourceTree = "<group>"; };
 		1C2696362A43111A00C1FC00 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		1C2696392A4315F300C1FC00 /* PreferCocktailSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferCocktailSelectionViewModel.swift; sourceTree = "<group>"; };
 		1C26963C2A4973FA00C1FC00 /* AppleAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthViewModel.swift; sourceTree = "<group>"; };
@@ -353,10 +353,10 @@
 		1C16A8672A13ACDA001640E2 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				1C2696412A4D80AF00C1FC00 /* UnloggedinMain */,
+				1C2696402A4D80A200C1FC00 /* LoggedinMain */,
 				1CC9D3E62A1901BF00654A5D /* LoggedinCell */,
 				1C04C19929DEED3D00E381C2 /* MainViewController.swift */,
-				1C16A86A2A13AD3D001640E2 /* LoggedinMainView.swift */,
-				1C16A86C2A13ADA5001640E2 /* UnloggedinMainView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -384,6 +384,22 @@
 				1C2696392A4315F300C1FC00 /* PreferCocktailSelectionViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		1C2696402A4D80A200C1FC00 /* LoggedinMain */ = {
+			isa = PBXGroup;
+			children = (
+				1C16A86A2A13AD3D001640E2 /* LoggedinMainViewController.swift */,
+			);
+			path = LoggedinMain;
+			sourceTree = "<group>";
+		};
+		1C2696412A4D80AF00C1FC00 /* UnloggedinMain */ = {
+			isa = PBXGroup;
+			children = (
+				1C16A86C2A13ADA5001640E2 /* UnloggedinMainViewController.swift */,
+			);
+			path = UnloggedinMain;
 			sourceTree = "<group>";
 		};
 		1C5CAAC329DB1AE30053F19A = {
@@ -748,7 +764,7 @@
 				1C5CAB1229DB52880053F19A /* SkillModalRepository.swift in Sources */,
 				1CCE88FE29EBB32300D3E1D2 /* BaseCell.swift in Sources */,
 				1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */,
-				1C16A86D2A13ADA5001640E2 /* UnloggedinMainView.swift in Sources */,
+				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
 				1CDDB9312A3ADD350007983A /* DescriptionView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
@@ -794,7 +810,7 @@
 				1CB096F32A2A150400B7CA71 /* PreferBaseView.swift in Sources */,
 				1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */,
 				1CCE890029EBBC3C00D3E1D2 /* LoginEndpoint.swift in Sources */,
-				1C16A86B2A13AD3D001640E2 /* LoggedinMainView.swift in Sources */,
+				1C16A86B2A13AD3D001640E2 /* LoggedinMainViewController.swift in Sources */,
 				1C5CAB0829DB51DD0053F19A /* MainRepository.swift in Sources */,
 				1CCE88E529E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift in Sources */,
 				1CF62FB62A1252F30043A32F /* FilterViewController.swift in Sources */,

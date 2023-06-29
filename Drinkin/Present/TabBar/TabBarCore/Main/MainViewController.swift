@@ -18,32 +18,12 @@ class MainViewController: UIViewController {
 
     static var login: Bool = false
  
-    private let loggedinMainView = LoggedinMainView()
-    private let unloggedinMainView = UnloggedinMainView()
-
-    
-    private var recommendCocktailCollectionView: UICollectionView = { 
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumLineSpacing = 0
-        
-        let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        view.isScrollEnabled = true
-        view.showsHorizontalScrollIndicator = false
-        view.showsVerticalScrollIndicator = true
-        view.contentInset = .zero
-        view.backgroundColor = .clear
-        view.clipsToBounds = true
-        view.backgroundColor = .white
-        
-        return view
-    }()
+    private let loggedinMainViewController = LoggedinMainViewController()
+    private let unloggedinMainViewController = UnloggedinMainViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,32 +37,39 @@ class MainViewController: UIViewController {
     }
         
     private func fetchUnloggedinMainView() {
-        let unloggedinMainView = UnloggedinMainView(frame: view.bounds)
-        unloggedinMainView.configureUI()
-        unloggedinMainView.sendDelegate(delegate)
-        view = unloggedinMainView
+        addChild(unloggedinMainViewController)
+        //view.addSubview(unloggedinMainViewController.view)
+        //let unloggedinMainViewController = UnloggedinMainViewController()
+        //unloggedinMainViewController.configureUI()
+        configureUnloggedinMainView()
+        unloggedinMainViewController.sendDelegate(delegate)
+        
     }
     
     private func configureUnloggedinMainView() {
-        view.addSubview(unloggedinMainView)
+        view.addSubview(unloggedinMainViewController.view)
         
-        unloggedinMainView.snp.makeConstraints { make in
+        unloggedinMainViewController.view.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
     
     private func fetchLoggedinMainView() {
+        unloggedinMainViewController.removeFromParent()
+        addChild(loggedinMainViewController)
+        //view.addSubview(loggedinMainViewController.view)
         configureLoggedinMainView()
-        loggedinMainView.configureUI()
-        loggedinMainView.sendDelegate(delegate)
-        loggedinMainView.setupRecommendCocktailCollectionView()
+//        let loggedinMainView = LoggedinMainViewController()
+//        loggedinMainView.configureUI()
+//        loggedinMainView.sendDelegate(delegate)
+//        loggedinMainView.setupRecommendCocktailCollectionView()
     }
     
     private func configureLoggedinMainView() {
-        view.addSubview(loggedinMainView)
+        view.addSubview(loggedinMainViewController.view)
         
-        loggedinMainView.snp.makeConstraints { make in
+        loggedinMainViewController.view.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }

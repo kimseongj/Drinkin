@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UnloggedinMainView: UIView {
+class UnloggedinMainViewController: UIViewController {
     
     weak var delegate: MainViewDelegate?
 
@@ -59,16 +59,20 @@ class UnloggedinMainView: UIView {
         delegate?.pushChooseCocktailVC()
     }
     
-    func configureUI() {
-        let safeArea = self.safeAreaLayoutGuide
+    override func viewDidLoad() {
+        configureUI()
+    }
     
-        self.backgroundColor = .white
+    func configureUI() {
+        let safeArea = view.safeAreaLayoutGuide
+    
+        view.backgroundColor = .white
         
-        self.addSubview(logoImage1)
-        self.addSubview(skeletonView)
+        view.addSubview(logoImage1)
+        view.addSubview(skeletonView)
         skeletonView.addSubview(recommendLabel1)
         skeletonView.addSubview(recommendLabel2)
-        self.addSubview(startButton)
+        view.addSubview(startButton)
         
         logoImage1.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -79,7 +83,7 @@ class UnloggedinMainView: UIView {
         
         skeletonView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.85)
-            make.height.equalTo(self.bounds.width)
+            make.height.equalTo(view.bounds.width)
             make.centerY.centerX.equalToSuperview()
         }
         
