@@ -25,6 +25,13 @@ class UnloggedinMainViewController: UIViewController {
         return skeletonView
     }()
     
+    private let exampleCocktailImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "exampleCocktail")
+        
+        return imageView
+    }()
+    
     private let recommendLabel1: UILabel = {
         let recommendLabel = UILabel()
         recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
@@ -70,6 +77,7 @@ class UnloggedinMainViewController: UIViewController {
         
         view.addSubview(logoImage1)
         view.addSubview(skeletonView)
+        skeletonView.addSubview(exampleCocktailImageView)
         skeletonView.addSubview(recommendLabel1)
         skeletonView.addSubview(recommendLabel2)
         view.addSubview(startButton)
@@ -85,6 +93,13 @@ class UnloggedinMainViewController: UIViewController {
             make.width.equalToSuperview().multipliedBy(0.85)
             make.height.equalTo(view.bounds.width)
             make.centerY.centerX.equalToSuperview()
+        }
+        
+        exampleCocktailImageView.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+            make.bottom.equalTo(recommendLabel1.snp.top).offset(-4)
+            make.centerX.equalToSuperview()
         }
         
         recommendLabel1.snp.makeConstraints { make in
