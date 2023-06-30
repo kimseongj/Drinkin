@@ -10,30 +10,21 @@ import SnapKit
 
 final class LoggedinMainViewController: UIViewController {
     private enum Constant {
-        static let itemSize = CGSize(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.7)
-
+        static let heightRatio = 0.7
+        static let widthRatio = 0.8
         static let itemSpacing = 18.0
-        
-        static var insetX: CGFloat {
-            (UIScreen.main.bounds.width) - itemSize.width / 2.0
-        }
-        
-        static var collectionViewContentInset: UIEdgeInsets {
-            UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
-        }
     }
     
-    private let carouselFlowLayout: UICollectionViewFlowLayout = {
+    weak var delegate: MainViewDelegate?
+    
+    private lazy var carouselFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = Constant.itemSize
+        layout.itemSize = calculateItemSize()
         layout.minimumLineSpacing = Constant.itemSpacing
-        layout.minimumLineSpacing = 0
         
         return layout
     }()
-    
-    weak var delegate: MainViewDelegate?
     
     private let logoImage2: UIImageView = {
         let logoImage = UIImageView()
@@ -46,35 +37,42 @@ final class LoggedinMainViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = .fast
         collectionView.clipsToBounds = true
-        collectionView.contentInset = Constant.collectionViewContentInset
-        
+        collectionView.contentInset = calculateContentInset()
+        collectionView.isScrollEnabled = true
+
         return collectionView
     }()
     
+    private let view1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray
+        
+        return view
+    }()
+ 
     override func viewDidLoad() {
         configureUI()
+        setupRecommendCocktailCollectionView()
     }
     
     func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
-        
         view.backgroundColor = .white
-        
-//        view.addSubview(logoImage2)
+        view.addSubview(logoImage2)
         view.addSubview(recommendCocktailCollectionView)
         
-//        logoImage2.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.top.equalTo(safeArea)
-//            make.height.equalTo(25)
-//            make.width.equalTo(120)
-//        }
+        logoImage2.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(safeArea)
+            make.height.equalTo(15)
+            make.width.equalTo(80)
+        }
         
         recommendCocktailCollectionView.snp.makeConstraints { make in
-//            make.top.equalTo(logoImage2.snp.bottom).offset(20)
-//            make.leading.equalToSuperview()
-//            make.trailing.equalToSuperview()
-            make.top.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(logoImage2.snp.bottom).offset(20)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
     
@@ -92,30 +90,45 @@ final class LoggedinMainViewController: UIViewController {
         delegate?.pushProductDetailVC()
         print("SeeMoreButon was Pushed")
     }
+    
+    private func calculateItemSize() -> CGSize {
+        let itemSize = CGSize(width: view.bounds.width * 0.85, height: view.bounds.height * 0.75)
+        
+        return itemSize
+    }
+    
+    private func calculateContentInset() -> UIEdgeInsets {
+        let insetX = (view.bounds.width - calculateItemSize().width) / 2.0
+        let insetY = (view.bounds.height - calculateItemSize().height) / 2.0
+        let collectionViewContentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
+        
+        return collectionViewContentInset
+    }
 }
 
 
-extension LoggedinMainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return recommendCocktailCollectionView.bounds.size
-    }
-    
+extension LoggedinMainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = recommendCocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "LoggedInCell", for: indexPath) as! LoggedInCell
-
         cell.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonAction), for: .touchUpInside)
-        
+
         return cell
     }
 }
 
-extension LoggedinMainViewController: UIScrollViewDelegate {
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
-    }
+extension LoggedinMainViewController: UICollectionViewDelegateFlowLayout {
+  func scrollViewWillEndDragging(
+    _ scrollView: UIScrollView,
+    withVelocity velocity: CGPoint,
+    targetContentOffset: UnsafeMutablePointer<CGPoint>
+  ) {
+    let scrolledOffsetX = targetContentOffset.pointee.x + scrollView.contentInset.left
+    let cellWidth = calculateItemSize().width + Constant.itemSpacing
+    let index = round(scrolledOffsetX / cellWidth)
+    targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
+  }
 }

@@ -57,16 +57,13 @@ class MainViewController: UIViewController {
     
     private func fetchLoggedinMainView() {
         unloggedinMainViewController.removeFromParent()
+        unloggedinMainViewController.view.removeFromSuperview()
         addChild(loggedinMainViewController)
-        //view.addSubview(loggedinMainViewController.view)
         configureLoggedinMainView()
-//        let loggedinMainView = LoggedinMainViewController()
-//        loggedinMainView.configureUI()
-//        loggedinMainView.sendDelegate(delegate)
-//        loggedinMainView.setupRecommendCocktailCollectionView()
+        loggedinMainViewController.sendDelegate(delegate)
     }
     
-    private func configureLoggedinMainView() {
+    private func configureLoggedinMainView() { 
         view.addSubview(loggedinMainViewController.view)
         
         loggedinMainViewController.view.snp.makeConstraints { make in
