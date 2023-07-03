@@ -25,7 +25,7 @@
 		1C2696372A43111A00C1FC00 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1C2696362A43111A00C1FC00 /* Pretendard-Black.otf */; };
 		1C26963A2A4315F300C1FC00 /* PreferCocktailSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2696392A4315F300C1FC00 /* PreferCocktailSelectionViewModel.swift */; };
 		1C26963D2A4973FA00C1FC00 /* AppleAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C26963C2A4973FA00C1FC00 /* AppleAuthViewModel.swift */; };
-		1C57317A2A06879400C19EE1 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5731792A06879400C19EE1 /* LevelView.swift */; };
+		1C57317A2A06879400C19EE1 /* GradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5731792A06879400C19EE1 /* GradeView.swift */; };
 		1C5906A52A21D5B3001F048B /* FilteredCocktailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */; };
 		1C5906A72A21DBE0001F048B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A62A21DBE0001F048B /* FilterViewModel.swift */; };
 		1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */; };
@@ -55,6 +55,7 @@
 		1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6636532A067F4B00C85374 /* SelectedView.swift */; };
 		1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */; };
 		1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */; };
+		1C71A4B02A5292A300F1814A /* GradePresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C71A4AF2A5292A300F1814A /* GradePresentationView.swift */; };
 		1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1029EFADA500E979AC /* LoadingView.swift */; };
 		1C9BAB1629EFAE6400E979AC /* ToolCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1529EFAE6400E979AC /* ToolCollectionView.swift */; };
 		1C9BAB1829EFAE8000E979AC /* ToolCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1729EFAE8000E979AC /* ToolCollectionViewCell.swift */; };
@@ -66,6 +67,7 @@
 		1C9BAB2429EFB32F00E979AC /* GlassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2329EFB32F00E979AC /* GlassCollectionViewCell.swift */; };
 		1C9BAB2629EFB34C00E979AC /* GlassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2529EFB34C00E979AC /* GlassView.swift */; };
 		1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB2729EFB58000E979AC /* CocktailInformationView.swift */; };
+		1CA20ECF2A52F4B2009FDD90 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CA20ECE2A52F4B2009FDD90 /* Pretendard-Medium.otf */; };
 		1CA2C9F02A2DA9A700AED81E /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2C9EF2A2DA9A700AED81E /* LoginProvider.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */; };
@@ -124,7 +126,7 @@
 		1C2696362A43111A00C1FC00 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		1C2696392A4315F300C1FC00 /* PreferCocktailSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferCocktailSelectionViewModel.swift; sourceTree = "<group>"; };
 		1C26963C2A4973FA00C1FC00 /* AppleAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthViewModel.swift; sourceTree = "<group>"; };
-		1C5731792A06879400C19EE1 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
+		1C5731792A06879400C19EE1 /* GradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeView.swift; sourceTree = "<group>"; };
 		1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCocktailCell.swift; sourceTree = "<group>"; };
 		1C5906A62A21DBE0001F048B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		1C5CAACC29DB1AE30053F19A /* Drinkin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 		1C6636532A067F4B00C85374 /* SelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedView.swift; sourceTree = "<group>"; };
 		1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowRectangleView.swift; sourceTree = "<group>"; };
 		1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRectangleView.swift; sourceTree = "<group>"; };
+		1C71A4AF2A5292A300F1814A /* GradePresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradePresentationView.swift; sourceTree = "<group>"; };
 		1C9BAB1029EFADA500E979AC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		1C9BAB1529EFAE6400E979AC /* ToolCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolCollectionView.swift; sourceTree = "<group>"; };
 		1C9BAB1729EFAE8000E979AC /* ToolCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +162,7 @@
 		1C9BAB2329EFB32F00E979AC /* GlassCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCollectionViewCell.swift; sourceTree = "<group>"; };
 		1C9BAB2529EFB34C00E979AC /* GlassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassView.swift; sourceTree = "<group>"; };
 		1C9BAB2729EFB58000E979AC /* CocktailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailInformationView.swift; sourceTree = "<group>"; };
+		1CA20ECE2A52F4B2009FDD90 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		1CA2C9EF2A2DA9A700AED81E /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterView.swift; sourceTree = "<group>"; };
@@ -236,7 +240,7 @@
 			children = (
 				1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */,
 				1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */,
-				1C5731792A06879400C19EE1 /* LevelView.swift */,
+				1C5731792A06879400C19EE1 /* GradeView.swift */,
 			);
 			path = RectangleView;
 			sourceTree = "<group>";
@@ -355,7 +359,6 @@
 			children = (
 				1C2696412A4D80AF00C1FC00 /* UnloggedinMain */,
 				1C2696402A4D80A200C1FC00 /* LoggedinMain */,
-				1CC9D3E62A1901BF00654A5D /* LoggedinCell */,
 				1C04C19929DEED3D00E381C2 /* MainViewController.swift */,
 			);
 			path = Main;
@@ -389,6 +392,7 @@
 		1C2696402A4D80A200C1FC00 /* LoggedinMain */ = {
 			isa = PBXGroup;
 			children = (
+				1CC9D3E62A1901BF00654A5D /* LoggedinCell */,
 				1C16A86A2A13AD3D001640E2 /* LoggedinMainViewController.swift */,
 			);
 			path = LoggedinMain;
@@ -457,7 +461,6 @@
 				1C04C18829DEEC3700E381C2 /* ProductDetailPage */,
 				1C04C18729DEEC3400E381C2 /* PreferCoctailSelectionView */,
 				1C04C18629DEEC3100E381C2 /* LoadingView */,
-				1C04C18529DEEC2F00E381C2 /* RectangleView */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -505,6 +508,23 @@
 				1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		1C71A4AD2A52928500F1814A /* CommonTool */ = {
+			isa = PBXGroup;
+			children = (
+				1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */,
+			);
+			path = CommonTool;
+			sourceTree = "<group>";
+		};
+		1C71A4AE2A52929300F1814A /* CommonView */ = {
+			isa = PBXGroup;
+			children = (
+				1C04C18529DEEC2F00E381C2 /* RectangleView */,
+				1C71A4AF2A5292A300F1814A /* GradePresentationView.swift */,
+			);
+			path = CommonView;
 			sourceTree = "<group>";
 		};
 		1C9BAAEA29EC15EA00E979AC /* LoginEndpoint */ = {
@@ -609,7 +629,8 @@
 		1CC9D3EB2A19033100654A5D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */,
+				1C71A4AE2A52929300F1814A /* CommonView */,
+				1C71A4AD2A52928500F1814A /* CommonTool */,
 				1CC9D3EC2A19034900654A5D /* Protocol */,
 			);
 			path = Utils;
@@ -634,6 +655,7 @@
 		1CC9D3F42A1A4A3100654A5D /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				1CA20ECE2A52F4B2009FDD90 /* Pretendard-Medium.otf */,
 				1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */,
 				1C2696362A43111A00C1FC00 /* Pretendard-Black.otf */,
 				1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */,
@@ -737,6 +759,7 @@
 				1C5CAADC29DB1AE50053F19A /* LaunchScreen.storyboard in Resources */,
 				1CDDB92C2A3AD7370007983A /* Pretendard-Bold.otf in Resources */,
 				1C5CAAD929DB1AE50053F19A /* Assets.xcassets in Resources */,
+				1CA20ECF2A52F4B2009FDD90 /* Pretendard-Medium.otf in Resources */,
 				1CDDB92E2A3AD87F0007983A /* Pretendard-SemiBold.otf in Resources */,
 				1CDDB92B2A3AD7370007983A /* Pretendard-ExtraBold.otf in Resources */,
 				1C2696372A43111A00C1FC00 /* Pretendard-Black.otf in Resources */,
@@ -774,6 +797,7 @@
 				1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */,
 				1CCE88DF29E949A900D3E1D2 /* HomeBarVCCoordinator.swift in Sources */,
 				1C5906A72A21DBE0001F048B /* FilterViewModel.swift in Sources */,
+				1C71A4B02A5292A300F1814A /* GradePresentationView.swift in Sources */,
 				1CCE88EB29E953E400D3E1D2 /* Provider.swift in Sources */,
 				1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */,
 				1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */,
@@ -795,7 +819,7 @@
 				1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */,
 				1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */,
 				1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */,
-				1C57317A2A06879400C19EE1 /* LevelView.swift in Sources */,
+				1C57317A2A06879400C19EE1 /* GradeView.swift in Sources */,
 				1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */,
 				1C5CAB1429DB52E30053F19A /* MainViewRepository.swift in Sources */,
 				1CCE890829EBC49400D3E1D2 /* RefreshEndpoint.swift in Sources */,

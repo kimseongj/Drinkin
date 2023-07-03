@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class LoggedInCell: UICollectionViewCell {
-
+    
     let wholeStackView = WholeStackView()
     
     let mainStackView: UIStackView = {
@@ -75,22 +75,23 @@ final class WholeStackView: UIView {
         label.numberOfLines = 2
         label.textColor = .black
         label.text = "스카치 위스키의 향 위에 아마레또의 달달한 아몬드향을 더했다. 아마레또는 생각보다 더 달다. 단 맛..."
-
+        
         return label
     }()
+    
     private let baseView = HoldView()
     private let ingredientView = HoldView()
     private let garnishView = HoldView()
-
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
     }
-
+    
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func configureUI() {
         self.addSubview(mainStackView)
         self.addSubview(descriptionLabel)
@@ -189,44 +190,15 @@ class SummaryOfCocktailView: UIView {
         return title
     }()
     
-    var levelLabel: UILabel = {
-        let levelLabel = UILabel()
-        levelLabel.font = UIFont.systemFont(ofSize: 14)
-        levelLabel.textColor = .black
-        levelLabel.text = "난이도"
-        
-        return levelLabel
-    }()
-    
-    var levelGradeView = UIStackView()
-    
-    var abvLabel: UILabel = {
-        let abvLabel = UILabel()
-        abvLabel.font = UIFont.systemFont(ofSize: 14)
-        abvLabel.textColor = .black
-        abvLabel.text = "도   수"
-        
-        return abvLabel
-    }()
-    
-    var abvGradeView = UIStackView()
-    
-    var sugarContentLabel: UILabel = {
-        let sugarContentLabel = UILabel()
-        sugarContentLabel.font = UIFont.systemFont(ofSize: 14)
-        sugarContentLabel.textColor = .black
-        sugarContentLabel.text = "당   도"
-        
-        return sugarContentLabel
-    }()
-    
-    var sugarContentGradeView = UIStackView()
+    private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 3)
+    private let abvGradePresentationView = GradePresentationView(title: "도   수", grade: 2)
+    private let sugarContentGradePresentationView = GradePresentationView(title: "당   도", grade: 1)
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
         checkLevel()
         configureUI()
-
+        
     }
     
     required init(coder: NSCoder) {
@@ -238,61 +210,40 @@ class SummaryOfCocktailView: UIView {
         
         self.addSubview(subtitleLabel)
         self.addSubview(titleLabel)
-        self.addSubview(levelLabel)
-        self.addSubview(abvLabel)
-        self.addSubview(sugarContentLabel)
-        self.addSubview(levelGradeView)
-        self.addSubview(abvGradeView)
-        self.addSubview(sugarContentGradeView)
+        self.addSubview(levelGradePresentationView)
+        self.addSubview(abvGradePresentationView)
+        self.addSubview(sugarContentGradePresentationView)
         
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(2)
             make.leading.equalToSuperview().offset(2)
         }
-        
+
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(subtitleLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(2)
         }
         
-        levelLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(2)
+        levelGradePresentationView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(2)
         }
-        
-        abvLabel.snp.makeConstraints { make in
-            make.top.equalTo(levelLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(2)
+
+        abvGradePresentationView.snp.makeConstraints {
+            $0.top.equalTo(levelGradePresentationView.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().offset(2)
         }
-        
-        sugarContentLabel.snp.makeConstraints { make in
-            make.top.equalTo(abvLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(2)
-            make.bottom.equalToSuperview().offset(-2)
-        }
-        
-        levelGradeView.snp.makeConstraints { make in
-            make.leading.equalTo(levelLabel.snp.trailing).offset(12)
-            make.centerY.equalTo(levelLabel.snp.centerY)
-        }
-        
-        abvGradeView.snp.makeConstraints { make in
-            make.leading.equalTo(abvLabel.snp.trailing).offset(12)
-            make.centerY.equalTo(abvLabel.snp.centerY)
-        }
-        
-        sugarContentGradeView.snp.makeConstraints { make in
-            make.leading.equalTo(sugarContentLabel.snp.trailing).offset(12)
-            make.centerY.equalTo(sugarContentLabel.snp.centerY)
+
+        sugarContentGradePresentationView.snp.makeConstraints {
+            $0.top.equalTo(abvGradePresentationView.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().offset(2)
+            $0.bottom.equalToSuperview().offset(-2)
         }
     }
     
+    // Binding 작업을 통해 뷰 업그래이드시키기 
     private func checkLevel() {
-        levelGradeView = LevelThreeView()
-        abvGradeView = LevelOneView()
-        sugarContentGradeView = LevelTwoView()
-        
-        // viewModel.난이도....
+
     }
 }
 

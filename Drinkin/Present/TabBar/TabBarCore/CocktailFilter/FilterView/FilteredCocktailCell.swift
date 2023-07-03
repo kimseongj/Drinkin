@@ -9,8 +9,14 @@ import UIKit
 import SnapKit
 
 class FilteredCocktailCell: UITableViewCell {
+    private enum Constant {
+//        static let
+//        static let 
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 20)
         
         return label
     }()
@@ -40,30 +46,28 @@ class FilteredCocktailCell: UITableViewCell {
     }()
     
     private let levelView = UIView()
-    private lazy var levelLabel: UILabel = makeSubtitleLabel()
-    private let levelGradeView = LevelOneView()
+    private lazy var levelLabel: UILabel = makeGradeLabel()
+    private lazy var levelGradeView = GradeView(grade: nil)
     
     private let sugarContentView = UIView()
-    private lazy var sugarContentLabel: UILabel = makeSubtitleLabel()
-    private let sugarContentLevelContentView = LevelOneView()
+    private lazy var sugarContentLabel: UILabel = makeGradeLabel()
+    private lazy var sugarContentGradeView = GradeView(grade: nil)
     
     private let abvView = UIView()
-    private lazy var abvLabel: UILabel = makeSubtitleLabel()
-    private let abvGradeView = LevelOneView()
+    private lazy var abvLabel: UILabel = makeGradeLabel()
+    private lazy var abvGradeView = GradeView(grade: nil)
     
     private let ingredienView = UIView()
-    private lazy var ingredientLabel: UILabel = makeSubtitleLabel()
-    private let ingredientGradeView = LevelOneView()
+    private lazy var ingredientLabel: UILabel = makeGradeLabel()
+    private lazy var ingredientGradeView = GradeView(grade: nil)
     
-    //    override init(frame: CGRect) {
-    //
-    //    }
-    //
-    //    required init?(coder: NSCoder) {
-    //        fatalError("init(coder:) has not been implemented")
-    //    }
+    private let cocktailImageView: UIImageView = {
+       let imageView = UIImageView()
+        
+        return imageView
+    }()
     
-    private func makeSubtitleLabel() -> UILabel {
+    private func makeGradeLabel() -> UILabel {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         
@@ -77,26 +81,39 @@ class FilteredCocktailCell: UITableViewCell {
         ingredientLabel.text = "재  료"
     }
     
-    private func makeLevelView(title: String, gradeView: LevelOneView) -> UIView {
-        let view = UIView()
-        let label: UILabel = makeSubtitleLabel()
-        let gradeView = LevelOneView()
-        
-        return view
-    }
-    
-    func configureLevel() {
-        
+    func configureGradeView() {
+         levelGradeView = GradeView(grade: 1)
+        sugarContentGradeView = GradeView(grade: 2)
+        abvGradeView = GradeView(grade: 3)
+        ingredientGradeView = GradeView(grade: 2)
     }
     
     private func configureUI() {
+        contentView.addSubview(titleLabel)
         contentView.addSubview(mainStackView)
+        contentView.addSubview(cocktailImageView)
         mainStackView.addArrangedSubview(firstSubStackView)
         mainStackView.addArrangedSubview(secondSubStackView)
         firstSubStackView.addArrangedSubview(levelView)
         firstSubStackView.addArrangedSubview(sugarContentView)
         secondSubStackView.addArrangedSubview(abvView)
         secondSubStackView.addArrangedSubview(ingredienView)
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        mainStackView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview().offset(-20)
+        }
+        
+        cocktailImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.height.width.equalTo(100)
+        }
     }
 }
-

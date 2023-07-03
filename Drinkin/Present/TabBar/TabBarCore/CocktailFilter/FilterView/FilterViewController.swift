@@ -18,7 +18,6 @@ class FilterViewController: UIViewController {
         return stackView
     }()
     
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "칵테일 리스트"
@@ -98,22 +97,4 @@ class ABVSortModalView: UIViewController {
 
 class IngredientView: UIViewController {
     
-}
-
-
-import SwiftUI
-
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-    }
-
-    func makeUIViewController(context: Context) -> some UIViewController {
-        LoginViewController()
-    }
-}
-
-struct ViewControllerRepresentable_PreviewProvider: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
-    }
 }

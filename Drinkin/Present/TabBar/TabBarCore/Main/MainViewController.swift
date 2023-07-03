@@ -38,9 +38,6 @@ class MainViewController: UIViewController {
         
     private func fetchUnloggedinMainView() {
         addChild(unloggedinMainViewController)
-        //view.addSubview(unloggedinMainViewController.view)
-        //let unloggedinMainViewController = UnloggedinMainViewController()
-        //unloggedinMainViewController.configureUI()
         configureUnloggedinMainView()
         unloggedinMainViewController.sendDelegate(delegate)
         
@@ -72,4 +69,3 @@ class MainViewController: UIViewController {
         }
     }
 }
-
