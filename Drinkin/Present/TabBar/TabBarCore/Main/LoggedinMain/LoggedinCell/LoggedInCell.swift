@@ -241,7 +241,7 @@ class SummaryOfCocktailView: UIView {
         }
     }
     
-    // Binding 작업을 통해 뷰 업그래이드시키기 
+    // Binding 작업을 통해 뷰 업그래이드시키기
     private func checkLevel() {
 
     }
@@ -270,7 +270,6 @@ class HoldStackView: UIView {
         
         baseView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            
         }
         
         ingredientView.snp.makeConstraints { make in
@@ -281,7 +280,6 @@ class HoldStackView: UIView {
         garnishView.snp.makeConstraints { make in
             make.top.equalTo(ingredientView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
-            
         }
     }
 }

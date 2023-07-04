@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import UIKit
 
 class PreferCocktailSelectionViewController: UIViewController {
@@ -34,7 +33,7 @@ class PreferCocktailSelectionViewController: UIViewController {
     let exitButton: UIButton = {
         let exitButton = UIButton()
         exitButton.setImage(UIImage(systemName: "multiply"), for: .normal)
-        exitButton.addTarget(self, action: #selector(pushExitButton), for: .touchUpInside)
+        exitButton.addTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
         
         return exitButton
     }()
@@ -64,9 +63,9 @@ class PreferCocktailSelectionViewController: UIViewController {
         completeSelectionButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
         completeSelectionButton.layer.borderWidth = 3
         completeSelectionButton.backgroundColor = .black
-        completeSelectionButton.setTitle("선택 완료", for: .normal)
         completeSelectionButton.titleLabel?.textColor = UIColor(red: 0.909, green: 0.906, blue: 0.903, alpha: 1)
         completeSelectionButton.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
+        
         return completeSelectionButton
     }()
     
@@ -75,7 +74,8 @@ class PreferCocktailSelectionViewController: UIViewController {
         configureUI()
         view.backgroundColor = .white
         MainViewController.login = true
-        setCocktailCollectionView()
+        configureCocktailCollectionView()
+        configureCompleteSelectionButton()
     }
     
     func configureUI() {
@@ -125,15 +125,29 @@ class PreferCocktailSelectionViewController: UIViewController {
         
     }
     
-    func setCocktailCollectionView() {
+    private func configureCocktailCollectionView() {
         cocktailCollectionView.delegate = self
         cocktailCollectionView.dataSource = self
     }
     
-    @objc func pushExitButton() {
-        self.dismiss(animated: true)
+    private func configureCompleteSelectionButton() {
+        var isSelected: Bool = false
+        
+        switch isSelected {
+        case false:
+            completeSelectionButton.setTitle("다음", for: .normal)
+            completeSelectionButton.addTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
+        case true:
+            completeSelectionButton.setTitle("선택 완료", for: .normal)
+        }
     }
     
+    @objc
+    private func presentPopupViewController() {
+        let recommendPopupViewController = RecommendPopupViewController()
+        recommendPopupViewController.modalPresentationStyle = .formSheet
+        present(recommendPopupViewController, animated: true)
+    }
 }
 
 extension PreferCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
