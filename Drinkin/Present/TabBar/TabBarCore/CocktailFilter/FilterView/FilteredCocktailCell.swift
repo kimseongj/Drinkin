@@ -8,10 +8,9 @@
 import UIKit
 import SnapKit
 
-class FilteredCocktailCell: UITableViewCell {
+class FilteredCocktailCell: UICollectionViewCell {
     private enum Constant {
-//        static let
-//        static let 
+
     }
     
     private let titleLabel: UILabel = {
@@ -24,7 +23,8 @@ class FilteredCocktailCell: UITableViewCell {
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
+        stackView.spacing = 9
         
         return stackView
     }()
@@ -32,7 +32,8 @@ class FilteredCocktailCell: UITableViewCell {
     private let firstSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalCentering
+       // stackView.spacing = 16
         
         return stackView
     }()
@@ -40,64 +41,52 @@ class FilteredCocktailCell: UITableViewCell {
     private let secondSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .equalCentering
+       // stackView.spacing = 16
         
         return stackView
     }()
     
-    private let levelView = UIView()
-    private lazy var levelLabel: UILabel = makeGradeLabel()
-    private lazy var levelGradeView = GradeView(grade: nil)
+    private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 2)
     
-    private let sugarContentView = UIView()
-    private lazy var sugarContentLabel: UILabel = makeGradeLabel()
-    private lazy var sugarContentGradeView = GradeView(grade: nil)
+    private let sugarContentPresentationView = GradePresentationView(title: "당   도", grade: 2)
     
-    private let abvView = UIView()
-    private lazy var abvLabel: UILabel = makeGradeLabel()
-    private lazy var abvGradeView = GradeView(grade: nil)
+    private let abvGradePresentationView = GradePresentationView(title: "도   수", grade: 1)
     
-    private let ingredienView = UIView()
-    private lazy var ingredientLabel: UILabel = makeGradeLabel()
-    private lazy var ingredientGradeView = GradeView(grade: nil)
+    private let ingredientPresentationView = IngredientQuantityView(ingredientQuantity: 2)
+    
+
     
     private let cocktailImageView: UIImageView = {
        let imageView = UIImageView()
+        imageView.backgroundColor = .gray
         
         return imageView
     }()
     
-    private func makeGradeLabel() -> UILabel {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
-        
-        return label
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        configureUI()
     }
     
-    private func configureSubtitleText() {
-        levelLabel.text = "난이도"
-        sugarContentLabel.text = "당  도"
-        abvLabel.text = "도  수"
-        ingredientLabel.text = "재  료"
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    
-    func configureGradeView() {
-         levelGradeView = GradeView(grade: 1)
-        sugarContentGradeView = GradeView(grade: 2)
-        abvGradeView = GradeView(grade: 3)
-        ingredientGradeView = GradeView(grade: 2)
-    }
-    
+
     private func configureUI() {
+        contentView.backgroundColor = .white
+        self.layer.borderWidth = 3
+        self.layer.borderColor = UIColor.black.cgColor
+        
         contentView.addSubview(titleLabel)
         contentView.addSubview(mainStackView)
         contentView.addSubview(cocktailImageView)
         mainStackView.addArrangedSubview(firstSubStackView)
         mainStackView.addArrangedSubview(secondSubStackView)
-        firstSubStackView.addArrangedSubview(levelView)
-        firstSubStackView.addArrangedSubview(sugarContentView)
-        secondSubStackView.addArrangedSubview(abvView)
-        secondSubStackView.addArrangedSubview(ingredienView)
+        firstSubStackView.addArrangedSubview(levelGradePresentationView)
+        firstSubStackView.addArrangedSubview(sugarContentPresentationView)
+        secondSubStackView.addArrangedSubview(abvGradePresentationView)
+        secondSubStackView.addArrangedSubview(ingredientPresentationView)
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
@@ -105,6 +94,7 @@ class FilteredCocktailCell: UITableViewCell {
         }
         
         mainStackView.snp.makeConstraints {
+            $0.width.equalTo(200)
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-20)
@@ -113,7 +103,15 @@ class FilteredCocktailCell: UITableViewCell {
         cocktailImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-16)
-            $0.height.width.equalTo(100)
+            $0.height.width.equalTo(70)
         }
+    }
+    
+    func configureCell(filteredItem: FilteredItem) {
+        titleLabel.text = filteredItem.title
+        levelGradePresentationView.grade = filteredItem.levelGrade
+        sugarContentPresentationView.grade = filteredItem.sugarContentGrade
+        abvGradePresentationView.grade = filteredItem.abvGrade
+        ingredientPresentationView.ingredientQuantity = filteredItem.ingredientQuantity
     }
 }

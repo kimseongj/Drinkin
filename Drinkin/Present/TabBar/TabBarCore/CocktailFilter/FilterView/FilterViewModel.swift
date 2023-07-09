@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import Combine
 
 class FilterViewModel {
+    @Published var filteredItems: [FilteredItem] = []
+    
+    private var cancelBag: Set<AnyCancellable> = []
+    
     
 }
