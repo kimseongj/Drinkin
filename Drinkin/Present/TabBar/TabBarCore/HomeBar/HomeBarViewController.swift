@@ -35,33 +35,32 @@ class HomeBarViewController: UIViewController {
     }()
     
     private let addLabel1: UILabel = {
-        let recommendLabel = UILabel()
-        recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        recommendLabel.text = "첫번 째 재료를 추가하고"
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.text = "첫번 째 재료를 추가하고"
         
-        return recommendLabel
+        return label
     }()
     
     private let addLabel2: UILabel = {
-        let recommendLabel = UILabel()
-        recommendLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        recommendLabel.text = "만들 수 있는 칵테일을 찾아보세요."
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.text = "만들 수 있는 칵테일을 찾아보세요."
         
-        return recommendLabel
+        return label
     }()
     
     private let addButton: UIButton = {
-        let startButton = UIButton()
-        startButton.setTitle("추가하기", for: .normal)
-        startButton.setTitleColor(.white, for: .normal)
-        startButton.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
-        startButton.backgroundColor = .black
-        startButton.layer.cornerRadius = 20
-        startButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
-        startButton.layer.borderWidth = 3
-        //startButton.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
+        let button = UIButton()
+        button.setTitle("추가하기", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 20
+        button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
+        button.layer.borderWidth = 3
         
-        return startButton
+        return button
     }()
     
     private let cocktailListTableView: UITableView = {
