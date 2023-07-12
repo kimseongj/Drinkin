@@ -19,7 +19,7 @@ struct AccessTokenConversionEndpoint: EndpointMakeable {
     
     var header: [String : String]?
     
-    mutating func insertTokenQueryValue(token: String) {
-        queryItems.append(URLQueryItem(name: "access_token", value: token))
+    mutating func insertTokenQueryValue(accessToken: String) {
+        queryItems.append(URLQueryItem(name: "access_token", value: accessToken))
     }
 }

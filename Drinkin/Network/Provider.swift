@@ -15,7 +15,9 @@ struct Provider {
         let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else { return }
             
-            guard let httpURLResponse = response as? HTTPURLResponse, (200...299).contains(httpURLResponse.statusCode) else { return }
+            guard let httpURLResponse = response as? HTTPURLResponse, (200...299).contains(httpURLResponse.statusCode) else {
+                print(response)
+                return }
             
             print(httpURLResponse.statusCode)
             
@@ -26,22 +28,44 @@ struct Provider {
     }
 }
 
-struct Provider1 {
-    func fetchData<T: Decodable>(endpoint: EndpointMakeable, parser: Parser<T>, completion: @escaping (T) -> Void) {
+//struct Provider1 {
+//    let provider2 = Provider2()
+//
+//    func fetchData<T: Decodable>(endpoint: EndpointMakeable, parser: Parser<T>, completion: @escaping (T) -> Void) {
+//        guard let request = endpoint.makeURLRequest() else { return }
+//
+//        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard error == nil else { return }
+//            
+//            if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 401 {
+//                provider2.fetchData(endpoint: <#T##EndpointMakeable#>, refreshToken: <#T##String#>, parser: <#T##Parser<Decodable>#>, completion: <#T##(Decodable) -> Void#>)
+//                return
+//            }
+//
+//            guard let httpURLResponse = response as? HTTPURLResponse, (200...299).contains(httpURLResponse.statusCode) else { return }
+//
+//            print(httpURLResponse.statusCode)
+//
+//            guard let validData = data, let parsedData = parser.parse(data: validData) else { return }
+//            completion(parsedData)
+//        }
+//        dataTask.resume()
+//    }
+//}
+
+struct Provider2 {
+    func fetchData<T: Decodable>(endpoint: EndpointMakeable, refreshToken: String, parser: Parser<T>, completion: @escaping (T) -> Void) {
         guard let request = endpoint.makeURLRequest() else { return }
         
         let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else { return }
-            
-            if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 401 {
-                return
-            }
             
             guard let httpURLResponse = response as? HTTPURLResponse, (200...299).contains(httpURLResponse.statusCode) else { return }
             
             print(httpURLResponse.statusCode)
             
             guard let validData = data, let parsedData = parser.parse(data: validData) else { return }
+            
             completion(parsedData)
         }
         dataTask.resume()
@@ -67,22 +91,7 @@ struct Provider1 {
 //    }
 //}
 
-struct Repository {
 
-    func fetchPublisher<T: Decodable>(endpoint: EndpointMakeable, dataType: T) -> AnyPublisher<T, Error> {
-        
-        let urlRequest = endpoint.makeURLRequest()
-        
-        return URLSession.shared.dataTaskPublisher(for: urlRequest!).map { $0.data }
-            .decode(type: T.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
-    }
-}
-
-class Repoistory {
-    let repository = Repository()
-    var subscriber: Set<AnyCancellable> = .init()
-}
     
     //    func fetchDailyBoxOffice(completion: @escaping (DailyBoxOffice) -> Void) {
     //        repository.fetchPublisher(endpoint: <#EndpointMakeable#>, dataType: <#_#>).sink { completion in
