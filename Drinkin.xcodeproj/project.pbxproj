@@ -12,7 +12,6 @@
 		1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */; };
 		1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19229DEECF800E381C2 /* TabBarController.swift */; };
 		1C04C19629DEED2700E381C2 /* HomeBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */; };
-		1C04C19829DEED3300E381C2 /* CocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19729DEED3300E381C2 /* CocktailViewController.swift */; };
 		1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19929DEED3D00E381C2 /* MainViewController.swift */; };
 		1C04C19C29DEEDAE00E381C2 /* LoggedInCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */; };
 		1C0809DA29E03FFB00265706 /* KakaoAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809D929E03FFB00265706 /* KakaoAuthViewModel.swift */; };
@@ -72,6 +71,7 @@
 		1CA20ED32A567AA6009FDD90 /* FilteredItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA20ED22A567AA6009FDD90 /* FilteredItem.swift */; };
 		1CA20ED62A568F21009FDD90 /* StoreTriedCocktailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA20ED52A568F21009FDD90 /* StoreTriedCocktailUsecase.swift */; };
 		1CA2C9F02A2DA9A700AED81E /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2C9EF2A2DA9A700AED81E /* LoginProvider.swift */; };
+		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */; };
 		1CB096F32A2A150400B7CA71 /* PreferBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096F22A2A150400B7CA71 /* PreferBaseView.swift */; };
@@ -116,7 +116,6 @@
 		1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolModalViewController.swift; sourceTree = "<group>"; };
 		1C04C19229DEECF800E381C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarViewController.swift; sourceTree = "<group>"; };
-		1C04C19729DEED3300E381C2 /* CocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailViewController.swift; sourceTree = "<group>"; };
 		1C04C19929DEED3D00E381C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1C04C19B29DEEDAE00E381C2 /* LoggedInCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInCell.swift; sourceTree = "<group>"; };
 		1C0809D929E03FFB00265706 /* KakaoAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthViewModel.swift; sourceTree = "<group>"; };
@@ -169,6 +168,7 @@
 		1CA20ED22A567AA6009FDD90 /* FilteredItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredItem.swift; sourceTree = "<group>"; };
 		1CA20ED52A568F21009FDD90 /* StoreTriedCocktailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTriedCocktailUsecase.swift; sourceTree = "<group>"; };
 		1CA2C9EF2A2DA9A700AED81E /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
+		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterView.swift; sourceTree = "<group>"; };
 		1CB096F22A2A150400B7CA71 /* PreferBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferBaseView.swift; sourceTree = "<group>"; };
@@ -373,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				1C04C18429DEEC2D00E381C2 /* FilterView */,
-				1C04C19729DEED3300E381C2 /* CocktailViewController.swift */,
 			);
 			path = CocktailFilter;
 			sourceTree = "<group>";
@@ -530,6 +529,7 @@
 			children = (
 				1C04C18529DEEC2F00E381C2 /* RectangleView */,
 				1C71A4AF2A5292A300F1814A /* GradePresentationView.swift */,
+				1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -816,7 +816,6 @@
 				1CCE88EB29E953E400D3E1D2 /* Provider.swift in Sources */,
 				1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */,
 				1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */,
-				1C04C19829DEED3300E381C2 /* CocktailViewController.swift in Sources */,
 				1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */,
 				1CCE88E129E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift in Sources */,
 				1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */,
@@ -858,6 +857,7 @@
 				1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */,
 				1C9BAB1629EFAE6400E979AC /* ToolCollectionView.swift in Sources */,
 				1C9BAB2229EFB31400E979AC /* GlassCollectionView.swift in Sources */,
+				1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */,
 				1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */,
 				1CC9D3EA2A19027400654A5D /* HoldCollectionViewCell.swift in Sources */,
 				1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */,

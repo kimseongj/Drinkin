@@ -32,8 +32,8 @@ class FilteredCocktailCell: UICollectionViewCell {
     private let firstSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalCentering
-       // stackView.spacing = 16
+        stackView.distribution = .fillEqually
+        stackView.spacing = 16
         
         return stackView
     }()
@@ -41,8 +41,8 @@ class FilteredCocktailCell: UICollectionViewCell {
     private let secondSubStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .equalCentering
-       // stackView.spacing = 16
+        stackView.distribution = .fillEqually
+        stackView.spacing = 16
         
         return stackView
     }()
@@ -94,7 +94,7 @@ class FilteredCocktailCell: UICollectionViewCell {
         }
         
         mainStackView.snp.makeConstraints {
-            $0.width.equalTo(200)
+            $0.width.equalTo(205)
             $0.top.equalTo(titleLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-20)
