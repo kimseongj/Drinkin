@@ -145,6 +145,7 @@ class PreferCocktailSelectionViewController: UIViewController {
     @objc
     private func presentPopupViewController() {
         let recommendPopupViewController = RecommendPopupViewController()
+        recommendPopupViewController.delegate = self
         recommendPopupViewController.modalPresentationStyle = .formSheet
         present(recommendPopupViewController, animated: true)
     }
@@ -180,5 +181,11 @@ extension PreferCocktailSelectionViewController {
             return section
         }
         return layout
+    }
+}
+
+extension PreferCocktailSelectionViewController: DismissDelegate {
+    func dismissCurrentViewController() {
+        self.dismiss(animated: true)
     }
 }
