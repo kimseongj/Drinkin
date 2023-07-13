@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
+protocol DismissDelegate {
+    func dismissCurrentViewController()
+}
+
 final class RecommendPopupViewController: UIViewController {
+    var delegate: DismissDelegate?
+    
     private let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -103,5 +109,6 @@ final class RecommendPopupViewController: UIViewController {
     @objc
     private func tapRecommendButton() {
         self.dismiss(animated: true)
+        delegate?.dismissCurrentViewController()
     }
 }
