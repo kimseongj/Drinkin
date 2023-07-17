@@ -29,7 +29,6 @@ class LoginService {
                 // completion 처리
                 print(completion)
             }, receiveValue: { value in
-                print("ASDASDSADASDASDSADzxczxcxzczxcxz")
                 print(value)
             })
 

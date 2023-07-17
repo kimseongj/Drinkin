@@ -12,7 +12,7 @@ import Combine
 //    
 //    func fetchPublisher() -> AnyPublisher<FeedService, Error> {
 //        let preferCocktailEndpoint = "abc"
-//        
+//
 //        return URLSession.shared.dataTaskPublisher(for: preferCocktailEndpoint).map {
 //            $0.data
 //        }.decode(type: , decoder: JSONDecoder())
@@ -20,3 +20,15 @@ import Combine
 //            .eraseToAnyPublisher()
 //    }
 //}
+
+class HoldedIngredientRepository {
+//    func fetchPublisher() -> AnyPublisher<FeedService, Error> {
+//        let preferCocktailEndpoint = "abc"
+//        
+//        return URLSession.shared.dataTaskPublisher(for: preferCocktailEndpoint).map {
+//            $0.data
+//        }.decode(type: , decoder: JSONDecoder())
+//            .receive(on: RunLoop.main)
+//            .eraseToAnyPublisher()
+//    }
+}
