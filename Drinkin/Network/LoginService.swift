@@ -20,15 +20,20 @@ class LoginService {
         accessTokenConversionEndpoint.insertTokenQueryValue(accessToken: accessToken)
         let request = accessTokenConversionEndpoint.makeURLRequest()
         
+        print("1231231231231232131")
+        
         URLSession.shared.dataTaskPublisher(for: request!)
             .tryMap {
+                print("qweqweqweqweqwewqeqwe")
                 print($0.response)
                 return $0.data }
             .decode(type: LoginToken.self, decoder: JSONDecoder())
             .sink(receiveCompletion: { completion in
                 // completion 처리
+                print("ASDASDASDSADSADASDASDASD")
                 print(completion)
             }, receiveValue: { value in
+                print("ZXCZXCXCZXCZXZXZXXZCXZCZ")
                 print(value)
             })
 
