@@ -19,7 +19,6 @@ protocol EndpointMakeable {
 }
 
 extension EndpointMakeable {
-    
     func makeURL() -> URL? {
         var urlComponents = URLComponents(string: baseURL)
         urlComponents?.path = path
