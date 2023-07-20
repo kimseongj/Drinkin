@@ -38,8 +38,9 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
-    lazy var appleLoginbutton: ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton()
+    lazy var appleLoginbutton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "appleid_button"), for: .normal)
         button.addTarget(self, action: #selector(appleLoginButtonClicked), for: .touchUpInside)
         
         return button
@@ -91,10 +92,7 @@ final class LoginViewController: UIViewController {
             $0.centerY.equalToSuperview()
         }
         
-        appleLoginbutton.snp.makeConstraints {
-            $0.width.equalTo(300)
-            $0.height.equalTo(45)
-        }
+
     }
 }
 
