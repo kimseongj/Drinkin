@@ -110,7 +110,7 @@
 		1CDDB92B2A3AD7370007983A /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */; };
 		1CDDB92C2A3AD7370007983A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */; };
 		1CDDB92E2A3AD87F0007983A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */; };
-		1CDDB9312A3ADD350007983A /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDDB9302A3ADD350007983A /* DescriptionView.swift */; };
+		1CDDB9312A3ADD350007983A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDDB9302A3ADD350007983A /* TestView.swift */; };
 		1CF62FB62A1252F30043A32F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF62FB52A1252F30043A32F /* FilterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -211,7 +211,7 @@
 		1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
-		1CDDB9302A3ADD350007983A /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		1CDDB9302A3ADD350007983A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		1CF62FB52A1252F30043A32F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -711,7 +711,7 @@
 		1CDDB92F2A3ADD110007983A /* DescriptionView */ = {
 			isa = PBXGroup;
 			children = (
-				1CDDB9302A3ADD350007983A /* DescriptionView.swift */,
+				1CDDB9302A3ADD350007983A /* TestView.swift */,
 			);
 			path = DescriptionView;
 			sourceTree = "<group>";
@@ -825,7 +825,7 @@
 				1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
-				1CDDB9312A3ADD350007983A /* DescriptionView.swift in Sources */,
+				1CDDB9312A3ADD350007983A /* TestView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
 				1CCE88F729EBB25C00D3E1D2 /* PreferCocktailViewController.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
