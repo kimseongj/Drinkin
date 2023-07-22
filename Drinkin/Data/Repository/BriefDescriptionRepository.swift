@@ -9,13 +9,16 @@ import Foundation
 import Combine
 
 class BriefDescriptionRepository {
+    let provider = Provider()
+    let endPoint = MockEndpoint()
+    
     func fetchPublisher() -> AnyPublisher<BriefDescription, Error> {
-        let preferCocktailEndpoint = URL(string: "zczxc")
+        let endPoint = MockEndpoint()
+        let request = endPoint.makeURLRequest()
         
-        return URLSession.shared.dataTaskPublisher(for: preferCocktailEndpoint!).map {
+        return URLSession.shared.dataTaskPublisher(for: request!).map {
             $0.data
         }.decode(type: BriefDescription.self, decoder: JSONDecoder())
-            .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }
 }

@@ -19,21 +19,19 @@ class LoginService {
     func fetch(accessToken: String, completion: @escaping () -> Void) {
         var accessTokenConversionEndpoint = AccessTokenConversionEndpoint()
         accessTokenConversionEndpoint.insertTokenQueryValue(accessToken: accessToken)
-        let request = accessTokenConversionEndpoint.makeURLRequest()
-        
-        print("1231231231231232131")
-        
-        URLSession.shared.dataTaskPublisher(for: request!)
-            .map { $0.data }
-            .decode(type: LoginToken.self, decoder: JSONDecoder())
-            .sink(receiveCompletion: { completion in
-                // completion 처리
-                print("ASDASDASDSADSADASDASDASD")
-                print(completion)
-            }, receiveValue: { value in
-                print("ZXCZXCXCZXCZXZXZXXZCXZCZ")
-                print(value)
-            }).store(in: &cancellableBeg)
+//        accessTokenConversionEndpoint.insertTokenQueryValue(accessToken: accessToken)
+//        let request = accessTokenConversionEndpoint.makeURLRequest()
+//
+//        URLSession.shared.dataTaskPublisher(for: request!)
+//            .map { $0.data }
+//            .decode(type: LoginToken.self, decoder: JSONDecoder())
+//            .sink(receiveCompletion: { completion in
+//
+//                print(completion)
+//            }, receiveValue: { value in
+//
+//                print(value)
+//            }).store(in: &cancellableBeg)
 
         
         
