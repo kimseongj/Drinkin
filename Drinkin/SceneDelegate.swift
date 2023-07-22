@@ -24,6 +24,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
          let viewController = LoginViewController()
          window?.rootViewController = viewController//tabbarController//tabbarController
          window?.makeKeyAndVisible()
+        
+//        window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정해줌
+//        let viewController = ViewController()
+//        window?.rootViewController = viewController//tabbarController//tabbarController
+//        window?.makeKeyAndVisible()
+        
+        
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
