@@ -17,6 +17,10 @@ final class LoggedinMainViewController: UIViewController {
     
     weak var delegate: MainViewDelegate?
     
+    //private var viewModel = LoggedinViewModel(fetchBriefDescriptionUseCase: <#FetchBriefDescriptionUsecase#>)
+    
+    private let briefDescriptionRepository = BriefDescriptionRepository()
+    
     private lazy var carouselFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -54,6 +58,10 @@ final class LoggedinMainViewController: UIViewController {
         configureUI()
         setupRecommendCocktailCollectionView()
     }
+    
+//    func create(with viewModel: LoggedinViewModel) {
+//        self.viewModel = viewModel
+//    }
     
     func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
@@ -113,8 +121,14 @@ extension LoggedinMainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //let briefDescription = BriefDescription(results: <#[Result]#>)
+        
         let cell = recommendCocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "LoggedInCell", for: indexPath) as! LoggedInCell
+        
+//        cell.configureCell(briefDescription: briefDescription.results[indexPath.row])
+        
         cell.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonAction), for: .touchUpInside)
+        
 
         return cell
     }

@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class HoldView: UIView {
+    private var title = ""
     
     var holdLabelView: UIView = {
         let label = UIView()
@@ -24,22 +25,30 @@ class HoldView: UIView {
         return collectionView
     }()
     
-    let holdLabel: UILabel = {
+    lazy var holdLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont(name: "Pretendard-ExtraBold", size: 14)
-        label.text = "테스트"
+        label.text = title
         
         return label
     }()
     
     let holdButtonName = ["스카치 위스키", "아미레또", "세르보사"]
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        configureUI()
+//        setHoldCollectionView()
+//    }
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        self.title = title
         configureUI()
         setHoldCollectionView()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -77,6 +86,10 @@ class HoldView: UIView {
         if let flowLayout = holdCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
+    }
+    
+    func configureHoldedIngredient() {
+        
     }
 }
 
