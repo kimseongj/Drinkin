@@ -51,16 +51,16 @@ final class GradePresentationView: UIView {
                 $0.leading.equalTo(titleLabel.snp.trailing).offset(12)
                 $0.trailing.equalToSuperview()
             }
-        case "당   도", "도   수":
+        case  "당    도", "도    수":
             titleLabel.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalToSuperview()
                 $0.bottom.equalToSuperview()
             }
-            
+
             gradeView.snp.makeConstraints {
                 $0.centerY.equalToSuperview()
-                $0.leading.equalTo(titleLabel.snp.trailing).offset(14)
+                $0.leading.equalTo(titleLabel.snp.trailing).offset(11)
                 $0.trailing.equalToSuperview()
             }
         default:
