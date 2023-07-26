@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     private var cocktail: [BriefDescription] = []
     
     private let briefDescriptionRepository = BriefDescriptionRepository()
+    //private let fetchBriefDescriptionUsecase = FetchBriefDescriptionUsecase()
     
     private lazy var testButton: UIButton = {
         let button = UIButton()
@@ -43,9 +44,10 @@ class ViewController: UIViewController {
     }
     
     @objc func pushTestButton() {
-        briefDescriptionRepository.fetchPublisher()
-            .sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-                print($0) }).store(in: &cancelbag)
+        //briefDescriptionRepository.fetchPublisher()
+        //fetchBriefDescriptionUsecase
+        //    .sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        //        print($0) }).store(in: &cancelbag)
     }
 }
 

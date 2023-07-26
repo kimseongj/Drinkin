@@ -27,7 +27,7 @@ struct Provider {
         dataTask.resume()
     }
     
-    func fetchData1<T: Decodable>(endpoint: EndpointMakeable, parser: Parser<T>, completion: @escaping (T) -> Void)  -> AnyPublisher<T, Error> {
+    func fetchData1<T: Decodable>(endpoint: EndpointMakeable)  -> AnyPublisher<T, Error> {
         let request = endpoint.makeURLRequest()
 
         return URLSession.shared.dataTaskPublisher(for: request!)

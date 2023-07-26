@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class HoldView: UIView {
+    private var title = ""
+    private var result: Result?
     
     var holdLabelView: UIView = {
         let label = UIView()
@@ -24,22 +26,25 @@ class HoldView: UIView {
         return collectionView
     }()
     
-    let holdLabel: UILabel = {
+    lazy var holdLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont(name: "Pretendard-ExtraBold", size: 14)
-        label.text = "테스트"
+        label.text = title
         
         return label
     }()
     
-    let holdButtonName = ["스카치 위스키", "아미레또", "세르보사"]
+    let holdButtonName: [String] = []
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(result: Result, title: String) {
+        super.init(frame: .zero)
+        self.title = title
+        self.result = result
         configureUI()
         setHoldCollectionView()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -82,12 +87,34 @@ class HoldView: UIView {
 
 extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return holdButtonName.count
+        guard let validResult = result else { return 0 }
+        
+        switch title {
+        case "베이스":
+            return validResult.categoryList.count
+        case "재    료":
+            return validResult.ingredientList.count
+        case "가니쉬":
+            return validResult.garnishList.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = holdCollectionView.dequeueReusableCell(withReuseIdentifier: HoldCollectionViewCell.identifier, for: indexPath) as! HoldCollectionViewCell
-        cell.label.text = holdButtonName[indexPath.row]
+        
+        guard let validResult = result else { return cell }
+        
+        switch title {
+        case "베이스":
+            cell.label.text = validResult.categoryList[indexPath.row].categoryNameKo
+        case "재    료":
+            cell.label.text = validResult.ingredientList[indexPath.row].ingredientNameKo
+        case "가니쉬":
+            cell.label.text = validResult.garnishList[indexPath.row].garnishNameKo
+        default: break
+        }
         
         return cell
     }

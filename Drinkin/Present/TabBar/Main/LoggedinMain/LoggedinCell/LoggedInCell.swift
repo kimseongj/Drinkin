@@ -10,7 +10,7 @@ import SnapKit
 
 class LoggedInCell: UICollectionViewCell {
     
-    let wholeStackView = WholeStackView()
+    let briefDescriptionView = BriefDescriptionView()
     
     let mainStackView: UIStackView = {
         let stackView = UIStackView()
@@ -46,10 +46,10 @@ class LoggedInCell: UICollectionViewCell {
     }
     
     func configureUI() {
-        self.addSubview(wholeStackView)
+        self.addSubview(briefDescriptionView)
         self.addSubview(seeMoreButton)
         
-        wholeStackView.snp.makeConstraints { make in
+        briefDescriptionView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
@@ -65,23 +65,35 @@ class LoggedInCell: UICollectionViewCell {
     }
 }
 
-//MARK: - 제일 큰 스택뷰
-final class WholeStackView: UIView {
-    private let mainStackView = MainStackView()
-    private let holdStackView = HoldStackView()
-    private let descriptionLabel: UILabel = {
+//MARK: - 버튼 제외 모든 기능
+final class BriefDescriptionView: UIView {
+    private let mainStackView: UIStackView = {//MainStackView()
+        let stackView = UIStackView()
+        stackView.distribution = .fill
+        stackView.spacing = 20
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        
+        return stackView
+    }()
+    
+    let cocktailImage: UIImageView = {
+        let cocktailImage = UIImageView()
+        cocktailImage.contentMode = .scaleAspectFit
+        cocktailImage.backgroundColor = .lightGray
+        return cocktailImage
+    }()
+    
+    let summaryOfCocktailView = SummaryOfCocktailView()
+    
+    let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 2
         label.textColor = .black
-        label.text = "스카치 위스키의 향 위에 아마레또의 달달한 아몬드향을 더했다. 아마레또는 생각보다 더 달다. 단 맛..."
         
         return label
     }()
-    
-    private let baseView = HoldView()
-    private let ingredientView = HoldView()
-    private let garnishView = HoldView()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -94,10 +106,9 @@ final class WholeStackView: UIView {
     
     func configureUI() {
         self.addSubview(mainStackView)
+        mainStackView.addArrangedSubview(cocktailImage)
+        mainStackView.addArrangedSubview(summaryOfCocktailView)
         self.addSubview(descriptionLabel)
-        self.addSubview(baseView)
-        self.addSubview(ingredientView)
-        self.addSubview(garnishView)
         
         mainStackView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -105,11 +116,42 @@ final class WholeStackView: UIView {
             make.trailing.equalToSuperview()
         }
         
+        cocktailImage.snp.makeConstraints{ make in
+            make.height.equalTo(120)
+            make.width.equalTo(120)
+        }
+        
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(mainStackView.snp.bottom).offset(20)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
+    }
+    
+    func configureCell(briefDescription: BriefDescription, indexPath: IndexPath) {
+        let result = briefDescription.results[indexPath.row]
+        
+        guard let validImageURL = URL(string: result.imageURI) else { return }
+        
+        summaryOfCocktailView.fetchTitle(result.cocktailNameKo)
+        summaryOfCocktailView.fetchLevel(levelGrade: result.levelScore, abvGrade: result.abvScore, sugarContentGrade: result.sugarContentScore)
+        
+        cocktailImage.load(url: validImageURL)
+        descriptionLabel.text = briefDescription.results[indexPath.row].description
+        
+        configureHoldViews(result: result)
+
+    }
+    
+    func configureHoldViews(result: Result) {
+        
+        let baseView = HoldView(result: result, title: "베이스")
+        let ingredientView = HoldView(result: result, title: "재    료")
+        let garnishView = HoldView(result: result, title: "가니쉬")
+        
+        self.addSubview(baseView)
+        self.addSubview(ingredientView)
+        self.addSubview(garnishView)
         
         baseView.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
@@ -131,48 +173,7 @@ final class WholeStackView: UIView {
     }
 }
 
-//MARK: - 이미지뷰랑 설명뷰 합쳐놓은 거
-class MainStackView: UIStackView {
-    let cocktailImage: UIImageView = {
-        let cocktailImage = UIImageView()
-        cocktailImage.contentMode = .scaleAspectFit
-        cocktailImage.backgroundColor = .lightGray
-        return cocktailImage
-    }()
-    
-    let summaryOfCocktailView = SummaryOfCocktailView()
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        setMainStackView()
-        configureUI()
-        
-        self.backgroundColor = .white
-    }
-    
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setMainStackView() {
-        self.distribution = .fill
-        self.spacing = 20
-        self.alignment = .center
-        self.axis = .horizontal
-    }
-    
-    func configureUI() {
-        self.addArrangedSubview(cocktailImage)
-        self.addArrangedSubview(summaryOfCocktailView)
-        
-        cocktailImage.snp.makeConstraints{ make in
-            make.height.equalTo(120)
-            make.width.equalTo(120)
-        }
-    }
-}
-
-//MARK: - 갓파더 뷰 내용
+//MARK: - 칵테일 제목, 카테고리, 난이도, 도수, 당도를 나타내는 뷰
 class SummaryOfCocktailView: UIView {
     var subtitleLabel: UILabel = {
         let subtitleLabel = UILabel()
@@ -182,23 +183,21 @@ class SummaryOfCocktailView: UIView {
         return subtitleLabel
     }()
     
-    var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let title = UILabel()
         title.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 17)
         title.textColor = .black
-        title.text = "갓파더"
+        
         return title
     }()
     
-    private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 3)
-    private let abvGradePresentationView = GradePresentationView(title: "도   수", grade: 2)
-    private let sugarContentGradePresentationView = GradePresentationView(title: "당   도", grade: 1)
+    private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 2)
+    private let abvGradePresentationView = GradePresentationView(title: "도    수", grade: 2)
+    private let sugarContentGradePresentationView = GradePresentationView(title: "당    도", grade: 2)
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        checkLevel()
         configureUI()
-        
     }
     
     required init(coder: NSCoder) {
@@ -218,7 +217,7 @@ class SummaryOfCocktailView: UIView {
             make.top.equalToSuperview().offset(2)
             make.leading.equalToSuperview().offset(2)
         }
-
+        
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(subtitleLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(2)
@@ -228,12 +227,12 @@ class SummaryOfCocktailView: UIView {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(2)
         }
-
+        
         abvGradePresentationView.snp.makeConstraints {
             $0.top.equalTo(levelGradePresentationView.snp.bottom).offset(5)
             $0.leading.equalToSuperview().offset(2)
         }
-
+        
         sugarContentGradePresentationView.snp.makeConstraints {
             $0.top.equalTo(abvGradePresentationView.snp.bottom).offset(5)
             $0.leading.equalToSuperview().offset(2)
@@ -241,45 +240,22 @@ class SummaryOfCocktailView: UIView {
         }
     }
     
+    func fetchTitle(_ title: String) {
+        titleLabel.text = title
+    }
+    
+    func fetchSubtitle(_ subtitle: String) {
+        subtitleLabel.text = subtitle
+    }
+    
     // Binding 작업을 통해 뷰 업그래이드시키기
-    private func checkLevel() {
-
+    func fetchLevel(levelGrade: Int,
+                    abvGrade: Int,
+                    sugarContentGrade: Int) {
+        levelGradePresentationView.grade = levelGrade
+        abvGradePresentationView.grade = abvGrade
+        sugarContentGradePresentationView.grade = sugarContentGrade
     }
 }
 
-//MARK: - HoldedIngredientView
-class HoldStackView: UIView {
-    let baseView = HoldView()
-    let ingredientView = HoldView()
-    let garnishView = HoldView()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .white
-        configureUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureUI() {
-        self.addSubview(baseView)
-        self.addSubview(ingredientView)
-        self.addSubview(garnishView)
-        
-        baseView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-        }
-        
-        ingredientView.snp.makeConstraints { make in
-            make.top.equalTo(baseView.snp.bottom)
-            make.leading.trailing.equalToSuperview()
-        }
-        
-        garnishView.snp.makeConstraints { make in
-            make.top.equalTo(ingredientView.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
-        }
-    }
-}
+// BriefDescriptionView 남기고
