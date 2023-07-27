@@ -13,11 +13,11 @@ protocol FetchBriefDescriptionUsecase {
 }
 
 class DefaultFetchBriefDescriptionUsecase: FetchBriefDescriptionUsecase {
-    private let briefDescriptionRepository = BriefDescriptionRepository()
+    private let briefDescriptionRepository: BriefDescriptionRepository
     
-//    init(briefDescriptionRepository: BriefDescriptionRepository) {
-//        self.briefDescriptionRepository = briefDescriptionRepository
-//    }
+    init(briefDescriptionRepository: BriefDescriptionRepository) {
+        self.briefDescriptionRepository = briefDescriptionRepository
+    }
     
     func execute() -> AnyPublisher<BriefDescription, Error> {
         return briefDescriptionRepository.fetchPublisher()

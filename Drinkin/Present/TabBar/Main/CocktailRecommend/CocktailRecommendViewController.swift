@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class LoggedinMainViewController: UIViewController {
+final class CocktailRecommendViewController: UIViewController {
     private enum Constant {
         static let heightRatio = 0.7
         static let widthRatio = 0.8
@@ -17,9 +17,7 @@ final class LoggedinMainViewController: UIViewController {
     
     weak var delegate: MainViewDelegate?
     
-    //private var viewModel = LoggedinViewModel(fetchBriefDescriptionUseCase: <#FetchBriefDescriptionUsecase#>)
-    
-    private let briefDescriptionRepository = BriefDescriptionRepository()
+    private let briefDescriptionRepository = DefaultBriefDescriptionRepository()
     
     private lazy var carouselFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -59,10 +57,6 @@ final class LoggedinMainViewController: UIViewController {
         setupRecommendCocktailCollectionView()
     }
     
-//    func create(with viewModel: LoggedinViewModel) {
-//        self.viewModel = viewModel
-//    }
-    
     func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         view.backgroundColor = .white
@@ -89,7 +83,7 @@ final class LoggedinMainViewController: UIViewController {
     }
     
     func setupRecommendCocktailCollectionView() {
-        recommendCocktailCollectionView.register(LoggedInCell.self, forCellWithReuseIdentifier: "LoggedInCell")
+        recommendCocktailCollectionView.register(CocktailRecommendCell.self, forCellWithReuseIdentifier: CocktailRecommendCell.identifier)
         recommendCocktailCollectionView.delegate = self
         recommendCocktailCollectionView.dataSource = self
     }
@@ -115,17 +109,15 @@ final class LoggedinMainViewController: UIViewController {
 }
 
 
-extension LoggedinMainViewController: UICollectionViewDataSource {
+extension CocktailRecommendViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //let briefDescription = BriefDescription(results: <#[Result]#>)
+
         
-        let cell = recommendCocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "LoggedInCell", for: indexPath) as! LoggedInCell
-        
-//        cell.configureCell(briefDescription: briefDescription.results[indexPath.row])
+        let cell = recommendCocktailCollectionView.dequeueReusableCell(withReuseIdentifier: CocktailRecommendCell.identifier, for: indexPath) as! CocktailRecommendCell
         
         cell.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonAction), for: .touchUpInside)
         
@@ -134,7 +126,7 @@ extension LoggedinMainViewController: UICollectionViewDataSource {
     }
 }
 
-extension LoggedinMainViewController: UICollectionViewDelegateFlowLayout {
+extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
   func scrollViewWillEndDragging(
     _ scrollView: UIScrollView,
     withVelocity velocity: CGPoint,

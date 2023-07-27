@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
 
     static var login: Bool = false
  
-    private let loggedinMainViewController = LoggedinMainViewController()
+    private let loggedinMainViewController = CocktailRecommendViewController()
     private let unloggedinMainViewController = UnloggedinMainViewController()
     
     override func viewDidLoad() {

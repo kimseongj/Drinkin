@@ -15,20 +15,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
-        self.window = UIWindow(windowScene: windowScene)
-        self.appCoordinator = AppCoordinator(window)
-        appCoordinator?.start()
+//
+//        self.window = UIWindow(windowScene: windowScene)
+//        self.appCoordinator = AppCoordinator(window)
+//        appCoordinator?.start()
         
 //         window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정해줌
 //         let viewController = LoginViewController()
 //         window?.rootViewController = viewController//tabbarController//tabbarController
 //         window?.makeKeyAndVisible()
         
-//        window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정해줌
-//        let viewController = ViewController()
-//        window?.rootViewController = viewController//tabbarController//tabbarController
-//        window?.makeKeyAndVisible()
+        window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정해줌
+        let viewController = ViewController()
+        window?.rootViewController = viewController//tabbarController//tabbarController
+        window?.makeKeyAndVisible()
         
         
     }

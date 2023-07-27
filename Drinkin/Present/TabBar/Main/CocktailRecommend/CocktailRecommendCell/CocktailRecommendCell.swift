@@ -1,5 +1,5 @@
 //
-//  LoggedInCell.swift
+//  CocktailRecommendCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/06.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LoggedInCell: UICollectionViewCell {
+class CocktailRecommendCell: UICollectionViewCell {
     
     let briefDescriptionView = BriefDescriptionView()
     
