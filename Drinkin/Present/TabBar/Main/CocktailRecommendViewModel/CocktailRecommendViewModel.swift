@@ -29,9 +29,9 @@ class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
             print($0) }).store(in: &cancelBag)
     }
     
-    func fetchResult(completion: @escaping () -> Void) {
+    func fetchResult(completion: @escaping ([Result]) -> Void) {
         $resultList.sink {
             completion($0)
-        }
+        }.store(in: &cancelBag)
     }
 }
