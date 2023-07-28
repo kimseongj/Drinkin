@@ -73,7 +73,7 @@
 		1CA2C9F02A2DA9A700AED81E /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA2C9EF2A2DA9A700AED81E /* LoginProvider.swift */; };
 		1CA8ED262A65915600CE5E1A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED252A65915600CE5E1A /* KeychainManager.swift */; };
 		1CA8ED292A6AB9BD00CE5E1A /* MockEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED282A6AB9BD00CE5E1A /* MockEndpoint.swift */; };
-		1CA8ED4C2A6BAEF100CE5E1A /* LoggedinMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED4B2A6BAEF100CE5E1A /* LoggedinMainViewModel.swift */; };
+		1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED4B2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */; };
@@ -113,6 +113,7 @@
 		1CDDB92C2A3AD7370007983A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */; };
 		1CDDB92E2A3AD87F0007983A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */; };
 		1CDDB9312A3ADD350007983A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDDB9302A3ADD350007983A /* TestView.swift */; };
+		1CED21982A739A700078916A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CED21972A739A700078916A /* Section.swift */; };
 		1CF62FB62A1252F30043A32F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF62FB52A1252F30043A32F /* FilterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -176,7 +177,7 @@
 		1CA2C9EF2A2DA9A700AED81E /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
 		1CA8ED252A65915600CE5E1A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		1CA8ED282A6AB9BD00CE5E1A /* MockEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEndpoint.swift; sourceTree = "<group>"; };
-		1CA8ED4B2A6BAEF100CE5E1A /* LoggedinMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedinMainViewModel.swift; sourceTree = "<group>"; };
+		1CA8ED4B2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecommendViewModel.swift; sourceTree = "<group>"; };
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterView.swift; sourceTree = "<group>"; };
@@ -216,6 +217,7 @@
 		1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		1CDDB9302A3ADD350007983A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		1CED21972A739A700078916A /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		1CF62FB52A1252F30043A32F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -368,7 +370,7 @@
 			children = (
 				1C2696412A4D80AF00C1FC00 /* UnloggedinMain */,
 				1C2696402A4D80A200C1FC00 /* CocktailRecommend */,
-				1CA8ED4A2A6BAEC800CE5E1A /* LoggedinMainViewModel */,
+				1CA8ED4A2A6BAEC800CE5E1A /* CocktailRecommendViewModel */,
 				1C04C19929DEED3D00E381C2 /* MainViewController.swift */,
 			);
 			path = Main;
@@ -634,12 +636,12 @@
 			path = Endpoint;
 			sourceTree = "<group>";
 		};
-		1CA8ED4A2A6BAEC800CE5E1A /* LoggedinMainViewModel */ = {
+		1CA8ED4A2A6BAEC800CE5E1A /* CocktailRecommendViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				1CA8ED4B2A6BAEF100CE5E1A /* LoggedinMainViewModel.swift */,
+				1CA8ED4B2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift */,
 			);
-			path = LoggedinMainViewModel;
+			path = CocktailRecommendViewModel;
 			sourceTree = "<group>";
 		};
 		1CB096ED2A2A067900B7CA71 /* SelectionFilterCollectionView */ = {
@@ -700,6 +702,7 @@
 		1CC9D3EB2A19033100654A5D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1CED21962A739A590078916A /* Section */,
 				1CB299082A6E4A73001F31BF /* Extension */,
 				1C71A4AE2A52929300F1814A /* CommonView */,
 				1C71A4AD2A52928500F1814A /* CommonTool */,
@@ -752,6 +755,14 @@
 				1CDDB9302A3ADD350007983A /* TestView.swift */,
 			);
 			path = DescriptionView;
+			sourceTree = "<group>";
+		};
+		1CED21962A739A590078916A /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				1CED21972A739A700078916A /* Section.swift */,
+			);
+			path = Section;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -890,7 +901,8 @@
 				1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */,
 				1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */,
 				1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */,
-				1CA8ED4C2A6BAEF100CE5E1A /* LoggedinMainViewModel.swift in Sources */,
+				1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */,
+				1CED21982A739A700078916A /* Section.swift in Sources */,
 				1C9BAB1A29EFAE8A00E979AC /* ToolView.swift in Sources */,
 				1C58ECE72A63CB4700AC2603 /* BriefDescription.swift in Sources */,
 				1C58ECE52A63CA9300AC2603 /* DescriptionRepository.swift in Sources */,
