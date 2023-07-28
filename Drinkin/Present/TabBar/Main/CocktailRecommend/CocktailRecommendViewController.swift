@@ -17,7 +17,6 @@ final class CocktailRecommendViewController: UIViewController {
     
     weak var delegate: MainViewDelegate?
     
-    private let briefDescriptionRepository = DefaultBriefDescriptionRepository()
     
     private lazy var carouselFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
