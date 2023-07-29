@@ -9,29 +9,28 @@ import Foundation
 import Combine
 
 protocol CocktailRecommendViewModel {
+    var briefDescriptionListPublisher: Published<[BriefDescription]>.Publisher { get }
     
+    func fetchBriefDescription()
 }
 
 class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
-    @Published var resultList: [Result] = []
+    @Published var briefDescriptionList: [BriefDescription] = []
+    
+    var briefDescriptionListPublisher: Published<[BriefDescription]>.Publisher { $briefDescriptionList }
+    
     private var cancelBag: Set<AnyCancellable> = []
     
     private let fetchBriefDescriptionUseCase: FetchBriefDescriptionUsecase
     
     init(fetchBriefDescriptionUseCase: FetchBriefDescriptionUsecase) {
         self.fetchBriefDescriptionUseCase = fetchBriefDescriptionUseCase
-        fetchBriefDescription()
     }
     
     func fetchBriefDescription() {
         fetchBriefDescriptionUseCase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            self.resultList = $0.results
-            print($0) }).store(in: &cancelBag)
-    }
-    
-    func fetchResult(completion: @escaping ([Result]) -> Void) {
-        $resultList.sink {
-            completion($0)
-        }.store(in: &cancelBag)
+            self.briefDescriptionList = $0.briefDescriptionList
+            
+        }).store(in: &cancelBag)
     }
 }

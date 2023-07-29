@@ -15,15 +15,24 @@ protocol MainViewDelegate: AnyObject {
 class MainViewController: UIViewController {
 
     var delegate: MainViewDelegate?
+    var viewModel: CocktailRecommendViewModel?
 
     static var login: Bool = false
  
-    private let loggedinMainViewController = CocktailRecommendViewController()
+    private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
     private let unloggedinMainViewController = UnloggedinMainViewController()
+    
+    init(viewModel: CocktailRecommendViewModel? = nil) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +49,6 @@ class MainViewController: UIViewController {
         addChild(unloggedinMainViewController)
         configureUnloggedinMainView()
         unloggedinMainViewController.sendDelegate(delegate)
-        
     }
     
     private func configureUnloggedinMainView() {
@@ -53,6 +61,7 @@ class MainViewController: UIViewController {
     }
     
     private func fetchLoggedinMainView() {
+
         unloggedinMainViewController.removeFromParent()
         unloggedinMainViewController.view.removeFromSuperview()
         addChild(loggedinMainViewController)

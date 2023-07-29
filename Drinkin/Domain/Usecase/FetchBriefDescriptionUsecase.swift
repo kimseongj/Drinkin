@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol FetchBriefDescriptionUsecase {
-    func execute() -> AnyPublisher<BriefDescription, Error>
+    func execute() -> AnyPublisher<CocktailBriefDescription, Error>
 }
 
 class DefaultFetchBriefDescriptionUsecase: FetchBriefDescriptionUsecase {
@@ -19,7 +19,7 @@ class DefaultFetchBriefDescriptionUsecase: FetchBriefDescriptionUsecase {
         self.briefDescriptionRepository = briefDescriptionRepository
     }
     
-    func execute() -> AnyPublisher<BriefDescription, Error> {
+    func execute() -> AnyPublisher<CocktailBriefDescription, Error> {
         return briefDescriptionRepository.fetchPublisher()
     }
 }

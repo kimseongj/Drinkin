@@ -20,6 +20,13 @@ class HoldCollectionViewCell: UICollectionViewCell {
     
     private let yellowRectangleView = YellowRectangleView()
     
+    private let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "-"
+        
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.cellSetting()
@@ -43,6 +50,15 @@ class HoldCollectionViewCell: UICollectionViewCell {
             make.top.equalToSuperview().offset(2)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-2)
+        }
+    }
+    
+    func makeEmptyCell() {
+        contentView.addSubview(emptyLabel)
+        
+        emptyLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
         }
     }
 }

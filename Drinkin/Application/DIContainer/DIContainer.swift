@@ -22,7 +22,7 @@ extension DIContainer {
         return DefaultFetchBriefDescriptionUsecase(briefDescriptionRepository: makeBriefDescriptionRepository())
     }
     
-    func CocktailRecommendViewModel() -> CocktailRecommendViewModel {
+    func makeCocktailRecommendViewModel() -> CocktailRecommendViewModel {
         return DefaultCocktailRecommendViewModel(fetchBriefDescriptionUseCase: makeFetchBriefDescriptionUsecase())
     }
 }

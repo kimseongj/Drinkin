@@ -12,7 +12,7 @@ import Combine
 class ViewController: UIViewController {
     private var cancelbag: Set<AnyCancellable> = []
     
-    private var cocktail: [BriefDescription] = []
+    private var cocktail: [CocktailBriefDescription] = []
     
     private let briefDescriptionRepository = DefaultBriefDescriptionRepository()
     private var fetchBriefDescriptionUsecase: FetchBriefDescriptionUsecase? = nil

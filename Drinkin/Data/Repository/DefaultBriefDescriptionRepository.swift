@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol BriefDescriptionRepository {
-    func fetchPublisher() -> AnyPublisher<BriefDescription, Error>
+    func fetchPublisher() -> AnyPublisher<CocktailBriefDescription, Error>
 }
 
 class DefaultBriefDescriptionRepository: BriefDescriptionRepository {
@@ -25,7 +25,7 @@ class DefaultBriefDescriptionRepository: BriefDescriptionRepository {
 //            }.decode(type: BriefDescription.self, decoder: JSONDecoder())
 //                .eraseToAnyPublisher()
 //        }
-    func fetchPublisher() -> AnyPublisher<BriefDescription, Error> {
+    func fetchPublisher() -> AnyPublisher<CocktailBriefDescription, Error> {
         return provider.fetchData1(endpoint: endpoint)
     }
 }
