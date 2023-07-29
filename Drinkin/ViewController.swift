@@ -12,10 +12,10 @@ import Combine
 class ViewController: UIViewController {
     private var cancelbag: Set<AnyCancellable> = []
     
-    private var cocktail: [BriefDescription] = []
+    private var cocktail: [CocktailBriefDescription] = []
     
-    private let briefDescriptionRepository = BriefDescriptionRepository()
-    //private let fetchBriefDescriptionUsecase = FetchBriefDescriptionUsecase()
+    private let briefDescriptionRepository = DefaultBriefDescriptionRepository()
+    private var fetchBriefDescriptionUsecase: FetchBriefDescriptionUsecase? = nil
     
     private lazy var testButton: UIButton = {
         let button = UIButton()
@@ -41,13 +41,18 @@ class ViewController: UIViewController {
             $0.width.equalTo(100)
             $0.height.equalTo(20)
         }
+        
+        fetchBriefDescriptionUsecase = DefaultFetchBriefDescriptionUsecase(briefDescriptionRepository: briefDescriptionRepository)
     }
     
     @objc func pushTestButton() {
-        //briefDescriptionRepository.fetchPublisher()
-        //fetchBriefDescriptionUsecase
-        //    .sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-        //        print($0) }).store(in: &cancelbag)
+//        briefDescriptionRepository.fetchPublisher().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+//            print($0) }).store(in: &cancelbag)
+        guard let validFetchBriefDescriptionUsecase = fetchBriefDescriptionUsecase else { return }
+        
+        validFetchBriefDescriptionUsecase.execute()
+            .sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+                print($0) }).store(in: &cancelbag)
     }
 }
 

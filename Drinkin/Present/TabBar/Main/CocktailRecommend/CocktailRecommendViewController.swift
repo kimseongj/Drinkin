@@ -7,8 +7,9 @@
 
 import UIKit
 import SnapKit
+import Combine
 
-final class LoggedinMainViewController: UIViewController {
+final class CocktailRecommendViewController: UIViewController {
     private enum Constant {
         static let heightRatio = 0.7
         static let widthRatio = 0.8
@@ -16,10 +17,10 @@ final class LoggedinMainViewController: UIViewController {
     }
     
     weak var delegate: MainViewDelegate?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, BriefDescription>?
+    private var cancelBag: Set<AnyCancellable> = []
     
-    //private var viewModel = LoggedinViewModel(fetchBriefDescriptionUseCase: <#FetchBriefDescriptionUsecase#>)
-    
-    private let briefDescriptionRepository = BriefDescriptionRepository()
+    private var viewModel: CocktailRecommendViewModel?
     
     private lazy var carouselFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -57,11 +58,19 @@ final class LoggedinMainViewController: UIViewController {
     override func viewDidLoad() {
         configureUI()
         setupRecommendCocktailCollectionView()
+        configureDataSource()
+        binding()
+        viewModel?.fetchBriefDescription()
     }
     
-//    func create(with viewModel: LoggedinViewModel) {
-//        self.viewModel = viewModel
-//    }
+    init(viewModel: CocktailRecommendViewModel?) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
@@ -89,9 +98,9 @@ final class LoggedinMainViewController: UIViewController {
     }
     
     func setupRecommendCocktailCollectionView() {
-        recommendCocktailCollectionView.register(LoggedInCell.self, forCellWithReuseIdentifier: "LoggedInCell")
+        recommendCocktailCollectionView.register(CocktailRecommendCell.self, forCellWithReuseIdentifier: CocktailRecommendCell.identifier)
         recommendCocktailCollectionView.delegate = self
-        recommendCocktailCollectionView.dataSource = self
+
     }
     
     @objc func seeMoreButtonAction() {
@@ -114,27 +123,40 @@ final class LoggedinMainViewController: UIViewController {
     }
 }
 
-
-extension LoggedinMainViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+//MARK: - DiffableDataSource
+extension CocktailRecommendViewController {
+    private func configureDataSource() {
+        self.dataSource = UICollectionViewDiffableDataSource<Section, BriefDescription> (collectionView: recommendCocktailCollectionView) { (collectionView, indexPath, briefDescription) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailRecommendCell.identifier, for: indexPath) as? CocktailRecommendCell else { return nil
+            }
+            
+            cell.configureCell(briefDescription: briefDescription)
+            cell.seeMoreButton.addTarget(self, action: #selector(self.seeMoreButtonAction), for: .touchUpInside)
+            
+            return cell
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //let briefDescription = BriefDescription(results: <#[Result]#>)
-        
-        let cell = recommendCocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "LoggedInCell", for: indexPath) as! LoggedInCell
-        
-//        cell.configureCell(briefDescription: briefDescription.results[indexPath.row])
-        
-        cell.seeMoreButton.addTarget(self, action: #selector(seeMoreButtonAction), for: .touchUpInside)
-        
-
-        return cell
+    private func applySnapshot(briefDescriptionList: [BriefDescription]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, BriefDescription>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(briefDescriptionList)
+        self.dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
-extension LoggedinMainViewController: UICollectionViewDelegateFlowLayout {
+//MARK: - Binding
+extension CocktailRecommendViewController {
+    private func binding() {
+        guard let viewModel else { return }
+        
+        viewModel.briefDescriptionListPublisher.sink {
+            self.applySnapshot(briefDescriptionList: $0)
+        }.store(in: &cancelBag)
+    }
+} 
+
+extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
   func scrollViewWillEndDragging(
     _ scrollView: UIScrollView,
     withVelocity velocity: CGPoint,

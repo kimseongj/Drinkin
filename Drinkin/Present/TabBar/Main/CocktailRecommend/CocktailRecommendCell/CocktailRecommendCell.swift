@@ -1,5 +1,5 @@
 //
-//  LoggedInCell.swift
+//  CocktailRecommendCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/06.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LoggedInCell: UICollectionViewCell {
+class CocktailRecommendCell: UICollectionViewCell {
     
     let briefDescriptionView = BriefDescriptionView()
     
@@ -62,6 +62,10 @@ class LoggedInCell: UICollectionViewCell {
             make.bottom.equalToSuperview().offset(-24)
             make.height.equalTo(42)
         }
+    }
+    
+    func configureCell(briefDescription: BriefDescription) {
+        briefDescriptionView.configureBriefDescriptionView(briefDescription: briefDescription)
     }
 }
 
@@ -128,26 +132,25 @@ final class BriefDescriptionView: UIView {
         }
     }
     
-    func configureCell(briefDescription: BriefDescription, indexPath: IndexPath) {
-        let result = briefDescription.results[indexPath.row]
+    func configureBriefDescriptionView(briefDescription: BriefDescription) {
         
-        guard let validImageURL = URL(string: result.imageURI) else { return }
+        guard let validImageURL = URL(string: briefDescription.imageURI) else { return }
         
-        summaryOfCocktailView.fetchTitle(result.cocktailNameKo)
-        summaryOfCocktailView.fetchLevel(levelGrade: result.levelScore, abvGrade: result.abvScore, sugarContentGrade: result.sugarContentScore)
+        summaryOfCocktailView.fetchTitle(briefDescription.cocktailNameKo)
+        summaryOfCocktailView.fetchLevel(levelGrade: briefDescription.levelScore, abvGrade: briefDescription.abvScore, sugarContentGrade: briefDescription.sugarContentScore)
         
         cocktailImage.load(url: validImageURL)
-        descriptionLabel.text = briefDescription.results[indexPath.row].description
+        descriptionLabel.text = briefDescription.description
         
-        configureHoldViews(result: result)
+        configureHoldViews(briefDescription: briefDescription)
 
     }
     
-    func configureHoldViews(result: Result) {
+    func configureHoldViews(briefDescription: BriefDescription) {
         
-        let baseView = HoldView(result: result, title: "베이스")
-        let ingredientView = HoldView(result: result, title: "재    료")
-        let garnishView = HoldView(result: result, title: "가니쉬")
+        let baseView = HoldView(briefDescription: briefDescription, title: "베이스")
+        let ingredientView = HoldView(briefDescription: briefDescription, title: "재    료")
+        let garnishView = HoldView(briefDescription: briefDescription, title: "가니쉬")
         
         self.addSubview(baseView)
         self.addSubview(ingredientView)

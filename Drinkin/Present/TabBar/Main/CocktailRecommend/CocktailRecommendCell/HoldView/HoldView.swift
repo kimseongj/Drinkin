@@ -10,7 +10,7 @@ import SnapKit
 
 class HoldView: UIView {
     private var title = ""
-    private var result: Result?
+    private var briefDescription: BriefDescription?
     
     var holdLabelView: UIView = {
         let label = UIView()
@@ -37,10 +37,10 @@ class HoldView: UIView {
     
     let holdButtonName: [String] = []
     
-    init(result: Result, title: String) {
+    init(briefDescription: BriefDescription, title: String) {
         super.init(frame: .zero)
         self.title = title
-        self.result = result
+        self.briefDescription = briefDescription
         configureUI()
         setHoldCollectionView()
     }
@@ -87,15 +87,15 @@ class HoldView: UIView {
 
 extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let validResult = result else { return 0 }
+        guard let validBriefDescription = briefDescription else { return 0 }
         
         switch title {
         case "베이스":
-            return validResult.categoryList.count
+            return validBriefDescription.categoryList.count
         case "재    료":
-            return validResult.ingredientList.count
+            return validBriefDescription.ingredientList.count
         case "가니쉬":
-            return validResult.garnishList.count
+            return validBriefDescription.garnishList.count
         default:
             return 0
         }
@@ -104,15 +104,27 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = holdCollectionView.dequeueReusableCell(withReuseIdentifier: HoldCollectionViewCell.identifier, for: indexPath) as! HoldCollectionViewCell
         
-        guard let validResult = result else { return cell }
+        guard let validBriefDescription = briefDescription else { return cell }
         
         switch title {
         case "베이스":
-            cell.label.text = validResult.categoryList[indexPath.row].categoryNameKo
+            if validBriefDescription.categoryList == [] {
+                cell.makeEmptyCell()
+            } else {
+                cell.label.text = validBriefDescription.categoryList[indexPath.row].categoryNameKo
+            }
         case "재    료":
-            cell.label.text = validResult.ingredientList[indexPath.row].ingredientNameKo
+            if validBriefDescription.ingredientList == [] {
+                cell.makeEmptyCell()
+            } else {
+                cell.label.text = validBriefDescription.ingredientList[indexPath.row].ingredientNameKo
+            }
         case "가니쉬":
-            cell.label.text = validResult.garnishList[indexPath.row].garnishNameKo
+            if validBriefDescription.garnishList == [] {
+                cell.makeEmptyCell()
+            } else {
+                cell.label.text = validBriefDescription.garnishList[indexPath.row].garnishNameKo
+            }
         default: break
         }
         

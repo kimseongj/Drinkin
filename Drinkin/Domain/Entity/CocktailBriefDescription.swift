@@ -8,12 +8,16 @@
 import Foundation
 
 // MARK: - Welcome
-struct BriefDescription: Codable {
-    let results: [Result]
+struct CocktailBriefDescription: Codable {
+    let briefDescriptionList: [BriefDescription]
+    
+    enum CodingKeys: String, CodingKey {
+        case briefDescriptionList = "results"
+    }
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct BriefDescription: Codable, Hashable {
     let id: Int
     let cocktailNameKo: String
     let imageURI: String
@@ -38,7 +42,7 @@ struct Result: Codable {
 }
 
 // MARK: - CategoryList
-struct CategoryList: Codable {
+struct CategoryList: Codable, Hashable {
     let categoryNameKo: String
     let hold: Bool
 
@@ -49,7 +53,7 @@ struct CategoryList: Codable {
 }
 
 // MARK: - GarnishList
-struct GarnishList: Codable {
+struct GarnishList: Codable, Hashable {
     let garnishNameKo: String
     let hold: Bool
 
@@ -60,7 +64,7 @@ struct GarnishList: Codable {
 }
 
 // MARK: - IngredientList
-struct IngredientList: Codable {
+struct IngredientList: Codable, Hashable {
     let ingredientNameKo: String
     let hold: Bool
 

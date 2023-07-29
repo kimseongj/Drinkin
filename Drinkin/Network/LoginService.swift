@@ -10,7 +10,6 @@ import Combine
 
 class LoginService {
     let provider = Provider()
-    let repository = Repository()
     var cancellableBeg: Set<AnyCancellable> = []
     
     static var accessToken: String?

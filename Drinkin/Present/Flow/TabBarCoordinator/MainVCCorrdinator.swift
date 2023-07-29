@@ -21,7 +21,9 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
     }
     
     func startPush() -> UINavigationController {
-        let mainViewController = MainViewController()
+        let cocktailRecommendDIContainer = DIContainer()
+        
+        let mainViewController = MainViewController(viewModel: cocktailRecommendDIContainer.makeCocktailRecommendViewModel())
         mainViewController.delegate = self
         navigationController.setViewControllers([mainViewController], animated: false)
         
