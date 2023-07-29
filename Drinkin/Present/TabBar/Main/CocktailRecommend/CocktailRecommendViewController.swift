@@ -99,8 +99,8 @@ final class CocktailRecommendViewController: UIViewController {
     
     func setupRecommendCocktailCollectionView() {
         recommendCocktailCollectionView.register(CocktailRecommendCell.self, forCellWithReuseIdentifier: CocktailRecommendCell.identifier)
-//        recommendCocktailCollectionView.delegate = self
-//        recommendCocktailCollectionView.dataSource = self
+        recommendCocktailCollectionView.delegate = self
+
     }
     
     @objc func seeMoreButtonAction() {
