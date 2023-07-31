@@ -12,7 +12,7 @@ protocol FetchDescriptionUsecase {
     func execute() -> AnyPublisher<CocktailDescription, Error>
 }
 
-class DefaultFetchDescriptionUsecase {
+class DefaultFetchDescriptionUsecase: FetchDescriptionUsecase {
     private let descriptionRepository: DescriptionRepository
     
     init(descriptionRepository: DescriptionRepository) {
