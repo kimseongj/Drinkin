@@ -84,7 +84,7 @@ final class BriefDescriptionView: UIView {
     let cocktailImage: UIImageView = {
         let cocktailImage = UIImageView()
         cocktailImage.contentMode = .scaleAspectFit
-        cocktailImage.backgroundColor = .lightGray
+
         return cocktailImage
     }()
     
@@ -194,9 +194,9 @@ class SummaryOfCocktailView: UIView {
         return title
     }()
     
-    private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 2)
-    private let abvGradePresentationView = GradePresentationView(title: "도    수", grade: 2)
-    private let sugarContentGradePresentationView = GradePresentationView(title: "당    도", grade: 2)
+//    private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 2)
+//    private let abvGradePresentationView = GradePresentationView(title: "도    수", grade: 2)
+//    private let sugarContentGradePresentationView = GradePresentationView(title: "당    도", grade: 2)
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -212,9 +212,9 @@ class SummaryOfCocktailView: UIView {
         
         self.addSubview(subtitleLabel)
         self.addSubview(titleLabel)
-        self.addSubview(levelGradePresentationView)
-        self.addSubview(abvGradePresentationView)
-        self.addSubview(sugarContentGradePresentationView)
+//        self.addSubview(levelGradePresentationView)
+//        self.addSubview(abvGradePresentationView)
+//        self.addSubview(sugarContentGradePresentationView)
         
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(2)
@@ -225,6 +225,33 @@ class SummaryOfCocktailView: UIView {
             make.top.equalTo(subtitleLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(2)
         }
+        
+        
+    }
+    
+    func fetchTitle(_ title: String) {
+        titleLabel.text = title
+    }
+    
+    func fetchSubtitle(_ subtitle: String) {
+        subtitleLabel.text = subtitle
+    }
+    
+    // Binding 작업을 통해 뷰 업그래이드시키기
+    func fetchLevel(levelGrade: Int,
+                    abvGrade: Int,
+                    sugarContentGrade: Int) {
+        
+        let levelGradePresentationView = GradePresentationView(title: "난이도", grade: levelGrade)
+        let abvGradePresentationView = GradePresentationView(title: "도    수", grade: abvGrade)
+        let sugarContentGradePresentationView = GradePresentationView(title: "당    도", grade: sugarContentGrade)
+//        levelGradePresentationView.grade = levelGrade
+//        abvGradePresentationView.grade = abvGrade
+//        sugarContentGradePresentationView.grade = sugarContentGrade
+        
+        self.addSubview(levelGradePresentationView)
+        self.addSubview(abvGradePresentationView)
+        self.addSubview(sugarContentGradePresentationView)
         
         levelGradePresentationView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
@@ -241,23 +268,6 @@ class SummaryOfCocktailView: UIView {
             $0.leading.equalToSuperview().offset(2)
             $0.bottom.equalToSuperview().offset(-2)
         }
-    }
-    
-    func fetchTitle(_ title: String) {
-        titleLabel.text = title
-    }
-    
-    func fetchSubtitle(_ subtitle: String) {
-        subtitleLabel.text = subtitle
-    }
-    
-    // Binding 작업을 통해 뷰 업그래이드시키기
-    func fetchLevel(levelGrade: Int,
-                    abvGrade: Int,
-                    sugarContentGrade: Int) {
-        levelGradePresentationView.grade = levelGrade
-        abvGradePresentationView.grade = abvGrade
-        sugarContentGradePresentationView.grade = sugarContentGrade
     }
 }
 
