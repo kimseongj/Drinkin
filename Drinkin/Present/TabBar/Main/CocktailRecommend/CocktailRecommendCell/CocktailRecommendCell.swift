@@ -108,6 +108,7 @@ final class BriefDescriptionView: UIView {
     let holdStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 12
         
         return stackView
     }()
@@ -145,7 +146,7 @@ final class BriefDescriptionView: UIView {
             make.trailing.equalToSuperview()
         }
         holdStackView.snp.makeConstraints {
-            $0.top.equalTo(descriptionLabel.snp.bottom)
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
