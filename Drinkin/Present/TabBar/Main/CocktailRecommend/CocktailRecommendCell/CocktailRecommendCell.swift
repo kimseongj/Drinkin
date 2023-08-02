@@ -20,10 +20,6 @@ class CocktailRecommendCell: UICollectionViewCell {
         return stackView
     }()
     
-    func setCellBorder() {
-        self.layer.borderWidth = 3
-    }
-    
     let seeMoreButton: UIButton = {
         let seeMoreButton = UIButton()
         seeMoreButton.setTitle("자세히 보기", for: .normal)
@@ -45,7 +41,11 @@ class CocktailRecommendCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    func configureUI() {
+    private func setCellBorder() {
+        self.layer.borderWidth = 3
+    }
+    
+    private func configureUI() {
         self.addSubview(briefDescriptionView)
         self.addSubview(seeMoreButton)
         
@@ -66,6 +66,12 @@ class CocktailRecommendCell: UICollectionViewCell {
     
     func configureCell(briefDescription: BriefDescription) {
         briefDescriptionView.configureBriefDescriptionView(briefDescription: briefDescription)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.briefDescriptionView.holdStackView.subviews.map { $0.removeFromSuperview() }
     }
 }
 
@@ -99,6 +105,14 @@ final class BriefDescriptionView: UIView {
         return label
     }()
     
+    let holdStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
@@ -113,6 +127,7 @@ final class BriefDescriptionView: UIView {
         mainStackView.addArrangedSubview(cocktailImage)
         mainStackView.addArrangedSubview(summaryOfCocktailView)
         self.addSubview(descriptionLabel)
+        self.addSubview(holdStackView)
         
         mainStackView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -129,6 +144,11 @@ final class BriefDescriptionView: UIView {
             make.top.equalTo(mainStackView.snp.bottom).offset(20)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
+        }
+        holdStackView.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
     }
     
@@ -152,27 +172,27 @@ final class BriefDescriptionView: UIView {
         let ingredientView = HoldView(briefDescription: briefDescription, title: "재    료")
         let garnishView = HoldView(briefDescription: briefDescription, title: "가니쉬")
         
-        self.addSubview(baseView)
-        self.addSubview(ingredientView)
-        self.addSubview(garnishView)
+        holdStackView.addArrangedSubview(baseView)
+        holdStackView.addArrangedSubview(ingredientView)
+        holdStackView.addArrangedSubview(garnishView)
         
-        baseView.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-        }
-        
-        ingredientView.snp.makeConstraints { make in
-            make.top.equalTo(baseView.snp.bottom).offset(10)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-        }
-        
-        garnishView.snp.makeConstraints { make in
-            make.top.equalTo(ingredientView.snp.bottom).offset(10)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-        }
+//        baseView.snp.makeConstraints { make in
+//            make.top.equalToSuperview().offset(20)
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//        }
+//
+//        ingredientView.snp.makeConstraints { make in
+//            make.top.equalTo(baseView.snp.bottom).offset(10)
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//        }
+//
+//        garnishView.snp.makeConstraints { make in
+//            make.top.equalTo(ingredientView.snp.bottom).offset(10)
+//            make.leading.equalToSuperview()
+//            make.trailing.equalToSuperview()
+//        }
     }
 }
 
@@ -194,10 +214,6 @@ class SummaryOfCocktailView: UIView {
         return title
     }()
     
-//    private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 2)
-//    private let abvGradePresentationView = GradePresentationView(title: "도    수", grade: 2)
-//    private let sugarContentGradePresentationView = GradePresentationView(title: "당    도", grade: 2)
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
@@ -209,12 +225,8 @@ class SummaryOfCocktailView: UIView {
     
     private func configureUI() {
         self.backgroundColor = .white
-        
         self.addSubview(subtitleLabel)
         self.addSubview(titleLabel)
-//        self.addSubview(levelGradePresentationView)
-//        self.addSubview(abvGradePresentationView)
-//        self.addSubview(sugarContentGradePresentationView)
         
         subtitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(2)
@@ -237,7 +249,6 @@ class SummaryOfCocktailView: UIView {
         subtitleLabel.text = subtitle
     }
     
-    // Binding 작업을 통해 뷰 업그래이드시키기
     func fetchLevel(levelGrade: Int,
                     abvGrade: Int,
                     sugarContentGrade: Int) {
@@ -245,9 +256,6 @@ class SummaryOfCocktailView: UIView {
         let levelGradePresentationView = GradePresentationView(title: "난이도", grade: levelGrade)
         let abvGradePresentationView = GradePresentationView(title: "도    수", grade: abvGrade)
         let sugarContentGradePresentationView = GradePresentationView(title: "당    도", grade: sugarContentGrade)
-//        levelGradePresentationView.grade = levelGrade
-//        abvGradePresentationView.grade = abvGrade
-//        sugarContentGradePresentationView.grade = sugarContentGrade
         
         self.addSubview(levelGradePresentationView)
         self.addSubview(abvGradePresentationView)
@@ -270,5 +278,3 @@ class SummaryOfCocktailView: UIView {
         }
     }
 }
-
-// BriefDescriptionView 남기고
