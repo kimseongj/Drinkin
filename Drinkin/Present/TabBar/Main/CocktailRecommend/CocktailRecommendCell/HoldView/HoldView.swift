@@ -35,8 +35,6 @@ class HoldView: UIView {
         return label
     }()
     
-    let holdButtonName: [String] = []
-    
     init(briefDescription: BriefDescription, title: String) {
         super.init(frame: .zero)
         self.title = title
@@ -91,11 +89,23 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         
         switch title {
         case "베이스":
-            return validBriefDescription.categoryList.count
+            if validBriefDescription.categoryList.count == 0 {
+                return 1
+            } else {
+                return validBriefDescription.categoryList.count
+            }
         case "재    료":
-            return validBriefDescription.ingredientList.count
+            if validBriefDescription.ingredientList.count == 0 {
+                return 1
+            } else {
+                return validBriefDescription.ingredientList.count
+            }
         case "가니쉬":
-            return validBriefDescription.garnishList.count
+            if validBriefDescription.garnishList.count == 0 {
+                return 1
+            } else {
+                return validBriefDescription.garnishList.count
+            }
         default:
             return 0
         }
@@ -108,22 +118,25 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         
         switch title {
         case "베이스":
-            if validBriefDescription.categoryList == [] {
+            if validBriefDescription.categoryList.count == 0 {
                 cell.makeEmptyCell()
             } else {
                 cell.label.text = validBriefDescription.categoryList[indexPath.row].categoryNameKo
+                cell.makeHoldedItemCell()
             }
         case "재    료":
-            if validBriefDescription.ingredientList == [] {
+            if validBriefDescription.ingredientList.count == 0 {
                 cell.makeEmptyCell()
             } else {
                 cell.label.text = validBriefDescription.ingredientList[indexPath.row].ingredientNameKo
+                cell.makeHoldedItemCell()
             }
         case "가니쉬":
-            if validBriefDescription.garnishList == [] {
+            if validBriefDescription.garnishList.count == 0 {
                 cell.makeEmptyCell()
             } else {
                 cell.label.text = validBriefDescription.garnishList[indexPath.row].garnishNameKo
+                cell.makeHoldedItemCell()
             }
         default: break
         }
