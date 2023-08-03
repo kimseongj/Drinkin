@@ -56,7 +56,7 @@ class IntroductionView: UIView {
     
     private let itemCollectionView: UICollectionView = {
        let collectionView = UICollectionView()
-        
+
         return collectionView
     }()
     
