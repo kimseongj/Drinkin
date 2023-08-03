@@ -33,6 +33,7 @@
 		1C58ECE72A63CB4700AC2603 /* CocktailBriefDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58ECE62A63CB4700AC2603 /* CocktailBriefDescription.swift */; };
 		1C5906A52A21D5B3001F048B /* FilteredCocktailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */; };
 		1C5906A72A21DBE0001F048B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A62A21DBE0001F048B /* FilterViewModel.swift */; };
+		1C598F882A7B495C00B9DC93 /* TextDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C598F872A7B495C00B9DC93 /* TextDescriptionView.swift */; };
 		1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */; };
 		1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */; };
 		1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD329DB1AE30053F19A /* ViewController.swift */; };
@@ -115,7 +116,6 @@
 		1CDDB92B2A3AD7370007983A /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */; };
 		1CDDB92C2A3AD7370007983A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */; };
 		1CDDB92E2A3AD87F0007983A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */; };
-		1CDDB9312A3ADD350007983A /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDDB9302A3ADD350007983A /* TestView.swift */; };
 		1CED21982A739A700078916A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CED21972A739A700078916A /* Section.swift */; };
 		1CF62FB62A1252F30043A32F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF62FB52A1252F30043A32F /* FilterViewController.swift */; };
 /* End PBXBuildFile section */
@@ -146,6 +146,7 @@
 		1C58ECE62A63CB4700AC2603 /* CocktailBriefDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailBriefDescription.swift; sourceTree = "<group>"; };
 		1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCocktailCell.swift; sourceTree = "<group>"; };
 		1C5906A62A21DBE0001F048B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		1C598F872A7B495C00B9DC93 /* TextDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDescriptionView.swift; sourceTree = "<group>"; };
 		1C5CAACC29DB1AE30053F19A /* Drinkin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -222,7 +223,6 @@
 		1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
-		1CDDB9302A3ADD350007983A /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		1CED21972A739A700078916A /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		1CF62FB52A1252F30043A32F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -424,6 +424,14 @@
 			path = UnloggedinMain;
 			sourceTree = "<group>";
 		};
+		1C598F862A7B494600B9DC93 /* TextDescriptionView */ = {
+			isa = PBXGroup;
+			children = (
+				1C598F872A7B495C00B9DC93 /* TextDescriptionView.swift */,
+			);
+			path = TextDescriptionView;
+			sourceTree = "<group>";
+		};
 		1C5CAAC329DB1AE30053F19A = {
 			isa = PBXGroup;
 			children = (
@@ -577,7 +585,7 @@
 		1C9BAB0C29EFA94200E979AC /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				1CDDB92F2A3ADD110007983A /* DescriptionView */,
+				1C598F862A7B494600B9DC93 /* TextDescriptionView */,
 				1C9BAB1229EFAE3400E979AC /* ToolView */,
 				1C9BAB1429EFAE4C00E979AC /* SkillView */,
 				1C9BAB1329EFAE3F00E979AC /* GlassView */,
@@ -766,14 +774,6 @@
 			path = CocktailCollectionView;
 			sourceTree = "<group>";
 		};
-		1CDDB92F2A3ADD110007983A /* DescriptionView */ = {
-			isa = PBXGroup;
-			children = (
-				1CDDB9302A3ADD350007983A /* TestView.swift */,
-			);
-			path = DescriptionView;
-			sourceTree = "<group>";
-		};
 		1CED21962A739A590078916A /* Section */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,7 +894,6 @@
 				1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
-				1CDDB9312A3ADD350007983A /* TestView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
 				1CCE88F729EBB25C00D3E1D2 /* PreferCocktailViewController.swift in Sources */,
 				1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */,
@@ -933,6 +932,7 @@
 				1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */,
 				1C57317A2A06879400C19EE1 /* GradeView.swift in Sources */,
 				1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */,
+				1C598F882A7B495C00B9DC93 /* TextDescriptionView.swift in Sources */,
 				1CCE890829EBC49400D3E1D2 /* RefreshEndpoint.swift in Sources */,
 				1C04C19629DEED2700E381C2 /* HomeBarViewController.swift in Sources */,
 				1CCE890629EBC13C00D3E1D2 /* LoginToken.swift in Sources */,

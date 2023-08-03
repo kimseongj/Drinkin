@@ -54,6 +54,12 @@ class IntroductionView: UIView {
         return label
     }()
     
+    private let itemCollectionView: UICollectionView = {
+       let collectionView = UICollectionView()
+        
+        return collectionView
+    }()
+    
     let receipeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "레시피"

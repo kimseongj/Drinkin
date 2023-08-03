@@ -21,7 +21,9 @@ class CocktailInformationView: UIView {
     let toolView = SkillView()
     let glassView = SkillView()
     let skillView = SkillView()
-    //let abvView =
+    let abvView = TextDescriptionView(title: "당 도")
+    let levelView = TextDescriptionView(title: "난이도")
+    let sugarContentView = TextDescriptionView(title: "당 도")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,6 +40,9 @@ class CocktailInformationView: UIView {
         self.addSubview(toolView)
         self.addSubview(glassView)
         self.addSubview(skillView)
+        self.addSubview(abvView)
+        self.addSubview(levelView)
+        self.addSubview(sugarContentView)
         
         cocktailNameTitle.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
@@ -59,7 +64,24 @@ class CocktailInformationView: UIView {
         glassView.snp.makeConstraints {make in
             make.top.equalTo(skillView.snp.bottom)
             make.trailing.leading.equalToSuperview()
-            make.bottom.equalToSuperview()
+            
+        }
+        
+        abvView.snp.makeConstraints {
+            $0.top.equalTo(glassView.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
+        }
+        
+        levelView.snp.makeConstraints {
+            $0.top.equalTo(abvView.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
+
+        }
+        
+        sugarContentView.snp.makeConstraints {
+            $0.top.equalTo(levelView.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
 }

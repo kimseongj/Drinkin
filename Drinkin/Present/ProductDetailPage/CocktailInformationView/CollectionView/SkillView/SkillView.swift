@@ -13,17 +13,18 @@ class SkillView: UIView {
     var delegate: ProductDetailViewDelegate?
     
     var skillLabelView: UIView = {
-        let slv = UIView()
-        slv.backgroundColor = .white
-        return slv
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        return view
     }()
     
     var skillCollectionView: SkillCollectionView = {
         let layout = UICollectionViewLayout()
-        let scv = SkillCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
-        scv.backgroundColor = .white
+        let collectionView = SkillCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
+        collectionView.backgroundColor = .white
  
-        return scv
+        return collectionView
     }()
     
     let skillLabel: UILabel = {
