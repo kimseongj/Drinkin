@@ -34,6 +34,7 @@
 		1C5906A52A21D5B3001F048B /* FilteredCocktailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */; };
 		1C5906A72A21DBE0001F048B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A62A21DBE0001F048B /* FilterViewModel.swift */; };
 		1C598F882A7B495C00B9DC93 /* TextDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C598F872A7B495C00B9DC93 /* TextDescriptionView.swift */; };
+		1C598F8A2A7BA02700B9DC93 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C598F892A7BA02700B9DC93 /* ItemCell.swift */; };
 		1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */; };
 		1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */; };
 		1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD329DB1AE30053F19A /* ViewController.swift */; };
@@ -141,6 +142,7 @@
 		1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCocktailCell.swift; sourceTree = "<group>"; };
 		1C5906A62A21DBE0001F048B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		1C598F872A7B495C00B9DC93 /* TextDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDescriptionView.swift; sourceTree = "<group>"; };
+		1C598F892A7BA02700B9DC93 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		1C5CAACC29DB1AE30053F19A /* Drinkin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 			children = (
 				1C9BAB0C29EFA94200E979AC /* CollectionView */,
 				1C9BAB2729EFB58000E979AC /* CocktailInformationView.swift */,
+				1C598F892A7BA02700B9DC93 /* ItemCell.swift */,
 			);
 			path = CocktailInformationView;
 			sourceTree = "<group>";
@@ -917,6 +920,7 @@
 				1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */,
 				1CC9D3EA2A19027400654A5D /* HoldCollectionViewCell.swift in Sources */,
 				1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */,
+				1C598F8A2A7BA02700B9DC93 /* ItemCell.swift in Sources */,
 				1CA8ED262A65915600CE5E1A /* KeychainManager.swift in Sources */,
 				1C26963A2A4315F300C1FC00 /* PreferCocktailSelectionViewModel.swift in Sources */,
 				1C0809DA29E03FFB00265706 /* KakaoAuthViewModel.swift in Sources */,

@@ -35,7 +35,7 @@ class SkillView: UIView {
         return label
     }()
     
-    let skillButtonName = ["asd", "asdzxc"]
+    let skillButtonName = ["asd", "asdzxc", "asddd", "zxczxca"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
