@@ -19,6 +19,6 @@ struct ProductDetailEndpoint: EndpointMakeable {
     var header: [String : String]?
     
     mutating func insertPathParmeter(id: Int) {
-        path = "/cocktail\(id)"
+        path = "/cocktail/\(id)"
     }
 }

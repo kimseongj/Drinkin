@@ -78,6 +78,4 @@ class ItemCell: UICollectionViewCell {
             checkImageView.image = nil
         }
     }
-    
-//    func fill(with )
 }
