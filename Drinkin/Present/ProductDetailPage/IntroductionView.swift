@@ -124,6 +124,12 @@ class IntroductionView: UIView {
     private func configureItemCollectionView() {
         itemCollectionView.dataSource = self
     }
+    
+    private func updateItemCollectionViewHeight() {
+        itemCollectionView.snp.makeConstraints {
+            $0.height.equalTo(itemCollectionView.contentSize.height)
+        }
+    }
 }
 
 extension IntroductionView {
@@ -153,6 +159,10 @@ extension IntroductionView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as! ItemCell
+        
+        
+        
+        updateItemCollectionViewHeight()
 
         return cell
     }
