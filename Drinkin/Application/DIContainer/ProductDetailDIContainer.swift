@@ -11,18 +11,17 @@ final class ProductDetailDIContainer {
 
 }
 
-
-//MARK: - BriefDescription
+//MARK: - Description
 extension ProductDetailDIContainer {
-    func makeDescriptionRepository() -> DescriptionRepository {
-        return DefaultDescriptionRepository()
+    func makeDescriptionRepository(cocktailID: Int) -> DescriptionRepository {
+        return DefaultDescriptionRepository(cocktailID: cocktailID)
     }
     
-    func makeFetchDescriptionUsecase() -> FetchDescriptionUsecase {
-        return DefaultFetchDescriptionUsecase(descriptionRepository: makeDescriptionRepository())
+    func makeFetchDescriptionUsecase(cocktailID: Int) -> FetchDescriptionUsecase {
+        return DefaultFetchDescriptionUsecase(descriptionRepository: makeDescriptionRepository(cocktailID: cocktailID))
     }
     
-//    func makeCocktailRecommendViewModel() -> CocktailRecommendViewModel {
-//        return DefaultCocktailRecommendViewModel(fetchBriefDescriptionUseCase: makeFetchBriefDescriptionUsecase())
-//    }
+    func makeProductDetailViewModel(cocktailID: Int) -> ProductDetailViewModel {
+        return DefaultProductDetailViewModel(fetchDescriptionUseCase: makeFetchDescriptionUsecase(cocktailID: cocktailID))
+    }
 }
