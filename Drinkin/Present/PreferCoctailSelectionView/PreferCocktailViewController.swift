@@ -43,7 +43,7 @@ class PreferCocktailSelectionViewController: UIViewController {
     
     //MARK:- cocktailCollectionView
     private lazy var cocktailCollectionView: UICollectionView = {
-        let flowLayout = setUpCompositionalIconLayout()
+        let flowLayout = configureCompositionalIconLayout()
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.isScrollEnabled = true
@@ -164,7 +164,7 @@ extension PreferCocktailSelectionViewController: UICollectionViewDelegate, UICol
 }
 
 extension PreferCocktailSelectionViewController {
-    private func setUpCompositionalIconLayout() -> UICollectionViewLayout {
+    private func configureCompositionalIconLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             

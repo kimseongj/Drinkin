@@ -9,7 +9,7 @@ import UIKit
 
 class SkillCollectionView: UICollectionView {
     
-    override var contentSize: CGSize{
+    override var contentSize: CGSize {
         didSet {
             if oldValue.height != self.contentSize.height {
                 invalidateIntrinsicContentSize()
@@ -18,7 +18,7 @@ class SkillCollectionView: UICollectionView {
     }
     
     override var intrinsicContentSize: CGSize {
-        layoutIfNeeded()
+
         return contentSize
     }
 }

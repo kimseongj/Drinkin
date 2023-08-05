@@ -37,21 +37,12 @@ class IntroductionView: UIView {
         return label
     }()
     
-    let ingredientStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        //stackView.layer.borderColor =
-        stackView.layer.borderWidth = 2
-        return stackView
-    }()
-    
-    let ingredientLabel: UILabel = {
-        let label = UILabel()
-        label.text = "스카치 위스키"
-        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 20)
+    private lazy var itemCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
+        collectionView.backgroundColor = .gray
+        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
         
-        return label
+        return collectionView
     }()
     
     let receipeTitleLabel: UILabel = {
@@ -78,6 +69,7 @@ class IntroductionView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         configureUI()
+        configureItemCollectionView()
     }
     
     required init?(coder: NSCoder) {
@@ -88,8 +80,7 @@ class IntroductionView: UIView {
         self.addSubview(cocktailImageView)
         self.addSubview(cocktailTitleLabel)
         self.addSubview(cocktailTDescriptionLabel)
-        self.addSubview(ingredientStackView)
-        ingredientStackView.addArrangedSubview(ingredientLabel)
+        self.addSubview(itemCollectionView)
         self.addSubview(receipeTitleLabel)
         self.addSubview(receipeDescriptionLabel)
         
@@ -110,14 +101,15 @@ class IntroductionView: UIView {
             make.trailing.equalToSuperview().offset(-16)
         }
         
-        ingredientStackView.snp.makeConstraints { make in
+        itemCollectionView.snp.makeConstraints { make in
             make.top.equalTo(cocktailTDescriptionLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(400)
         }
         
         receipeTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(ingredientStackView.snp.bottom).offset(40)
+            make.top.equalTo(itemCollectionView.snp.bottom).offset(40)
             make.leading.equalToSuperview().offset(16)
         }
         
@@ -128,4 +120,52 @@ class IntroductionView: UIView {
             make.bottom.equalToSuperview()
         }
     }
+    
+    private func configureItemCollectionView() {
+        itemCollectionView.dataSource = self
+    }
+    
+    private func updateItemCollectionViewHeight() {
+        itemCollectionView.snp.makeConstraints {
+            $0.height.equalTo(itemCollectionView.contentSize.height)
+        }
+    }
+}
+
+extension IntroductionView {
+    private func configureCompositionalIconLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(60))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+    }
+}
+
+extension IntroductionView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as! ItemCell
+        
+        
+        
+        updateItemCollectionViewHeight()
+
+        return cell
+    }
+
+
 }

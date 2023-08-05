@@ -14,11 +14,18 @@ protocol DescriptionRepository {
 
 class DefaultDescriptionRepository: DescriptionRepository {
     let provider = Provider()
-    //let endpoint =
-    let endpoint: EndpointMakeable? = nil
+    var endpoint = ProductDetailEndpoint()
+    
+    private let cocktailID: Int
+    
+    init(cocktailID: Int) {
+        self.cocktailID = cocktailID
+    }
     
     func fetchPublisher() -> AnyPublisher<CocktailDescription, Error> {
-        return provider.fetchData1(endpoint: endpoint!)
+        endpoint.insertPathParmeter(id: cocktailID)
+        
+        return provider.fetchData1(endpoint: endpoint)
     }
 }
 
