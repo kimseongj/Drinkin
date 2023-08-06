@@ -38,7 +38,7 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
         preferCocktailSelectionViewCoordinator.start()
     }
     
-    func pushProductDetailVC() {
+    func pushProductDetailVC(cocktailID: Int) {
         let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController)
         
         productDetailVCCoordinator.parentCoordinator = self
