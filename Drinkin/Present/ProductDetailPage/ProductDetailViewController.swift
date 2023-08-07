@@ -15,6 +15,8 @@ protocol ProductDetailViewDelegate: AnyObject {
 }
 
 class ProductDetailViewController: UIViewController {
+    
+    private var viewModel: ProductDetailViewModel?
    
     let scrollView : UIScrollView = {
         let scrollView = UIScrollView()
@@ -30,7 +32,6 @@ class ProductDetailViewController: UIViewController {
         return stackView
     }()
     
-    let tipAndContentsView = TipAndContentsView()
     let introductionView = IntroductionView()
     let cocktailInformationView = CocktailInformationView()
     
@@ -39,6 +40,15 @@ class ProductDetailViewController: UIViewController {
         view.backgroundColor = .white
         configureScrollView()
         configureStackView()
+    }
+    
+    init(viewModel: ProductDetailViewModel?) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureScrollView(){

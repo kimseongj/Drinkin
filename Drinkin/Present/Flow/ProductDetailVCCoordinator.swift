@@ -18,10 +18,12 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailViewDelegate {
     }
     
     func start() {
-        let productDetailViewController = ProductDetailViewController()
+        let productDetailDIContainer = ProductDetailDIContainer()
+        
+        let productDetailViewController = ProductDetailViewController(viewModel: productDetailDIContainer.makeProductDetailViewModel(cocktailID: 3))
         
         productDetailViewController.cocktailInformationView.toolView.delegate = self
-   //     productDetailViewController.cocktailInformationView.skillView.delegate = self
+
         productDetailViewController.cocktailInformationView.glassView.delegate = self
 
         navigationController.pushViewController(productDetailViewController, animated: true)

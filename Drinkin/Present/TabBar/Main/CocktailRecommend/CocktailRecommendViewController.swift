@@ -104,8 +104,13 @@ final class CocktailRecommendViewController: UIViewController {
     }
     
     @objc func seeMoreButtonAction() {
-        delegate?.pushProductDetailVC()
-        print("SeeMoreButon was Pushed")
+        guard let cocktailID = viewModel?.cocktailID else { return }
+        print(cocktailID)
+        delegate?.pushProductDetailVC(cocktailID: cocktailID)
+    }
+    
+    private func selectCocktailID() {
+        
     }
     
     private func calculateItemSize() -> CGSize {
@@ -129,6 +134,8 @@ extension CocktailRecommendViewController {
         self.dataSource = UICollectionViewDiffableDataSource<Section, BriefDescription> (collectionView: recommendCocktailCollectionView) { (collectionView, indexPath, briefDescription) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailRecommendCell.identifier, for: indexPath) as? CocktailRecommendCell else { return nil
             }
+            
+            self.viewModel?.cocktailID = briefDescription.id
             
             cell.configureCell(briefDescription: briefDescription)
             cell.seeMoreButton.addTarget(self, action: #selector(self.seeMoreButtonAction), for: .touchUpInside)

@@ -27,6 +27,7 @@ class CocktailRecommendCell: UICollectionViewCell {
         seeMoreButton.backgroundColor = .black
         seeMoreButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
         seeMoreButton.layer.borderWidth = 3
+        
         return seeMoreButton
     }()
     
