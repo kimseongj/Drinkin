@@ -39,7 +39,7 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
     }
     
     func pushProductDetailVC(cocktailID: Int) {
-        let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController)
+        let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController, cocktailID: cocktailID)
         
         productDetailVCCoordinator.parentCoordinator = self
         childCoordinators.append(productDetailVCCoordinator)

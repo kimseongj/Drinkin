@@ -13,7 +13,6 @@ class ItemCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 20)
-        label.text = "ASD"
         
         return label
     }()
@@ -21,7 +20,6 @@ class ItemCell: UICollectionViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard", size: 12)
-        label.text = "ZXCAXC"
         
         return label
     }()
@@ -54,7 +52,6 @@ class ItemCell: UICollectionViewCell {
         }
         
         descriptionLabel.snp.makeConstraints {
-            //$0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-10)
         }
@@ -77,5 +74,9 @@ class ItemCell: UICollectionViewCell {
             contentView.backgroundColor = .white
             checkImageView.image = nil
         }
+    }
+    
+    func fill() {
+        
     }
 }

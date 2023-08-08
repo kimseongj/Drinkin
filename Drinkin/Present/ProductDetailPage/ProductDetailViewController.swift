@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 protocol ProductDetailViewDelegate: AnyObject {
     func pushToolModalVC()
@@ -15,6 +16,7 @@ protocol ProductDetailViewDelegate: AnyObject {
 }
 
 class ProductDetailViewController: UIViewController {
+    private var cancelBag: Set<AnyCancellable> = []
     
     private var viewModel: ProductDetailViewModel?
    
@@ -37,7 +39,9 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        configureUI()
+        binding()
+        viewModel?.fetchDescription()
         configureScrollView()
         configureStackView()
     }
@@ -49,6 +53,10 @@ class ProductDetailViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureUI() {
+        view.backgroundColor = .white
     }
     
     private func configureScrollView(){
@@ -68,5 +76,20 @@ class ProductDetailViewController: UIViewController {
         
         stackView.addArrangedSubview(introductionView)
         stackView.addArrangedSubview(cocktailInformationView)
+    }
+    
+    private func fill(with cocktailDescription: CocktailDescription?) {
+        guard let validCocktailDescription = cocktailDescription else { return }
+        
+        introductionView.fill(with: validCocktailDescription)
+        
+    }
+}
+
+extension ProductDetailViewController {
+    private func binding() {
+        viewModel?.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink {
+            self.fill(with: $0)
+        }.store(in: &cancelBag)
     }
 }

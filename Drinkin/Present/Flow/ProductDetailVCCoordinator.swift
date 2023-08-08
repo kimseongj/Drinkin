@@ -12,15 +12,17 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailViewDelegate {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    var cocktailID: Int
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, cocktailID: Int) {
         self.navigationController = navigationController
+        self.cocktailID = cocktailID
     }
     
     func start() {
         let productDetailDIContainer = ProductDetailDIContainer()
         
-        let productDetailViewController = ProductDetailViewController(viewModel: productDetailDIContainer.makeProductDetailViewModel(cocktailID: 3))
+        let productDetailViewController = ProductDetailViewController(viewModel: productDetailDIContainer.makeProductDetailViewModel(cocktailID: cocktailID))
         
         productDetailViewController.cocktailInformationView.toolView.delegate = self
 

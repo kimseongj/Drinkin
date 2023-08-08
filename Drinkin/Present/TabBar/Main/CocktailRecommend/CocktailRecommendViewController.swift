@@ -109,10 +109,6 @@ final class CocktailRecommendViewController: UIViewController {
         delegate?.pushProductDetailVC(cocktailID: cocktailID)
     }
     
-    private func selectCocktailID() {
-        
-    }
-    
     private func calculateItemSize() -> CGSize {
         let itemSize = CGSize(width: view.bounds.width * 0.85, height: view.bounds.height * 0.75)
         

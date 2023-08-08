@@ -10,7 +10,7 @@ import SnapKit
 
 class IntroductionView: UIView {
     
-    let cocktailImageView: UIImageView = {
+    private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .systemGray3
@@ -18,19 +18,15 @@ class IntroductionView: UIView {
         return imageView
     }()
     
-    let cocktailTitleLabel: UILabel = {
+    private let cocktailTitleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 24)
-        label.text = "갓파더"
         
         return label
     }()
     
-    let cocktailTDescriptionLabel: UILabel = {
+    private let cocktailTDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = """
-스카치 위스키의 향 위에 아마레또의 달달한 아몬드 향을 더했다. 아마레또는 생각보다 더 달다. 단 맛이 싫다면 아마레또의 비율을 줄여보자.
-"""
         label.numberOfLines = 0
         label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         
@@ -45,7 +41,7 @@ class IntroductionView: UIView {
         return collectionView
     }()
     
-    let receipeTitleLabel: UILabel = {
+    private let recipeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "레시피"
         label.font = UIFont(name: "Pretendard-ExtraBold", size: 20)
@@ -53,16 +49,20 @@ class IntroductionView: UIView {
         return label
     }()
     
-    let receipeDescriptionLabel: UILabel = {
+    private let recipeDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Bold", size: 15)
-        label.text = """
-1. 올드패션드 글라스에 얼음을 채운다.
-2. 스카치 위스키 35ml, 디사론노 35ml를 순서대로 넣는다.
-3. 바 스푼으로 적당히 저어준다.
-"""
         label.numberOfLines = 0
+        
         return label
+    }()
+    
+    private let recipeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        
+        return stackView
     }()
     
     override init(frame: CGRect) {
@@ -76,13 +76,13 @@ class IntroductionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
         self.addSubview(cocktailImageView)
         self.addSubview(cocktailTitleLabel)
         self.addSubview(cocktailTDescriptionLabel)
         self.addSubview(itemCollectionView)
-        self.addSubview(receipeTitleLabel)
-        self.addSubview(receipeDescriptionLabel)
+        self.addSubview(recipeTitleLabel)
+        self.addSubview(recipeStackView)
         
         cocktailImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
@@ -108,13 +108,13 @@ class IntroductionView: UIView {
             make.height.equalTo(400)
         }
         
-        receipeTitleLabel.snp.makeConstraints { make in
+        recipeTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(itemCollectionView.snp.bottom).offset(40)
             make.leading.equalToSuperview().offset(16)
         }
         
-        receipeDescriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(receipeTitleLabel.snp.bottom).offset(12)
+        recipeStackView.snp.makeConstraints { make in
+            make.top.equalTo(recipeTitleLabel.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview()
@@ -128,6 +128,25 @@ class IntroductionView: UIView {
     private func updateItemCollectionViewHeight() {
         itemCollectionView.snp.makeConstraints {
             $0.height.equalTo(itemCollectionView.contentSize.height)
+        }
+    }
+    
+    func fill(with cocktailDesription: CocktailDescription) {
+        guard let validImageURL = URL(string: cocktailDesription.imageURI) else { return }
+        
+        cocktailImageView.load(url: validImageURL)
+        cocktailTitleLabel.text = cocktailDesription.cocktailNameKo
+        cocktailTDescriptionLabel.text = cocktailDesription.description
+        fillRecipeStackView(with: cocktailDesription.recipeList)
+    }
+    
+    func fillRecipeStackView(with recipeList: [String]) {
+        recipeList.forEach {
+            let label = UILabel()
+            label.font = UIFont(name: "Pretendard-Bold", size: 15)
+            label.numberOfLines = 0
+            label.text = $0
+            recipeStackView.addArrangedSubview(label)
         }
     }
 }
@@ -160,12 +179,8 @@ extension IntroductionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as! ItemCell
         
-        
-        
         updateItemCollectionViewHeight()
 
         return cell
     }
-
-
 }
