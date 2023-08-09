@@ -35,7 +35,7 @@ class CocktailInformationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
         self.addSubview(cocktailNameTitle)
         self.addSubview(toolView)
         self.addSubview(glassView)
@@ -83,5 +83,11 @@ class CocktailInformationView: UIView {
             $0.trailing.leading.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    func fill(with cocktailDescription: CocktailDescription) {  
+        abvView.fill(with: cocktailDescription.abv)
+        levelView.fill(with: cocktailDescription.level)
+        sugarContentView.fill(with: cocktailDescription.sugarContent)
     }
 }

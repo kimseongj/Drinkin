@@ -18,7 +18,7 @@ protocol ProductDetailViewModel {
 class DefaultProductDetailViewModel: ProductDetailViewModel {
     @Published var cocktailDescription: CocktailDescription?
     
-    var cocktailDescriptionPublisher: Published<CocktailDescription?>.Publisher { $cocktailDescription}
+    var cocktailDescriptionPublisher: Published<CocktailDescription?>.Publisher { $cocktailDescription }
     
     private var cancelBag: Set<AnyCancellable> = []
     

@@ -8,7 +8,7 @@
 import Foundation
 
 struct ProductDetailEndpoint: EndpointMakeable {
-    var baseURL: String = "http://192.168.0.9/v1"
+    var baseURL: String = "https://0c7e142f-aece-44f5-857c-f313df9c6f7b.mock.pstmn.io"
     
     var path: String = ""
     
@@ -19,6 +19,7 @@ struct ProductDetailEndpoint: EndpointMakeable {
     var header: [String : String]?
     
     mutating func insertPathParmeter(id: Int) {
-        path = "/cocktail/\(id)"
+        //path = "/cocktail/\(id)"
+        path = "/10"
     }
 }
