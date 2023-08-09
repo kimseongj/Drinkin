@@ -47,13 +47,6 @@ final class CocktailRecommendViewController: UIViewController {
 
         return collectionView
     }()
-    
-    private let view1: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        
-        return view
-    }()
  
     override func viewDidLoad() {
         configureUI()
@@ -105,7 +98,6 @@ final class CocktailRecommendViewController: UIViewController {
     
     @objc func seeMoreButtonAction() {
         guard let cocktailID = viewModel?.cocktailID else { return }
-        print(cocktailID)
         delegate?.pushProductDetailVC(cocktailID: cocktailID)
     }
     
