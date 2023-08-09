@@ -72,4 +72,8 @@ final class TextDescriptionView: UIView {
     private func configureTitle() {
         titleLabel.text = title
     }
+    
+    func fill(with description: String) {
+        descriptionLabel.text = description
+    }
 }

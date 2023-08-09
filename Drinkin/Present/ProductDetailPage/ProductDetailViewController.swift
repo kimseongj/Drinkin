@@ -82,7 +82,7 @@ class ProductDetailViewController: UIViewController {
         guard let validCocktailDescription = cocktailDescription else { return }
         
         introductionView.fill(with: validCocktailDescription)
-        
+        cocktailInformationView.fill(with: validCocktailDescription)
     }
 }
 
