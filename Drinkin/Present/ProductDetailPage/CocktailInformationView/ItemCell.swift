@@ -67,7 +67,7 @@ class ItemCell: UICollectionViewCell {
     func check(hold: Bool) {
         switch hold {
         case true:
-            contentView.backgroundColor = UIColor(red: 0.14, green: 0.13, blue: 0.12, alpha: 1)
+            contentView.backgroundColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
             checkImageView.image = UIImage(named: "check_icon")
             
         case false:
@@ -76,7 +76,7 @@ class ItemCell: UICollectionViewCell {
         }
     }
     
-    func fill() {
-        
+    func fill(detailCategory: DetailCategory) {
+        titleLabel.text = detailCategory.categoryNameKo
     }
 }

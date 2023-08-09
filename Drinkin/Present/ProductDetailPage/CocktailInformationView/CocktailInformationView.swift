@@ -85,10 +85,9 @@ class CocktailInformationView: UIView {
         }
     }
     
-    func fill(with cocktailDescription: CocktailDescription) {
+    func fill(with cocktailDescription: CocktailDescription) {  
         abvView.fill(with: cocktailDescription.abv)
         levelView.fill(with: cocktailDescription.level)
         sugarContentView.fill(with: cocktailDescription.sugarContent)
-        
     }
 }

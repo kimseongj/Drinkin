@@ -8,7 +8,8 @@
 import UIKit
 import SnapKit
 
-class IntroductionView: UIView {
+final class IntroductionView: UIView {
+    private var dataSource: UICollectionViewDiffableDataSource<Section, DetailCategory>?
     
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
@@ -33,7 +34,7 @@ class IntroductionView: UIView {
         return label
     }()
     
-    private lazy var itemCollectionView: UICollectionView = {
+    lazy var itemCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
         collectionView.backgroundColor = .gray
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
@@ -67,9 +68,8 @@ class IntroductionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
         configureUI()
-        configureItemCollectionView()
+        configureDataSource()
     }
     
     required init?(coder: NSCoder) {
@@ -77,6 +77,8 @@ class IntroductionView: UIView {
     }
     
     private func configureUI() {
+        self.backgroundColor = .white
+        
         self.addSubview(cocktailImageView)
         self.addSubview(cocktailTitleLabel)
         self.addSubview(cocktailTDescriptionLabel)
@@ -105,7 +107,6 @@ class IntroductionView: UIView {
             make.top.equalTo(cocktailTDescriptionLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(400)
         }
         
         recipeTitleLabel.snp.makeConstraints { make in
@@ -121,13 +122,13 @@ class IntroductionView: UIView {
         }
     }
     
-    private func configureItemCollectionView() {
-        itemCollectionView.dataSource = self
-    }
+//    private func configureItemCollectionView() {
+//        itemCollectionView.dataSource = self
+//    }
     
-    private func updateItemCollectionViewHeight() {
+    func updateItemCollectionViewHeight(cellCount: Int) {
         itemCollectionView.snp.makeConstraints {
-            $0.height.equalTo(itemCollectionView.contentSize.height)
+            $0.height.equalTo(cellCount * 60)
         }
     }
     
@@ -171,16 +172,42 @@ extension IntroductionView {
     }
 }
 
-extension IntroductionView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+//MARK: - DiffableDataSource
+extension IntroductionView {
+    private func configureDataSource() {
+        self.dataSource = UICollectionViewDiffableDataSource<Section, DetailCategory> (collectionView: itemCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell else { return nil
+            }
+            
+            cell.check(hold: detailCategory.hold)
+            cell.fill(detailCategory: detailCategory)
+            
+            return cell
+        }
     }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as! ItemCell
+    
+    func applySnapshot(detailCategoryList: [DetailCategory]?) {
+        guard let validDetailCategoryList = detailCategoryList else { return }
         
-        updateItemCollectionViewHeight()
-
-        return cell
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailCategory>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(validDetailCategoryList)
+        self.dataSource?.apply(snapshot, animatingDifferences: true)
+        updateItemCollectionViewHeight(cellCount: validDetailCategoryList.count)
+        print("ASD")
     }
 }
+
+//extension IntroductionView: UICollectionViewDataSource {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 2
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as! ItemCell
+//
+//        updateItemCollectionViewHeight()
+//
+//        return cell
+//    }
+//}

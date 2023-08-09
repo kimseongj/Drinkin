@@ -20,17 +20,19 @@ class ProductDetailViewController: UIViewController {
     
     private var viewModel: ProductDetailViewModel?
    
-    let scrollView : UIScrollView = {
+    private let scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
         scrollView.showsHorizontalScrollIndicator = false
+        
         return scrollView
     }()
     
-    let stackView : UIStackView = {
+    private let stackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 1
+        
         return stackView
     }()
     
@@ -90,6 +92,29 @@ extension ProductDetailViewController {
     private func binding() {
         viewModel?.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink {
             self.fill(with: $0)
+            self.introductionView.applySnapshot(detailCategoryList: $0?.categoryList)
         }.store(in: &cancelBag)
     }
 }
+
+//extension ProductDetailViewController: UICollectionViewDataSource {
+//    func configureItemCell() {
+//        
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 2
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = introductionView.itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as! ItemCell
+//
+//            introductionView.updateItemCollectionViewHeight()
+//
+//        return cell
+//    }
+//    
+//    private func configureItemCollectionView() {
+//        introductionView.itemCollectionView.dataSource = self
+//    }
+//}

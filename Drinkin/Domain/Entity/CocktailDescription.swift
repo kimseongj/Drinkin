@@ -14,8 +14,8 @@ struct CocktailDescription: Codable {
     let description: String
     let recipeList: [String]
     let abv, level, sugarContent: String
-    let categoryList: [DetailCategoryList]
-    let ingredientList: [DetailIngredientList]
+    let categoryList: [DetailCategory]
+    let ingredientList: [DetailIngredient]
     let toolList: [ToolList]
     let skillList: [SkillList]
     let glass: [Glass]
@@ -38,7 +38,7 @@ struct CocktailDescription: Codable {
 }
 
 // MARK: - CategoryList
-struct DetailCategoryList: Codable {
+struct DetailCategory: Codable, Hashable {
     let id: Int
     let categoryNameKo: String
     let hold: Bool
@@ -51,7 +51,7 @@ struct DetailCategoryList: Codable {
 }
 
 // MARK: - IngredientList
-struct DetailIngredientList: Codable {
+struct DetailIngredient: Codable, Hashable {
     let id: Int
     let ingredientNameKo: String
     let hold: Bool
@@ -64,7 +64,7 @@ struct DetailIngredientList: Codable {
 }
 
 // MARK: - ToolList
-struct ToolList: Codable {
+struct ToolList: Codable, Hashable {
     let id: Int
     let toolNameKo: String
 
@@ -75,7 +75,7 @@ struct ToolList: Codable {
 }
 
 // MARK: - SkillList
-struct SkillList: Codable {
+struct SkillList: Codable, Hashable {
     let id: Int
     let skillNameKo: String
 
@@ -86,7 +86,7 @@ struct SkillList: Codable {
 }
 
 // MARK: - Glass
-struct Glass: Codable {
+struct Glass: Codable, Hashable {
     let id: Int
     let glassNameKo: String
 
