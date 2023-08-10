@@ -194,20 +194,5 @@ extension IntroductionView {
         snapshot.appendItems(validDetailCategoryList)
         self.dataSource?.apply(snapshot, animatingDifferences: true)
         updateItemCollectionViewHeight(cellCount: validDetailCategoryList.count)
-        print("ASD")
     }
 }
-
-//extension IntroductionView: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 2
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as! ItemCell
-//
-//        updateItemCollectionViewHeight()
-//
-//        return cell
-//    }
-//}
