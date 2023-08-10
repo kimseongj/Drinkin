@@ -79,4 +79,8 @@ class ItemCell: UICollectionViewCell {
     func fill(detailCategory: DetailCategory) {
         titleLabel.text = detailCategory.categoryNameKo
     }
+    
+    func fill(detailIgredient: DetailIngredient) {
+        titleLabel.text = detailIgredient.ingredientNameKo
+    }
 }

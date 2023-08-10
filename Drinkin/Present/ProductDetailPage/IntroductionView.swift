@@ -9,7 +9,8 @@ import UIKit
 import SnapKit
 
 final class IntroductionView: UIView {
-    private var dataSource: UICollectionViewDiffableDataSource<Section, DetailCategory>?
+    private var baseDataSource: UICollectionViewDiffableDataSource<Section, DetailCategory>?
+    private var ingredientDataSource: UICollectionViewDiffableDataSource<Section, DetailIngredient>?
     
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
@@ -34,9 +35,15 @@ final class IntroductionView: UIView {
         return label
     }()
     
-    lazy var itemCollectionView: UICollectionView = {
+    lazy var baseCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
-        collectionView.backgroundColor = .gray
+        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
+        
+        return collectionView
+    }()
+    
+    lazy var ingredientCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
         
         return collectionView
@@ -69,7 +76,8 @@ final class IntroductionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        configureDataSource()
+        configureBaseDataSource()
+        configureIngredientDataSource()
     }
     
     required init?(coder: NSCoder) {
@@ -82,53 +90,56 @@ final class IntroductionView: UIView {
         self.addSubview(cocktailImageView)
         self.addSubview(cocktailTitleLabel)
         self.addSubview(cocktailTDescriptionLabel)
-        self.addSubview(itemCollectionView)
+        self.addSubview(baseCollectionView)
+        self.addSubview(ingredientCollectionView)
         self.addSubview(recipeTitleLabel)
         self.addSubview(recipeStackView)
         
-        cocktailImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.centerX.equalToSuperview()
-            make.height.width.equalTo(120)
+        cocktailImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
+            $0.centerX.equalToSuperview()
+            $0.height.width.equalTo(120)
         }
         
-        cocktailTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(cocktailImageView.snp.bottom).offset(12)
-            make.centerX.equalToSuperview()
+        cocktailTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(cocktailImageView.snp.bottom).offset(12)
+            $0.centerX.equalToSuperview()
         }
         
-        cocktailTDescriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(cocktailTitleLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+        cocktailTDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(cocktailTitleLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
         }
         
-        itemCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(cocktailTDescriptionLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+        baseCollectionView.snp.makeConstraints {
+            $0.top.equalTo(cocktailTDescriptionLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
         }
         
-        recipeTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(itemCollectionView.snp.bottom).offset(40)
-            make.leading.equalToSuperview().offset(16)
+        ingredientCollectionView.snp.makeConstraints {
+            $0.top.equalTo(baseCollectionView.snp.bottom)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
         }
         
-        recipeStackView.snp.makeConstraints { make in
-            make.top.equalTo(recipeTitleLabel.snp.bottom).offset(12)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview()
+        recipeTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(ingredientCollectionView.snp.bottom).offset(40)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        recipeStackView.snp.makeConstraints {
+            $0.top.equalTo(recipeTitleLabel.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview()
         }
     }
-    
-//    private func configureItemCollectionView() {
-//        itemCollectionView.dataSource = self
-//    }
-    
-    func updateItemCollectionViewHeight(cellCount: Int) {
-        itemCollectionView.snp.makeConstraints {
-            $0.height.equalTo(cellCount * 60)
+       
+    func updateCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
+        collectionView.snp.makeConstraints {
+            $0.height.equalTo(cellCount * 70)
         }
     }
     
@@ -172,10 +183,10 @@ extension IntroductionView {
     }
 }
 
-//MARK: - DiffableDataSource
+//MARK: - BaseDiffableDataSource
 extension IntroductionView {
-    private func configureDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource<Section, DetailCategory> (collectionView: itemCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
+    private func configureBaseDataSource() {
+        self.baseDataSource = UICollectionViewDiffableDataSource<Section, DetailCategory> (collectionView: baseCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell else { return nil
             }
             
@@ -186,13 +197,38 @@ extension IntroductionView {
         }
     }
     
-    func applySnapshot(detailCategoryList: [DetailCategory]?) {
+    func applybaseSnapshot(detailCategoryList: [DetailCategory]?) {
         guard let validDetailCategoryList = detailCategoryList else { return }
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, DetailCategory>()
         snapshot.appendSections([.main])
         snapshot.appendItems(validDetailCategoryList)
-        self.dataSource?.apply(snapshot, animatingDifferences: true)
-        updateItemCollectionViewHeight(cellCount: validDetailCategoryList.count)
+        self.baseDataSource?.apply(snapshot, animatingDifferences: true)
+        updateCollectionViewHeight(collectionView: baseCollectionView, cellCount: validDetailCategoryList.count)
+    }
+}
+
+//MARK: - IngredientDiffableDataSource
+extension IntroductionView {
+    private func configureIngredientDataSource() {
+        self.ingredientDataSource = UICollectionViewDiffableDataSource<Section, DetailIngredient> (collectionView: ingredientCollectionView) { (collectionView, indexPath, detailIngredient) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell else { return nil
+            }
+            
+            cell.check(hold: detailIngredient.hold)
+            cell.fill(detailIgredient: detailIngredient)
+            
+            return cell
+        }
+    }
+    
+    func applyIngredientSnapshot(detailIngredientList: [DetailIngredient]?) {
+        guard let validDetailIngredientList = detailIngredientList else { return }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailIngredient>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(validDetailIngredientList)
+        self.ingredientDataSource?.apply(snapshot, animatingDifferences: true)
+        updateCollectionViewHeight(collectionView: ingredientCollectionView, cellCount: validDetailIngredientList.count)
     }
 }
