@@ -1,5 +1,5 @@
 //
-//  TextDescriptionView.swift
+//  TextInformationView.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/08/03.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class TextDescriptionView: UIView {
+final class TextInformationView: UIView {
     private var title: String = ""
     
     private let titleLabelView: UIView = {
