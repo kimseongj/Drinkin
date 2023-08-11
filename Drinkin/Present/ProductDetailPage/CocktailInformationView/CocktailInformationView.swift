@@ -18,12 +18,12 @@ class CocktailInformationView: UIView {
         return title
     }()
     
-    let toolView = SkillView()
-    let glassView = SkillView()
-    let skillView = SkillView()
-    let abvView = TextDescriptionView(title: "당 도")
-    let levelView = TextDescriptionView(title: "난이도")
-    let sugarContentView = TextDescriptionView(title: "당 도")
+    let toolView = ClickableInformationView(title: "도구")
+    let skillView = ClickableInformationView(title: "기법")
+    let glassView = ClickableInformationView(title: "글라스")
+    let abvView = TextInformationView(title: "당 도")
+    let levelView = TextInformationView(title: "난이도")
+    let sugarContentView = TextInformationView(title: "당 도")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,6 +38,7 @@ class CocktailInformationView: UIView {
     private func configureUI() {
         self.addSubview(cocktailNameTitle)
         self.addSubview(toolView)
+        self.addSubview(skillView)
         self.addSubview(glassView)
         self.addSubview(skillView)
         self.addSubview(abvView)
@@ -89,5 +90,9 @@ class CocktailInformationView: UIView {
         abvView.fill(with: cocktailDescription.abv)
         levelView.fill(with: cocktailDescription.level)
         sugarContentView.fill(with: cocktailDescription.sugarContent)
+        
+        toolView.applySnapshot(cocktailDescription: cocktailDescription)
+        skillView.applySnapshot(cocktailDescription: cocktailDescription)
+        glassView.applySnapshot(cocktailDescription: cocktailDescription)
     }
 }
