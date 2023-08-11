@@ -15,7 +15,6 @@ final class IntroductionView: UIView {
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .systemGray3
         
         return imageView
     }()
