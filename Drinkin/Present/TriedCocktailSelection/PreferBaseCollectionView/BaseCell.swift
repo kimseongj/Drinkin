@@ -8,9 +8,7 @@
 import UIKit
 
 final class BaseCell: UICollectionViewCell {
-    
-    static let id = "BaseCell"
-    
+
     override var isSelected: Bool {
         didSet {
             if isSelected {

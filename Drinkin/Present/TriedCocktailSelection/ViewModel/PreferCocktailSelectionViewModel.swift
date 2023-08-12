@@ -1,5 +1,5 @@
 //
-//  PreferCocktailSelectionViewModel.swift
+//  TriedCocktailSelectionViewModel.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/06/21.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class PreferCocktailSelectionViewModel {
+final class TriedCocktailSelectionViewModel {
     @Published var selectedCocktailList: [String] = []
     
     func isEmptySelectedCocktailList() -> Bool {

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class PreferCocktailSelectionViewController: UIViewController {
+final class PreferCocktailSelectionViewController: UIViewController {
     
     //MARK:- mainLabel
     let mainLabel: UILabel = {

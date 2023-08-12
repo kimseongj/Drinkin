@@ -269,7 +269,7 @@
 			path = LoadingView;
 			sourceTree = "<group>";
 		};
-		1C04C18729DEEC3400E381C2 /* PreferCoctailSelectionView */ = {
+		1C04C18729DEEC3400E381C2 /* TriedCocktailSelection */ = {
 			isa = PBXGroup;
 			children = (
 				1C2696382A4315D500C1FC00 /* ViewModel */,
@@ -278,7 +278,7 @@
 				1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */,
 				1CA20ED02A54073F009FDD90 /* RecommendPopupViewController.swift */,
 			);
-			path = PreferCoctailSelectionView;
+			path = TriedCocktailSelection;
 			sourceTree = "<group>";
 		};
 		1C04C18829DEEC3700E381C2 /* ProductDetailPage */ = {
@@ -477,7 +477,7 @@
 				1C04C18A29DEEC3C00E381C2 /* TabBar */,
 				1C04C18929DEEC3A00E381C2 /* Login */,
 				1C04C18829DEEC3700E381C2 /* ProductDetailPage */,
-				1C04C18729DEEC3400E381C2 /* PreferCoctailSelectionView */,
+				1C04C18729DEEC3400E381C2 /* TriedCocktailSelection */,
 				1C04C18629DEEC3100E381C2 /* LoadingView */,
 			);
 			path = Present;

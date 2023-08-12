@@ -64,7 +64,7 @@ extension PreferBaseView: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = preferBaseCollectionView.dequeueReusableCell(withReuseIdentifier: BaseCell.id, for: indexPath) as! BaseCell
+        let cell = preferBaseCollectionView.dequeueReusableCell(withReuseIdentifier: BaseCell.identifier, for: indexPath) as! BaseCell
         cell.baseNameLabel.text = data[indexPath.row]
         cell.layoutIfNeeded()
         return cell
