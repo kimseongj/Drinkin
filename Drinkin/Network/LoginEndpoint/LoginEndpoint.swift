@@ -9,7 +9,7 @@ import Foundation
 
 //MARK: - Convert kakao login token to Drinkin login token
 struct AccessTokenConversionEndpoint: EndpointMakeable {
-    var baseURL: String = "http://192.168.0.16"
+    var baseURL: String = "http://172.29.65.78:8000"
 
     var path: String = "/v1/kakao-login"
     
