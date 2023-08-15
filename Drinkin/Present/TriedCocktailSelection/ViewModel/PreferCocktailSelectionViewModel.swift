@@ -11,6 +11,8 @@ import Combine
 final class TriedCocktailSelectionViewModel {
     @Published var selectedCocktailList: [String] = []
     
+    //let baseTypeList: [String] = ["전체", "위스키 베이스", "리큐르 베이스"]
+    
     func isEmptySelectedCocktailList() -> Bool {
         if selectedCocktailList.count == 0 {
             return true
