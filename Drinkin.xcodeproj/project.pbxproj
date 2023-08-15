@@ -99,7 +99,6 @@
 		1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F029EBABCE00D3E1D2 /* TipAndContentsView.swift */; };
 		1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */; };
 		1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */; };
-		1CCE88F729EBB25C00D3E1D2 /* PreferCocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */; };
 		1CCE88FA29EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift */; };
 		1CCE88FE29EBB32300D3E1D2 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */; };
 		1CCE890029EBBC3C00D3E1D2 /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */; };
@@ -113,6 +112,7 @@
 		1CDDB92C2A3AD7370007983A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */; };
 		1CDDB92E2A3AD87F0007983A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */; };
 		1CED21982A739A700078916A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CED21972A739A700078916A /* Section.swift */; };
+		1CF26FA12A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF26FA02A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift */; };
 		1CF62FB62A1252F30043A32F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF62FB52A1252F30043A32F /* FilterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -202,7 +202,6 @@
 		1CCE88F029EBABCE00D3E1D2 /* TipAndContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentsView.swift; sourceTree = "<group>"; };
 		1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignmentLayout.swift; sourceTree = "<group>"; };
-		1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferCocktailViewController.swift; sourceTree = "<group>"; };
 		1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailCollectionViewCell.swift; sourceTree = "<group>"; };
 		1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
@@ -216,6 +215,7 @@
 		1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		1CED21972A739A700078916A /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		1CF26FA02A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktialSelectionViewController.swift; sourceTree = "<group>"; };
 		1CF62FB52A1252F30043A32F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,7 +275,7 @@
 				1C2696382A4315D500C1FC00 /* ViewModel */,
 				1C9BAB0D29EFAD5300E979AC /* PreferBaseCollectionView */,
 				1CCE88F829EBB27C00D3E1D2 /* CocktailCollectionView */,
-				1CCE88F629EBB25C00D3E1D2 /* PreferCocktailViewController.swift */,
+				1CF26FA02A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift */,
 				1CA20ED02A54073F009FDD90 /* RecommendPopupViewController.swift */,
 			);
 			path = TriedCocktailSelection;
@@ -865,7 +865,6 @@
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
-				1CCE88F729EBB25C00D3E1D2 /* PreferCocktailViewController.swift in Sources */,
 				1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
 				1CB299112A724136001F31BF /* DIContainer.swift in Sources */,
@@ -873,6 +872,7 @@
 				1CCE88DF29E949A900D3E1D2 /* HomeBarVCCoordinator.swift in Sources */,
 				1C5906A72A21DBE0001F048B /* FilterViewModel.swift in Sources */,
 				1C71A4B02A5292A300F1814A /* GradePresentationView.swift in Sources */,
+				1CF26FA12A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift in Sources */,
 				1CCE88EB29E953E400D3E1D2 /* Provider.swift in Sources */,
 				1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */,
 				1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */,

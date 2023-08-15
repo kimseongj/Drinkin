@@ -54,7 +54,6 @@ class PreferBaseView: UIView {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
-
 }
 
 extension PreferBaseView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

@@ -1,5 +1,5 @@
 //
-//  PreferCocktailViewController.swift
+//  TriedCocktailSelectionViewController.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/16.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class PreferCocktailSelectionViewController: UIViewController {
+final class TriedCocktailSelectionViewController: UIViewController {
     
     //MARK:- mainLabel
     let mainLabel: UILabel = {
@@ -40,7 +40,7 @@ final class PreferCocktailSelectionViewController: UIViewController {
     
     //MARK:- baseCollectionView
     let preferBaseView = PreferBaseView()
-    
+
     //MARK:- cocktailCollectionView
     private lazy var cocktailCollectionView: UICollectionView = {
         let flowLayout = configureCompositionalIconLayout()
@@ -151,7 +151,7 @@ final class PreferCocktailSelectionViewController: UIViewController {
     }
 }
 
-extension PreferCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension TriedCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 14
     }
@@ -160,10 +160,11 @@ extension PreferCocktailSelectionViewController: UICollectionViewDelegate, UICol
         let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "CocktailCell", for: indexPath) as! CocktailCollectionViewCell
         cell.cocktailNameLabel.text = "asd"
         return cell
-    } 
+    }
 }
 
-extension PreferCocktailSelectionViewController {
+//MARK: - CompositionalLayout
+extension TriedCocktailSelectionViewController {
     private func configureCompositionalIconLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -184,7 +185,7 @@ extension PreferCocktailSelectionViewController {
     }
 }
 
-extension PreferCocktailSelectionViewController: DismissDelegate {
+extension TriedCocktailSelectionViewController: DismissDelegate {
     func dismissCurrentViewController() {
         self.dismiss(animated: true)
     }
