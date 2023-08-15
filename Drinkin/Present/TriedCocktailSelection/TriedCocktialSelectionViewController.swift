@@ -11,22 +11,22 @@ import UIKit
 final class TriedCocktailSelectionViewController: UIViewController {
     
     //MARK:- mainLabel
-    let mainLabel: UILabel = {
-        let mainLabel = UILabel()
-        mainLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        mainLabel.text = "마셔봤던 칵테일 선택"
+    private let mainLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.text = "마셔봤던 칵테일 선택"
         
-        return mainLabel
+        return label
     }()
     
     //MARK:- subLabel
-    let subLabel: UILabel = {
-        let subLabel = UILabel()
-        subLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        subLabel.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
-        subLabel.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
+    private let subLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
+        label.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
         
-        return subLabel
+        return label
     }()
     
     //MARK:- exitButton
@@ -78,7 +78,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         configureCompleteSelectionButton()
     }
     
-    func configureUI() {
+    private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(mainLabel)
