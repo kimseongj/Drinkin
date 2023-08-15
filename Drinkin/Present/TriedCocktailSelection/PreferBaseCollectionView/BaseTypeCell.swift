@@ -1,5 +1,5 @@
 //
-//  BaseCell.swift
+//  BaseTypeCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/16.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BaseCell: UICollectionViewCell {
+final class BaseTypeCell: UICollectionViewCell {
 
     override var isSelected: Bool {
         didSet {

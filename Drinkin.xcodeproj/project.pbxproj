@@ -100,7 +100,7 @@
 		1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */; };
 		1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */; };
 		1CCE88FA29EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift */; };
-		1CCE88FE29EBB32300D3E1D2 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */; };
+		1CCE88FE29EBB32300D3E1D2 /* BaseTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FD29EBB32300D3E1D2 /* BaseTypeCell.swift */; };
 		1CCE890029EBBC3C00D3E1D2 /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */; };
 		1CCE890229EBBCCA00D3E1D2 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */; };
 		1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890329EBBD9800D3E1D2 /* LoginService.swift */; };
@@ -203,7 +203,7 @@
 		1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		1CCE88F429EBAC2500D3E1D2 /* LeftAlignmentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignmentLayout.swift; sourceTree = "<group>"; };
 		1CCE88F929EBB2C200D3E1D2 /* CocktailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailCollectionViewCell.swift; sourceTree = "<group>"; };
-		1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		1CCE88FD29EBB32300D3E1D2 /* BaseTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTypeCell.swift; sourceTree = "<group>"; };
 		1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
 		1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		1CCE890329EBBD9800D3E1D2 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
@@ -588,7 +588,7 @@
 		1C9BAB0D29EFAD5300E979AC /* PreferBaseCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				1CCE88FD29EBB32300D3E1D2 /* BaseCell.swift */,
+				1CCE88FD29EBB32300D3E1D2 /* BaseTypeCell.swift */,
 				1CB096F22A2A150400B7CA71 /* PreferBaseView.swift */,
 			);
 			path = PreferBaseCollectionView;
@@ -860,7 +860,7 @@
 				1C9BAB1C29EFAEC500E979AC /* InformationCollectionView.swift in Sources */,
 				1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */,
 				1CDDB9242A3A109F0007983A /* FilterModalView.swift in Sources */,
-				1CCE88FE29EBB32300D3E1D2 /* BaseCell.swift in Sources */,
+				1CCE88FE29EBB32300D3E1D2 /* BaseTypeCell.swift in Sources */,
 				1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
