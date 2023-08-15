@@ -1,5 +1,5 @@
 //
-//  CocktailScrollView.swift
+//  CocktailSelectionCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/16.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-class CocktailCollectionViewCell: UICollectionViewCell {
-    static let cellID = "CocktailCell"
+class CocktailSelectionCell: UICollectionViewCell {
     
     private let selectedView = SelectedView()
     

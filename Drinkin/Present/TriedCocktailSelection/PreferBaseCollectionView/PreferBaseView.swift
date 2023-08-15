@@ -20,7 +20,7 @@ class PreferBaseView: UIView {
         view.showsHorizontalScrollIndicator = false
         view.contentInset = .zero
         view.clipsToBounds = true
-        view.register(BaseCell.self, forCellWithReuseIdentifier: "BaseCell")
+        view.register(BaseTypeCell.self, forCellWithReuseIdentifier: "BaseCell")
 
         return view
     }()
@@ -46,7 +46,7 @@ class PreferBaseView: UIView {
     }
     
     func setBaseCollectionView() {
-        preferBaseCollectionView.register(BaseCell.self, forCellWithReuseIdentifier: "BaseCell")
+        preferBaseCollectionView.register(BaseTypeCell.self, forCellWithReuseIdentifier: BaseTypeCell.identifier)
         preferBaseCollectionView.delegate = self
         preferBaseCollectionView.dataSource = self
         
@@ -54,7 +54,6 @@ class PreferBaseView: UIView {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
-
 }
 
 extension PreferBaseView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -64,7 +63,7 @@ extension PreferBaseView: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = preferBaseCollectionView.dequeueReusableCell(withReuseIdentifier: BaseCell.id, for: indexPath) as! BaseCell
+        let cell = preferBaseCollectionView.dequeueReusableCell(withReuseIdentifier: BaseTypeCell.identifier, for: indexPath) as! BaseTypeCell
         cell.baseNameLabel.text = data[indexPath.row]
         cell.layoutIfNeeded()
         return cell

@@ -1,5 +1,5 @@
 //
-//  PreferCocktailViewController.swift
+//  TriedCocktailSelectionViewController.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/16.
@@ -8,25 +8,25 @@
 import Foundation
 import UIKit
 
-class PreferCocktailSelectionViewController: UIViewController {
+final class TriedCocktailSelectionViewController: UIViewController {
     
     //MARK:- mainLabel
-    let mainLabel: UILabel = {
-        let mainLabel = UILabel()
-        mainLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        mainLabel.text = "마셔봤던 칵테일 선택"
+    private let mainLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.text = "마셔봤던 칵테일 선택"
         
-        return mainLabel
+        return label
     }()
     
     //MARK:- subLabel
-    let subLabel: UILabel = {
-        let subLabel = UILabel()
-        subLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        subLabel.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
-        subLabel.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
+    private let subLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
+        label.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
         
-        return subLabel
+        return label
     }()
     
     //MARK:- exitButton
@@ -40,7 +40,7 @@ class PreferCocktailSelectionViewController: UIViewController {
     
     //MARK:- baseCollectionView
     let preferBaseView = PreferBaseView()
-    
+
     //MARK:- cocktailCollectionView
     private lazy var cocktailCollectionView: UICollectionView = {
         let flowLayout = configureCompositionalIconLayout()
@@ -52,7 +52,7 @@ class PreferCocktailSelectionViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = .zero
         collectionView.clipsToBounds = true
-        collectionView.register(CocktailCollectionViewCell.self, forCellWithReuseIdentifier: "CocktailCell")
+        collectionView.register(CocktailSelectionCell.self, forCellWithReuseIdentifier: CocktailSelectionCell.identifier)
         
         return collectionView
     }()
@@ -78,7 +78,7 @@ class PreferCocktailSelectionViewController: UIViewController {
         configureCompleteSelectionButton()
     }
     
-    func configureUI() {
+    private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(mainLabel)
@@ -151,19 +151,20 @@ class PreferCocktailSelectionViewController: UIViewController {
     }
 }
 
-extension PreferCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension TriedCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 14
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "CocktailCell", for: indexPath) as! CocktailCollectionViewCell
+        let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as! CocktailSelectionCell
         cell.cocktailNameLabel.text = "asd"
         return cell
-    } 
+    }
 }
 
-extension PreferCocktailSelectionViewController {
+//MARK: - CompositionalLayout
+extension TriedCocktailSelectionViewController {
     private func configureCompositionalIconLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -184,7 +185,7 @@ extension PreferCocktailSelectionViewController {
     }
 }
 
-extension PreferCocktailSelectionViewController: DismissDelegate {
+extension TriedCocktailSelectionViewController: DismissDelegate {
     func dismissCurrentViewController() {
         self.dismiss(animated: true)
     }
