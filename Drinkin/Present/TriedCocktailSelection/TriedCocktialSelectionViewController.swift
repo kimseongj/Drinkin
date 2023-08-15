@@ -52,7 +52,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = .zero
         collectionView.clipsToBounds = true
-        collectionView.register(CocktailCollectionViewCell.self, forCellWithReuseIdentifier: "CocktailCell")
+        collectionView.register(CocktailSelectionCell.self, forCellWithReuseIdentifier: CocktailSelectionCell.identifier)
         
         return collectionView
     }()
@@ -157,7 +157,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "CocktailCell", for: indexPath) as! CocktailCollectionViewCell
+        let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as! CocktailSelectionCell
         cell.cocktailNameLabel.text = "asd"
         return cell
     }
