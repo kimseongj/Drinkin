@@ -18,3 +18,7 @@ struct MockEndpoint: EndpointMakeable {
     
     var header: [String : String]?
 }
+
+//http://192.168.0.16/v1/home
+
+//https://061fc60f-2f6b-49ea-bac6-dc3055e4557f.mock.pstmn.io/triedcocktail

@@ -18,10 +18,12 @@ class CocktailInformationView: UIView {
         return title
     }()
     
-    let toolView = SkillView()
-    let glassView = SkillView()
-    let skillView = SkillView()
-    //let abvView =
+    let toolView = ClickableInformationView(title: "도구")
+    let skillView = ClickableInformationView(title: "기법")
+    let glassView = ClickableInformationView(title: "글라스")
+    let abvView = TextInformationView(title: "당 도")
+    let levelView = TextInformationView(title: "난이도")
+    let sugarContentView = TextInformationView(title: "당 도")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,11 +35,15 @@ class CocktailInformationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
         self.addSubview(cocktailNameTitle)
         self.addSubview(toolView)
+        self.addSubview(skillView)
         self.addSubview(glassView)
         self.addSubview(skillView)
+        self.addSubview(abvView)
+        self.addSubview(levelView)
+        self.addSubview(sugarContentView)
         
         cocktailNameTitle.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(16)
@@ -59,7 +65,34 @@ class CocktailInformationView: UIView {
         glassView.snp.makeConstraints {make in
             make.top.equalTo(skillView.snp.bottom)
             make.trailing.leading.equalToSuperview()
-            make.bottom.equalToSuperview()
+            
         }
+        
+        abvView.snp.makeConstraints {
+            $0.top.equalTo(glassView.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
+        }
+        
+        levelView.snp.makeConstraints {
+            $0.top.equalTo(abvView.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
+
+        }
+        
+        sugarContentView.snp.makeConstraints {
+            $0.top.equalTo(levelView.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+    }
+    
+    func fill(with cocktailDescription: CocktailDescription) {  
+        abvView.fill(with: cocktailDescription.abv)
+        levelView.fill(with: cocktailDescription.level)
+        sugarContentView.fill(with: cocktailDescription.sugarContent)
+        
+        toolView.applySnapshot(cocktailDescription: cocktailDescription)
+        skillView.applySnapshot(cocktailDescription: cocktailDescription)
+        glassView.applySnapshot(cocktailDescription: cocktailDescription)
     }
 }

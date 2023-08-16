@@ -17,7 +17,7 @@ class PreferCocktailSelectionViewCoordinator: Coordinator {
     }
 
     func start() {
-        let vc = PreferCocktailSelectionViewController()
+        let vc = TriedCocktailSelectionViewController()
         vc.modalPresentationStyle = .fullScreen
         //preferCocktailSelectionViewController.delegate = self
         navigationController.present(vc, animated: true)

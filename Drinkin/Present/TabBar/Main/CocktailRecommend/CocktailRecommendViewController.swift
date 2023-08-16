@@ -31,7 +31,7 @@ final class CocktailRecommendViewController: UIViewController {
         return layout
     }()
     
-    private let logoImage2: UIImageView = {
+    private let logoImage: UIImageView = {
         let logoImage = UIImageView()
         logoImage.image = UIImage(named: "drinkinLogo")
         return logoImage
@@ -46,13 +46,6 @@ final class CocktailRecommendViewController: UIViewController {
         collectionView.isScrollEnabled = true
 
         return collectionView
-    }()
-    
-    private let view1: UIView = {
-        let view = UIView()
-        view.backgroundColor = .gray
-        
-        return view
     }()
  
     override func viewDidLoad() {
@@ -75,10 +68,10 @@ final class CocktailRecommendViewController: UIViewController {
     func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         view.backgroundColor = .white
-        view.addSubview(logoImage2)
+        view.addSubview(logoImage)
         view.addSubview(recommendCocktailCollectionView)
         
-        logoImage2.snp.makeConstraints { make in
+        logoImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(safeArea)
             make.height.equalTo(15)
@@ -86,7 +79,7 @@ final class CocktailRecommendViewController: UIViewController {
         }
         
         recommendCocktailCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(logoImage2.snp.bottom).offset(20)
+            make.top.equalTo(logoImage.snp.bottom).offset(20)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -104,8 +97,9 @@ final class CocktailRecommendViewController: UIViewController {
     }
     
     @objc func seeMoreButtonAction() {
-        delegate?.pushProductDetailVC()
-        print("SeeMoreButon was Pushed")
+        guard let cocktailID = viewModel?.cocktailID else { return }
+        print(cocktailID)
+        delegate?.pushProductDetailVC(cocktailID: cocktailID)
     }
     
     private func calculateItemSize() -> CGSize {
@@ -130,8 +124,11 @@ extension CocktailRecommendViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailRecommendCell.identifier, for: indexPath) as? CocktailRecommendCell else { return nil
             }
             
+            cell.delegate = self
+            cell.cocktailID = briefDescription.id
+            
             cell.configureCell(briefDescription: briefDescription)
-            cell.seeMoreButton.addTarget(self, action: #selector(self.seeMoreButtonAction), for: .touchUpInside)
+            //cell.seeMoreButton.addTarget(self, action: #selector(self.seeMoreButtonAction), for: .touchUpInside)
             
             return cell
         }
@@ -167,4 +164,11 @@ extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
     let index = round(scrolledOffsetX / cellWidth)
     targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
   }
+}
+
+extension CocktailRecommendViewController: CellButtonDelegate {
+    func didTapButton(withID cocktailID: Int) {
+        delegate?.pushProductDetailVC(cocktailID: cocktailID)
+        print(cocktailID)
+        }
 }

@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
+protocol CellButtonDelegate: AnyObject {
+    func didTapButton(withID id: Int)
+}
+
 class CocktailRecommendCell: UICollectionViewCell {
+    weak var delegate: CellButtonDelegate?
+    var cocktailID: Int?
     
     let briefDescriptionView = BriefDescriptionView()
     
@@ -27,6 +33,8 @@ class CocktailRecommendCell: UICollectionViewCell {
         seeMoreButton.backgroundColor = .black
         seeMoreButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
         seeMoreButton.layer.borderWidth = 3
+        seeMoreButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
         return seeMoreButton
     }()
     
@@ -71,7 +79,13 @@ class CocktailRecommendCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.briefDescriptionView.holdStackView.subviews.map { $0.removeFromSuperview() }
+        self.briefDescriptionView.holdStackView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    @objc private func buttonTapped() {
+        if let id = cocktailID {
+            delegate?.didTapButton(withID: id)
+        }
     }
 }
 
@@ -87,16 +101,16 @@ final class BriefDescriptionView: UIView {
         return stackView
     }()
     
-    let cocktailImage: UIImageView = {
+    private let cocktailImageView: UIImageView = {
         let cocktailImage = UIImageView()
         cocktailImage.contentMode = .scaleAspectFit
 
         return cocktailImage
     }()
     
-    let summaryOfCocktailView = SummaryOfCocktailView()
+    private let summaryOfCocktailView = SummaryOfCocktailView()
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 2
@@ -122,9 +136,9 @@ final class BriefDescriptionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
         self.addSubview(mainStackView)
-        mainStackView.addArrangedSubview(cocktailImage)
+        mainStackView.addArrangedSubview(cocktailImageView)
         mainStackView.addArrangedSubview(summaryOfCocktailView)
         self.addSubview(descriptionLabel)
         self.addSubview(holdStackView)
@@ -135,7 +149,7 @@ final class BriefDescriptionView: UIView {
             make.trailing.equalToSuperview()
         }
         
-        cocktailImage.snp.makeConstraints{ make in
+        cocktailImageView.snp.makeConstraints{ make in
             make.height.equalTo(120)
             make.width.equalTo(120)
         }
@@ -159,7 +173,7 @@ final class BriefDescriptionView: UIView {
         summaryOfCocktailView.fetchTitle(briefDescription.cocktailNameKo)
         summaryOfCocktailView.fetchLevel(levelGrade: briefDescription.levelScore, abvGrade: briefDescription.abvScore, sugarContentGrade: briefDescription.sugarContentScore)
         
-        cocktailImage.load(url: validImageURL)
+        cocktailImageView.load(url: validImageURL)
         descriptionLabel.text = briefDescription.description
         
         configureHoldViews(briefDescription: briefDescription)
@@ -175,24 +189,6 @@ final class BriefDescriptionView: UIView {
         holdStackView.addArrangedSubview(baseView)
         holdStackView.addArrangedSubview(ingredientView)
         holdStackView.addArrangedSubview(garnishView)
-        
-//        baseView.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(20)
-//            make.leading.equalToSuperview()
-//            make.trailing.equalToSuperview()
-//        }
-//
-//        ingredientView.snp.makeConstraints { make in
-//            make.top.equalTo(baseView.snp.bottom).offset(10)
-//            make.leading.equalToSuperview()
-//            make.trailing.equalToSuperview()
-//        }
-//
-//        garnishView.snp.makeConstraints { make in
-//            make.top.equalTo(ingredientView.snp.bottom).offset(10)
-//            make.leading.equalToSuperview()
-//            make.trailing.equalToSuperview()
-//        }
     }
 }
 
