@@ -170,5 +170,5 @@ extension CocktailRecommendViewController: CellButtonDelegate {
     func didTapButton(withID cocktailID: Int) {
         delegate?.pushProductDetailVC(cocktailID: cocktailID)
         print(cocktailID)
-        }
+    }
 }
