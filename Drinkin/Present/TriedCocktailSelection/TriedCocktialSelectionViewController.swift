@@ -1,5 +1,5 @@
 //
-//  PreferCocktailViewController.swift
+//  TriedCocktailSelectionViewController.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/16.
@@ -8,25 +8,25 @@
 import Foundation
 import UIKit
 
-class PreferCocktailSelectionViewController: UIViewController {
+final class TriedCocktailSelectionViewController: UIViewController {
     
     //MARK:- mainLabel
-    let mainLabel: UILabel = {
-        let mainLabel = UILabel()
-        mainLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        mainLabel.text = "마셔봤던 칵테일 선택"
+    private let mainLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.text = "마셔봤던 칵테일 선택"
         
-        return mainLabel
+        return label
     }()
     
     //MARK:- subLabel
-    let subLabel: UILabel = {
-        let subLabel = UILabel()
-        subLabel.font = UIFont.boldSystemFont(ofSize: 14)
-        subLabel.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
-        subLabel.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
+    private let subLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
+        label.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
         
-        return subLabel
+        return label
     }()
     
     //MARK:- exitButton
@@ -39,11 +39,25 @@ class PreferCocktailSelectionViewController: UIViewController {
     }()
     
     //MARK:- baseCollectionView
-    let preferBaseView = PreferBaseView()
+    private let baseTypeCollectionView: UICollectionView =  {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 8
+        let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        view.isScrollEnabled = true
+        view.showsVerticalScrollIndicator = true
+        view.showsHorizontalScrollIndicator = false
+        view.contentInset = .zero
+        view.clipsToBounds = true
+        view.register(BaseTypeCell.self, forCellWithReuseIdentifier: BaseTypeCell.identifier)
+        view.backgroundColor = .gray
+        
+        return view
+    }()
     
     //MARK:- cocktailCollectionView
     private lazy var cocktailCollectionView: UICollectionView = {
-        let flowLayout = setUpCompositionalIconLayout()
+        let flowLayout = configureCompositionalIconLayout()
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.isScrollEnabled = true
@@ -52,7 +66,7 @@ class PreferCocktailSelectionViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = .zero
         collectionView.clipsToBounds = true
-        collectionView.register(CocktailCollectionViewCell.self, forCellWithReuseIdentifier: "CocktailCell")
+        collectionView.register(CocktailSelectionCell.self, forCellWithReuseIdentifier: CocktailSelectionCell.identifier)
         
         return collectionView
     }()
@@ -75,16 +89,17 @@ class PreferCocktailSelectionViewController: UIViewController {
         view.backgroundColor = .white
         MainViewController.login = true
         configureCocktailCollectionView()
+        configureBaseTypeCollectionView()
         configureCompleteSelectionButton()
     }
     
-    func configureUI() {
+    private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(mainLabel)
         view.addSubview(subLabel)
         view.addSubview(exitButton)
-        view.addSubview(preferBaseView)
+        view.addSubview(baseTypeCollectionView)
         view.addSubview(cocktailCollectionView)
         view.addSubview(completeSelectionButton)
         
@@ -103,7 +118,7 @@ class PreferCocktailSelectionViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-22)
         }
         
-        preferBaseView.snp.makeConstraints { make in
+        baseTypeCollectionView.snp.makeConstraints { make in
             make.top.equalTo(exitButton.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
@@ -111,7 +126,7 @@ class PreferCocktailSelectionViewController: UIViewController {
         }
         
         cocktailCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(preferBaseView.snp.bottom).offset(11)
+            make.top.equalTo(baseTypeCollectionView.snp.bottom).offset(11)
             make.leading.equalToSuperview().offset(7)
             make.trailing.equalToSuperview().offset(-7)
             make.bottom.equalTo(completeSelectionButton.snp.top)
@@ -119,15 +134,18 @@ class PreferCocktailSelectionViewController: UIViewController {
         
         completeSelectionButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(safeArea.snp.bottom)//.offset(-AppCoordinator.tabBarHeight)
+            make.bottom.equalTo(safeArea.snp.bottom)
             make.height.equalTo(54)
         }
-        
     }
     
     private func configureCocktailCollectionView() {
         cocktailCollectionView.delegate = self
         cocktailCollectionView.dataSource = self
+    }
+    
+    private func configureBaseTypeCollectionView() {
+        baseTypeCollectionView.dataSource = self
     }
     
     private func configureCompleteSelectionButton() {
@@ -151,20 +169,32 @@ class PreferCocktailSelectionViewController: UIViewController {
     }
 }
 
-extension PreferCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension TriedCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 14
+        if collectionView == baseTypeCollectionView {
+            return 6
+        } else {
+            return 14
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: "CocktailCell", for: indexPath) as! CocktailCollectionViewCell
-        cell.cocktailNameLabel.text = "asd"
-        return cell
-    } 
+        if collectionView == baseTypeCollectionView {
+            let cell = baseTypeCollectionView.dequeueReusableCell(withReuseIdentifier: BaseTypeCell.identifier, for: indexPath) as! BaseTypeCell
+            cell.baseNameLabel.text = "ZXC"
+            cell.layoutIfNeeded()
+            return cell
+        } else {
+            let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as! CocktailSelectionCell
+            cell.cocktailNameLabel.text = "asd"
+            return cell
+        }
+    }
 }
 
-extension PreferCocktailSelectionViewController {
-    private func setUpCompositionalIconLayout() -> UICollectionViewLayout {
+//MARK: - CompositionalLayout
+extension TriedCocktailSelectionViewController {
+    private func configureCompositionalIconLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
@@ -184,7 +214,7 @@ extension PreferCocktailSelectionViewController {
     }
 }
 
-extension PreferCocktailSelectionViewController: DismissDelegate {
+extension TriedCocktailSelectionViewController: DismissDelegate {
     func dismissCurrentViewController() {
         self.dismiss(animated: true)
     }
