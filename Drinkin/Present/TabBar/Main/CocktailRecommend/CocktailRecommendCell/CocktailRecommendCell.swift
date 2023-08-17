@@ -137,8 +137,8 @@ final class CocktailRecommendCell: UICollectionViewCell {
             make.height.equalTo(42)
         }
         
-        //configureSummaryOfCocktailView()
         configureVisualDescriptionStackView()
+        configureSummaryOfCocktailView()
         configureTextDescriptionView()
     }
     
@@ -162,7 +162,6 @@ final class CocktailRecommendCell: UICollectionViewCell {
 //MARK: - VisualDescription
 extension CocktailRecommendCell {
     private func configureVisualDescriptionStackView() {
-        configureSummaryOfCocktailView()
         visualDescriptionStackView.addArrangedSubview(cocktailImageView)
         visualDescriptionStackView.addArrangedSubview(summaryOfCocktailView)
     }
@@ -197,9 +196,9 @@ extension CocktailRecommendCell {
                     abvGrade: Int,
                     sugarContentGrade: Int) {
         
-        let levelGradePresentationView = GradePresentationView(title: "난이도", grade: levelGrade)
-        let abvGradePresentationView = GradePresentationView(title: "도    수", grade: abvGrade)
-        let sugarContentGradePresentationView = GradePresentationView(title: "당    도", grade: sugarContentGrade)
+        let levelGradePresentationView = GradePresentationView(title: TitleText.level, grade: levelGrade)
+        let abvGradePresentationView = GradePresentationView(title: TitleText.abv, grade: abvGrade)
+        let sugarContentGradePresentationView = GradePresentationView(title: TitleText.sugarContent, grade: sugarContentGrade)
         
         summaryOfCocktailView.addSubview(levelGradePresentationView)
         summaryOfCocktailView.addSubview(abvGradePresentationView)
@@ -243,9 +242,9 @@ extension CocktailRecommendCell {
     
     private func configureHoldViews(briefDescription: BriefDescription) {
         
-        let baseView = HoldView(briefDescription: briefDescription, title: "베이스")
-        let ingredientView = HoldView(briefDescription: briefDescription, title: "재    료")
-        let garnishView = HoldView(briefDescription: briefDescription, title: "가니쉬")
+        let baseView = HoldView(briefDescription: briefDescription, title: TitleText.base)
+        let ingredientView = HoldView(briefDescription: briefDescription, title: TitleText.ingredient)
+        let garnishView = HoldView(briefDescription: briefDescription, title: TitleText.garnish)
         
         holdStackView.addArrangedSubview(baseView)
         holdStackView.addArrangedSubview(ingredientView)
