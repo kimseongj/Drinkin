@@ -17,10 +17,9 @@ final class CocktailRecommendViewController: UIViewController {
     }
     
     weak var delegate: MainViewDelegate?
+    private var viewModel: CocktailRecommendViewModel?
     private var dataSource: UICollectionViewDiffableDataSource<Section, BriefDescription>?
     private var cancelBag: Set<AnyCancellable> = []
-    
-    private var viewModel: CocktailRecommendViewModel?
     
     private lazy var carouselFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
