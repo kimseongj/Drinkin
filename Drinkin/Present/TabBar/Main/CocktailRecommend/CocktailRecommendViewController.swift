@@ -33,7 +33,7 @@ final class CocktailRecommendViewController: UIViewController {
     
     private let logoImage: UIImageView = {
         let logoImage = UIImageView()
-        logoImage.image = UIImage(named: "drinkinLogo")
+        logoImage.image = ImageStorage.drinkinLogo
         return logoImage
     }()
     
@@ -126,9 +126,7 @@ extension CocktailRecommendViewController {
             
             cell.delegate = self
             cell.cocktailID = briefDescription.id
-            
             cell.configureCell(briefDescription: briefDescription)
-            //cell.seeMoreButton.addTarget(self, action: #selector(self.seeMoreButtonAction), for: .touchUpInside)
             
             return cell
         }
@@ -170,5 +168,5 @@ extension CocktailRecommendViewController: CellButtonDelegate {
     func didTapButton(withID cocktailID: Int) {
         delegate?.pushProductDetailVC(cocktailID: cocktailID)
         print(cocktailID)
-        }
+    }
 }

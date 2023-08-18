@@ -23,7 +23,7 @@ class HoldCollectionViewCell: UICollectionViewCell {
     
     private let emptyLabel: UILabel = {
         let label = UILabel()
-        label.text = "-"
+        label.text = MiscStrings.hyphen
         label.font = UIFont.systemFont(ofSize: 14)
         
         return label

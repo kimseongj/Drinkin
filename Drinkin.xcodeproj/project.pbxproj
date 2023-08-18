@@ -74,6 +74,9 @@
 		1CA8ED262A65915600CE5E1A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED252A65915600CE5E1A /* KeychainManager.swift */; };
 		1CA8ED292A6AB9BD00CE5E1A /* MockEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED282A6AB9BD00CE5E1A /* MockEndpoint.swift */; };
 		1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED4B2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift */; };
+		1CA968E72A8E40200076731B /* TitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968E62A8E40200076731B /* TitleText.swift */; };
+		1CA968E92A8E423B0076731B /* MiscStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968E82A8E423B0076731B /* MiscStrings.swift */; };
+		1CA968EB2A8E43EC0076731B /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968EA2A8E43EC0076731B /* ImageStorage.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */; };
@@ -176,6 +179,9 @@
 		1CA8ED252A65915600CE5E1A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		1CA8ED282A6AB9BD00CE5E1A /* MockEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEndpoint.swift; sourceTree = "<group>"; };
 		1CA8ED4B2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecommendViewModel.swift; sourceTree = "<group>"; };
+		1CA968E62A8E40200076731B /* TitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleText.swift; sourceTree = "<group>"; };
+		1CA968E82A8E423B0076731B /* MiscStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscStrings.swift; sourceTree = "<group>"; };
+		1CA968EA2A8E43EC0076731B /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterView.swift; sourceTree = "<group>"; };
@@ -629,6 +635,16 @@
 			path = CocktailRecommendViewModel;
 			sourceTree = "<group>";
 		};
+		1CA968E52A8E40120076731B /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				1CA968E62A8E40200076731B /* TitleText.swift */,
+				1CA968E82A8E423B0076731B /* MiscStrings.swift */,
+				1CA968EA2A8E43EC0076731B /* ImageStorage.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		1CB096ED2A2A067900B7CA71 /* SelectionFilterCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,6 +704,7 @@
 		1CC9D3EB2A19033100654A5D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1CA968E52A8E40120076731B /* Enum */,
 				1CED21962A739A590078916A /* Section */,
 				1CB299082A6E4A73001F31BF /* Extension */,
 				1C71A4AE2A52929300F1814A /* CommonView */,
@@ -851,14 +868,17 @@
 				1CCE88E329E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift in Sources */,
 				1CCE88EF29EBAB7900D3E1D2 /* ProductDetailViewController.swift in Sources */,
 				1C58ECE32A63CA8100AC2603 /* BriefDescriptionRepository.swift in Sources */,
+				1CA968EB2A8E43EC0076731B /* ImageStorage.swift in Sources */,
 				1C7A10492A74FB14009961A1 /* ProductDetailEndpoint.swift in Sources */,
 				1C9BAB2029EFAED500E979AC /* ClickableInformationView.swift in Sources */,
+				1CA968E92A8E423B0076731B /* MiscStrings.swift in Sources */,
 				1CC9D3F02A1903EE00654A5D /* HoldView.swift in Sources */,
 				1C9BAB1C29EFAEC500E979AC /* InformationCollectionView.swift in Sources */,
 				1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */,
 				1CDDB9242A3A109F0007983A /* FilterModalView.swift in Sources */,
 				1CCE88FE29EBB32300D3E1D2 /* BaseTypeCell.swift in Sources */,
 				1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */,
+				1CA968E72A8E40200076731B /* TitleText.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,

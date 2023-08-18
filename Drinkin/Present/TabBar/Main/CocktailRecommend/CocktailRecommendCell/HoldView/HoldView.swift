@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class HoldView: UIView {
-    private var title = ""
+    private var title = MiscStrings.emptySpace
     private var briefDescription: BriefDescription?
     
     var holdLabelView: UIView = {
@@ -88,19 +88,19 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         guard let validBriefDescription = briefDescription else { return 0 }
         
         switch title {
-        case "베이스":
+        case TitleText.base:
             if validBriefDescription.categoryList.count == 0 {
                 return 1
             } else {
                 return validBriefDescription.categoryList.count
             }
-        case "재    료":
+        case TitleText.ingredient:
             if validBriefDescription.ingredientList.count == 0 {
                 return 1
             } else {
                 return validBriefDescription.ingredientList.count
             }
-        case "가니쉬":
+        case TitleText.garnish:
             if validBriefDescription.garnishList.count == 0 {
                 return 1
             } else {
@@ -117,21 +117,21 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         guard let validBriefDescription = briefDescription else { return cell }
         
         switch title {
-        case "베이스":
+        case TitleText.base:
             if validBriefDescription.categoryList.count == 0 {
                 cell.makeEmptyCell()
             } else {
                 cell.label.text = validBriefDescription.categoryList[indexPath.row].categoryNameKo
                 cell.makeHoldedItemCell()
             }
-        case "재    료":
+        case TitleText.ingredient:
             if validBriefDescription.ingredientList.count == 0 {
                 cell.makeEmptyCell()
             } else {
                 cell.label.text = validBriefDescription.ingredientList[indexPath.row].ingredientNameKo
                 cell.makeHoldedItemCell()
             }
-        case "가니쉬":
+        case TitleText.garnish:
             if validBriefDescription.garnishList.count == 0 {
                 cell.makeEmptyCell()
             } else {
