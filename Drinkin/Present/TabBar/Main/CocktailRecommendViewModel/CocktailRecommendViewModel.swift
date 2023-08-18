@@ -10,15 +10,11 @@ import Combine
 
 protocol CocktailRecommendViewModel {
     var briefDescriptionListPublisher: Published<[BriefDescription]>.Publisher { get }
-    
-    var cocktailID: Int { get set }
-    
+
     func fetchBriefDescription()
 }
 
 class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
-    var cocktailID: Int = 0
-    
     @Published var briefDescriptionList: [BriefDescription] = []
     
     var briefDescriptionListPublisher: Published<[BriefDescription]>.Publisher { $briefDescriptionList }
