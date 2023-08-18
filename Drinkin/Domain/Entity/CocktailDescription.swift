@@ -37,7 +37,7 @@ struct CocktailDescription: Codable {
     }
 }
 
-// MARK: - CategoryList
+// MARK: - DetailCategory
 struct DetailCategory: Codable, Hashable {
     let id: Int
     let categoryNameKo: String
@@ -50,7 +50,7 @@ struct DetailCategory: Codable, Hashable {
     }
 }
 
-// MARK: - IngredientList
+// MARK: - DetailIngredient
 struct DetailIngredient: Codable, Hashable {
     let id: Int
     let ingredientNameKo: String
@@ -63,7 +63,7 @@ struct DetailIngredient: Codable, Hashable {
     }
 }
 
-// MARK: - ToolList
+// MARK: - CocktailTool
 struct CocktailTool: Codable, Hashable {
     let id: Int
     let toolNameKo: String
@@ -74,7 +74,7 @@ struct CocktailTool: Codable, Hashable {
     }
 }
 
-// MARK: - SkillList
+// MARK: - CocktailSkill
 struct CocktailSkill: Codable, Hashable {
     let id: Int
     let skillNameKo: String
@@ -85,7 +85,7 @@ struct CocktailSkill: Codable, Hashable {
     }
 }
 
-// MARK: - Glass
+// MARK: - CocktailGlass
 struct CocktailGlass: Codable, Hashable {
     let id: Int
     let glassNameKo: String
