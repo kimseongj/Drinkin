@@ -80,6 +80,7 @@
 		1CA968EF2A8F587D0076731B /* TriedCocktailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968EE2A8F587D0076731B /* TriedCocktailEndpoint.swift */; };
 		1CA969172A9078690076731B /* KeyChainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969162A9078690076731B /* KeyChainError.swift */; };
 		1CA969192A9078860076731B /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969182A9078860076731B /* TokenType.swift */; };
+		1CA9691B2A90D64B0076731B /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9691A2A90D64B0076731B /* Provider.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */; };
@@ -188,6 +189,7 @@
 		1CA968EE2A8F587D0076731B /* TriedCocktailEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktailEndpoint.swift; sourceTree = "<group>"; };
 		1CA969162A9078690076731B /* KeyChainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainError.swift; sourceTree = "<group>"; };
 		1CA969182A9078860076731B /* TokenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
+		1CA9691A2A90D64B0076731B /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterView.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				1CCE88EA29E953E400D3E1D2 /* LoginProvider.swift */,
 				1CCE88EC29EBA7AB00D3E1D2 /* Parser.swift */,
 				1CCE890329EBBD9800D3E1D2 /* LoginService.swift */,
+				1CA9691A2A90D64B0076731B /* Provider.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -925,6 +928,7 @@
 				1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */,
 				1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */,
 				1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */,
+				1CA9691B2A90D64B0076731B /* Provider.swift in Sources */,
 				1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */,
 				1CED21982A739A700078916A /* Section.swift in Sources */,
 				1C58ECE72A63CB4700AC2603 /* CocktailBriefDescription.swift in Sources */,
