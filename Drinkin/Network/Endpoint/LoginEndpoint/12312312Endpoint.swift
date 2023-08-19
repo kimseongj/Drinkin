@@ -22,5 +22,4 @@ struct RefreshAccessTokenEndpoint: EndpointMakeable {
     mutating func insertTokenQueryValue(refreshToken: String) {
         queryItems.append(URLQueryItem(name: "refresh_token", value: refreshToken))
     }
-    
 }
