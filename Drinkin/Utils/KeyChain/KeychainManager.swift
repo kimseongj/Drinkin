@@ -7,32 +7,6 @@
 
 import Foundation
 
-struct TokenCredentials {
-    var tokenType: String
-    var token: String
-}
-
-enum TokenType {
-    case accessToken
-    case refreshToken
-    
-    var description: String {
-        switch self {
-        case .accessToken:
-            return "accessToken"
-        case .refreshToken:
-            return "refreshToken"
-        }
-    }
-}
-
-enum KeychainError: Error {
-    case noPassword
-    case duplicateItem
-    case unexpectedPasswordData
-    case unhandledError(status: OSStatus)
-}
-
 class KeychainManager {
     func saveToken(tokenType: TokenType, token: String) throws {
         let account = tokenType.description
@@ -56,10 +30,12 @@ class KeychainManager {
     }
     
     func readToken(tokenType: TokenType) throws -> String? {
+        let account = tokenType.description
+        
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecMatchLimit as String: kSecMatchLimitOne,
-            kSecAttrAccount as String: tokenType,
+            kSecAttrAccount as String: account,
             kSecReturnAttributes as String: true,
             kSecReturnData as String: true
         ]
@@ -74,10 +50,13 @@ class KeychainManager {
         guard status == errSecSuccess else {
             throw KeychainError.unhandledError(status: status)
         }
-        
+          
         guard let existingItem = item as? [String: Any],
-              let token = existingItem[kSecValueData as String] as? String else { return nil }
-              
+                  let tokenData = existingItem[kSecValueData as String] as? Data,
+                  let token = String(data: tokenData, encoding: .utf8) else {
+                return nil
+            }
+        
         return token
     }
     
