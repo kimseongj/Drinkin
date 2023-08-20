@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class LoginService {
-    let provider = Provider()
+    let provider = LoginProvider()
     var cancellableBeg: Set<AnyCancellable> = []
     
     static var accessToken: String?

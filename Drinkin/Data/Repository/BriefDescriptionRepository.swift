@@ -14,9 +14,9 @@ protocol BriefDescriptionRepository {
 
 class DefaultBriefDescriptionRepository: BriefDescriptionRepository {
     let provider = Provider()
-    let endpoint = MockEndpoint()
+    let endpoint = CocktailRecommendEndpoint()
     
     func fetchPublisher() -> AnyPublisher<CocktailBriefDescription, Error> {
-        return provider.fetchData1(endpoint: endpoint)
+        return provider.fetchData(endpoint: endpoint)
     }
 }

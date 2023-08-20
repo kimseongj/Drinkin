@@ -25,7 +25,7 @@ class DefaultDescriptionRepository: DescriptionRepository {
     func fetchPublisher() -> AnyPublisher<CocktailDescription, Error> {
         endpoint.insertPathParmeter(id: cocktailID)
         
-        return provider.fetchData1(endpoint: endpoint)
+        return provider.fetchData(endpoint: endpoint)
     }
 }
 
