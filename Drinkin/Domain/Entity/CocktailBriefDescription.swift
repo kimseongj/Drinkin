@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - CocktailBriefDescription
 struct CocktailBriefDescription: Codable {
     let briefDescriptionList: [BriefDescription]
     
@@ -16,7 +16,7 @@ struct CocktailBriefDescription: Codable {
     }
 }
 
-// MARK: - Result
+// MARK: - BriefDescription
 struct BriefDescription: Codable, Hashable {
     let id: Int
     let cocktailNameKo: String

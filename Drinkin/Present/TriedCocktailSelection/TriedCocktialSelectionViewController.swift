@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 
 final class TriedCocktailSelectionViewController: UIViewController {
+    //private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, >?
+    
+    private var viewModel: TriedCocktailSelectionViewModel? = TriedCocktailSelectionViewModel()
+    private var categoryDataSource: UICollectionViewDiffableDataSource<Section, String>?
     
     //MARK:- mainLabel
     private let mainLabel: UILabel = {
@@ -39,7 +43,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
     }()
     
     //MARK:- baseCollectionView
-    private let baseTypeCollectionView: UICollectionView =  {
+    private let categoryCollectionView: UICollectionView =  {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 8
@@ -49,8 +53,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         view.showsHorizontalScrollIndicator = false
         view.contentInset = .zero
         view.clipsToBounds = true
-        view.register(BaseTypeCell.self, forCellWithReuseIdentifier: BaseTypeCell.identifier)
-        view.backgroundColor = .gray
+        view.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
         
         return view
     }()
@@ -88,7 +91,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         configureUI()
         view.backgroundColor = .white
         MainViewController.login = true
-        configureCocktailCollectionView()
+        //configureCocktailCollectionView()
         configureBaseTypeCollectionView()
         configureCompleteSelectionButton()
     }
@@ -99,7 +102,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         view.addSubview(mainLabel)
         view.addSubview(subLabel)
         view.addSubview(exitButton)
-        view.addSubview(baseTypeCollectionView)
+        view.addSubview(categoryCollectionView)
         view.addSubview(cocktailCollectionView)
         view.addSubview(completeSelectionButton)
         
@@ -118,7 +121,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-22)
         }
         
-        baseTypeCollectionView.snp.makeConstraints { make in
+        categoryCollectionView.snp.makeConstraints { make in
             make.top.equalTo(exitButton.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
@@ -126,7 +129,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         }
         
         cocktailCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(baseTypeCollectionView.snp.bottom).offset(11)
+            make.top.equalTo(categoryCollectionView.snp.bottom).offset(11)
             make.leading.equalToSuperview().offset(7)
             make.trailing.equalToSuperview().offset(-7)
             make.bottom.equalTo(completeSelectionButton.snp.top)
@@ -145,7 +148,10 @@ final class TriedCocktailSelectionViewController: UIViewController {
     }
     
     private func configureBaseTypeCollectionView() {
-        baseTypeCollectionView.dataSource = self
+        categoryCollectionView.dataSource = self
+        if let flowLayout = categoryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
     }
     
     private func configureCompleteSelectionButton() {
@@ -169,26 +175,18 @@ final class TriedCocktailSelectionViewController: UIViewController {
     }
 }
 
+//MARK: - CategoryCollectionView
 extension TriedCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == baseTypeCollectionView {
-            return 6
-        } else {
-            return 14
-        }
+        guard let categoryListCount = viewModel?.categoryList.count else { return 0 }
+        return categoryListCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == baseTypeCollectionView {
-            let cell = baseTypeCollectionView.dequeueReusableCell(withReuseIdentifier: BaseTypeCell.identifier, for: indexPath) as! BaseTypeCell
-            cell.baseNameLabel.text = "ZXC"
-            cell.layoutIfNeeded()
+            let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
+        cell.categoryNameLabel.text = viewModel?.categoryList[indexPath.row]
+
             return cell
-        } else {
-            let cell = cocktailCollectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as! CocktailSelectionCell
-            cell.cocktailNameLabel.text = "asd"
-            return cell
-        }
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  BaseTypeCell.swift
+//  CategoryCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/16.
@@ -7,25 +7,25 @@
 
 import UIKit
 
-final class BaseTypeCell: UICollectionViewCell {
+final class CategoryCell: UICollectionViewCell {
 
     override var isSelected: Bool {
         didSet {
             if isSelected {
                 self.backgroundColor = .black
-                baseNameLabel.textColor = .white
+                categoryNameLabel.textColor = .white
             } else {
                 self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
-                baseNameLabel.textColor = .black
+                categoryNameLabel.textColor = .black
             }
         }
     }
     
-    let baseNameLabel: UILabel = {
-        let baseNameLabel = UILabel()
-        baseNameLabel.sizeToFit()
-        baseNameLabel.font = UIFont(name: "Pretendard-Bold", size: 14)
-        return baseNameLabel
+    let categoryNameLabel: UILabel = {
+        let label = UILabel()
+        label.sizeToFit()
+        label.font = UIFont(name: "Pretendard-Bold", size: 14)
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -40,13 +40,17 @@ final class BaseTypeCell: UICollectionViewCell {
     private func cellSetting() {
         self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
         self.layer.cornerRadius = 4
-        self.addSubview(baseNameLabel)
+        self.addSubview(categoryNameLabel)
         
-        baseNameLabel.snp.makeConstraints { make in
+        categoryNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().offset(-10)
             make.bottom.equalToSuperview().offset(-10)
         }
+    }
+    
+    func fill(with categoryName: String) {
+        categoryNameLabel.text = categoryName
     }
 }
