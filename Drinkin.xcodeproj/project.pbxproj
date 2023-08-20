@@ -308,6 +308,7 @@
 		1C04C18929DEEC3A00E381C2 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				1C0809D829E03FDB00265706 /* LoginViewModel */,
 				1C0809DB29E041E000265706 /* LoginViewController.swift */,
 			);
 			path = Login;
@@ -458,7 +459,6 @@
 				1CB2990E2A72405A001F31BF /* Application */,
 				1CC9D3F12A19C92900654A5D /* Resource */,
 				1CC9D3EB2A19033100654A5D /* Utils */,
-				1C0809D829E03FDB00265706 /* LoginViewModel */,
 				1C5CAAFF29DB51560053F19A /* Network */,
 				1C5CAAFB29DB50CC0053F19A /* Data */,
 				1C5CAAF929DB50A80053F19A /* Domain */,
