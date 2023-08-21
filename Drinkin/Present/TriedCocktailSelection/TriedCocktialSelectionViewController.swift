@@ -11,7 +11,7 @@ import UIKit
 final class TriedCocktailSelectionViewController: UIViewController {
     //private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, >?
     
-    private var viewModel: TriedCocktailSelectionViewModel? = TriedCocktailSelectionViewModel()
+    private var viewModel: TriedCocktailSelectionViewModel?
     private var categoryDataSource: UICollectionViewDiffableDataSource<Section, String>?
     
     //MARK:- mainLabel

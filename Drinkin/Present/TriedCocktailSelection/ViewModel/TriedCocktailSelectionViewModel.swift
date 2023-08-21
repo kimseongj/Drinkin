@@ -8,20 +8,29 @@
 import Foundation
 import Combine
 
-final class TriedCocktailSelectionViewModel {
-    @Published var cocktailList: [String] = []
-    let categoryList: [String] = ["전체", "위스키 베이스", "리큐르 베이스", "보드카 베이스", "진 베이스", "럼 베이스", "데킬라 베이스", "논알콜", "혼합"]
-    //√var selectedCocktail
-    //let baseTypeList: [String] = ["전체", "위스키 베이스", "리큐르 베이스"]
+
+protocol TriedCocktailSelectionViewModel {
+    var cocktailListPublisher: Published< [TriedCocktailInformation]>.Publisher { get }
+    var categoryList: [String] { get }
     
-//    func isEmptySelectedCocktailList() -> Bool {
-//        if selectedCocktailList.count == 0 {
-//            return true
-//        }
-//        return false
-//    }
+    func fetchTriedCocktail()
+    func filterCocktail(cocktailList: [TriedCocktailInformation], categoryName: String) -> [TriedCocktailInformation]
+}
+
+final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewModel {
+    @Published var cocktailList: [TriedCocktailInformation] = []
     
-    func saveSelectedCocktailList() {
-        // 서버 혹은 코어데이터에 저장하기
+    var cocktailListPublisher: Published<[TriedCocktailInformation]>.Publisher { $cocktailList }
+    
+    var categoryList: [String] = ["전체", "위스키 베이스", "리큐르 베이스", "보드카 베이스", "진 베이스", "럼 베이스", "데킬라 베이스", "논알콜", "혼합"]
+
+    func fetchTriedCocktail() {
+        
+    }
+    
+    func filterCocktail(cocktailList: [TriedCocktailInformation], categoryName: String) -> [TriedCocktailInformation] {
+        let filteredCocktailList = cocktailList.filter { $0.category == categoryName }
+        
+        return filteredCocktailList
     }
 }
