@@ -82,6 +82,8 @@
 		1CA969192A9078860076731B /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969182A9078860076731B /* TokenType.swift */; };
 		1CA9691B2A90D64B0076731B /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9691A2A90D64B0076731B /* Provider.swift */; };
 		1CA969212A91D99E0076731B /* TriedCocktailSelectionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969202A91D99E0076731B /* TriedCocktailSelectionUsecase.swift */; };
+		1CA969232A9332860076731B /* CategoryListStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969222A9332860076731B /* CategoryListStrings.swift */; };
+		1CA969252A9334980076731B /* TriedCocktailSelectionDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB096F12A2A144D00B7CA71 /* SelectionFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */; };
@@ -192,6 +194,8 @@
 		1CA969182A9078860076731B /* TokenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
 		1CA9691A2A90D64B0076731B /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		1CA969202A91D99E0076731B /* TriedCocktailSelectionUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktailSelectionUsecase.swift; sourceTree = "<group>"; };
+		1CA969222A9332860076731B /* CategoryListStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListStrings.swift; sourceTree = "<group>"; };
+		1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktailSelectionDIContainer.swift; sourceTree = "<group>"; };
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB096F02A2A144D00B7CA71 /* SelectionFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterView.swift; sourceTree = "<group>"; };
@@ -644,6 +648,7 @@
 				1CA968E82A8E423B0076731B /* MiscStrings.swift */,
 				1CA968EA2A8E43EC0076731B /* ImageStorage.swift */,
 				1CA969182A9078860076731B /* TokenType.swift */,
+				1CA969222A9332860076731B /* CategoryListStrings.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -710,6 +715,7 @@
 			children = (
 				1CB299102A724136001F31BF /* DIContainer.swift */,
 				1C7A10452A74F8BA009961A1 /* ProductDetailDIContainer.swift */,
+				1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -935,6 +941,7 @@
 				1CA9691B2A90D64B0076731B /* Provider.swift in Sources */,
 				1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */,
 				1CED21982A739A700078916A /* Section.swift in Sources */,
+				1CA969252A9334980076731B /* TriedCocktailSelectionDIContainer.swift in Sources */,
 				1C58ECE72A63CB4700AC2603 /* CocktailBriefDescription.swift in Sources */,
 				1C58ECE52A63CA9300AC2603 /* DescriptionRepository.swift in Sources */,
 				1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */,
@@ -952,6 +959,7 @@
 				1CCE890629EBC13C00D3E1D2 /* LoginToken.swift in Sources */,
 				1C26963D2A4973FA00C1FC00 /* AppleAuthViewModel.swift in Sources */,
 				1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */,
+				1CA969232A9332860076731B /* CategoryListStrings.swift in Sources */,
 				1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */,
 				1C58ECDB2A63C79C00AC2603 /* StoreHoldedIngredientUsecase.swift in Sources */,
 				1C7A10462A74F8BA009961A1 /* ProductDetailDIContainer.swift in Sources */,
