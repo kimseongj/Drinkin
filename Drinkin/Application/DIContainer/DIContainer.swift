@@ -8,12 +8,6 @@
 import Foundation
 
 final class DIContainer {
-
-}
-
-
-//MARK: - BriefDescription
-extension DIContainer {
     func makeBriefDescriptionRepository() -> BriefDescriptionRepository {
         return DefaultBriefDescriptionRepository()
     }

@@ -22,7 +22,20 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     
     var cocktailListPublisher: Published<[TriedCocktailInformation]>.Publisher { $cocktailList }
     
-    var categoryList: [String] = ["전체", "위스키 베이스", "리큐르 베이스", "보드카 베이스", "진 베이스", "럼 베이스", "데킬라 베이스", "논알콜", "혼합"]
+    var categoryList: [String] = [CategoryListStrings.whole,
+                                  CategoryListStrings.liqueur,
+                                  CategoryListStrings.vodka,
+                                  CategoryListStrings.gin,
+                                  CategoryListStrings.rum,
+                                  CategoryListStrings.tequila,
+                                  CategoryListStrings.nonAlcoholic,
+                                  CategoryListStrings.mixing]
+    
+    private let triedCocktailSelectionUsecase: TriedCocktailSelectionUsecase
+    
+    init( triedCocktailSelectionUsecase: TriedCocktailSelectionUsecase) {
+        self.triedCocktailSelectionUsecase = triedCocktailSelectionUsecase
+    }
 
     func fetchTriedCocktail() {
         

@@ -98,7 +98,7 @@
 		1CCE88DD29E9498D00D3E1D2 /* CocktailVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DC29E9498D00D3E1D2 /* CocktailVCCoordinator.swift */; };
 		1CCE88DF29E949A900D3E1D2 /* HomeBarVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DE29E949A900D3E1D2 /* HomeBarVCCoordinator.swift */; };
 		1CCE88E129E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */; };
-		1CCE88E329E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E229E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift */; };
+		1CCE88E329E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E229E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift */; };
 		1CCE88E529E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E429E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift */; };
 		1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E629E94B4700D3E1D2 /* SkillModalVCCoordinator.swift */; };
 		1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E829E94B5400D3E1D2 /* GlassModalVCCoordinator.swift */; };
@@ -210,7 +210,7 @@
 		1CCE88DC29E9498D00D3E1D2 /* CocktailVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88DE29E949A900D3E1D2 /* HomeBarVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVCCoordinator.swift; sourceTree = "<group>"; };
-		1CCE88E229E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferCocktailSelectionVCCoordinator.swift; sourceTree = "<group>"; };
+		1CCE88E229E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktailSelectionVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88E429E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolModalVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88E629E94B4700D3E1D2 /* SkillModalVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88E829E94B5400D3E1D2 /* GlassModalVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalVCCoordinator.swift; sourceTree = "<group>"; };
@@ -357,7 +357,7 @@
 				1C0809DE29E043AE00265706 /* TabBarCoordinator */,
 				1C0809DF29E043BA00265706 /* ModalCoordinator */,
 				1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */,
-				1CCE88E229E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift */,
+				1CCE88E229E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -894,7 +894,7 @@
 				1C58ECDD2A63C84800AC2603 /* FetchBriefDescriptionUsecase.swift in Sources */,
 				1C7A10442A74F6FF009961A1 /* CocktailDescription.swift in Sources */,
 				1CA20ED62A568F21009FDD90 /* StoreTriedCocktailUsecase.swift in Sources */,
-				1CCE88E329E94A7D00D3E1D2 /* PreferCocktailSelectionVCCoordinator.swift in Sources */,
+				1CCE88E329E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift in Sources */,
 				1CCE88EF29EBAB7900D3E1D2 /* ProductDetailViewController.swift in Sources */,
 				1CA969212A91D99E0076731B /* TriedCocktailSelectionUsecase.swift in Sources */,
 				1C58ECE32A63CA8100AC2603 /* BriefDescriptionRepository.swift in Sources */,

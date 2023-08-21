@@ -18,3 +18,4 @@ struct TriedCocktailEndpoint: EndpointMakeable {
     
     var header: [String : String]?
 }
+//https://e0300af8-1756-4713-8b6d-903e44c3c78d.mock.pstmn.io
