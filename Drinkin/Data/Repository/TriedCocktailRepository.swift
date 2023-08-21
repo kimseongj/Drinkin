@@ -6,8 +6,17 @@
 //
 
 import Foundation
+import Combine
 
-class TriedCocktailRepository {
-    
+protocol TriedCocktailRepository {
+    func fetchPublisher() -> AnyPublisher<TriedCocktail, Error>
 }
 
+class DefaultTriedCocktailRepository: TriedCocktailRepository {
+    let provider = Provider()
+    let endpoint = CocktailRecommendEndpoint()
+    
+    func fetchPublisher() -> AnyPublisher<TriedCocktail, Error> {
+        return provider.fetchData(endpoint: endpoint)
+    }
+}
