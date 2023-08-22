@@ -27,7 +27,7 @@ class CocktailSelectionCell: UICollectionViewCell {
     private lazy var cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .black
+        imageView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         return imageView
     }()
     
@@ -67,6 +67,13 @@ class CocktailSelectionCell: UICollectionViewCell {
     private func configureBackground(){
         self.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.layer.cornerRadius = 4
+    }
+    
+    func fill(with previewDescription: PreviewDescription) {
+        guard let imageURL = URL(string: previewDescription.imageURI) else { return }
+        
+        cocktailImageView.load(url: imageURL)
+        cocktailNameLabel.text = previewDescription.cocktailNameKo
     }
 }
 
