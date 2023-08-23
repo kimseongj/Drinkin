@@ -8,18 +8,18 @@
 import Foundation
 import Combine
 
-protocol TriedCocktailSelectionUsecase {
-    func execute() -> AnyPublisher<TriedCocktail, Error>
+protocol SelectTriedCocktailUsecase {
+    func execute() -> AnyPublisher<CocktailPreviewDescription, Error>
 }
 
-class DefaultTriedCocktailSelectionUsecase: TriedCocktailSelectionUsecase {
+class DefaultSelectTriedCocktailUsecase: SelectTriedCocktailUsecase {
     private let triedCocktailRepository: TriedCocktailRepository
     
     init(triedCocktailRepository: TriedCocktailRepository) {
         self.triedCocktailRepository = triedCocktailRepository
     }
     
-    func execute() -> AnyPublisher<TriedCocktail, Error> {
+    func execute() -> AnyPublisher<CocktailPreviewDescription, Error> {
         return triedCocktailRepository.fetchPublisher()
     }
 }

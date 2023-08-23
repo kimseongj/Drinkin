@@ -7,12 +7,12 @@
 
 import Foundation
 import UIKit
+import Combine
 
 final class TriedCocktailSelectionViewController: UIViewController {
-    //private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, >?
-    
     private var viewModel: TriedCocktailSelectionViewModel?
-    private var categoryDataSource: UICollectionViewDiffableDataSource<Section, String>?
+    private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription>?
+    private var cancelBag: Set<AnyCancellable> = []
     
     //MARK:- mainLabel
     private let mainLabel: UILabel = {
@@ -91,9 +91,12 @@ final class TriedCocktailSelectionViewController: UIViewController {
         configureUI()
         view.backgroundColor = .white
         MainViewController.login = true
-        //configureCocktailCollectionView()
+        configureCocktailCollectionView()
         configureBaseTypeCollectionView()
         configureCompleteSelectionButton()
+        configureCocktailDataSource()
+        binding()
+        viewModel?.fetchTriedCocktail()
     }
     
     init(viewModel: TriedCocktailSelectionViewModel?) {
@@ -153,11 +156,12 @@ final class TriedCocktailSelectionViewController: UIViewController {
     
     private func configureCocktailCollectionView() {
         cocktailCollectionView.delegate = self
-        cocktailCollectionView.dataSource = self
     }
     
     private func configureBaseTypeCollectionView() {
         categoryCollectionView.dataSource = self
+        categoryCollectionView.delegate = self
+        
         if let flowLayout = categoryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
@@ -185,7 +189,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
 }
 
 //MARK: - CategoryCollectionView
-extension TriedCocktailSelectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let categoryListCount = viewModel?.categoryList.count else { return 0 }
         return categoryListCount
@@ -196,6 +200,60 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate, UIColl
         cell.categoryNameLabel.text = viewModel?.categoryList[indexPath.row]
 
             return cell
+    }
+}
+
+extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categoryCollectionView {
+            guard let currentCategoryName = viewModel?.categoryList[indexPath.row] else { return }
+            viewModel?.currentCategoryName = currentCategoryName
+            viewModel?.filterCocktail()
+            print("------------------------------------------")
+            print(viewModel?.filteredSelectableCocktailList)
+            print("------------------------------------------")
+            
+        } else if collectionView == cocktailCollectionView {
+            viewModel?.selectCocktail(index: indexPath.row)
+            viewModel?.filterCocktail()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView == cocktailCollectionView {
+            viewModel?.deselectCocktail(index: indexPath.row)
+        }
+    }
+}
+
+//MARK: - CocktailDiffableDataSource
+extension TriedCocktailSelectionViewController {
+    private func configureCocktailDataSource() {
+        cocktailDataSource = UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription> (collectionView: cocktailCollectionView) { (collectionView, indexPath, previewDescription) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as? CocktailSelectionCell else { return nil
+            }
+
+            //cell.isSelected = previewDescription.isSelected
+            cell.fill(with: previewDescription)
+            return cell
+        }
+    }
+    
+    private func applySnapshot(previewDescriptionList: [SelectablePreviewDescription]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, SelectablePreviewDescription>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(previewDescriptionList)
+        self.cocktailDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+//MARK: - Binding
+extension TriedCocktailSelectionViewController {
+    private func binding() {
+        guard let viewModel else { return }
+        viewModel.filteredSelectableCocktailListPublisher.sink {
+            self.applySnapshot(previewDescriptionList: $0)
+        }.store(in: &cancelBag)
     }
 }
 

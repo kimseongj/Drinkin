@@ -12,11 +12,11 @@ final class TriedCocktailSelectionDIContainer {
         return DefaultTriedCocktailRepository()
     }
     
-    func makeTriedCocktailSelectionUsecase() -> TriedCocktailSelectionUsecase {
-        return DefaultTriedCocktailSelectionUsecase(triedCocktailRepository: makeTriedCocktailRepository())
+    func makeSelectTriedCocktailUsecase() -> SelectTriedCocktailUsecase {
+        return DefaultSelectTriedCocktailUsecase(triedCocktailRepository: makeTriedCocktailRepository())
     }
     
     func makeTriedCocktailSelectionViewModel() -> TriedCocktailSelectionViewModel {
-        return DefaultTriedCocktailSelectionViewModel(triedCocktailSelectionUsecase: makeTriedCocktailSelectionUsecase())
+        return DefaultTriedCocktailSelectionViewModel(selectTriedCocktailUsecase: makeSelectTriedCocktailUsecase())
     }
 }

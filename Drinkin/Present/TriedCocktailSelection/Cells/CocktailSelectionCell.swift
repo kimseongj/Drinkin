@@ -69,11 +69,17 @@ class CocktailSelectionCell: UICollectionViewCell {
         self.layer.cornerRadius = 4
     }
     
-    func fill(with previewDescription: PreviewDescription) {
+    func fill(with previewDescription: SelectablePreviewDescription) {
         guard let imageURL = URL(string: previewDescription.imageURI) else { return }
         
         cocktailImageView.load(url: imageURL)
         cocktailNameLabel.text = previewDescription.cocktailNameKo
+        if previewDescription.isSelected == true {
+            self.addSubview(selectedView)
+            selectedView.snp.makeConstraints {
+                $0.top.leading.trailing.bottom.equalToSuperview()
+            }
+        }
     }
 }
 
