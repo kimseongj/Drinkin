@@ -31,7 +31,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     
     var selectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { $selectableCocktailList }
     var filteredSelectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { $filteredSelectableCocktailList }
-    
+
     var categoryList: [String] = [CategoryListStrings.whole,
                                   CategoryListStrings.whiskey,
                                   CategoryListStrings.liqueur,
@@ -41,6 +41,8 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
                                   CategoryListStrings.tequila,
                                   CategoryListStrings.nonAlcoholic,
                                   CategoryListStrings.mixing]
+    var categoryList: [String] = []
+    
     
     init(selectTriedCocktailUsecase: SelectTriedCocktailUsecase) {
         self.selectTriedCocktailUsecase = selectTriedCocktailUsecase

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectionFilterView: UIView {
+class FilterSelectionView: UIView {
     
     //MARK:- baseCollectionView
     var selectionFilterCollectionView: UICollectionView =  {
@@ -25,7 +25,7 @@ class SelectionFilterView: UIView {
         return view
     }()
     
-    private let data = ["전체", "위스키 베이스", "리큐르 베이스", "보드카 베이스", "진 베이스"]
+    private let data = ["전체 칵테일", "보유 재료", "난이도", "도수", "당도", "재료 수"]
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,7 +57,7 @@ class SelectionFilterView: UIView {
 
 }
 
-extension SelectionFilterView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension FilterSelectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
@@ -71,6 +71,5 @@ extension SelectionFilterView: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
     }
 }

@@ -44,7 +44,7 @@ class FilterViewController: UIViewController {
         return button
     }()
     
-    private let selectionFilterView = SelectionFilterView()
+    private let selectionFilterView = FilterSelectionView()
     
     private lazy var filteredCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
@@ -103,6 +103,21 @@ class FilterViewController: UIViewController {
             self.applySnapshot(filteredItems: $0)
         }.store(in: &cancelBag)
     }
+}
+
+//MARK: -
+
+//MARK: - FilteredCollectionView Diffable Data Source
+extension FilterViewController {
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, FilteredItem> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilteredCocktailCell.identifier, for: indexPath) as? FilteredCocktailCell else { return nil }
+            
+            cell.fill(with: filteredItem)
+            
+            return cell
+        }
+    }
     
     private func applySnapshot(filteredItems: [FilteredItem]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, FilteredItem>()
@@ -111,18 +126,8 @@ class FilterViewController: UIViewController {
         self.dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
-
+//MARK: - FilteredCocktailCollectionView Compositional Layout
 extension FilterViewController {
-    private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, FilteredItem> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilteredCocktailCell.identifier, for: indexPath) as? FilteredCocktailCell else { return nil }
-            
-            cell.configureCell(filteredItem: filteredItem)
-            
-            return cell
-        }
-    }
-    
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
