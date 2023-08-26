@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 enum TitleText {
     static let level: String = "난이도"
     static let base: String = "베이스"

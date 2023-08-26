@@ -21,7 +21,7 @@ final class CategoryCell: UICollectionViewCell {
         }
     }
     
-    let categoryNameLabel: UILabel = {
+    private let categoryNameLabel: UILabel = {
         let label = UILabel()
         label.sizeToFit()
         label.font = UIFont(name: "Pretendard-Bold", size: 14)
@@ -52,5 +52,10 @@ final class CategoryCell: UICollectionViewCell {
     
     func fill(with categoryName: String) {
         categoryNameLabel.text = categoryName
+        
+        if isSelected == true {
+            self.backgroundColor = .black
+            categoryNameLabel.textColor = .white
+        }
     }
 }

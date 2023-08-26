@@ -22,14 +22,14 @@ class DefaultProductDetailViewModel: ProductDetailViewModel {
     
     private var cancelBag: Set<AnyCancellable> = []
     
-    private let fetchDescriptionUseCase: FetchDescriptionUsecase
+    private let fetchDescriptionUsecase: FetchDescriptionUsecase
     
     init(fetchDescriptionUseCase: FetchDescriptionUsecase) {
-        self.fetchDescriptionUseCase = fetchDescriptionUseCase
+        self.fetchDescriptionUsecase = fetchDescriptionUseCase
     }
     
     func fetchDescription() {
-        fetchDescriptionUseCase.execute()
+        fetchDescriptionUsecase.execute()
             .sink(receiveCompletion: { print("\($0)")}, receiveValue: {
                 self.cocktailDescription = $0
             }).store(in: &cancelBag)
