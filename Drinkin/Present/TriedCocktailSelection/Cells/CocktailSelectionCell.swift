@@ -7,23 +7,9 @@
 
 import UIKit
 
-class CocktailSelectionCell: UICollectionViewCell {
-    
+final class CocktailSelectionCell: UICollectionViewCell {
     private let selectedView = SelectedView()
-    
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                self.addSubview(selectedView)
-                selectedView.snp.makeConstraints {
-                    $0.top.leading.trailing.bottom.equalToSuperview()
-                }
-            } else {
-                selectedView.removeFromSuperview()
-            }
-        }
-    }
-    
+        
     private lazy var cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -31,7 +17,7 @@ class CocktailSelectionCell: UICollectionViewCell {
         return imageView
     }()
     
-    lazy var cocktailNameLabel: UILabel = {
+    private lazy var cocktailNameLabel: UILabel = {
         let cocktailNameLabel = UILabel()
         cocktailNameLabel.font = UIFont.systemFont(ofSize: 13)
         return cocktailNameLabel
@@ -50,6 +36,7 @@ class CocktailSelectionCell: UICollectionViewCell {
     private func configureUI() {
         self.addSubview(cocktailImageView)
         self.addSubview(cocktailNameLabel)
+        self.addSubview(selectedView)
         
         cocktailImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(8)
@@ -62,11 +49,16 @@ class CocktailSelectionCell: UICollectionViewCell {
             make.bottom.equalToSuperview().offset(-16)
             make.centerX.equalToSuperview()
         }
+        
+        selectedView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
     }
     
     private func configureBackground(){
         self.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         self.layer.cornerRadius = 4
+        selectedView.isHidden = true
     }
     
     func fill(with previewDescription: SelectablePreviewDescription) {
@@ -74,12 +66,14 @@ class CocktailSelectionCell: UICollectionViewCell {
         
         cocktailImageView.load(url: imageURL)
         cocktailNameLabel.text = previewDescription.cocktailNameKo
-        if previewDescription.isSelected == true {
-            self.addSubview(selectedView)
-            selectedView.snp.makeConstraints {
-                $0.top.leading.trailing.bottom.equalToSuperview()
-            }
-        }
+    }
+    
+    func presentSelected() {
+        selectedView.isHidden = false
+    }
+    
+    func presentDeselected() {
+        selectedView.isHidden = true
     }
 }
 

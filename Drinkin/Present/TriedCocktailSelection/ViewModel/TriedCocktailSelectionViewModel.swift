@@ -8,34 +8,29 @@
 import Foundation
 import Combine
 
-
 protocol TriedCocktailSelectionViewModel {
-    var currentCategoryNamePublisher: Published<String>.Publisher { get }
     var selectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { get }
     var filteredSelectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { get }
     var categoryList: [String] { get }
     var currentCategoryName: String { get set }
-    var selectableCocktailList: [SelectablePreviewDescription] { get set } //
-    var filteredSelectableCocktailList: [SelectablePreviewDescription] { get set } //
     
-    func fetchTriedCocktail()
-    func filterCocktail()
+    func fetchCocktailPreviewDescription()
+    func filterCocktailList()
     func selectCocktail(index: Int)
     func deselectCocktail(index: Int)
+    func checkCocktailSelected() -> Bool
 }
 
 final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewModel {
     private var cancelBag: Set<AnyCancellable> = []
     private let selectTriedCocktailUsecase: SelectTriedCocktailUsecase
     @Published var cocktailList: [PreviewDescription] = []
-    @Published var currentCategoryName: String = "전체"
+    var currentCategoryName: String = CategoryListStrings.whole
     @Published var selectableCocktailList: [SelectablePreviewDescription] = []
     @Published var filteredSelectableCocktailList: [SelectablePreviewDescription] = []
     
     var selectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { $selectableCocktailList }
     var filteredSelectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { $filteredSelectableCocktailList }
-    
-    var currentCategoryNamePublisher: Published<String>.Publisher { $currentCategoryName }
     
     var categoryList: [String] = [CategoryListStrings.whole,
                                   CategoryListStrings.whiskey,
@@ -47,31 +42,26 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
                                   CategoryListStrings.nonAlcoholic,
                                   CategoryListStrings.mixing]
     
-    
     init(selectTriedCocktailUsecase: SelectTriedCocktailUsecase) {
         self.selectTriedCocktailUsecase = selectTriedCocktailUsecase
     }
 
-    func fetchTriedCocktail() {
+    func fetchCocktailPreviewDescription() {
         selectTriedCocktailUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.cocktailList = $0.previewDescriptionList
             self.convertSelectableCocktailList()
+            self.filterCocktailList()
         }).store(in: &cancelBag)
     }
     
-    
-    
-    
-    func filterCocktail() {
+    func filterCocktailList() {
         if currentCategoryName == CategoryListStrings.whole {
+            filteredSelectableCocktailList = []
             filteredSelectableCocktailList = selectableCocktailList
         } else {
             filteredSelectableCocktailList = selectableCocktailList.filter { $0.category == currentCategoryName }
         }
     }
-    
-    
-    
     
     func convertSelectableCocktailList() {
         cocktailList.forEach {
@@ -84,10 +74,6 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
             selectableCocktailList.append(convertedPreviewDescription)
         }
     }
-    
-    
-    
-    
     
     func selectCocktail(index: Int) {
         let selectedID = filteredSelectableCocktailList[index].id
@@ -105,9 +91,17 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
         }
     }
     
-    func checkSelectableCocktailList() {
-        $selectableCocktailList.sink {
-            $0
-        }
+    func extractSelectedCocktailID() -> [Int] {
+        let selectedCocktaiIDList = filteredSelectableCocktailList.filter {
+            $0.isSelected == true
+        }.map { $0.id }
+        
+        return selectedCocktaiIDList
+    }
+    
+    func checkCocktailSelected() -> Bool {
+        let result = selectableCocktailList.contains { $0.isSelected == true }
+        
+        return result
     }
 }
