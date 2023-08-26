@@ -14,7 +14,7 @@ final class IngredientQuantityView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
-        label.text = "재   료"
+        label.text = "재    료"
         
         return label
     }()

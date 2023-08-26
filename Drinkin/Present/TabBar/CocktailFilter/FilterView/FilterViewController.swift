@@ -44,7 +44,7 @@ class FilterViewController: UIViewController {
         return button
     }()
     
-    private let selectionFilterView = SelectionFilterView()
+    private let selectionFilterView = FilterSelectionView()
     
     private lazy var filteredCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
@@ -103,15 +103,11 @@ class FilterViewController: UIViewController {
             self.applySnapshot(filteredItems: $0)
         }.store(in: &cancelBag)
     }
-    
-    private func applySnapshot(filteredItems: [FilteredItem]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, FilteredItem>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(filteredItems)
-        self.dataSource?.apply(snapshot, animatingDifferences: true)
-    }
 }
 
+//MARK: -
+
+//MARK: - FilteredCollectionView Diffable Data Source
 extension FilterViewController {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, FilteredItem> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
@@ -123,6 +119,15 @@ extension FilterViewController {
         }
     }
     
+    private func applySnapshot(filteredItems: [FilteredItem]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, FilteredItem>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(filteredItems)
+        self.dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+//MARK: - FilteredCocktailCollectionView Compositional Layout
+extension FilterViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))

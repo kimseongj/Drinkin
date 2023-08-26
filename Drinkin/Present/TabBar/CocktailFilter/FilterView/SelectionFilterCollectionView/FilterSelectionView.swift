@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectionFilterView: UIView {
+class FilterSelectionView: UIView {
     
     //MARK:- baseCollectionView
     var selectionFilterCollectionView: UICollectionView =  {
@@ -57,7 +57,7 @@ class SelectionFilterView: UIView {
 
 }
 
-extension SelectionFilterView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension FilterSelectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
