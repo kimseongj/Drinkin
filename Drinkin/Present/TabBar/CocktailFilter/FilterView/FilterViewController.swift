@@ -117,7 +117,7 @@ extension FilterViewController {
         dataSource = UICollectionViewDiffableDataSource<Section, FilteredItem> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilteredCocktailCell.identifier, for: indexPath) as? FilteredCocktailCell else { return nil }
             
-            cell.configureCell(filteredItem: filteredItem)
+            cell.fill(with: filteredItem)
             
             return cell
         }

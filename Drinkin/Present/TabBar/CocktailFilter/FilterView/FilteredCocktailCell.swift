@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class FilteredCocktailCell: UICollectionViewCell {
+final class FilteredCocktailCell: UICollectionViewCell {
     private enum Constant {
 
     }
@@ -49,9 +49,9 @@ class FilteredCocktailCell: UICollectionViewCell {
     
     private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 2)
     
-    private let sugarContentPresentationView = GradePresentationView(title: "당   도", grade: 2)
+    private let sugarContentPresentationView = GradePresentationView(title: "당    도", grade: 2)
     
-    private let abvGradePresentationView = GradePresentationView(title: "도   수", grade: 1)
+    private let abvGradePresentationView = GradePresentationView(title: "도    수", grade: 1)
     
     private let ingredientPresentationView = IngredientQuantityView(ingredientQuantity: 2)
     
@@ -107,11 +107,11 @@ class FilteredCocktailCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(filteredItem: FilteredItem) {
-        titleLabel.text = filteredItem.title
-        levelGradePresentationView.grade = filteredItem.levelGrade
-        sugarContentPresentationView.grade = filteredItem.sugarContentGrade
-        abvGradePresentationView.grade = filteredItem.abvGrade
-        ingredientPresentationView.ingredientQuantity = filteredItem.ingredientQuantity
+    func fill(with: FilteredItem) {
+        titleLabel.text = with.title
+        levelGradePresentationView.grade = with.levelGrade
+        sugarContentPresentationView.grade = with.sugarContentGrade
+        abvGradePresentationView.grade = with.abvGrade
+        ingredientPresentationView.ingredientQuantity = with.ingredientQuantity
     }
 }
