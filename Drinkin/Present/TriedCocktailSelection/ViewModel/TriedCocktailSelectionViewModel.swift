@@ -40,9 +40,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
                                   CategoryListStrings.rum,
                                   CategoryListStrings.tequila,
                                   CategoryListStrings.nonAlcoholic,
-                                  CategoryListStrings.mixing]
-    var categoryList: [String] = []
-    
+                                  CategoryListStrings.mixing]    
     
     init(selectTriedCocktailUsecase: SelectTriedCocktailUsecase) {
         self.selectTriedCocktailUsecase = selectTriedCocktailUsecase

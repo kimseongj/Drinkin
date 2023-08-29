@@ -85,6 +85,8 @@
 		1CA969252A9334980076731B /* TriedCocktailSelectionDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */; };
 		1CA969272A933C400076731B /* CocktailPreviewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969262A933C400076731B /* CocktailPreviewDescription.swift */; };
 		1CA969292A949D070076731B /* SelectablePreviewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969282A949D070076731B /* SelectablePreviewDescription.swift */; };
+		1CA9692B2A9DA3A70076731B /* CocktailFilterModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9692A2A9DA3A70076731B /* CocktailFilterModalViewController.swift */; };
+		1CA9692D2A9DA4700076731B /* CocktailFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9692C2A9DA4700076731B /* CocktailFilterCell.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB096F12A2A144D00B7CA71 /* FilterSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096F02A2A144D00B7CA71 /* FilterSelectionView.swift */; };
@@ -198,6 +200,8 @@
 		1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktailSelectionDIContainer.swift; sourceTree = "<group>"; };
 		1CA969262A933C400076731B /* CocktailPreviewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailPreviewDescription.swift; sourceTree = "<group>"; };
 		1CA969282A949D070076731B /* SelectablePreviewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectablePreviewDescription.swift; sourceTree = "<group>"; };
+		1CA9692A2A9DA3A70076731B /* CocktailFilterModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterModalViewController.swift; sourceTree = "<group>"; };
+		1CA9692C2A9DA4700076731B /* CocktailFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterCell.swift; sourceTree = "<group>"; };
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB096F02A2A144D00B7CA71 /* FilterSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectionView.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				1CF62FB52A1252F30043A32F /* FilterViewController.swift */,
 				1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */,
 				1C5906A62A21DBE0001F048B /* FilterViewModel.swift */,
+				1CA9692C2A9DA4700076731B /* CocktailFilterCell.swift */,
 			);
 			path = FilterView;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				1C04C18429DEEC2D00E381C2 /* FilterView */,
+				1CA9692A2A9DA3A70076731B /* CocktailFilterModalViewController.swift */,
 			);
 			path = CocktailFilter;
 			sourceTree = "<group>";
@@ -913,9 +919,11 @@
 				1CCE88FE29EBB32300D3E1D2 /* CategoryCell.swift in Sources */,
 				1CB096F12A2A144D00B7CA71 /* FilterSelectionView.swift in Sources */,
 				1CA968E72A8E40200076731B /* TitleText.swift in Sources */,
+				1CA9692B2A9DA3A70076731B /* CocktailFilterModalViewController.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
+				1CA9692D2A9DA4700076731B /* CocktailFilterCell.swift in Sources */,
 				1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */,
 				1CA968EF2A8F587D0076731B /* TriedCocktailEndpoint.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,

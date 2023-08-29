@@ -18,3 +18,4 @@ extension IdentifierType {
 }
 
 extension UICollectionViewCell: IdentifierType {}
+extension UITableViewCell: IdentifierType {}

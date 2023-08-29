@@ -40,6 +40,7 @@ class FilterViewController: UIViewController {
         button.setTitle("필터 초기화", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.addTarget(self, action: #selector(tapInitializationButton), for: .touchUpInside)
         
         return button
     }()
@@ -102,6 +103,11 @@ class FilterViewController: UIViewController {
         filterViewModel.$filteredItems.sink {
             self.applySnapshot(filteredItems: $0)
         }.store(in: &cancelBag)
+    }
+    
+    @objc private func tapInitializationButton() {
+        let viewController = CocktailFilterModalViewController()
+        present(viewController, animated: true)
     }
 }
 
