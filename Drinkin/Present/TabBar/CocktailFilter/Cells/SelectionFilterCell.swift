@@ -48,4 +48,8 @@ class SelectionFilterCell: UICollectionViewCell {
             make.bottom.equalToSuperview().offset(-10)
         }
     }
+    
+    func changeState() {
+        
+    }
 }

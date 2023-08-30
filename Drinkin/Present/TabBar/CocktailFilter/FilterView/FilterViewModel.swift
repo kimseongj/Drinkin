@@ -13,5 +13,8 @@ class FilterViewModel {
     
     private var cancelBag: Set<AnyCancellable> = []
     
+    func filterCocktail() {
+        
+    }
     
 }
