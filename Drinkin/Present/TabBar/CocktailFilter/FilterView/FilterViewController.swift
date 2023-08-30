@@ -9,7 +9,8 @@ import UIKit
 import SnapKit
 import Combine
 
-class FilterViewController: UIViewController {
+class FilterViewController: UIViewController, CocktailFilterDelegate {
+    
     private enum Section: CaseIterable {
         case main
     }
@@ -45,7 +46,20 @@ class FilterViewController: UIViewController {
         return button
     }()
     
-    private let selectionFilterView = FilterSelectionView()
+    private let selectionFilterCollectionView: UICollectionView =  {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 8
+        let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        view.isScrollEnabled = true
+        view.showsVerticalScrollIndicator = true
+        view.showsHorizontalScrollIndicator = false
+        view.contentInset = .zero
+        view.clipsToBounds = true
+        view.register(SelectionFilterCell.self, forCellWithReuseIdentifier: SelectionFilterCell.identifier)
+  
+        return view
+    }()
     
     private lazy var filteredCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
@@ -55,11 +69,14 @@ class FilterViewController: UIViewController {
         return collectionView
     }()
     
+    private let data = ["전체 칵테일", "보유 재료", "난이도", "도수", "당도", "재료 수"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDataSource()
         bindFilteredItem()
         configureUI()
+        configureSelectionFilterCollectionView()
         filterViewModel.filteredItems = [FilteredItem(title: "갓파파더", levelGrade: 2, sugarContentGrade: 1, abvGrade: 3, ingredientQuantity: 2), FilteredItem(title: "갓파더", levelGrade: 2, sugarContentGrade: 1, abvGrade: 3, ingredientQuantity: 2)]
     }
     
@@ -71,7 +88,7 @@ class FilterViewController: UIViewController {
         
         view.addSubview(titleLabel)
         view.addSubview(initializationButton)
-        view.addSubview(selectionFilterView)
+        view.addSubview(selectionFilterCollectionView)
         view.addSubview(filteredCollectionView)
         
         titleLabel.snp.makeConstraints {
@@ -84,7 +101,7 @@ class FilterViewController: UIViewController {
             $0.trailing.equalTo(safeArea.snp.trailing).offset(-16)
         }
         
-        selectionFilterView.snp.makeConstraints {
+        selectionFilterCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
@@ -92,10 +109,20 @@ class FilterViewController: UIViewController {
         }
         
         filteredCollectionView.snp.makeConstraints {
-            $0.top.equalTo(selectionFilterView.snp.bottom).offset(10)
+            $0.top.equalTo(selectionFilterCollectionView.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
+        }
+    }
+    
+    func configureSelectionFilterCollectionView() {
+        selectionFilterCollectionView.register(SelectionFilterCell.self, forCellWithReuseIdentifier: SelectionFilterCell.identifier)
+        selectionFilterCollectionView.delegate = self
+        selectionFilterCollectionView.dataSource = self
+        
+        if let flowLayout = selectionFilterCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
     
@@ -106,12 +133,41 @@ class FilterViewController: UIViewController {
     }
     
     @objc private func tapInitializationButton() {
-        let viewController = CocktailFilterModalViewController()
-        present(viewController, animated: true)
+    }
+    
+    func checkSelectedFilter() {
+   
     }
 }
 
-//MARK: -
+//MARK: - SelectionFilterCollectionView DataSource
+extension FilterViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = selectionFilterCollectionView.dequeueReusableCell(withReuseIdentifier: SelectionFilterCell.identifier, for: indexPath) as! SelectionFilterCell
+        cell.baseNameLabel.text = data[indexPath.row] + " ▼"
+
+        return cell
+    }
+    
+    
+}
+
+//MARK: - FilteredCollectionView, SelectionFilterCollectionView Delegate
+extension FilterViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == selectionFilterCollectionView {
+            let cocktailFilterModalViewController = CocktailFilterModalViewController()
+            cocktailFilterModalViewController.modalPresentationStyle = .formSheet
+            present(cocktailFilterModalViewController, animated: false)
+        } else {
+            
+        }
+    }
+}
 
 //MARK: - FilteredCollectionView Diffable Data Source
 extension FilterViewController {
