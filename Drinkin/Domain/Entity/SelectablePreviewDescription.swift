@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct SelectablePreviewDescription: Hashable {
     let id: Int
     let category, cocktailNameKo, cocktailNameEn: String

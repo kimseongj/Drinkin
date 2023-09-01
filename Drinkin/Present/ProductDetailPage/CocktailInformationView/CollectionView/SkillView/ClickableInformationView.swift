@@ -24,9 +24,9 @@ class ClickableInformationView: UIView {
         return view
     }()
     
-    private lazy var informationCollectionView: InformationCollectionView = {
+    private lazy var informationCollectionView: MutableSizeCollectionView = {
         let layout = UICollectionViewLayout()
-        let collectionView = InformationCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
+        let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
         collectionView.register(InformationCell.self, forCellWithReuseIdentifier: InformationCell.identifier)
         collectionView.backgroundColor = .white
  

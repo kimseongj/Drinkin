@@ -8,5 +8,9 @@
 import Foundation
 
 struct HoldedItem: Codable, Hashable {
-    let title: String
+    let holdedItemList: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case holdedItemList = "holded_item_list"
+    }
 }

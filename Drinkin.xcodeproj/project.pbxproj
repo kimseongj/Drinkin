@@ -89,9 +89,10 @@
 		1CA9692D2A9DA4700076731B /* CocktailFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9692C2A9DA4700076731B /* CocktailFilterCell.swift */; };
 		1CA969302AA044C70076731B /* HoldedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9692F2AA044C70076731B /* HoldedItemCell.swift */; };
 		1CA969322AA082CB0076731B /* HoldedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969312AA082CB0076731B /* HoldedItem.swift */; };
-		1CA969342AA08E540076731B /* HomeBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969332AA08E540076731B /* HomeBarViewModel.swift */; };
+		1CA969342AA08E540076731B /* MyHomeBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969332AA08E540076731B /* MyHomeBarViewModel.swift */; };
 		1CA969362AA0B59A0076731B /* HoldedItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969352AA0B59A0076731B /* HoldedItemEndpoint.swift */; };
 		1CA969382AA0B7230076731B /* FetchHoldedItemUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969372AA0B7220076731B /* FetchHoldedItemUsecase.swift */; };
+		1CA9695A2AA18AB40076731B /* MyHomeBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */; };
@@ -207,9 +208,10 @@
 		1CA9692C2A9DA4700076731B /* CocktailFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterCell.swift; sourceTree = "<group>"; };
 		1CA9692F2AA044C70076731B /* HoldedItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldedItemCell.swift; sourceTree = "<group>"; };
 		1CA969312AA082CB0076731B /* HoldedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldedItem.swift; sourceTree = "<group>"; };
-		1CA969332AA08E540076731B /* HomeBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarViewModel.swift; sourceTree = "<group>"; };
+		1CA969332AA08E540076731B /* MyHomeBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarViewModel.swift; sourceTree = "<group>"; };
 		1CA969352AA0B59A0076731B /* HoldedItemEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldedItemEndpoint.swift; sourceTree = "<group>"; };
 		1CA969372AA0B7220076731B /* FetchHoldedItemUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHoldedItemUsecase.swift; sourceTree = "<group>"; };
+		1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarDIContainer.swift; sourceTree = "<group>"; };
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage +Extension.swift"; sourceTree = "<group>"; };
@@ -420,7 +422,7 @@
 			children = (
 				1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */,
 				1CA9692F2AA044C70076731B /* HoldedItemCell.swift */,
-				1CA969332AA08E540076731B /* HomeBarViewModel.swift */,
+				1CA969332AA08E540076731B /* MyHomeBarViewModel.swift */,
 			);
 			path = HomeBar;
 			sourceTree = "<group>";
@@ -742,6 +744,7 @@
 				1CB299102A724136001F31BF /* DIContainer.swift */,
 				1C7A10452A74F8BA009961A1 /* ProductDetailDIContainer.swift */,
 				1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */,
+				1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -940,7 +943,7 @@
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
 				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
 				1CA9692D2A9DA4700076731B /* CocktailFilterCell.swift in Sources */,
-				1CA969342AA08E540076731B /* HomeBarViewModel.swift in Sources */,
+				1CA969342AA08E540076731B /* MyHomeBarViewModel.swift in Sources */,
 				1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */,
 				1CA968EF2A8F587D0076731B /* TriedCocktailEndpoint.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
@@ -959,6 +962,7 @@
 				1CCE88E129E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift in Sources */,
 				1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */,
 				1CA20ED32A567AA6009FDD90 /* FilteredItem.swift in Sources */,
+				1CA9695A2AA18AB40076731B /* MyHomeBarDIContainer.swift in Sources */,
 				1CCE88FA29EBB2C200D3E1D2 /* CocktailSelectionCell.swift in Sources */,
 				1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */,
 				1CA8ED292A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift in Sources */,
