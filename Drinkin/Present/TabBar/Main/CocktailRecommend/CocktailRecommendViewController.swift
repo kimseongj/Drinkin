@@ -47,14 +47,6 @@ final class CocktailRecommendViewController: UIViewController {
         return collectionView
     }()
  
-    override func viewDidLoad() {
-        configureUI()
-        setupRecommendCocktailCollectionView()
-        configureDataSource()
-        binding()
-        viewModel?.fetchBriefDescription()
-    }
-    
     init(viewModel: CocktailRecommendViewModel?) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -62,6 +54,14 @@ final class CocktailRecommendViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        configureUI()
+        setupRecommendCocktailCollectionView()
+        configureDataSource()
+        binding()
+        viewModel?.fetchBriefDescription()
     }
     
     func configureUI() {

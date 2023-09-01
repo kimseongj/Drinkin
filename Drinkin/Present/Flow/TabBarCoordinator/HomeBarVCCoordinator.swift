@@ -19,8 +19,10 @@ class HomeBarVCCoordinator: Coordinator {
     }
     
     func startPush() -> UINavigationController {
-        let homeBarViewController = HomeBarViewController()
-        //homeBarViewController.delegate = self
+        let myHomeBarDIContainer = MyHomeBarDIContainer()
+        
+        let homeBarViewController = HomeBarViewController(viewModel: myHomeBarDIContainer.makeMyHomeBarViewModel())
+ 
         navigationController.setViewControllers([homeBarViewController], animated: false)
         
         return navigationController

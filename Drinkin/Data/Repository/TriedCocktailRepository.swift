@@ -12,7 +12,7 @@ protocol TriedCocktailRepository {
     func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error>
 }
 
-class DefaultTriedCocktailRepository: TriedCocktailRepository {
+final class DefaultTriedCocktailRepository: TriedCocktailRepository {
     let provider = Provider()
     let endpoint = TriedCocktailEndpoint()
     

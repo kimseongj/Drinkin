@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InformationCollectionView: UICollectionView {
+class MutableSizeCollectionView: UICollectionView {
     
     override var contentSize: CGSize {
         didSet {

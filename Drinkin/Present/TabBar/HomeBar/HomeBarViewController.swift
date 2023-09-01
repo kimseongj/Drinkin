@@ -5,11 +5,17 @@
 //  Created by kimseongjun on 2023/04/06.
 //
 
-import Foundation
-
 import UIKit
+import SnapKit
+import Combine
 
 class HomeBarViewController: UIViewController {
+    private var viewModel: MyHomeBarViewModel?
+    private var isTrue: Bool = true
+    private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, String>?
+    private var cancelBag: Set<AnyCancellable> = []
+    
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "나의 홈바"
@@ -33,6 +39,8 @@ class HomeBarViewController: UIViewController {
         
         return button
     }()
+    
+    private let addItemView = UIView()
     
     private let addLabel1: UILabel = {
         let label = UILabel()
@@ -63,15 +71,32 @@ class HomeBarViewController: UIViewController {
         return button
     }()
     
-    private let cocktailListTableView: UITableView = {
-        let tableView = UITableView()
-        
-        return tableView
+    private let holdedItemCollectionView: UICollectionView = {
+        let layout = UICollectionViewLayout()
+        let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
+        collectionView.register(HoldedItemCell.self, forCellWithReuseIdentifier: HoldedItemCell.identifier)
+        collectionView.backgroundColor = .white
+ 
+        return collectionView
     }()
+        
+    init(viewModel: MyHomeBarViewModel?) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureHoldedItemCollectionView()
+        viewModel?.fetchHoldedItem()
+        configureDataSource()
+        binding()
+        
     }
     
     private func configureUI() {
@@ -102,8 +127,27 @@ class HomeBarViewController: UIViewController {
             $0.height.width.equalTo(28)
         }
         
-        addLabel1.snp.makeConstraints {
+        switch isTrue {
+        case true:
+            configureHoldedItem()
+        case false:
+            configureItem()
+        }
+    }
+    
+    private func configureItem() {
+        view.addSubview(addItemView)
+        addItemView.addSubview(addLabel1)
+        addItemView.addSubview(addLabel2)
+        addItemView.addSubview(addButton)
+        
+        addItemView.snp.makeConstraints {
             $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(32)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        addLabel1.snp.makeConstraints {
+            $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
         
@@ -117,7 +161,52 @@ class HomeBarViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(39)
             $0.width.equalTo(108)
+            $0.bottom.equalToSuperview().offset(-32)
+        }
+    }
+    
+    private func configureHoldedItem() {
+        view.addSubview(holdedItemCollectionView)
+        
+        holdedItemCollectionView.snp.makeConstraints {
+            $0.top.equalTo(holdIngredientLabel)
+            $0.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    private func configureHoldedItemCollectionView() {
+        if let flowLayout = holdedItemCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
 }
 
+//MARK: - DiffableDataSource
+extension HomeBarViewController {
+    private func configureDataSource() {
+        self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, itemName) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoldedItemCell.identifier, for: indexPath) as? HoldedItemCell else { return nil }
+            cell.fill(with: itemName)
+            
+            return cell
+        }
+    }
+    
+    private func applySnapshot(holdedItemList: [String]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(holdedItemList)
+        self.holdedItemDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+//MARK: - Binding
+extension HomeBarViewController {
+    private func binding() {
+        guard let viewModel else { return }
+        
+        viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink {
+            self.applySnapshot(holdedItemList: $0)
+        }.store(in: &cancelBag)
+    }
+}
