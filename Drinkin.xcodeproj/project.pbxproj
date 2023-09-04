@@ -93,6 +93,8 @@
 		1CA969362AA0B59A0076731B /* HoldedItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969352AA0B59A0076731B /* HoldedItemEndpoint.swift */; };
 		1CA969382AA0B7230076731B /* FetchHoldedItemUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969372AA0B7220076731B /* FetchHoldedItemUsecase.swift */; };
 		1CA9695A2AA18AB40076731B /* MyHomeBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */; };
+		1CA9695C2AA1BAA10076731B /* FirstLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9695B2AA1BAA10076731B /* FirstLogin.swift */; };
+		1CA9695E2AA30BBB0076731B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9695D2AA30BBB0076731B /* LoginCoordinator.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
 		1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */; };
@@ -212,6 +214,8 @@
 		1CA969352AA0B59A0076731B /* HoldedItemEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldedItemEndpoint.swift; sourceTree = "<group>"; };
 		1CA969372AA0B7220076731B /* FetchHoldedItemUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHoldedItemUsecase.swift; sourceTree = "<group>"; };
 		1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarDIContainer.swift; sourceTree = "<group>"; };
+		1CA9695B2AA1BAA10076731B /* FirstLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLogin.swift; sourceTree = "<group>"; };
+		1CA9695D2AA30BBB0076731B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage +Extension.swift"; sourceTree = "<group>"; };
@@ -382,6 +386,7 @@
 				1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */,
 				1CCE88DC29E9498D00D3E1D2 /* CocktailVCCoordinator.swift */,
 				1CCE88DE29E949A900D3E1D2 /* HomeBarVCCoordinator.swift */,
+				1CA9695D2AA30BBB0076731B /* LoginCoordinator.swift */,
 			);
 			path = TabBarCoordinator;
 			sourceTree = "<group>";
@@ -560,6 +565,7 @@
 				1CA969262A933C400076731B /* CocktailPreviewDescription.swift */,
 				1CA969282A949D070076731B /* SelectablePreviewDescription.swift */,
 				1CA969312AA082CB0076731B /* HoldedItem.swift */,
+				1CA9695B2AA1BAA10076731B /* FirstLogin.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -968,6 +974,7 @@
 				1CA8ED292A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift in Sources */,
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
 				1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */,
+				1CA9695E2AA30BBB0076731B /* LoginCoordinator.swift in Sources */,
 				1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */,
 				1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */,
 				1CA9691B2A90D64B0076731B /* Provider.swift in Sources */,
@@ -992,6 +999,7 @@
 				1C04C19629DEED2700E381C2 /* HomeBarViewController.swift in Sources */,
 				1CCE890629EBC13C00D3E1D2 /* LoginToken.swift in Sources */,
 				1C26963D2A4973FA00C1FC00 /* AppleAuthViewModel.swift in Sources */,
+				1CA9695C2AA1BAA10076731B /* FirstLogin.swift in Sources */,
 				1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */,
 				1CA969232A9332860076731B /* CategoryListStrings.swift in Sources */,
 				1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */,
