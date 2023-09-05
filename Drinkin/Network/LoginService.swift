@@ -9,15 +9,21 @@ import Foundation
 import Combine
 
 class LoginService {
-    let provider = LoginProvider()
+    var provider = LoginProvider()
     var cancellableBeg: Set<AnyCancellable> = []
     
     static var accessToken: String?
     static var refreshToken: String?
     
-    func fetch(accessToken: String, completion: @escaping () -> Void) {
-        var accessTokenConversionEndpoint = AccessTokenConversionEndpoint()
-        accessTokenConversionEndpoint.insertTokenQueryValue(accessToken: accessToken)
+    func fetch(accessToken: String) {
+       let request = provider.makePostRequest(endpoint: AccessTokenConversionEndpoint(), accessToken: accessToken, holdedCocktailList: [1, 2, 3, 4, 5])
+        
+        provider.postAccessTokenAndHoldedItem(request: request)
+    }
+}
+//    func fetch(accessToken: String, completion: @escaping () -> Void) {
+//        var accessTokenConversionEndpoint = AccessTokenConversionEndpoint()
+//        accessTokenConversionEndpoint.insertTokenQueryValue(accessToken: accessToken)
 //        accessTokenConversionEndpoint.insertTokenQueryValue(accessToken: accessToken)
 //        let request = accessTokenConversionEndpoint.makeURLRequest()
 //
@@ -39,18 +45,18 @@ class LoginService {
 //        repository.fetchPublisher(endpoint: accessTokenConversionEndpoint)
         
     
-        provider.fetchData(endpoint: accessTokenConversionEndpoint,
-                           parser: Parser<LoginToken>()) { parsedData in
-            LoginService.accessToken = parsedData.accessToken
-            LoginService.refreshToken = parsedData.refreshToken
-            print(LoginService.accessToken)
-            print("Refresh : " + LoginService.refreshToken!)
-            completion()
-        }
-    }
+//        provider.fetchData(endpoint: accessTokenConversionEndpoint,
+//                           parser: Parser<LoginToken>()) { parsedData in
+//            LoginService.accessToken = parsedData.accessToken
+//            LoginService.refreshToken = parsedData.refreshToken
+//            print(LoginService.accessToken)
+//            print("Refresh : " + LoginService.refreshToken!)
+//            completion()
+//        }
+        
+        
   
-    func refreshAccessToken() {
-        var refreshEndPoint = RefreshEndpoint()
-        //refreshEndPoint.
-    }
-}
+//    func refreshAccessToken() {
+//        var refreshEndPoint = RefreshEndpoint()
+//        //refreshEndPoint.
+//    }
