@@ -1,5 +1,5 @@
 //
-//  MYHomeBarViewModel.swift
+//  MyHomeBarViewModel.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/08/31.

@@ -9,8 +9,13 @@ import Foundation
 import Combine
 
 struct LoginProvider {
+    private var cancelBag: Set<AnyCancellable> = []
+    
     func fetchData<T: Decodable>(endpoint: EndpointMakeable, parser: Parser<T>, completion: @escaping (T) -> Void) {
-        guard let request = endpoint.makeURLRequest() else { return }
+        guard var request = endpoint.makeURLRequest() else { return }
+        if endpoint.method == "POST" {
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
 
         let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else { return }
@@ -25,6 +30,38 @@ struct LoginProvider {
             completion(parsedData)
         }
         dataTask.resume()
+    }
+    
+    func makePostRequest(endpoint: EndpointMakeable, accessToken: String, holdedCocktailList: [Int]) -> URLRequest? {
+        guard var request = endpoint.makeURLRequest() else { return nil }
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let requestBody = FirstLogin(accessToken: accessToken, holdedItemList: holdedCocktailList)
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(requestBody)
+        } catch {
+            print("PostError")
+        }
+        
+        return request
+    }
+    
+    mutating func postAccessTokenAndHoldedItem(request: URLRequest?) {
+        guard let request else { return }
+        
+        URLSession.shared.dataTaskPublisher(for: request)
+            .map(\.data).decode(type: FirstLoginResponse.self, decoder: JSONDecoder())
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
+                }
+            }, receiveValue: {
+                print($0)
+            }).store(in: &cancelBag)
     }
 }
 

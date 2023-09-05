@@ -34,7 +34,7 @@ class KakaoAuthViewModel: ObservableObject {
                     
                     guard let accessToken = oauthToken?.accessToken else { return }
                     
-                    self.loginService.fetch(accessToken: accessToken) { return }
+                    self.loginService.fetch(accessToken: accessToken) 
                 }
             }
         } else { // 카카오톡 실행이 안될 경우
@@ -47,7 +47,7 @@ class KakaoAuthViewModel: ObservableObject {
                     
                     guard let accessToken = oauthToken?.accessToken else { return }
             
-                    self.loginService.fetch(accessToken: accessToken) { return }
+                    self.loginService.fetch(accessToken: accessToken)
                 }
             }
         }
