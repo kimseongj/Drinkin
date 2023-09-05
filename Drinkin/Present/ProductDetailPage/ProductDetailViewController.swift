@@ -13,11 +13,12 @@ protocol ProductDetailViewDelegate: AnyObject {
     func pushToolModalVC()
     func pushSkillModalVC()
     func pushGlassModalVC()
+    func didFinishProductDetailVC()
 }
 
 class ProductDetailViewController: UIViewController {
+    var delegate: ProductDetailViewDelegate?
     private var cancelBag: Set<AnyCancellable> = []
-    
     private var viewModel: ProductDetailViewModel?
    
     private let scrollView : UIScrollView = {
@@ -46,6 +47,11 @@ class ProductDetailViewController: UIViewController {
         viewModel?.fetchDescription()
         configureScrollView()
         configureStackView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.didFinishProductDetailVC()
     }
     
     init(viewModel: ProductDetailViewModel?) {
