@@ -10,9 +10,11 @@ import UIKit
 import Combine
 
 final class TriedCocktailSelectionViewController: UIViewController {
+    var delegate: TriedCocktailSelectionVCDelegate?
+    private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: TriedCocktailSelectionViewModel?
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription>?
-    private var cancelBag: Set<AnyCancellable> = []
+   
     
     //MARK:- mainLabel
     private let mainLabel: UILabel = {
@@ -180,7 +182,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         case true:
             completeSelectionButton.setTitle("선택 완료", for: .normal)
             completeSelectionButton.removeTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
-            completeSelectionButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
+            completeSelectionButton.addTarget(self, action: #selector(presentLoginViewController), for: .touchUpInside)
         }
     }
     
@@ -195,6 +197,11 @@ final class TriedCocktailSelectionViewController: UIViewController {
     @objc
     private func dismissViewController() {
         self.dismiss(animated: true)
+    }
+    
+    @objc
+    private func presentLoginViewController() {
+        delegate?.presentLoginVC()
     }
 }
 

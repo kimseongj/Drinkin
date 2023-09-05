@@ -63,7 +63,7 @@ class UnloggedinMainViewController: UIViewController {
     }()
     
     @objc func startButtonAction() {
-        delegate?.pushChooseCocktailVC()
+        delegate?.pushTriedCocktailSelectionVC()
     }
     
     override func viewDidLoad() {

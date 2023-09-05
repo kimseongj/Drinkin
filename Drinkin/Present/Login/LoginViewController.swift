@@ -14,6 +14,14 @@ final class LoginViewController: UIViewController {
     let kakaoAuthVM = KakaoAuthViewModel()
     let appleAuthVM = AppleAuthViewModel()
     
+    private let dismissButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "delete_icon"), for: .normal)
+        button.addTarget(self, action: #selector(dismissLoginVC), for: .touchUpInside)
+        
+        return button
+    }()
+    
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -62,6 +70,11 @@ final class LoginViewController: UIViewController {
     }
     
     @objc
+    private func dismissLoginVC() {
+        self.dismiss(animated: true)
+    }
+    
+    @objc
     private func loginButtonClicked() {
         print("loginButtonClicked")
         kakaoAuthVM.handleKakaoLogin()
@@ -80,12 +93,18 @@ final class LoginViewController: UIViewController {
     }
     
     private func configureUI() {
+        view.addSubview(dismissButton)
         view.addSubview(stackView)
         
         stackView.addArrangedSubview(kakaoLoginStatusLabel)
         stackView.addArrangedSubview(kakaoLoginButton)
         stackView.addArrangedSubview(appleLoginbutton)
         stackView.addArrangedSubview(kakaoLogoutButton)
+        
+        dismissButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(60)
+            $0.leading.equalToSuperview().offset(30)
+        }
         
         stackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()

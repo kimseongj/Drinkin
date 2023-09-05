@@ -9,15 +9,8 @@ import UIKit
 import SnapKit
 import Combine
 
-protocol ProductDetailViewDelegate: AnyObject {
-    func pushToolModalVC()
-    func pushSkillModalVC()
-    func pushGlassModalVC()
-    func didFinishProductDetailVC()
-}
-
 class ProductDetailViewController: UIViewController {
-    var delegate: ProductDetailViewDelegate?
+    var delegate: ProductDetailVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: ProductDetailViewModel?
    

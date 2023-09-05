@@ -7,11 +7,17 @@
 
 import UIKit
 
-class TriedCocktailSelectionViewCoordinator: Coordinator {
+protocol TriedCocktailSelectionVCDelegate: AnyObject {
+    func presentLoginVC()
+    func didFinishTriedCocktailSelectionVC()
+}
+
+class TriedCocktailSelectionVCCoordinator: Coordinator, TriedCocktailSelectionVCDelegate {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
-
+    var triedCocktailSelectionViewController: TriedCocktailSelectionViewController?
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
@@ -20,9 +26,23 @@ class TriedCocktailSelectionViewCoordinator: Coordinator {
         let triedCocktailSelectionDIContainer = TriedCocktailSelectionDIContainer()
         
         let vc = TriedCocktailSelectionViewController(viewModel: triedCocktailSelectionDIContainer.makeTriedCocktailSelectionViewModel())
+        vc.delegate = self
         vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true)
+        triedCocktailSelectionViewController = vc
     }
     
-    func childDidFinish(_ child: Coordinator?) { }
+    func presentLoginVC() {
+        let vc = LoginViewController()
+        vc.modalPresentationStyle = .fullScreen
+        triedCocktailSelectionViewController?.present(vc, animated: true)
+    }
+    
+    func childDidFinish(_ child: Coordinator?) {
+        parentCoordinator?.childDidFinish(self)
+    }
+    
+    func didFinishTriedCocktailSelectionVC() {
+        
+    }
 }

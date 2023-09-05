@@ -30,12 +30,12 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
         return navigationController
     }
     
-    func pushChooseCocktailVC() {
-        let preferCocktailSelectionViewCoordinator = TriedCocktailSelectionViewCoordinator(navigationController: navigationController)
+    func pushTriedCocktailSelectionVC() {
+        let triedCocktailSelectionViewCoordinator = TriedCocktailSelectionVCCoordinator(navigationController: navigationController)
         
-        preferCocktailSelectionViewCoordinator.parentCoordinator = self
-        childCoordinators.append(preferCocktailSelectionViewCoordinator)
-        preferCocktailSelectionViewCoordinator.start()
+        triedCocktailSelectionViewCoordinator.parentCoordinator = self
+        childCoordinators.append(triedCocktailSelectionViewCoordinator)
+        triedCocktailSelectionViewCoordinator.start()
     }
     
     func pushProductDetailVC(cocktailID: Int) {

@@ -23,4 +23,8 @@ class LoginVCCoordinator: Coordinator {
     }
     
     func childDidFinish(_ child: Coordinator?) { }
+    
+    func didFinsihLoginVC() {
+        
+    }
 }
