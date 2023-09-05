@@ -104,4 +104,10 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
         
         return result
     }
+    
+    func makeSelectedCocktailIDList() -> [Int] {
+        let selectedCocktailIdList = selectableCocktailList.filter { $0.isSelected == true }.map { $0.id }
+        
+        return selectedCocktailIdList
+    }
 }
