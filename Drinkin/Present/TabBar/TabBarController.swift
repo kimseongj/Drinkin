@@ -15,9 +15,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func setTabBar() {
-        let mainTabBarItem = UITabBarItem(title: "메인", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
-        let cocktailTabBarItem = UITabBarItem(title: "칵테일", image: UIImage(systemName: "multiply"), selectedImage: UIImage(systemName: "house.fill"))
-        let homeBarTabBarItem = UITabBarItem(title: "나의 홈바", image: UIImage(systemName: "multiply"), selectedImage: UIImage(systemName: "house.fill"))
+        let mainTabBarItem = UITabBarItem(title: "메인", image: UIImage(named: "home_icon"), selectedImage: UIImage(named: "home_fill_icon"))
+        let cocktailTabBarItem = UITabBarItem(title: "칵테일", image: UIImage(named: "cocktail_list_icon"), selectedImage: UIImage(named: "cocktail_list_fill_icon"))
+        let homeBarTabBarItem = UITabBarItem(title: "나의 홈바", image: UIImage(named: "my_bar_icon"), selectedImage: UIImage(named: "my_bar_fill_icon"))
         
         let mainVCCoordinator = MainVCCoordinator()
         let mainViewController = mainVCCoordinator.startPush()
