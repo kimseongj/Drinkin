@@ -93,7 +93,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         MainViewController.login = true
         configureCocktailCollectionView()
         configureBaseTypeCollectionView()
-        configureCompleteSelectionButton()
+        configureViewState()
         configureCocktailDataSource()
         binding()
         viewModel?.fetchCocktailPreviewDescription()
@@ -172,13 +172,15 @@ final class TriedCocktailSelectionViewController: UIViewController {
         }
     }
     
-    private func configureCompleteSelectionButton(aasd: Bool = false) {
-        switch aasd {
+    private func configureViewState(isCellsSelected: Bool = false) {
+        switch isCellsSelected {
         case false:
             completeSelectionButton.setTitle("다음", for: .normal)
             completeSelectionButton.addTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
         case true:
             completeSelectionButton.setTitle("선택 완료", for: .normal)
+            completeSelectionButton.removeTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
+            completeSelectionButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
         }
     }
     
@@ -188,6 +190,11 @@ final class TriedCocktailSelectionViewController: UIViewController {
         recommendPopupViewController.delegate = self
         recommendPopupViewController.modalPresentationStyle = .formSheet
         present(recommendPopupViewController, animated: true)
+    }
+    
+    @objc
+    private func dismissViewController() {
+        self.dismiss(animated: true)
     }
 }
 
@@ -226,7 +233,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
                 cell.presentSelected()
             }
             viewModel?.selectCocktail(index: indexPath.row)
-            configureCompleteSelectionButton(aasd: viewModel?.checkCocktailSelected() ?? false )
+            configureViewState(isCellsSelected: viewModel?.checkCocktailSelected() ?? false )
         }
     }
     
@@ -235,7 +242,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
             guard let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell else { return }
             
             viewModel?.deselectCocktail(index: indexPath.row)
-            configureCompleteSelectionButton(aasd: viewModel?.checkCocktailSelected() ?? false )
+            configureViewState(isCellsSelected: viewModel?.checkCocktailSelected() ?? false )
             cell.presentDeselected()
         }
     }
