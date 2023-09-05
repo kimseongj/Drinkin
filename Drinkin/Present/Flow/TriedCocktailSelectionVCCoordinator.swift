@@ -23,4 +23,6 @@ class TriedCocktailSelectionViewCoordinator: Coordinator {
         vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true)
     }
+    
+    func childDidFinish(_ child: Coordinator?) { }
 }

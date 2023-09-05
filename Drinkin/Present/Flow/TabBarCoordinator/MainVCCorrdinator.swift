@@ -45,4 +45,13 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
         childCoordinators.append(productDetailVCCoordinator)
         productDetailVCCoordinator.start()
     }
+    
+    func childDidFinish(_ child: Coordinator?) {
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
+    }
 }

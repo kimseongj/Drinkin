@@ -18,8 +18,8 @@ class AppCoordinator: NSObject, Coordinator {
     }
     
     func start() {
-        let tabBarController = TabBarController()
-        self.window?.rootViewController = configureTabBarController()
+        let tabBarController = configureTabBarController()
+        self.window?.rootViewController = tabBarController
         AppCoordinator.tabBarHeight = tabBarController.tabBar.frame.size.height
     }
     
@@ -46,4 +46,6 @@ class AppCoordinator: NSObject, Coordinator {
         
         return tabBarController
     }
+    
+    func childDidFinish(_ child: Coordinator?) { }
 }
