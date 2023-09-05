@@ -95,4 +95,3 @@ struct CocktailGlass: Codable, Hashable {
         case glassNameKo = "glass_name_ko"
     }
 }
-
