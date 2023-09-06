@@ -20,4 +20,6 @@ class SkillModalVCCoordinator: Coordinator {
         let vc = ToolModalViewController()
         navigationController.present(vc, animated: true)
     }
+    
+    func childDidFinish(_ child: Coordinator?) { }
 }

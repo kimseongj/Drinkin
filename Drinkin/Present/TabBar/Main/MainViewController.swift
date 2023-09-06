@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 
 protocol MainViewDelegate: AnyObject {
-    func pushChooseCocktailVC()
+    func pushTriedCocktailSelectionVC()
     func pushProductDetailVC(cocktailID: Int)
 }
 

@@ -9,15 +9,9 @@ import UIKit
 import SnapKit
 import Combine
 
-protocol ProductDetailViewDelegate: AnyObject {
-    func pushToolModalVC()
-    func pushSkillModalVC()
-    func pushGlassModalVC()
-}
-
 class ProductDetailViewController: UIViewController {
+    var delegate: ProductDetailVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
-    
     private var viewModel: ProductDetailViewModel?
    
     private let scrollView : UIScrollView = {
@@ -46,6 +40,11 @@ class ProductDetailViewController: UIViewController {
         viewModel?.fetchDescription()
         configureScrollView()
         configureStackView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.didFinishProductDetailVC()
     }
     
     init(viewModel: ProductDetailViewModel?) {

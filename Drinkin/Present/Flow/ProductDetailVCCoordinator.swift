@@ -7,8 +7,14 @@
 
 import UIKit
 
-class ProductDetailVCCoordinator: Coordinator, ProductDetailViewDelegate {
-    
+protocol ProductDetailVCDelegate: AnyObject {
+    func pushToolModalVC()
+    func pushSkillModalVC()
+    func pushGlassModalVC()
+    func didFinishProductDetailVC()
+}
+
+class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -24,12 +30,15 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailViewDelegate {
         
         let productDetailViewController = ProductDetailViewController(viewModel: productDetailDIContainer.makeProductDetailViewModel(cocktailID: cocktailID))
         
+        productDetailViewController.delegate = self
         productDetailViewController.cocktailInformationView.toolView.delegate = self
-
+        productDetailViewController.cocktailInformationView.skillView.delegate = self
         productDetailViewController.cocktailInformationView.glassView.delegate = self
-
+        
         navigationController.pushViewController(productDetailViewController, animated: true)
     }
+    
+    func childDidFinish(_ child: Coordinator?) { }
     
     func pushToolModalVC() {
         let toolModalVCCoordinator = ToolModalVCCoordinator(navigationController: navigationController)
@@ -50,5 +59,9 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailViewDelegate {
         glassModalVCCoordinator.parentCoordinator = self
         childCoordinators.append(glassModalVCCoordinator)
         glassModalVCCoordinator.start()
+    }
+    
+    func didFinishProductDetailVC() {
+        parentCoordinator?.childDidFinish(self)
     }
 }

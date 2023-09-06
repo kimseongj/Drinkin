@@ -21,4 +21,10 @@ class LoginVCCoordinator: Coordinator {
         loginViewController.modalPresentationStyle = .fullScreen
         navigationController.present(loginViewController, animated: true)
     }
+    
+    func childDidFinish(_ child: Coordinator?) { }
+    
+    func didFinsihLoginVC() {
+        
+    }
 }

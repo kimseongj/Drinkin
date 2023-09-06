@@ -15,7 +15,7 @@ class ClickableInformationView: UIView {
     private var skillDataSource: UICollectionViewDiffableDataSource<Section, CocktailSkill>?
     private var glassDataSource: UICollectionViewDiffableDataSource<Section, CocktailGlass>?
     
-    var delegate: ProductDetailViewDelegate?
+    var delegate: ProductDetailVCDelegate?
     
     private var skillLabelView: UIView = {
         let view = UIView()

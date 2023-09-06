@@ -12,8 +12,6 @@ import KakaoSDKUser
 
 class KakaoAuthViewModel: ObservableObject {
     static var validAccessToken: String?
-    
-    var subscriptions = Set<AnyCancellable>()
     var loginService = LoginService()
     
     init() {

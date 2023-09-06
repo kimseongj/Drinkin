@@ -10,9 +10,11 @@ import UIKit
 import Combine
 
 final class TriedCocktailSelectionViewController: UIViewController {
+    var delegate: TriedCocktailSelectionVCDelegate?
+    private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: TriedCocktailSelectionViewModel?
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription>?
-    private var cancelBag: Set<AnyCancellable> = []
+   
     
     //MARK:- mainLabel
     private let mainLabel: UILabel = {
@@ -93,7 +95,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         MainViewController.login = true
         configureCocktailCollectionView()
         configureBaseTypeCollectionView()
-        configureViewState()
+        renewCompleteSelectionButton()
         configureCocktailDataSource()
         binding()
         viewModel?.fetchCocktailPreviewDescription()
@@ -172,15 +174,16 @@ final class TriedCocktailSelectionViewController: UIViewController {
         }
     }
     
-    private func configureViewState(isCellsSelected: Bool = false) {
+    private func renewCompleteSelectionButton(isCellsSelected: Bool = false) {
         switch isCellsSelected {
         case false:
             completeSelectionButton.setTitle("다음", for: .normal)
+            completeSelectionButton.removeTarget(self, action: #selector(presentLoginViewController), for: .touchUpInside)
             completeSelectionButton.addTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
         case true:
             completeSelectionButton.setTitle("선택 완료", for: .normal)
             completeSelectionButton.removeTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
-            completeSelectionButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
+            completeSelectionButton.addTarget(self, action: #selector(presentLoginViewController), for: .touchUpInside)
         }
     }
     
@@ -195,6 +198,11 @@ final class TriedCocktailSelectionViewController: UIViewController {
     @objc
     private func dismissViewController() {
         self.dismiss(animated: true)
+    }
+    
+    @objc
+    private func presentLoginViewController() {
+        delegate?.presentLoginVC()
     }
 }
 
@@ -233,7 +241,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
                 cell.presentSelected()
             }
             viewModel?.selectCocktail(index: indexPath.row)
-            configureViewState(isCellsSelected: viewModel?.checkCocktailSelected() ?? false )
+            renewCompleteSelectionButton(isCellsSelected: viewModel?.checkCocktailSelected() ?? false )
         }
     }
     
@@ -242,7 +250,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
             guard let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell else { return }
             
             viewModel?.deselectCocktail(index: indexPath.row)
-            configureViewState(isCellsSelected: viewModel?.checkCocktailSelected() ?? false )
+            renewCompleteSelectionButton(isCellsSelected: viewModel?.checkCocktailSelected() ?? false )
             cell.presentDeselected()
         }
     }
@@ -313,6 +321,7 @@ extension TriedCocktailSelectionViewController {
 //MARK: - Dismiss ViewController
 extension TriedCocktailSelectionViewController: DismissDelegate {
     func dismissCurrentViewController() {
-        self.dismiss(animated: true)
+        //self.dismiss(animated: true)
+        delegate?.presentLoginVC()
     }
 }

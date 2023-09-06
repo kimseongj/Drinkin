@@ -15,8 +15,9 @@ class CocktailVCCoordinator: Coordinator {
         self.navigationController = .init()
     }
     
-    func start() {
-    }
+    func start() { }
+    
+    func childDidFinish(_ child: Coordinator?) { }
     
     func startPush() -> UINavigationController {
         let filterViewController = FilterViewController()

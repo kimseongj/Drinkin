@@ -15,8 +15,9 @@ class HomeBarVCCoordinator: Coordinator {
         self.navigationController = .init()
     }
     
-    func start() {
-    }
+    func start() { }
+    
+    func childDidFinish(_ child: Coordinator?) { }
     
     func startPush() -> UINavigationController {
         let myHomeBarDIContainer = MyHomeBarDIContainer()

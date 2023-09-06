@@ -10,7 +10,6 @@
 		1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */; };
 		1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */; };
 		1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */; };
-		1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19229DEECF800E381C2 /* TabBarController.swift */; };
 		1C04C19629DEED2700E381C2 /* HomeBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */; };
 		1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19929DEED3D00E381C2 /* MainViewController.swift */; };
 		1C0809DA29E03FFB00265706 /* KakaoAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809D929E03FFB00265706 /* KakaoAuthViewModel.swift */; };
@@ -138,7 +137,6 @@
 		1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewController.swift; sourceTree = "<group>"; };
 		1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildModalViewController.swift; sourceTree = "<group>"; };
 		1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolModalViewController.swift; sourceTree = "<group>"; };
-		1C04C19229DEECF800E381C2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarViewController.swift; sourceTree = "<group>"; };
 		1C04C19929DEED3D00E381C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1C0809D929E03FFB00265706 /* KakaoAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthViewModel.swift; sourceTree = "<group>"; };
@@ -343,7 +341,6 @@
 				1C16A8672A13ACDA001640E2 /* Main */,
 				1C16A8682A13ACEB001640E2 /* CocktailFilter */,
 				1C16A8692A13AD08001640E2 /* HomeBar */,
-				1C04C19229DEECF800E381C2 /* TabBarController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -947,7 +944,6 @@
 				1CA9692B2A9DA3A70076731B /* CocktailFilterModalViewController.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,
-				1C04C19329DEECF800E381C2 /* TabBarController.swift in Sources */,
 				1CA9692D2A9DA4700076731B /* CocktailFilterCell.swift in Sources */,
 				1CA969342AA08E540076731B /* MyHomeBarViewModel.swift in Sources */,
 				1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */,
