@@ -10,9 +10,7 @@ import SnapKit
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
-    let navigationController1 = UINavigationController()
-    let kakaoAuthVM = KakaoAuthViewModel()
-    let appleAuthVM = AppleAuthViewModel()
+    let loginViewModel = LoginViewModel()
     
     private let dismissButton: UIButton = {
         let button = UIButton()
@@ -60,6 +58,7 @@ final class LoginViewController: UIViewController {
         button.backgroundColor = .yellow
         button.titleLabel?.textColor = .black
         button.addTarget(self, action: #selector(logoutButtonClicked), for: .touchUpInside)
+        
         return button
     }()
     
@@ -77,7 +76,7 @@ final class LoginViewController: UIViewController {
     @objc
     private func loginButtonClicked() {
         print("loginButtonClicked")
-        kakaoAuthVM.handleKakaoLogin()
+        loginViewModel.handleKakaoLogin()
     }
     
     @objc
