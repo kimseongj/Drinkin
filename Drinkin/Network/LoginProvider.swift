@@ -8,7 +8,8 @@
 import Foundation
 import Combine
 
-struct LoginProvider {
+class LoginProvider {
+    private let keychainManager = KeychainManager()
     private var cancelBag: Set<AnyCancellable> = []
     
     func fetchData<T: Decodable>(endpoint: EndpointMakeable, parser: Parser<T>, completion: @escaping (T) -> Void) {
@@ -16,16 +17,16 @@ struct LoginProvider {
         if endpoint.method == "POST" {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
-
+        
         let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else { return }
-
+            
             guard let httpURLResponse = response as? HTTPURLResponse, (200...299).contains(httpURLResponse.statusCode) else {
                 print(response)
                 return }
-
+            
             print(httpURLResponse.statusCode)
-
+            
             guard let validData = data, let parsedData = parser.parse(data: validData) else { return }
             completion(parsedData)
         }
@@ -47,7 +48,7 @@ struct LoginProvider {
         return request
     }
     
-    mutating func postAccessTokenAndHoldedItem(request: URLRequest?) {
+    func postAccessTokenAndHoldedItem(request: URLRequest?) {
         guard let request else { return }
         
         URLSession.shared.dataTaskPublisher(for: request)
@@ -59,8 +60,14 @@ struct LoginProvider {
                 case .failure(let error):
                     print("Request failed with error: \(error)")
                 }
-            }, receiveValue: {
-                print($0)
+            }, receiveValue: { [weak self] in
+                guard let self = self else { return }
+                
+                do {
+                    try self.keychainManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
+                } catch {
+                    print("saveError")
+                }
             }).store(in: &cancelBag)
     }
 }

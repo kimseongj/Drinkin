@@ -25,9 +25,9 @@ import Foundation
 //}
 
 struct AccessTokenConversionEndpoint: EndpointMakeable {
-    var baseURL: String = "http://192.168.0.13:8000"
+    var baseURL: String = "https://ed41530a-7b99-47dd-99eb-54ef60188c0f.mock.pstmn.io"
 
-    var path: String = "/v1/kakao-login"
+    var path: String = "/firstlogin"
     
     var method: String = HTTPMethod.post.rawValue
     

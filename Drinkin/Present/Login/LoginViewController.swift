@@ -11,7 +11,6 @@ import AuthenticationServices
 
 final class LoginViewController: UIViewController {
     let loginViewModel = LoginViewModel()
-    let appleAuthVM = AppleAuthViewModel()
     
     private let dismissButton: UIButton = {
         let button = UIButton()
@@ -82,6 +81,7 @@ final class LoginViewController: UIViewController {
     
     @objc
     private func logoutButtonClicked() {
+        let keychainManager = KeychainManager()
         print("logoutButtonClicked")
     }
     
@@ -89,7 +89,7 @@ final class LoginViewController: UIViewController {
     private func appleLoginButtonClicked() {
         print("appleClicked")
         
-        appleAuthVM.performRequests()
+        loginViewModel.performRequests()
     }
     
     private func configureUI() {
@@ -110,8 +110,6 @@ final class LoginViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
         }
-        
-
     }
 }
 
