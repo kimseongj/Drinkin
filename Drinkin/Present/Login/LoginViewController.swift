@@ -11,6 +11,7 @@ import AuthenticationServices
 
 final class LoginViewController: UIViewController {
     let loginViewModel = LoginViewModel()
+    let appleAuthVM = AppleAuthViewModel()
     
     private let dismissButton: UIButton = {
         let button = UIButton()

@@ -9,15 +9,21 @@ import Foundation
 import Combine
 import KakaoSDKAuth
 import KakaoSDKUser
+import AuthenticationServices
 
-class LoginViewModel: ObservableObject {
+class LoginViewModel: NSObject, ObservableObject {
     static var validAccessToken: String?
     var loginService = LoginService()
+    lazy var authorizationController = ASAuthorizationController(authorizationRequests: [createRequest()])
     
-    init() {
-        print("KakaoAuthVM - init() called")
+    override init() {
+        super.init()
+        createAccount()
     }
-    
+}
+
+//MARK: -KakaoLogin
+extension LoginViewModel {
     func handleKakaoLogin() {
         print("KakoAuthVM - handleKakao")
         
@@ -50,5 +56,48 @@ class LoginViewModel: ObservableObject {
             }
         }
     }
+}
+
+//MARK: - AppleLogin
+extension LoginViewModel: ASAuthorizationControllerDelegate {
+    func createRequest() -> ASAuthorizationAppleIDRequest {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        return request
+    }
     
+    func createAccount() {
+        authorizationController.delegate = self
+        
+    }
+    
+    func performRequests() {
+        authorizationController.performRequests()
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        // Apple ID
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+                
+            // 계정 정보 가져오기
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+                
+            print("User ID : \(userIdentifier)")
+            print("User Email : \(email ?? "")")
+            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
+
+        default:
+            break
+        }
+    }
+        
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+    }
 }
