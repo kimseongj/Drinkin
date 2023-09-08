@@ -95,6 +95,7 @@
 		1CA9695E2AA30BBB0076731B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9695D2AA30BBB0076731B /* LoginCoordinator.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* SelectionFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */; };
+		1CB0AD012AAAC7BC00847544 /* CocktailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0AD002AAAC7BC00847544 /* CocktailListViewController.swift */; };
 		1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */; };
 		1CB299112A724136001F31BF /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299102A724136001F31BF /* DIContainer.swift */; };
 		1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299142A7247AF001F31BF /* CocktailRecommendCell.swift */; };
@@ -215,6 +216,7 @@
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* SelectionFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionFilterCell.swift; sourceTree = "<group>"; };
 		1CB0ACFD2AA88FAA00847544 /* Drinkin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Drinkin.entitlements; sourceTree = "<group>"; };
+		1CB0AD002AAAC7BC00847544 /* CocktailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListViewController.swift; sourceTree = "<group>"; };
 		1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage +Extension.swift"; sourceTree = "<group>"; };
 		1CB299102A724136001F31BF /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 		1CB299142A7247AF001F31BF /* CocktailRecommendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailRecommendCell.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				1C04C19529DEED2700E381C2 /* HomeBarViewController.swift */,
 				1CA9692F2AA044C70076731B /* HoldedItemCell.swift */,
 				1CA969332AA08E540076731B /* MyHomeBarViewModel.swift */,
+				1CB0AD002AAAC7BC00847544 /* CocktailListViewController.swift */,
 			);
 			path = HomeBar;
 			sourceTree = "<group>";
@@ -950,6 +953,7 @@
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
 				1CA969192A9078860076731B /* TokenType.swift in Sources */,
 				1CB299112A724136001F31BF /* DIContainer.swift in Sources */,
+				1CB0AD012AAAC7BC00847544 /* CocktailListViewController.swift in Sources */,
 				1C5CAB0629DB51D50053F19A /* LoginRepository.swift in Sources */,
 				1CCE88DF29E949A900D3E1D2 /* HomeBarVCCoordinator.swift in Sources */,
 				1C5906A72A21DBE0001F048B /* FilterViewModel.swift in Sources */,
