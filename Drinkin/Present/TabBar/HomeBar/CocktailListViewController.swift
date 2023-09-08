@@ -6,12 +6,12 @@
 //
 
 import Foundation
-
 import UIKit
 import SnapKit
 import Combine
 
 final class CocktailListViewController: UIViewController {
+    private var viewControllerTitle: String
     private var dataSource: UICollectionViewDiffableDataSource<Section, FilteredItem>!
     
     private lazy var cocktailListCollectionView: UICollectionView = {
@@ -22,6 +22,15 @@ final class CocktailListViewController: UIViewController {
         return collectionView
     }()
     
+    init(viewControllerTitle: String) {
+        self.viewControllerTitle = viewControllerTitle
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationItemTitle()
@@ -29,12 +38,11 @@ final class CocktailListViewController: UIViewController {
     }
     
     private func configureNavigationItemTitle() {
-        self.navigationItem.title = "저장한 칵테일 목록"
+        self.navigationItem.title = viewControllerTitle
     }
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
-        
         view.addSubview(cocktailListCollectionView)
         
         cocktailListCollectionView.snp.makeConstraints {
@@ -66,7 +74,6 @@ extension CocktailListViewController {
     }
 }
 
-
 //MARK: - CocktailListCollectionView Compositional Layout
 extension CocktailListViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
@@ -79,7 +86,6 @@ extension CocktailListViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                          subitems: [item])
         
-
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
 
