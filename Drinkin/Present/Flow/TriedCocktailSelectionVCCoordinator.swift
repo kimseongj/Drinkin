@@ -4,7 +4,6 @@
 //
 //  Created by kimseongjun on 2023/04/14.
 
-
 import UIKit
 
 protocol TriedCocktailSelectionVCDelegate: AnyObject {
