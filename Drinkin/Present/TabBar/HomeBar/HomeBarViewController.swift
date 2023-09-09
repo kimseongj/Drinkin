@@ -170,7 +170,8 @@ class HomeBarViewController: UIViewController {
         
         holdedItemCollectionView.snp.makeConstraints {
             $0.top.equalTo(holdIngredientLabel)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
         }
     }
     
