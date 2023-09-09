@@ -14,20 +14,23 @@ final class HoldedItemCell: UICollectionViewCell {
     }
     
     private let titleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
+        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 13)
         
         return label
     }()
     
     private let deleteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.setImage(UIImage(named: "delete_icon"), for: .normal)
+        button.tintColor = .black
         
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        configureBackgroundColor()
         configureUI()
     }
     
@@ -35,7 +38,13 @@ final class HoldedItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func configureBackgroundColor() {
+        contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+    }
+    
     private func configureUI() {
+        contentView.layer.cornerRadius = 4
+        
         contentView.addSubview(titleLabel)
         contentView.addSubview(deleteButton)
         
@@ -47,7 +56,7 @@ final class HoldedItemCell: UICollectionViewCell {
         
         deleteButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Constraint.padding)
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(Constraint.padding)
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(8)
             $0.trailing.equalToSuperview().offset(-Constraint.padding)
             $0.bottom.equalToSuperview().offset(-Constraint.padding)
         }
