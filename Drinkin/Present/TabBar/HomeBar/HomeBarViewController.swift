@@ -10,10 +10,11 @@ import SnapKit
 import Combine
 
 class HomeBarViewController: UIViewController {
+    var delegate: HomeBarVCDelegate?
+    private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: MyHomeBarViewModel?
     private var isTrue: Bool = true
     private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, String>?
-    private var cancelBag: Set<AnyCancellable> = []
     
     
     private let titleLabel: UILabel = {
@@ -84,6 +85,7 @@ class HomeBarViewController: UIViewController {
     
     private let savedCocktailListButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(tapSavedCocktailListButton), for: .touchUpInside)
         
         let titleLabel = UILabel()
         titleLabel.text = "저장한 칵테일 목록"
@@ -110,6 +112,7 @@ class HomeBarViewController: UIViewController {
     
     private let userMadeCocktailListButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
         
         let titleLabel = UILabel()
         titleLabel.text = "내가 만든 칵테일 목록"
@@ -258,6 +261,16 @@ class HomeBarViewController: UIViewController {
         if let flowLayout = holdedItemCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
+    }
+    
+    @objc
+    private func tapSavedCocktailListButton() {
+        delegate?.pushSavedCocktailListVC()
+    }
+    
+    @objc
+    private func tapUserMadeCocktailListButton() {
+        delegate?.pushUserMadeCocktailListVC()
     }
 }
 
