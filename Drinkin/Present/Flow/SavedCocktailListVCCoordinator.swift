@@ -17,7 +17,9 @@ class SavedCocktailListVCCoordinator: Coordinator {
     }
 
     func start() {
-        let vc = CocktailListViewController(viewControllerTitle: "저장한 칵테일 목록")
+        let savedCocktailListDIContainer = SavedCocktailListDIContainer()
+        
+        let vc = SavedCocktailListViewController(viewModel: savedCocktailListDIContainer.makeSavedCocktailListViewModel())
         navigationController.pushViewController(vc, animated: true)
     }
     

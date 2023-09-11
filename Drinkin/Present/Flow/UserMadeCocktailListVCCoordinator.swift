@@ -17,7 +17,9 @@ class UserMadeCocktailListVCCoordinator: Coordinator {
     }
 
     func start() {
-        let vc = CocktailListViewController(viewControllerTitle: "만들어본 칵테일 목록")
+        let userMadeCocktailListDIContainer = UserMadeCocktailListDIContainer()
+        
+        let vc = UserMadeCocktailListViewController(viewModel: userMadeCocktailListDIContainer.makeUserMadeCocktailListViewModel())
         navigationController.pushViewController(vc, animated: true)
     }
     
