@@ -9,14 +9,14 @@ import Foundation
 import Combine
 
 protocol TriedCocktailRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error>
+    func fetchPublisher() -> AnyPublisher<CocktailImageDescription, Error>
 }
 
 final class DefaultTriedCocktailRepository: TriedCocktailRepository {
     let provider = Provider()
     let endpoint = TriedCocktailEndpoint()
     
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error> {
+    func fetchPublisher() -> AnyPublisher<CocktailImageDescription, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }
