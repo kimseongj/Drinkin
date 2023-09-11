@@ -43,4 +43,3 @@ struct ProductDetailEndpoint: EndpointMakeable {
         path = "/10"
     }
 }
-
