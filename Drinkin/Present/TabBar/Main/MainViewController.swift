@@ -7,11 +7,6 @@
 import UIKit
 import SnapKit
 
-protocol MainViewDelegate: AnyObject {
-    func pushTriedCocktailSelectionVC()
-    func pushProductDetailVC(cocktailID: Int)
-}
-
 class MainViewController: UIViewController {
 
     var delegate: MainViewDelegate?

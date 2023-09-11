@@ -1,5 +1,5 @@
 //
-//  CocktailPreviewDescription.swift
+//  CocktailImageDescription.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/08/21.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-// MARK: - CocktailPreviewDescription
-struct CocktailPreviewDescription: Codable {
-    let previewDescriptionList: [PreviewDescription]
+// MARK: - CocktailImageDescription
+struct CocktailImageDescription: Codable {
+    let previewDescriptionList: [ImageDescription]
 
     enum CodingKeys: String, CodingKey {
         case previewDescriptionList = "preview_description_list"
@@ -17,7 +17,7 @@ struct CocktailPreviewDescription: Codable {
 }
 
 // MARK: - PreviewDescriptionList
-struct PreviewDescription: Codable, Hashable {
+struct ImageDescription: Codable, Hashable {
     let id: Int
     let category, cocktailNameKo, cocktailNameEn: String
     let imageURI: String

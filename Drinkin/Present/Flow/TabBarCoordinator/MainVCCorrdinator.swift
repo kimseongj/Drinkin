@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol MainViewDelegate: AnyObject {
+    func pushTriedCocktailSelectionVC()
+    func pushProductDetailVC(cocktailID: Int)
+}
+
 class MainVCCoordinator: Coordinator, MainViewDelegate {
     
     weak var parentCoordinator: Coordinator?

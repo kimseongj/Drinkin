@@ -7,7 +7,12 @@
 
 import UIKit
 
-class HomeBarVCCoordinator: Coordinator {
+protocol HomeBarVCDelegate: AnyObject {
+    func pushSavedCocktailListVC()
+    func pushUserMadeCocktailListVC()
+}
+
+class HomeBarVCCoordinator: Coordinator, HomeBarVCDelegate {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
@@ -23,10 +28,20 @@ class HomeBarVCCoordinator: Coordinator {
         let myHomeBarDIContainer = MyHomeBarDIContainer()
         
         let homeBarViewController = HomeBarViewController(viewModel: myHomeBarDIContainer.makeMyHomeBarViewModel())
- 
+        homeBarViewController.delegate = self
         navigationController.setViewControllers([homeBarViewController], animated: false)
         
         return navigationController
+    }
+    
+    func pushSavedCocktailListVC() {
+        let savedCocktailListVCCoordinator = SavedCocktailListVCCoordinator(navigationController: navigationController)
+        savedCocktailListVCCoordinator.start()
+    }
+    
+    func pushUserMadeCocktailListVC() {
+        let userMadeCocktailListVCCoordinator = UserMadeCocktailListVCCoordinator(navigationController: navigationController)
+        userMadeCocktailListVCCoordinator.start()
     }
 }
 

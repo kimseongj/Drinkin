@@ -24,7 +24,7 @@ protocol TriedCocktailSelectionViewModel {
 final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewModel {
     private var cancelBag: Set<AnyCancellable> = []
     private let selectTriedCocktailUsecase: SelectTriedCocktailUsecase
-    @Published var cocktailList: [PreviewDescription] = []
+    @Published var cocktailList: [ImageDescription] = []
     var currentCategoryName: String = CategoryListStrings.whole
     @Published var selectableCocktailList: [SelectablePreviewDescription] = []
     @Published var filteredSelectableCocktailList: [SelectablePreviewDescription] = []

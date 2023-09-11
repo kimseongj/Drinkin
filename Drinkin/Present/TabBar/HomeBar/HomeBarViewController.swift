@@ -24,6 +24,8 @@ class HomeBarViewController: UIViewController {
         return label
     }()
     
+    private let convertableItemView = UIView()
+    
     private let holdIngredientLabel: UILabel = {
         let label = UILabel()
         label.text = "가지고 있는 재료"
@@ -79,6 +81,58 @@ class HomeBarViewController: UIViewController {
  
         return collectionView
     }()
+    
+    private let savedCocktailListButton: UIButton = {
+        let button = UIButton()
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "저장한 칵테일 목록"
+        titleLabel.font = UIFont(name: "Pretendard-Bold", size: 17)
+        
+        let arrowImageView = UIImageView(image: UIImage(named: "arrow_icon"))
+        
+        button.addSubview(titleLabel)
+        button.addSubview(arrowImageView)
+        
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(15)
+        }
+        
+        arrowImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.size.equalTo(30)
+        }
+        
+        return button
+    }()
+    
+    private let userMadeCocktailListButton: UIButton = {
+        let button = UIButton()
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "내가 만든 칵테일 목록"
+        titleLabel.font = UIFont(name: "Pretendard-Bold", size: 17)
+        
+        let arrowImageView = UIImageView(image: UIImage(named: "arrow_icon"))
+        
+        button.addSubview(arrowImageView)
+        button.addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(15)
+        }
+        
+        arrowImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.size.equalTo(30)
+        }
+        
+        return button
+    }()
         
     init(viewModel: MyHomeBarViewModel?) {
         self.viewModel = viewModel
@@ -96,7 +150,6 @@ class HomeBarViewController: UIViewController {
         viewModel?.fetchHoldedItem()
         configureDataSource()
         binding()
-        
     }
     
     private func configureUI() {
@@ -105,19 +158,12 @@ class HomeBarViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(titleLabel)
-        view.addSubview(holdIngredientLabel)
         view.addSubview(moreButton)
-        view.addSubview(addLabel1)
-        view.addSubview(addLabel2)
-        view.addSubview(addButton)
+        view.addSubview(holdIngredientLabel)
+        view.addSubview(convertableItemView)
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeArea.snp.top)
-            $0.leading.equalTo(safeArea.snp.leading).offset(16)
-        }
-        
-        holdIngredientLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(34)
             $0.leading.equalTo(safeArea.snp.leading).offset(16)
         }
         
@@ -125,6 +171,11 @@ class HomeBarViewController: UIViewController {
             $0.centerY.equalTo(titleLabel)
             $0.trailing.equalTo(safeArea.snp.trailing).offset(-16)
             $0.height.width.equalTo(28)
+        }
+        
+        holdIngredientLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(34)
+            $0.leading.equalTo(safeArea.snp.leading).offset(16)
         }
         
         switch isTrue {
@@ -137,6 +188,8 @@ class HomeBarViewController: UIViewController {
     
     private func configureItem() {
         view.addSubview(addItemView)
+        view.addSubview(savedCocktailListButton)
+        view.addSubview(userMadeCocktailListButton)
         addItemView.addSubview(addLabel1)
         addItemView.addSubview(addLabel2)
         addItemView.addSubview(addButton)
@@ -163,14 +216,41 @@ class HomeBarViewController: UIViewController {
             $0.width.equalTo(108)
             $0.bottom.equalToSuperview().offset(-32)
         }
+        
+        savedCocktailListButton.snp.makeConstraints {
+            $0.top.equalTo(addItemView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        userMadeCocktailListButton.snp.makeConstraints {
+            $0.top.equalTo(savedCocktailListButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
     }
     
     private func configureHoldedItem() {
         view.addSubview(holdedItemCollectionView)
+        view.addSubview(savedCocktailListButton)
+        view.addSubview(userMadeCocktailListButton)
         
         holdedItemCollectionView.snp.makeConstraints {
-            $0.top.equalTo(holdIngredientLabel)
+            $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+        }
+        
+        savedCocktailListButton.snp.makeConstraints {
+            $0.top.equalTo(holdedItemCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        userMadeCocktailListButton.snp.makeConstraints {
+            $0.top.equalTo(savedCocktailListButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
         }
     }
     
