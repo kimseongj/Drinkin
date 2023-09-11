@@ -1,8 +1,8 @@
 //
-//  CocktailListViewController.swift
+//  SavedCocktailListViewController.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/09/08.
+//  Created by kimseongjun on 2023/09/11.
 //
 
 import Foundation
@@ -10,9 +10,10 @@ import UIKit
 import SnapKit
 import Combine
 
-final class CocktailListViewController: UIViewController {
-    private var viewControllerTitle: String
-    private var dataSource: UICollectionViewDiffableDataSource<Section, FilteredItem>!
+final class SavedCocktailListViewController: UIViewController {
+    private var cancelBag: Set<AnyCancellable> = []
+    private var viewModel: SavedCocktailListViewModel?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
     
     private lazy var cocktailListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
@@ -22,8 +23,8 @@ final class CocktailListViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewControllerTitle: String) {
-        self.viewControllerTitle = viewControllerTitle
+    init(viewModel: SavedCocktailListViewModel?) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,12 +34,20 @@ final class CocktailListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureBackgroundColor()
         configureNavigationItemTitle()
         configureUI()
+        configureDataSource()
+        binding()
+        viewModel?.fetchCocktailPreviewDescription()
+    }
+    
+    private func configureBackgroundColor() {
+        view.backgroundColor = .white
     }
     
     private func configureNavigationItemTitle() {
-        self.navigationItem.title = viewControllerTitle
+        self.navigationItem.title = "저장한 칵테일 목록"
     }
     
     private func configureUI() {
@@ -46,7 +55,7 @@ final class CocktailListViewController: UIViewController {
         view.addSubview(cocktailListCollectionView)
         
         cocktailListCollectionView.snp.makeConstraints {
-            $0.top.equalTo(safeArea.snp.top)
+            $0.top.equalTo(safeArea.snp.top).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalTo(safeArea.snp.bottom)
@@ -55,27 +64,37 @@ final class CocktailListViewController: UIViewController {
 }
 
 //MARK: - CocktailListCollectionView DiffableDataSource
-extension CocktailListViewController {
+extension SavedCocktailListViewController {
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, FilteredItem> (collectionView: cocktailListCollectionView) { collectionView, indexPath, filteredItem in
+        dataSource = UICollectionViewDiffableDataSource<Section, PreviewDescription> (collectionView: cocktailListCollectionView) { collectionView, indexPath, previewDescription in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilteredCocktailCell.identifier, for: indexPath) as? FilteredCocktailCell else { return nil }
             
-            cell.fill(with: filteredItem)
+            cell.fill(with: previewDescription)
             
             return cell
         }
     }
     
-    private func applySnapshot(filteredItems: [FilteredItem]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, FilteredItem>()
+    private func applySnapshot(previewDescriptionList: [PreviewDescription]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, PreviewDescription>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(filteredItems)
+        snapshot.appendItems(previewDescriptionList)
         self.dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
+//MARK: - Binding
+extension SavedCocktailListViewController {
+    private func binding() {
+        guard let viewModel else { return }
+        viewModel.previewDescriptionListPublisher.receive(on: RunLoop.main).sink {
+            self.applySnapshot(previewDescriptionList: $0)
+        }.store(in: &cancelBag)
+    }
+}
+
 //MARK: - CocktailListCollectionView Compositional Layout
-extension CocktailListViewController {
+extension SavedCocktailListViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
