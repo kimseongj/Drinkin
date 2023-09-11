@@ -107,11 +107,11 @@ final class FilteredCocktailCell: UICollectionViewCell {
         }
     }
     
-    func fill(with: FilteredItem) {
-        titleLabel.text = with.title
-        levelGradePresentationView.grade = with.levelGrade
-        sugarContentPresentationView.grade = with.sugarContentGrade
-        abvGradePresentationView.grade = with.abvGrade
-        ingredientPresentationView.ingredientQuantity = with.ingredientQuantity
+    func fill(with previewDescription: PreviewDescription) {
+        titleLabel.text = previewDescription.title
+        levelGradePresentationView.grade = previewDescription.levelGrade
+        sugarContentPresentationView.grade = previewDescription.sugarContentGrade
+        abvGradePresentationView.grade = previewDescription.abvGrade
+        ingredientPresentationView.ingredientQuantity = previewDescription.ingredientQuantity
     }
 }

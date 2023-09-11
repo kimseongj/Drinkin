@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class FilterViewModel {
-    @Published var filteredItems: [FilteredItem] = []
+    @Published var filteredItems: [PreviewDescription] = []
     
     private var cancelBag: Set<AnyCancellable> = []
     

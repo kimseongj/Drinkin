@@ -15,7 +15,7 @@ class FilterViewController: UIViewController, CocktailFilterDelegate {
         case main
     }
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, FilteredItem>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
     
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -77,7 +77,7 @@ class FilterViewController: UIViewController, CocktailFilterDelegate {
         bindFilteredItem()
         configureUI()
         configureSelectionFilterCollectionView()
-        filterViewModel.filteredItems = [FilteredItem(title: "갓파파더", levelGrade: 2, sugarContentGrade: 1, abvGrade: 3, ingredientQuantity: 2), FilteredItem(title: "갓파더", levelGrade: 2, sugarContentGrade: 1, abvGrade: 3, ingredientQuantity: 2)]
+        filterViewModel.filteredItems = [PreviewDescription(title: "갓파파더", levelGrade: 2, sugarContentGrade: 1, abvGrade: 3, ingredientQuantity: 2), PreviewDescription(title: "갓파더", levelGrade: 2, sugarContentGrade: 1, abvGrade: 3, ingredientQuantity: 2)]
     }
     
     
@@ -172,7 +172,7 @@ extension FilterViewController: UICollectionViewDelegate {
 //MARK: - FilteredCollectionView Diffable Data Source
 extension FilterViewController {
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, FilteredItem> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
+        dataSource = UICollectionViewDiffableDataSource<Section, PreviewDescription> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilteredCocktailCell.identifier, for: indexPath) as? FilteredCocktailCell else { return nil }
             
             cell.fill(with: filteredItem)
@@ -181,8 +181,8 @@ extension FilterViewController {
         }
     }
     
-    private func applySnapshot(filteredItems: [FilteredItem]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, FilteredItem>()
+    private func applySnapshot(filteredItems: [PreviewDescription]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, PreviewDescription>()
         snapshot.appendSections([.main])
         snapshot.appendItems(filteredItems)
         self.dataSource?.apply(snapshot, animatingDifferences: true)
@@ -200,7 +200,6 @@ extension FilterViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                          subitems: [item])
         
-
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
 
