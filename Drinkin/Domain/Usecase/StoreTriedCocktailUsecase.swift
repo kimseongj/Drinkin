@@ -8,11 +8,12 @@
 import Foundation
 
 protocol StoreTriedCocktailUsecase {
-//    func execute() {
+//    func execute()
+//}
 //
+//class DefaultStoreTriedCocktailUsecase: StoreTriedCocktailUsecase {
+//    func execute() {
 //    }
-}
-
-class DefaultStoreTiredCocktailUsecase: StoreTriedCocktailUsecase {
     
+    //마셔봤던 칵테일 저장 
 }

@@ -1,5 +1,5 @@
 //
-//  FetchUserMadeCocktailUsecase.swift
+//  FetchUserMadeCocktailListUsecase.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/09/11.
