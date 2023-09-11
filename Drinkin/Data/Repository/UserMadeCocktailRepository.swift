@@ -14,7 +14,7 @@ protocol UserMadeCocktailListRepository {
 
 final class DefaultUserMadeCocktailListRepository: UserMadeCocktailListRepository {
     let provider = Provider()
-    let endpoint = HoldedItemEndpoint()
+    let endpoint = UserMadeCocktailListEndpoint()
     
     func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error> {
         return provider.fetchData(endpoint: endpoint)

@@ -14,7 +14,7 @@ protocol SavedCocktailListRepository {
 
 final class DefaultSavedCocktailListRepository: SavedCocktailListRepository {
     let provider = Provider()
-    let endpoint = HoldedItemEndpoint()
+    let endpoint = SavedCocktailListEndpoint()
     
     func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error> {
         return provider.fetchData(endpoint: endpoint)
