@@ -27,6 +27,6 @@ struct PreviewDescription: Codable, Hashable {
         case levelGrade = "level_grade"
         case sugarContentGrade = "sugar_content"
         case abvGrade = "abv_level"
-        case ingredientQuantity
+        case ingredientQuantity = "ingredient_quantity"
     }
 }
