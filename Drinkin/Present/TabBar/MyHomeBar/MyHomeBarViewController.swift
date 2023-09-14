@@ -1,5 +1,5 @@
 //
-//  HomeBarViewController.swift
+//  MyHomeBarViewController.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/06.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
-class HomeBarViewController: UIViewController {
+class MyHomeBarViewController: UIViewController {
     var delegate: HomeBarVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: MyHomeBarViewModel?
@@ -275,7 +275,7 @@ class HomeBarViewController: UIViewController {
 }
 
 //MARK: - DiffableDataSource
-extension HomeBarViewController {
+extension MyHomeBarViewController {
     private func configureDataSource() {
         self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, itemName) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoldedItemCell.identifier, for: indexPath) as? HoldedItemCell else { return nil }
@@ -294,7 +294,7 @@ extension HomeBarViewController {
 }
 
 //MARK: - Binding
-extension HomeBarViewController {
+extension MyHomeBarViewController {
     private func binding() {
         guard let viewModel else { return }
         
