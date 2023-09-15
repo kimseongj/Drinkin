@@ -1,5 +1,5 @@
 //
-//  HomeBarViewController.swift
+//  MyHomeBarViewController.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/06.
@@ -9,11 +9,12 @@ import UIKit
 import SnapKit
 import Combine
 
-class HomeBarViewController: UIViewController {
+class MyHomeBarViewController: UIViewController {
+    var delegate: HomeBarVCDelegate?
+    private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: MyHomeBarViewModel?
     private var isTrue: Bool = true
     private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, String>?
-    private var cancelBag: Set<AnyCancellable> = []
     
     
     private let titleLabel: UILabel = {
@@ -84,6 +85,7 @@ class HomeBarViewController: UIViewController {
     
     private let savedCocktailListButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(tapSavedCocktailListButton), for: .touchUpInside)
         
         let titleLabel = UILabel()
         titleLabel.text = "저장한 칵테일 목록"
@@ -110,6 +112,7 @@ class HomeBarViewController: UIViewController {
     
     private let userMadeCocktailListButton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
         
         let titleLabel = UILabel()
         titleLabel.text = "내가 만든 칵테일 목록"
@@ -259,10 +262,20 @@ class HomeBarViewController: UIViewController {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
+    
+    @objc
+    private func tapSavedCocktailListButton() {
+        delegate?.pushSavedCocktailListVC()
+    }
+    
+    @objc
+    private func tapUserMadeCocktailListButton() {
+        delegate?.pushUserMadeCocktailListVC()
+    }
 }
 
 //MARK: - DiffableDataSource
-extension HomeBarViewController {
+extension MyHomeBarViewController {
     private func configureDataSource() {
         self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, itemName) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoldedItemCell.identifier, for: indexPath) as? HoldedItemCell else { return nil }
@@ -281,7 +294,7 @@ extension HomeBarViewController {
 }
 
 //MARK: - Binding
-extension HomeBarViewController {
+extension MyHomeBarViewController {
     private func binding() {
         guard let viewModel else { return }
         

@@ -1,5 +1,5 @@
 //
-//  HomeBarVCCoordinator.swift
+//  MyHomeBarVCCoordinator.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/14.
@@ -27,9 +27,9 @@ class HomeBarVCCoordinator: Coordinator, HomeBarVCDelegate {
     func startPush() -> UINavigationController {
         let myHomeBarDIContainer = MyHomeBarDIContainer()
         
-        let homeBarViewController = HomeBarViewController(viewModel: myHomeBarDIContainer.makeMyHomeBarViewModel())
-        homeBarViewController.delegate = self
-        navigationController.setViewControllers([homeBarViewController], animated: false)
+        let myHomeBarViewController = MyHomeBarViewController(viewModel: myHomeBarDIContainer.makeMyHomeBarViewModel())
+        myHomeBarViewController.delegate = self
+        navigationController.setViewControllers([myHomeBarViewController], animated: false)
         
         return navigationController
     }

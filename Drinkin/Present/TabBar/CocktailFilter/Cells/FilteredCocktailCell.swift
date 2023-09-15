@@ -55,8 +55,6 @@ final class FilteredCocktailCell: UICollectionViewCell {
     
     private let ingredientPresentationView = IngredientQuantityView(ingredientQuantity: 2)
     
-
-    
     private let cocktailImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.backgroundColor = .gray
