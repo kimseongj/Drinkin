@@ -1,5 +1,5 @@
 //
-//  CocktailVCCoordinator.swift
+//  CocktailFilterVCCoordinator.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/04/14.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CocktailVCCoordinator: Coordinator {
+class CocktailFilterVCCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
@@ -20,7 +20,8 @@ class CocktailVCCoordinator: Coordinator {
     func childDidFinish(_ child: Coordinator?) { }
     
     func startPush() -> UINavigationController {
-        let filterViewController = FilterViewController()
+        let cocktailFilterDIContainer = CocktailFilterDICotainer()
+        let filterViewController = CocktailFilterViewController(viewModel: cocktailFilterDIContainer.makeCocktailFilterViewModel())
         //cocktailViewController.delegate = self
         navigationController.setViewControllers([filterViewController], animated: false)
         
