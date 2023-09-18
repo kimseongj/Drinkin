@@ -1,5 +1,5 @@
 //
-//  SelectionFilterCell.swift
+//  FilterSelectionCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/06/02.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectionFilterCell: UICollectionViewCell {
+class FilterSelectionCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -51,5 +51,10 @@ class SelectionFilterCell: UICollectionViewCell {
     
     func changeState() {
         
+    }
+    
+    func makeCellBlack() {
+        self.backgroundColor = .black
+        baseNameLabel.textColor = .white
     }
 }
