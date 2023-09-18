@@ -34,8 +34,8 @@ class AppCoordinator: NSObject, Coordinator {
         let mainViewController = mainVCCoordinator.startPush()
         mainViewController.tabBarItem = mainTabBarItem
         
-        let cocktailVCCoordinator = CocktailVCCoordinator()
-        let cocktailViewController = cocktailVCCoordinator.startPush()
+        let cocktailFilterVCCoordinator = CocktailFilterVCCoordinator()
+        let cocktailViewController = cocktailFilterVCCoordinator.startPush()
         cocktailViewController.tabBarItem = cocktailTabBarItem
         
         let homeBarVCCoordinator = HomeBarVCCoordinator()

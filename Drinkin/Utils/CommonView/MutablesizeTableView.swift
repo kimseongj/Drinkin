@@ -1,13 +1,13 @@
 //
-//  InformationCollectionView.swift
+//  MutablesizeTableView.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/19.
+//  Created by kimseongjun on 2023/09/18.
 //
 
 import UIKit
 
-class MutableSizeCollectionView: UICollectionView {
+class MutableSizeTableView: UITableView {
     
     override var contentSize: CGSize {
         didSet {
