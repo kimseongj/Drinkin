@@ -85,7 +85,10 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
         configureDataSource()
         configureUI()
         configureSelectionFilterCollectionView()
-        viewModel?.fetchCocktailFilter(completion: {})
+        makeSelectionFilterCollectionViewDisable()
+        viewModel?.fetchCocktailFilter(completion: { [weak self] in
+            self?.makeSelectionFilterCollectionViewEnable()
+        })
     }
     
     
@@ -124,7 +127,7 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
         }
     }
     
-    func configureSelectionFilterCollectionView() {
+    private func configureSelectionFilterCollectionView() {
         selectionFilterCollectionView.register(SelectionFilterCell.self, forCellWithReuseIdentifier: SelectionFilterCell.identifier)
         selectionFilterCollectionView.delegate = self
         selectionFilterCollectionView.dataSource = self
@@ -132,6 +135,14 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
         if let flowLayout = selectionFilterCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
+    }
+    
+    private func makeSelectionFilterCollectionViewDisable() {
+        selectionFilterCollectionView.isUserInteractionEnabled = false
+    }
+    
+    private func makeSelectionFilterCollectionViewEnable() {
+        selectionFilterCollectionView.isUserInteractionEnabled = true
     }
     
     @objc private func tapInitializationButton() {
