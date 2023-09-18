@@ -26,11 +26,12 @@ final class CocktailFilterModalViewController: UIViewController {
         return view
     }()
     
-    private let filterTableView: UITableView = {
-        let tableView = UITableView()
+    private let filterTableView: MutableSizeTableView = {
+        let tableView = MutableSizeTableView()
         tableView.backgroundColor = .gray
-        tableView.register(CocktailFilterCell.self, forCellReuseIdentifier: CocktailFilterCell.identifier)
+        tableView.register(DetailFilterCell.self, forCellReuseIdentifier: DetailFilterCell.identifier)
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         
         return tableView
     }()
@@ -101,9 +102,6 @@ final class CocktailFilterModalViewController: UIViewController {
 extension CocktailFilterModalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
-        contentView.snp.makeConstraints {
-            $0.height.equalTo(70 * viewModel.fetchFilterContent(filterType: filterType).count)
-        }
         
         return viewModel.fetchFilterContent(filterType: filterType).count
     }
