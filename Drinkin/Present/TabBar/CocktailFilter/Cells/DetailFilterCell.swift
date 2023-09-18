@@ -1,5 +1,5 @@
 //
-//  CocktailFilterCell.swift
+//  DetailFilterCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/08/29.
@@ -8,7 +8,17 @@
 import UIKit
 import SnapKit
 
-final class CocktailFilterCell: UITableViewCell {
+final class DetailFilterCell: UITableViewCell {
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                titleLabel.textColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
+            } else {
+                titleLabel.textColor = .black
+            }
+        }
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
