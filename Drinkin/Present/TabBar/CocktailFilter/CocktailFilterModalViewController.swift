@@ -14,6 +14,9 @@ protocol CocktailFilterDelegate: AnyObject {
 
 final class CocktailFilterModalViewController: UIViewController {
     weak var delegate: CocktailFilterDelegate?
+    var viewModel: CocktailFilterViewModel?
+    
+    private let filterType: FilterType
     
     private let contentView: UIView = {
         let view = UIView()
@@ -41,6 +44,16 @@ final class CocktailFilterModalViewController: UIViewController {
        return button
     }()
     
+    init(filterType: FilterType, viewModel: CocktailFilterViewModel?) {
+        self.filterType = filterType
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -67,12 +80,12 @@ final class CocktailFilterModalViewController: UIViewController {
             $0.top.equalTo(filterTableView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.height.equalTo(40)
+            $0.height.equalTo(60)
         }
     }
     
     private func configureBackgroundColor() {
-//        view.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        view.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
     }
     
     private func configureFilterTableView() {
@@ -87,15 +100,18 @@ final class CocktailFilterModalViewController: UIViewController {
 
 extension CocktailFilterModalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        filterTableView.snp.makeConstraints {
-            $0.height.equalTo(50 * 3)
+        guard let viewModel = viewModel else { return 0 }
+        contentView.snp.makeConstraints {
+            $0.height.equalTo(70 * viewModel.fetchFilterContent(filterType: filterType).count)
         }
-        return 3
+        
+        return viewModel.fetchFilterContent(filterType: filterType).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let viewModel = viewModel else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: CocktailFilterCell.identifier, for: indexPath) as! CocktailFilterCell
-        cell.fill(with: "")
+        cell.fill(with: viewModel.fetchFilterContent(filterType: filterType)[indexPath.row])
 
         return cell
     }
@@ -108,3 +124,8 @@ extension CocktailFilterModalViewController: UITableViewDelegate {
     }
 }
 
+extension CocktailFilterModalViewController {
+    private func binding() {
+        filterTableView.reloadData()
+    }
+}
