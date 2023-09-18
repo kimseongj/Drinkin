@@ -13,8 +13,10 @@ final class DetailFilterCell: UITableViewCell {
         didSet {
             if isSelected {
                 titleLabel.textColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
+                checkImageView.tintColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
             } else {
                 titleLabel.textColor = .black
+                checkImageView.tintColor = .white
             }
         }
     }
@@ -24,6 +26,14 @@ final class DetailFilterCell: UITableViewCell {
         label.textColor = .black
         
         return label
+    }()
+    
+    private let checkImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "checkmark")
+        imageView.tintColor = .white
+        
+        return imageView
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -37,12 +47,19 @@ final class DetailFilterCell: UITableViewCell {
     
     private func configureUI() {
         contentView.addSubview(titleLabel)
+        contentView.addSubview(checkImageView)
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(24)
             $0.bottom.equalToSuperview().offset(-20)
         }
+        
+        checkImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-24)
+        }
+        
     }
     
     func fill(with title: String) {

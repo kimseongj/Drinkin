@@ -108,8 +108,9 @@ extension CocktailFilterModalViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let viewModel = viewModel else { return UITableViewCell() }
-        let cell = tableView.dequeueReusableCell(withIdentifier: CocktailFilterCell.identifier, for: indexPath) as! CocktailFilterCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: DetailFilterCell.identifier, for: indexPath) as! DetailFilterCell
         cell.fill(with: viewModel.fetchFilterContent(filterType: filterType)[indexPath.row])
+        cell.selectionStyle = .none
 
         return cell
     }
@@ -118,7 +119,13 @@ extension CocktailFilterModalViewController: UITableViewDataSource {
 extension CocktailFilterModalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.checkSelectedFilter()
-        self.dismiss(animated: true)
+        if let previousSelectedIndexPath = viewModel?.selectedDetailFilterIndexPath {
+            tableView.cellForRow(at: previousSelectedIndexPath)?.isSelected = false
+        }
+        
+        tableView.cellForRow(at: indexPath)?.isSelected = true
+        
+        viewModel?.selectedDetailFilterIndexPath = indexPath
     }
 }
 
