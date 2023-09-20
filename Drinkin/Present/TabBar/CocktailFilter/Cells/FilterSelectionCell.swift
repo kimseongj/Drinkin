@@ -37,8 +37,8 @@ class FilterSelectionCell: UICollectionViewCell {
         }
     }
     
-    func changeState() {
-        
+    func fill(with categoryName: String) {
+        categoryNameLabel.text = categoryName + " ▼"
     }
     
     func makeFixedCell() {

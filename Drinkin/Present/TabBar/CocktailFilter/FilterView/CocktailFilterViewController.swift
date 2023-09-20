@@ -10,12 +10,8 @@ import SnapKit
 import Combine
 
 final class CocktailFilterViewController: UIViewController, CocktailFilterDelegate {
-    
-    private enum Section: CaseIterable {
-        case main
-    }
-    
-    private var dataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
+    private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
+    private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
     
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -46,7 +42,7 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
         return button
     }()
     
-    private let selectionFilterCollectionView: UICollectionView =  {
+    private let filterSelectionCollectionView: UICollectionView =  {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 8
@@ -56,7 +52,7 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
         view.showsHorizontalScrollIndicator = false
         view.contentInset = .zero
         view.clipsToBounds = true
-        view.register(SelectionFilterCell.self, forCellWithReuseIdentifier: SelectionFilterCell.identifier)
+        view.register(FilterSelectionCell.self, forCellWithReuseIdentifier: FilterSelectionCell.identifier)
   
         return view
     }()
@@ -69,8 +65,6 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
         return collectionView
     }()
     
-    
-    
     init(viewModel: CocktailFilterViewModel? = nil) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -82,13 +76,15 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureDataSource()
+        
         configureUI()
         configureSelectionFilterCollectionView()
         makeSelectionFilterCollectionViewDisable()
         viewModel?.fetchCocktailFilter(completion: { [weak self] in
             self?.makeSelectionFilterCollectionViewEnable()
         })
+        configureFilterDataSource()
+        filterBinding()
     }
     
     
@@ -99,7 +95,7 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
         
         view.addSubview(titleLabel)
         view.addSubview(initializationButton)
-        view.addSubview(selectionFilterCollectionView)
+        view.addSubview(filterSelectionCollectionView)
         view.addSubview(filteredCollectionView)
         
         titleLabel.snp.makeConstraints {
@@ -112,7 +108,7 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
             $0.trailing.equalTo(safeArea.snp.trailing).offset(-16)
         }
         
-        selectionFilterCollectionView.snp.makeConstraints {
+        filterSelectionCollectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
@@ -120,7 +116,7 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
         }
         
         filteredCollectionView.snp.makeConstraints {
-            $0.top.equalTo(selectionFilterCollectionView.snp.bottom).offset(10)
+            $0.top.equalTo(filterSelectionCollectionView.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
@@ -128,21 +124,19 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
     }
     
     private func configureSelectionFilterCollectionView() {
-        selectionFilterCollectionView.register(SelectionFilterCell.self, forCellWithReuseIdentifier: SelectionFilterCell.identifier)
-        selectionFilterCollectionView.delegate = self
-        selectionFilterCollectionView.dataSource = self
-        
-        if let flowLayout = selectionFilterCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        filterSelectionCollectionView.delegate = self
+    
+        if let flowLayout = filterSelectionCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
     
     private func makeSelectionFilterCollectionViewDisable() {
-        selectionFilterCollectionView.isUserInteractionEnabled = false
+        filterSelectionCollectionView.isUserInteractionEnabled = false
     }
     
     private func makeSelectionFilterCollectionViewEnable() {
-        selectionFilterCollectionView.isUserInteractionEnabled = true
+        filterSelectionCollectionView.isUserInteractionEnabled = true
     }
     
     @objc private func tapInitializationButton() {
@@ -153,42 +147,35 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
     }
 }
 
-//MARK: - SelectionFilterCollectionView DataSource
-extension CocktailFilterViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let viewModel = viewModel else { return 0 }
-        
-        return viewModel.filterTypeList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let viewModel = viewModel else { return UICollectionViewCell() }
-        let cell = selectionFilterCollectionView.dequeueReusableCell(withReuseIdentifier: SelectionFilterCell.identifier, for: indexPath) as! SelectionFilterCell
-        cell.baseNameLabel.text = viewModel.filterTypeList[indexPath.row].description + " ▼"
-
-        return cell
-    }
-}
-
-//MARK: - FilteredCollectionView, SelectionFilterCollectionView Delegate
-extension CocktailFilterViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == selectionFilterCollectionView {
-            guard let viewModel = viewModel else { return }
+//MARK: - FilterSelectionCollectionView DiffableDataSource
+extension CocktailFilterViewController {
+    private func configureFilterDataSource() {
+        filterDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: filterSelectionCollectionView) { (collectionView, indexPath, categoryName) in
+//            guard let viewModel = viewModel else { return }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterSelectionCell.identifier, for: indexPath) as? FilterSelectionCell else { return UICollectionViewCell() }
             
-            let cocktailFilterModalViewController = CocktailFilterModalViewController(filterType: viewModel.filterTypeList[indexPath.row], viewModel: viewModel)
-            cocktailFilterModalViewController.modalPresentationStyle = .overFullScreen
-            present(cocktailFilterModalViewController, animated: false)
-        } else {
+            cell.fill(with: categoryName)
             
+            if self.viewModel?.textFilterTypeList[indexPath.row] != self.viewModel?.filterTypeList[indexPath.row].description {
+                cell.makeFixedCell()
+            }
+
+            return cell
         }
     }
+    
+    private func applyFilterSnapshot(filterList: [String]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(filterList)
+        self.filterDataSource?.apply(snapshot, animatingDifferences: true)
+    }
 }
 
-//MARK: - FilteredCollectionView Diffable Data Source
+//MARK: - FilteredCollectionView DiffableDataSource
 extension CocktailFilterViewController {
-    private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, PreviewDescription> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
+    private func configureCocktailDataSource() {
+        cocktailDataSource = UICollectionViewDiffableDataSource<Section, PreviewDescription> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilteredCocktailCell.identifier, for: indexPath) as? FilteredCocktailCell else { return nil }
             
             cell.fill(with: filteredItem)
@@ -197,18 +184,27 @@ extension CocktailFilterViewController {
         }
     }
     
-    private func applySnapshot(filteredItems: [PreviewDescription]) {
+    private func applyCocktailSnapshot(filteredItems: [PreviewDescription]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, PreviewDescription>()
         snapshot.appendSections([.main])
         snapshot.appendItems(filteredItems)
-        self.dataSource?.apply(snapshot, animatingDifferences: true)
+        self.cocktailDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+//MARK: - Binding
+extension CocktailFilterViewController {
+    private func filterBinding() {
+        viewModel?.textFilterTypeListPublisher.receive(on: RunLoop.main).sink {
+            self.applyFilterSnapshot(filterList: $0)
+        }.store(in: &cancelBag)
     }
 }
 
 extension CocktailFilterViewController {
-    private func binding() {
+    private func cocktailBinding() {
         viewModel?.filteredCocktailListPublisher.receive(on: RunLoop.main).sink {
-            self.applySnapshot(filteredItems: $0)
+            self.applyCocktailSnapshot(filteredItems: $0)
         }.store(in: &cancelBag)
     }
 }
@@ -231,5 +227,20 @@ extension CocktailFilterViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+}
+
+//MARK: - FilteredCollectionView, FilterSelectionCollectionView Delegate
+extension CocktailFilterViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == filterSelectionCollectionView {
+            guard let viewModel = viewModel else { return }
+            
+            let cocktailFilterModalViewController = CocktailFilterModalViewController(filterType: viewModel.filterTypeList[indexPath.row], viewModel: viewModel)
+            cocktailFilterModalViewController.modalPresentationStyle = .overFullScreen
+            present(cocktailFilterModalViewController, animated: false)
+        } else {
+            
+        }
     }
 }

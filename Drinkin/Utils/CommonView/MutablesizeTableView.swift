@@ -1,8 +1,8 @@
 //
-//  MutablesizeTableView.swift
+//  MutableSizeTableView.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/09/18.
+//  Created by kimseongjun on 2023/09/20.
 //
 
 import UIKit
