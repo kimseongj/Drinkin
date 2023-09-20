@@ -64,8 +64,8 @@ final class DetailFilterCell: UITableViewCell {
     }
     
     private func presentSelected() {
-        titleLabel.textColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
-        checkImageView.tintColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
+        titleLabel.textColor = ColorPalette.themeColor
+        checkImageView.tintColor = ColorPalette.themeColor
     }
     
     private func presentDeselected() {
