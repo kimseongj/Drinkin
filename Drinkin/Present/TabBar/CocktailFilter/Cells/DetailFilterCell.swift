@@ -12,11 +12,9 @@ final class DetailFilterCell: UITableViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                titleLabel.textColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
-                checkImageView.tintColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
+                presentSelected()
             } else {
-                titleLabel.textColor = .black
-                checkImageView.tintColor = .white
+                presentDeselected()
             }
         }
     }
@@ -59,10 +57,19 @@ final class DetailFilterCell: UITableViewCell {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-24)
         }
-        
     }
     
     func fill(with title: String) {
         titleLabel.text = title
+    }
+    
+    private func presentSelected() {
+        titleLabel.textColor = ColorPalette.themeColor
+        checkImageView.tintColor = ColorPalette.themeColor
+    }
+    
+    private func presentDeselected() {
+        titleLabel.textColor = .black
+        checkImageView.tintColor = .white
     }
 }

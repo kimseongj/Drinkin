@@ -8,23 +8,11 @@
 import UIKit
 
 class FilterSelectionCell: UICollectionViewCell {
-    override var isSelected: Bool {
-        didSet {
-            if isSelected {
-                self.backgroundColor = .black
-                baseNameLabel.textColor = .white
-            } else {
-                self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
-                baseNameLabel.textColor = .black
-            }
-        }
-    }
-    
-    let baseNameLabel: UILabel = {
-        let baseNameLabel = UILabel()
-        baseNameLabel.sizeToFit()
-        baseNameLabel.font = UIFont(name: "Pretendard-Bold", size: 14)
-        return baseNameLabel
+    let categoryNameLabel: UILabel = {
+        let label = UILabel()
+        label.sizeToFit()
+        label.font = UIFont(name: "Pretendard-Bold", size: 14)
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -37,11 +25,11 @@ class FilterSelectionCell: UICollectionViewCell {
     }
     
     private func cellSetting() {
-        self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
-        self.layer.cornerRadius = 4
-        self.addSubview(baseNameLabel)
+        contentView.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+        contentView.layer.cornerRadius = 4
+        contentView.addSubview(categoryNameLabel)
         
-        baseNameLabel.snp.makeConstraints { make in
+        categoryNameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().offset(-10)
@@ -53,8 +41,8 @@ class FilterSelectionCell: UICollectionViewCell {
         
     }
     
-    func makeCellBlack() {
-        self.backgroundColor = .black
-        baseNameLabel.textColor = .white
+    func makeFixedCell() {
+        contentView.layer.borderWidth = 3
+        contentView.backgroundColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
     }
 }
