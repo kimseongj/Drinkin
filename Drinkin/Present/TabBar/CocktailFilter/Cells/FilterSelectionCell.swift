@@ -41,8 +41,8 @@ class FilterSelectionCell: UICollectionViewCell {
         
     }
     
-    func makeCellBlack() {
-        self.backgroundColor = .black
-        baseNameLabel.textColor = .white
+    func makeFixedCell() {
+        contentView.layer.borderWidth = 3
+        contentView.backgroundColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
     }
 }
