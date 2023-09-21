@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
-final class CocktailFilterViewController: UIViewController, CocktailFilterDelegate {
+final class CocktailFilterViewController: UIViewController {
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
     
@@ -141,10 +141,6 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
     
     @objc private func tapInitializationButton() {
         viewModel?.resetFilter()
-    }
-    
-    func checkSelectedFilter() {
-   
     }
 }
 

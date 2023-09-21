@@ -8,12 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol CocktailFilterDelegate: AnyObject {
-    func checkSelectedFilter()
-}
-
 final class CocktailFilterModalViewController: UIViewController {
-    weak var delegate: CocktailFilterDelegate?
     var viewModel: CocktailFilterViewModel?
     
     private let filterType: FilterType
@@ -118,7 +113,6 @@ extension CocktailFilterModalViewController: UITableViewDataSource {
 
 extension CocktailFilterModalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.checkSelectedFilter()
         if let previousSelectedIndexPath = viewModel?.selectedDetailFilterIndexPath {
             tableView.cellForRow(at: previousSelectedIndexPath)?.isSelected = false
         }
