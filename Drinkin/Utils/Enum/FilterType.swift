@@ -8,7 +8,7 @@
 import Foundation
 
 enum FilterType {
-    case cocktailFilter
+    case categoryFilter
     case holdIngredientFilter
     case level
     case abv
@@ -17,7 +17,7 @@ enum FilterType {
     
     var description: String {
         switch self {
-        case .cocktailFilter:
+        case .categoryFilter:
             return "전체 칵테일"
         case .holdIngredientFilter:
             return "보유 재료"

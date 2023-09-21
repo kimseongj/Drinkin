@@ -12,6 +12,7 @@ class FilterSelectionCell: UICollectionViewCell {
         let label = UILabel()
         label.sizeToFit()
         label.font = UIFont(name: "Pretendard-Bold", size: 14)
+        
         return label
     }()
     
@@ -37,12 +38,24 @@ class FilterSelectionCell: UICollectionViewCell {
         }
     }
     
-    func changeState() {
-        
+    func fill(with categoryName: String) {
+        categoryNameLabel.text = categoryName + " ▼"
+    }
+    
+    func makeBlackCell() {
+        contentView.backgroundColor = .black
+        categoryNameLabel.textColor = .white
     }
     
     func makeFixedCell() {
         contentView.layer.borderWidth = 3
         contentView.backgroundColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
+        categoryNameLabel.textColor = .black
+    }
+    
+    func makeDefaultCell() {
+        contentView.layer.borderWidth = 0
+        contentView.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+        categoryNameLabel.textColor = .black 
     }
 }

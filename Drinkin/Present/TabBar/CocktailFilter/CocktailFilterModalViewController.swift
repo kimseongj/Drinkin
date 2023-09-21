@@ -8,12 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol CocktailFilterDelegate: AnyObject {
-    func checkSelectedFilter()
-}
-
 final class CocktailFilterModalViewController: UIViewController {
-    weak var delegate: CocktailFilterDelegate?
     var viewModel: CocktailFilterViewModel?
     
     private let filterType: FilterType
@@ -42,7 +37,7 @@ final class CocktailFilterModalViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(tapDismissButton), for: .touchUpInside)
         
-       return button
+        return button
     }()
     
     init(filterType: FilterType, viewModel: CocktailFilterViewModel?) {
@@ -103,22 +98,21 @@ extension CocktailFilterModalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
         
-        return viewModel.fetchFilterContent(filterType: filterType).count
+        return viewModel.fetchDetailFilter(filterType: filterType).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let viewModel = viewModel else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailFilterCell.identifier, for: indexPath) as! DetailFilterCell
-        cell.fill(with: viewModel.fetchFilterContent(filterType: filterType)[indexPath.row])
+        cell.fill(with: viewModel.fetchDetailFilter(filterType: filterType)[indexPath.row])
         cell.selectionStyle = .none
-
+        
         return cell
     }
 }
 
 extension CocktailFilterModalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.checkSelectedFilter()
         if let previousSelectedIndexPath = viewModel?.selectedDetailFilterIndexPath {
             tableView.cellForRow(at: previousSelectedIndexPath)?.isSelected = false
         }
@@ -126,11 +120,8 @@ extension CocktailFilterModalViewController: UITableViewDelegate {
         tableView.cellForRow(at: indexPath)?.isSelected = true
         
         viewModel?.selectedDetailFilterIndexPath = indexPath
-    }
-}
-
-extension CocktailFilterModalViewController {
-    private func binding() {
-        filterTableView.reloadData()
+        
+        viewModel?.insertDetailFilter(filterType: filterType, detailFilterIndex: indexPath.row)
+        
     }
 }

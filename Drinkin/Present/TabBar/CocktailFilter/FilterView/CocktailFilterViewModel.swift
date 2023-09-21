@@ -1,22 +1,20 @@
-//
-//  CocktailFilterViewModel.swift
-//  Drinkin
-//
-//  Created by kimseongjun on 2023/05/27.
-//
-
 import Foundation
 import Combine
 
 protocol CocktailFilterViewModel {
     var filteredCocktailListPublisher: Published<[PreviewDescription]>.Publisher { get }
-    var cocktailFilter: CocktailFilter? { get }
+    var detailFilter: CocktailFilter? { get }
+    var selectedDetailFilterIndexPath: IndexPath? { get set }
     var filterTypeList: [FilterType] { get }
-    
+    var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
+    var textFilterTypeList: [String] { get }
+
     
     func fetchCocktailList()
     func fetchCocktailFilter(completion: @escaping () -> Void)
-    func fetchFilterContent(filterType: FilterType) -> [String]
+    func fetchDetailFilter(filterType: FilterType) -> [String]
+    func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int)
+    func resetFilter()
 }
 
 final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
@@ -26,14 +24,26 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     
     var filteredCocktailListPublisher: Published<[PreviewDescription]>.Publisher { $filteredCocktailList }
     
-    var filterTypeList: [FilterType] = [FilterType.cocktailFilter,
-                                FilterType.holdIngredientFilter,
-                                FilterType.level,
-                                FilterType.abv,
-                                FilterType.sugarContent,
-                                FilterType.ingredientQuantity]
+    var detailFilter: CocktailFilter? = nil
     
-    var cocktailFilter: CocktailFilter? = nil
+    var selectedDetailFilterIndexPath: IndexPath?
+    
+    var filterTypeList: [FilterType] = [FilterType.categoryFilter,
+                      FilterType.holdIngredientFilter,
+                      FilterType.level,
+                      FilterType.abv,
+                      FilterType.sugarContent,
+                      FilterType.ingredientQuantity]
+    
+    @Published var textFilterTypeList: [String] = [FilterType.categoryFilter.description,
+                                        FilterType.holdIngredientFilter.description,
+                                        FilterType.level.description,
+                                        FilterType.abv.description,
+                                        FilterType.sugarContent.description,
+                                        FilterType.ingredientQuantity.description]
+    
+    var textFilterTypeListPublisher: Published<[String]>.Publisher { $textFilterTypeList }
+    
     
     private let fetchCocktailFilterUsecase: FetchCocktailFilterUsecase
     private let fetchPreviewDescriptionUsecase: FetchPreviewDescriptionUsecase
@@ -52,27 +62,44 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     
     func fetchCocktailFilter(completion: @escaping () -> Void) {
         fetchCocktailFilterUsecase.execute().receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            self.cocktailFilter = $0
+            self.detailFilter = $0
             completion()
         }).store(in: &cancelBag)
     }
     
-    func fetchFilterContent(filterType: FilterType) -> [String] {
-        guard let cocktailFilter = cocktailFilter else { return [] }
+    func fetchDetailFilter(filterType: FilterType) -> [String] {
+        guard let detailFilter = detailFilter else { return [] }
         
         switch filterType {
-        case FilterType.cocktailFilter:
-            return cocktailFilter.category
+        case FilterType.categoryFilter:
+            return detailFilter.category
         case .holdIngredientFilter:
-            return cocktailFilter.holdIngredient
+            return detailFilter.holdIngredient
         case .level:
-            return cocktailFilter.level
+            return detailFilter.level
         case .abv:
-            return cocktailFilter.abv
+            return detailFilter.abv
         case .sugarContent:
-            return cocktailFilter.sugarContent
+            return detailFilter.sugarContent
         case .ingredientQuantity:
-            return cocktailFilter.ingredientQuantity
+            return detailFilter.ingredientQuantity
+        }
+    }
+    
+    func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int) {
+        if let index = filterTypeList.firstIndex(of: filterType) {
+            if fetchDetailFilter(filterType: filterType)[detailFilterIndex] == "필터 해제" {
+                textFilterTypeList[index] = filterTypeList[index].description
+            } else {
+                textFilterTypeList[index] = fetchDetailFilter(filterType: filterType)[detailFilterIndex]
+            }
+            
+        }
+    }
+    
+    func resetFilter() {
+        for (index, _) in textFilterTypeList.enumerated() {
+            textFilterTypeList[index] = filterTypeList[index].description
         }
     }
 }
