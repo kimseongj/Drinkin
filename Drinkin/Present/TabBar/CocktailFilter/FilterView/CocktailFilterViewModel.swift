@@ -14,6 +14,7 @@ protocol CocktailFilterViewModel {
     func fetchCocktailFilter(completion: @escaping () -> Void)
     func fetchDetailFilter(filterType: FilterType) -> [String]
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int)
+    func resetFilter()
 }
 
 final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
@@ -93,6 +94,12 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
                 textFilterTypeList[index] = fetchDetailFilter(filterType: filterType)[detailFilterIndex]
             }
             
+        }
+    }
+    
+    func resetFilter() {
+        for (index, _) in textFilterTypeList.enumerated() {
+            textFilterTypeList[index] = filterTypeList[index].description
         }
     }
 }

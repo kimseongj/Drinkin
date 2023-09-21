@@ -140,6 +140,7 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
     }
     
     @objc private func tapInitializationButton() {
+        viewModel?.resetFilter()
     }
     
     func checkSelectedFilter() {
