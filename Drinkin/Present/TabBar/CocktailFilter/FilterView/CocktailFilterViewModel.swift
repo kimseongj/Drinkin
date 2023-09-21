@@ -87,7 +87,12 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int) {
         if let index = filterTypeList.firstIndex(of: filterType) {
-            textFilterTypeList[index] = fetchDetailFilter(filterType: filterType)[detailFilterIndex]
+            if fetchDetailFilter(filterType: filterType)[detailFilterIndex] == "필터 해제" {
+                textFilterTypeList[index] = filterTypeList[index].description
+            } else {
+                textFilterTypeList[index] = fetchDetailFilter(filterType: filterType)[detailFilterIndex]
+            }
+            
         }
     }
 }

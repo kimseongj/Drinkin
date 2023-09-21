@@ -151,15 +151,20 @@ final class CocktailFilterViewController: UIViewController, CocktailFilterDelega
 extension CocktailFilterViewController {
     private func configureFilterDataSource() {
         filterDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: filterSelectionCollectionView) { (collectionView, indexPath, categoryName) in
-//            guard let viewModel = viewModel else { return }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterSelectionCell.identifier, for: indexPath) as? FilterSelectionCell else { return UICollectionViewCell() }
             
             cell.fill(with: categoryName)
             
-            if self.viewModel?.textFilterTypeList[indexPath.row] != self.viewModel?.filterTypeList[indexPath.row].description {
+            if self.viewModel?.textFilterTypeList[indexPath.row] != self.viewModel?.filterTypeList[indexPath.row].description && self.viewModel?.filterTypeList[indexPath.row] != FilterType.categoryFilter {
                 cell.makeFixedCell()
+            } else {
+                cell.makeDefaultCell()
             }
-
+            
+            if self.viewModel?.filterTypeList[indexPath.row] == FilterType.categoryFilter {
+                cell.makeBlackCell()
+            }
+            
             return cell
         }
     }
