@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 class MyHomeBarViewController: UIViewController {
-    var delegate: HomeBarVCDelegate?
+    var delegate: MyHomeBarVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: MyHomeBarViewModel?
     private var isTrue: Bool = true
@@ -280,6 +280,7 @@ extension MyHomeBarViewController {
         self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, itemName) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoldedItemCell.identifier, for: indexPath) as? HoldedItemCell else { return nil }
             cell.fill(with: itemName)
+            cell.delegate = self
             
             return cell
         }
@@ -302,4 +303,14 @@ extension MyHomeBarViewController {
             self.applySnapshot(holdedItemList: $0)
         }.store(in: &cancelBag)
     }
+}
+
+extension MyHomeBarViewController: CellDeleteButtonDelegate {
+    func deleteHoldedItem(holdedItem: String) {
+        viewModel?.deleteHoldedItem(holdedItem: holdedItem)
+    }
+}
+
+protocol CellDeleteButtonDelegate: AnyObject {
+    func deleteHoldedItem(holdedItem: String)
 }

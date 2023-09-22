@@ -12,6 +12,7 @@ protocol MyHomeBarViewModel  {
     var holdedItemListPublisher: Published<[String]>.Publisher { get }
 
     func fetchHoldedItem()
+    func deleteHoldedItem(holdedItem: String)
 }
 
 class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
@@ -30,5 +31,11 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
         fetchHoldedItemUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.holdedItemList = $0.holdedItemList
         }).store(in: &cancelBag)
+    }
+    
+    func deleteHoldedItem(holdedItem: String) {
+        if let index = holdedItemList.firstIndex(of: holdedItem) {
+            holdedItemList.remove(at: index)
+        }
     }
 }
