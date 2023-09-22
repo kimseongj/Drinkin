@@ -46,15 +46,15 @@ final class CocktailFilterViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumLineSpacing = 8
-        let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        view.isScrollEnabled = true
-        view.showsVerticalScrollIndicator = true
-        view.showsHorizontalScrollIndicator = false
-        view.contentInset = .zero
-        view.clipsToBounds = true
-        view.register(FilterSelectionCell.self, forCellWithReuseIdentifier: FilterSelectionCell.identifier)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.isScrollEnabled = true
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.contentInset = .zero
+        collectionView.clipsToBounds = true
+        collectionView.register(FilterSelectionCell.self, forCellWithReuseIdentifier: FilterSelectionCell.identifier)
   
-        return view
+        return collectionView
     }()
     
     private lazy var filteredCollectionView: UICollectionView = {
@@ -78,7 +78,7 @@ final class CocktailFilterViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
-        configureSelectionFilterCollectionView()
+        configureFilterSelectionCollectionView()
         makeSelectionFilterCollectionViewDisable()
         viewModel?.fetchCocktailFilter(completion: { [weak self] in
             self?.makeSelectionFilterCollectionViewEnable()
@@ -123,7 +123,7 @@ final class CocktailFilterViewController: UIViewController {
         }
     }
     
-    private func configureSelectionFilterCollectionView() {
+    private func configureFilterSelectionCollectionView() {
         filterSelectionCollectionView.delegate = self
     
         if let flowLayout = filterSelectionCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
