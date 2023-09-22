@@ -25,6 +25,8 @@
 		1C07687E2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07687D2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift */; };
 		1C0768802ABD6BFD0003D4BF /* LoginSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07687F2ABD6BFD0003D4BF /* LoginSettingViewController.swift */; };
 		1C0768832ABD75360003D4BF /* LoginSettingDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */; };
+		1C0768872ABDC72D0003D4BF /* BaseInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */; };
+		1C07688A2ABDDA760003D4BF /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768892ABDDA760003D4BF /* BrandCell.swift */; };
 		1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809DB29E041E000265706 /* LoginViewController.swift */; };
 		1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E029E043DF00265706 /* AppCoordinator.swift */; };
 		1C0809E329E043FF00265706 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E229E043FF00265706 /* Coordinator.swift */; };
@@ -189,6 +191,8 @@
 		1C07687D2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientVCCoordinator.swift; sourceTree = "<group>"; };
 		1C07687F2ABD6BFD0003D4BF /* LoginSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSettingViewController.swift; sourceTree = "<group>"; };
 		1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSettingDIContainer.swift; sourceTree = "<group>"; };
+		1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationViewController.swift; sourceTree = "<group>"; };
+		1C0768892ABDDA760003D4BF /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		1C0809DB29E041E000265706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C0809E029E043DF00265706 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		1C0809E229E043FF00265706 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -447,6 +451,15 @@
 			path = LoginSetting;
 			sourceTree = "<group>";
 		};
+		1C0768882ABDDA490003D4BF /* BaseInformation */ = {
+			isa = PBXGroup;
+			children = (
+				1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */,
+				1C0768892ABDDA760003D4BF /* BrandCell.swift */,
+			);
+			path = BaseInformation;
+			sourceTree = "<group>";
+		};
 		1C0809D829E03FDB00265706 /* LoginViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,6 +664,7 @@
 				1C5CAAFB29DB50CC0053F19A /* Data */,
 				1C5CAAF929DB50A80053F19A /* Domain */,
 				1C5CAAFA29DB50B00053F19A /* Present */,
+				1C0768882ABDDA490003D4BF /* BaseInformation */,
 				1C5CAAD329DB1AE30053F19A /* ViewController.swift */,
 				1C5CAAD829DB1AE50053F19A /* Assets.xcassets */,
 				1C5CAADA29DB1AE50053F19A /* LaunchScreen.storyboard */,
@@ -1118,6 +1132,7 @@
 				1CC9D3F02A1903EE00654A5D /* HoldView.swift in Sources */,
 				1C7807FC2AAEDFED0036FB80 /* FetchUserMadeCocktailListUsecase.swift in Sources */,
 				1C9BAB1C29EFAEC500E979AC /* MutableSizeCollectionView.swift in Sources */,
+				1C07688A2ABDDA760003D4BF /* BrandCell.swift in Sources */,
 				1C0768782ABD66320003D4BF /* IngredientFilterEndpoint.swift in Sources */,
 				1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */,
 				1C0768802ABD6BFD0003D4BF /* LoginSettingViewController.swift in Sources */,
@@ -1208,6 +1223,7 @@
 				1C8804A82AAD792400FB7844 /* LoginViewModel.swift in Sources */,
 				1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */,
 				1C58ECDB2A63C79C00AC2603 /* StoreHoldedIngredientUsecase.swift in Sources */,
+				1C0768872ABDC72D0003D4BF /* BaseInformationViewController.swift in Sources */,
 				1C7A10462A74F8BA009961A1 /* ProductDetailDIContainer.swift in Sources */,
 				1CC9D3E82A19024C00654A5D /* HoldCollectionView.swift in Sources */,
 				1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */,
