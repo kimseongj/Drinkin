@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol CellButtonDelegate: AnyObject {
-    func didTapButton(withID id: Int)
+    func pushProductDetailVC(withID id: Int)
 }
 
 final class CocktailRecommendCell: UICollectionViewCell {
@@ -154,7 +154,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
     
     @objc private func buttonTapped() {
         if let id = cocktailID {
-            delegate?.didTapButton(withID: id)
+            delegate?.pushProductDetailVC(withID: id)
         }
     }
 }

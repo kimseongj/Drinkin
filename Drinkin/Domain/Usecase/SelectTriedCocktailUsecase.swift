@@ -22,5 +22,4 @@ class DefaultSelectTriedCocktailUsecase: SelectTriedCocktailUsecase {
     func execute() -> AnyPublisher<CocktailImageDescription, Error> {
         return triedCocktailRepository.fetchPublisher()
     }
-    
 }
