@@ -83,8 +83,11 @@ final class CocktailFilterViewController: UIViewController {
         viewModel?.fetchCocktailFilter(completion: { [weak self] in
             self?.makeSelectionFilterCollectionViewEnable()
         })
+        viewModel?.fetchCocktailList()
         configureFilterDataSource()
         filterBinding()
+        configureCocktailDataSource()
+        cocktailBinding()
     }
     
     
