@@ -122,6 +122,5 @@ extension CocktailFilterModalViewController: UITableViewDelegate {
         viewModel?.selectedDetailFilterIndexPath = indexPath
         
         viewModel?.insertDetailFilter(filterType: filterType, detailFilterIndex: indexPath.row)
-        
     }
 }

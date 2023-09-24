@@ -158,7 +158,7 @@ extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension CocktailRecommendViewController: CellButtonDelegate {
-    func didTapButton(withID cocktailID: Int) {
+    func pushProductDetailVC(withID cocktailID: Int) {
         delegate?.pushProductDetailVC(cocktailID: cocktailID)
         print(cocktailID)
     }

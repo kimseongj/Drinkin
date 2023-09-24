@@ -26,9 +26,23 @@ class AppCoordinator: NSObject, Coordinator {
     func configureTabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
         
-        let mainTabBarItem = UITabBarItem(title: "메인", image: UIImage(named: "home_icon"), selectedImage: UIImage(named: "home_fill_icon"))
-        let cocktailTabBarItem = UITabBarItem(title: "칵테일", image: UIImage(named: "cocktail_list_icon"), selectedImage: UIImage(named: "cocktail_list_fill_icon"))
-        let homeBarTabBarItem = UITabBarItem(title: "나의 홈바", image: UIImage(named: "my_bar_icon"), selectedImage: UIImage(named: "my_bar_fill_icon"))
+        let selectedTextAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
+        
+        UITabBar.appearance().unselectedItemTintColor = UIColor.black
+        UITabBarItem.appearance().setTitleTextAttributes(selectedTextAttributes, for: .selected)
+        
+        let mainTabBarItem = UITabBarItem(title: "메인",
+                                          image: UIImage(named: "home_icon")?.withRenderingMode(.alwaysOriginal),
+                                          selectedImage: UIImage(named: "home_fill_icon")?.withRenderingMode(.alwaysOriginal))
+        
+        let cocktailTabBarItem = UITabBarItem(title: "칵테일",
+                                              image: UIImage(named: "cocktail_list_icon")?.withRenderingMode(.alwaysOriginal),
+                                              selectedImage: UIImage(named: "cocktail_list_fill_icon")?.withRenderingMode(.alwaysOriginal))
+        
+        let homeBarTabBarItem = UITabBarItem(title: "나의 홈바",
+                                             image: UIImage(named: "my_bar_icon")?.withRenderingMode(.alwaysOriginal),
+                                             selectedImage: UIImage(named: "my_bar_fill_icon")?.withRenderingMode(.alwaysOriginal))
+    
         
         let mainVCCoordinator = MainVCCoordinator()
         let mainViewController = mainVCCoordinator.startPush()

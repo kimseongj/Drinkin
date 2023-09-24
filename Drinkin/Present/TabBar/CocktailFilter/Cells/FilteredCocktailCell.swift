@@ -10,7 +10,7 @@ import SnapKit
 
 final class FilteredCocktailCell: UICollectionViewCell {
     private enum Constant {
-
+        
     }
     
     private let titleLabel: UILabel = {
@@ -56,8 +56,7 @@ final class FilteredCocktailCell: UICollectionViewCell {
     private let ingredientPresentationView = IngredientQuantityView(ingredientQuantity: 2)
     
     private let cocktailImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.backgroundColor = .gray
+        let imageView = UIImageView()
         
         return imageView
     }()
@@ -70,7 +69,7 @@ final class FilteredCocktailCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func configureUI() {
         contentView.backgroundColor = .white
         self.layer.borderWidth = 3
@@ -106,10 +105,13 @@ final class FilteredCocktailCell: UICollectionViewCell {
     }
     
     func fill(with previewDescription: PreviewDescription) {
+        guard let imageURI = URL(string: previewDescription.imageURI) else { return }
+        
         titleLabel.text = previewDescription.title
         levelGradePresentationView.grade = previewDescription.levelGrade
         sugarContentPresentationView.grade = previewDescription.sugarContentGrade
         abvGradePresentationView.grade = previewDescription.abvGrade
         ingredientPresentationView.ingredientQuantity = previewDescription.ingredientQuantity
+        cocktailImageView.load(url: imageURI)
     }
 }

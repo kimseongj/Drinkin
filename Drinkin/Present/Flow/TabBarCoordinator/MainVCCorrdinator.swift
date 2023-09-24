@@ -29,6 +29,7 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
         let cocktailRecommendDIContainer = BriefDescriptionDIContainer()
         
         let mainViewController = MainViewController(viewModel: cocktailRecommendDIContainer.makeCocktailRecommendViewModel())
+        mainViewController.makeBlackBackBarButton()
         mainViewController.delegate = self
         navigationController.setViewControllers([mainViewController], animated: false)
         

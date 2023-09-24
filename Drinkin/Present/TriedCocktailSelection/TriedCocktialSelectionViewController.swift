@@ -321,7 +321,7 @@ extension TriedCocktailSelectionViewController {
 //MARK: - Dismiss ViewController
 extension TriedCocktailSelectionViewController: DismissDelegate {
     func dismissCurrentViewController() {
-        //self.dismiss(animated: true)
-        delegate?.presentLoginVC()
+        self.dismiss(animated: true)
+        //delegate?.presentLoginVC()
     }
 }

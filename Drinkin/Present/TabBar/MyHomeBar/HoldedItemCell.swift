@@ -13,6 +13,8 @@ final class HoldedItemCell: UICollectionViewCell {
         static let padding: Int = 12
     }
     
+    weak var delegate: CellDeleteButtonDelegate?
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 13)
@@ -24,6 +26,7 @@ final class HoldedItemCell: UICollectionViewCell {
         let button = UIButton()
         button.setImage(UIImage(named: "delete_icon"), for: .normal)
         button.tintColor = .black
+        button.addTarget(self, action: #selector(tapDeleteButton), for: .touchUpInside)
         
         return button
     }()
@@ -64,5 +67,11 @@ final class HoldedItemCell: UICollectionViewCell {
     
     func fill(with itemName: String) {
         titleLabel.text = itemName
+    }
+    
+    @objc
+    func tapDeleteButton() {
+        guard let titleText = titleLabel.text else { return }
+        delegate?.deleteHoldedItem(holdedItem: titleText)
     }
 }

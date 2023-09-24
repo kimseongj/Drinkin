@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 class MyHomeBarViewController: UIViewController {
-    var delegate: HomeBarVCDelegate?
+    var delegate: MyHomeBarVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: MyHomeBarViewModel?
     private var isTrue: Bool = true
@@ -30,22 +30,26 @@ class MyHomeBarViewController: UIViewController {
     private let holdIngredientLabel: UILabel = {
         let label = UILabel()
         label.text = "가지고 있는 재료"
-        label.font = UIFont(name: "Pretendard-Bold", size: 17)
+        label.font = UIFont(name: "Pretendard-ExtraBold", size: 17)
         
         return label
     }()
     
-    private let moreButton: UIButton = {
+    private let loginSettingButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "vertical_elipsis"), for: .normal)
+        if let originalImage = UIImage(systemName: "person.circle") {
+            let scaledImage = originalImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 36.0))
+            button.setImage(scaledImage, for: .normal)
+        }
         button.tintColor = .black
+        button.addTarget(self, action: #selector(tapLoginSettingButton), for: .touchUpInside)
         
         return button
     }()
     
     private let addItemView = UIView()
     
-    private let addLabel1: UILabel = {
+    private lazy var addLabel1: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.text = "첫번 째 재료를 추가하고"
@@ -53,7 +57,7 @@ class MyHomeBarViewController: UIViewController {
         return label
     }()
     
-    private let addLabel2: UILabel = {
+    private lazy var addLabel2: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.text = "만들 수 있는 칵테일을 찾아보세요."
@@ -61,7 +65,7 @@ class MyHomeBarViewController: UIViewController {
         return label
     }()
     
-    private let addButton: UIButton = {
+    private lazy var largeAddButton: UIButton = {
         let button = UIButton()
         button.setTitle("추가하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -70,6 +74,17 @@ class MyHomeBarViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
         button.layer.borderWidth = 3
+        button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var smallAddButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("추가하기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
+        button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         
         return button
     }()
@@ -161,7 +176,7 @@ class MyHomeBarViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(titleLabel)
-        view.addSubview(moreButton)
+        view.addSubview(loginSettingButton)
         view.addSubview(holdIngredientLabel)
         view.addSubview(convertableItemView)
         
@@ -170,7 +185,7 @@ class MyHomeBarViewController: UIViewController {
             $0.leading.equalTo(safeArea.snp.leading).offset(16)
         }
         
-        moreButton.snp.makeConstraints {
+        loginSettingButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)
             $0.trailing.equalTo(safeArea.snp.trailing).offset(-16)
             $0.height.width.equalTo(28)
@@ -195,7 +210,7 @@ class MyHomeBarViewController: UIViewController {
         view.addSubview(userMadeCocktailListButton)
         addItemView.addSubview(addLabel1)
         addItemView.addSubview(addLabel2)
-        addItemView.addSubview(addButton)
+        addItemView.addSubview(largeAddButton)
         
         addItemView.snp.makeConstraints {
             $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(32)
@@ -212,7 +227,7 @@ class MyHomeBarViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
         
-        addButton.snp.makeConstraints {
+        largeAddButton.snp.makeConstraints {
             $0.top.equalTo(addLabel2.snp.bottom).offset(15)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(39)
@@ -234,9 +249,15 @@ class MyHomeBarViewController: UIViewController {
     }
     
     private func configureHoldedItem() {
+        view.addSubview(smallAddButton)
         view.addSubview(holdedItemCollectionView)
         view.addSubview(savedCocktailListButton)
         view.addSubview(userMadeCocktailListButton)
+        
+        smallAddButton.snp.makeConstraints {
+            $0.centerY.equalTo(holdIngredientLabel)
+            $0.trailing.equalToSuperview().offset(-16)
+        }
         
         holdedItemCollectionView.snp.makeConstraints {
             $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(16)
@@ -264,6 +285,16 @@ class MyHomeBarViewController: UIViewController {
     }
     
     @objc
+    private func tapLoginSettingButton() {
+        delegate?.pushLoginSettingVC()
+    }
+    
+    @objc
+    private func tapAddButton() {
+        delegate?.pushAddIngredientVC()
+    }
+    
+    @objc
     private func tapSavedCocktailListButton() {
         delegate?.pushSavedCocktailListVC()
     }
@@ -280,6 +311,7 @@ extension MyHomeBarViewController {
         self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, itemName) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoldedItemCell.identifier, for: indexPath) as? HoldedItemCell else { return nil }
             cell.fill(with: itemName)
+            cell.delegate = self
             
             return cell
         }
@@ -302,4 +334,14 @@ extension MyHomeBarViewController {
             self.applySnapshot(holdedItemList: $0)
         }.store(in: &cancelBag)
     }
+}
+
+extension MyHomeBarViewController: CellDeleteButtonDelegate {
+    func deleteHoldedItem(holdedItem: String) {
+        viewModel?.deleteHoldedItem(holdedItem: holdedItem)
+    }
+}
+
+protocol CellDeleteButtonDelegate: AnyObject {
+    func deleteHoldedItem(holdedItem: String)
 }
