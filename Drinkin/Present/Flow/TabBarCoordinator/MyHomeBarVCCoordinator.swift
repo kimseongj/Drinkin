@@ -30,6 +30,7 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
         let myHomeBarDIContainer = MyHomeBarDIContainer()
         
         let myHomeBarViewController = MyHomeBarViewController(viewModel: myHomeBarDIContainer.makeMyHomeBarViewModel())
+        myHomeBarViewController.makeBlackBackBarButton()
         myHomeBarViewController.delegate = self
         navigationController.setViewControllers([myHomeBarViewController], animated: false)
         
