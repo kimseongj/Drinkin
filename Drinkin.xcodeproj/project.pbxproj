@@ -28,6 +28,7 @@
 		1C0768872ABDC72D0003D4BF /* BaseInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */; };
 		1C07688A2ABDDA760003D4BF /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768892ABDDA760003D4BF /* BrandCell.swift */; };
 		1C0768922ABEFCCD0003D4BF /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */; };
+		1C0768A32AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */; };
 		1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809DB29E041E000265706 /* LoginViewController.swift */; };
 		1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E029E043DF00265706 /* AppCoordinator.swift */; };
 		1C0809E329E043FF00265706 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E229E043FF00265706 /* Coordinator.swift */; };
@@ -161,7 +162,6 @@
 		1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890329EBBD9800D3E1D2 /* LoginService.swift */; };
 		1CCE890629EBC13C00D3E1D2 /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */; };
 		1CCE890829EBC49400D3E1D2 /* RefreshEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */; };
-		1CCE890A29EBD9BF00D3E1D2 /* 12312312Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */; };
 		1CD75BA52AAD98C50040F085 /* SavedCocktailListDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */; };
 		1CD75BA72AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD75BA62AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift */; };
 		1CDDB92B2A3AD7370007983A /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */; };
@@ -195,6 +195,7 @@
 		1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationViewController.swift; sourceTree = "<group>"; };
 		1C0768892ABDDA760003D4BF /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAccessTokenEndpoint.swift; sourceTree = "<group>"; };
 		1C0809DB29E041E000265706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C0809E029E043DF00265706 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		1C0809E229E043FF00265706 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -322,7 +323,6 @@
 		1CCE890329EBBD9800D3E1D2 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
 		1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshEndpoint.swift; sourceTree = "<group>"; };
-		1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 12312312Endpoint.swift; sourceTree = "<group>"; };
 		1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCocktailListDIContainer.swift; sourceTree = "<group>"; };
 		1CD75BA62AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMadeCocktailListDIContainer.swift; sourceTree = "<group>"; };
 		1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -798,7 +798,7 @@
 			children = (
 				1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */,
 				1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */,
-				1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */,
+				1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */,
 			);
 			path = LoginEndpoint;
 			sourceTree = "<group>";
@@ -1124,7 +1124,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */,
-				1CCE890A29EBD9BF00D3E1D2 /* 12312312Endpoint.swift in Sources */,
 				1C58ECDD2A63C84800AC2603 /* FetchBriefDescriptionUsecase.swift in Sources */,
 				1C7A10442A74F6FF009961A1 /* CocktailDescription.swift in Sources */,
 				1CA20ED62A568F21009FDD90 /* StoreTriedCocktailUsecase.swift in Sources */,
@@ -1262,6 +1261,7 @@
 				1C951D472ABB389000662B35 /* ColorPalette.swift in Sources */,
 				1C504CCF2AB46CEA005A0B25 /* CocktailFilterRepository.swift in Sources */,
 				1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */,
+				1C0768A32AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift in Sources */,
 				1CC9D3EE2A19035600654A5D /* IdentifierType.swift in Sources */,
 				1CB0AD052AAC3EF100847544 /* UserMadeCocktailListVCCoordinator.swift in Sources */,
 				1CCE88ED29EBA7AB00D3E1D2 /* Parser.swift in Sources */,

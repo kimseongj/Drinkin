@@ -1,13 +1,12 @@
 //
-//  12312312Endpoint.swift
+//  RefreshAccessTokenEndpoint.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/16.
+//  Created by kimseongjun on 2023/09/26.
 //
 
 import Foundation
 
-//http://3.35.208.50/v1/refresh-token?refresh_token={}
 struct RefreshAccessTokenEndpoint: EndpointMakeable {
     var baseURL: String = "http://3.35.208.50"
     
