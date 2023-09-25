@@ -25,6 +25,5 @@ class EmptyRectangleView: UIView {
         self.snp.makeConstraints {
             $0.height.width.equalTo(12)
         }
-        
     }
 }
