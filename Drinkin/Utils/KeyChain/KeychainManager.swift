@@ -10,8 +10,7 @@ import Foundation
 class KeychainManager {
     func saveToken(tokenType: TokenType, token: String) throws {
         let account = tokenType.description
-        guard let password = token.data(using: String.Encoding.utf8) else { return } //오류처리 필요
-        
+        guard let password = token.data(using: String.Encoding.utf8) else { return }
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: account,
@@ -31,7 +30,6 @@ class KeychainManager {
     
     func readToken(tokenType: TokenType) throws -> String? {
         let account = tokenType.description
-        
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecMatchLimit as String: kSecMatchLimitOne,
@@ -50,27 +48,25 @@ class KeychainManager {
         guard status == errSecSuccess else {
             throw KeychainError.unhandledError(status: status)
         }
-          
+        
         guard let existingItem = item as? [String: Any],
-                  let tokenData = existingItem[kSecValueData as String] as? Data,
-                  let token = String(data: tokenData, encoding: .utf8) else {
-                return nil
-            }
+              let tokenData = existingItem[kSecValueData as String] as? Data,
+              let token = String(data: tokenData, encoding: .utf8) else {
+            return nil
+        }
         
         return token
     }
     
     func updateToken(tokenType: TokenType, token: String) throws {
         let account = tokenType.description
-        
+        let password = token.data(using: String.Encoding.utf8)!
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: account
         ]
         
-        let password = token.data(using: String.Encoding.utf8)!
         let attributes: [String: Any] = [kSecValueData as String: password]
-        
         let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
         
         guard status != errSecDuplicateItem else {
@@ -88,7 +84,6 @@ class KeychainManager {
     
     func deleteToken(tokenType: TokenType) throws {
         let account = tokenType.description
-        
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccount as String: account

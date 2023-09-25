@@ -462,6 +462,14 @@
 			path = BaseInformation;
 			sourceTree = "<group>";
 		};
+		1C0768A12AC1EE5A0003D4BF /* ErrorEnum */ = {
+			isa = PBXGroup;
+			children = (
+				1CA969162A9078690076731B /* KeyChainError.swift */,
+			);
+			path = ErrorEnum;
+			sourceTree = "<group>";
+		};
 		1C0809D829E03FDB00265706 /* LoginViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -863,6 +871,7 @@
 		1CA968E52A8E40120076731B /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				1C0768A12AC1EE5A0003D4BF /* ErrorEnum */,
 				1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */,
 				1CA968E62A8E40200076731B /* TitleText.swift */,
 				1CA968E82A8E423B0076731B /* MiscStrings.swift */,
@@ -895,7 +904,6 @@
 			isa = PBXGroup;
 			children = (
 				1CA8ED252A65915600CE5E1A /* KeychainManager.swift */,
-				1CA969162A9078690076731B /* KeyChainError.swift */,
 			);
 			path = KeyChain;
 			sourceTree = "<group>";
@@ -914,6 +922,7 @@
 			isa = PBXGroup;
 			children = (
 				1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */,
+				1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -972,7 +981,6 @@
 				1C71A4AD2A52928500F1814A /* CommonTool */,
 				1CA969152A9059800076731B /* KeyChain */,
 				1CC9D3EC2A19034900654A5D /* Protocol */,
-				1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
