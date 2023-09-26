@@ -10,12 +10,11 @@ import SnapKit
 import Combine
 
 final class CocktailFilterViewController: UIViewController {
+    private var viewModel: CocktailFilterViewModel?
+    private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
     
-    private var cancelBag: Set<AnyCancellable> = []
-    
-    var viewModel: CocktailFilterViewModel?
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -53,7 +52,7 @@ final class CocktailFilterViewController: UIViewController {
         collectionView.contentInset = .zero
         collectionView.clipsToBounds = true
         collectionView.register(FilterSelectionCell.self, forCellWithReuseIdentifier: FilterSelectionCell.identifier)
-  
+        
         return collectionView
     }()
     
@@ -76,7 +75,6 @@ final class CocktailFilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
         configureFilterSelectionCollectionView()
         makeSelectionFilterCollectionViewDisable()
@@ -128,7 +126,7 @@ final class CocktailFilterViewController: UIViewController {
     
     private func configureFilterSelectionCollectionView() {
         filterSelectionCollectionView.delegate = self
-    
+        
         if let flowLayout = filterSelectionCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
@@ -218,17 +216,17 @@ extension CocktailFilterViewController {
 extension CocktailFilterViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                             heightDimension: .fractionalHeight(1.0))
+                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .absolute(120))
+                                               heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                         subitems: [item])
+                                                       subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
-
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
