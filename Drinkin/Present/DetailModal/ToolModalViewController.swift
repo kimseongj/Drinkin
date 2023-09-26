@@ -8,16 +8,10 @@
 import UIKit
 
 class ToolModalViewController: UIViewController {
-    
-    private enum ModalType {
-        static let toolModalType = "tool"
-        static let buildModalType = "build"
-        static let glassModalType = "glass"
-    }
-    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        
         return imageView
     }()
     
@@ -25,6 +19,7 @@ class ToolModalViewController: UIViewController {
         let label = UILabel()
         label.text = "스푼"
         label.font = UIFont.boldSystemFont(ofSize: 24)
+        
         return label
     }()
     
@@ -32,6 +27,7 @@ class ToolModalViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "바 스푼은 재료를 저을 때 사용한다. 일반 스푼과 다르게, 더 기다랗고 젓는 데 도움이 되는 꼬인 줄기 부분이 있다."
+        
         return label
     }()
     
@@ -39,6 +35,7 @@ class ToolModalViewController: UIViewController {
         let label = UILabel()
         label.text = "정보"
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        
         return label
     }()
     
