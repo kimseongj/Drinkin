@@ -12,7 +12,7 @@ final class HoldCollectionViewCell: UICollectionViewCell {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 14)
         label.sizeToFit()
         
         return label
@@ -24,7 +24,7 @@ final class HoldCollectionViewCell: UICollectionViewCell {
     private let emptyLabel: UILabel = {
         let label = UILabel()
         label.text = MiscStrings.hyphen
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 14)
         
         return label
     }()
