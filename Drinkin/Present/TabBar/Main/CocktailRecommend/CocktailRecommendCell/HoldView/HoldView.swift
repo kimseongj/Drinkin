@@ -89,19 +89,19 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         guard let validBriefDescription = briefDescription else { return 0 }
         
         switch title {
-        case TitleText.base:
+        case InformationStrings.base:
             if validBriefDescription.categoryList.count == 0 {
                 return 1
             } else {
                 return validBriefDescription.categoryList.count
             }
-        case TitleText.ingredient:
+        case InformationStrings.ingredient:
             if validBriefDescription.ingredientList.count == 0 {
                 return 1
             } else {
                 return validBriefDescription.ingredientList.count
             }
-        case TitleText.garnish:
+        case InformationStrings.garnish:
             if validBriefDescription.garnishList.count == 0 {
                 return 1
             } else {
@@ -118,21 +118,21 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         guard let validBriefDescription = briefDescription else { return cell }
         
         switch title {
-        case TitleText.base:
+        case InformationStrings.base:
             if validBriefDescription.categoryList.count == 0 {
                 cell.makeEmptyCell()
             } else {
                 cell.fill(with: validBriefDescription.categoryList[indexPath.row].categoryNameKo) 
                 cell.makeHoldedItemCell()
             }
-        case TitleText.ingredient:
+        case InformationStrings.ingredient:
             if validBriefDescription.ingredientList.count == 0 {
                 cell.makeEmptyCell()
             } else {
                 cell.fill(with: validBriefDescription.ingredientList[indexPath.row].ingredientNameKo)
                 cell.makeHoldedItemCell()
             }
-        case TitleText.garnish:
+        case InformationStrings.garnish:
             if validBriefDescription.garnishList.count == 0 {
                 cell.makeEmptyCell()
             } else {

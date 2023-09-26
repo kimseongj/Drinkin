@@ -200,11 +200,11 @@ extension CocktailRecommendCell {
                             abvGrade: Int,
                             sugarContentGrade: Int) {
         
-        let levelGradePresentationView = GradePresentationView(title: TitleText.level,
+        let levelGradePresentationView = GradePresentationView(title: InformationStrings.level,
                                                                grade: levelGrade)
-        let abvGradePresentationView = GradePresentationView(title: TitleText.abv,
+        let abvGradePresentationView = GradePresentationView(title: InformationStrings.abv,
                                                              grade: abvGrade)
-        let sugarContentGradePresentationView = GradePresentationView(title: TitleText.sugarContent,
+        let sugarContentGradePresentationView = GradePresentationView(title: InformationStrings.sugarContent,
                                                                       grade: sugarContentGrade)
         
         summaryOfCocktailView.addSubview(levelGradePresentationView)
@@ -250,11 +250,11 @@ extension CocktailRecommendCell {
     private func configureHoldViews(briefDescription: BriefDescription) {
         
         let baseView = HoldView(briefDescription: briefDescription,
-                                title: TitleText.base)
+                                title: InformationStrings.base)
         let ingredientView = HoldView(briefDescription: briefDescription,
-                                      title: TitleText.ingredient)
+                                      title: InformationStrings.ingredient)
         let garnishView = HoldView(briefDescription: briefDescription,
-                                   title: TitleText.garnish)
+                                   title: InformationStrings.garnish)
         
         holdStackView.addArrangedSubview(baseView)
         holdStackView.addArrangedSubview(ingredientView)
