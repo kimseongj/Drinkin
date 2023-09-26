@@ -8,7 +8,6 @@
 import UIKit
 
 class HoldCollectionView: UICollectionView {
-    
     override var contentSize: CGSize{
         didSet {
             if oldValue.height != self.contentSize.height {
