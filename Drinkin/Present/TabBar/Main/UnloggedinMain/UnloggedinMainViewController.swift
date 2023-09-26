@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UnloggedinMainViewController: UIViewController {
+final class UnloggedinMainViewController: UIViewController {
     
     weak var delegate: MainViewDelegate?
 
@@ -67,14 +67,16 @@ class UnloggedinMainViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        configureBackgroundColor()
         configureUI()
     }
     
-    func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
-    
+    private func configureBackgroundColor() {
         view.backgroundColor = .white
-        
+    }
+    
+    private func configureUI() {
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(logoImage1)
         view.addSubview(skeletonView)
         skeletonView.addSubview(exampleCocktailImageView)
