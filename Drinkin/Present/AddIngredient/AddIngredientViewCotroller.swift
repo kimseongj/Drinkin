@@ -11,7 +11,6 @@ import Combine
 
 final class AddIngredientViewCotroller: UIViewController {
     private var viewModel: AddIngredientViewModel?
-    
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var ingredientDataSource: UICollectionViewDiffableDataSource<Section, IngredientDescription>!
     
@@ -51,7 +50,6 @@ final class AddIngredientViewCotroller: UIViewController {
         configureTitle()
         configureBackgroundColor()
         configureUI()
-        
     }
     
     private func configureTitle() {

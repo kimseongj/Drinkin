@@ -49,11 +49,8 @@ class SelectCircleView: UIView {
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
-       // self.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-        
         let circleRect = bounds.insetBy(dx: bounds.height * 0.1, dy: bounds.width * 0.1)
         
-        //원 그리기
         context.beginPath()
         context.setLineWidth(2)
         context.setStrokeColor(UIColor.black.cgColor)
@@ -62,7 +59,7 @@ class SelectCircleView: UIView {
         context.drawPath(using: .fillStroke)
         context.closePath()
         
-        //체크 표시 그리기
+
         context.beginPath()
         context.setLineWidth(2)
         context.setLineJoin(.round)

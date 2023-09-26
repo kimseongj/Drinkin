@@ -17,7 +17,6 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
     
     @Published var ingredientFilter: [String] = []
     @Published var ingredientList: [IngredientDescription] = []
-    
     var ingredientFilterPublisher: Published<[String]>.Publisher { $ingredientFilter }
     var ingredientListPublisher: Published<[IngredientDescription]>.Publisher { $ingredientList }
     
@@ -26,6 +25,4 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
     init(fetchIngredientFilterUsecase: FetchIngredientFilterUsecase) {
         self.fetchIngredientFilterUsecase = fetchIngredientFilterUsecase
     }
-    
-    
 }

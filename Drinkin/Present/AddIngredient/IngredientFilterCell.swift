@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 
 final class IngredientFilterCell: UICollectionViewCell {
-    let categoryNameLabel: UILabel = {
+    private let categoryNameLabel: UILabel = {
         let label = UILabel()
         label.sizeToFit()
-        label.font = UIFont(name: "Pretendard-Bold", size: 14)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 14)
         
         return label
     }()
@@ -32,7 +32,6 @@ final class IngredientFilterCell: UICollectionViewCell {
     
     private func configureUI() {
         contentView.layer.cornerRadius = 4
-        
         contentView.addSubview(categoryNameLabel)
         
         categoryNameLabel.snp.makeConstraints { make in
