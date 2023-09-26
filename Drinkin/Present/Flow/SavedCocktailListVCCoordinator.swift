@@ -18,8 +18,8 @@ class SavedCocktailListVCCoordinator: Coordinator {
 
     func start() {
         let savedCocktailListDIContainer = SavedCocktailListDIContainer()
-        
         let vc = SavedCocktailListViewController(viewModel: savedCocktailListDIContainer.makeSavedCocktailListViewModel())
+        
         navigationController.pushViewController(vc, animated: true)
     }
     
