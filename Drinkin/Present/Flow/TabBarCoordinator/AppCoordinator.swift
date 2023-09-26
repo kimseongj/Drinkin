@@ -25,24 +25,22 @@ class AppCoordinator: NSObject, Coordinator {
     
     func configureTabBarController() -> UITabBarController {
         let tabBarController = UITabBarController()
-        
         let selectedTextAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
         
         UITabBar.appearance().unselectedItemTintColor = UIColor.black
         UITabBarItem.appearance().setTitleTextAttributes(selectedTextAttributes, for: .selected)
         
-        let mainTabBarItem = UITabBarItem(title: "메인",
-                                          image: UIImage(named: "home_icon")?.withRenderingMode(.alwaysOriginal),
-                                          selectedImage: UIImage(named: "home_fill_icon")?.withRenderingMode(.alwaysOriginal))
+        let mainTabBarItem = UITabBarItem(title: TabBarTitleStrings.main,
+                                          image: ImageStorage.homeIcon?.withRenderingMode(.alwaysOriginal),
+                                          selectedImage: ImageStorage.homeFillIcon?.withRenderingMode(.alwaysOriginal))
         
-        let cocktailTabBarItem = UITabBarItem(title: "칵테일",
-                                              image: UIImage(named: "cocktail_list_icon")?.withRenderingMode(.alwaysOriginal),
-                                              selectedImage: UIImage(named: "cocktail_list_fill_icon")?.withRenderingMode(.alwaysOriginal))
+        let cocktailTabBarItem = UITabBarItem(title: TabBarTitleStrings.cocktail,
+                                              image: ImageStorage.cocktailIcon?.withRenderingMode(.alwaysOriginal),
+                                              selectedImage: ImageStorage.cocktailFillIcon?.withRenderingMode(.alwaysOriginal))
         
-        let homeBarTabBarItem = UITabBarItem(title: "나의 홈바",
-                                             image: UIImage(named: "my_bar_icon")?.withRenderingMode(.alwaysOriginal),
-                                             selectedImage: UIImage(named: "my_bar_fill_icon")?.withRenderingMode(.alwaysOriginal))
-    
+        let homeBarTabBarItem = UITabBarItem(title: TabBarTitleStrings.myHomeBar,
+                                             image: ImageStorage.myBarIcon?.withRenderingMode(.alwaysOriginal),
+                                             selectedImage: ImageStorage.myBarFillIcon?.withRenderingMode(.alwaysOriginal))
         
         let mainVCCoordinator = MainVCCoordinator()
         let mainViewController = mainVCCoordinator.startPush()
@@ -56,7 +54,9 @@ class AppCoordinator: NSObject, Coordinator {
         let homeBarViewController = homeBarVCCoordinator.startPush()
         homeBarViewController.tabBarItem = homeBarTabBarItem
         
-        tabBarController.viewControllers = [mainViewController, cocktailViewController, homeBarViewController]
+        tabBarController.viewControllers = [mainViewController,
+                                            cocktailViewController,
+                                            homeBarViewController]
         
         return tabBarController
     }
