@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */; };
-		1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */; };
 		1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */; };
 		1C04C19629DEED2700E381C2 /* MyHomeBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19529DEED2700E381C2 /* MyHomeBarViewController.swift */; };
 		1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19929DEED3D00E381C2 /* MainViewController.swift */; };
@@ -30,6 +28,8 @@
 		1C0768922ABEFCCD0003D4BF /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */; };
 		1C0768A32AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */; };
 		1C0768A52AC1F1060003D4BF /* FirstLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */; };
+		1C0768A72AC1F4890003D4BF /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A62AC1F4890003D4BF /* APIError.swift */; };
+		1C0768A92AC1F4990003D4BF /* TabBarTitleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */; };
 		1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809DB29E041E000265706 /* LoginViewController.swift */; };
 		1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E029E043DF00265706 /* AppCoordinator.swift */; };
 		1C0809E329E043FF00265706 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E229E043FF00265706 /* Coordinator.swift */; };
@@ -175,8 +175,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewController.swift; sourceTree = "<group>"; };
-		1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildModalViewController.swift; sourceTree = "<group>"; };
 		1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolModalViewController.swift; sourceTree = "<group>"; };
 		1C04C19529DEED2700E381C2 /* MyHomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarViewController.swift; sourceTree = "<group>"; };
 		1C04C19929DEED3D00E381C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +196,8 @@
 		1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAccessTokenEndpoint.swift; sourceTree = "<group>"; };
 		1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLoginResponse.swift; sourceTree = "<group>"; };
+		1C0768A62AC1F4890003D4BF /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarTitleStrings.swift; sourceTree = "<group>"; };
 		1C0809DB29E041E000265706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C0809E029E043DF00265706 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		1C0809E229E043FF00265706 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -431,8 +431,6 @@
 			isa = PBXGroup;
 			children = (
 				1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */,
-				1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */,
-				1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */,
 			);
 			path = DetailModal;
 			sourceTree = "<group>";
@@ -468,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				1CA969162A9078690076731B /* KeyChainError.swift */,
+				1C0768A62AC1F4890003D4BF /* APIError.swift */,
 			);
 			path = ErrorEnum;
 			sourceTree = "<group>";
@@ -884,6 +883,7 @@
 				1C504CDB2AB5E6B7005A0B25 /* FilterType.swift */,
 				1CED21972A739A700078916A /* Section.swift */,
 				1C951D462ABB389000662B35 /* ColorPalette.swift */,
+				1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1151,6 +1151,7 @@
 				1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */,
 				1C0768802ABD6BFD0003D4BF /* LoginSettingViewController.swift in Sources */,
 				1CCE88FE29EBB32300D3E1D2 /* CategoryCell.swift in Sources */,
+				1C0768A92AC1F4990003D4BF /* TabBarTitleStrings.swift in Sources */,
 				1CA968E72A8E40200076731B /* TitleText.swift in Sources */,
 				1CA9692B2A9DA3A70076731B /* CocktailFilterModalViewController.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
@@ -1192,7 +1193,6 @@
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
 				1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */,
 				1CA9695E2AA30BBB0076731B /* LoginCoordinator.swift in Sources */,
-				1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */,
 				1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */,
 				1C504CDA2AB47268005A0B25 /* CocktailFilterEndpoint.swift in Sources */,
 				1CA9691B2A90D64B0076731B /* Provider.swift in Sources */,
@@ -1206,7 +1206,6 @@
 				1C7807FA2AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift in Sources */,
 				1CA969382AA0B7230076731B /* FetchHoldedItemUsecase.swift in Sources */,
 				1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */,
-				1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */,
 				1C58ECE12A63CA3A00AC2603 /* TriedCocktailRepository.swift in Sources */,
 				1C504CD72AB47035005A0B25 /* CocktailListEndpoint.swift in Sources */,
 				1CA969292A949D070076731B /* SelectablePreviewDescription.swift in Sources */,
@@ -1247,6 +1246,7 @@
 				1C16A86B2A13AD3D001640E2 /* CocktailRecommendViewController.swift in Sources */,
 				1CCE88E529E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift in Sources */,
 				1CF62FB62A1252F30043A32F /* CocktailFilterViewController.swift in Sources */,
+				1C0768A72AC1F4890003D4BF /* APIError.swift in Sources */,
 				1C41D9342AAF0CC300D50F4F /* SavedCocktailListViewModel.swift in Sources */,
 				1CCE890229EBBCCA00D3E1D2 /* HTTPMethod.swift in Sources */,
 				1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */,

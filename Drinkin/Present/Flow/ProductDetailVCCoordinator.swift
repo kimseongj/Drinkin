@@ -26,7 +26,6 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     
     func start() {
         let productDetailDIContainer = ProductDetailDIContainer()
-        
         let productDetailViewController = ProductDetailViewController(viewModel: productDetailDIContainer.makeProductDetailViewModel(cocktailID: cocktailID))
         
         productDetailViewController.delegate = self
@@ -41,6 +40,7 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     
     func pushToolModalVC() {
         let toolModalVCCoordinator = ToolModalVCCoordinator(navigationController: navigationController)
+        
         toolModalVCCoordinator.parentCoordinator = self
         childCoordinators.append(toolModalVCCoordinator)
         toolModalVCCoordinator.start()
@@ -48,6 +48,7 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     
     func pushSkillModalVC() {
         let buildModalVCCoordinator = SkillModalVCCoordinator(navigationController: navigationController)
+        
         buildModalVCCoordinator.parentCoordinator = self
         childCoordinators.append(buildModalVCCoordinator)
         buildModalVCCoordinator.start()
@@ -55,6 +56,7 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     
     func pushGlassModalVC() {
         let glassModalVCCoordinator = GlassModalVCCoordinator(navigationController: navigationController)
+        
         glassModalVCCoordinator.parentCoordinator = self
         childCoordinators.append(glassModalVCCoordinator)
         glassModalVCCoordinator.start()
