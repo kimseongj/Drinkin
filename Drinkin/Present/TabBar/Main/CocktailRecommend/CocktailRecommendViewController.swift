@@ -33,6 +33,7 @@ final class CocktailRecommendViewController: UIViewController {
     private let logoImage: UIImageView = {
         let logoImage = UIImageView()
         logoImage.image = ImageStorage.drinkinLogo
+        
         return logoImage
     }()
     
@@ -57,6 +58,7 @@ final class CocktailRecommendViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        configureBackgroundColor()
         configureUI()
         setupRecommendCocktailCollectionView()
         configureDataSource()
@@ -64,9 +66,12 @@ final class CocktailRecommendViewController: UIViewController {
         viewModel?.fetchBriefDescription()
     }
     
+    func configureBackgroundColor() {
+        view.backgroundColor = .white
+    }
+    
     func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
-        view.backgroundColor = .white
         view.addSubview(logoImage)
         view.addSubview(recommendCocktailCollectionView)
         
@@ -92,7 +97,6 @@ final class CocktailRecommendViewController: UIViewController {
     func setupRecommendCocktailCollectionView() {
         recommendCocktailCollectionView.register(CocktailRecommendCell.self, forCellWithReuseIdentifier: CocktailRecommendCell.identifier)
         recommendCocktailCollectionView.delegate = self
-
     }
     
     private func calculateItemSize() -> CGSize {
