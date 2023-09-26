@@ -17,7 +17,7 @@ final class HoldedItemCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 13)
+        label.font = UIFont(name: FontStrings.themeFont, size: 13)
         
         return label
     }()

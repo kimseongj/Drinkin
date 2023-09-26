@@ -48,11 +48,6 @@ class LoadingView: UIView {
         return sem
     }()
     
-//    let networkErrorMessageButton: UIButton = {
-//        let nemb = UIButton()
-//
-//    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white

@@ -20,7 +20,7 @@ final class CocktailSelectionCell: UICollectionViewCell {
     
     private lazy var cocktailNameLabel: UILabel = {
         let cocktailNameLabel = UILabel()
-        cocktailNameLabel.font = UIFont.systemFont(ofSize: 13)
+        cocktailNameLabel.font = UIFont(name: FontStrings.themeFont, size: 13)
         return cocktailNameLabel
     }()
  

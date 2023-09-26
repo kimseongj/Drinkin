@@ -30,7 +30,7 @@ final class HoldView: UIView {
     private lazy var holdLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont(name: "Pretendard-ExtraBold", size: 14)
+        label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 14)
         label.text = title
         
         return label

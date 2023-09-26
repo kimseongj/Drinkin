@@ -21,7 +21,7 @@ final class IntroductionView: UIView {
     
     private let cocktailTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 24)
+        label.font = UIFont(name: FontStrings.themeFont, size: 24)
         
         return label
     }()
@@ -29,7 +29,7 @@ final class IntroductionView: UIView {
     private let cocktailTDescriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 14)
         
         return label
     }()
@@ -51,14 +51,14 @@ final class IntroductionView: UIView {
     private let recipeTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "레시피"
-        label.font = UIFont(name: "Pretendard-ExtraBold", size: 20)
+        label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 20)
         
         return label
     }()
     
     private let recipeDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Pretendard-Bold", size: 15)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 15)
         label.numberOfLines = 0
         
         return label
@@ -154,7 +154,7 @@ final class IntroductionView: UIView {
     func fillRecipeStackView(with recipeList: [String]) {
         recipeList.forEach {
             let label = UILabel()
-            label.font = UIFont(name: "Pretendard-Bold", size: 15)
+            label.font = UIFont(name: FontStrings.pretendardBold, size: 15)
             label.numberOfLines = 0
             label.text = $0
             recipeStackView.addArrangedSubview(label)

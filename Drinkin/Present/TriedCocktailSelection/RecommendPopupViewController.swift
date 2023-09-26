@@ -54,7 +54,7 @@ final class RecommendPopupViewController: UIViewController {
         let button = UIButton()
         button.setTitle("추천 받기", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
+        button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.backgroundColor = .black
         button.layer.cornerRadius = 20
         button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor

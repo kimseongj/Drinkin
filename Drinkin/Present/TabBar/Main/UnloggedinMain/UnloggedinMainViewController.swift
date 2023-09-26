@@ -51,7 +51,7 @@ final class UnloggedinMainViewController: UIViewController {
         let startButton = UIButton()
         startButton.setTitle("시작하기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)
-        startButton.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
+        startButton.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         startButton.backgroundColor = .black
         startButton.layer.cornerRadius = 20
         startButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor

@@ -49,7 +49,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let title = UILabel()
-        title.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 17)
+        title.font = UIFont(name: FontStrings.themeFont, size: 17)
         title.textColor = .black
         
         return title

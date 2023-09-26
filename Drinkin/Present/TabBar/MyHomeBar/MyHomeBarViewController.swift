@@ -25,7 +25,7 @@ final class MyHomeBarViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "나의 홈바"
-        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 20)
+        label.font = UIFont(name: FontStrings.themeFont, size: 20)
         
         return label
     }()
@@ -35,7 +35,7 @@ final class MyHomeBarViewController: UIViewController {
     private let holdIngredientLabel: UILabel = {
         let label = UILabel()
         label.text = "가지고 있는 재료"
-        label.font = UIFont(name: "Pretendard-ExtraBold", size: 17)
+        label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 17)
         
         return label
     }()
@@ -74,7 +74,7 @@ final class MyHomeBarViewController: UIViewController {
         let button = UIButton()
         button.setTitle("추가하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
+        button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.backgroundColor = .black
         button.layer.cornerRadius = 20
         button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
@@ -88,7 +88,7 @@ final class MyHomeBarViewController: UIViewController {
         let button = UIButton()
         button.setTitle("추가하기", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
+        button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         
         return button
@@ -109,7 +109,7 @@ final class MyHomeBarViewController: UIViewController {
         
         let titleLabel = UILabel()
         titleLabel.text = "저장한 칵테일 목록"
-        titleLabel.font = UIFont(name: "Pretendard-Bold", size: 17)
+        titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         
         let arrowImageView = UIImageView(image: UIImage(named: "arrow_icon"))
         
@@ -136,7 +136,7 @@ final class MyHomeBarViewController: UIViewController {
         
         let titleLabel = UILabel()
         titleLabel.text = "내가 만든 칵테일 목록"
-        titleLabel.font = UIFont(name: "Pretendard-Bold", size: 17)
+        titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         
         let arrowImageView = UIImageView(image: UIImage(named: "arrow_icon"))
         

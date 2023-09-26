@@ -12,6 +12,7 @@ class  SelectedView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureBackgroundColor()
         configureUI()
     }
     
@@ -19,10 +20,11 @@ class  SelectedView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func configureBackgroundColor() {
+        self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
+    }
     
     private func configureUI() {
-        self.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
-        
         self.addSubview(selectCircleView)
         
         selectCircleView.snp.makeConstraints {
@@ -47,7 +49,7 @@ class SelectCircleView: UIView {
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
-        self.backgroundColor = UIColor.gray.withAlphaComponent(0.6)
+       // self.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         
         let circleRect = bounds.insetBy(dx: bounds.height * 0.1, dy: bounds.width * 0.1)
         
@@ -69,5 +71,6 @@ class SelectCircleView: UIView {
         context.addLine(to: CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.7))
         context.addLine(to: CGPoint(x: bounds.width * 0.7 , y: bounds.height * 0.35))
         context.drawPath(using: .stroke)
+        context.closePath()
     }
 }

@@ -36,7 +36,7 @@ final class ClickableInformationView: UIView {
     private let skillLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont(name: "Pretendard-ExtraBold", size: 15)
+        label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
         return label
     }()
     

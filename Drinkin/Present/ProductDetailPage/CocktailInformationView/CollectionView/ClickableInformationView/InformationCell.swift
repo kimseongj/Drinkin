@@ -9,10 +9,9 @@ import UIKit
 import SnapKit
 
 class InformationCell: UICollectionViewCell {
-
     private let label: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Pretendard-Bold", size: 14)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 14)
         label.sizeToFit()
         
         return label
