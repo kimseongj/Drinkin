@@ -8,8 +8,7 @@
 import UIKit
 import SnapKit
 
-class ItemCell: UICollectionViewCell {
-    
+final class ItemCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 20)
@@ -24,11 +23,7 @@ class ItemCell: UICollectionViewCell {
         return label
     }()
     
-    private let checkImageView: UIImageView = {
-        let imageView = UIImageView()
-        
-        return imageView
-    }()
+    private let checkImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)

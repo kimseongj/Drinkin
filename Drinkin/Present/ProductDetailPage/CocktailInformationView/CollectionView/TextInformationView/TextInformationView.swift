@@ -53,7 +53,7 @@ final class TextInformationView: UIView {
         titleLabelView.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview().offset(24)
-            $0.width.equalTo(62)
+            $0.width.equalTo(65)
             $0.bottom.equalToSuperview()
         }
         
