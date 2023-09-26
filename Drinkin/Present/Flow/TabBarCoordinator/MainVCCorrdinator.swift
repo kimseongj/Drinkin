@@ -13,7 +13,6 @@ protocol MainViewDelegate: AnyObject {
 }
 
 class MainVCCoordinator: Coordinator, MainViewDelegate {
-    
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -22,13 +21,21 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
         self.navigationController = .init()
     }
     
-    func start() {
+    func start() { }
+    
+    func childDidFinish(_ child: Coordinator?) {
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
     }
     
     func startPush() -> UINavigationController {
         let cocktailRecommendDIContainer = BriefDescriptionDIContainer()
-        
         let mainViewController = MainViewController(viewModel: cocktailRecommendDIContainer.makeCocktailRecommendViewModel())
+        
         mainViewController.makeBlackBackBarButton()
         mainViewController.delegate = self
         navigationController.setViewControllers([mainViewController], animated: false)
@@ -45,19 +52,10 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
     }
     
     func pushProductDetailVC(cocktailID: Int) {
-        let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController, cocktailID: cocktailID)
-        
+        let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController,
+                                                                    cocktailID: cocktailID)
         productDetailVCCoordinator.parentCoordinator = self
         childCoordinators.append(productDetailVCCoordinator)
         productDetailVCCoordinator.start()
-    }
-    
-    func childDidFinish(_ child: Coordinator?) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
     }
 }

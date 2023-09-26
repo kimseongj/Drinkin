@@ -1,17 +1,18 @@
 //
-//  asdasd.swift
+//  FirstLoginResponse.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/16.
+//  Created by kimseongjun on 2023/09/26.
 //
 
 import Foundation
 
-struct LoginToken: Decodable {
+//MARK: - FirstLoginResponse
+struct FirstLoginResponse: Codable {
     let accessToken: String
     let refreshToken: String
     
-    private enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
         case refreshToken = "refresh_token"
     }

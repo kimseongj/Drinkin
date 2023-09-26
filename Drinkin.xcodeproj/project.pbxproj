@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */; };
-		1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */; };
 		1C04C19129DEEC6F00E381C2 /* ToolModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */; };
 		1C04C19629DEED2700E381C2 /* MyHomeBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19529DEED2700E381C2 /* MyHomeBarViewController.swift */; };
 		1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19929DEED3D00E381C2 /* MainViewController.swift */; };
@@ -28,6 +26,10 @@
 		1C0768872ABDC72D0003D4BF /* BaseInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */; };
 		1C07688A2ABDDA760003D4BF /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768892ABDDA760003D4BF /* BrandCell.swift */; };
 		1C0768922ABEFCCD0003D4BF /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */; };
+		1C0768A32AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */; };
+		1C0768A52AC1F1060003D4BF /* FirstLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */; };
+		1C0768A72AC1F4890003D4BF /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A62AC1F4890003D4BF /* APIError.swift */; };
+		1C0768A92AC1F4990003D4BF /* TabBarTitleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */; };
 		1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809DB29E041E000265706 /* LoginViewController.swift */; };
 		1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E029E043DF00265706 /* AppCoordinator.swift */; };
 		1C0809E329E043FF00265706 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E229E043FF00265706 /* Coordinator.swift */; };
@@ -161,7 +163,6 @@
 		1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890329EBBD9800D3E1D2 /* LoginService.swift */; };
 		1CCE890629EBC13C00D3E1D2 /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */; };
 		1CCE890829EBC49400D3E1D2 /* RefreshEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */; };
-		1CCE890A29EBD9BF00D3E1D2 /* 12312312Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */; };
 		1CD75BA52AAD98C50040F085 /* SavedCocktailListDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */; };
 		1CD75BA72AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD75BA62AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift */; };
 		1CDDB92B2A3AD7370007983A /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */; };
@@ -174,8 +175,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewController.swift; sourceTree = "<group>"; };
-		1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildModalViewController.swift; sourceTree = "<group>"; };
 		1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolModalViewController.swift; sourceTree = "<group>"; };
 		1C04C19529DEED2700E381C2 /* MyHomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarViewController.swift; sourceTree = "<group>"; };
 		1C04C19929DEED3D00E381C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +194,10 @@
 		1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationViewController.swift; sourceTree = "<group>"; };
 		1C0768892ABDDA760003D4BF /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAccessTokenEndpoint.swift; sourceTree = "<group>"; };
+		1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLoginResponse.swift; sourceTree = "<group>"; };
+		1C0768A62AC1F4890003D4BF /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarTitleStrings.swift; sourceTree = "<group>"; };
 		1C0809DB29E041E000265706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C0809E029E043DF00265706 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		1C0809E229E043FF00265706 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -322,7 +325,6 @@
 		1CCE890329EBBD9800D3E1D2 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
 		1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshEndpoint.swift; sourceTree = "<group>"; };
-		1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 12312312Endpoint.swift; sourceTree = "<group>"; };
 		1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCocktailListDIContainer.swift; sourceTree = "<group>"; };
 		1CD75BA62AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMadeCocktailListDIContainer.swift; sourceTree = "<group>"; };
 		1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
@@ -429,8 +431,6 @@
 			isa = PBXGroup;
 			children = (
 				1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */,
-				1C04C18E29DEEC6200E381C2 /* BuildModalViewController.swift */,
-				1C04C18C29DEEC5900E381C2 /* GlassModalViewController.swift */,
 			);
 			path = DetailModal;
 			sourceTree = "<group>";
@@ -460,6 +460,15 @@
 				1C0768892ABDDA760003D4BF /* BrandCell.swift */,
 			);
 			path = BaseInformation;
+			sourceTree = "<group>";
+		};
+		1C0768A12AC1EE5A0003D4BF /* ErrorEnum */ = {
+			isa = PBXGroup;
+			children = (
+				1CA969162A9078690076731B /* KeyChainError.swift */,
+				1C0768A62AC1F4890003D4BF /* APIError.swift */,
+			);
+			path = ErrorEnum;
 			sourceTree = "<group>";
 		};
 		1C0809D829E03FDB00265706 /* LoginViewModel */ = {
@@ -753,6 +762,7 @@
 				1C504CC62AB4256F005A0B25 /* CocktailFilter.swift */,
 				1C07686F2ABD52CB0003D4BF /* IngredientDescription.swift */,
 				1C0768732ABD58930003D4BF /* IngredientFilter.swift */,
+				1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -790,7 +800,7 @@
 			children = (
 				1CCE88FF29EBBC3C00D3E1D2 /* LoginEndpoint.swift */,
 				1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */,
-				1CCE890929EBD9BF00D3E1D2 /* 12312312Endpoint.swift */,
+				1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */,
 			);
 			path = LoginEndpoint;
 			sourceTree = "<group>";
@@ -863,6 +873,7 @@
 		1CA968E52A8E40120076731B /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				1C0768A12AC1EE5A0003D4BF /* ErrorEnum */,
 				1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */,
 				1CA968E62A8E40200076731B /* TitleText.swift */,
 				1CA968E82A8E423B0076731B /* MiscStrings.swift */,
@@ -872,6 +883,7 @@
 				1C504CDB2AB5E6B7005A0B25 /* FilterType.swift */,
 				1CED21972A739A700078916A /* Section.swift */,
 				1C951D462ABB389000662B35 /* ColorPalette.swift */,
+				1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -895,7 +907,6 @@
 			isa = PBXGroup;
 			children = (
 				1CA8ED252A65915600CE5E1A /* KeychainManager.swift */,
-				1CA969162A9078690076731B /* KeyChainError.swift */,
 			);
 			path = KeyChain;
 			sourceTree = "<group>";
@@ -914,6 +925,7 @@
 			isa = PBXGroup;
 			children = (
 				1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */,
+				1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -972,7 +984,6 @@
 				1C71A4AD2A52928500F1814A /* CommonTool */,
 				1CA969152A9059800076731B /* KeyChain */,
 				1CC9D3EC2A19034900654A5D /* Protocol */,
-				1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1116,7 +1127,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */,
-				1CCE890A29EBD9BF00D3E1D2 /* 12312312Endpoint.swift in Sources */,
 				1C58ECDD2A63C84800AC2603 /* FetchBriefDescriptionUsecase.swift in Sources */,
 				1C7A10442A74F6FF009961A1 /* CocktailDescription.swift in Sources */,
 				1CA20ED62A568F21009FDD90 /* StoreTriedCocktailUsecase.swift in Sources */,
@@ -1141,6 +1151,7 @@
 				1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */,
 				1C0768802ABD6BFD0003D4BF /* LoginSettingViewController.swift in Sources */,
 				1CCE88FE29EBB32300D3E1D2 /* CategoryCell.swift in Sources */,
+				1C0768A92AC1F4990003D4BF /* TabBarTitleStrings.swift in Sources */,
 				1CA968E72A8E40200076731B /* TitleText.swift in Sources */,
 				1CA9692B2A9DA3A70076731B /* CocktailFilterModalViewController.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
@@ -1182,10 +1193,10 @@
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
 				1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */,
 				1CA9695E2AA30BBB0076731B /* LoginCoordinator.swift in Sources */,
-				1C04C18F29DEEC6200E381C2 /* BuildModalViewController.swift in Sources */,
 				1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */,
 				1C504CDA2AB47268005A0B25 /* CocktailFilterEndpoint.swift in Sources */,
 				1CA9691B2A90D64B0076731B /* Provider.swift in Sources */,
+				1C0768A52AC1F1060003D4BF /* FirstLoginResponse.swift in Sources */,
 				1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */,
 				1CED21982A739A700078916A /* Section.swift in Sources */,
 				1CA969252A9334980076731B /* TriedCocktailSelectionDIContainer.swift in Sources */,
@@ -1195,7 +1206,6 @@
 				1C7807FA2AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift in Sources */,
 				1CA969382AA0B7230076731B /* FetchHoldedItemUsecase.swift in Sources */,
 				1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */,
-				1C04C18D29DEEC5900E381C2 /* GlassModalViewController.swift in Sources */,
 				1C58ECE12A63CA3A00AC2603 /* TriedCocktailRepository.swift in Sources */,
 				1C504CD72AB47035005A0B25 /* CocktailListEndpoint.swift in Sources */,
 				1CA969292A949D070076731B /* SelectablePreviewDescription.swift in Sources */,
@@ -1236,6 +1246,7 @@
 				1C16A86B2A13AD3D001640E2 /* CocktailRecommendViewController.swift in Sources */,
 				1CCE88E529E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift in Sources */,
 				1CF62FB62A1252F30043A32F /* CocktailFilterViewController.swift in Sources */,
+				1C0768A72AC1F4890003D4BF /* APIError.swift in Sources */,
 				1C41D9342AAF0CC300D50F4F /* SavedCocktailListViewModel.swift in Sources */,
 				1CCE890229EBBCCA00D3E1D2 /* HTTPMethod.swift in Sources */,
 				1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */,
@@ -1254,6 +1265,7 @@
 				1C951D472ABB389000662B35 /* ColorPalette.swift in Sources */,
 				1C504CCF2AB46CEA005A0B25 /* CocktailFilterRepository.swift in Sources */,
 				1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */,
+				1C0768A32AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift in Sources */,
 				1CC9D3EE2A19035600654A5D /* IdentifierType.swift in Sources */,
 				1CB0AD052AAC3EF100847544 /* UserMadeCocktailListVCCoordinator.swift in Sources */,
 				1CCE88ED29EBA7AB00D3E1D2 /* Parser.swift in Sources */,

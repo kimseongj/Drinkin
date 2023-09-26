@@ -11,28 +11,7 @@ import Combine
 class LoginProvider {
     private let keychainManager = KeychainManager()
     private var cancelBag: Set<AnyCancellable> = []
-    
-    func fetchData<T: Decodable>(endpoint: EndpointMakeable, parser: Parser<T>, completion: @escaping (T) -> Void) {
-        guard var request = endpoint.makeURLRequest() else { return }
-        if endpoint.method == "POST" {
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        }
         
-        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else { return }
-            
-            guard let httpURLResponse = response as? HTTPURLResponse, (200...299).contains(httpURLResponse.statusCode) else {
-                print(response)
-                return }
-            
-            print(httpURLResponse.statusCode)
-            
-            guard let validData = data, let parsedData = parser.parse(data: validData) else { return }
-            completion(parsedData)
-        }
-        dataTask.resume()
-    }
-    
     func makePostRequest(endpoint: EndpointMakeable, accessToken: String, holdedCocktailList: [Int]) -> URLRequest? {
         guard var request = endpoint.makeURLRequest() else { return nil }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -70,9 +49,4 @@ class LoginProvider {
                 }
             }).store(in: &cancelBag)
     }
-}
-
-enum APIError: Error {
-    case data
-    case request
 }

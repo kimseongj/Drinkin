@@ -7,7 +7,6 @@
 
 import Foundation
 
-//MARK: - 
 struct RefreshEndpoint: EndpointMakeable {
     var baseURL: String = "http://3.35.208.50"
     

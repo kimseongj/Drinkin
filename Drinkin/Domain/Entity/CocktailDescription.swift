@@ -7,6 +7,7 @@
 
 import Foundation
  
+//MARK: - CocktailDescription
 struct CocktailDescription: Codable {
     let id: Int
     let cocktailNameKo, cocktailNameEng: String

@@ -24,12 +24,19 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
     
     func start() { }
     
-    func childDidFinish(_ child: Coordinator?) { }
+    func childDidFinish(_ child: Coordinator?) {
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
+    }
     
     func startPush() -> UINavigationController {
         let myHomeBarDIContainer = MyHomeBarDIContainer()
-        
         let myHomeBarViewController = MyHomeBarViewController(viewModel: myHomeBarDIContainer.makeMyHomeBarViewModel())
+        
         myHomeBarViewController.makeBlackBackBarButton()
         myHomeBarViewController.delegate = self
         navigationController.setViewControllers([myHomeBarViewController], animated: false)
@@ -39,6 +46,7 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
     
     func pushLoginSettingVC() {
         let loginSettingVCCoordinator = LoginSettingVCCoordinator(navigationController: navigationController)
+        
         loginSettingVCCoordinator.start()
     }
     
@@ -50,11 +58,14 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
     
     func pushSavedCocktailListVC() {
         let savedCocktailListVCCoordinator = SavedCocktailListVCCoordinator(navigationController: navigationController)
+        
         savedCocktailListVCCoordinator.start()
     }
     
     func pushUserMadeCocktailListVC() {
         let userMadeCocktailListVCCoordinator = UserMadeCocktailListVCCoordinator(navigationController: navigationController)
+        
+        
         userMadeCocktailListVCCoordinator.start()
     }
 }

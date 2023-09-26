@@ -21,4 +21,3 @@ struct Parser<T: Decodable> {
         }
     }
 }
-
