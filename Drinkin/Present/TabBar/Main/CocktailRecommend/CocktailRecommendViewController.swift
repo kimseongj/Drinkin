@@ -16,10 +16,10 @@ final class CocktailRecommendViewController: UIViewController {
         static let itemSpacing = 18.0
     }
     
-    weak var delegate: MainViewDelegate?
     private var viewModel: CocktailRecommendViewModel?
-    private var dataSource: UICollectionViewDiffableDataSource<Section, BriefDescription>?
+    weak var delegate: MainViewDelegate?
     private var cancelBag: Set<AnyCancellable> = []
+    private var dataSource: UICollectionViewDiffableDataSource<Section, BriefDescription>?
     
     private lazy var carouselFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()

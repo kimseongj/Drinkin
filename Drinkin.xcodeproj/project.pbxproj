@@ -110,7 +110,7 @@
 		1CA8ED262A65915600CE5E1A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED252A65915600CE5E1A /* KeychainManager.swift */; };
 		1CA8ED292A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED282A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift */; };
 		1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA8ED4B2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift */; };
-		1CA968E72A8E40200076731B /* TitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968E62A8E40200076731B /* TitleText.swift */; };
+		1CA968E72A8E40200076731B /* InformationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968E62A8E40200076731B /* InformationStrings.swift */; };
 		1CA968E92A8E423B0076731B /* MiscStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968E82A8E423B0076731B /* MiscStrings.swift */; };
 		1CA968EB2A8E43EC0076731B /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968EA2A8E43EC0076731B /* ImageStorage.swift */; };
 		1CA968EF2A8F587D0076731B /* TriedCocktailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA968EE2A8F587D0076731B /* TriedCocktailEndpoint.swift */; };
@@ -271,7 +271,7 @@
 		1CA8ED252A65915600CE5E1A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		1CA8ED282A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecommendEndpoint.swift; sourceTree = "<group>"; };
 		1CA8ED4B2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecommendViewModel.swift; sourceTree = "<group>"; };
-		1CA968E62A8E40200076731B /* TitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleText.swift; sourceTree = "<group>"; };
+		1CA968E62A8E40200076731B /* InformationStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationStrings.swift; sourceTree = "<group>"; };
 		1CA968E82A8E423B0076731B /* MiscStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscStrings.swift; sourceTree = "<group>"; };
 		1CA968EA2A8E43EC0076731B /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
 		1CA968EE2A8F587D0076731B /* TriedCocktailEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktailEndpoint.swift; sourceTree = "<group>"; };
@@ -819,18 +819,18 @@
 			isa = PBXGroup;
 			children = (
 				1C598F862A7B494600B9DC93 /* TextInformationView */,
-				1C9BAB1429EFAE4C00E979AC /* SkillView */,
+				1C9BAB1429EFAE4C00E979AC /* ClickableInformationView */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
 		};
-		1C9BAB1429EFAE4C00E979AC /* SkillView */ = {
+		1C9BAB1429EFAE4C00E979AC /* ClickableInformationView */ = {
 			isa = PBXGroup;
 			children = (
 				1C9BAB1F29EFAED500E979AC /* ClickableInformationView.swift */,
 				1C34B66E2A84D27A00CB294C /* InformationCell.swift */,
 			);
-			path = SkillView;
+			path = ClickableInformationView;
 			sourceTree = "<group>";
 		};
 		1CA20ED42A567E9A009FDD90 /* Usecase */ = {
@@ -875,7 +875,7 @@
 			children = (
 				1C0768A12AC1EE5A0003D4BF /* ErrorEnum */,
 				1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */,
-				1CA968E62A8E40200076731B /* TitleText.swift */,
+				1CA968E62A8E40200076731B /* InformationStrings.swift */,
 				1CA968E82A8E423B0076731B /* MiscStrings.swift */,
 				1CA968EA2A8E43EC0076731B /* ImageStorage.swift */,
 				1CA969182A9078860076731B /* TokenType.swift */,
@@ -1152,7 +1152,7 @@
 				1C0768802ABD6BFD0003D4BF /* LoginSettingViewController.swift in Sources */,
 				1CCE88FE29EBB32300D3E1D2 /* CategoryCell.swift in Sources */,
 				1C0768A92AC1F4990003D4BF /* TabBarTitleStrings.swift in Sources */,
-				1CA968E72A8E40200076731B /* TitleText.swift in Sources */,
+				1CA968E72A8E40200076731B /* InformationStrings.swift in Sources */,
 				1CA9692B2A9DA3A70076731B /* CocktailFilterModalViewController.swift in Sources */,
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CCE88F129EBABCE00D3E1D2 /* TipAndContentsView.swift in Sources */,

@@ -24,10 +24,7 @@ class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
     init(fetchBriefDescriptionUseCase: FetchBriefDescriptionUsecase) {
         self.fetchBriefDescriptionUseCase = fetchBriefDescriptionUseCase
     }
-}
-
-//MARK: - FetchBriefDescription
-extension DefaultCocktailRecommendViewModel {
+    
     func fetchBriefDescription() {
         fetchBriefDescriptionUseCase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.briefDescriptionList = $0.briefDescriptionList

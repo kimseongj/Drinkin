@@ -47,7 +47,6 @@ final class HoldedItemCell: UICollectionViewCell {
     
     private func configureUI() {
         contentView.layer.cornerRadius = 4
-        
         contentView.addSubview(titleLabel)
         contentView.addSubview(deleteButton)
         

@@ -9,10 +9,15 @@ import UIKit
 import SnapKit
 import Combine
 
-class MyHomeBarViewController: UIViewController {
-    var delegate: MyHomeBarVCDelegate?
-    private var cancelBag: Set<AnyCancellable> = []
+protocol CellDeleteButtonDelegate: AnyObject {
+    func deleteHoldedItem(holdedItem: String)
+}
+
+final class MyHomeBarViewController: UIViewController {
     private var viewModel: MyHomeBarViewModel?
+    weak var delegate: MyHomeBarVCDelegate?
+    private var cancelBag: Set<AnyCancellable> = []
+    
     private var isTrue: Bool = true
     private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, String>?
     
@@ -336,12 +341,9 @@ extension MyHomeBarViewController {
     }
 }
 
+//MARK: - CellDelteButtonDelegate
 extension MyHomeBarViewController: CellDeleteButtonDelegate {
     func deleteHoldedItem(holdedItem: String) {
         viewModel?.deleteHoldedItem(holdedItem: holdedItem)
     }
-}
-
-protocol CellDeleteButtonDelegate: AnyObject {
-    func deleteHoldedItem(holdedItem: String)
 }
