@@ -50,8 +50,3 @@ class LoginProvider {
             }).store(in: &cancelBag)
     }
 }
-
-enum APIError: Error {
-    case data
-    case request
-}
