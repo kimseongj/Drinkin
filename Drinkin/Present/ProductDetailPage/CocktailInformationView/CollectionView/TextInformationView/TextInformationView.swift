@@ -21,7 +21,7 @@ final class TextInformationView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont(name: "Pretendard-ExtraBold", size: 15)
+        label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
         
         return label
     }()
@@ -29,7 +29,7 @@ final class TextInformationView: UIView {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont(name: "Pretendard", size: 14)
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 14)
         
         return label
     }()
@@ -53,7 +53,7 @@ final class TextInformationView: UIView {
         titleLabelView.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview().offset(24)
-            $0.width.equalTo(62)
+            $0.width.equalTo(65)
             $0.bottom.equalToSuperview()
         }
         

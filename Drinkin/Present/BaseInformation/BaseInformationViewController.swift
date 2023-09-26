@@ -13,14 +13,14 @@ final class BaseInformationViewController: UIViewController {
     
     private let titleLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 24)
+        label.font = UIFont(name: FontStrings.themeFont, size: 24)
     
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-         label.font = UIFont(name: "Pretendard-SemiBold", size: 15)
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
      
          return label
      }()
@@ -38,7 +38,6 @@ final class BaseInformationViewController: UIViewController {
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
-        
         view.addSubview(scrollView)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(descriptionLabel)
@@ -62,7 +61,6 @@ final class BaseInformationViewController: UIViewController {
         brandCollectionView.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview()
-            $0
         }
     }
 }

@@ -16,13 +16,12 @@ protocol ProductDetailViewModel {
 }
 
 class DefaultProductDetailViewModel: ProductDetailViewModel {
+    private let fetchDescriptionUsecase: FetchDescriptionUsecase
+    private var cancelBag: Set<AnyCancellable> = []
+    
     @Published var cocktailDescription: CocktailDescription?
     
     var cocktailDescriptionPublisher: Published<CocktailDescription?>.Publisher { $cocktailDescription }
-    
-    private var cancelBag: Set<AnyCancellable> = []
-    
-    private let fetchDescriptionUsecase: FetchDescriptionUsecase
     
     init(fetchDescriptionUseCase: FetchDescriptionUsecase) {
         self.fetchDescriptionUsecase = fetchDescriptionUseCase

@@ -15,14 +15,11 @@ protocol SavedCocktailListViewModel {
 }
 
 class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
+    private let fetchSavedCocktailListUsecase: FetchSavedCocktailListUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var previewDescriptionList: [PreviewDescription] = []
     var previewDescriptionListPublisher: Published<[PreviewDescription]>.Publisher { $previewDescriptionList }
-    
-    
-    
-    private let fetchSavedCocktailListUsecase: FetchSavedCocktailListUsecase
     
     init(fetchSavedCocktailListUsecase: FetchSavedCocktailListUsecase) {
         self.fetchSavedCocktailListUsecase = fetchSavedCocktailListUsecase
@@ -31,7 +28,6 @@ class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     func fetchCocktailPreviewDescription() {
         fetchSavedCocktailListUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.previewDescriptionList = $0.cocktailList
-            
         }).store(in: &cancelBag)
     }
 }

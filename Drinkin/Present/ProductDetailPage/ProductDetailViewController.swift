@@ -89,6 +89,7 @@ class ProductDetailViewController: UIViewController {
     }
 }
 
+//MARK: - Binding
 extension ProductDetailViewController {
     private func binding() {
         viewModel?.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink {

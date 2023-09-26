@@ -20,11 +20,11 @@ class TriedCocktailSelectionVCCoordinator: Coordinator, TriedCocktailSelectionVC
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-
+    
     func start() {
         let triedCocktailSelectionDIContainer = TriedCocktailSelectionDIContainer()
-        
         let vc = TriedCocktailSelectionViewController(viewModel: triedCocktailSelectionDIContainer.makeTriedCocktailSelectionViewModel())
+        
         vc.delegate = self
         vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true)
@@ -33,6 +33,7 @@ class TriedCocktailSelectionVCCoordinator: Coordinator, TriedCocktailSelectionVC
     
     func presentLoginVC() {
         let vc = LoginViewController()
+        
         vc.modalPresentationStyle = .fullScreen
         triedCocktailSelectionViewController?.present(vc, animated: true)
     }

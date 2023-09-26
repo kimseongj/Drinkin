@@ -8,28 +8,29 @@
 import UIKit
 import SnapKit
 
-class HoldView: UIView {
+final class HoldView: UIView {
     private var title = MiscStrings.emptySpace
     private var briefDescription: BriefDescription?
     
-    var holdLabelView: UIView = {
+    private var holdLabelView: UIView = {
         let label = UIView()
         label.backgroundColor = .white
+        
         return label
     }()
     
-    var holdCollectionView: HoldCollectionView = {
+    private var holdCollectionView: HoldCollectionView = {
         let layout = UICollectionViewLayout()
         let collectionView = HoldCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
         collectionView.backgroundColor = .white
-
+        
         return collectionView
     }()
     
-    lazy var holdLabel: UILabel = {
+    private lazy var holdLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont(name: "Pretendard-ExtraBold", size: 14)
+        label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 14)
         label.text = title
         
         return label
@@ -48,7 +49,7 @@ class HoldView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    private func configureUI() {
         self.backgroundColor = .white
         self.addSubview(holdLabelView)
         holdLabelView.addSubview(holdLabel)
@@ -73,7 +74,7 @@ class HoldView: UIView {
         }
     }
     
-    func setHoldCollectionView() {
+    private func setHoldCollectionView() {
         holdCollectionView.register(HoldCollectionViewCell.self, forCellWithReuseIdentifier: HoldCollectionViewCell.identifier)
         holdCollectionView.delegate = self
         holdCollectionView.dataSource = self
@@ -88,19 +89,19 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         guard let validBriefDescription = briefDescription else { return 0 }
         
         switch title {
-        case TitleText.base:
+        case InformationStrings.base:
             if validBriefDescription.categoryList.count == 0 {
                 return 1
             } else {
                 return validBriefDescription.categoryList.count
             }
-        case TitleText.ingredient:
+        case InformationStrings.ingredient:
             if validBriefDescription.ingredientList.count == 0 {
                 return 1
             } else {
                 return validBriefDescription.ingredientList.count
             }
-        case TitleText.garnish:
+        case InformationStrings.garnish:
             if validBriefDescription.garnishList.count == 0 {
                 return 1
             } else {
@@ -117,25 +118,25 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         guard let validBriefDescription = briefDescription else { return cell }
         
         switch title {
-        case TitleText.base:
+        case InformationStrings.base:
             if validBriefDescription.categoryList.count == 0 {
                 cell.makeEmptyCell()
             } else {
-                cell.label.text = validBriefDescription.categoryList[indexPath.row].categoryNameKo
+                cell.fill(with: validBriefDescription.categoryList[indexPath.row].categoryNameKo) 
                 cell.makeHoldedItemCell()
             }
-        case TitleText.ingredient:
+        case InformationStrings.ingredient:
             if validBriefDescription.ingredientList.count == 0 {
                 cell.makeEmptyCell()
             } else {
-                cell.label.text = validBriefDescription.ingredientList[indexPath.row].ingredientNameKo
+                cell.fill(with: validBriefDescription.ingredientList[indexPath.row].ingredientNameKo)
                 cell.makeHoldedItemCell()
             }
-        case TitleText.garnish:
+        case InformationStrings.garnish:
             if validBriefDescription.garnishList.count == 0 {
                 cell.makeEmptyCell()
             } else {
-                cell.label.text = validBriefDescription.garnishList[indexPath.row].garnishNameKo
+                cell.fill(with: validBriefDescription.garnishList[indexPath.row].garnishNameKo)
                 cell.makeHoldedItemCell()
             }
         default: break

@@ -52,7 +52,7 @@ final class LoginSettingViewController: UIViewController {
         
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.font = UIFont(name: "Pretendard-Bold", size: 17)
+        titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         
         button.addSubview(titleLabel)
         
@@ -66,7 +66,6 @@ final class LoginSettingViewController: UIViewController {
     
     private func configureLoggedinUI() {
         let safeArea = view.safeAreaLayoutGuide
-        
         view.addSubview(loginButton)
         view.addSubview(userAgreementButton)
         
@@ -85,7 +84,6 @@ final class LoginSettingViewController: UIViewController {
     
     private func configureLoggedoutUI() {
         let safeArea = view.safeAreaLayoutGuide
-        
         view.addSubview(logoutButton)
         view.addSubview(userAgreementButton)
         view.addSubview(memberLeaveButton)

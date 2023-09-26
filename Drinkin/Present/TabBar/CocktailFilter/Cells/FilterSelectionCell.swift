@@ -11,7 +11,7 @@ class FilterSelectionCell: UICollectionViewCell {
     let categoryNameLabel: UILabel = {
         let label = UILabel()
         label.sizeToFit()
-        label.font = UIFont(name: "Pretendard-Bold", size: 14)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 14)
         
         return label
     }()

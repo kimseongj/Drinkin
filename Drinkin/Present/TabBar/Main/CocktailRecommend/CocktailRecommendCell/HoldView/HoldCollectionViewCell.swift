@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class HoldCollectionViewCell: UICollectionViewCell {
+final class HoldCollectionViewCell: UICollectionViewCell {
     
-    var label: UILabel = {
+    private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 14)
         label.sizeToFit()
         
         return label
@@ -24,7 +24,7 @@ class HoldCollectionViewCell: UICollectionViewCell {
     private let emptyLabel: UILabel = {
         let label = UILabel()
         label.text = MiscStrings.hyphen
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 14)
         
         return label
     }()
@@ -36,23 +36,22 @@ class HoldCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configureCell(title: String) {
-        makeHoldedItemCell()
-        makeEmptyCell()
+
+    func fill(with itemName: String) {
+        titleLabel.text = itemName
     }
     
     func makeHoldedItemCell() {
         contentView.addSubview(yellowRectangleView)
-        contentView.addSubview(label)
+        contentView.addSubview(titleLabel)
         
         yellowRectangleView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview()
-            make.trailing.equalTo(label.snp.leading).offset(-4)
+            make.trailing.equalTo(titleLabel.snp.leading).offset(-4)
         }
         
-        label.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(2)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-2)
@@ -61,15 +60,15 @@ class HoldCollectionViewCell: UICollectionViewCell {
     
     func makeUnholdedItemCell() {
         contentView.addSubview(emptyRectangleView)
-        contentView.addSubview(label)
+        contentView.addSubview(titleLabel)
         
         emptyRectangleView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview()
-            make.trailing.equalTo(label.snp.leading).offset(-4)
+            make.trailing.equalTo(titleLabel.snp.leading).offset(-4)
         }
         
-        label.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(2)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-2)

@@ -9,8 +9,7 @@ import UIKit
 import SnapKit
 
 final class CocktailFilterModalViewController: UIViewController {
-    var viewModel: CocktailFilterViewModel?
-    
+    private var viewModel: CocktailFilterViewModel?
     private let filterType: FilterType
     
     private let contentView: UIView = {
@@ -94,6 +93,7 @@ final class CocktailFilterModalViewController: UIViewController {
     }
 }
 
+//MARK: - FilterTableView DataSource
 extension CocktailFilterModalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
@@ -111,6 +111,7 @@ extension CocktailFilterModalViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - FilterTableView Delegate 
 extension CocktailFilterModalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let previousSelectedIndexPath = viewModel?.selectedDetailFilterIndexPath {
@@ -118,9 +119,7 @@ extension CocktailFilterModalViewController: UITableViewDelegate {
         }
         
         tableView.cellForRow(at: indexPath)?.isSelected = true
-        
         viewModel?.selectedDetailFilterIndexPath = indexPath
-        
         viewModel?.insertDetailFilter(filterType: filterType, detailFilterIndex: indexPath.row)
     }
 }

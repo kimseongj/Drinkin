@@ -8,7 +8,7 @@ protocol CocktailFilterViewModel {
     var filterTypeList: [FilterType] { get }
     var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
     var textFilterTypeList: [String] { get }
-
+    
     
     func fetchCocktailList()
     func fetchCocktailFilter(completion: @escaping () -> Void)
@@ -18,6 +18,8 @@ protocol CocktailFilterViewModel {
 }
 
 final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
+    private let fetchCocktailFilterUsecase: FetchCocktailFilterUsecase
+    private let fetchPreviewDescriptionUsecase: FetchPreviewDescriptionUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var filteredCocktailList: [PreviewDescription] = []
@@ -29,24 +31,20 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     var selectedDetailFilterIndexPath: IndexPath?
     
     var filterTypeList: [FilterType] = [FilterType.categoryFilter,
-                      FilterType.holdIngredientFilter,
-                      FilterType.level,
-                      FilterType.abv,
-                      FilterType.sugarContent,
-                      FilterType.ingredientQuantity]
+                                        FilterType.holdIngredientFilter,
+                                        FilterType.level,
+                                        FilterType.abv,
+                                        FilterType.sugarContent,
+                                        FilterType.ingredientQuantity]
     
     @Published var textFilterTypeList: [String] = [FilterType.categoryFilter.description,
-                                        FilterType.holdIngredientFilter.description,
-                                        FilterType.level.description,
-                                        FilterType.abv.description,
-                                        FilterType.sugarContent.description,
-                                        FilterType.ingredientQuantity.description]
+                                                   FilterType.holdIngredientFilter.description,
+                                                   FilterType.level.description,
+                                                   FilterType.abv.description,
+                                                   FilterType.sugarContent.description,
+                                                   FilterType.ingredientQuantity.description]
     
     var textFilterTypeListPublisher: Published<[String]>.Publisher { $textFilterTypeList }
-    
-    
-    private let fetchCocktailFilterUsecase: FetchCocktailFilterUsecase
-    private let fetchPreviewDescriptionUsecase: FetchPreviewDescriptionUsecase
     
     init(fetchCocktailFilterUsecase: FetchCocktailFilterUsecase, fetchPreviewDescriptionUsecase: FetchPreviewDescriptionUsecase) {
         self.fetchCocktailFilterUsecase = fetchCocktailFilterUsecase
@@ -93,7 +91,6 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
             } else {
                 textFilterTypeList[index] = fetchDetailFilter(filterType: filterType)[detailFilterIndex]
             }
-            
         }
     }
     

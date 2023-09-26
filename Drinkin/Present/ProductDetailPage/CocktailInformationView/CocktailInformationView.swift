@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class CocktailInformationView: UIView {
+final class CocktailInformationView: UIView {
     
-    let cocktailNameTitle: UILabel = {
+    private let cocktailNameTitle: UILabel = {
         let title = UILabel()
         title.textColor = .black
         title.font = UIFont.boldSystemFont(ofSize: 17)
@@ -18,12 +18,12 @@ class CocktailInformationView: UIView {
         return title
     }()
     
-    let toolView = ClickableInformationView(title: "도구")
-    let skillView = ClickableInformationView(title: "기법")
-    let glassView = ClickableInformationView(title: "글라스")
-    let abvView = TextInformationView(title: "당 도")
-    let levelView = TextInformationView(title: "난이도")
-    let sugarContentView = TextInformationView(title: "당 도")
+    let toolView = ClickableInformationView(title: InformationStrings.tool)
+    let skillView = ClickableInformationView(title: InformationStrings.skill)
+    let glassView = ClickableInformationView(title: InformationStrings.glass)
+    let abvView = TextInformationView(title: InformationStrings.abv)
+    let levelView = TextInformationView(title: InformationStrings.level)
+    let sugarContentView = TextInformationView(title: InformationStrings.sugarContent)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,7 +65,6 @@ class CocktailInformationView: UIView {
         glassView.snp.makeConstraints {make in
             make.top.equalTo(skillView.snp.bottom)
             make.trailing.leading.equalToSuperview()
-            
         }
         
         abvView.snp.makeConstraints {
@@ -76,7 +75,6 @@ class CocktailInformationView: UIView {
         levelView.snp.makeConstraints {
             $0.top.equalTo(abvView.snp.bottom)
             $0.trailing.leading.equalToSuperview()
-
         }
         
         sugarContentView.snp.makeConstraints {

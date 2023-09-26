@@ -11,8 +11,8 @@ import SnapKit
 import Combine
 
 final class SavedCocktailListViewController: UIViewController {
-    private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: SavedCocktailListViewModel?
+    private var cancelBag: Set<AnyCancellable> = []
     private var dataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
     
     private lazy var cocktailListCollectionView: UICollectionView = {

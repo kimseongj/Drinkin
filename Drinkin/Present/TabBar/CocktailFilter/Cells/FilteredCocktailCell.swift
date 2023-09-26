@@ -15,7 +15,7 @@ final class FilteredCocktailCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 20)
+        label.font = UIFont(name: FontStrings.themeFont, size: 20)
         
         return label
     }()

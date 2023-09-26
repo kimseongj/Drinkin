@@ -8,10 +8,8 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-
+    private var viewModel: CocktailRecommendViewModel?
     var delegate: MainViewDelegate?
-    var viewModel: CocktailRecommendViewModel?
-
     static var login: Bool = false
  
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
@@ -57,7 +55,6 @@ class MainViewController: UIViewController {
     }
     
     private func fetchLoggedinMainView() {
-
         unloggedinMainViewController.removeFromParent()
         unloggedinMainViewController.view.removeFromSuperview()
         addChild(loggedinMainViewController)

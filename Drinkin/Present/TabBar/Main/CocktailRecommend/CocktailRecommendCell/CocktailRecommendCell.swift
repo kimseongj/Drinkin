@@ -16,7 +16,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
     weak var delegate: CellButtonDelegate?
     var cocktailID: Int?
     
-    let briefDescriptionView = UIView()
+    private let briefDescriptionView = UIView()
     
     //MARK: - VisualDescriptionView
     private let visualDescriptionStackView: UIStackView = {
@@ -30,44 +30,44 @@ final class CocktailRecommendCell: UICollectionViewCell {
     }()
     
     private let cocktailImageView: UIImageView = {
-        let cocktailImage = UIImageView()
-        cocktailImage.contentMode = .scaleAspectFit
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         
-        return cocktailImage
+        return imageView
     }()
     
     //MARK: - SummaryOfCocktailView
     private let summaryOfCocktailView = UIView()
     
     private let subtitleLabel: UILabel = {
-        let subtitleLabel = UILabel()
-        subtitleLabel.font = UIFont.systemFont(ofSize: 12)
-        subtitleLabel.textColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1)
-        subtitleLabel.text = "위스키베이스"
-        return subtitleLabel
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1)
+        label.text = "위스키베이스"
+        return label
     }()
     
     private let titleLabel: UILabel = {
-        let title = UILabel()
-        title.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 17)
-        title.textColor = .black
+        let label = UILabel()
+        label.font = UIFont(name: FontStrings.themeFont, size: 17)
+        label.textColor = .black
         
-        return title
+        return label
     }()
     
-    //MARK: = TextDescriptionView
+    //MARK: - TextDescriptionView
     private let textDescriptionView = UIView()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 14)
         label.numberOfLines = 2
         label.textColor = .black
         
         return label
     }()
     
-    let holdStackView: UIStackView = {
+    private let holdStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 12
@@ -76,23 +76,24 @@ final class CocktailRecommendCell: UICollectionViewCell {
     }()
     
     //MARK: - Button
-    let seeMoreButton: UIButton = {
-        let seeMoreButton = UIButton()
-        seeMoreButton.setTitle("자세히 보기", for: .normal)
-        seeMoreButton.setTitleColor(.white, for: .normal)
-        seeMoreButton.backgroundColor = .black
-        seeMoreButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
-        seeMoreButton.layer.borderWidth = 3
-        seeMoreButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    private let seeMoreButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("자세히 보기", for: .normal)
+        button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
+        button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
+        button.layer.borderWidth = 3
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
-        return seeMoreButton
+        return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
+        configureBackgroundColor()
         configureUI()
         setCellBorder()
-        self.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
@@ -102,6 +103,10 @@ final class CocktailRecommendCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         holdStackView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func configureBackgroundColor() {
+        self.backgroundColor = .white
     }
     
     private func setCellBorder() {
@@ -159,7 +164,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
     }
 }
 
-//MARK: - VisualDescription
+//MARK: - VisualDescriptionView
 extension CocktailRecommendCell {
     private func configureVisualDescriptionStackView() {
         visualDescriptionStackView.addArrangedSubview(cocktailImageView)
@@ -167,7 +172,7 @@ extension CocktailRecommendCell {
     }
 }
 
-//MARK: - SummaryOfCocktail
+//MARK: - SummaryOfCocktailView
 extension CocktailRecommendCell {
     private func configureSummaryOfCocktailView() {
         summaryOfCocktailView.addSubview(subtitleLabel)
@@ -193,12 +198,15 @@ extension CocktailRecommendCell {
     }
     
     private func fetchLevel(levelGrade: Int,
-                    abvGrade: Int,
-                    sugarContentGrade: Int) {
+                            abvGrade: Int,
+                            sugarContentGrade: Int) {
         
-        let levelGradePresentationView = GradePresentationView(title: TitleText.level, grade: levelGrade)
-        let abvGradePresentationView = GradePresentationView(title: TitleText.abv, grade: abvGrade)
-        let sugarContentGradePresentationView = GradePresentationView(title: TitleText.sugarContent, grade: sugarContentGrade)
+        let levelGradePresentationView = GradePresentationView(title: InformationStrings.level,
+                                                               grade: levelGrade)
+        let abvGradePresentationView = GradePresentationView(title: InformationStrings.abv,
+                                                             grade: abvGrade)
+        let sugarContentGradePresentationView = GradePresentationView(title: InformationStrings.sugarContent,
+                                                                      grade: sugarContentGrade)
         
         summaryOfCocktailView.addSubview(levelGradePresentationView)
         summaryOfCocktailView.addSubview(abvGradePresentationView)
@@ -242,9 +250,12 @@ extension CocktailRecommendCell {
     
     private func configureHoldViews(briefDescription: BriefDescription) {
         
-        let baseView = HoldView(briefDescription: briefDescription, title: TitleText.base)
-        let ingredientView = HoldView(briefDescription: briefDescription, title: TitleText.ingredient)
-        let garnishView = HoldView(briefDescription: briefDescription, title: TitleText.garnish)
+        let baseView = HoldView(briefDescription: briefDescription,
+                                title: InformationStrings.base)
+        let ingredientView = HoldView(briefDescription: briefDescription,
+                                      title: InformationStrings.ingredient)
+        let garnishView = HoldView(briefDescription: briefDescription,
+                                   title: InformationStrings.garnish)
         
         holdStackView.addArrangedSubview(baseView)
         holdStackView.addArrangedSubview(ingredientView)
