@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-class ClickableInformationView: UIView {
+final class ClickableInformationView: UIView {
     private var title: String = ""
     
-    private var toolDataSource: UICollectionViewDiffableDataSource<Section, CocktailTool>?
-    private var skillDataSource: UICollectionViewDiffableDataSource<Section, CocktailSkill>?
-    private var glassDataSource: UICollectionViewDiffableDataSource<Section, CocktailGlass>?
+    private var toolDataSource: UICollectionViewDiffableDataSource<Section, CocktailTool>!
+    private var skillDataSource: UICollectionViewDiffableDataSource<Section, CocktailSkill>!
+    private var glassDataSource: UICollectionViewDiffableDataSource<Section, CocktailGlass>!
     
-    var delegate: ProductDetailVCDelegate?
+    weak var delegate: ProductDetailVCDelegate?
     
     private var skillLabelView: UIView = {
         let view = UIView()
@@ -29,7 +29,7 @@ class ClickableInformationView: UIView {
         let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
         collectionView.register(InformationCell.self, forCellWithReuseIdentifier: InformationCell.identifier)
         collectionView.backgroundColor = .white
- 
+        
         return collectionView
     }()
     
@@ -67,7 +67,7 @@ class ClickableInformationView: UIView {
             make.leading.equalToSuperview()
             make.top.equalToSuperview().offset(24)
             make.bottom.equalTo(informationCollectionView)
-            make.width.equalTo(62)
+            make.width.equalTo(65)
         }
         
         skillLabel.snp.makeConstraints { make in
@@ -90,26 +90,27 @@ class ClickableInformationView: UIView {
     }
 }
 
+//MARK: - InformationCollectionView Delegate
 extension ClickableInformationView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.pushSkillModalVC()
     }
 }
 
-
+//MARK: - InformationCollectionView DiffableDataSource
 extension ClickableInformationView {
     func configureDataSource() {
         switch title {
-        case "도구":
+        case InformationStrings.tool:
             self.toolDataSource = UICollectionViewDiffableDataSource<Section, CocktailTool> (collectionView: informationCollectionView) { (collectionView, indexPath, cocktailTool) -> UICollectionViewCell? in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil
                 }
-            
+                
                 cell.fill(with: cocktailTool)
                 
                 return cell
             }
-        case "기법":
+        case InformationStrings.skill:
             self.skillDataSource = UICollectionViewDiffableDataSource<Section, CocktailSkill> (collectionView: informationCollectionView) { (collectionView, indexPath, cocktailSkill) -> UICollectionViewCell? in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil
                 }
@@ -118,11 +119,10 @@ extension ClickableInformationView {
                 
                 return cell
             }
-        case "글라스":
+        case InformationStrings.glass:
             self.glassDataSource = UICollectionViewDiffableDataSource<Section, CocktailGlass> (collectionView: informationCollectionView) { (collectionView, indexPath, cocktailGlass) -> UICollectionViewCell? in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil
                 }
-                
                 
                 cell.fill(with: cocktailGlass)
                 
@@ -135,17 +135,17 @@ extension ClickableInformationView {
     
     func applySnapshot(cocktailDescription: CocktailDescription) {
         switch title {
-        case "도구":
+        case InformationStrings.tool:
             var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailTool>()
             snapshot.appendSections([.main])
             snapshot.appendItems(cocktailDescription.toolList)
             self.toolDataSource?.apply(snapshot, animatingDifferences: true)
-        case "기법":
+        case InformationStrings.skill:
             var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailSkill>()
             snapshot.appendSections([.main])
             snapshot.appendItems(cocktailDescription.skillList)
             self.skillDataSource?.apply(snapshot, animatingDifferences: true)
-        case "글라스":
+        case InformationStrings.glass:
             var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailGlass>()
             snapshot.appendSections([.main])
             snapshot.appendItems(cocktailDescription.glassList)
