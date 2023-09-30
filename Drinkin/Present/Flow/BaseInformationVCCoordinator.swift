@@ -19,12 +19,11 @@ final class BaseInformationVCCoordinator: Coordinator {
     func start() {
         
         let vc = BaseInformationViewController()
-        
+        vc.makeBlackBackBarButton()
         navigationController.pushViewController(vc, animated: true)
     }
     
     func childDidFinish(_ child: Coordinator?) {
         parentCoordinator?.childDidFinish(self)
     }
-    
 }

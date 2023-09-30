@@ -7,6 +7,7 @@
 import UIKit
 
 protocol ProductDetailVCDelegate: AnyObject {
+    func pushBaseInformationVC()
     func pushToolModalVC()
     func pushSkillModalVC()
     func pushGlassModalVC()
@@ -32,11 +33,20 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
         productDetailViewController.cocktailInformationView.toolView.delegate = self
         productDetailViewController.cocktailInformationView.skillView.delegate = self
         productDetailViewController.cocktailInformationView.glassView.delegate = self
+        productDetailViewController.makeBlackBackBarButton()
         
         navigationController.pushViewController(productDetailViewController, animated: true)
     }
     
     func childDidFinish(_ child: Coordinator?) { }
+    
+    func pushBaseInformationVC() {
+        let baseInformationVCCoordinator = BaseInformationVCCoordinator(navigationController: navigationController)
+        childCoordinators.append(baseInformationVCCoordinator)
+        
+        baseInformationVCCoordinator.parentCoordinator = self
+        baseInformationVCCoordinator.start()
+    }
     
     func pushToolModalVC() {
         let toolModalVCCoordinator = ToolModalVCCoordinator(navigationController: navigationController)
