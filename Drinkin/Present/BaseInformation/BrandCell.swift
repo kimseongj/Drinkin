@@ -32,13 +32,25 @@ final class BrandCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         
         brandImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(8)
+            $0.bottom.equalTo(titleLabel.snp.top).offset(-8)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(brandImageView.snp.bottom).offset(8)
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-8)
         }
+        
+        brandImageView.snp.updateConstraints {
+            $0.width.equalTo(brandImageView.bounds.height)
+        }
+    }
+    
+    func fill(with baseBrand: BaseBrandDescription) {
+        guard let imageURL = URL(string: baseBrand.imageURI) else { return }
+        
+        titleLabel.text = baseBrand.title
+        brandImageView.load(url: imageURL)
     }
 }
