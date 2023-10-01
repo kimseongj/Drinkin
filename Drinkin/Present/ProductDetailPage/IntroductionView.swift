@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 final class IntroductionView: UIView {
+    private weak var delegate: ProductDetailVCDelegate?
     private var baseDataSource: UICollectionViewDiffableDataSource<Section, DetailCategory>?
     private var ingredientDataSource: UICollectionViewDiffableDataSource<Section, DetailIngredient>?
     
@@ -75,6 +76,7 @@ final class IntroductionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        configureBaseCollectionView()
         configureBaseDataSource()
         configureIngredientDataSource()
     }
@@ -135,11 +137,19 @@ final class IntroductionView: UIView {
             $0.bottom.equalToSuperview()
         }
     }
+    
+    private func configureBaseCollectionView() {
+        baseCollectionView.delegate = self
+    }
        
     func updateCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
         collectionView.snp.makeConstraints {
             $0.height.equalTo(cellCount * 70)
         }
+    }
+    
+    func configureDelegate(delegate: ProductDetailVCDelegate?) {
+        self.delegate = delegate
     }
     
     func fill(with cocktailDesription: CocktailDescription) {
@@ -229,5 +239,13 @@ extension IntroductionView {
         snapshot.appendItems(validDetailIngredientList)
         self.ingredientDataSource?.apply(snapshot, animatingDifferences: true)
         updateCollectionViewHeight(collectionView: ingredientCollectionView, cellCount: validDetailIngredientList.count)
+    }
+}
+
+extension IntroductionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == baseCollectionView {
+            delegate?.pushBaseInformationVC()
+        }
     }
 }

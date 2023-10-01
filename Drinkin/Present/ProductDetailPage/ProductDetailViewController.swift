@@ -45,6 +45,7 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        introductionView.configureDelegate(delegate: delegate)
         binding()
         viewModel?.fetchDescription()
         configureScrollView()
