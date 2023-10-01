@@ -32,7 +32,7 @@ final class BaseInformationViewController: UIViewController {
     }()
     
     private lazy var brandCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         return collectionView
     }()
