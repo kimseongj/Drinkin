@@ -144,7 +144,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
             make.top.equalTo(exitButton.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         cocktailCollectionView.snp.makeConstraints { make in
