@@ -9,6 +9,10 @@ import UIKit
 import SnapKit
 
 final class BaseInformationViewController: UIViewController {
+    private var viewModel: BaseInformationViewModel?
+    private var cancelBag: Set<AnyCancellable> = []
+    private var baseBrandDataSource: UICollectionViewDiffableDataSource<Section, BaseBrandDescription>!
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
@@ -31,11 +35,20 @@ final class BaseInformationViewController: UIViewController {
         return label
     }()
     
-    private lazy var brandCollectionView: UICollectionView = {
+    private lazy var baseBrandCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         return collectionView
     }()
+    
+    init(viewModel: CocktailRecommendViewModel?) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +65,7 @@ final class BaseInformationViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(descriptionLabel)
-        scrollView.addSubview(brandCollectionView)
+        scrollView.addSubview(baseBrandCollectionView)
         
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
@@ -70,9 +83,65 @@ final class BaseInformationViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-16)
         }
         
-        brandCollectionView.snp.makeConstraints {
+        baseBrandCollectionView.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview()
         }
+    }
+}
+
+//MARK: - CompositionalLayout
+extension BaseInformationViewController {
+    private func configureCompositionalIconLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout {
+            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            
+            return section
+        }
+        return layout
+    }
+}
+
+//MARK: - DiffableDataSource
+extension BaseInformationViewController {
+    private func configureDataSource() {
+        brandDataSource = UICollectionViewDiffableDataSource<Section, BaseBrandDescription> (collectionView: baseBrandCollectionView) { (collectionView, indexPath, baseBrandDescription) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BrandCell.identifier, for: indexPath) as? BrandCell else { return nil }
+            
+            return cell
+        }
+    }
+    
+    private func applySnapshot(baseBrandDescriptionList: [BaseBrandDescription]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, BaseBrandDescription>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(baseBrandDescriptionList)
+        baseBrandDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension BaseInformationViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+}
+
+//MARK: - Binding
+extension BaseInformationViewController {
+    private func binding() {
+        guard let viewModel else { return }
+        
+        viewModel.baseBrandListPublisher.sink {
+            self.applySnapshot(baseBrandDescriptionList: $0)
+        }.store(in: &cancelBag)
     }
 }
