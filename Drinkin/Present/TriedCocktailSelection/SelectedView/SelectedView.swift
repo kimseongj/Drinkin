@@ -57,8 +57,6 @@ class SelectCircleView: UIView {
         context.setFillColor(UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1).cgColor)
         context.addEllipse(in: circleRect)
         context.drawPath(using: .fillStroke)
-        context.closePath()
-        
 
         context.beginPath()
         context.setLineWidth(2)
@@ -68,6 +66,5 @@ class SelectCircleView: UIView {
         context.addLine(to: CGPoint(x: bounds.width * 0.5, y: bounds.height * 0.7))
         context.addLine(to: CGPoint(x: bounds.width * 0.7 , y: bounds.height * 0.35))
         context.drawPath(using: .stroke)
-        context.closePath()
     }
 }
