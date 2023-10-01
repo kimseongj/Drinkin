@@ -36,7 +36,7 @@ final class ItemCell: UICollectionViewCell {
     
     private func configureUI() {
         self.layer.borderWidth = 2
-        
+        self.layer.cornerRadius = 4
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(checkImageView)

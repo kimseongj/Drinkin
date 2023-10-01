@@ -9,31 +9,42 @@ import UIKit
 import SnapKit
 
 final class BaseInformationViewController: UIViewController {
-    private let scrollView: UIScrollView = UIScrollView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        scrollView.showsHorizontalScrollIndicator = false
+        
+        return scrollView
+    }()
     
     private let titleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = UIFont(name: FontStrings.themeFont, size: 24)
-    
+        
         return label
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
-     
-         return label
-     }()
+        
+        return label
+    }()
     
-    private let brandCollectionView: UICollectionView = {
-        let collectionView = UICollectionView()
+    private lazy var brandCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
         
         return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureBackgroundColor()
         configureUI()
+    }
+    
+    private func configureBackgroundColor() {
+        view.backgroundColor = .white
     }
     
     private func configureUI() {
@@ -44,7 +55,8 @@ final class BaseInformationViewController: UIViewController {
         scrollView.addSubview(brandCollectionView)
         
         scrollView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalTo(safeArea)
+            $0.top.leading.trailing.bottom.equalToSuperview()
+            $0.width.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints {
