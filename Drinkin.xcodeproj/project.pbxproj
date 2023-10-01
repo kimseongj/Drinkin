@@ -173,7 +173,7 @@
 		1CDDB92E2A3AD87F0007983A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */; };
 		1CDE6FA52AAEA8DF000D7BE3 /* UserMadeCocktailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDE6FA42AAEA8DF000D7BE3 /* UserMadeCocktailRepository.swift */; };
 		1CED21982A739A700078916A /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CED21972A739A700078916A /* Section.swift */; };
-		1CF26FA12A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF26FA02A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift */; };
+		1CF26FA12A8B52BD0066E754 /* TriedCocktailSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF26FA02A8B52BD0066E754 /* TriedCocktailSelectionViewController.swift */; };
 		1CF62FB62A1252F30043A32F /* CocktailFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF62FB52A1252F30043A32F /* CocktailFilterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -338,7 +338,7 @@
 		1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		1CDE6FA42AAEA8DF000D7BE3 /* UserMadeCocktailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMadeCocktailRepository.swift; sourceTree = "<group>"; };
 		1CED21972A739A700078916A /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		1CF26FA02A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktialSelectionViewController.swift; sourceTree = "<group>"; };
+		1CF26FA02A8B52BD0066E754 /* TriedCocktailSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktailSelectionViewController.swift; sourceTree = "<group>"; };
 		1CF62FB52A1252F30043A32F /* CocktailFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -396,7 +396,7 @@
 				1CD71F932A8B666000CBDF43 /* SelectedView */,
 				1CD71F922A8B664900CBDF43 /* Cells */,
 				1C2696382A4315D500C1FC00 /* ViewModel */,
-				1CF26FA02A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift */,
+				1CF26FA02A8B52BD0066E754 /* TriedCocktailSelectionViewController.swift */,
 				1CA20ED02A54073F009FDD90 /* RecommendPopupViewController.swift */,
 			);
 			path = TriedCocktailSelection;
@@ -1186,7 +1186,7 @@
 				1C71A4B02A5292A300F1814A /* GradePresentationView.swift in Sources */,
 				1C9F4C8D2AAD8DAF0020DB48 /* PreviewDescription.swift in Sources */,
 				1C504CC72AB4256F005A0B25 /* CocktailFilter.swift in Sources */,
-				1CF26FA12A8B52BD0066E754 /* TriedCocktialSelectionViewController.swift in Sources */,
+				1CF26FA12A8B52BD0066E754 /* TriedCocktailSelectionViewController.swift in Sources */,
 				1CCE88EB29E953E400D3E1D2 /* LoginProvider.swift in Sources */,
 				1C9F4C8F2AAD91AE0020DB48 /* SavedCocktailListRepository.swift in Sources */,
 				1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */,
