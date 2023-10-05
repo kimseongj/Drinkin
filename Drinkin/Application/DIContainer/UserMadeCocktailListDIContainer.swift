@@ -8,6 +8,14 @@
 import Foundation
 
 final class UserMadeCocktailListDIContainer {
+    let tokenManager: TokenManager
+    let provider: Provider
+    
+    init(tokenManager: TokenManager, provider: Provider) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+    }
+    
     func makeUserMadeCocktailListRepository() -> UserMadeCocktailListRepository {
         return DefaultUserMadeCocktailListRepository()
     }
@@ -18,6 +26,10 @@ final class UserMadeCocktailListDIContainer {
     
     func makeUserMadeCocktailListViewModel() -> UserMadeCocktailListViewModel {
         return DefaultUserMadeCocktailListViewModel(fetchUserMadeCocktailListUsecase: makeFetchUserMadeCocktailListUsecase())
+    }
+    
+    func makeUserMadeCocktailListViewController() -> UserMadeCocktailListViewController {
+        return UserMadeCocktailListViewController(viewModel: makeUserMadeCocktailListViewModel())
     }
 }
 

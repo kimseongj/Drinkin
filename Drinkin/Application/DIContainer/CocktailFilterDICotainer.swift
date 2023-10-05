@@ -8,6 +8,14 @@
 import Foundation
 
 final class CocktailFilterDICotainer {
+    let tokenManager: TokenManager
+    let provider: Provider
+    
+    init(tokenManager: TokenManager, provider: Provider) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+    }
+    
     func makeCocktailFilterRepository() -> CocktailFilterRepository {
         return DefaultCocktailFilterRepository()
     }
@@ -26,5 +34,9 @@ final class CocktailFilterDICotainer {
     
     func makeCocktailFilterViewModel() -> CocktailFilterViewModel {
         return DefaultCocktailFilterViewModel(fetchCocktailFilterUsecase: makeFetchCocktailFilterUsecase(), fetchPreviewDescriptionUsecase: makeFetchPreviewDescriptionUsecase())
+    }
+    
+    func makeCocktailFilterViewController() -> CocktailFilterViewController {
+        return CocktailFilterViewController(viewModel: makeCocktailFilterViewModel())
     }
 }

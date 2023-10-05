@@ -10,9 +10,11 @@ import UIKit
 class CocktailFilterVCCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    var appDIContainer: AppDIContainer
     
-    init() {
+    init(appDIContainer: AppDIContainer) {
         self.navigationController = .init()
+        self.appDIContainer = appDIContainer
     }
     
     func start() { }
@@ -27,8 +29,8 @@ class CocktailFilterVCCoordinator: Coordinator {
     }
     
     func startPush() -> UINavigationController {
-        let cocktailFilterDIContainer = CocktailFilterDICotainer()
-        let filterViewController = CocktailFilterViewController(viewModel: cocktailFilterDIContainer.makeCocktailFilterViewModel())
+        let cocktailFilterDIContainer = appDIContainer.makeCocktailFilterDICotainer()
+        let filterViewController = cocktailFilterDIContainer.makeCocktailFilterViewController()
         
         filterViewController.makeBlackBackBarButton()
         navigationController.setViewControllers([filterViewController], animated: false)

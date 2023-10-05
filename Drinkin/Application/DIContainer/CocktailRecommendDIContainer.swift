@@ -7,7 +7,15 @@
 
 import Foundation
 
-final class BriefDescriptionDIContainer {
+final class CocktailRecommendDIContainer {
+    let tokenManager: TokenManager
+    let provider: Provider
+    
+    init(tokenManager: TokenManager, provider: Provider) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+    }
+    
     func makeBriefDescriptionRepository() -> BriefDescriptionRepository {
         return DefaultBriefDescriptionRepository()
     }

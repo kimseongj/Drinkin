@@ -6,8 +6,17 @@
 //
 
 import Foundation
+import UIKit
 
 final class AddIngredientDIContainer {
+    let tokenManager: TokenManager
+    let provider: Provider
+    
+    init(tokenManager: TokenManager, provider: Provider) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+    }
+    
     func makeIngredientFilterRepository() -> IngredientFilterRepository {
         return DefaultIngredientFilterRepository()
     }
@@ -18,5 +27,9 @@ final class AddIngredientDIContainer {
     
     func makeAddIngredientViewModel() -> AddIngredientViewModel {
         return DefaultAddIngredientViewModel(fetchIngredientFilterUsecase: makeFetchIngredientFilterUsecase())
+    }
+    
+    func makeAddIngredientViewController() -> AddIngredientViewController {
+        return AddIngredientViewController(viewModel: makeAddIngredientViewModel() )
     }
 }

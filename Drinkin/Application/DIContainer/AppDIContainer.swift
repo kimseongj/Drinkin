@@ -8,15 +8,8 @@
 import Foundation
 
 final class AppDIContainer {
-
-
-    private let tokenManager: TokenManager
-    private let provider: Provider
-    
-    init(tokenManager: TokenManager, provider: Provider) {
-        self.tokenManager = tokenManager
-        self.provider = provider
-    }
+    private lazy var tokenManager = TokenManager()
+    private lazy var provider = Provider()
     
     func makeTriedCocktailSelectionDIContainer() -> TriedCocktailSelectionDIContainer {
         return TriedCocktailSelectionDIContainer(tokenManager: tokenManager,

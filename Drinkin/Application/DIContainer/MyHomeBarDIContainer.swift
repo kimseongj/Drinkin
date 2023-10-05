@@ -8,6 +8,14 @@
 import Foundation
 
 final class MyHomeBarDIContainer {
+    let tokenManager: TokenManager
+    let provider: Provider
+    
+    init(tokenManager: TokenManager, provider: Provider) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+    }
+    
     func makeHoldedItemRepository() -> HoldedItemRepository {
         return DefaultHoldedItemRepository()
     }
@@ -18,5 +26,9 @@ final class MyHomeBarDIContainer {
     
     func makeMyHomeBarViewModel() -> MyHomeBarViewModel {
         return DefaultMyHomeBarViewModel(fetchHoldedItemUsecase: makeFetchHoldedItemUsecase())
+    }
+    
+    func makeMyHomeBarViewController() -> MyHomeBarViewController {
+        return MyHomeBarViewController(viewModel: makeMyHomeBarViewModel())
     }
 }

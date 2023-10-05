@@ -8,6 +8,14 @@
 import Foundation
 
 final class LoginSettingDIContainer {
+    let tokenManager: TokenManager
+    let provider: Provider
+    
+    init(tokenManager: TokenManager, provider: Provider) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+    }
+    
     func makeIngredientFilterRepository() -> IngredientFilterRepository {
         return DefaultIngredientFilterRepository()
     }

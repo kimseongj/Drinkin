@@ -11,13 +11,14 @@ import KakaoSDKAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
+    let appDIContainer = AppDIContainer()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         self.window = UIWindow(windowScene: windowScene)
-        self.appCoordinator = AppCoordinator(window)
+        self.appCoordinator = AppCoordinator(window, appDIContainer: appDIContainer)
         appCoordinator?.start()
         
 //         window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정해줌

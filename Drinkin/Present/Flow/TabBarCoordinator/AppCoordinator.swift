@@ -10,10 +10,12 @@ import UIKit
 class AppCoordinator: NSObject, Coordinator {
     var childCoordinators = [Coordinator]()
     let window: UIWindow?
+    let appDIContainer: AppDIContainer
     static var tabBarHeight: CGFloat = 0
     
-    init(_ window: UIWindow?) {
+    init(_ window: UIWindow?, appDIContainer: AppDIContainer) {
         self.window = window
+        self.appDIContainer = appDIContainer
         window?.makeKeyAndVisible()
     }
     
@@ -42,15 +44,15 @@ class AppCoordinator: NSObject, Coordinator {
                                              image: ImageStorage.myBarIcon?.withRenderingMode(.alwaysOriginal),
                                              selectedImage: ImageStorage.myBarFillIcon?.withRenderingMode(.alwaysOriginal))
         
-        let mainVCCoordinator = MainVCCoordinator()
+        let mainVCCoordinator = MainVCCoordinator(appDIContainer: appDIContainer)
         let mainViewController = mainVCCoordinator.startPush()
         mainViewController.tabBarItem = mainTabBarItem
         
-        let cocktailFilterVCCoordinator = CocktailFilterVCCoordinator()
+        let cocktailFilterVCCoordinator = CocktailFilterVCCoordinator(appDIContainer: appDIContainer)
         let cocktailViewController = cocktailFilterVCCoordinator.startPush()
         cocktailViewController.tabBarItem = cocktailTabBarItem
         
-        let homeBarVCCoordinator = HomeBarVCCoordinator()
+        let homeBarVCCoordinator = HomeBarVCCoordinator(appDIContainer: appDIContainer)
         let homeBarViewController = homeBarVCCoordinator.startPush()
         homeBarViewController.tabBarItem = homeBarTabBarItem
         

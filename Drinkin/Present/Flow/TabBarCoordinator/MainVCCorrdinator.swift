@@ -16,9 +16,11 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    var appDIContainer: AppDIContainer
     
-    init() {
+    init(appDIContainer: AppDIContainer) {
         self.navigationController = .init()
+        self.appDIContainer = appDIContainer
     }
     
     func start() { }
@@ -33,7 +35,7 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
     }
     
     func startPush() -> UINavigationController {
-        let cocktailRecommendDIContainer = BriefDescriptionDIContainer()
+        let cocktailRecommendDIContainer = appDIContainer.makeCocktailRecommendDIContainer()
         let mainViewController = MainViewController(viewModel: cocktailRecommendDIContainer.makeCocktailRecommendViewModel())
         
         mainViewController.makeBlackBackBarButton()
@@ -44,7 +46,8 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
     }
     
     func pushTriedCocktailSelectionVC() {
-        let triedCocktailSelectionViewCoordinator = TriedCocktailSelectionVCCoordinator(navigationController: navigationController)
+        let triedCocktailSelectionViewCoordinator = TriedCocktailSelectionVCCoordinator(navigationController: navigationController,
+                                                                                        appDIContainer: appDIContainer)
         
         triedCocktailSelectionViewCoordinator.parentCoordinator = self
         childCoordinators.append(triedCocktailSelectionViewCoordinator)
@@ -53,6 +56,7 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
     
     func pushProductDetailVC(cocktailID: Int) {
         let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController,
+                                                                    appDIContainer: appDIContainer,
                                                                     cocktailID: cocktailID)
         productDetailVCCoordinator.parentCoordinator = self
         childCoordinators.append(productDetailVCCoordinator)

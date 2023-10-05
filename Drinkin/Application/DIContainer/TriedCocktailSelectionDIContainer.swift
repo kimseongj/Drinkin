@@ -6,8 +6,17 @@
 //
 
 import Foundation
+import UIKit
 
 final class TriedCocktailSelectionDIContainer {
+    let tokenManager: TokenManager
+    let provider: Provider
+    
+    init(tokenManager: TokenManager, provider: Provider) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+    }
+    
     func makeTriedCocktailRepository() -> TriedCocktailRepository {
         return DefaultTriedCocktailRepository()
     }
@@ -18,5 +27,9 @@ final class TriedCocktailSelectionDIContainer {
     
     func makeTriedCocktailSelectionViewModel() -> TriedCocktailSelectionViewModel {
         return DefaultTriedCocktailSelectionViewModel(selectTriedCocktailUsecase: makeSelectTriedCocktailUsecase())
+    }
+    
+    func makeTriedCocktailSelectionViewController() -> TriedCocktailSelectionViewController {
+        return TriedCocktailSelectionViewController(viewModel: makeTriedCocktailSelectionViewModel())
     }
 }
