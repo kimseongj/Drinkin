@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
-final class AddIngredientViewCotroller: UIViewController {
+final class AddIngredientViewController: UIViewController {
     private var viewModel: AddIngredientViewModel?
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var ingredientDataSource: UICollectionViewDiffableDataSource<Section, IngredientDescription>!
@@ -91,7 +91,7 @@ final class AddIngredientViewCotroller: UIViewController {
 }
 
 //MARK: - FilterCollectionView DiffableDataSource
-extension AddIngredientViewCotroller {
+extension AddIngredientViewController {
     private func configureFilterDataSource() {
         filterDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: ingredientFilterCollectionView) { collectionView, indexPath, ingredientFilter in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IngredientFilterCell.identifier, for: indexPath) as? IngredientFilterCell else { return UICollectionViewCell() }
@@ -110,12 +110,12 @@ extension AddIngredientViewCotroller {
     }
 }
 
-extension AddIngredientViewCotroller: UICollectionViewDelegate {
+extension AddIngredientViewController: UICollectionViewDelegate {
     
 }
 
 //MARK: - IngredientCollectionView Compositional Layout
-extension AddIngredientViewCotroller {
+extension AddIngredientViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
