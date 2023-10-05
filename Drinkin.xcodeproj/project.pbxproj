@@ -11,7 +11,7 @@
 		1C04C19629DEED2700E381C2 /* MyHomeBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19529DEED2700E381C2 /* MyHomeBarViewController.swift */; };
 		1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19929DEED3D00E381C2 /* MainViewController.swift */; };
 		1C0768692ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768682ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift */; };
-		1C07686B2ABD2FE00003D4BF /* AddIngredientViewCotroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686A2ABD2FE00003D4BF /* AddIngredientViewCotroller.swift */; };
+		1C07686B2ABD2FE00003D4BF /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686A2ABD2FE00003D4BF /* AddIngredientViewController.swift */; };
 		1C07686E2ABD38C70003D4BF /* AddIngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686D2ABD38C70003D4BF /* AddIngredientViewModel.swift */; };
 		1C0768702ABD52CB0003D4BF /* IngredientDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686F2ABD52CB0003D4BF /* IngredientDescription.swift */; };
 		1C0768722ABD58480003D4BF /* IngredientFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768712ABD58480003D4BF /* IngredientFilterCell.swift */; };
@@ -34,6 +34,7 @@
 		1C0768BD2AC972570003D4BF /* BaseInformationVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768BC2AC972570003D4BF /* BaseInformationVCCoordinator.swift */; };
 		1C0768BF2AC97F860003D4BF /* BaseInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768BE2AC97F860003D4BF /* BaseInformationViewModel.swift */; };
 		1C0768C12AC9806E0003D4BF /* BaseBrandDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768C02AC9806E0003D4BF /* BaseBrandDescription.swift */; };
+		1C0768C52AC9A9510003D4BF /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768C42AC9A9510003D4BF /* AppDIContainer.swift */; };
 		1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809DB29E041E000265706 /* LoginViewController.swift */; };
 		1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E029E043DF00265706 /* AppCoordinator.swift */; };
 		1C0809E329E043FF00265706 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E229E043FF00265706 /* Coordinator.swift */; };
@@ -97,6 +98,7 @@
 		1C7A10442A74F6FF009961A1 /* CocktailDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A10432A74F6FF009961A1 /* CocktailDescription.swift */; };
 		1C7A10462A74F8BA009961A1 /* ProductDetailDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A10452A74F8BA009961A1 /* ProductDetailDIContainer.swift */; };
 		1C7A10492A74FB14009961A1 /* ProductDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A10482A74FB14009961A1 /* ProductDetailEndpoint.swift */; };
+		1C82611D2ACA79050065ED2B /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C82611C2ACA79050065ED2B /* TokenManager.swift */; };
 		1C8804A82AAD792400FB7844 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8804A72AAD792400FB7844 /* LoginViewModel.swift */; };
 		1C951D472ABB389000662B35 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C951D462ABB389000662B35 /* ColorPalette.swift */; };
 		1C951D492ABB38CA00662B35 /* MutableSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C951D482ABB38CA00662B35 /* MutableSizeTableView.swift */; };
@@ -140,7 +142,7 @@
 		1CB0AD032AAAF91300847544 /* SavedCocktailListVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0AD022AAAF91300847544 /* SavedCocktailListVCCoordinator.swift */; };
 		1CB0AD052AAC3EF100847544 /* UserMadeCocktailListVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB0AD042AAC3EF000847544 /* UserMadeCocktailListVCCoordinator.swift */; };
 		1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */; };
-		1CB299112A724136001F31BF /* BriefDescriptionDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299102A724136001F31BF /* BriefDescriptionDIContainer.swift */; };
+		1CB299112A724136001F31BF /* CocktailRecommendDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299102A724136001F31BF /* CocktailRecommendDIContainer.swift */; };
 		1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299142A7247AF001F31BF /* CocktailRecommendCell.swift */; };
 		1CC9D3E82A19024C00654A5D /* HoldCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3E72A19024C00654A5D /* HoldCollectionView.swift */; };
 		1CC9D3EA2A19027400654A5D /* HoldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3E92A19027400654A5D /* HoldCollectionViewCell.swift */; };
@@ -182,7 +184,7 @@
 		1C04C19529DEED2700E381C2 /* MyHomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarViewController.swift; sourceTree = "<group>"; };
 		1C04C19929DEED3D00E381C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1C0768682ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSettingVCCoordinator.swift; sourceTree = "<group>"; };
-		1C07686A2ABD2FE00003D4BF /* AddIngredientViewCotroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewCotroller.swift; sourceTree = "<group>"; };
+		1C07686A2ABD2FE00003D4BF /* AddIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
 		1C07686D2ABD38C70003D4BF /* AddIngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewModel.swift; sourceTree = "<group>"; };
 		1C07686F2ABD52CB0003D4BF /* IngredientDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientDescription.swift; sourceTree = "<group>"; };
 		1C0768712ABD58480003D4BF /* IngredientFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientFilterCell.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		1C0768BC2AC972570003D4BF /* BaseInformationVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationVCCoordinator.swift; sourceTree = "<group>"; };
 		1C0768BE2AC97F860003D4BF /* BaseInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationViewModel.swift; sourceTree = "<group>"; };
 		1C0768C02AC9806E0003D4BF /* BaseBrandDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBrandDescription.swift; sourceTree = "<group>"; };
+		1C0768C42AC9A9510003D4BF /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		1C0809DB29E041E000265706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C0809E029E043DF00265706 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		1C0809E229E043FF00265706 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 		1C7A10432A74F6FF009961A1 /* CocktailDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDescription.swift; sourceTree = "<group>"; };
 		1C7A10452A74F8BA009961A1 /* ProductDetailDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailDIContainer.swift; sourceTree = "<group>"; };
 		1C7A10482A74FB14009961A1 /* ProductDetailEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailEndpoint.swift; sourceTree = "<group>"; };
+		1C82611C2ACA79050065ED2B /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		1C8804A72AAD792400FB7844 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		1C951D462ABB389000662B35 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		1C951D482ABB38CA00662B35 /* MutableSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableSizeTableView.swift; sourceTree = "<group>"; };
@@ -305,7 +309,7 @@
 		1CB0AD022AAAF91300847544 /* SavedCocktailListVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCocktailListVCCoordinator.swift; sourceTree = "<group>"; };
 		1CB0AD042AAC3EF000847544 /* UserMadeCocktailListVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMadeCocktailListVCCoordinator.swift; sourceTree = "<group>"; };
 		1CB299092A6E4A8B001F31BF /* UIImage +Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage +Extension.swift"; sourceTree = "<group>"; };
-		1CB299102A724136001F31BF /* BriefDescriptionDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefDescriptionDIContainer.swift; sourceTree = "<group>"; };
+		1CB299102A724136001F31BF /* CocktailRecommendDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecommendDIContainer.swift; sourceTree = "<group>"; };
 		1CB299142A7247AF001F31BF /* CocktailRecommendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailRecommendCell.swift; sourceTree = "<group>"; };
 		1CC9D3E72A19024C00654A5D /* HoldCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldCollectionView.swift; sourceTree = "<group>"; };
 		1CC9D3E92A19027400654A5D /* HoldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -443,7 +447,7 @@
 		1C07686C2ABD38A40003D4BF /* AddIngredient */ = {
 			isa = PBXGroup;
 			children = (
-				1C07686A2ABD2FE00003D4BF /* AddIngredientViewCotroller.swift */,
+				1C07686A2ABD2FE00003D4BF /* AddIngredientViewController.swift */,
 				1C07686D2ABD38C70003D4BF /* AddIngredientViewModel.swift */,
 				1C0768712ABD58480003D4BF /* IngredientFilterCell.swift */,
 			);
@@ -962,15 +966,16 @@
 		1CB2990F2A724092001F31BF /* DIContainer */ = {
 			isa = PBXGroup;
 			children = (
-				1CB299102A724136001F31BF /* BriefDescriptionDIContainer.swift */,
-				1C7A10452A74F8BA009961A1 /* ProductDetailDIContainer.swift */,
 				1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */,
+				1CB299102A724136001F31BF /* CocktailRecommendDIContainer.swift */,
+				1C7A10452A74F8BA009961A1 /* ProductDetailDIContainer.swift */,
+				1C74FD5E2AB6969300823E73 /* CocktailFilterDICotainer.swift */,
 				1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */,
+				1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */,
+				1C07687B2ABD66F10003D4BF /* AddIngredientDIContainer.swift */,
 				1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */,
 				1CD75BA62AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift */,
-				1C74FD5E2AB6969300823E73 /* CocktailFilterDICotainer.swift */,
-				1C07687B2ABD66F10003D4BF /* AddIngredientDIContainer.swift */,
-				1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */,
+				1C0768C42AC9A9510003D4BF /* AppDIContainer.swift */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -993,6 +998,7 @@
 				1C71A4AD2A52928500F1814A /* CommonTool */,
 				1CA969152A9059800076731B /* KeyChain */,
 				1CC9D3EC2A19034900654A5D /* Protocol */,
+				1C82611C2ACA79050065ED2B /* TokenManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1172,9 +1178,9 @@
 				1CA968EF2A8F587D0076731B /* TriedCocktailEndpoint.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
 				1CA969192A9078860076731B /* TokenType.swift in Sources */,
-				1CB299112A724136001F31BF /* BriefDescriptionDIContainer.swift in Sources */,
+				1CB299112A724136001F31BF /* CocktailRecommendDIContainer.swift in Sources */,
 				1C0768742ABD58930003D4BF /* IngredientFilter.swift in Sources */,
-				1C07686B2ABD2FE00003D4BF /* AddIngredientViewCotroller.swift in Sources */,
+				1C07686B2ABD2FE00003D4BF /* AddIngredientViewController.swift in Sources */,
 				1C0FE7F72AAF08620046F555 /* UserMadeCocktailListViewController.swift in Sources */,
 				1C9F4C8B2AAD8D7A0020DB48 /* CocktailImageDescription.swift in Sources */,
 				1CB0AD032AAAF91300847544 /* SavedCocktailListVCCoordinator.swift in Sources */,
@@ -1202,6 +1208,7 @@
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
 				1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */,
 				1CA9695E2AA30BBB0076731B /* LoginCoordinator.swift in Sources */,
+				1C0768C52AC9A9510003D4BF /* AppDIContainer.swift in Sources */,
 				1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */,
 				1C504CDA2AB47268005A0B25 /* CocktailFilterEndpoint.swift in Sources */,
 				1CA9691B2A90D64B0076731B /* Provider.swift in Sources */,
@@ -1255,6 +1262,7 @@
 				1C0FE7F32AAF08010046F555 /* SavedCocktailListViewController.swift in Sources */,
 				1C16A86B2A13AD3D001640E2 /* CocktailRecommendViewController.swift in Sources */,
 				1C0768BF2AC97F860003D4BF /* BaseInformationViewModel.swift in Sources */,
+				1C82611D2ACA79050065ED2B /* TokenManager.swift in Sources */,
 				1CCE88E529E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift in Sources */,
 				1CF62FB62A1252F30043A32F /* CocktailFilterViewController.swift in Sources */,
 				1C0768A72AC1F4890003D4BF /* APIError.swift in Sources */,
