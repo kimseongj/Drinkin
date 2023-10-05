@@ -9,12 +9,15 @@ import Foundation
 import UIKit
 
 final class TriedCocktailSelectionDIContainer {
-    let tokenManager: TokenManager
-    let provider: Provider
+    struct Dependencies {
+        let tokenManager: TokenManager
+        let provider: Provider
+    }
     
-    init(tokenManager: TokenManager, provider: Provider) {
-        self.tokenManager = tokenManager
-        self.provider = provider
+    let dependencies: Dependencies
+    
+    init(dependencies: Dependencies) {
+        self.dependencies = dependencies
     }
     
     func makeTriedCocktailRepository() -> TriedCocktailRepository {
