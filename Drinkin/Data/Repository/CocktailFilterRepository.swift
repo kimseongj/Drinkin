@@ -13,8 +13,15 @@ protocol CocktailFilterRepository {
 }
 
 final class DefaultCocktailFilterRepository: CocktailFilterRepository {
-    let provider = Provider()
-    let endpoint = CocktailFilterEndpoint()
+    let tokenManager: TokenManager
+    let provider: Provider
+    let endpoint: EndpointMakeable
+    
+    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+        self.endpoint = endpoint
+    }
     
     func fetchPublisher() -> AnyPublisher<CocktailFilter, Error> {
         return provider.fetchData(endpoint: endpoint)

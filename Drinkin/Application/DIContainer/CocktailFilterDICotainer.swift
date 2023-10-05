@@ -14,6 +14,7 @@ final class CocktailFilterDICotainer {
     }
     
     let dependencies: Dependencies
+    let cocktailFilterEndpoint = CocktailFilterEndpoint()
     let cocktailListEndpoint = CocktailListEndpoint()
     
     init(dependencies: Dependencies) {
@@ -21,7 +22,7 @@ final class CocktailFilterDICotainer {
     }
     
     func makeCocktailFilterRepository() -> CocktailFilterRepository {
-        return DefaultCocktailFilterRepository()
+        return DefaultCocktailFilterRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, endpoint: cocktailFilterEndpoint)
     }
     
     func makeFetchCocktailFilterUsecase() -> FetchCocktailFilterUsecase {
