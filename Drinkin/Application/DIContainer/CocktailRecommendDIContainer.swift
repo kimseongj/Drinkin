@@ -14,13 +14,16 @@ final class CocktailRecommendDIContainer {
     }
     
     let dependencies: Dependencies
+    let cocktailRecommendEndpoint = CocktailRecommendEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
     func makeBriefDescriptionRepository() -> BriefDescriptionRepository {
-        return DefaultBriefDescriptionRepository()
+        return DefaultBriefDescriptionRepository(tokenManager: dependencies.tokenManager,
+                                                 provider: dependencies.provider,
+                                                 endpoint: cocktailRecommendEndpoint)
     }
     
     func makeFetchBriefDescriptionUsecase() -> FetchBriefDescriptionUsecase {

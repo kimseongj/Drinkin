@@ -72,7 +72,6 @@
 		1C5ADE2E2AAEE46D008AD62B /* FetchSavedCocktailListUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5ADE2D2AAEE46D008AD62B /* FetchSavedCocktailListUsecase.swift */; };
 		1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */; };
 		1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */; };
-		1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD329DB1AE30053F19A /* ViewController.swift */; };
 		1C5CAAD929DB1AE50053F19A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD829DB1AE50053F19A /* Assets.xcassets */; };
 		1C5CAADC29DB1AE50053F19A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C5CAADA29DB1AE50053F19A /* LaunchScreen.storyboard */; };
 		1C5CAAE529DB1F710053F19A /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 1C5CAAE429DB1F710053F19A /* KakaoSDK */; };
@@ -245,7 +244,6 @@
 		1C5CAACC29DB1AE30053F19A /* Drinkin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1C5CAAD329DB1AE30053F19A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1C5CAAD829DB1AE50053F19A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1C5CAADB29DB1AE50053F19A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1C5CAADD29DB1AE50053F19A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -686,7 +684,6 @@
 				1C5CAAFB29DB50CC0053F19A /* Data */,
 				1C5CAAF929DB50A80053F19A /* Domain */,
 				1C5CAAFA29DB50B00053F19A /* Present */,
-				1C5CAAD329DB1AE30053F19A /* ViewController.swift */,
 				1C5CAAD829DB1AE50053F19A /* Assets.xcassets */,
 				1C5CAADA29DB1AE50053F19A /* LaunchScreen.storyboard */,
 				1C5CAADD29DB1AE50053F19A /* Info.plist */,
@@ -1203,7 +1200,6 @@
 				1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */,
 				1CA9695A2AA18AB40076731B /* MyHomeBarDIContainer.swift in Sources */,
 				1CCE88FA29EBB2C200D3E1D2 /* CocktailSelectionCell.swift in Sources */,
-				1C5CAAD429DB1AE30053F19A /* ViewController.swift in Sources */,
 				1CA8ED292A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift in Sources */,
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
 				1C9BAB2829EFB58000E979AC /* CocktailInformationView.swift in Sources */,

@@ -14,6 +14,7 @@ final class CocktailFilterDICotainer {
     }
     
     let dependencies: Dependencies
+    let cocktailListEndpoint = CocktailListEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -28,7 +29,9 @@ final class CocktailFilterDICotainer {
     }
     
     func makePreviewDescriptionRepository() -> PreviewDescriptionRepository {
-        return DefaultPreviewDescriptionRepository()
+        return DefaultPreviewDescriptionRepository(tokenManager: dependencies.tokenManager,
+                                                   provider: dependencies.provider,
+                                                   endpoint: cocktailListEndpoint)
     }
     
     func makeFetchPreviewDescriptionUsecase() -> FetchPreviewDescriptionUsecase {

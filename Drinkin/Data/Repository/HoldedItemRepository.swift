@@ -13,8 +13,15 @@ protocol HoldedItemRepository {
 }
 
 final class DefaultHoldedItemRepository: HoldedItemRepository {
-    let provider = Provider()
-    let endpoint = HoldedItemEndpoint()
+    let tokenManager: TokenManager
+    let provider: Provider
+    let endpoint: EndpointMakeable
+    
+    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+        self.endpoint = endpoint
+    }
     
     func fetchPublisher() -> AnyPublisher<HoldedItem, Error> {
         return provider.fetchData(endpoint: endpoint)

@@ -14,13 +14,18 @@ final class ProductDetailDIContainer {
     }
     
     let dependencies: Dependencies
+    let productDetailEndpoint = ProductDetailEndpoint()
+    
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
     func makeDescriptionRepository(cocktailID: Int) -> DescriptionRepository {
-        return DefaultDescriptionRepository(cocktailID: cocktailID)
+        return DefaultDescriptionRepository(tokenManager: dependencies.tokenManager,
+                                            provider: dependencies.provider,
+                                            endpoint: productDetailEndpoint,
+                                            cocktailID: cocktailID)
     }
     
     func makeFetchDescriptionUsecase(cocktailID: Int) -> FetchDescriptionUsecase {

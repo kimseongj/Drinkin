@@ -9,9 +9,9 @@ import Foundation
 
 protocol EndpointMakeable {
     var baseURL: String { get }
-    var path: String { get }
+    var path: String { get set }
     var method: String { get }
-    var queryItems: [URLQueryItem] { get }
+    var queryItems: [URLQueryItem] { get set }
     var header: [String: String]? { get }
     
     func makeURL() -> URL?
@@ -19,6 +19,14 @@ protocol EndpointMakeable {
 }
 
 extension EndpointMakeable {
+    mutating func insertPathParmeter(pathParameter: String) {
+        path += "/\(pathParameter)"
+    }
+    
+    mutating func insertQuery(queryParameter: String, queryValue: String) {
+        queryItems.append(URLQueryItem(name: queryParameter, value: queryValue))
+    }
+    
     func makeURL() -> URL? {
         var urlComponents = URLComponents(string: baseURL)
         urlComponents?.path = path

@@ -15,13 +15,16 @@ final class TriedCocktailSelectionDIContainer {
     }
     
     let dependencies: Dependencies
+    let triedCocktailEndpoint = TriedCocktailEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
     func makeTriedCocktailRepository() -> TriedCocktailRepository {
-        return DefaultTriedCocktailRepository()
+        return DefaultTriedCocktailRepository(tokenManager: dependencies.tokenManager,
+                                              provider: dependencies.provider,
+                                              endpoint: triedCocktailEndpoint)
     }
     
     func makeSelectTriedCocktailUsecase() -> SelectTriedCocktailUsecase {

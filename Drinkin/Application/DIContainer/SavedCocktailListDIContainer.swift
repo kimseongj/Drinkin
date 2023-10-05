@@ -14,13 +14,17 @@ final class SavedCocktailListDIContainer {
     }
     
     let dependencies: Dependencies
+    let savedCocktailListEndpoint = SavedCocktailListEndpoint()
+
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
     func makeSavedCocktailListRepository() -> SavedCocktailListRepository {
-        return DefaultSavedCocktailListRepository()
+        return DefaultSavedCocktailListRepository(tokenManager: dependencies.tokenManager,
+                                                  provider: dependencies.provider,
+                                                  endpoint: savedCocktailListEndpoint)
     }
     
     func makeFetchSavedCocktailListUsecase() -> FetchSavedCocktailListUsecase {

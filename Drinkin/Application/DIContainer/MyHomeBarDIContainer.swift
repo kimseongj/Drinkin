@@ -14,13 +14,16 @@ final class MyHomeBarDIContainer {
     }
     
     let dependencies: Dependencies
+    let holdedItemEndpoint = HoldedItemEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
     func makeHoldedItemRepository() -> HoldedItemRepository {
-        return DefaultHoldedItemRepository()
+        return DefaultHoldedItemRepository(tokenManager: dependencies.tokenManager,
+                                           provider: dependencies.provider,
+                                           endpoint: holdedItemEndpoint)
     }
     
     func makeFetchHoldedItemUsecase() -> FetchHoldedItemUsecase {
