@@ -11,14 +11,16 @@ class SavedCocktailListVCCoordinator: Coordinator {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    let appDIContainer: AppDIContainer
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
         self.navigationController = navigationController
+        self.appDIContainer = appDIContainer
     }
 
     func start() {
-        let savedCocktailListDIContainer = SavedCocktailListDIContainer()
-        let vc = SavedCocktailListViewController(viewModel: savedCocktailListDIContainer.makeSavedCocktailListViewModel())
+        let savedCocktailListDIContainer = appDIContainer.makeSavedCocktailListDIContainer()
+        let vc = savedCocktailListDIContainer.makeSavedCocktailListViewController()
         
         navigationController.pushViewController(vc, animated: true)
     }

@@ -16,14 +16,16 @@ class TriedCocktailSelectionVCCoordinator: Coordinator, TriedCocktailSelectionVC
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var triedCocktailSelectionViewController: TriedCocktailSelectionViewController?
+    let appDIContainer: AppDIContainer
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
         self.navigationController = navigationController
+        self.appDIContainer = appDIContainer
     }
     
     func start() {
-        let triedCocktailSelectionDIContainer = TriedCocktailSelectionDIContainer()
-        let vc = TriedCocktailSelectionViewController(viewModel: triedCocktailSelectionDIContainer.makeTriedCocktailSelectionViewModel())
+        let triedCocktailSelectionDIContainer = appDIContainer.makeTriedCocktailSelectionDIContainer()
+        let vc = triedCocktailSelectionDIContainer.makeTriedCocktailSelectionViewController()
         
         vc.delegate = self
         vc.modalPresentationStyle = .fullScreen

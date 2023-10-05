@@ -18,16 +18,19 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    let appDIContainer: AppDIContainer
     var cocktailID: Int
     
-    init(navigationController: UINavigationController, cocktailID: Int) {
+    init(navigationController: UINavigationController, appDIContainer: AppDIContainer, cocktailID: Int) {
         self.navigationController = navigationController
+        self.appDIContainer = appDIContainer
         self.cocktailID = cocktailID
     }
     
     func start() {
-        let productDetailDIContainer = ProductDetailDIContainer()
-        let productDetailViewController = ProductDetailViewController(viewModel: productDetailDIContainer.makeProductDetailViewModel(cocktailID: cocktailID))
+        let productDetailDIContainer = appDIContainer.makeProductDetailDIContainer()
+        let productDetailViewModel =  productDetailDIContainer.makeProductDetailViewModel(cocktailID: cocktailID)
+        let productDetailViewController = productDetailDIContainer.makeProductDetailViewController(viewModel: productDetailViewModel)
         
         productDetailViewController.delegate = self
         productDetailViewController.cocktailInformationView.toolView.delegate = self
@@ -41,10 +44,10 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     func childDidFinish(_ child: Coordinator?) { }
     
     func pushBaseInformationVC() {
-        let baseInformationVCCoordinator = BaseInformationVCCoordinator(navigationController: navigationController)
-        childCoordinators.append(baseInformationVCCoordinator)
+        let baseInformationVCCoordinator = BaseInformationVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
         
         baseInformationVCCoordinator.parentCoordinator = self
+        childCoordinators.append(baseInformationVCCoordinator)
         baseInformationVCCoordinator.start()
     }
     

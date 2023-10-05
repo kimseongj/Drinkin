@@ -11,14 +11,16 @@ class AddIngredientVCCoordinator: Coordinator {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    let appDIContainer: AppDIContainer
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
         self.navigationController = navigationController
+        self.appDIContainer = appDIContainer
     }
     
     func start() {
-        let addIngredientDIContainer = AddIngredientDIContainer()
-        let vc = AddIngredientViewCotroller(viewModel: addIngredientDIContainer.makeAddIngredientViewModel())
+        let addIngredientDIContainer = appDIContainer.makeAddIngredientDIContainer()
+        let vc = addIngredientDIContainer.makeAddIngredientViewController()
         
         navigationController.pushViewController(vc, animated: true)
     }

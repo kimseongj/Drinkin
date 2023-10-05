@@ -47,10 +47,10 @@ final class BrandCell: UICollectionViewCell {
         }
     }
     
-    func fill(with baseBrand: BaseBrandDescription) {
-        guard let imageURL = URL(string: baseBrand.imageURI) else { return }
-        
-        titleLabel.text = baseBrand.title
-        brandImageView.load(url: imageURL)
-    }
+//    func fill(with baseBrand: BaseBrandDescription) {
+//        guard let imageURL = URL(string: baseBrand.imageURI) else { return }
+//        
+//        titleLabel.text = baseBrand.title
+//        brandImageView.load(url: imageURL)
+//    }
 }

@@ -13,8 +13,15 @@ protocol SavedCocktailListRepository {
 }
 
 final class DefaultSavedCocktailListRepository: SavedCocktailListRepository {
-    let provider = Provider()
-    let endpoint = SavedCocktailListEndpoint()
+    let tokenManager: TokenManager
+    let provider: Provider
+    let endpoint: EndpointMakeable
+    
+    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+        self.endpoint = endpoint
+    }
     
     func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error> {
         return provider.fetchData(endpoint: endpoint)

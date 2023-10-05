@@ -13,17 +13,20 @@ protocol DescriptionRepository {
 }
 
 class DefaultDescriptionRepository: DescriptionRepository {
-    let provider = Provider()
-    var endpoint = ProductDetailEndpoint()
+    let tokenManager: TokenManager
+    let provider: Provider
+    var endpoint: EndpointMakeable
+    let cocktailID: Int
     
-    private let cocktailID: Int
-    
-    init(cocktailID: Int) {
+    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable, cocktailID: Int) {
+        self.tokenManager = tokenManager
+        self.provider = provider
+        self.endpoint = endpoint
         self.cocktailID = cocktailID
     }
     
     func fetchPublisher() -> AnyPublisher<CocktailDescription, Error> {
-        endpoint.insertPathParmeter(id: cocktailID)
+        endpoint.insertPathParmeter(pathParameter: cocktailID.description)
         
         return provider.fetchData(endpoint: endpoint)
     }

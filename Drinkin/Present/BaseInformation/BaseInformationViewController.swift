@@ -7,11 +7,12 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 final class BaseInformationViewController: UIViewController {
     private var viewModel: BaseInformationViewModel?
     private var cancelBag: Set<AnyCancellable> = []
-    private var baseBrandDataSource: UICollectionViewDiffableDataSource<Section, BaseBrandDescription>!
+    private var brandDataSource: UICollectionViewDiffableDataSource<Section, BrandDescription>!
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -41,7 +42,7 @@ final class BaseInformationViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: CocktailRecommendViewModel?) {
+    init(viewModel: BaseInformationViewModel?) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -114,18 +115,18 @@ extension BaseInformationViewController {
 //MARK: - DiffableDataSource
 extension BaseInformationViewController {
     private func configureDataSource() {
-        brandDataSource = UICollectionViewDiffableDataSource<Section, BaseBrandDescription> (collectionView: baseBrandCollectionView) { (collectionView, indexPath, baseBrandDescription) -> UICollectionViewCell? in
+        brandDataSource = UICollectionViewDiffableDataSource<Section,BrandDescription> (collectionView: baseBrandCollectionView) { (collectionView, indexPath, brandDescription) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BrandCell.identifier, for: indexPath) as? BrandCell else { return nil }
             
             return cell
         }
     }
     
-    private func applySnapshot(baseBrandDescriptionList: [BaseBrandDescription]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, BaseBrandDescription>()
+    private func applySnapshot(brandDescriptionList: [BrandDescription]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, BrandDescription>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(baseBrandDescriptionList)
-        baseBrandDataSource?.apply(snapshot, animatingDifferences: true)
+        snapshot.appendItems(brandDescriptionList)
+        brandDataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
@@ -141,7 +142,7 @@ extension BaseInformationViewController {
         guard let viewModel else { return }
         
         viewModel.baseBrandListPublisher.sink {
-            self.applySnapshot(baseBrandDescriptionList: $0)
+            self.applySnapshot(brandDescriptionList: $0)
         }.store(in: &cancelBag)
     }
 }

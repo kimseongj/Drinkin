@@ -6,10 +6,25 @@
 //
 
 import Foundation
+import UIKit
 
 final class TriedCocktailSelectionDIContainer {
+    struct Dependencies {
+        let tokenManager: TokenManager
+        let provider: Provider
+    }
+    
+    let dependencies: Dependencies
+    let triedCocktailEndpoint = TriedCocktailEndpoint()
+    
+    init(dependencies: Dependencies) {
+        self.dependencies = dependencies
+    }
+    
     func makeTriedCocktailRepository() -> TriedCocktailRepository {
-        return DefaultTriedCocktailRepository()
+        return DefaultTriedCocktailRepository(tokenManager: dependencies.tokenManager,
+                                              provider: dependencies.provider,
+                                              endpoint: triedCocktailEndpoint)
     }
     
     func makeSelectTriedCocktailUsecase() -> SelectTriedCocktailUsecase {
@@ -18,5 +33,9 @@ final class TriedCocktailSelectionDIContainer {
     
     func makeTriedCocktailSelectionViewModel() -> TriedCocktailSelectionViewModel {
         return DefaultTriedCocktailSelectionViewModel(selectTriedCocktailUsecase: makeSelectTriedCocktailUsecase())
+    }
+    
+    func makeTriedCocktailSelectionViewController() -> TriedCocktailSelectionViewController {
+        return TriedCocktailSelectionViewController(viewModel: makeTriedCocktailSelectionViewModel())
     }
 }

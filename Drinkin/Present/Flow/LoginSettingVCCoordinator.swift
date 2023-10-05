@@ -17,7 +17,7 @@ class LoginSettingVCCoordinator: Coordinator {
     }
     
     func start() {
-        let loginSettingDIContainer = LoginSettingDIContainer()
+        //let loginSettingDIContainer = LoginSettingDIContainer()
         let vc = LoginSettingViewController()
         
         navigationController.pushViewController(vc, animated: true)

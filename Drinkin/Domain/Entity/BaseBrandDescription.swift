@@ -15,7 +15,7 @@ struct BaseBrandDescription: Codable {
     }
 }
 
-struct BrandDescription: Codable {
+struct BrandDescription: Codable, Hashable {
     let title: String
     let imageURI: String
     
