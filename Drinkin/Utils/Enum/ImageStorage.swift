@@ -15,4 +15,5 @@ enum ImageStorage {
     static let cocktailFillIcon = UIImage(named: "cocktail_list_fill_icon")
     static let myBarIcon = UIImage(named: "my_bar_icon")
     static let myBarFillIcon = UIImage(named: "my_bar_fill_icon")
+    static let checkIcon = UIImage(named: "check_icon")
 }
