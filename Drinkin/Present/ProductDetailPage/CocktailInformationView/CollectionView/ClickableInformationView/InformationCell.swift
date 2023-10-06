@@ -33,11 +33,11 @@ class InformationCell: UICollectionViewCell {
         self.layer.borderWidth = 1.4
         self.addSubview(label)
         
-        label.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(2)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview().offset(-2)
+        label.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(8)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview().offset(-8)
         }
     }
     
