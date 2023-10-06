@@ -9,13 +9,11 @@ import UIKit
 import SnapKit
 
 final class ClickableInformationView: UIView {
+    weak var delegate: ProductDetailVCDelegate?
     private var title: String = ""
-    
     private var toolDataSource: UICollectionViewDiffableDataSource<Section, CocktailTool>!
     private var skillDataSource: UICollectionViewDiffableDataSource<Section, CocktailSkill>!
     private var glassDataSource: UICollectionViewDiffableDataSource<Section, CocktailGlass>!
-    
-    weak var delegate: ProductDetailVCDelegate?
     
     private var skillLabelView: UIView = {
         let view = UIView()
@@ -37,6 +35,7 @@ final class ClickableInformationView: UIView {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
+        
         return label
     }()
     
@@ -63,22 +62,22 @@ final class ClickableInformationView: UIView {
         skillLabelView.addSubview(skillLabel)
         self.addSubview(informationCollectionView)
         
-        skillLabelView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalToSuperview().offset(24)
-            make.bottom.equalTo(informationCollectionView)
-            make.width.equalTo(65)
+        skillLabelView.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.top.equalToSuperview().offset(24)
+            $0.bottom.equalTo(informationCollectionView)
+            $0.width.equalTo(65)
         }
         
-        skillLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(7)
+        skillLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(7)
         }
         
-        informationCollectionView.snp.makeConstraints { make in
-            make.trailing.bottom.equalToSuperview()
-            make.top.equalToSuperview().offset(24)
-            make.leading.equalTo(skillLabelView.snp.trailing)
+        informationCollectionView.snp.makeConstraints {
+            $0.trailing.bottom.equalToSuperview()
+            $0.top.equalToSuperview().offset(24)
+            $0.leading.equalTo(skillLabelView.snp.trailing)
         }
     }
     
