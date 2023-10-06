@@ -32,6 +32,32 @@ class ProductDetailViewController: UIViewController {
     
     let introductionView = IntroductionView()
     let cocktailInformationView = CocktailInformationView()
+    let tipAndContentView = TipAndContentView()
+    
+    private let markMadeCocktailButton: MarkMadeCocktailButton = {
+        let button = MarkMadeCocktailButton()
+        button.addTarget(self, action: #selector(tapMarkMadeCocktailButton), for: .touchUpInside)
+        
+        return button
+    }()
+   
+    
+    private let bookmarkCocktailButton: BookmarkCocktailButton = {
+        let button = BookmarkCocktailButton()
+        button.addTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc
+    private func tapMarkMadeCocktailButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
+    @objc
+    private func tapBookmarkCocktailButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
     
     init(viewModel: ProductDetailViewModel?) {
         self.viewModel = viewModel
@@ -65,14 +91,29 @@ class ProductDetailViewController: UIViewController {
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(introductionView)
         stackView.addArrangedSubview(cocktailInformationView)
+        stackView.addArrangedSubview(tipAndContentView)
+        scrollView.addSubview(markMadeCocktailButton)
+        scrollView.addSubview(bookmarkCocktailButton)
         
         scrollView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
         
         stackView.snp.makeConstraints {
-            $0.top.bottom.leading.trailing.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
             $0.width.equalToSuperview()
+        }
+        
+        markMadeCocktailButton.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom).offset(80)
+            $0.centerX.equalTo(view.frame.width * 0.25)
+            $0.bottom.equalToSuperview().offset(-5)
+        }
+        
+        bookmarkCocktailButton.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom).offset(80)
+            $0.centerX.equalTo(view.frame.width * 0.75)
+            $0.bottom.equalToSuperview().offset(-5)
         }
     }
     
@@ -84,6 +125,16 @@ class ProductDetailViewController: UIViewController {
         introductionView.applybaseSnapshot(detailCategoryList: validCocktailDescription.categoryList)
         introductionView.applyIngredientSnapshot(detailIngredientList: validCocktailDescription.ingredientList)
     }
+    
+//    private func configureMarkButton() {
+//        if viewModel?. == true {
+//            bookmarkCocktailButton.isSelected
+//        }
+//
+//        if viewModel?. == true {
+//            markMadeCocktailButton.isSelected
+//        }
+//    }
 }
 
 //MARK: - Binding
