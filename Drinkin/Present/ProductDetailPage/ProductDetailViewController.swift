@@ -44,12 +44,11 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureBackgroundColor()
         configureUI()
         introductionView.configureDelegate(delegate: delegate)
         binding()
         viewModel?.fetchDescription()
-        configureScrollView()
-        configureStackView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -57,27 +56,24 @@ class ProductDetailViewController: UIViewController {
         delegate?.didFinishProductDetailVC()
     }
     
-    private func configureUI() {
+    private func configureBackgroundColor() {
         view.backgroundColor = .white
     }
     
-    private func configureScrollView(){
+    private func configureUI() {
         view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-        }
-    }
-    
-    private func configureStackView(){
         scrollView.addSubview(stackView)
-        
-        stackView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-            make.width.equalToSuperview()
-        }
-        
         stackView.addArrangedSubview(introductionView)
         stackView.addArrangedSubview(cocktailInformationView)
+        
+        scrollView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
     }
     
     private func fill(with cocktailDescription: CocktailDescription?) {
