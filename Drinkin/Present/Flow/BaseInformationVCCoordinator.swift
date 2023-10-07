@@ -12,17 +12,20 @@ final class BaseInformationVCCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
+    //var baseID: Int
     
     init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
+        //self.baseID = baseID
     }
     
     func start() {
-        //let baseInformationVCCoordinator = appDIContainer.
-//        let vc = BaseInformationViewController(viewModel: BaseInformationViewModel())
-//        vc.makeBlackBackBarButton()
-//        navigationController.pushViewController(vc, animated: true)
+        let baseInformationDIContainer = appDIContainer.makeBaseInformationDIContainer()
+        //let baseInformationViewModel =
+        let vc = baseInformationDIContainer.makeBaseInformationViewController()
+        vc.makeBlackBackBarButton()
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func childDidFinish(_ child: Coordinator?) {
