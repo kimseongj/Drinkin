@@ -18,16 +18,4 @@ final class LoginSettingDIContainer {
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
-    
-    func makeIngredientFilterRepository() -> IngredientFilterRepository {
-        return DefaultIngredientFilterRepository()
-    }
-    
-    func makeFetchIngredientFilterUsecase() -> FetchIngredientFilterUsecase {
-        return DefaultFetchIngredientFilterUsecase(ingredientFilterRepository: makeIngredientFilterRepository())
-    }
-    
-    func makeAddIngredientViewModel() -> AddIngredientViewModel {
-        return DefaultAddIngredientViewModel(fetchIngredientFilterUsecase: makeFetchIngredientFilterUsecase())
-    }
 }
