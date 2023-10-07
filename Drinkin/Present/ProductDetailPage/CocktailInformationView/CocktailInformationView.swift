@@ -80,7 +80,7 @@ final class CocktailInformationView: UIView {
         sugarContentView.snp.makeConstraints {
             $0.top.equalTo(levelView.snp.bottom)
             $0.trailing.leading.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-40)
         }
     }
     
