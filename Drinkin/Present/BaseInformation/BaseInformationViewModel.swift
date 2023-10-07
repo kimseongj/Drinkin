@@ -13,10 +13,15 @@ protocol BaseInformationViewModel {
 }
 
 final class DefaultBaseInformationViewModel: BaseInformationViewModel {
+    private let fetchBaseDescriptionUsecase: FetchBaseDescriptionUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var baseBrandList: [BrandDescription] = []
     var baseBrandListPublisher: Published<[BrandDescription]>.Publisher { $baseBrandList }
+    
+    init(fetchBaseDescriptionUsecase: FetchBaseDescriptionUsecase) {
+        self.fetchBaseDescriptionUsecase = fetchBaseDescriptionUsecase
+    }
     
     func fetchBaseBrandDesription() {
         
