@@ -12,7 +12,7 @@ import Combine
 final class BaseInformationViewController: UIViewController {
     private var viewModel: BaseInformationViewModel?
     private var cancelBag: Set<AnyCancellable> = []
-    private var brandDataSource: UICollectionViewDiffableDataSource<Section, BrandDescription>!
+    private var brandImageDescriptionDataSource: UICollectionViewDiffableDataSource<Section, BrandImageDescription>!
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -32,12 +32,14 @@ final class BaseInformationViewController: UIViewController {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
+        label.numberOfLines = 0
         
         return label
     }()
     
     private lazy var baseBrandCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
+        collectionView.register(BrandCell.self, forCellWithReuseIdentifier: BrandCell.identifier)
         
         return collectionView
     }()
@@ -55,6 +57,9 @@ final class BaseInformationViewController: UIViewController {
         super.viewDidLoad()
         configureBackgroundColor()
         configureUI()
+        configureDataSource()
+        binding()
+        viewModel?.fetchBaseDesription()
     }
     
     private func configureBackgroundColor() {
@@ -70,7 +75,6 @@ final class BaseInformationViewController: UIViewController {
         
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
-            $0.width.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints {
@@ -87,7 +91,24 @@ final class BaseInformationViewController: UIViewController {
         baseBrandCollectionView.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.width.equalToSuperview()
         }
+    }
+    
+    private func fill(with baseDescription: BaseDescription?) {
+        guard let validBaseDescription = baseDescription else { return }
+        
+        titleLabel.text = validBaseDescription.baseName
+        descriptionLabel.text = validBaseDescription.baseDescription
+        applySnapshot(brandImageDescriptionList: validBaseDescription.brandList)
+    }
+}
+
+//MARK: - BaseBrandCollectionView Delegate
+extension BaseInformationViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 }
 
@@ -105,6 +126,7 @@ extension BaseInformationViewController {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
             
             let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
             
             return section
         }
@@ -115,34 +137,38 @@ extension BaseInformationViewController {
 //MARK: - DiffableDataSource
 extension BaseInformationViewController {
     private func configureDataSource() {
-        brandDataSource = UICollectionViewDiffableDataSource<Section,BrandDescription> (collectionView: baseBrandCollectionView) { (collectionView, indexPath, brandDescription) -> UICollectionViewCell? in
+        brandImageDescriptionDataSource = UICollectionViewDiffableDataSource<Section,BrandImageDescription> (collectionView: baseBrandCollectionView) { (collectionView, indexPath, brandImageDescription) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BrandCell.identifier, for: indexPath) as? BrandCell else { return nil }
+            
+            cell.fill(with: brandImageDescription)
             
             return cell
         }
     }
     
-    private func applySnapshot(brandDescriptionList: [BrandDescription]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, BrandDescription>()
+    private func applySnapshot(brandImageDescriptionList: [BrandImageDescription]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, BrandImageDescription>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(brandDescriptionList)
-        brandDataSource?.apply(snapshot, animatingDifferences: true)
+        snapshot.appendItems(brandImageDescriptionList)
+        brandImageDescriptionDataSource?.apply(snapshot, animatingDifferences: true)
+        updateCollectionViewHeight(cellCount: brandImageDescriptionList.count)
     }
-}
-
-extension BaseInformationViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
+    private func updateCollectionViewHeight(cellCount: Int) {
+        let cellLineCount: Int = cellCount / 2
+        let cellLineHeigt: CGFloat = view.bounds.width / 2 + 10
         
+        baseBrandCollectionView.snp.makeConstraints {
+            $0.height.equalTo(cellLineHeigt * CGFloat(cellLineCount))
+        }
     }
 }
 
 //MARK: - Binding
 extension BaseInformationViewController {
     private func binding() {
-        guard let viewModel else { return }
-        
-        viewModel.baseBrandListPublisher.sink {
-            self.applySnapshot(brandDescriptionList: $0)
+        viewModel?.baseDescriptionPublisher.receive(on: RunLoop.main).sink {
+            self.fill(with: $0)
         }.store(in: &cancelBag)
     }
 }

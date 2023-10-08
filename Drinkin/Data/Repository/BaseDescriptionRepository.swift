@@ -1,18 +1,18 @@
 //
-//  IngredientRepository.swift
+//  BaseDescriptionRepository.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/09/22.
+//  Created by kimseongjun on 2023/10/07.
 //
 
 import Foundation
 import Combine
 
-protocol IngredientFilterRepository {
-    func fetchPublisher() -> AnyPublisher<IngredientFilter, Error>
+protocol BaseDescriptionRepository {
+    func fetchPublisher() -> AnyPublisher<BaseDescription, Error>
 }
 
-final class DefaultIngredientFilterRepository: IngredientFilterRepository {
+final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -23,7 +23,7 @@ final class DefaultIngredientFilterRepository: IngredientFilterRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<IngredientFilter, Error> {
+    func fetchPublisher() -> AnyPublisher<BaseDescription, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

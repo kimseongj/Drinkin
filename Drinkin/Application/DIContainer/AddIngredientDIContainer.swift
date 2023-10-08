@@ -15,13 +15,14 @@ final class AddIngredientDIContainer {
     }
     
     let dependencies: Dependencies
+    let ingredientFilterEndpoint = IngredientFilterEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
     func makeIngredientFilterRepository() -> IngredientFilterRepository {
-        return DefaultIngredientFilterRepository()
+        return DefaultIngredientFilterRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, endpoint: ingredientFilterEndpoint)
     }
     
     func makeFetchIngredientFilterUsecase() -> FetchIngredientFilterUsecase {

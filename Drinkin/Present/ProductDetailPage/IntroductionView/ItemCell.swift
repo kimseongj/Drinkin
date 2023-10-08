@@ -62,8 +62,8 @@ final class ItemCell: UICollectionViewCell {
     func check(hold: Bool) {
         switch hold {
         case true:
-            contentView.backgroundColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
-            checkImageView.image = UIImage(named: "check_icon")
+            contentView.backgroundColor = ColorPalette.themeColor
+            checkImageView.image = ImageStorage.checkIcon
             
         case false:
             contentView.backgroundColor = .white

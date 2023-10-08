@@ -32,6 +32,32 @@ class ProductDetailViewController: UIViewController {
     
     let introductionView = IntroductionView()
     let cocktailInformationView = CocktailInformationView()
+    let tipAndContentView = TipAndContentView()
+    
+    private let markMadeCocktailButton: MarkMadeCocktailButton = {
+        let button = MarkMadeCocktailButton()
+        button.addTarget(self, action: #selector(tapMarkMadeCocktailButton), for: .touchUpInside)
+        
+        return button
+    }()
+   
+    
+    private let bookmarkCocktailButton: BookmarkCocktailButton = {
+        let button = BookmarkCocktailButton()
+        button.addTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    @objc
+    private func tapMarkMadeCocktailButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
+    @objc
+    private func tapBookmarkCocktailButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
     
     init(viewModel: ProductDetailViewModel?) {
         self.viewModel = viewModel
@@ -44,12 +70,11 @@ class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureBackgroundColor()
         configureUI()
         introductionView.configureDelegate(delegate: delegate)
         binding()
         viewModel?.fetchDescription()
-        configureScrollView()
-        configureStackView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -57,27 +82,39 @@ class ProductDetailViewController: UIViewController {
         delegate?.didFinishProductDetailVC()
     }
     
-    private func configureUI() {
+    private func configureBackgroundColor() {
         view.backgroundColor = .white
     }
     
-    private func configureScrollView(){
+    private func configureUI() {
         view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-        }
-    }
-    
-    private func configureStackView(){
         scrollView.addSubview(stackView)
-        
-        stackView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalToSuperview()
-            make.width.equalToSuperview()
-        }
-        
         stackView.addArrangedSubview(introductionView)
         stackView.addArrangedSubview(cocktailInformationView)
+        stackView.addArrangedSubview(tipAndContentView)
+        scrollView.addSubview(markMadeCocktailButton)
+        scrollView.addSubview(bookmarkCocktailButton)
+        
+        scrollView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
+        
+        markMadeCocktailButton.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom).offset(80)
+            $0.centerX.equalTo(view.frame.width * 0.25)
+            $0.bottom.equalToSuperview().offset(-5)
+        }
+        
+        bookmarkCocktailButton.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom).offset(80)
+            $0.centerX.equalTo(view.frame.width * 0.75)
+            $0.bottom.equalToSuperview().offset(-5)
+        }
     }
     
     private func fill(with cocktailDescription: CocktailDescription?) {
@@ -88,6 +125,16 @@ class ProductDetailViewController: UIViewController {
         introductionView.applybaseSnapshot(detailCategoryList: validCocktailDescription.categoryList)
         introductionView.applyIngredientSnapshot(detailIngredientList: validCocktailDescription.ingredientList)
     }
+    
+//    private func configureMarkButton() {
+//        if viewModel?. == true {
+//            bookmarkCocktailButton.isSelected
+//        }
+//
+//        if viewModel?. == true {
+//            markMadeCocktailButton.isSelected
+//        }
+//    }
 }
 
 //MARK: - Binding

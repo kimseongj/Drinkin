@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 final class CocktailInformationView: UIView {
-    
-    private let cocktailNameTitle: UILabel = {
-        let title = UILabel()
-        title.textColor = .black
-        title.font = UIFont.boldSystemFont(ofSize: 17)
-        title.text = "정보"
-        return title
+    private let informationLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 20)
+        label.text = "정보"
+        
+        return label
     }()
     
     let toolView = ClickableInformationView(title: InformationStrings.tool)
@@ -36,7 +36,7 @@ final class CocktailInformationView: UIView {
     }
     
     private func configureUI() {
-        self.addSubview(cocktailNameTitle)
+        self.addSubview(informationLabel)
         self.addSubview(toolView)
         self.addSubview(skillView)
         self.addSubview(glassView)
@@ -45,26 +45,26 @@ final class CocktailInformationView: UIView {
         self.addSubview(levelView)
         self.addSubview(sugarContentView)
         
-        cocktailNameTitle.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(17)
+        informationLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.height.equalTo(17)
         }
         
-        toolView.snp.makeConstraints { make in
-            make.top.equalTo(cocktailNameTitle.snp.bottom)
-            make.trailing.leading.equalToSuperview()
+        toolView.snp.makeConstraints {
+            $0.top.equalTo(informationLabel.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
         }
         
-        skillView.snp.makeConstraints { make in
-            make.top.equalTo(toolView.snp.bottom)
-            make.trailing.leading.equalToSuperview()
+        skillView.snp.makeConstraints {
+            $0.top.equalTo(toolView.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
         }
         
-        glassView.snp.makeConstraints {make in
-            make.top.equalTo(skillView.snp.bottom)
-            make.trailing.leading.equalToSuperview()
+        glassView.snp.makeConstraints {
+            $0.top.equalTo(skillView.snp.bottom)
+            $0.trailing.leading.equalToSuperview()
         }
         
         abvView.snp.makeConstraints {
@@ -80,7 +80,7 @@ final class CocktailInformationView: UIView {
         sugarContentView.snp.makeConstraints {
             $0.top.equalTo(levelView.snp.bottom)
             $0.trailing.leading.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-40)
         }
     }
     

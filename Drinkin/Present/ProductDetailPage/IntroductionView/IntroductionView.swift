@@ -134,7 +134,7 @@ final class IntroductionView: UIView {
             $0.top.equalTo(recipeTitleLabel.snp.bottom).offset(12)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-40)
         }
     }
     

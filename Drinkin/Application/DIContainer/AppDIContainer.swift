@@ -29,6 +29,12 @@ final class AppDIContainer {
         return ProductDetailDIContainer(dependencies: dependencies)
     }
     
+    func makeBaseInformationDIContainer() -> BaseInformationDIContainer {
+        let dependencies = BaseInformationDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
+        
+        return BaseInformationDIContainer(dependencies: dependencies)
+    }
+    
     func makeCocktailFilterDICotainer() -> CocktailFilterDICotainer {
         let dependencies = CocktailFilterDICotainer.Dependencies(tokenManager: tokenManager, provider: provider)
         
