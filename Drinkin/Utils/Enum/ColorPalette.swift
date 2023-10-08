@@ -13,4 +13,6 @@ enum ColorPalette {
     static let categoryCellColor: UIColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
     
     static let subTitleGrayColor: UIColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1)
+    
+    static let grayCellColor: UIColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
 }
