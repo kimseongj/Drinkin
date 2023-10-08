@@ -12,7 +12,7 @@ import Combine
 final class BaseInformationViewController: UIViewController {
     private var viewModel: BaseInformationViewModel?
     private var cancelBag: Set<AnyCancellable> = []
-    private var brandDataSource: UICollectionViewDiffableDataSource<Section, BrandImageDescription>!
+    private var brandImageDescriptionDataSource: UICollectionViewDiffableDataSource<Section, BrandImageDescription>!
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -91,7 +91,7 @@ final class BaseInformationViewController: UIViewController {
         baseBrandCollectionView.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(400)
+            $0.bottom.equalToSuperview()
             $0.width.equalToSuperview()
         }
     }
@@ -137,7 +137,7 @@ extension BaseInformationViewController {
 //MARK: - DiffableDataSource
 extension BaseInformationViewController {
     private func configureDataSource() {
-        brandDataSource = UICollectionViewDiffableDataSource<Section,BrandImageDescription> (collectionView: baseBrandCollectionView) { (collectionView, indexPath, brandImageDescription) -> UICollectionViewCell? in
+        brandImageDescriptionDataSource = UICollectionViewDiffableDataSource<Section,BrandImageDescription> (collectionView: baseBrandCollectionView) { (collectionView, indexPath, brandImageDescription) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BrandCell.identifier, for: indexPath) as? BrandCell else { return nil }
             
             cell.fill(with: brandImageDescription)
@@ -150,7 +150,17 @@ extension BaseInformationViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, BrandImageDescription>()
         snapshot.appendSections([.main])
         snapshot.appendItems(brandImageDescriptionList)
-        brandDataSource?.apply(snapshot, animatingDifferences: true)
+        brandImageDescriptionDataSource?.apply(snapshot, animatingDifferences: true)
+        updateCollectionViewHeight(cellCount: brandImageDescriptionList.count)
+    }
+    
+    private func updateCollectionViewHeight(cellCount: Int) {
+        let cellLineCount: Int = cellCount / 2
+        let cellLineHeigt: CGFloat = view.bounds.width / 2 + 10
+        
+        baseBrandCollectionView.snp.makeConstraints {
+            $0.height.equalTo(cellLineHeigt * CGFloat(cellLineCount))
+        }
     }
 }
 
