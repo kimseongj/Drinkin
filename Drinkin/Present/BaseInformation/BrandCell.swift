@@ -20,11 +20,16 @@ final class BrandCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureBackgroundColor()
         configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureBackgroundColor() {
+        contentView.backgroundColor = ColorPalette.grayCellColor
     }
     
     private func configureUI() {
@@ -35,22 +40,19 @@ final class BrandCell: UICollectionViewCell {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(8)
             $0.bottom.equalTo(titleLabel.snp.top).offset(-8)
+            $0.size.equalTo(contentView.bounds.height * 0.72)
         }
         
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-8)
         }
-        
-        brandImageView.snp.updateConstraints {
-            $0.width.equalTo(brandImageView.bounds.height)
-        }
     }
     
-    func fill(with baseBrand: BrandDescription) {
-        guard let imageURL = URL(string: baseBrand.imageURI) else { return }
+    func fill(with brandImageDescription: BrandImageDescription) {
+        guard let imageURL = URL(string: brandImageDescription.imageURI) else { return }
         
-        titleLabel.text = baseBrand.title
+        titleLabel.text = brandImageDescription.brandName
         brandImageView.load(url: imageURL)
     }
 }
