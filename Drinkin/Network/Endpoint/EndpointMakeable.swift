@@ -16,6 +16,8 @@ protocol EndpointMakeable {
     
     func makeURL() -> URL?
     func makeURLRequest() -> URLRequest?
+    mutating func insertPathParmeter(pathParameter: String)
+    mutating func insertQuery(queryParameter: String, queryValue: String)
 }
 
 extension EndpointMakeable {
