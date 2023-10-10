@@ -9,8 +9,10 @@ import Foundation
 import Combine
 
 protocol FilterCocktailListUsecase {
-    func initCocktailList() -> AnyPublisher<CocktailPreviewDescription, Error>
-    func addFilter(queryParameter: String, queryValue: String) -> AnyPublisher<CocktailPreviewDescription, Error>
+    func fetchCocktailList() -> AnyPublisher<CocktailPreviewDescription, Error>
+    func addFilter(queryParameter: String, queryValue: String)
+    func clearFilter(queryParameter: String)
+    func clearAllFilter()
 }
 
 final class DefaultFilterCocktailListUsecase: FilterCocktailListUsecase {
@@ -20,16 +22,19 @@ final class DefaultFilterCocktailListUsecase: FilterCocktailListUsecase {
         self.cocktailListRepository = cocktailListRepository
     }
     
-    func initCocktailList() -> AnyPublisher<CocktailPreviewDescription, Error> {
+    func fetchCocktailList() -> AnyPublisher<CocktailPreviewDescription, Error> {
         return cocktailListRepository.fetchPublisher()
     }
     
-    func addFilter(queryParameter: String, queryValue: String) -> AnyPublisher<CocktailPreviewDescription, Error> {
+    func addFilter(queryParameter: String, queryValue: String) {
         cocktailListRepository.insertQuery(queryParameter: queryParameter, queryValue: queryValue)
-        return cocktailListRepository.fetchPublisher()
     }
     
-    func clearFilter(queryParameter: String, queryValue: String) {
-        
+    func clearFilter(queryParameter: String) {
+        cocktailListRepository.removeQuery(queryParameter: queryParameter)
+    }
+    
+    func clearAllFilter() {
+        cocktailListRepository.removeAllQuery()
     }
 }
