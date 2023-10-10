@@ -29,6 +29,16 @@ extension EndpointMakeable {
         queryItems.append(URLQueryItem(name: queryParameter, value: queryValue))
     }
     
+    mutating func removeQuery(queryParamter: String) {
+       queryItems = queryItems.filter {
+            $0.name != queryParamter
+        }
+    }
+    
+    mutating func removeAllQuery() {
+        queryItems = []
+    }
+    
     func makeURL() -> URL? {
         var urlComponents = URLComponents(string: baseURL)
         urlComponents?.path = path
