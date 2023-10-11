@@ -141,7 +141,8 @@ final class CocktailFilterViewController: UIViewController {
     }
     
     @objc private func tapInitializationButton() {
-        viewModel?.resetFilter()
+        viewModel?.clearAllFilter()
+        viewModel?.fetchCocktailList()
     }
 }
 
@@ -153,13 +154,13 @@ extension CocktailFilterViewController {
             
             cell.fill(with: categoryName)
             
-            if self.viewModel?.textFilterTypeList[indexPath.row] != self.viewModel?.filterTypeList[indexPath.row].description && self.viewModel?.filterTypeList[indexPath.row] != FilterType.categoryFilter {
+            if self.viewModel?.textFilterTypeList[indexPath.row] != self.viewModel?.filterTypeList[indexPath.row].descriptionko && self.viewModel?.filterTypeList[indexPath.row] != FilterType.category {
                 cell.makeFixedCell()
             } else {
                 cell.makeDefaultCell()
             }
             
-            if self.viewModel?.filterTypeList[indexPath.row] == FilterType.categoryFilter {
+            if self.viewModel?.filterTypeList[indexPath.row] == FilterType.category {
                 cell.makeBlackCell()
             }
             
