@@ -107,7 +107,7 @@ final class FilteredCocktailCell: UICollectionViewCell {
     func fill(with previewDescription: PreviewDescription) {
         guard let imageURI = URL(string: previewDescription.imageURI) else { return }
         
-        titleLabel.text = previewDescription.title
+        titleLabel.text = previewDescription.cocktailNameKo
         levelGradePresentationView.grade = previewDescription.levelGrade
         sugarContentPresentationView.grade = previewDescription.sugarContentGrade
         abvGradePresentationView.grade = previewDescription.abvGrade

@@ -21,6 +21,7 @@ final class CocktailFilterDICotainer {
         self.dependencies = dependencies
     }
     
+    //MARK: - CocktailFilter
     func makeCocktailFilterRepository() -> CocktailFilterRepository {
         return DefaultCocktailFilterRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, endpoint: cocktailFilterEndpoint)
     }
@@ -29,18 +30,20 @@ final class CocktailFilterDICotainer {
         return DefaultFetchCocktailFilterUsecase(cocktailFilterRepository: makeCocktailFilterRepository())
     }
     
-    func makePreviewDescriptionRepository() -> PreviewDescriptionRepository {
-        return DefaultPreviewDescriptionRepository(tokenManager: dependencies.tokenManager,
-                                                   provider: dependencies.provider,
-                                                   endpoint: cocktailListEndpoint)
+    //MARK: - filterCocktailList
+    func makeCocktailListRepository() -> CocktailListRepository {
+        return DefaultCocktailListRepository(tokenManager: dependencies.tokenManager,
+                                             provider: dependencies.provider,
+                                             endpoint: cocktailListEndpoint)
     }
     
-    func makeFetchPreviewDescriptionUsecase() -> FetchPreviewDescriptionUsecase {
-        return DefaultFetchPreviewDescriptionUsecase(previewDescriptionRepository: makePreviewDescriptionRepository())
+    func makeFilterCocktailListUsecase() -> FilterCocktailListUsecase {
+        return DefaultFilterCocktailListUsecase(cocktailListRepository: makeCocktailListRepository())
     }
+    
     
     func makeCocktailFilterViewModel() -> CocktailFilterViewModel {
-        return DefaultCocktailFilterViewModel(fetchCocktailFilterUsecase: makeFetchCocktailFilterUsecase(), fetchPreviewDescriptionUsecase: makeFetchPreviewDescriptionUsecase())
+        return DefaultCocktailFilterViewModel(fetchCocktailFilterUsecase: makeFetchCocktailFilterUsecase(), filterCocktailListUsecase: makeFilterCocktailListUsecase())
     }
     
     func makeCocktailFilterViewController() -> CocktailFilterViewController {

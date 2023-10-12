@@ -8,18 +8,35 @@
 import Foundation
 
 enum FilterType {
-    case categoryFilter
-    case holdIngredientFilter
+    case category
+    case holdIngredient
     case level
     case abv
     case sugarContent
     case ingredientQuantity
     
-    var description: String {
+    var queryDescription: String {
         switch self {
-        case .categoryFilter:
+        case .category:
+            return "category"
+        case .holdIngredient:
+            return "hold_ingredient"
+        case .level:
+            return "level"
+        case .abv:
+            return "abv"
+        case .sugarContent:
+            return "sugar_content"
+        case .ingredientQuantity:
+            return "ingredient_quantity"
+        }
+    }
+    
+    var descriptionko: String {
+        switch self {
+        case .category:
             return "전체 칵테일"
-        case .holdIngredientFilter:
+        case .holdIngredient:
             return "보유 재료"
         case .level:
             return "난이도"
