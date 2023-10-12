@@ -11,7 +11,7 @@ protocol CocktailFilterViewModel {
     
     
     func fetchCocktailList()
-    func fetchCocktailFilter()
+    func fetchCocktailFilter(completion: @escaping () -> Void)
     func fetchDetailFilter(filterType: FilterType) -> [String]
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int)
     func clearAllFilter()
@@ -59,9 +59,10 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
             }).store(in: &cancelBag)
     }
     
-    func fetchCocktailFilter() {
+    func fetchCocktailFilter(completion: @escaping () -> Void) {
         fetchCocktailFilterUsecase.execute().receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.detailFilter = $0
+            completion()
         }).store(in: &cancelBag)
     }
     
