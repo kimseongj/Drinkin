@@ -1,5 +1,5 @@
 //
-//  CocktailListRepository.swift
+//  DefaultCocktailQueryRepository.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/09.
@@ -8,14 +8,14 @@
 import Foundation
 import Combine
 
-protocol CocktailListRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error>
+protocol CocktailQueryRepository {
+    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, Error>
     func insertQuery(queryParameter: String, queryValue: String)
     func removeQuery(queryParameter: String)
     func removeAllQuery()
 }
 
-final class DefaultCocktailListRepository: CocktailListRepository {
+final class DefaultCocktailQueryRepository: CocktailQueryRepository {
     let tokenManager: TokenManager
     let provider: Provider
     var endpoint: EndpointMakeable
@@ -26,7 +26,7 @@ final class DefaultCocktailListRepository: CocktailListRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error> {
+    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
     

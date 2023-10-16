@@ -8,8 +8,8 @@
 import Foundation
 
 // MARK: - Welcome
-struct CocktailPreviewDescription: Codable {
-    let cocktailList: [PreviewDescription]
+struct CocktailPreviewList: Codable {
+    let cocktailList: [CocktailPreview]
 
     enum CodingKeys: String, CodingKey {
         case cocktailList = "results"
@@ -17,7 +17,7 @@ struct CocktailPreviewDescription: Codable {
 }
 
 // MARK: - CocktailList
-struct PreviewDescription: Codable, Hashable {
+struct CocktailPreview: Codable, Hashable {
     let id = UUID()
     let cocktailNameKo: String
     let imageURI: String

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol BaseDescriptionRepository {
-    func fetchPublisher() -> AnyPublisher<BaseDescription, Error>
+    func fetchBaseDescription() -> AnyPublisher<BaseDescription, Error>
 }
 
 final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
@@ -23,7 +23,7 @@ final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<BaseDescription, Error> {
+    func fetchBaseDescription() -> AnyPublisher<BaseDescription, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

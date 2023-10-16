@@ -1,18 +1,18 @@
 //
-//  Saved.swift
+//  DefaultCocktailImageListRepository.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/09/10.
+//  Created by kimseongjun on 2023/07/16.
 //
 
 import Foundation
 import Combine
 
-protocol SavedCocktailListRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error>
+protocol CocktailImageListRepository {
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageDescription, Error>
 }
 
-final class DefaultSavedCocktailListRepository: SavedCocktailListRepository {
+final class DefaultCocktailImageListRepository: CocktailImageListRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -23,7 +23,7 @@ final class DefaultSavedCocktailListRepository: SavedCocktailListRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error> {
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageDescription, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

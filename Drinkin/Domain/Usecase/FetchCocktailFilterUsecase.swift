@@ -20,6 +20,6 @@ final class DefaultFetchCocktailFilterUsecase: FetchCocktailFilterUsecase {
     }
     
     func execute() -> AnyPublisher<CocktailFilter, Error> {
-        return cocktailFilterRepository.fetchPublisher()
+        return cocktailFilterRepository.fetchCocktailFilter()
     }
 }

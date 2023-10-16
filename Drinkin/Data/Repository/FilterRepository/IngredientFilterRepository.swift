@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol IngredientFilterRepository {
-    func fetchPublisher() -> AnyPublisher<IngredientFilter, Error>
+    func fetchIngredientFilter() -> AnyPublisher<IngredientFilter, Error>
 }
 
 final class DefaultIngredientFilterRepository: IngredientFilterRepository {
@@ -23,7 +23,7 @@ final class DefaultIngredientFilterRepository: IngredientFilterRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<IngredientFilter, Error> {
+    func fetchIngredientFilter() -> AnyPublisher<IngredientFilter, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

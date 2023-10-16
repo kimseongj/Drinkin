@@ -104,7 +104,7 @@ final class FilteredCocktailCell: UICollectionViewCell {
         }
     }
     
-    func fill(with previewDescription: PreviewDescription) {
+    func fill(with previewDescription: CocktailPreview) {
         guard let imageURI = URL(string: previewDescription.imageURI) else { return }
         
         titleLabel.text = previewDescription.cocktailNameKo

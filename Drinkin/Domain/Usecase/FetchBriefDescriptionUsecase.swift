@@ -9,17 +9,17 @@ import Foundation
 import Combine
 
 protocol FetchBriefDescriptionUsecase {
-    func execute() -> AnyPublisher<CocktailBriefDescription, Error>
+    func execute() -> AnyPublisher<CocktailBriefList, Error>
 }
 
 class DefaultFetchBriefDescriptionUsecase: FetchBriefDescriptionUsecase {
-    private let briefDescriptionRepository: BriefDescriptionRepository
+    private let briefDescriptionRepository: CocktailBriefListRepository
     
-    init(briefDescriptionRepository: BriefDescriptionRepository) {
+    init(briefDescriptionRepository: CocktailBriefListRepository) {
         self.briefDescriptionRepository = briefDescriptionRepository
     }
     
-    func execute() -> AnyPublisher<CocktailBriefDescription, Error> {
-        return briefDescriptionRepository.fetchPublisher()
+    func execute() -> AnyPublisher<CocktailBriefList, Error> {
+        return briefDescriptionRepository.fetchCocktailBriefList()
     }
 }

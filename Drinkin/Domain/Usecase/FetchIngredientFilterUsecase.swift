@@ -20,6 +20,6 @@ final class DefaultFetchIngredientFilterUsecase: FetchIngredientFilterUsecase {
     }
     
     func execute() -> AnyPublisher<IngredientFilter, Error> {
-        return ingredientFilterRepository.fetchPublisher()
+        return ingredientFilterRepository.fetchIngredientFilter()
     }
 }

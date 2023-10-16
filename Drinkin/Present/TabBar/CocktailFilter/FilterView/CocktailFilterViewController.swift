@@ -13,7 +13,7 @@ final class CocktailFilterViewController: UIViewController {
     private var viewModel: CocktailFilterViewModel?
     private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
-    private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
+    private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
     
     
     private let stackView: UIStackView = {
@@ -179,7 +179,7 @@ extension CocktailFilterViewController {
 //MARK: - FilteredCollectionView DiffableDataSource
 extension CocktailFilterViewController {
     private func configureCocktailDataSource() {
-        cocktailDataSource = UICollectionViewDiffableDataSource<Section, PreviewDescription> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
+        cocktailDataSource = UICollectionViewDiffableDataSource<Section, CocktailPreview> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilteredCocktailCell.identifier, for: indexPath) as? FilteredCocktailCell else { return nil }
             
             cell.fill(with: filteredItem)
@@ -188,8 +188,8 @@ extension CocktailFilterViewController {
         }
     }
     
-    private func applyCocktailSnapshot(filteredItems: [PreviewDescription]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, PreviewDescription>()
+    private func applyCocktailSnapshot(filteredItems: [CocktailPreview]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailPreview>()
         snapshot.appendSections([.main])
         snapshot.appendItems(filteredItems)
         self.cocktailDataSource?.apply(snapshot, animatingDifferences: true)

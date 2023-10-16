@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol FetchSavedCocktailListUsecase {
-    func execute() -> AnyPublisher<CocktailPreviewDescription, Error>
+    func execute() -> AnyPublisher<CocktailPreviewList, Error>
 }
 
 final class DefaultFetchSavedCocktailListUsecase: FetchSavedCocktailListUsecase {
@@ -19,7 +19,7 @@ final class DefaultFetchSavedCocktailListUsecase: FetchSavedCocktailListUsecase 
         self.savedCocktailListRepository = savedCocktailListRepository
     }
     
-    func execute() -> AnyPublisher<CocktailPreviewDescription, Error> {
-        return savedCocktailListRepository.fetchPublisher()
+    func execute() -> AnyPublisher<CocktailPreviewList, Error> {
+        return savedCocktailListRepository.fetchSavedCocktailList()
     }
 }

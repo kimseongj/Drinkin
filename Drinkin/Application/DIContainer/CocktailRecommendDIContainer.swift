@@ -20,7 +20,7 @@ final class CocktailRecommendDIContainer {
         self.dependencies = dependencies
     }
     
-    func makeBriefDescriptionRepository() -> BriefDescriptionRepository {
+    func makeBriefDescriptionRepository() -> CocktailBriefListRepository {
         return DefaultBriefDescriptionRepository(tokenManager: dependencies.tokenManager,
                                                  provider: dependencies.provider,
                                                  endpoint: cocktailRecommendEndpoint)

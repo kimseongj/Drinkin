@@ -1,5 +1,5 @@
 //
-//  TriedCocktailRepository.swift
+//  DefaultCocktailBriefListRepository.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/07/16.
@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-protocol TriedCocktailRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailImageDescription, Error>
+protocol CocktailBriefListRepository {
+    func fetchCocktailBriefList() -> AnyPublisher<CocktailBriefList, Error>
 }
 
-final class DefaultTriedCocktailRepository: TriedCocktailRepository {
+class DefaultCocktailBriefListRepository: CocktailBriefListRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -23,7 +23,7 @@ final class DefaultTriedCocktailRepository: TriedCocktailRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<CocktailImageDescription, Error> {
+    func fetchCocktailBriefList() -> AnyPublisher<CocktailBriefList, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

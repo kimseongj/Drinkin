@@ -20,6 +20,6 @@ final class DefaultFetchHoldedItemUsecase: FetchHoldedItemUsecase {
     }
     
     func execute() -> AnyPublisher<HoldedItem, Error> {
-        return holdedItemRepository.fetchPublisher()
+        return holdedItemRepository.fetchHoldedItem()
     }
 }

@@ -7,17 +7,17 @@
 
 import Foundation
 
-// MARK: - CocktailBriefDescription
-struct CocktailBriefDescription: Codable {
-    let briefDescriptionList: [BriefDescription]
+// MARK: - CocktailBriefList
+struct CocktailBriefList: Codable {
+    let briefDescriptionList: [CocktailBrief]
     
     enum CodingKeys: String, CodingKey {
         case briefDescriptionList = "results"
     }
 }
 
-// MARK: - BriefDescription
-struct BriefDescription: Codable, Hashable {
+// MARK: - CocktailBrief
+struct CocktailBrief: Codable, Hashable {
     let id: Int
     let cocktailNameKo: String
     let imageURI: String

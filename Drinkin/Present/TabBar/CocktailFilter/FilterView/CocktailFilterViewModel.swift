@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 protocol CocktailFilterViewModel {
-    var filteredCocktailListPublisher: Published<[PreviewDescription]>.Publisher { get }
+    var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
     var detailFilter: CocktailFilter? { get }
     var selectedDetailFilterIndexPath: IndexPath? { get set }
     var filterTypeList: [FilterType] { get }
@@ -22,9 +22,9 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     private let filterCocktailListUsecase: FilterCocktailListUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var filteredCocktailList: [PreviewDescription] = []
+    @Published var filteredCocktailList: [CocktailPreview] = []
     
-    var filteredCocktailListPublisher: Published<[PreviewDescription]>.Publisher { $filteredCocktailList }
+    var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { $filteredCocktailList }
     
     var detailFilter: CocktailFilter? = nil
     

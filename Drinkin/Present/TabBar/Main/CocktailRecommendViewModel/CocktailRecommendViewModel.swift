@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol CocktailRecommendViewModel {
-    var briefDescriptionListPublisher: Published<[BriefDescription]>.Publisher { get }
+    var briefDescriptionListPublisher: Published<[CocktailBrief]>.Publisher { get }
     
     func fetchBriefDescription()
 }
@@ -17,9 +17,9 @@ protocol CocktailRecommendViewModel {
 class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
     private var cancelBag: Set<AnyCancellable> = []
     private let fetchBriefDescriptionUseCase: FetchBriefDescriptionUsecase
-    @Published var briefDescriptionList: [BriefDescription] = []
+    @Published var briefDescriptionList: [CocktailBrief] = []
     
-    var briefDescriptionListPublisher: Published<[BriefDescription]>.Publisher { $briefDescriptionList }
+    var briefDescriptionListPublisher: Published<[CocktailBrief]>.Publisher { $briefDescriptionList }
     
     init(fetchBriefDescriptionUseCase: FetchBriefDescriptionUsecase) {
         self.fetchBriefDescriptionUseCase = fetchBriefDescriptionUseCase

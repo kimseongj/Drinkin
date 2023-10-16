@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol AddIngredientUsecase {
-    func fetchIngredientList () -> AnyPublisher<IngredientDescription, Error>
+
 }
 
 final class DefaultAddIngredientUsecase: AddIngredientUsecase {

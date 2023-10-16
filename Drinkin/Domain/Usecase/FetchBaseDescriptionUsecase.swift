@@ -20,6 +20,6 @@ final class DefaultFetchBaseDescriptionUsecase: FetchBaseDescriptionUsecase {
     }
     
     func execute() -> AnyPublisher<BaseDescription, Error> {
-        return baseDescriptionRepository.fetchPublisher()
+        return baseDescriptionRepository.fetchBaseDescription()
     }
 }

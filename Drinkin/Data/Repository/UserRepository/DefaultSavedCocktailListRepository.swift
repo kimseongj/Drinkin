@@ -1,18 +1,18 @@
 //
-//  UserMadeCocktailRepository.swift
+//  DefaultSavedCocktailListRepository.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/09/11.
+//  Created by kimseongjun on 2023/09/10.
 //
 
 import Foundation
 import Combine
 
-protocol UserMadeCocktailListRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error>
+protocol SavedCocktailListRepository {
+    func fetchSavedCocktailList() -> AnyPublisher<CocktailPreviewList, Error>
 }
 
-final class DefaultUserMadeCocktailListRepository: UserMadeCocktailListRepository {    
+final class DefaultSavedCocktailListRepository: SavedCocktailListRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -23,7 +23,7 @@ final class DefaultUserMadeCocktailListRepository: UserMadeCocktailListRepositor
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error> {
+    func fetchSavedCocktailList() -> AnyPublisher<CocktailPreviewList, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

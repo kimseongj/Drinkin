@@ -21,8 +21,8 @@ final class TriedCocktailSelectionDIContainer {
         self.dependencies = dependencies
     }
     
-    func makeTriedCocktailRepository() -> TriedCocktailRepository {
-        return DefaultTriedCocktailRepository(tokenManager: dependencies.tokenManager,
+    func makeTriedCocktailRepository() -> CocktailImageListRepository {
+        return DefaultCocktailImageListRepository(tokenManager: dependencies.tokenManager,
                                               provider: dependencies.provider,
                                               endpoint: triedCocktailEndpoint)
     }

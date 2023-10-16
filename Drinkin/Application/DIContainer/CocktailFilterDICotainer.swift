@@ -31,8 +31,8 @@ final class CocktailFilterDICotainer {
     }
     
     //MARK: - filterCocktailList
-    func makeCocktailListRepository() -> CocktailListRepository {
-        return DefaultCocktailListRepository(tokenManager: dependencies.tokenManager,
+    func makeCocktailListRepository() -> CocktailQueryRepository {
+        return DefaultCocktailQueryRepository(tokenManager: dependencies.tokenManager,
                                              provider: dependencies.provider,
                                              endpoint: cocktailListEndpoint)
     }
