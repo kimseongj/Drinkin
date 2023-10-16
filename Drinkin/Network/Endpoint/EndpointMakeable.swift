@@ -14,10 +14,14 @@ protocol EndpointMakeable {
     var queryItems: [URLQueryItem] { get set }
     var header: [String: String]? { get }
     
-    func makeURL() -> URL?
-    func makeURLRequest() -> URLRequest?
     mutating func insertPathParmeter(pathParameter: String)
     mutating func insertQuery(queryParameter: String, queryValue: String)
+    mutating func removeQuery(queryParamter: String)
+    mutating func removeAllQuery()
+    
+    func makeURL() -> URL?
+    func makeURLRequest() -> URLRequest?
+    func makeJsonPostRequest<T: Encodable>(endPoint: EndpointMakeable, bodyItem: T) -> URLRequest?
 }
 
 extension EndpointMakeable {
@@ -57,5 +61,19 @@ extension EndpointMakeable {
         header?.forEach { urlRequest.setValue($1, forHTTPHeaderField: $0) }
         
         return urlRequest
+    }
+    
+    func makeJsonPostRequest<T: Encodable>(endPoint: EndpointMakeable, bodyItem: T) -> URLRequest? {
+        guard var request = makeURLRequest() else { return nil }
+        let requestBody = bodyItem
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(requestBody)
+        } catch {
+            print("PostError")
+        }
+        
+        return request
     }
 }

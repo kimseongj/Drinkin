@@ -11,7 +11,7 @@ import Combine
 class LoginProvider {
     private let keychainManager = KeychainManager()
     private var cancelBag: Set<AnyCancellable> = []
-        
+
     func makePostRequest(endpoint: EndpointMakeable, accessToken: String, holdedCocktailList: [Int]) -> URLRequest? {
         guard var request = endpoint.makeURLRequest() else { return nil }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

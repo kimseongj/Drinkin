@@ -21,8 +21,12 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
     var ingredientListPublisher: Published<[IngredientDescription]>.Publisher { $ingredientList }
     
     private let fetchIngredientFilterUsecase: FetchIngredientFilterUsecase
+    private let addIngredientUsecase: AddIngredientUsecase
     
-    init(fetchIngredientFilterUsecase: FetchIngredientFilterUsecase) {
+    init(fetchIngredientFilterUsecase: FetchIngredientFilterUsecase,
+         addIngredientUsecase: AddIngredientUsecase
+    ) {
         self.fetchIngredientFilterUsecase = fetchIngredientFilterUsecase
+        self.addIngredientUsecase = addIngredientUsecase
     }
 }

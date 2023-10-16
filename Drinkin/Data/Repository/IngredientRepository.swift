@@ -2,28 +2,40 @@
 //  IngredientRepository.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/09/22.
+//  Created by kimseongjun on 2023/10/12.
 //
+
+import Foundation
 
 import Foundation
 import Combine
 
-protocol IngredientFilterRepository {
-    func fetchPublisher() -> AnyPublisher<IngredientFilter, Error>
+protocol IngredientRepository {
+    func fetchIngredientList() -> AnyPublisher<IngredientDescription, Error>
+    func postIngredientList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error>
 }
 
-final class DefaultIngredientFilterRepository: IngredientFilterRepository {
+final class DefaultIngredientRepository: IngredientRepository {
     let tokenManager: TokenManager
     let provider: Provider
-    let endpoint: EndpointMakeable
+    let ingredientListEndpoint: EndpointMakeable
+    let addIngredientEndpoint: EndpointMakeable
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
+    init(tokenManager: TokenManager,
+         provider: Provider,
+         ingredientListEndpoint: EndpointMakeable,
+         addIngredientEndpoint: EndpointMakeable) {
         self.tokenManager = tokenManager
         self.provider = provider
-        self.endpoint = endpoint
+        self.ingredientListEndpoint = ingredientListEndpoint
+        self.addIngredientEndpoint = addIngredientEndpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<IngredientFilter, Error> {
-        return provider.fetchData(endpoint: endpoint)
+    func fetchIngredientList() -> AnyPublisher<IngredientDescription, Error> {
+        return provider.fetchData(endpoint: ingredientListEndpoint)
+    }
+    
+    func postIngredientList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error> {
+        return provider.postData(endpoint: addIngredientEndpoint, bodyItem: receipeItems)
     }
 }
