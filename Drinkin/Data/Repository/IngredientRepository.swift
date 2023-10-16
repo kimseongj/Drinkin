@@ -11,21 +11,31 @@ import Foundation
 import Combine
 
 protocol IngredientRepository {
-    func fetchPublisher() -> AnyPublisher<IngredientDescription, Error>
+    func fetchIngredientList() -> AnyPublisher<IngredientDescription, Error>
+    func postIngredientList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error>
 }
 
 final class DefaultIngredientRepository: IngredientRepository {
     let tokenManager: TokenManager
     let provider: Provider
-    let endpoint: EndpointMakeable
+    let ingredientListEndpoint: EndpointMakeable
+    let addIngredientEndpoint: EndpointMakeable
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
+    init(tokenManager: TokenManager,
+         provider: Provider,
+         ingredientListEndpoint: EndpointMakeable,
+         addIngredientEndpoint: EndpointMakeable) {
         self.tokenManager = tokenManager
         self.provider = provider
-        self.endpoint = endpoint
+        self.ingredientListEndpoint = ingredientListEndpoint
+        self.addIngredientEndpoint = addIngredientEndpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<IngredientDescription, Error> {
-        return provider.fetchData(endpoint: endpoint)
+    func fetchIngredientList() -> AnyPublisher<IngredientDescription, Error> {
+        return provider.fetchData(endpoint: ingredientListEndpoint)
+    }
+    
+    func postIngredientList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error> {
+        return provider.postData(endpoint: addIngredientEndpoint, bodyItem: receipeItems)
     }
 }
