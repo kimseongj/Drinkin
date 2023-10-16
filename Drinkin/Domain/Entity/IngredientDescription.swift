@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - CocktailFilter
 struct IngredientDescription: Codable, Hashable {
     let title: String
     let ingredientCategory: String
