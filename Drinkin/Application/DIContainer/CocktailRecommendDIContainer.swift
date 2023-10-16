@@ -20,17 +20,13 @@ final class CocktailRecommendDIContainer {
         self.dependencies = dependencies
     }
     
-    func makeBriefDescriptionRepository() -> CocktailBriefListRepository {
-        return DefaultBriefDescriptionRepository(tokenManager: dependencies.tokenManager,
+    func makeCocktailBriefListRepository() -> CocktailBriefListRepository {
+        return DefaultCocktailBriefListRepository(tokenManager: dependencies.tokenManager,
                                                  provider: dependencies.provider,
                                                  endpoint: cocktailRecommendEndpoint)
     }
-    
-    func makeFetchBriefDescriptionUsecase() -> FetchBriefDescriptionUsecase {
-        return DefaultFetchBriefDescriptionUsecase(briefDescriptionRepository: makeBriefDescriptionRepository())
-    }
-    
+        
     func makeCocktailRecommendViewModel() -> CocktailRecommendViewModel {
-        return DefaultCocktailRecommendViewModel(fetchBriefDescriptionUseCase: makeFetchBriefDescriptionUsecase())
+        return DefaultCocktailRecommendViewModel(cocktailBriefListRepository: makeCocktailBriefListRepository())
     }
 }
