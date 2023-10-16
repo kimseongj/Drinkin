@@ -773,19 +773,11 @@
 		1C5CAB0229DB51C40053F19A /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				1C5CAB0329DB51D10053F19A /* HoldedItemRepository.swift */,
-				1C58ECE02A63CA3A00AC2603 /* TriedCocktailRepository.swift */,
+				1CDAB4332ADCDF6000E30181 /* FilterRepository */,
+				1CDAB4322ADCDF4B00E30181 /* IngredientRepository */,
+				1CDAB4312ADCDF1D00E30181 /* UserRepository */,
+				1CDAB42E2ADCDEDF00E30181 /* CocktailRepository */,
 				1C5CAB0529DB51D50053F19A /* LoginRepository.swift */,
-				1C58ECE22A63CA8100AC2603 /* BriefDescriptionRepository.swift */,
-				1C58ECE42A63CA9300AC2603 /* DescriptionRepository.swift */,
-				1C9F4C8E2AAD91AE0020DB48 /* SavedCocktailListRepository.swift */,
-				1CDE6FA42AAEA8DF000D7BE3 /* UserMadeCocktailRepository.swift */,
-				1C504CCC2AB46C6E005A0B25 /* PreviewDescriptionRepository.swift */,
-				1C504CCE2AB46CEA005A0B25 /* CocktailFilterRepository.swift */,
-				1C0768752ABD64E20003D4BF /* IngredientFilterRepository.swift */,
-				1CDB85C12AD12E1900360852 /* BaseDescriptionRepository.swift */,
-				1CDAB4262AD3E19100E30181 /* CocktailListRepository.swift */,
-				1CDAB4282AD7DE5D00E30181 /* IngredientRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1075,6 +1067,46 @@
 				1C6636532A067F4B00C85374 /* SelectedView.swift */,
 			);
 			path = SelectedView;
+			sourceTree = "<group>";
+		};
+		1CDAB42E2ADCDEDF00E30181 /* CocktailRepository */ = {
+			isa = PBXGroup;
+			children = (
+				1C504CCC2AB46C6E005A0B25 /* PreviewDescriptionRepository.swift */,
+				1C58ECE42A63CA9300AC2603 /* DescriptionRepository.swift */,
+				1C58ECE22A63CA8100AC2603 /* BriefDescriptionRepository.swift */,
+				1C58ECE02A63CA3A00AC2603 /* TriedCocktailRepository.swift */,
+				1CDAB4262AD3E19100E30181 /* CocktailListRepository.swift */,
+			);
+			path = CocktailRepository;
+			sourceTree = "<group>";
+		};
+		1CDAB4312ADCDF1D00E30181 /* UserRepository */ = {
+			isa = PBXGroup;
+			children = (
+				1C5CAB0329DB51D10053F19A /* HoldedItemRepository.swift */,
+				1CDE6FA42AAEA8DF000D7BE3 /* UserMadeCocktailRepository.swift */,
+				1C9F4C8E2AAD91AE0020DB48 /* SavedCocktailListRepository.swift */,
+			);
+			path = UserRepository;
+			sourceTree = "<group>";
+		};
+		1CDAB4322ADCDF4B00E30181 /* IngredientRepository */ = {
+			isa = PBXGroup;
+			children = (
+				1CDAB4282AD7DE5D00E30181 /* IngredientRepository.swift */,
+				1CDB85C12AD12E1900360852 /* BaseDescriptionRepository.swift */,
+			);
+			path = IngredientRepository;
+			sourceTree = "<group>";
+		};
+		1CDAB4332ADCDF6000E30181 /* FilterRepository */ = {
+			isa = PBXGroup;
+			children = (
+				1C504CCE2AB46CEA005A0B25 /* CocktailFilterRepository.swift */,
+				1C0768752ABD64E20003D4BF /* IngredientFilterRepository.swift */,
+			);
+			path = FilterRepository;
 			sourceTree = "<group>";
 		};
 		1CDB85B12ACFD3CA00360852 /* BrandInformation */ = {
