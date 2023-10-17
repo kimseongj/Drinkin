@@ -6,14 +6,7 @@
 //
 
 import Foundation
-
-import Foundation
 import Combine
-
-protocol IngredientRepository {
-    func fetchIngredientList() -> AnyPublisher<IngredientDescription, Error>
-    func postIngredientList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error>
-}
 
 final class DefaultIngredientRepository: IngredientRepository {
     let tokenManager: TokenManager

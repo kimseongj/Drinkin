@@ -19,7 +19,7 @@ final class CocktailRecommendViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel?
     weak var delegate: MainViewDelegate?
     private var cancelBag: Set<AnyCancellable> = []
-    private var dataSource: UICollectionViewDiffableDataSource<Section, BriefDescription>?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailBrief>?
     
     private lazy var carouselFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -117,7 +117,7 @@ final class CocktailRecommendViewController: UIViewController {
 //MARK: - DiffableDataSource
 extension CocktailRecommendViewController {
     private func configureDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource<Section, BriefDescription> (collectionView: recommendCocktailCollectionView) { (collectionView, indexPath, briefDescription) -> UICollectionViewCell? in
+        self.dataSource = UICollectionViewDiffableDataSource<Section, CocktailBrief> (collectionView: recommendCocktailCollectionView) { (collectionView, indexPath, briefDescription) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailRecommendCell.identifier, for: indexPath) as? CocktailRecommendCell else { return nil
             }
             
@@ -129,8 +129,8 @@ extension CocktailRecommendViewController {
         }
     }
     
-    private func applySnapshot(briefDescriptionList: [BriefDescription]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, BriefDescription>()
+    private func applySnapshot(briefDescriptionList: [CocktailBrief]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailBrief>()
         snapshot.appendSections([.main])
         snapshot.appendItems(briefDescriptionList)
         self.dataSource?.apply(snapshot, animatingDifferences: true)

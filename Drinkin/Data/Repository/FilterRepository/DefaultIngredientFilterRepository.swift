@@ -1,18 +1,14 @@
 //
-//  BriefDescriptionRepository.swift
+//  IngredientFilterRepository.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/07/16.
+//  Created by kimseongjun on 2023/09/22.
 //
 
 import Foundation
 import Combine
 
-protocol BriefDescriptionRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailBriefDescription, Error>
-}
-
-class DefaultBriefDescriptionRepository: BriefDescriptionRepository {
+final class DefaultIngredientFilterRepository: IngredientFilterRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -23,7 +19,7 @@ class DefaultBriefDescriptionRepository: BriefDescriptionRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<CocktailBriefDescription, Error> {
+    func fetchIngredientFilter() -> AnyPublisher<IngredientFilter, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

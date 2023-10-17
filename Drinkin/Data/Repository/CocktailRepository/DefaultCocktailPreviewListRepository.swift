@@ -1,5 +1,5 @@
 //
-//  CocktailFilterRepository.swift
+//  DefaultCocktailPreviewListRepository.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/09/15.
@@ -8,11 +8,7 @@
 import Foundation
 import Combine
 
-protocol CocktailFilterRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailFilter, Error>
-}
-
-final class DefaultCocktailFilterRepository: CocktailFilterRepository {
+final class DefaultCocktailPreviewListRepository: CocktailPreviewListRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -23,7 +19,7 @@ final class DefaultCocktailFilterRepository: CocktailFilterRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<CocktailFilter, Error> {
+    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

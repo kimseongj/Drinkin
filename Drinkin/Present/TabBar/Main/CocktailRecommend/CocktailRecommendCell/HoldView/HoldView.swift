@@ -10,7 +10,7 @@ import SnapKit
 
 final class HoldView: UIView {
     private var title = MiscStrings.emptySpace
-    private var briefDescription: BriefDescription?
+    private var briefDescription: CocktailBrief?
     
     private var holdLabelView: UIView = {
         let label = UIView()
@@ -36,7 +36,7 @@ final class HoldView: UIView {
         return label
     }()
     
-    init(briefDescription: BriefDescription, title: String) {
+    init(briefDescription: CocktailBrief, title: String) {
         super.init(frame: .zero)
         self.title = title
         self.briefDescription = briefDescription

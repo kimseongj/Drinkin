@@ -26,12 +26,8 @@ final class BaseInformationDIContainer {
                                                      endpoint: baseInformationEndpoint)
     }
     
-    func makeFetchBaseDescriptionUsecase() -> FetchBaseDescriptionUsecase {
-        return DefaultFetchBaseDescriptionUsecase(baseDescriptionRepository: makeBaseDescriptionRepository())
-    }
-    
     func makeBaseInformationViewModel() -> BaseInformationViewModel {
-        return DefaultBaseInformationViewModel(fetchBaseDescriptionUsecase: makeFetchBaseDescriptionUsecase())
+        return DefaultBaseInformationViewModel(baseDescriptionRepository: makeBaseDescriptionRepository())
     }
     
     func makeBaseInformationViewController() -> BaseInformationViewController {

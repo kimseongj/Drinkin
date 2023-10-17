@@ -13,13 +13,13 @@ protocol SelectTriedCocktailUsecase {
 }
 
 class DefaultSelectTriedCocktailUsecase: SelectTriedCocktailUsecase {
-    private let triedCocktailRepository: TriedCocktailRepository
+    private let triedCocktailRepository: CocktailImageListRepository
     
-    init(triedCocktailRepository: TriedCocktailRepository) {
+    init(triedCocktailRepository: CocktailImageListRepository) {
         self.triedCocktailRepository = triedCocktailRepository
     }
     
     func execute() -> AnyPublisher<CocktailImageDescription, Error> {
-        return triedCocktailRepository.fetchPublisher()
+        return triedCocktailRepository.fetchCocktailImageList()
     }
 }

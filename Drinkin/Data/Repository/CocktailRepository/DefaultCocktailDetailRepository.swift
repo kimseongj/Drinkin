@@ -1,5 +1,5 @@
 //
-//  DescriptionRepository.swift
+//  DefaultCocktailDetailRepository.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/07/16.
@@ -8,11 +8,7 @@
 import Foundation
 import Combine
 
-protocol DescriptionRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailDescription, Error>
-}
-
-class DefaultDescriptionRepository: DescriptionRepository {
+final class DefaultCocktailDetailRepository: CocktailDetailRepository {
     let tokenManager: TokenManager
     let provider: Provider
     var endpoint: EndpointMakeable
@@ -25,7 +21,7 @@ class DefaultDescriptionRepository: DescriptionRepository {
         self.cocktailID = cocktailID
     }
     
-    func fetchPublisher() -> AnyPublisher<CocktailDescription, Error> {
+    func fetchCocktailDescription() -> AnyPublisher<CocktailDescription, Error> {
         endpoint.insertPathParmeter(pathParameter: cocktailID.description)
         
         return provider.fetchData(endpoint: endpoint)

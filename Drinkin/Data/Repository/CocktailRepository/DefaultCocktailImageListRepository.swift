@@ -1,18 +1,14 @@
 //
-//  BaseDescriptionRepository.swift
+//  DefaultCocktailImageListRepository.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/10/07.
+//  Created by kimseongjun on 2023/07/16.
 //
 
 import Foundation
 import Combine
 
-protocol BaseDescriptionRepository {
-    func fetchPublisher() -> AnyPublisher<BaseDescription, Error>
-}
-
-final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
+final class DefaultCocktailImageListRepository: CocktailImageListRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -23,7 +19,7 @@ final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<BaseDescription, Error> {
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageDescription, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

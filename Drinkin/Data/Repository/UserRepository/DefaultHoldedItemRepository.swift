@@ -1,18 +1,14 @@
 //
-//  Saved.swift
+//  DefaultHoldedItemRepository.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/09/10.
+//  Created by kimseongjun on 2023/04/04.
 //
 
 import Foundation
 import Combine
 
-protocol SavedCocktailListRepository {
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error>
-}
-
-final class DefaultSavedCocktailListRepository: SavedCocktailListRepository {
+final class DefaultHoldedItemRepository: HoldedItemRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -23,7 +19,7 @@ final class DefaultSavedCocktailListRepository: SavedCocktailListRepository {
         self.endpoint = endpoint
     }
     
-    func fetchPublisher() -> AnyPublisher<CocktailPreviewDescription, Error> {
+    func fetchHoldedItem() -> AnyPublisher<HoldedItem, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

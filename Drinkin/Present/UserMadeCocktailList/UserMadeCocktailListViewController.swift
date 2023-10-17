@@ -13,7 +13,7 @@ import Combine
 final class UserMadeCocktailListViewController: UIViewController {
     private var viewModel: UserMadeCocktailListViewModel?
     private var cancelBag: Set<AnyCancellable> = []
-    private var dataSource: UICollectionViewDiffableDataSource<Section, PreviewDescription>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
     
     private lazy var cocktailListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
@@ -67,7 +67,7 @@ final class UserMadeCocktailListViewController: UIViewController {
 //MARK: - CocktailListCollectionView DiffableDataSource
 extension UserMadeCocktailListViewController {
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, PreviewDescription> (collectionView: cocktailListCollectionView) { collectionView, indexPath, previewDescription in
+        dataSource = UICollectionViewDiffableDataSource<Section, CocktailPreview> (collectionView: cocktailListCollectionView) { collectionView, indexPath, previewDescription in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilteredCocktailCell.identifier, for: indexPath) as? FilteredCocktailCell else { return nil }
             
             cell.fill(with: previewDescription)
@@ -76,8 +76,8 @@ extension UserMadeCocktailListViewController {
         }
     }
     
-    private func applySnapshot(previewDescriptionList: [PreviewDescription]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, PreviewDescription>()
+    private func applySnapshot(previewDescriptionList: [CocktailPreview]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailPreview>()
         snapshot.appendSections([.main])
         snapshot.appendItems(previewDescriptionList)
         self.dataSource?.apply(snapshot, animatingDifferences: true)

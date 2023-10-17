@@ -16,19 +16,19 @@ protocol MyHomeBarViewModel  {
 }
 
 class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
-    private let fetchHoldedItemUsecase: FetchHoldedItemUsecase
+    private let holdedItemRepository: HoldedItemRepository
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var holdedItemList: [String] = []
     
     var holdedItemListPublisher: Published<[String]>.Publisher { $holdedItemList }
     
-    init(fetchHoldedItemUsecase: FetchHoldedItemUsecase) {
-        self.fetchHoldedItemUsecase = fetchHoldedItemUsecase
+    init(holdedItemRepository: HoldedItemRepository) {
+        self.holdedItemRepository = holdedItemRepository
     }
     
     func fetchHoldedItem() {
-        fetchHoldedItemUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        holdedItemRepository.fetchHoldedItem().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.holdedItemList = $0.holdedItemList
         }).store(in: &cancelBag)
     }

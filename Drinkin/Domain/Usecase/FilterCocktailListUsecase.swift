@@ -9,21 +9,21 @@ import Foundation
 import Combine
 
 protocol FilterCocktailListUsecase {
-    func fetchCocktailList() -> AnyPublisher<CocktailPreviewDescription, Error>
+    func fetchCocktailList() -> AnyPublisher<CocktailPreviewList, Error>
     func addFilter(queryParameter: String, queryValue: String)
     func clearFilter(queryParameter: String)
     func clearAllFilter()
 }
 
 final class DefaultFilterCocktailListUsecase: FilterCocktailListUsecase {
-    private let cocktailListRepository: CocktailListRepository
+    private let cocktailListRepository: CocktailQueryRepository
     
-    init(cocktailListRepository: CocktailListRepository) {
+    init(cocktailListRepository: CocktailQueryRepository) {
         self.cocktailListRepository = cocktailListRepository
     }
     
-    func fetchCocktailList() -> AnyPublisher<CocktailPreviewDescription, Error> {
-        return cocktailListRepository.fetchPublisher()
+    func fetchCocktailList() -> AnyPublisher<CocktailPreviewList, Error> {
+        return cocktailListRepository.fetchCocktailPreviewList()
     }
     
     func addFilter(queryParameter: String, queryValue: String) {

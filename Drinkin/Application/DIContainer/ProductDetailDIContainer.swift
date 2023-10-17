@@ -21,19 +21,15 @@ final class ProductDetailDIContainer {
         self.dependencies = dependencies
     }
     
-    func makeDescriptionRepository(cocktailID: Int) -> DescriptionRepository {
-        return DefaultDescriptionRepository(tokenManager: dependencies.tokenManager,
+    func makeCocktailDescriptionRepository(cocktailID: Int) -> CocktailDetailRepository {
+        return DefaultCocktailDetailRepository(tokenManager: dependencies.tokenManager,
                                             provider: dependencies.provider,
                                             endpoint: productDetailEndpoint,
                                             cocktailID: cocktailID)
     }
-    
-    func makeFetchDescriptionUsecase(cocktailID: Int) -> FetchDescriptionUsecase {
-        return DefaultFetchDescriptionUsecase(descriptionRepository: makeDescriptionRepository(cocktailID: cocktailID))
-    }
-    
+
     func makeProductDetailViewModel(cocktailID: Int) -> ProductDetailViewModel {
-        return DefaultProductDetailViewModel(fetchDescriptionUseCase: makeFetchDescriptionUsecase(cocktailID: cocktailID))
+        return DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository(cocktailID: cocktailID))
     }
     
     func makeProductDetailViewController(viewModel: ProductDetailViewModel) -> ProductDetailViewController {

@@ -147,7 +147,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
         configureTextDescriptionView()
     }
     
-    func configureCell(briefDescription: BriefDescription) {
+    func configureCell(briefDescription: CocktailBrief) {
         guard let validImageURL = URL(string: briefDescription.imageURI) else { return }
         
         cocktailImageView.load(url: validImageURL)
@@ -248,7 +248,7 @@ extension CocktailRecommendCell {
         }
     }
     
-    private func configureHoldViews(briefDescription: BriefDescription) {
+    private func configureHoldViews(briefDescription: CocktailBrief) {
         
         let baseView = HoldView(briefDescription: briefDescription,
                                 title: InformationStrings.base)

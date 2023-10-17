@@ -9,24 +9,24 @@ import Foundation
 import Combine
 
 protocol UserMadeCocktailListViewModel {
-    var previewDescriptionListPublisher: Published<[PreviewDescription]>.Publisher { get }
+    var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { get }
 
     func fetchCocktailPreviewDescription()
 }
 
 class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel {
-    private let fetchUserMadeCocktailListUsecase: FetchUserMadeCocktailListUsecase
+    private let userMadeCocktailListRepository: UserMadeCocktailListRepository
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var previewDescriptionList: [PreviewDescription] = []
-    var previewDescriptionListPublisher: Published<[PreviewDescription]>.Publisher { $previewDescriptionList }
+    @Published var previewDescriptionList: [CocktailPreview] = []
+    var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { $previewDescriptionList }
     
-    init(fetchUserMadeCocktailListUsecase: FetchUserMadeCocktailListUsecase) {
-        self.fetchUserMadeCocktailListUsecase = fetchUserMadeCocktailListUsecase
+    init(userMadeCocktailListRepository: UserMadeCocktailListRepository) {
+        self.userMadeCocktailListRepository = userMadeCocktailListRepository
     }
     
     func fetchCocktailPreviewDescription() {
-        fetchUserMadeCocktailListUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        userMadeCocktailListRepository.fetchUserMadeCocktailList().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.previewDescriptionList = $0.cocktailList
         }).store(in: &cancelBag)
     }

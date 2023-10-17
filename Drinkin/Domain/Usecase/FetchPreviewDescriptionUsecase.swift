@@ -9,17 +9,17 @@ import Foundation
 import Combine
 
 protocol FetchPreviewDescriptionUsecase {
-    func execute() -> AnyPublisher<CocktailPreviewDescription, Error>
+    func execute() -> AnyPublisher<CocktailPreviewList, Error>
 }
 
 final class DefaultFetchPreviewDescriptionUsecase: FetchPreviewDescriptionUsecase {
-    private let previewDescriptionRepository: PreviewDescriptionRepository
+    private let previewDescriptionRepository: CocktailPreviewListRepository
     
-    init(previewDescriptionRepository: PreviewDescriptionRepository) {
+    init(previewDescriptionRepository: CocktailPreviewListRepository) {
         self.previewDescriptionRepository = previewDescriptionRepository
     }
     
-    func execute() -> AnyPublisher<CocktailPreviewDescription, Error> {
-        return previewDescriptionRepository.fetchPublisher()
+    func execute() -> AnyPublisher<CocktailPreviewList, Error> {
+        return previewDescriptionRepository.fetchCocktailPreviewList()
     }
 }
