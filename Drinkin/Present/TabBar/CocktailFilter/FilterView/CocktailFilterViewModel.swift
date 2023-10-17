@@ -17,7 +17,7 @@ protocol CocktailFilterViewModel {
 }
 
 final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
-    private let fetchCocktailFilterUsecase: FetchCocktailFilterUsecase
+    private let cocktailFilterRepository: CocktailFilterRepository
     private let filterCocktailListUsecase: FilterCocktailListUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -45,9 +45,9 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     
     var textFilterTypeListPublisher: Published<[String]>.Publisher { $textFilterTypeList }
     
-    init(fetchCocktailFilterUsecase: FetchCocktailFilterUsecase,
+    init(cocktailFilterRepository: CocktailFilterRepository,
          filterCocktailListUsecase: FilterCocktailListUsecase) {
-        self.fetchCocktailFilterUsecase = fetchCocktailFilterUsecase
+        self.cocktailFilterRepository = cocktailFilterRepository
         self.filterCocktailListUsecase = filterCocktailListUsecase
     }
 }
@@ -62,7 +62,7 @@ extension DefaultCocktailFilterViewModel {
     }
     
     func fetchCocktailFilter(completion: @escaping () -> Void) {
-        fetchCocktailFilterUsecase.execute()
+        cocktailFilterRepository.fetchCocktailFilter()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { print("\($0)")},
                   receiveValue: {
