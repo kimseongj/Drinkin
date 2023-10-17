@@ -16,19 +16,19 @@ protocol ProductDetailViewModel {
 }
 
 class DefaultProductDetailViewModel: ProductDetailViewModel {
-    private let fetchCocktailDescriptionUseCase: FetchCocktailDescriptionUsecase
+    private let cocktailDetailRepository: CocktailDetailRepository
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var cocktailDescription: CocktailDescription?
     
     var cocktailDescriptionPublisher: Published<CocktailDescription?>.Publisher { $cocktailDescription }
     
-    init(fetchCocktailDescriptionUseCase: FetchCocktailDescriptionUsecase) {
-        self.fetchCocktailDescriptionUseCase = fetchCocktailDescriptionUseCase
+    init(cocktailDetailRepository: CocktailDetailRepository) {
+        self.cocktailDetailRepository = cocktailDetailRepository
     }
     
     func fetchDescription() {
-        fetchCocktailDescriptionUseCase.execute()
+        cocktailDetailRepository.fetchCocktailDescription()
             .sink(receiveCompletion: { print("\($0)")}, receiveValue: {
                 self.cocktailDescription = $0
             }).store(in: &cancelBag)

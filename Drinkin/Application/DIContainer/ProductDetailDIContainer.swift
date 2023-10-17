@@ -27,13 +27,9 @@ final class ProductDetailDIContainer {
                                             endpoint: productDetailEndpoint,
                                             cocktailID: cocktailID)
     }
-    
-    func makeFetchCocktailDescriptionUsecase(cocktailID: Int) -> FetchCocktailDescriptionUsecase {
-        return DefaultFetchCocktailDescriptionUsecase(cocktailDescriptionRepository: makeCocktailDescriptionRepository(cocktailID: cocktailID))
-    }
-    
+
     func makeProductDetailViewModel(cocktailID: Int) -> ProductDetailViewModel {
-        return DefaultProductDetailViewModel(fetchCocktailDescriptionUseCase: makeFetchCocktailDescriptionUsecase(cocktailID: cocktailID))
+        return DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository(cocktailID: cocktailID))
     }
     
     func makeProductDetailViewController(viewModel: ProductDetailViewModel) -> ProductDetailViewController {
