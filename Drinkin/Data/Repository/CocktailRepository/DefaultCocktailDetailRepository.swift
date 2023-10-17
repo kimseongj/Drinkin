@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class DefaultCocktailDetailRepository: CocktailDetailRepository {
+final class DefaultCocktailDetailRepository: CocktailDetailRepository {
     let tokenManager: TokenManager
     let provider: Provider
     var endpoint: EndpointMakeable
