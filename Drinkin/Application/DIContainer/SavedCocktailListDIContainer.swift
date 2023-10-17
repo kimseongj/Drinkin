@@ -27,12 +27,8 @@ final class SavedCocktailListDIContainer {
                                                   endpoint: savedCocktailListEndpoint)
     }
     
-    func makeFetchSavedCocktailListUsecase() -> FetchSavedCocktailListUsecase {
-        return DefaultFetchSavedCocktailListUsecase(savedCocktailListRepository: makeSavedCocktailListRepository())
-    }
-    
     func makeSavedCocktailListViewModel() -> SavedCocktailListViewModel {
-        return DefaultSavedCocktailListViewModel(fetchSavedCocktailListUsecase: makeFetchSavedCocktailListUsecase())
+        return DefaultSavedCocktailListViewModel(savedCocktailListRepository: makeSavedCocktailListRepository())
     }
     
     func makeSavedCocktailListViewController() -> SavedCocktailListViewController {
