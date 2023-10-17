@@ -26,12 +26,8 @@ final class UserMadeCocktailListDIContainer {
                                                      endpoint: userMadeCocktailListEndpoint)
     }
     
-    func makeFetchUserMadeCocktailListUsecase() -> FetchUserMadeCocktailListUsecase {
-        return DefaultFetchUserMadeCocktailListUsecase(userMadeCocktailListRepository: makeUserMadeCocktailListRepository())
-    }
-    
     func makeUserMadeCocktailListViewModel() -> UserMadeCocktailListViewModel {
-        return DefaultUserMadeCocktailListViewModel(fetchUserMadeCocktailListUsecase: makeFetchUserMadeCocktailListUsecase())
+        return DefaultUserMadeCocktailListViewModel(userMadeCocktailListRepository: makeUserMadeCocktailListRepository())
     }
     
     func makeUserMadeCocktailListViewController() -> UserMadeCocktailListViewController {

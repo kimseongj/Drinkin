@@ -15,18 +15,18 @@ protocol UserMadeCocktailListViewModel {
 }
 
 class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel {
-    private let fetchUserMadeCocktailListUsecase: FetchUserMadeCocktailListUsecase
+    private let userMadeCocktailListRepository: UserMadeCocktailListRepository
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var previewDescriptionList: [CocktailPreview] = []
     var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { $previewDescriptionList }
     
-    init(fetchUserMadeCocktailListUsecase: FetchUserMadeCocktailListUsecase) {
-        self.fetchUserMadeCocktailListUsecase = fetchUserMadeCocktailListUsecase
+    init(userMadeCocktailListRepository: UserMadeCocktailListRepository) {
+        self.userMadeCocktailListRepository = userMadeCocktailListRepository
     }
     
     func fetchCocktailPreviewDescription() {
-        fetchUserMadeCocktailListUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        userMadeCocktailListRepository.fetchUserMadeCocktailList().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.previewDescriptionList = $0.cocktailList
         }).store(in: &cancelBag)
     }
