@@ -15,18 +15,18 @@ protocol BaseInformationViewModel {
 }
 
 final class DefaultBaseInformationViewModel: BaseInformationViewModel {
-    private let fetchBaseDescriptionUsecase: FetchBaseDescriptionUsecase
+    private let baseDescriptionRepository: BaseDescriptionRepository
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var baseDescription: BaseDescription?
     var baseDescriptionPublisher: Published<BaseDescription?>.Publisher { $baseDescription }
     
-    init(fetchBaseDescriptionUsecase: FetchBaseDescriptionUsecase) {
-        self.fetchBaseDescriptionUsecase = fetchBaseDescriptionUsecase
+    init(baseDescriptionRepository: BaseDescriptionRepository) {
+        self.baseDescriptionRepository = baseDescriptionRepository
     }
     
     func fetchBaseDesription() {
-        fetchBaseDescriptionUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        baseDescriptionRepository.fetchBaseDescription().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.baseDescription = $0
         }).store(in: &cancelBag)
     }
