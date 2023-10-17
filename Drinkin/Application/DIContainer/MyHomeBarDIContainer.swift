@@ -26,12 +26,8 @@ final class MyHomeBarDIContainer {
                                            endpoint: holdedItemEndpoint)
     }
     
-    func makeFetchHoldedItemUsecase() -> FetchHoldedItemUsecase {
-        return DefaultFetchHoldedItemUsecase(holdedItemRepository: makeHoldedItemRepository())
-    }
-    
     func makeMyHomeBarViewModel() -> MyHomeBarViewModel {
-        return DefaultMyHomeBarViewModel(fetchHoldedItemUsecase: makeFetchHoldedItemUsecase())
+        return DefaultMyHomeBarViewModel(holdedItemRepository: makeHoldedItemRepository())
     }
     
     func makeMyHomeBarViewController() -> MyHomeBarViewController {
