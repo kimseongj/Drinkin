@@ -22,7 +22,7 @@ final class ProductDetailDIContainer {
     }
     
     func makeCocktailDescriptionRepository(cocktailID: Int) -> CocktailDetailRepository {
-        return DefaultDescriptionRepository(tokenManager: dependencies.tokenManager,
+        return DefaultCocktailDetailRepository(tokenManager: dependencies.tokenManager,
                                             provider: dependencies.provider,
                                             endpoint: productDetailEndpoint,
                                             cocktailID: cocktailID)

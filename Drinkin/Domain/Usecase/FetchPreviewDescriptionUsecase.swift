@@ -20,6 +20,6 @@ final class DefaultFetchPreviewDescriptionUsecase: FetchPreviewDescriptionUsecas
     }
     
     func execute() -> AnyPublisher<CocktailPreviewList, Error> {
-        return previewDescriptionRepository.fetchPublisher()
+        return previewDescriptionRepository.fetchCocktailPreviewList()
     }
 }
