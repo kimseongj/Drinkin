@@ -9,7 +9,6 @@ protocol CocktailFilterViewModel {
     var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
     var textFilterTypeList: [String] { get }
     
-    
     func fetchCocktailList()
     func fetchCocktailFilter(completion: @escaping () -> Void)
     func fetchDetailFilter(filterType: FilterType) -> [String]
@@ -51,7 +50,10 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
         self.fetchCocktailFilterUsecase = fetchCocktailFilterUsecase
         self.filterCocktailListUsecase = filterCocktailListUsecase
     }
-    
+}
+
+//MARK: - Fetch Data
+extension DefaultCocktailFilterViewModel {
     func fetchCocktailList() {
         filterCocktailListUsecase.fetchCocktailList().sink(receiveCompletion: {
             print("\($0)")}, receiveValue: {
@@ -60,7 +62,10 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     }
     
     func fetchCocktailFilter(completion: @escaping () -> Void) {
-        fetchCocktailFilterUsecase.execute().receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        fetchCocktailFilterUsecase.execute()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { print("\($0)")},
+                  receiveValue: {
             self.detailFilter = $0
             completion()
         }).store(in: &cancelBag)
@@ -84,14 +89,19 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
             return detailFilter.ingredientQuantity
         }
     }
-    
+}
+
+//MARK: - Filter Cocktail
+extension DefaultCocktailFilterViewModel {
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int) {
         if let index = filterTypeList.firstIndex(of: filterType) {
             if fetchDetailFilter(filterType: filterType)[detailFilterIndex] == "필터 해제" {
                 textFilterTypeList[index] = filterTypeList[index].descriptionko
+                
                 clearFilter(index: index)
             } else {
                 textFilterTypeList[index] = fetchDetailFilter(filterType: filterType)[detailFilterIndex]
+                
                 filterCocktail(filterType: filterTypeList[index].queryDescription, filter: textFilterTypeList[index])
             }
         }
@@ -109,8 +119,9 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     func clearAllFilter() {
         for (index, _) in textFilterTypeList.enumerated() {
             textFilterTypeList[index] = filterTypeList[index].descriptionko
-            filterCocktailListUsecase.clearAllFilter()
         }
+        
+        filterCocktailListUsecase.clearAllFilter()
         fetchCocktailList()
     }
 }
