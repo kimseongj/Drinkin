@@ -8,13 +8,6 @@
 import Foundation
 import Combine
 
-protocol CocktailQueryRepository {
-    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, Error>
-    func insertQuery(queryParameter: String, queryValue: String)
-    func removeQuery(queryParameter: String)
-    func removeAllQuery()
-}
-
 final class DefaultCocktailQueryRepository: CocktailQueryRepository {
     let tokenManager: TokenManager
     let provider: Provider

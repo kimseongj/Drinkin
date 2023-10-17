@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-protocol IngredientFilterRepository {
-    func fetchIngredientFilter() -> AnyPublisher<IngredientFilter, Error>
-}
-
 final class DefaultIngredientFilterRepository: IngredientFilterRepository {
     let tokenManager: TokenManager
     let provider: Provider

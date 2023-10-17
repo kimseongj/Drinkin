@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-protocol CocktailBriefListRepository {
-    func fetchCocktailBriefList() -> AnyPublisher<CocktailBriefList, Error>
-}
-
 class DefaultCocktailBriefListRepository: CocktailBriefListRepository {
     let tokenManager: TokenManager
     let provider: Provider

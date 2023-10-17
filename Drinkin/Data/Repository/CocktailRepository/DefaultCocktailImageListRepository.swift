@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-protocol CocktailImageListRepository {
-    func fetchCocktailImageList() -> AnyPublisher<CocktailImageDescription, Error>
-}
-
 final class DefaultCocktailImageListRepository: CocktailImageListRepository {
     let tokenManager: TokenManager
     let provider: Provider

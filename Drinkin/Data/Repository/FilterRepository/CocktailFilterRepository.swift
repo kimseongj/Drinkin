@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-protocol CocktailFilterRepository {
-    func fetchCocktailFilter() -> AnyPublisher<CocktailFilter, Error>
-}
-
 final class DefaultCocktailFilterRepository: CocktailFilterRepository {
     let tokenManager: TokenManager
     let provider: Provider

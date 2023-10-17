@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-protocol BaseDescriptionRepository {
-    func fetchBaseDescription() -> AnyPublisher<BaseDescription, Error>
-}
-
 final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
     let tokenManager: TokenManager
     let provider: Provider
