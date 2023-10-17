@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-protocol HoldedItemRepository {
-    func fetchHoldedItem() -> AnyPublisher<HoldedItem, Error>
-}
-
 final class DefaultHoldedItemRepository: HoldedItemRepository {
     let tokenManager: TokenManager
     let provider: Provider
