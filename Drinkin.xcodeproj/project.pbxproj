@@ -45,7 +45,7 @@
 		1C0768AF2AC2A50A0003D4BF /* FontStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */; };
 		1C0768BD2AC972570003D4BF /* BaseInformationVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768BC2AC972570003D4BF /* BaseInformationVCCoordinator.swift */; };
 		1C0768BF2AC97F860003D4BF /* BaseInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768BE2AC97F860003D4BF /* BaseInformationViewModel.swift */; };
-		1C0768C12AC9806E0003D4BF /* BaseBrandDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768C02AC9806E0003D4BF /* BaseBrandDescription.swift */; };
+		1C0768C12AC9806E0003D4BF /* BaseBrandDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768C02AC9806E0003D4BF /* BaseBrandDetail.swift */; };
 		1C0768C52AC9A9510003D4BF /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768C42AC9A9510003D4BF /* AppDIContainer.swift */; };
 		1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809DB29E041E000265706 /* LoginViewController.swift */; };
 		1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0809E029E043DF00265706 /* AppCoordinator.swift */; };
@@ -154,6 +154,7 @@
 		1CBDA5402ADF9D73000F1F7D /* TipAndContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA53F2ADF9D73000F1F7D /* TipAndContentRepository.swift */; };
 		1CBDA5432ADF9DDB000F1F7D /* DefaultTipAndContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA5422ADF9DDB000F1F7D /* DefaultTipAndContentRepository.swift */; };
 		1CBDA5472ADF9EBD000F1F7D /* TipAndContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA5462ADF9EBD000F1F7D /* TipAndContentViewModel.swift */; };
+		1CBDA5492ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA5482ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift */; };
 		1CC9D3E82A19024C00654A5D /* HoldCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3E72A19024C00654A5D /* HoldCollectionView.swift */; };
 		1CC9D3EA2A19027400654A5D /* HoldCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3E92A19027400654A5D /* HoldCollectionViewCell.swift */; };
 		1CC9D3EE2A19035600654A5D /* IdentifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3ED2A19035600654A5D /* IdentifierType.swift */; };
@@ -192,7 +193,7 @@
 		1CDB85BE2AD0558500360852 /* TipAndContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85BD2AD0558500360852 /* TipAndContentCell.swift */; };
 		1CDB85C02AD11E0800360852 /* BaseInformationDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85BF2AD11E0800360852 /* BaseInformationDIContainer.swift */; };
 		1CDB85C22AD12E1900360852 /* DefaultBaseDescriptionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85C12AD12E1900360852 /* DefaultBaseDescriptionRepository.swift */; };
-		1CDB85C42AD12E7600360852 /* BaseDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85C32AD12E7600360852 /* BaseDescription.swift */; };
+		1CDB85C42AD12E7600360852 /* BaseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85C32AD12E7600360852 /* BaseDetail.swift */; };
 		1CDDB92B2A3AD7370007983A /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */; };
 		1CDDB92C2A3AD7370007983A /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */; };
 		1CDDB92E2A3AD87F0007983A /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */; };
@@ -241,7 +242,7 @@
 		1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStrings.swift; sourceTree = "<group>"; };
 		1C0768BC2AC972570003D4BF /* BaseInformationVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationVCCoordinator.swift; sourceTree = "<group>"; };
 		1C0768BE2AC97F860003D4BF /* BaseInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationViewModel.swift; sourceTree = "<group>"; };
-		1C0768C02AC9806E0003D4BF /* BaseBrandDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBrandDescription.swift; sourceTree = "<group>"; };
+		1C0768C02AC9806E0003D4BF /* BaseBrandDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBrandDetail.swift; sourceTree = "<group>"; };
 		1C0768C42AC9A9510003D4BF /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		1C0809DB29E041E000265706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1C0809E029E043DF00265706 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -344,6 +345,7 @@
 		1CBDA53F2ADF9D73000F1F7D /* TipAndContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentRepository.swift; sourceTree = "<group>"; };
 		1CBDA5422ADF9DDB000F1F7D /* DefaultTipAndContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTipAndContentRepository.swift; sourceTree = "<group>"; };
 		1CBDA5462ADF9EBD000F1F7D /* TipAndContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentViewModel.swift; sourceTree = "<group>"; };
+		1CBDA5482ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBrandInformationEndpoint.swift; sourceTree = "<group>"; };
 		1CC9D3E72A19024C00654A5D /* HoldCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldCollectionView.swift; sourceTree = "<group>"; };
 		1CC9D3E92A19027400654A5D /* HoldCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldCollectionViewCell.swift; sourceTree = "<group>"; };
 		1CC9D3ED2A19035600654A5D /* IdentifierType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifierType.swift; sourceTree = "<group>"; };
@@ -382,7 +384,7 @@
 		1CDB85BD2AD0558500360852 /* TipAndContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentCell.swift; sourceTree = "<group>"; };
 		1CDB85BF2AD11E0800360852 /* BaseInformationDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationDIContainer.swift; sourceTree = "<group>"; };
 		1CDB85C12AD12E1900360852 /* DefaultBaseDescriptionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBaseDescriptionRepository.swift; sourceTree = "<group>"; };
-		1CDB85C32AD12E7600360852 /* BaseDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDescription.swift; sourceTree = "<group>"; };
+		1CDB85C32AD12E7600360852 /* BaseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDetail.swift; sourceTree = "<group>"; };
 		1CDDB9292A3AD7370007983A /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		1CDDB92A2A3AD7370007983A /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		1CDDB92D2A3AD87F0007983A /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
@@ -859,8 +861,8 @@
 				1C07686F2ABD52CB0003D4BF /* IngredientDescription.swift */,
 				1C0768732ABD58930003D4BF /* IngredientFilter.swift */,
 				1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */,
-				1CDB85C32AD12E7600360852 /* BaseDescription.swift */,
-				1C0768C02AC9806E0003D4BF /* BaseBrandDescription.swift */,
+				1CDB85C32AD12E7600360852 /* BaseDetail.swift */,
+				1C0768C02AC9806E0003D4BF /* BaseBrandDetail.swift */,
 				1C18B7902ADF96E90086B1A0 /* TipAndContentList.swift */,
 			);
 			path = Entity;
@@ -988,6 +990,7 @@
 				1C504CD62AB47035005A0B25 /* CocktailListEndpoint.swift */,
 				1C0768772ABD66320003D4BF /* IngredientFilterEndpoint.swift */,
 				1CDB85B22ACFD75D00360852 /* BaseInformationEndpoint.swift */,
+				1CBDA5482ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift */,
 			);
 			path = UIEndpoint;
 			sourceTree = "<group>";
@@ -1417,13 +1420,14 @@
 				1C07687E2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift in Sources */,
 				1C58ECE72A63CB4700AC2603 /* CocktailBriefList.swift in Sources */,
 				1C58ECE52A63CA9300AC2603 /* DefaultCocktailDetailRepository.swift in Sources */,
-				1C0768C12AC9806E0003D4BF /* BaseBrandDescription.swift in Sources */,
+				1C0768C12AC9806E0003D4BF /* BaseBrandDetail.swift in Sources */,
 				1C7807FA2AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift in Sources */,
 				1CCE88E729E94B4700D3E1D2 /* SkillModalVCCoordinator.swift in Sources */,
 				1C58ECE12A63CA3A00AC2603 /* DefaultCocktailImageListRepository.swift in Sources */,
 				1C504CD72AB47035005A0B25 /* CocktailListEndpoint.swift in Sources */,
 				1CA969292A949D070076731B /* SelectablePreviewDescription.swift in Sources */,
 				1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */,
+				1CBDA5492ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift in Sources */,
 				1C0328F22ADE5164002E144E /* IngredientFilterRepository.swift in Sources */,
 				1C0328E62ADE508A002E144E /* CocktailBriefListRepository.swift in Sources */,
 				1C0768762ABD64E20003D4BF /* DefaultIngredientFilterRepository.swift in Sources */,
@@ -1487,7 +1491,7 @@
 				1C598F8C2A7D35ED00B9DC93 /* ProductDetailViewModel.swift in Sources */,
 				1C598F8A2A7BA02700B9DC93 /* ItemCell.swift in Sources */,
 				1CA8ED262A65915600CE5E1A /* KeychainManager.swift in Sources */,
-				1CDB85C42AD12E7600360852 /* BaseDescription.swift in Sources */,
+				1CDB85C42AD12E7600360852 /* BaseDetail.swift in Sources */,
 				1C26963A2A4315F300C1FC00 /* TriedCocktailSelectionViewModel.swift in Sources */,
 				1CA969362AA0B59A0076731B /* HoldedItemEndpoint.swift in Sources */,
 				1CA969322AA082CB0076731B /* HoldedItem.swift in Sources */,

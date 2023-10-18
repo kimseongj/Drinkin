@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol BaseInformationViewModel {
-    var baseDescriptionPublisher: Published<BaseDescription?>.Publisher { get }
+    var baseDescriptionPublisher: Published<BaseDetail?>.Publisher { get }
     
     func fetchBaseDesription()
 }
@@ -18,8 +18,8 @@ final class DefaultBaseInformationViewModel: BaseInformationViewModel {
     private let baseDescriptionRepository: BaseDescriptionRepository
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var baseDescription: BaseDescription?
-    var baseDescriptionPublisher: Published<BaseDescription?>.Publisher { $baseDescription }
+    @Published var baseDescription: BaseDetail?
+    var baseDescriptionPublisher: Published<BaseDetail?>.Publisher { $baseDescription }
     
     init(baseDescriptionRepository: BaseDescriptionRepository) {
         self.baseDescriptionRepository = baseDescriptionRepository

@@ -8,5 +8,5 @@
 import Combine
 
 protocol BaseDescriptionRepository {
-    func fetchBaseDescription() -> AnyPublisher<BaseDescription, Error>
+    func fetchBaseDescription() -> AnyPublisher<BaseDetail, Error>
 }

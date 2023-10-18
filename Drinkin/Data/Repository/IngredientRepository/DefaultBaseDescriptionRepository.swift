@@ -19,7 +19,7 @@ final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
         self.endpoint = endpoint
     }
     
-    func fetchBaseDescription() -> AnyPublisher<BaseDescription, Error> {
+    func fetchBaseDescription() -> AnyPublisher<BaseDetail, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

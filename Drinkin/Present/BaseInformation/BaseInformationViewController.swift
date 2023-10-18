@@ -96,7 +96,7 @@ final class BaseInformationViewController: UIViewController {
         }
     }
     
-    private func fill(with baseDescription: BaseDescription?) {
+    private func fill(with baseDescription: BaseDetail?) {
         guard let validBaseDescription = baseDescription else { return }
         
         titleLabel.text = validBaseDescription.baseName

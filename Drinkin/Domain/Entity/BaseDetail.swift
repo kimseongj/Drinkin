@@ -1,5 +1,5 @@
 //
-//  BaseDescription.swift
+//  BaseDetail.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/07.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseDescription: Codable {
+struct BaseDetail: Codable {
     let baseName, baseDescription: String
     let brandList: [BrandImageDescription]
 
