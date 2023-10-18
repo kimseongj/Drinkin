@@ -167,7 +167,7 @@ extension BaseInformationViewController {
 //MARK: - Binding
 extension BaseInformationViewController {
     private func binding() {
-        viewModel?.baseDescriptionPublisher.receive(on: RunLoop.main).sink {
+        viewModel?.baseDetailPublisher.receive(on: RunLoop.main).sink {
             self.fill(with: $0)
         }.store(in: &cancelBag)
     }
