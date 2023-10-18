@@ -9,25 +9,25 @@ import Foundation
 import Combine
 
 protocol BaseInformationViewModel {
-    var baseDescriptionPublisher: Published<BaseDetail?>.Publisher { get }
+    var baseDetailPublisher: Published<BaseDetail?>.Publisher { get }
     
-    func fetchBaseDesription()
+    func fetchBaseDetail()
 }
 
 final class DefaultBaseInformationViewModel: BaseInformationViewModel {
-    private let baseDescriptionRepository: BaseDescriptionRepository
+    private let baseDetailRepository: BaseDetailRepository
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var baseDescription: BaseDetail?
-    var baseDescriptionPublisher: Published<BaseDetail?>.Publisher { $baseDescription }
+    @Published var baseDetail: BaseDetail?
+    var baseDetailPublisher: Published<BaseDetail?>.Publisher { $baseDetail }
     
-    init(baseDescriptionRepository: BaseDescriptionRepository) {
-        self.baseDescriptionRepository = baseDescriptionRepository
+    init(baseDetailRepository: BaseDetailRepository) {
+        self.baseDetailRepository = baseDetailRepository
     }
     
-    func fetchBaseDesription() {
-        baseDescriptionRepository.fetchBaseDescription().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            self.baseDescription = $0
+    func fetchBaseDetail() {
+        baseDetailRepository.fetchBaseDetail().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+            self.baseDetail = $0
         }).store(in: &cancelBag)
     }
 }

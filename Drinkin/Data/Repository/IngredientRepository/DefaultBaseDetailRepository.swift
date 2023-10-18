@@ -1,5 +1,5 @@
 //
-//  BaseDescriptionRepository.swift
+//  DefaultBaseDetailRepository.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/07.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
+final class DefaultBaseDetailRepository: BaseDetailRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -19,7 +19,7 @@ final class DefaultBaseDescriptionRepository: BaseDescriptionRepository {
         self.endpoint = endpoint
     }
     
-    func fetchBaseDescription() -> AnyPublisher<BaseDetail, Error> {
+    func fetchBaseDetail() -> AnyPublisher<BaseDetail, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

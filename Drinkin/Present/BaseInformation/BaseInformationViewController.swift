@@ -59,7 +59,7 @@ final class BaseInformationViewController: UIViewController {
         configureUI()
         configureDataSource()
         binding()
-        viewModel?.fetchBaseDesription()
+        viewModel?.fetchBaseDetail()
     }
     
     private func configureBackgroundColor() {
