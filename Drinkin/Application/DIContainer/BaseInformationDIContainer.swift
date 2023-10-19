@@ -20,14 +20,14 @@ final class BaseInformationDIContainer {
         self.dependencies = dependencies
     }
     
-    func makeBaseDescriptionRepository() -> BaseDescriptionRepository {
-        return DefaultBaseDescriptionRepository(tokenManager: dependencies.tokenManager,
+    func makeBaseDetailRepository() -> BaseDetailRepository {
+        return DefaultBaseDetailRepository(tokenManager: dependencies.tokenManager,
                                                      provider: dependencies.provider,
                                                      endpoint: baseInformationEndpoint)
     }
     
     func makeBaseInformationViewModel() -> BaseInformationViewModel {
-        return DefaultBaseInformationViewModel(baseDescriptionRepository: makeBaseDescriptionRepository())
+        return DefaultBaseInformationViewModel(baseDetailRepository: makeBaseDetailRepository())
     }
     
     func makeBaseInformationViewController() -> BaseInformationViewController {

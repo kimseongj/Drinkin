@@ -32,7 +32,7 @@ class ProductDetailViewController: UIViewController {
     
     let introductionView = IntroductionView()
     let cocktailInformationView = CocktailInformationView()
-    let tipAndContentView = TipAndContentView()
+    let tipAndContentViewController = TipAndContentViewController()
     
     private let markMadeCocktailButton: MarkMadeCocktailButton = {
         let button = MarkMadeCocktailButton()
@@ -91,7 +91,7 @@ class ProductDetailViewController: UIViewController {
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(introductionView)
         stackView.addArrangedSubview(cocktailInformationView)
-        stackView.addArrangedSubview(tipAndContentView)
+        stackView.addArrangedSubview(tipAndContentViewController.view)
         scrollView.addSubview(markMadeCocktailButton)
         scrollView.addSubview(bookmarkCocktailButton)
         

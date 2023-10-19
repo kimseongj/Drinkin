@@ -1,5 +1,5 @@
 //
-//  BrandInformation.swift
+//  BaseBrandInformationViewController.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/06.
@@ -9,7 +9,10 @@ import UIKit
 import SnapKit
 import Combine
 
-final class BrandInformationViewController: UIViewController {
+final class BaseBrandInformationViewController: UIViewController {
+    private var viewModel: BaseBrandInformationViewModel?
+    private var cancelBag: Set<AnyCancellable> = []
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
@@ -62,16 +65,18 @@ final class BrandInformationViewController: UIViewController {
         return label
     }()
     
-//    init() {
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    init(viewModel: BaseBrandInformationViewModel?) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureBackgroundColor()
         
     }
     

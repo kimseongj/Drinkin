@@ -11,6 +11,7 @@ import Combine
 
 final class BaseInformationViewController: UIViewController {
     private var viewModel: BaseInformationViewModel?
+    var flowDelegate: BaseInformationVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     private var brandImageDescriptionDataSource: UICollectionViewDiffableDataSource<Section, BrandImageDescription>!
     
@@ -58,8 +59,9 @@ final class BaseInformationViewController: UIViewController {
         configureBackgroundColor()
         configureUI()
         configureDataSource()
+        configureBaseBrandCollectionView()
         binding()
-        viewModel?.fetchBaseDesription()
+        viewModel?.fetchBaseDetail()
     }
     
     private func configureBackgroundColor() {
@@ -96,19 +98,24 @@ final class BaseInformationViewController: UIViewController {
         }
     }
     
-    private func fill(with baseDescription: BaseDescription?) {
+    private func fill(with baseDescription: BaseDetail?) {
         guard let validBaseDescription = baseDescription else { return }
         
         titleLabel.text = validBaseDescription.baseName
         descriptionLabel.text = validBaseDescription.baseDescription
         applySnapshot(brandImageDescriptionList: validBaseDescription.brandList)
     }
+    
+    private func configureBaseBrandCollectionView() {
+        baseBrandCollectionView.delegate = self
+    }
 }
 
 //MARK: - BaseBrandCollectionView Delegate
 extension BaseInformationViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        guard let brandID = viewModel?.returnBrandID(index: indexPath.row) else { return }
+        flowDelegate?.pushBaseBrandInformationVC(brandID: brandID)
     }
 }
 
@@ -167,8 +174,10 @@ extension BaseInformationViewController {
 //MARK: - Binding
 extension BaseInformationViewController {
     private func binding() {
-        viewModel?.baseDescriptionPublisher.receive(on: RunLoop.main).sink {
+        viewModel?.baseDetailPublisher.receive(on: RunLoop.main).sink {
             self.fill(with: $0)
         }.store(in: &cancelBag)
     }
 }
+
+

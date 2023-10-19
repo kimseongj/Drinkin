@@ -1,5 +1,5 @@
 //
-//  TipandContentsCell.swift
+//  TipAndContentCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/06.
@@ -8,8 +8,14 @@
 import UIKit
 import SnapKit
 
-final class TipandContentsCell: UICollectionViewCell {
-    private let imageView = UIImageView()
+final class TipAndContentCell: UICollectionViewCell {
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .systemGray3
+        
+        return imageView
+    }()
     
     private let subTitleLabel: UILabel = {
         let label = UILabel()
@@ -59,7 +65,11 @@ final class TipandContentsCell: UICollectionViewCell {
         }
     }
     
-    func fill(with tipAndContent: String) {
+    func fill(with tipAndContent: TipAndContent) {
+        guard let imageURL = URL(string: tipAndContent.imageURI) else { return }
         
+        imageView.load(url: imageURL)
+        subTitleLabel.text = tipAndContent.subtitle
+        titleLabel.text = tipAndContent.title
     }
 }
