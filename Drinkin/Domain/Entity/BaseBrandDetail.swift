@@ -11,7 +11,7 @@ struct BaseBrandDetail: Codable {
     let brandDetail: BrandDetail
     
     enum CodingKeys: String, CodingKey {
-        case brandDetail = "brand_detail"
+        case brandDetail = "base_brand"
     }
 }
 

@@ -15,7 +15,7 @@ final class BaseBrandInformationDIContainer {
     }
     
     let dependencies: Dependencies
-    let baseInformationEndpoint = BaseInformationEndpoint()
+    let baseBrandInformationEndpoint = BaseBrandInformationEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -25,7 +25,7 @@ final class BaseBrandInformationDIContainer {
         return DefaultBaseBrandDetailRepository(tokenManager: dependencies.tokenManager,
                                            provider: dependencies.provider,
                                                 brandID: dependencies.brandID,
-                                           endpoint: baseInformationEndpoint)
+                                           endpoint: baseBrandInformationEndpoint)
     }
     
     func makeBaseBrandInformationViewModel() -> BaseBrandInformationViewModel {

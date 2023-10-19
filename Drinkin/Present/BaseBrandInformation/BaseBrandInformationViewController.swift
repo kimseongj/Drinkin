@@ -21,7 +21,12 @@ final class BaseBrandInformationViewController: UIViewController {
         return scrollView
     }()
     
-    private let brandImageView = UIImageView()
+    private let brandImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -33,6 +38,7 @@ final class BaseBrandInformationViewController: UIViewController {
     private let informationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 20)
+        label.text = "정보"
         
         return label
     }()
@@ -40,6 +46,7 @@ final class BaseBrandInformationViewController: UIViewController {
     private let classificationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
+        label.text = "분   류"
         
         return label
     }()
@@ -54,6 +61,7 @@ final class BaseBrandInformationViewController: UIViewController {
     private let abvLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
+        label.text = "당   도"
         
         return label
     }()
@@ -76,8 +84,10 @@ final class BaseBrandInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.fetchBaseBrandDetail()
+        binding()
         configureBackgroundColor()
-        
+        configureUI()
     }
     
     private func configureBackgroundColor() {
@@ -86,10 +96,69 @@ final class BaseBrandInformationViewController: UIViewController {
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
+        let brandImageSize = view.bounds.width * 0.27
+        view.addSubview(brandImageView)
+        view.addSubview(titleLabel)
+        view.addSubview(informationLabel)
+        view.addSubview(classificationLabel)
+        view.addSubview(classificationDescriptionLabel)
+        view.addSubview(abvLabel)
+        view.addSubview(abvDescriptionLabel)
         
+        brandImageView.snp.makeConstraints {
+            $0.size.equalTo(brandImageSize)
+            $0.top.equalTo(safeArea.snp.top).offset(8)
+            $0.centerX.equalToSuperview()
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(brandImageView.snp.bottom).offset(12)
+            $0.centerX.equalToSuperview()
+        }
+        
+        informationLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(28)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        classificationLabel.snp.makeConstraints {
+            $0.top.equalTo(informationLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        classificationDescriptionLabel.snp.makeConstraints{
+            $0.top.equalTo(classificationLabel.snp.top)
+            $0.leading.equalTo(classificationLabel.snp.trailing).offset(16)
+        }
+        
+        abvLabel.snp.makeConstraints {
+            $0.top.equalTo(classificationLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        abvDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(abvLabel.snp.top)
+            $0.leading.equalTo(abvLabel.snp.trailing).offset(16)
+        }
     }
     
-    private func fill() {
+    private func fill(with brandDetail: BrandDetail?) {
         
+        
+        guard let brandDetail = brandDetail, let brandImageURL = URL(string: brandDetail.imageURI) else { return }
+        
+        brandImageView.load(url: brandImageURL)
+        titleLabel.text = brandDetail.brandName
+        classificationDescriptionLabel.text = brandDetail.classification
+        abvDescriptionLabel.text = brandDetail.abv
+    }
+}
+
+//MARK: - Binding
+extension BaseBrandInformationViewController {
+    private func binding() {
+        viewModel?.baseBrandDetailPublisher.receive(on: RunLoop.main).sink {
+            self.fill(with: $0)
+        }.store(in: &cancelBag)
     }
 }
