@@ -8,5 +8,5 @@
 import Combine
 
 protocol BaseBrandDetailRepository {
-    func fetchBaseBrandDetail(brandID: Int) -> AnyPublisher<BaseBrandDetail, Error>
+    func fetchBaseBrandDetail() -> AnyPublisher<BaseBrandDetail, Error>
 }

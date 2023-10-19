@@ -11,15 +11,17 @@ import Combine
 final class DefaultBaseBrandDetailRepository: BaseBrandDetailRepository {
     let tokenManager: TokenManager
     let provider: Provider
+    let brandID: Int
     var endpoint: EndpointMakeable
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
+    init(tokenManager: TokenManager, provider: Provider, brandID: Int, endpoint: EndpointMakeable) {
         self.tokenManager = tokenManager
         self.provider = provider
+        self.brandID = brandID
         self.endpoint = endpoint
     }
     
-    func fetchBaseBrandDetail(brandID: Int) -> AnyPublisher<BaseBrandDetail, Error> {
+    func fetchBaseBrandDetail() -> AnyPublisher<BaseBrandDetail, Error> {
         endpoint.insertQuery(queryParameter: "brand_id", queryValue: brandID.description)
         return provider.fetchData(endpoint: endpoint)
     }
