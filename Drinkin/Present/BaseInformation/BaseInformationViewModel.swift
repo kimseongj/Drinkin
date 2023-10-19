@@ -12,6 +12,7 @@ protocol BaseInformationViewModel {
     var baseDetailPublisher: Published<BaseDetail?>.Publisher { get }
     
     func fetchBaseDetail()
+    func returnBrandID(index: Int) -> Int
 }
 
 final class DefaultBaseInformationViewModel: BaseInformationViewModel {
@@ -29,6 +30,11 @@ final class DefaultBaseInformationViewModel: BaseInformationViewModel {
         baseDetailRepository.fetchBaseDetail().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
             self.baseDetail = $0
         }).store(in: &cancelBag)
+    }
+    
+    func returnBrandID(index: Int) -> Int {
+        guard let brandID = baseDetail?.brandList[index].id else { return 0 }
+        return brandID
     }
 }
 

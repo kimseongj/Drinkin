@@ -11,6 +11,7 @@ import Combine
 
 final class BaseInformationViewController: UIViewController {
     private var viewModel: BaseInformationViewModel?
+    var flowDelegate: BaseInformationVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     private var brandImageDescriptionDataSource: UICollectionViewDiffableDataSource<Section, BrandImageDescription>!
     
@@ -58,6 +59,7 @@ final class BaseInformationViewController: UIViewController {
         configureBackgroundColor()
         configureUI()
         configureDataSource()
+        configureBaseBrandCollectionView()
         binding()
         viewModel?.fetchBaseDetail()
     }
@@ -103,12 +105,17 @@ final class BaseInformationViewController: UIViewController {
         descriptionLabel.text = validBaseDescription.baseDescription
         applySnapshot(brandImageDescriptionList: validBaseDescription.brandList)
     }
+    
+    private func configureBaseBrandCollectionView() {
+        baseBrandCollectionView.delegate = self
+    }
 }
 
 //MARK: - BaseBrandCollectionView Delegate
 extension BaseInformationViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        guard let brandID = viewModel?.returnBrandID(index: indexPath.row) else { return }
+        flowDelegate?.pushBaseBrandInformationVC(brandID: brandID)
     }
 }
 
@@ -172,3 +179,5 @@ extension BaseInformationViewController {
         }.store(in: &cancelBag)
     }
 }
+
+

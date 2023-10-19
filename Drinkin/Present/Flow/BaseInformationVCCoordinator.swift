@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class BaseInformationVCCoordinator: Coordinator {
+protocol BaseInformationVCFlow {
+    func pushBaseBrandInformationVC(brandID: Int)
+}
+
+final class BaseInformationVCCoordinator: Coordinator, BaseInformationVCFlow {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -23,9 +27,17 @@ final class BaseInformationVCCoordinator: Coordinator {
     func start() {
         let baseInformationDIContainer = appDIContainer.makeBaseInformationDIContainer()
         //let baseInformationViewModel =
-        let vc = baseInformationDIContainer.makeBaseInformationViewController()
-        vc.makeBlackBackBarButton()
-        navigationController.pushViewController(vc, animated: true)
+        let baseInformationViewController = baseInformationDIContainer.makeBaseInformationViewController()
+        baseInformationViewController.flowDelegate = self
+        baseInformationViewController.makeBlackBackBarButton()
+        navigationController.pushViewController(baseInformationViewController, animated: true)
+    }
+    
+    func pushBaseBrandInformationVC(brandID: Int) {
+        let baseBrandInformationVCCoordinator = BaseBrandInformationVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer, baseBrandID: brandID)
+        baseBrandInformationVCCoordinator.parentCoordinator = self
+        childCoordinators.append(baseBrandInformationVCCoordinator)
+        baseBrandInformationVCCoordinator.start()
     }
     
     func childDidFinish(_ child: Coordinator?) {
