@@ -22,7 +22,7 @@ final class DefaultBaseBrandDetailRepository: BaseBrandDetailRepository {
     }
     
     func fetchBaseBrandDetail() -> AnyPublisher<BaseBrandDetail, Error> {
-        endpoint.insertQuery(queryParameter: "brand_id", queryValue: brandID.description)
+        //endpoint.insertQuery(queryParameter: "brand_id", queryValue: brandID.description)
         return provider.fetchData(endpoint: endpoint)
     }
 }
