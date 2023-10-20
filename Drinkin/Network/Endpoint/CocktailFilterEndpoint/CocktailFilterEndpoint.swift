@@ -16,5 +16,5 @@ struct CocktailFilterEndpoint: EndpointMakeable {
     
     var queryItems: [URLQueryItem] = []
     
-    var header: [String : String]?
+    var header: [String : String] = [:]
 }

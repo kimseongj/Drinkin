@@ -16,7 +16,7 @@ struct RefreshAccessTokenEndpoint: EndpointMakeable {
     
     var queryItems: [URLQueryItem]
     
-    var header: [String : String]?
+    var header: [String : String] = [:]
     
     mutating func insertTokenQueryValue(refreshToken: String) {
         queryItems.append(URLQueryItem(name: "refresh_token", value: refreshToken))

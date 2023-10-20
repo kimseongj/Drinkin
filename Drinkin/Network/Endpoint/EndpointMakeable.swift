@@ -12,8 +12,9 @@ protocol EndpointMakeable {
     var path: String { get set }
     var method: String { get }
     var queryItems: [URLQueryItem] { get set }
-    var header: [String: String]? { get }
+    var header: [String: String] { get set }
     
+    mutating func insertHeader(accessToken: String)
     mutating func insertPathParmeter(pathParameter: String)
     mutating func insertQuery(queryParameter: String, queryValue: String)
     mutating func removeQuery(queryParamter: String)
@@ -25,6 +26,10 @@ protocol EndpointMakeable {
 }
 
 extension EndpointMakeable {
+    mutating func insertHeader(accessToken: String) {
+        header["authorization"] = accessToken
+    }
+    
     mutating func insertPathParmeter(pathParameter: String) {
         path += "/\(pathParameter)"
     }
@@ -58,7 +63,7 @@ extension EndpointMakeable {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method
         
-        header?.forEach { urlRequest.setValue($1, forHTTPHeaderField: $0) }
+        header.forEach { urlRequest.setValue($1, forHTTPHeaderField: $0) }
         
         return urlRequest
     }

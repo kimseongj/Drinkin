@@ -16,7 +16,7 @@ struct ProductDetailEndpoint: EndpointMakeable {
     
     var queryItems: [URLQueryItem] = []
     
-    var header: [String : String]?
+    var header: [String : String] = [:]
     
     mutating func insertPathParmeter(id: Int) {
         //path = "/v1/cocktails/\(id)"
