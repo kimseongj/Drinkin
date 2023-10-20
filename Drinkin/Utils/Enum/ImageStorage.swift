@@ -20,4 +20,6 @@ enum ImageStorage {
     static let bookmarkFillIcon = UIImage(named: "bookmark_fill_icon")
     static let heartIcon = UIImage(named: "heart_icon")
     static let heartFillIcon = UIImage(named: "heart_fill_icon")
+    static let kakaoLoginIcon = UIImage(named: "kakao_logo")
+    static let appleLoginIcon = UIImage(named: "apple_logo")
 }
