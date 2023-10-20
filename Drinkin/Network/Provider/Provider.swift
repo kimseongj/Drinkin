@@ -13,7 +13,14 @@ struct Provider {
         let request = endpoint.makeURLRequest()
         
         return URLSession.shared.dataTaskPublisher(for: request!)
-            .map { $0.data }
+            .map {
+                let httpResponse = $0.response as? HTTPURLResponse
+                if httpResponse?.statusCode == 401 {
+                    
+                }
+                
+                return $0.data
+            }
             .decode(type: T.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }

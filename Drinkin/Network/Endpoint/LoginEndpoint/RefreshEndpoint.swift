@@ -16,7 +16,7 @@ struct RefreshEndpoint: EndpointMakeable {
     
     var queryItems: [URLQueryItem] = []
     
-    var header: [String : String]?
+    var header: [String : String] = [:]
     
     mutating func insertAuthorization(accessToken: String) {
         header = ["Authorization": accessToken]

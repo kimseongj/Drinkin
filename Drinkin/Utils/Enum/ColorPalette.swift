@@ -15,4 +15,14 @@ enum ColorPalette {
     static let subTitleGrayColor: UIColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1)
     
     static let grayCellColor: UIColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+    
+    static let kakaoThemeColor: UIColor = UIColor(red: 0xFE / 255.0,
+                                                  green: 0xE5 / 255.0,
+                                                  blue: 0x00 / 255.0,
+                                                  alpha: 1.0)
+    
+    static let kakaoIconColor: UIColor = UIColor(red: 0,
+                                                 green: 0,
+                                                 blue: 0,
+                                                 alpha: 0.9)
 }
