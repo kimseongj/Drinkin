@@ -12,7 +12,7 @@ import Combine
 final class AddIngredientViewController: UIViewController {
     private var viewModel: AddIngredientViewModel?
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
-    private var ingredientDataSource: UICollectionViewDiffableDataSource<Section, IngredientDescription>!
+    private var ingredientDataSource: UICollectionViewDiffableDataSource<Section, ItemDetail>!
     
     private let ingredientFilterCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()

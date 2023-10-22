@@ -7,6 +7,6 @@
 
 import Combine
 
-protocol IngredientFilterRepository {
-    func fetchIngredientFilter() -> AnyPublisher<IngredientFilter, Error>
+protocol ItemFilterRepository {
+    func fetchIngredientFilter() -> AnyPublisher<ItemFilterList, Error>
 }
