@@ -1,5 +1,5 @@
 //
-//  IngredientFilterRepository.swift
+//  DefaultItemFilterRepository.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/09/22.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultIngredientFilterRepository: IngredientFilterRepository {
+final class DefaultItemFilterRepository: ItemFilterRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
@@ -19,7 +19,7 @@ final class DefaultIngredientFilterRepository: IngredientFilterRepository {
         self.endpoint = endpoint
     }
     
-    func fetchIngredientFilter() -> AnyPublisher<IngredientFilter, Error> {
+    func fetchIngredientFilter() -> AnyPublisher<ItemFilterList, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }
