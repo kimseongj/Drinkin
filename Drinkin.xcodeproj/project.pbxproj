@@ -166,6 +166,8 @@
 		1CC9D3EE2A19035600654A5D /* IdentifierType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3ED2A19035600654A5D /* IdentifierType.swift */; };
 		1CC9D3F02A1903EE00654A5D /* HoldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3EF2A1903EE00654A5D /* HoldView.swift */; };
 		1CC9D3F62A1A4A7300654A5D /* RixYeoljeongdo_Pro Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CC9D3F52A1A4A7300654A5D /* RixYeoljeongdo_Pro Regular.otf */; };
+		1CCE60182AE4B2D90026427C /* FilterIngredientUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE60172AE4B2D90026427C /* FilterIngredientUsecase.swift */; };
+		1CCE601A2AE4BB070026427C /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE60192AE4BB070026427C /* IngredientCell.swift */; };
 		1CCE88DD29E9498D00D3E1D2 /* CocktailFilterVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DC29E9498D00D3E1D2 /* CocktailFilterVCCoordinator.swift */; };
 		1CCE88DF29E949A900D3E1D2 /* MyHomeBarVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DE29E949A900D3E1D2 /* MyHomeBarVCCoordinator.swift */; };
 		1CCE88E129E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */; };
@@ -363,6 +365,8 @@
 		1CC9D3ED2A19035600654A5D /* IdentifierType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifierType.swift; sourceTree = "<group>"; };
 		1CC9D3EF2A1903EE00654A5D /* HoldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldView.swift; sourceTree = "<group>"; };
 		1CC9D3F52A1A4A7300654A5D /* RixYeoljeongdo_Pro Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RixYeoljeongdo_Pro Regular.otf"; sourceTree = "<group>"; };
+		1CCE60172AE4B2D90026427C /* FilterIngredientUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterIngredientUsecase.swift; sourceTree = "<group>"; };
+		1CCE60192AE4BB070026427C /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		1CCE88DC29E9498D00D3E1D2 /* CocktailFilterVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88DE29E949A900D3E1D2 /* MyHomeBarVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarVCCoordinator.swift; sourceTree = "<group>"; };
 		1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVCCoordinator.swift; sourceTree = "<group>"; };
@@ -552,6 +556,7 @@
 				1C07686A2ABD2FE00003D4BF /* AddIngredientViewController.swift */,
 				1C07686D2ABD38C70003D4BF /* AddIngredientViewModel.swift */,
 				1C0768712ABD58480003D4BF /* IngredientFilterCell.swift */,
+				1CCE60192AE4BB070026427C /* IngredientCell.swift */,
 			);
 			path = AddIngredient;
 			sourceTree = "<group>";
@@ -950,6 +955,7 @@
 				1CDAB4242AD3DFE200E30181 /* FilterCocktailListUsecase.swift */,
 				1CDAB42A2AD7DF0500E30181 /* AddIngredientUsecase.swift */,
 				1C3374972AE105DF0078F562 /* ManageMarkingCokctailUsecase.swift */,
+				1CCE60172AE4B2D90026427C /* FilterIngredientUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -1423,6 +1429,7 @@
 				1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */,
 				1CA9695A2AA18AB40076731B /* MyHomeBarDIContainer.swift in Sources */,
 				1C0328EC2ADE5108002E144E /* IngredientRepository.swift in Sources */,
+				1CCE601A2AE4BB070026427C /* IngredientCell.swift in Sources */,
 				1CCE88FA29EBB2C200D3E1D2 /* CocktailSelectionCell.swift in Sources */,
 				1CA8ED292A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift in Sources */,
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
@@ -1435,6 +1442,7 @@
 				1CA9691B2A90D64B0076731B /* Provider.swift in Sources */,
 				1C0768A52AC1F1060003D4BF /* FirstLoginResponse.swift in Sources */,
 				1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */,
+				1CCE60182AE4B2D90026427C /* FilterIngredientUsecase.swift in Sources */,
 				1CED21982A739A700078916A /* Section.swift in Sources */,
 				1CA969252A9334980076731B /* TriedCocktailSelectionDIContainer.swift in Sources */,
 				1C07687E2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift in Sources */,

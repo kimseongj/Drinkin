@@ -15,7 +15,7 @@ protocol CellDeleteButtonDelegate: AnyObject {
 
 final class MyHomeBarViewController: UIViewController {
     private var viewModel: MyHomeBarViewModel?
-    weak var delegate: MyHomeBarVCDelegate?
+    var delegate: MyHomeBarVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     
     private var isTrue: Bool = true
