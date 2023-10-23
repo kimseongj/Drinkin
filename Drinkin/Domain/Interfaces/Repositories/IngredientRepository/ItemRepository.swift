@@ -7,7 +7,7 @@
 
 import Combine
 
-protocol IngredientRepository {
-    func fetchIngredientList() -> AnyPublisher<IngredientDescription, Error>
+protocol ItemRepository {
+    func fetchIngredientList() -> AnyPublisher<ItemList, Error>
     func postIngredientList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error>
 }

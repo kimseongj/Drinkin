@@ -9,17 +9,17 @@ import Foundation
 import Combine
 
 protocol FetchIngredientFilterUsecase {
-    func execute() -> AnyPublisher<IngredientFilter, Error>
+    func execute() -> AnyPublisher<ItemFilterList, Error>
 }
 
 final class DefaultFetchIngredientFilterUsecase: FetchIngredientFilterUsecase {
-    private let ingredientFilterRepository: IngredientFilterRepository
+    private let ingredientFilterRepository: ItemFilterRepository
     
-    init(ingredientFilterRepository: IngredientFilterRepository) {
+    init(ingredientFilterRepository: ItemFilterRepository) {
         self.ingredientFilterRepository = ingredientFilterRepository
     }
     
-    func execute() -> AnyPublisher<IngredientFilter, Error> {
+    func execute() -> AnyPublisher<ItemFilterList, Error> {
         return ingredientFilterRepository.fetchIngredientFilter()
     }
 }

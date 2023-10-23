@@ -1,5 +1,5 @@
 //
-//  IngredientRepository.swift
+//  DefaultItemRepository.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/12.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultIngredientRepository: IngredientRepository {
+final class DefaultItemRepository: ItemRepository {
     let tokenManager: TokenManager
     let provider: Provider
     let ingredientListEndpoint: EndpointMakeable
@@ -24,7 +24,7 @@ final class DefaultIngredientRepository: IngredientRepository {
         self.addIngredientEndpoint = addIngredientEndpoint
     }
     
-    func fetchIngredientList() -> AnyPublisher<IngredientDescription, Error> {
+    func fetchIngredientList() -> AnyPublisher<ItemList, Error> {
         return provider.fetchData(endpoint: ingredientListEndpoint)
     }
     

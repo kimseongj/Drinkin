@@ -15,22 +15,36 @@ final class AddIngredientDIContainer {
     }
     
     let dependencies: Dependencies
-    let ingredientFilterEndpoint = IngredientFilterEndpoint()
+    let itemFilterEndpoint = ItemFilterEndpoint()
+    let itemListEndpoint = ItemListEndpoint()
+    let addItemEndpoint = AddItemEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
-    func makeIngredientFilterRepository() -> IngredientFilterRepository {
-        return DefaultIngredientFilterRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, endpoint: ingredientFilterEndpoint)
+    //MARK: - ItemFilter
+    func makeItemFilterRepository() -> ItemFilterRepository {
+        return DefaultItemFilterRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, endpoint: itemFilterEndpoint)
     }
     
-    func makeFetchIngredientFilterUsecase() -> FetchIngredientFilterUsecase {
-        return DefaultFetchIngredientFilterUsecase(ingredientFilterRepository: makeIngredientFilterRepository())
+    //MARK: - filterItemUsecase
+    func makeItemRepository() -> ItemRepository {
+        return DefaultItemRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, ingredientListEndpoint: itemListEndpoint, addIngredientEndpoint: addItemEndpoint)
     }
+    
+    func makeFilterItemUsecase() -> FilterItemUsecase {
+        return DefaultFilterItemUsecase(itemRepository: makeItemRepository())
+    }
+    
+    //MARK: - AddItemUsecase
+    func makeAddItemUsecase() -> AddItemUsecase {
+        return DefaultAddItemUsecase(itemRepository: makeItemRepository())
+    }
+    
     
     func makeAddIngredientViewModel() -> AddIngredientViewModel {
-        return DefaultAddIngredientViewModel(fetchIngredientFilterUsecase: makeFetchIngredientFilterUsecase())
+        return DefaultAddIngredientViewModel(ingredientFilterRepository: makeItemFilterRepository(), filterItemUsecase: makeFilterItemUsecase(), addItemUsecase: makeAddItemUsecase())
     }
     
     func makeAddIngredientViewController() -> AddIngredientViewController {
