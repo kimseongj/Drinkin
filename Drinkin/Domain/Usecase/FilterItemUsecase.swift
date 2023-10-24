@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 protocol FilterItemUsecase {
-    func filterItem(itemCategory: String, completion: @escaping ([ItemDetail]) -> Void)
+    func fetchItemList() -> AnyPublisher<ItemList, Error>
+    func filterItem(itemCategory: String, completion: @escaping ([ItemPreview]) -> Void)
 }
 
 final class DefaultFilterItemUsecase: FilterItemUsecase {
@@ -20,9 +21,19 @@ final class DefaultFilterItemUsecase: FilterItemUsecase {
         self.itemRepository = itemRepository
     }
     
-    func filterItem(itemCategory: String, completion: @escaping ([ItemDetail]) -> Void) {
+    func fetchItemList() -> AnyPublisher<ItemList, Error> {
+        return itemRepository.fetchIngredientList()
+    }
+    
+    func filterItem(itemCategory: String, completion: @escaping ([ItemPreview]) -> Void) {
         itemRepository.fetchIngredientList().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            let filteredItemList = $0.itemList.filter { $0.ingredientCategory == itemCategory }
+            var filteredItemList: [ItemPreview] = []
+            
+            if itemCategory == "전체" {
+                filteredItemList = $0.itemList
+            } else {
+                filteredItemList = $0.itemList.filter { $0.category == itemCategory }
+            }
             
             completion(filteredItemList)
         }).store(in: &cancelBag)
