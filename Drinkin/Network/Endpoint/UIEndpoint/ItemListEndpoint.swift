@@ -8,11 +8,11 @@
 import Foundation
 
 struct ItemListEndpoint: EndpointMakeable {
-    var baseURL: String = ""
+    var baseURL: String = "https://1e10ad7d-7845-4433-aa0c-b658bf7d2078.mock.pstmn.io"
+
+    var path: String = "/ingredient"
     
-    var path: String = ""
-    
-    var method: String = HTTPMethod.post.rawValue
+    var method: String = HTTPMethod.get.rawValue
     
     var queryItems: [URLQueryItem] = []
     
