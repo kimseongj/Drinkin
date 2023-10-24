@@ -9,17 +9,24 @@ import Foundation
 import Combine
 
 protocol AddIngredientViewModel {
+    var itemFilterPublisher: Published<[String]>.Publisher { get }
+    var itemListPublisher: Published<[ItemPreview]>.Publisher { get }
+    
+    func fetchItemFilter()
+    func fetchItemList()
+    func filterItem(itemCategory: String)
+    func addItem(itemList: [String])
     
 }
 
 class DefaultAddIngredientViewModel: AddIngredientViewModel {
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var ingredientFilterList: [String] = []
-    @Published var ingredientList: [ItemDetail] = []
+    @Published var itemFilterList: [String] = []
+    @Published var itemList: [ItemPreview] = []
     var selectedItemList: [String] = []
-    var ingredientFilterPublisher: Published<[String]>.Publisher { $ingredientFilterList }
-    var ingredientListPublisher: Published<[ItemDetail]>.Publisher { $ingredientList }
+    var itemFilterPublisher: Published<[String]>.Publisher { $itemFilterList }
+    var itemListPublisher: Published<[ItemPreview]>.Publisher { $itemList }
     
     private let ingredientFilterRepository: ItemFilterRepository
     private let filterItemUsecase: FilterItemUsecase
@@ -34,19 +41,21 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
         self.addItemUsecase = addItemUsecase
     }
     
-    func fetchIngredientFilter() {
+    func fetchItemFilter() {
         ingredientFilterRepository.fetchIngredientFilter().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            self.ingredientFilterList = $0.ingredientFilterList
+            self.itemFilterList = $0.itemFilterList
         }).store(in: &cancelBag)
     }
     
     func fetchItemList() {
-        
+        filterItemUsecase.fetchItemList().sink(receiveCompletion: { print("\($0)") }, receiveValue: {
+            self.itemList = $0.itemList
+        }).store(in: &cancelBag)
     }
     
     func filterItem(itemCategory: String) {
         filterItemUsecase.filterItem(itemCategory: itemCategory) {
-            self.ingredientList = $0
+            self.itemList = $0
         }
     }
     

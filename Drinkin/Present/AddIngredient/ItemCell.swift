@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 
-final class IngredientCell: UICollectionViewCell {
-    private let ingredientImageView: UIImageView = {
+final class ItemCell: UICollectionViewCell {
+    private let itemImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         
@@ -24,7 +24,7 @@ final class IngredientCell: UICollectionViewCell {
         return stackView
     }()
     
-    private let recipeItemTitleLabel: UILabel = {
+    private let itemTitleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.themeFont, size: 15)
         
@@ -41,7 +41,7 @@ final class IngredientCell: UICollectionViewCell {
     
     private let emptyCheckImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageStorage.checkFillIcon
+        imageView.image = ImageStorage.checkEmptyIcon
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -55,22 +55,35 @@ final class IngredientCell: UICollectionViewCell {
         return imageView
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func configureUI() {
-        contentView.addSubview(ingredientImageView)
+        contentView.layer.borderWidth = 3
+        contentView.layer.cornerRadius = 4
+        
+        contentView.addSubview(itemImageView)
         contentView.addSubview(labelStackView)
-        labelStackView.addArrangedSubview(recipeItemTitleLabel)
+        labelStackView.addArrangedSubview(itemTitleLabel)
         labelStackView.addArrangedSubview(categoryLabel)
         contentView.addSubview(emptyCheckImageView)
         contentView.addSubview(checkImageView)
         
-        ingredientImageView.snp.makeConstraints {
+        itemImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(8)
             $0.size.equalTo(68)
         }
 
         labelStackView.snp.makeConstraints {
-            $0.leading.equalTo(ingredientImageView.snp.trailing).offset(8)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(itemImageView.snp.trailing).offset(8)
             $0.trailing.equalTo(emptyCheckImageView.snp.leading).offset(-8)
         }
         
@@ -86,6 +99,22 @@ final class IngredientCell: UICollectionViewCell {
             $0.size.equalTo(26)
         }
         
+        checkImageView.isHidden = true
+    }
+    
+    func fill(with itemPreview: ItemPreview) {
+        guard let imageURL = URL(string: itemPreview.imageURI) else { return }
+        
+        itemImageView.load(url: imageURL)
+        itemTitleLabel.text = itemPreview.itemName
+        categoryLabel.text = itemPreview.category
+    }
+    
+    func presentHoldItem() {
+        checkImageView.isHidden = false
+    }
+    
+    func presentUnholdItem() {
         checkImageView.isHidden = true
     }
 }
