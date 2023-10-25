@@ -15,8 +15,7 @@ protocol AddIngredientViewModel {
     func fetchItemFilter()
     func fetchItemList()
     func filterItem(itemCategory: String)
-    func addItem(itemList: [String])
-    
+    func addItem(itemList: [String], completion: @escaping () -> Void)
 }
 
 class DefaultAddIngredientViewModel: AddIngredientViewModel {
@@ -42,14 +41,17 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
     }
     
     func fetchItemFilter() {
-        ingredientFilterRepository.fetchIngredientFilter().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        ingredientFilterRepository.fetchIngredientFilter().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            guard let self = self else { return }
             self.itemFilterList = $0.itemFilterList
         }).store(in: &cancelBag)
     }
     
     func fetchItemList() {
-        filterItemUsecase.fetchItemList().sink(receiveCompletion: { print("\($0)") }, receiveValue: {
+        filterItemUsecase.fetchItemList().sink(receiveCompletion: { print("\($0)") }, receiveValue: { [weak self] in
+            guard let self = self else { return }
             self.itemList = $0.itemList
+            self.fetchSelectedItemList(itemList: $0.itemList)
         }).store(in: &cancelBag)
     }
     
@@ -59,7 +61,7 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
         }
     }
     
-    func addItem(itemList: [String]) {
+    func addItem(itemList: [String], completion: @escaping () -> Void) {
         addItemUsecase.addItem(itemList: itemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
             
         }).store(in: &cancelBag)
