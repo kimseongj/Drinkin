@@ -32,6 +32,7 @@ final class AddItemViewController: UIViewController {
     
     private lazy var itemCollectionView: UICollectionView = {
         let  collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
+        collectionView.allowsMultipleSelection = true
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
         
@@ -53,12 +54,18 @@ final class AddItemViewController: UIViewController {
         configureBackgroundColor()
         configureUI()
         configureFilterCollectionView()
+        configureItemCollectionView()
         configureItemFilterDataSource()
         configureItemDataSource()
         filterBinding()
         itemBinding()
         viewModel?.fetchItemFilter()
         viewModel?.fetchItemList()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("zxczxc")
     }
     
     private func configureTitle() {
@@ -97,6 +104,10 @@ final class AddItemViewController: UIViewController {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
+    
+    private func configureItemCollectionView() {
+        itemCollectionView.delegate = self
+    }
 }
 
 //MARK: - FilterCollectionView ItemCollectionView Delegate
@@ -105,7 +116,17 @@ extension AddItemViewController: UICollectionViewDelegate {
         if collectionView == itemFilterCollectionView {
             
         } else {
+            if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
+                cell.presentHoldItem()
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView == itemCollectionView {
+            guard let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell else { return }
             
+            cell.presentUnholdItem()
         }
     }
 }
@@ -137,8 +158,17 @@ extension AddItemViewController {
 //MARK: - ItemCollectionView DiffableDataSource
 extension AddItemViewController {
     private func configureItemDataSource() {
-        itemDataSource = UICollectionViewDiffableDataSource<Section, ItemPreview> (collectionView: itemCollectionView) { collectionView, indexPath, itemPreview in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell else { return UICollectionViewCell() }
+        itemDataSource = UICollectionViewDiffableDataSource<Section, ItemPreview> (collectionView: itemCollectionView) { [weak self] (collectionView, indexPath, itemPreview) in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell, let self = self else { return UICollectionViewCell() }
+        
+            
+            if itemPreview.hold == true {
+                cell.presentHoldItem()
+                self.itemCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+            } else {
+                cell.presentUnholdItem()
+                self.itemCollectionView.deselectItem(at: indexPath, animated: true)
+            }
             
             cell.fill(with: itemPreview)
             
@@ -157,13 +187,15 @@ extension AddItemViewController {
 //MARK: - Binding
 extension AddItemViewController {
     private func itemBinding() {
-        viewModel?.itemListPublisher.receive(on: RunLoop.main).sink {
+        viewModel?.itemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
             self.applyItemSnapshot(itemPreviewList: $0)
         }.store(in: &cancelBag)
     }
     
     private func filterBinding() {
-        viewModel?.itemFilterPublisher.receive(on: RunLoop.main).sink {
+        viewModel?.itemFilterPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
             self.applyItemFilterSnapshot(itemFilterList: $0)
         }.store(in: &cancelBag)
     }
