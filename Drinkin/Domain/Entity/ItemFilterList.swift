@@ -9,9 +9,9 @@ import Foundation
 
 //MARK: - IngredientFilter
 struct ItemFilterList: Codable, Hashable {
-    let ingredientFilterList: [String]
+    let itemFilterList: [String]
     
     enum CodingKeys: String, CodingKey {
-        case ingredientFilterList = "ingredient_filter_list"
+        case itemFilterList = "item_filter_list"
     }
 }

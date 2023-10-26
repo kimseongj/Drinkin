@@ -37,14 +37,14 @@ final class IntroductionView: UIView {
     
     lazy var baseCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
-        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
+        collectionView.register(RecipeItemCell.self, forCellWithReuseIdentifier: RecipeItemCell.identifier)
         
         return collectionView
     }()
     
     lazy var ingredientCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
-        collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
+        collectionView.register(RecipeItemCell.self, forCellWithReuseIdentifier: RecipeItemCell.identifier)
         
         return collectionView
     }()
@@ -196,7 +196,7 @@ extension IntroductionView {
 extension IntroductionView {
     private func configureBaseDataSource() {
         self.baseDataSource = UICollectionViewDiffableDataSource<Section, DetailCategory> (collectionView: baseCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell else { return nil
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeItemCell.identifier, for: indexPath) as? RecipeItemCell else { return nil
             }
             
             cell.check(hold: detailCategory.hold)
@@ -221,7 +221,7 @@ extension IntroductionView {
 extension IntroductionView {
     private func configureIngredientDataSource() {
         self.ingredientDataSource = UICollectionViewDiffableDataSource<Section, DetailIngredient> (collectionView: ingredientCollectionView) { (collectionView, indexPath, detailIngredient) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell else { return nil
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeItemCell.identifier, for: indexPath) as? RecipeItemCell else { return nil
             }
             
             cell.check(hold: detailIngredient.hold)

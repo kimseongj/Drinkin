@@ -9,17 +9,29 @@ import Foundation
 import Combine
 
 protocol AddIngredientViewModel {
+    var itemFilterList: [String] { get }
+    var itemFilterPublisher: Published<[String]>.Publisher { get }
+    var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { get }
     
+    func fetchItemFilter()
+    func fetchItemList()
+    func filterItems(itemCategory: String)
+    func addSelectedItems(completion: @escaping () -> Void)
+    func fetchSelectedItemList()
+    func selectItem(index: Int)
+    func deselectItem(index: Int)
 }
 
 class DefaultAddIngredientViewModel: AddIngredientViewModel {
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var ingredientFilterList: [String] = []
-    @Published var ingredientList: [ItemDetail] = []
+    @Published var itemFilterList: [String] = []
+    @Published var itemList: [ItemPreview] = []
+    @Published var filteredItemList: [ItemPreview] = []
+    var alreadySelectedItemList: [String] = []
     var selectedItemList: [String] = []
-    var ingredientFilterPublisher: Published<[String]>.Publisher { $ingredientFilterList }
-    var ingredientListPublisher: Published<[ItemDetail]>.Publisher { $ingredientList }
+    var itemFilterPublisher: Published<[String]>.Publisher { $itemFilterList }
+    var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { $filteredItemList }
     
     private let ingredientFilterRepository: ItemFilterRepository
     private let filterItemUsecase: FilterItemUsecase
@@ -34,25 +46,76 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
         self.addItemUsecase = addItemUsecase
     }
     
-    func fetchIngredientFilter() {
-        ingredientFilterRepository.fetchIngredientFilter().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            self.ingredientFilterList = $0.ingredientFilterList
+    func fetchItemFilter() {
+        ingredientFilterRepository.fetchIngredientFilter().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            guard let self = self else { return }
+            self.itemFilterList = $0.itemFilterList
         }).store(in: &cancelBag)
     }
     
     func fetchItemList() {
-        
+        filterItemUsecase.fetchItemList().sink(receiveCompletion: { print("\($0)") }, receiveValue: { [weak self] in
+            guard let self = self else { return }
+            self.itemList = $0.itemList
+            self.filteredItemList = $0.itemList
+            self.fetchAlreadySelectedItemList(itemList: $0.itemList)
+        }).store(in: &cancelBag)
     }
     
-    func filterItem(itemCategory: String) {
-        filterItemUsecase.filterItem(itemCategory: itemCategory) {
-            self.ingredientList = $0
+    func fetchAlreadySelectedItemList(itemList: [ItemPreview]) {
+        alreadySelectedItemList = itemList.filter {
+            $0.hold == true
+        }.map {
+            $0.itemName
         }
     }
     
-    func addItem(itemList: [String]) {
-        addItemUsecase.addItem(itemList: itemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
-            
-        }).store(in: &cancelBag)
+    func fetchSelectedItemList() {
+        selectedItemList = itemList.filter {
+            $0.hold == true
+        }.map {
+            $0.itemName
+        }
+    }
+    
+    func filterItems(itemCategory: String) {
+        filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList) {
+            self.filteredItemList = $0
+        }
+    }
+    
+    func addSelectedItems(completion: @escaping () -> Void) {
+        let isSelectedItemChanged = compareSelectedItem()
+        
+        if isSelectedItemChanged {
+            addItemUsecase.addItem(itemList: selectedItemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
+                completion()
+            }).store(in: &cancelBag)
+        } else {
+            return
+        }
+    }
+    
+    func compareSelectedItem() -> Bool {
+        let alreadySelectedItemSet = Set(alreadySelectedItemList)
+        let selectedItemSet = Set(selectedItemList)
+        
+        return alreadySelectedItemSet != selectedItemSet
+    }
+    
+    func selectItem(index: Int) {
+        let selectedItemName = filteredItemList[index].itemName
+        
+        if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            itemList[selectedItemIndex].hold = true
+        }
+    }
+    
+    func deselectItem(index: Int) {
+        let selectedItemName = filteredItemList[index].itemName
+        
+        if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            itemList[selectedItemIndex].hold = false
+        }
     }
 }

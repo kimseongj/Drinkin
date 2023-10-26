@@ -23,10 +23,10 @@
 		1C04C19629DEED2700E381C2 /* MyHomeBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19529DEED2700E381C2 /* MyHomeBarViewController.swift */; };
 		1C04C19A29DEED3D00E381C2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C04C19929DEED3D00E381C2 /* MainViewController.swift */; };
 		1C0768692ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768682ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift */; };
-		1C07686B2ABD2FE00003D4BF /* AddIngredientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686A2ABD2FE00003D4BF /* AddIngredientViewController.swift */; };
+		1C07686B2ABD2FE00003D4BF /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686A2ABD2FE00003D4BF /* AddItemViewController.swift */; };
 		1C07686E2ABD38C70003D4BF /* AddIngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686D2ABD38C70003D4BF /* AddIngredientViewModel.swift */; };
-		1C0768702ABD52CB0003D4BF /* ItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686F2ABD52CB0003D4BF /* ItemDetail.swift */; };
-		1C0768722ABD58480003D4BF /* IngredientFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768712ABD58480003D4BF /* IngredientFilterCell.swift */; };
+		1C0768702ABD52CB0003D4BF /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07686F2ABD52CB0003D4BF /* ItemList.swift */; };
+		1C0768722ABD58480003D4BF /* ItemFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768712ABD58480003D4BF /* ItemFilterCell.swift */; };
 		1C0768742ABD58930003D4BF /* ItemFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768732ABD58930003D4BF /* ItemFilterList.swift */; };
 		1C0768762ABD64E20003D4BF /* DefaultItemFilterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768752ABD64E20003D4BF /* DefaultItemFilterRepository.swift */; };
 		1C0768782ABD66320003D4BF /* ItemFilterEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768772ABD66320003D4BF /* ItemFilterEndpoint.swift */; };
@@ -80,7 +80,7 @@
 		1C5906A52A21D5B3001F048B /* FilteredCocktailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */; };
 		1C5906A72A21DBE0001F048B /* CocktailFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5906A62A21DBE0001F048B /* CocktailFilterViewModel.swift */; };
 		1C598F882A7B495C00B9DC93 /* TextInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C598F872A7B495C00B9DC93 /* TextInformationView.swift */; };
-		1C598F8A2A7BA02700B9DC93 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C598F892A7BA02700B9DC93 /* ItemCell.swift */; };
+		1C598F8A2A7BA02700B9DC93 /* RecipeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C598F892A7BA02700B9DC93 /* RecipeItemCell.swift */; };
 		1C598F8C2A7D35ED00B9DC93 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C598F8B2A7D35ED00B9DC93 /* ProductDetailViewModel.swift */; };
 		1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */; };
 		1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */; };
@@ -167,7 +167,7 @@
 		1CC9D3F02A1903EE00654A5D /* HoldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC9D3EF2A1903EE00654A5D /* HoldView.swift */; };
 		1CC9D3F62A1A4A7300654A5D /* RixYeoljeongdo_Pro Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1CC9D3F52A1A4A7300654A5D /* RixYeoljeongdo_Pro Regular.otf */; };
 		1CCE60182AE4B2D90026427C /* FilterItemUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE60172AE4B2D90026427C /* FilterItemUsecase.swift */; };
-		1CCE601A2AE4BB070026427C /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE60192AE4BB070026427C /* IngredientCell.swift */; };
+		1CCE601A2AE4BB070026427C /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE60192AE4BB070026427C /* ItemCell.swift */; };
 		1CCE601C2AE505050026427C /* AddItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE601B2AE505050026427C /* AddItemEndpoint.swift */; };
 		1CCE601E2AE515390026427C /* ItemListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE601D2AE515390026427C /* ItemListEndpoint.swift */; };
 		1CCE88DD29E9498D00D3E1D2 /* CocktailFilterVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88DC29E9498D00D3E1D2 /* CocktailFilterVCCoordinator.swift */; };
@@ -230,10 +230,10 @@
 		1C04C19529DEED2700E381C2 /* MyHomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarViewController.swift; sourceTree = "<group>"; };
 		1C04C19929DEED3D00E381C2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		1C0768682ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSettingVCCoordinator.swift; sourceTree = "<group>"; };
-		1C07686A2ABD2FE00003D4BF /* AddIngredientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewController.swift; sourceTree = "<group>"; };
+		1C07686A2ABD2FE00003D4BF /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		1C07686D2ABD38C70003D4BF /* AddIngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientViewModel.swift; sourceTree = "<group>"; };
-		1C07686F2ABD52CB0003D4BF /* ItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetail.swift; sourceTree = "<group>"; };
-		1C0768712ABD58480003D4BF /* IngredientFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientFilterCell.swift; sourceTree = "<group>"; };
+		1C07686F2ABD52CB0003D4BF /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
+		1C0768712ABD58480003D4BF /* ItemFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilterCell.swift; sourceTree = "<group>"; };
 		1C0768732ABD58930003D4BF /* ItemFilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilterList.swift; sourceTree = "<group>"; };
 		1C0768752ABD64E20003D4BF /* DefaultItemFilterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultItemFilterRepository.swift; sourceTree = "<group>"; };
 		1C0768772ABD66320003D4BF /* ItemFilterEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilterEndpoint.swift; sourceTree = "<group>"; };
@@ -286,7 +286,7 @@
 		1C5906A42A21D5B3001F048B /* FilteredCocktailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCocktailCell.swift; sourceTree = "<group>"; };
 		1C5906A62A21DBE0001F048B /* CocktailFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterViewModel.swift; sourceTree = "<group>"; };
 		1C598F872A7B495C00B9DC93 /* TextInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInformationView.swift; sourceTree = "<group>"; };
-		1C598F892A7BA02700B9DC93 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		1C598F892A7BA02700B9DC93 /* RecipeItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeItemCell.swift; sourceTree = "<group>"; };
 		1C598F8B2A7D35ED00B9DC93 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		1C5CAACC29DB1AE30053F19A /* Drinkin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drinkin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -368,7 +368,7 @@
 		1CC9D3EF2A1903EE00654A5D /* HoldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldView.swift; sourceTree = "<group>"; };
 		1CC9D3F52A1A4A7300654A5D /* RixYeoljeongdo_Pro Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RixYeoljeongdo_Pro Regular.otf"; sourceTree = "<group>"; };
 		1CCE60172AE4B2D90026427C /* FilterItemUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterItemUsecase.swift; sourceTree = "<group>"; };
-		1CCE60192AE4BB070026427C /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
+		1CCE60192AE4BB070026427C /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		1CCE601B2AE505050026427C /* AddItemEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemEndpoint.swift; sourceTree = "<group>"; };
 		1CCE601D2AE515390026427C /* ItemListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListEndpoint.swift; sourceTree = "<group>"; };
 		1CCE88DC29E9498D00D3E1D2 /* CocktailFilterVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterVCCoordinator.swift; sourceTree = "<group>"; };
@@ -456,14 +456,14 @@
 			path = FilterRepositoriy;
 			sourceTree = "<group>";
 		};
-		1C0328D92ADE49D5002E144E /* IngredientRepository */ = {
+		1C0328D92ADE49D5002E144E /* ItemRepository */ = {
 			isa = PBXGroup;
 			children = (
 				1C0328EB2ADE5108002E144E /* ItemRepository.swift */,
 				1C0328ED2ADE511D002E144E /* BaseDetailRepository.swift */,
 				1CBDA54B2ADFC5F4000F1F7D /* BaseBrandDetailRepository.swift */,
 			);
-			path = IngredientRepository;
+			path = ItemRepository;
 			sourceTree = "<group>";
 		};
 		1C0328DA2ADE49DF002E144E /* UserRepository */ = {
@@ -557,10 +557,10 @@
 		1C07686C2ABD38A40003D4BF /* AddIngredient */ = {
 			isa = PBXGroup;
 			children = (
-				1C07686A2ABD2FE00003D4BF /* AddIngredientViewController.swift */,
+				1C07686A2ABD2FE00003D4BF /* AddItemViewController.swift */,
 				1C07686D2ABD38C70003D4BF /* AddIngredientViewModel.swift */,
-				1C0768712ABD58480003D4BF /* IngredientFilterCell.swift */,
-				1CCE60192AE4BB070026427C /* IngredientCell.swift */,
+				1C0768712ABD58480003D4BF /* ItemFilterCell.swift */,
+				1CCE60192AE4BB070026427C /* ItemCell.swift */,
 			);
 			path = AddIngredient;
 			sourceTree = "<group>";
@@ -758,6 +758,7 @@
 		1C504CD82AB4725A005A0B25 /* CocktailFilterEndpoint */ = {
 			isa = PBXGroup;
 			children = (
+				1C0768772ABD66320003D4BF /* ItemFilterEndpoint.swift */,
 				1C504CD92AB47268005A0B25 /* CocktailFilterEndpoint.swift */,
 			);
 			path = CocktailFilterEndpoint;
@@ -862,7 +863,7 @@
 				1CBDA5412ADF9DC6000F1F7D /* TipAndContentRepository */,
 				1CDAB4312ADCDF1D00E30181 /* UserRepository */,
 				1CDAB42E2ADCDEDF00E30181 /* CocktailRepository */,
-				1CDAB4322ADCDF4B00E30181 /* IngredientRepository */,
+				1CDAB4322ADCDF4B00E30181 /* ItemRepository */,
 				1CDAB4332ADCDF6000E30181 /* FilterRepository */,
 				1C5CAB0529DB51D50053F19A /* LoginRepository.swift */,
 			);
@@ -881,7 +882,7 @@
 				1C9F4C8A2AAD8D7A0020DB48 /* CocktailImageDescription.swift */,
 				1C9F4C8C2AAD8DAF0020DB48 /* CocktailPreviewList.swift */,
 				1C504CC62AB4256F005A0B25 /* CocktailFilter.swift */,
-				1C07686F2ABD52CB0003D4BF /* ItemDetail.swift */,
+				1C07686F2ABD52CB0003D4BF /* ItemList.swift */,
 				1C0768732ABD58930003D4BF /* ItemFilterList.swift */,
 				1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */,
 				1CDB85C32AD12E7600360852 /* BaseDetail.swift */,
@@ -1013,7 +1014,6 @@
 				1C9F4C902AAD92700020DB48 /* SavedCocktailListEndpoint.swift */,
 				1C7807F92AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift */,
 				1C504CD62AB47035005A0B25 /* CocktailListEndpoint.swift */,
-				1C0768772ABD66320003D4BF /* ItemFilterEndpoint.swift */,
 				1CDB85B22ACFD75D00360852 /* BaseInformationEndpoint.swift */,
 				1CBDA5482ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift */,
 				1CCE601B2AE505050026427C /* AddItemEndpoint.swift */,
@@ -1195,14 +1195,14 @@
 			path = UserRepository;
 			sourceTree = "<group>";
 		};
-		1CDAB4322ADCDF4B00E30181 /* IngredientRepository */ = {
+		1CDAB4322ADCDF4B00E30181 /* ItemRepository */ = {
 			isa = PBXGroup;
 			children = (
 				1CDAB4282AD7DE5D00E30181 /* DefaultItemRepository.swift */,
 				1CDB85C12AD12E1900360852 /* DefaultBaseDetailRepository.swift */,
 				1CBDA54D2ADFC61C000F1F7D /* DefaultBaseBrandDetailRepository.swift */,
 			);
-			path = IngredientRepository;
+			path = ItemRepository;
 			sourceTree = "<group>";
 		};
 		1CDAB4332ADCDF6000E30181 /* FilterRepository */ = {
@@ -1228,7 +1228,7 @@
 				1CBDA53E2ADF9D5E000F1F7D /* TipAndContentRepository */,
 				1C0328DA2ADE49DF002E144E /* UserRepository */,
 				1C0328D72ADE49C0002E144E /* CocktailRepository */,
-				1C0328D92ADE49D5002E144E /* IngredientRepository */,
+				1C0328D92ADE49D5002E144E /* ItemRepository */,
 				1C0328D82ADE49CA002E144E /* FilterRepositoriy */,
 			);
 			path = Repositories;
@@ -1246,7 +1246,7 @@
 		1CDB85B42AD01C1B00360852 /* IntroductionView */ = {
 			isa = PBXGroup;
 			children = (
-				1C598F892A7BA02700B9DC93 /* ItemCell.swift */,
+				1C598F892A7BA02700B9DC93 /* RecipeItemCell.swift */,
 				1CCE88F229EBAC0800D3E1D2 /* IntroductionView.swift */,
 			);
 			path = IntroductionView;
@@ -1411,7 +1411,7 @@
 				1CCE601C2AE505050026427C /* AddItemEndpoint.swift in Sources */,
 				1CB299112A724136001F31BF /* CocktailRecommendDIContainer.swift in Sources */,
 				1C0768742ABD58930003D4BF /* ItemFilterList.swift in Sources */,
-				1C07686B2ABD2FE00003D4BF /* AddIngredientViewController.swift in Sources */,
+				1C07686B2ABD2FE00003D4BF /* AddItemViewController.swift in Sources */,
 				1C0FE7F72AAF08620046F555 /* UserMadeCocktailListViewController.swift in Sources */,
 				1CDAB4252AD3DFE200E30181 /* FilterCocktailListUsecase.swift in Sources */,
 				1CDB85C22AD12E1900360852 /* DefaultBaseDetailRepository.swift in Sources */,
@@ -1436,7 +1436,7 @@
 				1C0809E129E043DF00265706 /* AppCoordinator.swift in Sources */,
 				1CA9695A2AA18AB40076731B /* MyHomeBarDIContainer.swift in Sources */,
 				1C0328EC2ADE5108002E144E /* ItemRepository.swift in Sources */,
-				1CCE601A2AE4BB070026427C /* IngredientCell.swift in Sources */,
+				1CCE601A2AE4BB070026427C /* ItemCell.swift in Sources */,
 				1CCE88FA29EBB2C200D3E1D2 /* CocktailSelectionCell.swift in Sources */,
 				1CA8ED292A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift in Sources */,
 				1C0809E329E043FF00265706 /* Coordinator.swift in Sources */,
@@ -1470,7 +1470,7 @@
 				1C0328E62ADE508A002E144E /* CocktailBriefListRepository.swift in Sources */,
 				1C0768762ABD64E20003D4BF /* DefaultItemFilterRepository.swift in Sources */,
 				1C74FD5F2AB6969300823E73 /* CocktailFilterDICotainer.swift in Sources */,
-				1C0768722ABD58480003D4BF /* IngredientFilterCell.swift in Sources */,
+				1C0768722ABD58480003D4BF /* ItemFilterCell.swift in Sources */,
 				1C9F4C912AAD92700020DB48 /* SavedCocktailListEndpoint.swift in Sources */,
 				1C0768692ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift in Sources */,
 				1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */,
@@ -1482,7 +1482,7 @@
 				1C0328EE2ADE511D002E144E /* BaseDetailRepository.swift in Sources */,
 				1C598F882A7B495C00B9DC93 /* TextInformationView.swift in Sources */,
 				1CCE890829EBC49400D3E1D2 /* RefreshEndpoint.swift in Sources */,
-				1C0768702ABD52CB0003D4BF /* ItemDetail.swift in Sources */,
+				1C0768702ABD52CB0003D4BF /* ItemList.swift in Sources */,
 				1CDE6FA52AAEA8DF000D7BE3 /* DefaultUserMadeCocktailListRepository.swift in Sources */,
 				1C0768832ABD75360003D4BF /* LoginSettingDIContainer.swift in Sources */,
 				1CA969172A9078690076731B /* KeyChainError.swift in Sources */,
@@ -1528,7 +1528,7 @@
 				1CC9D3EA2A19027400654A5D /* HoldCollectionViewCell.swift in Sources */,
 				1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */,
 				1C598F8C2A7D35ED00B9DC93 /* ProductDetailViewModel.swift in Sources */,
-				1C598F8A2A7BA02700B9DC93 /* ItemCell.swift in Sources */,
+				1C598F8A2A7BA02700B9DC93 /* RecipeItemCell.swift in Sources */,
 				1CA8ED262A65915600CE5E1A /* KeychainManager.swift in Sources */,
 				1CDB85C42AD12E7600360852 /* BaseDetail.swift in Sources */,
 				1C26963A2A4315F300C1FC00 /* TriedCocktailSelectionViewModel.swift in Sources */,

@@ -47,7 +47,7 @@ final class AddIngredientDIContainer {
         return DefaultAddIngredientViewModel(ingredientFilterRepository: makeItemFilterRepository(), filterItemUsecase: makeFilterItemUsecase(), addItemUsecase: makeAddItemUsecase())
     }
     
-    func makeAddIngredientViewController() -> AddIngredientViewController {
-        return AddIngredientViewController(viewModel: makeAddIngredientViewModel() )
+    func makeAddIngredientViewController() -> AddItemViewController {
+        return AddItemViewController(viewModel: makeAddIngredientViewModel() )
     }
 }

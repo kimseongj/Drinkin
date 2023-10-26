@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ItemCell: UICollectionViewCell {
+final class RecipeItemCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.themeFont, size: 20)
