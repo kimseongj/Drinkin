@@ -9,13 +9,16 @@ import Foundation
 import Combine
 
 protocol AddIngredientViewModel {
+    var itemFilterList: [String] { get }
     var itemFilterPublisher: Published<[String]>.Publisher { get }
-    var itemListPublisher: Published<[ItemPreview]>.Publisher { get }
+    var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { get }
     
     func fetchItemFilter()
     func fetchItemList()
-    func filterItem(itemCategory: String)
-    func addItem(itemList: [String], completion: @escaping () -> Void)
+    func filterItems(itemCategory: String)
+    func addSelectedItems(SelecteditemList: [String], completion: @escaping () -> Void)
+    func selectItem(index: Int)
+    func deselectItem(index: Int)
 }
 
 class DefaultAddIngredientViewModel: AddIngredientViewModel {
@@ -23,9 +26,11 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
     
     @Published var itemFilterList: [String] = []
     @Published var itemList: [ItemPreview] = []
+    @Published var filteredItemList: [ItemPreview] = []
+    var alreadySelectedItemList: [String] = []
     var selectedItemList: [String] = []
     var itemFilterPublisher: Published<[String]>.Publisher { $itemFilterList }
-    var itemListPublisher: Published<[ItemPreview]>.Publisher { $itemList }
+    var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { $filteredItemList }
     
     private let ingredientFilterRepository: ItemFilterRepository
     private let filterItemUsecase: FilterItemUsecase
@@ -51,19 +56,65 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
         filterItemUsecase.fetchItemList().sink(receiveCompletion: { print("\($0)") }, receiveValue: { [weak self] in
             guard let self = self else { return }
             self.itemList = $0.itemList
+            self.filteredItemList = $0.itemList
             self.fetchSelectedItemList(itemList: $0.itemList)
         }).store(in: &cancelBag)
     }
     
-    func filterItem(itemCategory: String) {
-        filterItemUsecase.filterItem(itemCategory: itemCategory) {
-            self.itemList = $0
+    func fetchAlreadySelectedItemList(itemList: [ItemPreview]) {
+        alreadySelectedItemList = itemList.filter {
+            $0.hold == true
+        }.map {
+            $0.itemName
         }
     }
     
-    func addItem(itemList: [String], completion: @escaping () -> Void) {
-        addItemUsecase.addItem(itemList: itemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
-            
-        }).store(in: &cancelBag)
+    func fetchSelectedItemList(itemList: [ItemPreview]) {
+        selectedItemList = itemList.filter {
+            $0.hold == true
+        }.map {
+            $0.itemName
+        }
+    }
+    
+    func filterItems(itemCategory: String) {
+        filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList) {
+            self.filteredItemList = $0
+        }
+    }
+    
+    func addSelectedItems(SelecteditemList: [String], completion: @escaping () -> Void) {
+        let isSelectedItemChanged = compareSelectedItem()
+        
+        if isSelectedItemChanged {
+            print("실행 완료")
+//            addItemUsecase.addItem(itemList: itemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
+//
+//            }).store(in: &cancelBag)
+        } else { print("변화 없음")
+            return }
+    }
+    
+    func compareSelectedItem() -> Bool {
+        let alreadySelectedItemSet = Set(alreadySelectedItemList)
+        let selectedItemSet = Set(selectedItemList)
+        
+        return alreadySelectedItemSet == selectedItemSet
+    }
+    
+    func selectItem(index: Int) {
+        let selectedItemName = filteredItemList[index].itemName
+        
+        if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            itemList[selectedItemIndex].hold = true
+        }
+    }
+    
+    func deselectItem(index: Int) {
+        let selectedItemName = filteredItemList[index].itemName
+        
+        if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            itemList[selectedItemIndex].hold = false
+        }
     }
 }

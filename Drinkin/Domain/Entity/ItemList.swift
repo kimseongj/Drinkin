@@ -19,7 +19,7 @@ struct ItemPreview: Codable, Hashable {
     let itemName: String
     let category: String
     let imageURI: String
-    let hold: Bool
+    var hold: Bool
 
     enum CodingKeys: String, CodingKey {
         case itemName = "item_name"

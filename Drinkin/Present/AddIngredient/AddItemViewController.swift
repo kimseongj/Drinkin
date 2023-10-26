@@ -39,6 +39,10 @@ final class AddItemViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var presentUploadItemStateView: UIView = {
+        
+    }
+    
     init(viewModel: AddIngredientViewModel?) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -114,10 +118,11 @@ final class AddItemViewController: UIViewController {
 extension AddItemViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == itemFilterCollectionView {
-            
+            viewModel?.filterItems(itemCategory: (viewModel?.itemFilterList[indexPath.row])!)
         } else {
             if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
                 cell.presentHoldItem()
+                viewModel?.selectItem(index: indexPath.row)
             }
         }
     }
@@ -127,6 +132,7 @@ extension AddItemViewController: UICollectionViewDelegate {
             guard let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell else { return }
             
             cell.presentUnholdItem()
+            viewModel?.deselectItem(index: indexPath.row)
         }
     }
 }
@@ -138,7 +144,7 @@ extension AddItemViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemFilterCell.identifier, for: indexPath) as? ItemFilterCell else { return UICollectionViewCell() }
             
             if itemFilter == "전체" {
-                cell.isSelected = true
+//                self.itemFilterCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
             }
             
             cell.fill(with: itemFilter)
@@ -187,7 +193,7 @@ extension AddItemViewController {
 //MARK: - Binding
 extension AddItemViewController {
     private func itemBinding() {
-        viewModel?.itemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel?.filteredItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.applyItemSnapshot(itemPreviewList: $0)
         }.store(in: &cancelBag)
