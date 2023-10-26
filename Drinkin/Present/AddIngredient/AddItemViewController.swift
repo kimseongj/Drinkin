@@ -39,10 +39,6 @@ final class AddItemViewController: UIViewController {
         return collectionView
     }()
     
-    private lazy var presentUploadItemStateView: UIView = {
-        
-    }
-    
     init(viewModel: AddIngredientViewModel?) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -69,7 +65,10 @@ final class AddItemViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("zxczxc")
+        viewModel?.fetchSelectedItemList()
+        viewModel?.addSelectedItems(completion: {
+            
+        })
     }
     
     private func configureTitle() {

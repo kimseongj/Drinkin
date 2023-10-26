@@ -16,7 +16,8 @@ protocol AddIngredientViewModel {
     func fetchItemFilter()
     func fetchItemList()
     func filterItems(itemCategory: String)
-    func addSelectedItems(SelecteditemList: [String], completion: @escaping () -> Void)
+    func addSelectedItems(completion: @escaping () -> Void)
+    func fetchSelectedItemList()
     func selectItem(index: Int)
     func deselectItem(index: Int)
 }
@@ -57,7 +58,7 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
             guard let self = self else { return }
             self.itemList = $0.itemList
             self.filteredItemList = $0.itemList
-            self.fetchSelectedItemList(itemList: $0.itemList)
+            self.fetchAlreadySelectedItemList(itemList: $0.itemList)
         }).store(in: &cancelBag)
     }
     
@@ -69,7 +70,7 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
         }
     }
     
-    func fetchSelectedItemList(itemList: [ItemPreview]) {
+    func fetchSelectedItemList() {
         selectedItemList = itemList.filter {
             $0.hold == true
         }.map {
@@ -83,23 +84,23 @@ class DefaultAddIngredientViewModel: AddIngredientViewModel {
         }
     }
     
-    func addSelectedItems(SelecteditemList: [String], completion: @escaping () -> Void) {
+    func addSelectedItems(completion: @escaping () -> Void) {
         let isSelectedItemChanged = compareSelectedItem()
         
         if isSelectedItemChanged {
-            print("실행 완료")
-//            addItemUsecase.addItem(itemList: itemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
-//
-//            }).store(in: &cancelBag)
-        } else { print("변화 없음")
-            return }
+            addItemUsecase.addItem(itemList: selectedItemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
+                completion()
+            }).store(in: &cancelBag)
+        } else {
+            return
+        }
     }
     
     func compareSelectedItem() -> Bool {
         let alreadySelectedItemSet = Set(alreadySelectedItemList)
         let selectedItemSet = Set(selectedItemList)
         
-        return alreadySelectedItemSet == selectedItemSet
+        return alreadySelectedItemSet != selectedItemSet
     }
     
     func selectItem(index: Int) {
