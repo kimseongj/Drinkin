@@ -110,6 +110,9 @@
 		1C7A10492A74FB14009961A1 /* ProductDetailEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A10482A74FB14009961A1 /* ProductDetailEndpoint.swift */; };
 		1C82611D2ACA79050065ED2B /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C82611C2ACA79050065ED2B /* TokenManager.swift */; };
 		1C8804A82AAD792400FB7844 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8804A72AAD792400FB7844 /* LoginViewModel.swift */; };
+		1C93EDE92AEA509B0080E33A /* SkillModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C93EDE82AEA509B0080E33A /* SkillModalViewController.swift */; };
+		1C93EDEB2AEA50C50080E33A /* GlassModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C93EDEA2AEA50C50080E33A /* GlassModalViewController.swift */; };
+		1C93EDEE2AEA51F70080E33A /* MakeableCocktailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C93EDED2AEA51F70080E33A /* MakeableCocktailListViewController.swift */; };
 		1C951D472ABB389000662B35 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C951D462ABB389000662B35 /* ColorPalette.swift */; };
 		1C951D492ABB38CA00662B35 /* MutableSizeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C951D482ABB38CA00662B35 /* MutableSizeTableView.swift */; };
 		1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9BAB1029EFADA500E979AC /* LoadingView.swift */; };
@@ -155,7 +158,6 @@
 		1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB299142A7247AF001F31BF /* CocktailRecommendCell.swift */; };
 		1CBDA5402ADF9D73000F1F7D /* TipAndContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA53F2ADF9D73000F1F7D /* TipAndContentRepository.swift */; };
 		1CBDA5432ADF9DDB000F1F7D /* DefaultTipAndContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA5422ADF9DDB000F1F7D /* DefaultTipAndContentRepository.swift */; };
-		1CBDA5472ADF9EBD000F1F7D /* TipAndContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA5462ADF9EBD000F1F7D /* TipAndContentViewModel.swift */; };
 		1CBDA5492ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA5482ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift */; };
 		1CBDA54C2ADFC5F4000F1F7D /* BaseBrandDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA54B2ADFC5F4000F1F7D /* BaseBrandDetailRepository.swift */; };
 		1CBDA54E2ADFC61C000F1F7D /* DefaultBaseBrandDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBDA54D2ADFC61C000F1F7D /* DefaultBaseBrandDetailRepository.swift */; };
@@ -197,10 +199,8 @@
 		1CDAB42B2AD7DF0500E30181 /* AddItemUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDAB42A2AD7DF0500E30181 /* AddItemUsecase.swift */; };
 		1CDB85B02ACFD3C600360852 /* BaseBrandInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85AF2ACFD3C600360852 /* BaseBrandInformationViewController.swift */; };
 		1CDB85B32ACFD75D00360852 /* BaseInformationEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85B22ACFD75D00360852 /* BaseInformationEndpoint.swift */; };
-		1CDB85B72AD037A200360852 /* TipAndContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85B62AD037A200360852 /* TipAndContentViewController.swift */; };
 		1CDB85BA2AD040B600360852 /* BookmarkCocktailButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85B92AD040B600360852 /* BookmarkCocktailButton.swift */; };
 		1CDB85BC2AD040CA00360852 /* MarkMadeCocktailButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85BB2AD040CA00360852 /* MarkMadeCocktailButton.swift */; };
-		1CDB85BE2AD0558500360852 /* TipAndContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85BD2AD0558500360852 /* TipAndContentCell.swift */; };
 		1CDB85C02AD11E0800360852 /* BaseInformationDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85BF2AD11E0800360852 /* BaseInformationDIContainer.swift */; };
 		1CDB85C22AD12E1900360852 /* DefaultBaseDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85C12AD12E1900360852 /* DefaultBaseDetailRepository.swift */; };
 		1CDB85C42AD12E7600360852 /* BaseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDB85C32AD12E7600360852 /* BaseDetail.swift */; };
@@ -310,6 +310,9 @@
 		1C7A10482A74FB14009961A1 /* ProductDetailEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailEndpoint.swift; sourceTree = "<group>"; };
 		1C82611C2ACA79050065ED2B /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		1C8804A72AAD792400FB7844 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		1C93EDE82AEA509B0080E33A /* SkillModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalViewController.swift; sourceTree = "<group>"; };
+		1C93EDEA2AEA50C50080E33A /* GlassModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewController.swift; sourceTree = "<group>"; };
+		1C93EDED2AEA51F70080E33A /* MakeableCocktailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableCocktailListViewController.swift; sourceTree = "<group>"; };
 		1C951D462ABB389000662B35 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		1C951D482ABB38CA00662B35 /* MutableSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableSizeTableView.swift; sourceTree = "<group>"; };
 		1C9BAB1029EFADA500E979AC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -356,7 +359,6 @@
 		1CB299142A7247AF001F31BF /* CocktailRecommendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocktailRecommendCell.swift; sourceTree = "<group>"; };
 		1CBDA53F2ADF9D73000F1F7D /* TipAndContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentRepository.swift; sourceTree = "<group>"; };
 		1CBDA5422ADF9DDB000F1F7D /* DefaultTipAndContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTipAndContentRepository.swift; sourceTree = "<group>"; };
-		1CBDA5462ADF9EBD000F1F7D /* TipAndContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentViewModel.swift; sourceTree = "<group>"; };
 		1CBDA5482ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBrandInformationEndpoint.swift; sourceTree = "<group>"; };
 		1CBDA54B2ADFC5F4000F1F7D /* BaseBrandDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBrandDetailRepository.swift; sourceTree = "<group>"; };
 		1CBDA54D2ADFC61C000F1F7D /* DefaultBaseBrandDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBaseBrandDetailRepository.swift; sourceTree = "<group>"; };
@@ -398,10 +400,8 @@
 		1CDAB42A2AD7DF0500E30181 /* AddItemUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemUsecase.swift; sourceTree = "<group>"; };
 		1CDB85AF2ACFD3C600360852 /* BaseBrandInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBrandInformationViewController.swift; sourceTree = "<group>"; };
 		1CDB85B22ACFD75D00360852 /* BaseInformationEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationEndpoint.swift; sourceTree = "<group>"; };
-		1CDB85B62AD037A200360852 /* TipAndContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentViewController.swift; sourceTree = "<group>"; };
 		1CDB85B92AD040B600360852 /* BookmarkCocktailButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCocktailButton.swift; sourceTree = "<group>"; };
 		1CDB85BB2AD040CA00360852 /* MarkMadeCocktailButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkMadeCocktailButton.swift; sourceTree = "<group>"; };
-		1CDB85BD2AD0558500360852 /* TipAndContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentCell.swift; sourceTree = "<group>"; };
 		1CDB85BF2AD11E0800360852 /* BaseInformationDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationDIContainer.swift; sourceTree = "<group>"; };
 		1CDB85C12AD12E1900360852 /* DefaultBaseDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultBaseDetailRepository.swift; sourceTree = "<group>"; };
 		1CDB85C32AD12E7600360852 /* BaseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDetail.swift; sourceTree = "<group>"; };
@@ -550,6 +550,8 @@
 			isa = PBXGroup;
 			children = (
 				1C04C19029DEEC6F00E381C2 /* ToolModalViewController.swift */,
+				1C93EDE82AEA509B0080E33A /* SkillModalViewController.swift */,
+				1C93EDEA2AEA50C50080E33A /* GlassModalViewController.swift */,
 			);
 			path = DetailModal;
 			sourceTree = "<group>";
@@ -832,8 +834,8 @@
 				1C07686C2ABD38A40003D4BF /* AddIngredient */,
 				1C0768812ABD6C020003D4BF /* LoginSetting */,
 				1C0768882ABDDA490003D4BF /* BaseInformation */,
-				1CDB85B52AD01C3200360852 /* TipAndContents */,
 				1CDB85B12ACFD3CA00360852 /* BaseBrandInformation */,
+				1C93EDEC2AEA51EA0080E33A /* MakeableCocktailList */,
 			);
 			path = Present;
 			sourceTree = "<group>";
@@ -918,6 +920,14 @@
 				1C598F8B2A7D35ED00B9DC93 /* ProductDetailViewModel.swift */,
 			);
 			path = ProductDetailViewModel;
+			sourceTree = "<group>";
+		};
+		1C93EDEC2AEA51EA0080E33A /* MakeableCocktailList */ = {
+			isa = PBXGroup;
+			children = (
+				1C93EDED2AEA51F70080E33A /* MakeableCocktailListViewController.swift */,
+			);
+			path = MakeableCocktailList;
 			sourceTree = "<group>";
 		};
 		1C9BAAEA29EC15EA00E979AC /* LoginEndpoint */ = {
@@ -1252,16 +1262,6 @@
 			path = IntroductionView;
 			sourceTree = "<group>";
 		};
-		1CDB85B52AD01C3200360852 /* TipAndContents */ = {
-			isa = PBXGroup;
-			children = (
-				1CDB85B62AD037A200360852 /* TipAndContentViewController.swift */,
-				1CDB85BD2AD0558500360852 /* TipAndContentCell.swift */,
-				1CBDA5462ADF9EBD000F1F7D /* TipAndContentViewModel.swift */,
-			);
-			path = TipAndContents;
-			sourceTree = "<group>";
-		};
 		1CDB85B82AD040A100360852 /* BookmarkButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1363,6 +1363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C93EDE92AEA509B0080E33A /* SkillModalViewController.swift in Sources */,
 				1CBDA5402ADF9D73000F1F7D /* TipAndContentRepository.swift in Sources */,
 				1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */,
 				1C0768AF2AC2A50A0003D4BF /* FontStrings.swift in Sources */,
@@ -1385,7 +1386,7 @@
 				1C9BAB2029EFAED500E979AC /* ClickableInformationView.swift in Sources */,
 				1CA968E92A8E423B0076731B /* MiscStrings.swift in Sources */,
 				1CC9D3F02A1903EE00654A5D /* HoldView.swift in Sources */,
-				1CDB85BE2AD0558500360852 /* TipAndContentCell.swift in Sources */,
+				1C93EDEB2AEA50C50080E33A /* GlassModalViewController.swift in Sources */,
 				1C9BAB1C29EFAEC500E979AC /* MutableSizeCollectionView.swift in Sources */,
 				1C07688A2ABDDA760003D4BF /* BrandCell.swift in Sources */,
 				1C0768782ABD66320003D4BF /* ItemFilterEndpoint.swift in Sources */,
@@ -1497,7 +1498,6 @@
 				1CA969232A9332860076731B /* CategoryListStrings.swift in Sources */,
 				1C8804A82AAD792400FB7844 /* LoginViewModel.swift in Sources */,
 				1C5CAAD229DB1AE30053F19A /* SceneDelegate.swift in Sources */,
-				1CBDA5472ADF9EBD000F1F7D /* TipAndContentViewModel.swift in Sources */,
 				1C0328DE2ADE4A24002E144E /* UserMadeCocktailListRepository.swift in Sources */,
 				1C58ECDB2A63C79C00AC2603 /* StoreHoldedIngredientUsecase.swift in Sources */,
 				1C0768872ABDC72D0003D4BF /* BaseInformationViewController.swift in Sources */,
@@ -1511,7 +1511,6 @@
 				1C16A86B2A13AD3D001640E2 /* CocktailRecommendViewController.swift in Sources */,
 				1CDAB42B2AD7DF0500E30181 /* AddItemUsecase.swift in Sources */,
 				1CDB85C02AD11E0800360852 /* BaseInformationDIContainer.swift in Sources */,
-				1CDB85B72AD037A200360852 /* TipAndContentViewController.swift in Sources */,
 				1C0768BF2AC97F860003D4BF /* BaseInformationViewModel.swift in Sources */,
 				1C82611D2ACA79050065ED2B /* TokenManager.swift in Sources */,
 				1CCE88E529E94AAF00D3E1D2 /* ToolModalVCCoordinator.swift in Sources */,
@@ -1522,6 +1521,7 @@
 				1CCE890229EBBCCA00D3E1D2 /* HTTPMethod.swift in Sources */,
 				1CDB85B02ACFD3C600360852 /* BaseBrandInformationViewController.swift in Sources */,
 				1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */,
+				1C93EDEE2AEA51F70080E33A /* MakeableCocktailListViewController.swift in Sources */,
 				1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */,
 				1CD75BA52AAD98C50040F085 /* SavedCocktailListDIContainer.swift in Sources */,
 				1C9BAB1129EFADA500E979AC /* LoadingView.swift in Sources */,

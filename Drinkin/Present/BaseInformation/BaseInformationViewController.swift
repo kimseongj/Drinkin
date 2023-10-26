@@ -64,6 +64,11 @@ final class BaseInformationViewController: UIViewController {
         viewModel?.fetchBaseDetail()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppCoordinator.tabBarController.tabBar.isHidden = true
+    }
+    
     private func configureBackgroundColor() {
         view.backgroundColor = .white
     }
