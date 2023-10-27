@@ -36,14 +36,14 @@ final class IntroductionView: UIView {
     }()
     
     lazy var baseCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
-        collectionView.register(RecipeItemCell.self, forCellWithReuseIdentifier: RecipeItemCell.identifier)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureBaseCompositionalLayout())
+        collectionView.register(RecipeBaseCell.self, forCellWithReuseIdentifier: RecipeBaseCell.identifier)
         
         return collectionView
     }()
     
     lazy var ingredientCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureItemCompositionalLayout())
         collectionView.register(RecipeItemCell.self, forCellWithReuseIdentifier: RecipeItemCell.identifier)
         
         return collectionView
@@ -134,7 +134,7 @@ final class IntroductionView: UIView {
             $0.top.equalTo(recipeTitleLabel.snp.bottom).offset(12)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview().offset(-40)
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -142,9 +142,15 @@ final class IntroductionView: UIView {
         baseCollectionView.delegate = self
     }
        
-    func updateCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
+    func updateBaseCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
         collectionView.snp.makeConstraints {
             $0.height.equalTo(cellCount * 70)
+        }
+    }
+    
+    func updateItemCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
+        collectionView.snp.makeConstraints {
+            $0.height.equalTo(cellCount * 50)
         }
     }
     
@@ -173,14 +179,32 @@ final class IntroductionView: UIView {
 }
 
 extension IntroductionView {
-    private func configureCompositionalIconLayout() -> UICollectionViewLayout {
+    private func configureBaseCompositionalLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .absolute(60))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
+                                                       subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+    }
+    
+    private func configureItemCompositionalLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(40))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                        subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -196,8 +220,7 @@ extension IntroductionView {
 extension IntroductionView {
     private func configureBaseDataSource() {
         self.baseDataSource = UICollectionViewDiffableDataSource<Section, DetailCategory> (collectionView: baseCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeItemCell.identifier, for: indexPath) as? RecipeItemCell else { return nil
-            }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeBaseCell.identifier, for: indexPath) as? RecipeBaseCell else { return nil }
             
             cell.check(hold: detailCategory.hold)
             cell.fill(detailCategory: detailCategory)
@@ -213,7 +236,7 @@ extension IntroductionView {
         snapshot.appendSections([.main])
         snapshot.appendItems(validDetailCategoryList)
         self.baseDataSource?.apply(snapshot, animatingDifferences: true)
-        updateCollectionViewHeight(collectionView: baseCollectionView, cellCount: validDetailCategoryList.count)
+        updateBaseCollectionViewHeight(collectionView: baseCollectionView, cellCount: validDetailCategoryList.count)
     }
 }
 
@@ -238,14 +261,16 @@ extension IntroductionView {
         snapshot.appendSections([.main])
         snapshot.appendItems(validDetailIngredientList)
         self.ingredientDataSource?.apply(snapshot, animatingDifferences: true)
-        updateCollectionViewHeight(collectionView: ingredientCollectionView, cellCount: validDetailIngredientList.count)
+        updateItemCollectionViewHeight(collectionView: ingredientCollectionView, cellCount: validDetailIngredientList.count)
     }
 }
 
 extension IntroductionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == baseCollectionView {
-            delegate?.pushBaseInformationVC()
+            delegate?.pushBaseInformationVC(baseID: 0)
+        } else {
+            
         }
     }
 }

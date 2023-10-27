@@ -1,17 +1,25 @@
 //
-//  ItemCell.swift
+//  RecipeBaseCell.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/08/03.
+//  Created by kimseongjun on 2023/10/26.
 //
 
 import UIKit
 import SnapKit
 
-final class RecipeItemCell: UICollectionViewCell {
+final class RecipeBaseCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.themeFont, size: 14)
+        
+        return label
+    }()
+    
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 12)
+        label.text = "ZXCZXVASDFGASD, zxcasdaseqwe, ASDASFGSDF"
         
         return label
     }()
@@ -31,15 +39,22 @@ final class RecipeItemCell: UICollectionViewCell {
         self.layer.borderWidth = 2
         self.layer.cornerRadius = 4
         contentView.addSubview(titleLabel)
+        contentView.addSubview(descriptionLabel)
         contentView.addSubview(checkImageView)
         
         titleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().offset(12)
             $0.leading.equalToSuperview().offset(16)
+        }
+        
+        descriptionLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview().offset(-12)
         }
         
         checkImageView.snp.makeConstraints {
             $0.height.width.equalTo(14)
+            $0.leading.equalTo(descriptionLabel.snp.trailing).offset(4)
             $0.trailing.equalToSuperview().offset(-16)
             $0.centerY.equalToSuperview()
         }
@@ -57,7 +72,7 @@ final class RecipeItemCell: UICollectionViewCell {
         }
     }
     
-    func fill(detailIgredient: DetailIngredient) {
-        titleLabel.text = detailIgredient.ingredientNameKo
+    func fill(detailCategory: DetailCategory) {
+        titleLabel.text = detailCategory.categoryNameKo
     }
 }
