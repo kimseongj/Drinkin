@@ -8,7 +8,7 @@
 import Foundation
 
 struct CocktailListEndpoint: EndpointMakeable {
-    var baseURL: String = "https://19fdd04c-1102-4b20-b18b-37ca653fa0da.mock.pstmn.io"
+    var baseURL: String = "https://9370ab1e-4838-4db0-85fb-8f3bb967155c.mock.pstmn.io"
     
     var path: String = "/cocktaillist"
     

@@ -8,7 +8,7 @@
 import Foundation
 
 struct BaseBrandInformationEndpoint: EndpointMakeable {
-    var baseURL: String = "https://41b9e562-5f0b-4f0c-98ab-3e657e0e7dea.mock.pstmn.io"
+    var baseURL: String = "https://9a068c10-f6c1-4433-a241-431d589c8390.mock.pstmn.io"
     
     var path: String = "/brand"
     
