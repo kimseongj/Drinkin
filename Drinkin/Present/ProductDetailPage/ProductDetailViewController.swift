@@ -25,7 +25,7 @@ class ProductDetailViewController: UIViewController {
     private let stackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 1
+        stackView.spacing = 40
         
         return stackView
     }()
@@ -107,13 +107,13 @@ class ProductDetailViewController: UIViewController {
         }
         
         markMadeCocktailButton.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(80)
+            $0.top.equalTo(stackView.snp.bottom).offset(40)
             $0.centerX.equalTo(view.frame.width * 0.25)
             $0.bottom.equalToSuperview().offset(-5)
         }
         
         bookmarkCocktailButton.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(80)
+            $0.top.equalTo(stackView.snp.bottom).offset(40)
             $0.centerX.equalTo(view.frame.width * 0.75)
             $0.bottom.equalToSuperview().offset(-5)
         }
