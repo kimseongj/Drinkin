@@ -216,7 +216,8 @@ extension AddItemViewController {
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: .absolute(84))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+        
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                          subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
