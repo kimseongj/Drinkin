@@ -11,6 +11,7 @@ final class BaseInformationDIContainer {
     struct Dependencies {
         let tokenManager: TokenManager
         let provider: Provider
+        let baseID: Int
     }
     
     let dependencies: Dependencies
@@ -22,8 +23,9 @@ final class BaseInformationDIContainer {
     
     func makeBaseDetailRepository() -> BaseDetailRepository {
         return DefaultBaseDetailRepository(tokenManager: dependencies.tokenManager,
-                                                     provider: dependencies.provider,
-                                                     endpoint: baseInformationEndpoint)
+                                           provider: dependencies.provider,
+                                           endpoint: baseInformationEndpoint,
+                                           baseID: dependencies.baseID)
     }
     
     func makeBaseInformationViewModel() -> BaseInformationViewModel {

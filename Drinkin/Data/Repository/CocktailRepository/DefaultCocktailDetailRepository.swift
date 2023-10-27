@@ -22,10 +22,8 @@ final class DefaultCocktailDetailRepository: CocktailDetailRepository {
     }
     
     func fetchCocktailDescription() -> AnyPublisher<CocktailDescription, Error> {
-        endpoint.insertPathParmeter(pathParameter: cocktailID.description)
+        //endpoint.insertPathParmeter(pathParameter: cocktailID.description)
         
         return provider.fetchData(endpoint: endpoint)
     }
 }
-
-

@@ -7,7 +7,7 @@
 import UIKit
 
 protocol ProductDetailVCDelegate: AnyObject {
-    func pushBaseInformationVC()
+    func pushBaseInformationVC(baseID: Int)
     func pushToolModalVC()
     func pushSkillModalVC()
     func pushGlassModalVC()
@@ -28,8 +28,8 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     }
     
     func start() {
-        let productDetailDIContainer = appDIContainer.makeProductDetailDIContainer()
-        let productDetailViewModel =  productDetailDIContainer.makeProductDetailViewModel(cocktailID: cocktailID)
+        let productDetailDIContainer = appDIContainer.makeProductDetailDIContainer(cocktailID: cocktailID)
+        let productDetailViewModel =  productDetailDIContainer.makeProductDetailViewModel()
         let productDetailViewController = productDetailDIContainer.makeProductDetailViewController(viewModel: productDetailViewModel)
         
         productDetailViewController.delegate = self
@@ -43,8 +43,8 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     
     func childDidFinish(_ child: Coordinator?) { }
     
-    func pushBaseInformationVC() {
-        let baseInformationVCCoordinator = BaseInformationVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+    func pushBaseInformationVC(baseID: Int) {
+        let baseInformationVCCoordinator = BaseInformationVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer, baseID: baseID)
         
         baseInformationVCCoordinator.parentCoordinator = self
         childCoordinators.append(baseInformationVCCoordinator)
