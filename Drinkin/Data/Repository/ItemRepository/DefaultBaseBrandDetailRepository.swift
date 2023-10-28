@@ -11,14 +11,14 @@ import Combine
 final class DefaultBaseBrandDetailRepository: BaseBrandDetailRepository {
     let tokenManager: TokenManager
     let provider: Provider
-    let brandID: Int
     var endpoint: EndpointMakeable
+    let brandID: Int
     
-    init(tokenManager: TokenManager, provider: Provider, brandID: Int, endpoint: EndpointMakeable) {
+    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable, brandID: Int) {
         self.tokenManager = tokenManager
         self.provider = provider
-        self.brandID = brandID
         self.endpoint = endpoint
+        self.brandID = brandID
     }
     
     func fetchBaseBrandDetail() -> AnyPublisher<BaseBrandDetail, Error> {

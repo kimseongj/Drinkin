@@ -207,7 +207,7 @@ extension AddItemViewController {
 }
 
 
-//MARK: - IngredientCollectionView Compositional Layout
+//MARK: - ItemCollectionView Compositional Layout
 extension AddItemViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -216,7 +216,7 @@ extension AddItemViewController {
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: .absolute(84))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
                                                          subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)

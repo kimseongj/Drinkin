@@ -11,6 +11,7 @@ final class ProductDetailDIContainer {
     struct Dependencies {
         let tokenManager: TokenManager
         let provider: Provider
+        let cocktailID: Int
     }
     
     let dependencies: Dependencies
@@ -21,15 +22,15 @@ final class ProductDetailDIContainer {
         self.dependencies = dependencies
     }
     
-    func makeCocktailDescriptionRepository(cocktailID: Int) -> CocktailDetailRepository {
+    func makeCocktailDescriptionRepository() -> CocktailDetailRepository {
         return DefaultCocktailDetailRepository(tokenManager: dependencies.tokenManager,
                                             provider: dependencies.provider,
                                             endpoint: productDetailEndpoint,
-                                            cocktailID: cocktailID)
+                                               cocktailID: dependencies.cocktailID)
     }
 
-    func makeProductDetailViewModel(cocktailID: Int) -> ProductDetailViewModel {
-        return DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository(cocktailID: cocktailID))
+    func makeProductDetailViewModel() -> ProductDetailViewModel {
+        return DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository())
     }
     
     func makeProductDetailViewController(viewModel: ProductDetailViewModel) -> ProductDetailViewController {

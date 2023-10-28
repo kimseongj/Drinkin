@@ -8,7 +8,7 @@
 import Foundation
 
 struct HoldedItemEndpoint: EndpointMakeable {
-    var baseURL: String = "https://8e298973-e1f6-45d5-8a0c-5590ab8b3ba2.mock.pstmn.io"
+    var baseURL: String = "https://7ebea399-2cd6-4172-8337-8a1dec11b1df.mock.pstmn.io"
     
     var path: String = "/holdeditem"
     

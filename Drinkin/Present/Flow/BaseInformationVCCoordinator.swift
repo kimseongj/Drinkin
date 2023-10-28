@@ -16,16 +16,16 @@ final class BaseInformationVCCoordinator: Coordinator, BaseInformationVCFlow {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
-    //var baseID: Int
+    let baseID: Int
     
-    init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
+    init(navigationController: UINavigationController, appDIContainer: AppDIContainer, baseID: Int) {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
-        //self.baseID = baseID
+        self.baseID = baseID
     }
     
     func start() {
-        let baseInformationDIContainer = appDIContainer.makeBaseInformationDIContainer()
+        let baseInformationDIContainer = appDIContainer.makeBaseInformationDIContainer(baseID: baseID)
         //let baseInformationViewModel =
         let baseInformationViewController = baseInformationDIContainer.makeBaseInformationViewController()
         baseInformationViewController.flowDelegate = self

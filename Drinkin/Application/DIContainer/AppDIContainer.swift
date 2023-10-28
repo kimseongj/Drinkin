@@ -23,14 +23,14 @@ final class AppDIContainer {
         return CocktailRecommendDIContainer(dependencies: dependencies)
     }
     
-    func makeProductDetailDIContainer() -> ProductDetailDIContainer {
-        let dependencies = ProductDetailDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
+    func makeProductDetailDIContainer(cocktailID: Int) -> ProductDetailDIContainer {
+        let dependencies = ProductDetailDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, cocktailID: cocktailID)
         
         return ProductDetailDIContainer(dependencies: dependencies)
     }
     
-    func makeBaseInformationDIContainer() -> BaseInformationDIContainer {
-        let dependencies = BaseInformationDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
+    func makeBaseInformationDIContainer(baseID: Int) -> BaseInformationDIContainer {
+        let dependencies = BaseInformationDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, baseID: baseID)
         
         return BaseInformationDIContainer(dependencies: dependencies)
     }

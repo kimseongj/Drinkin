@@ -1,13 +1,13 @@
 //
-//  ToolModalViewController.swift
+//  GlassModalViewController.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/06.
+//  Created by kimseongjun on 2023/10/26.
 //
 
 import UIKit
 
-class ToolModalViewController: UIViewController {
+class GlassModalViewController: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -40,6 +40,21 @@ class ToolModalViewController: UIViewController {
         return label
     }()
     
+    private let capacityLabel: UILabel = {
+        let label = UILabel()
+        label.text = "용량"
+        label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
+        
+        return label
+    }()
+    
+    private let capacityDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 15)
+        
+        return label
+    }()
+    
     private let purchaseInformationLabel: UILabel = {
         let label = UILabel()
         label.text = "구매처"
@@ -65,6 +80,11 @@ class ToolModalViewController: UIViewController {
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
+        view.addSubview(informationLabel)
+        view.addSubview(capacityLabel)
+        view.addSubview(capacityDescriptionLabel)
+        view.addSubview(purchaseInformationLabel)
+        view.addSubview(purchaseLinkLabel)
         
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(40)
@@ -82,7 +102,7 @@ class ToolModalViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-16)
         }
     }
-    
+
     private func fill() {
         
     }

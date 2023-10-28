@@ -23,9 +23,9 @@ final class BaseBrandInformationDIContainer {
     
     func makeBaseBrandDetailRepository() -> BaseBrandDetailRepository {
         return DefaultBaseBrandDetailRepository(tokenManager: dependencies.tokenManager,
-                                           provider: dependencies.provider,
-                                                brandID: dependencies.brandID,
-                                           endpoint: baseBrandInformationEndpoint)
+                                                provider: dependencies.provider,
+                                                endpoint: baseBrandInformationEndpoint,
+                                                brandID: dependencies.brandID)
     }
     
     func makeBaseBrandInformationViewModel() -> BaseBrandInformationViewModel {

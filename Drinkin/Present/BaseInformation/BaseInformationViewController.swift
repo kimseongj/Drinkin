@@ -39,7 +39,7 @@ final class BaseInformationViewController: UIViewController {
     }()
     
     private lazy var baseBrandCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalIconLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
         collectionView.register(BrandCell.self, forCellWithReuseIdentifier: BrandCell.identifier)
         
         return collectionView
@@ -62,6 +62,11 @@ final class BaseInformationViewController: UIViewController {
         configureBaseBrandCollectionView()
         binding()
         viewModel?.fetchBaseDetail()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppCoordinator.tabBarController.tabBar.isHidden = true
     }
     
     private func configureBackgroundColor() {
@@ -121,7 +126,7 @@ extension BaseInformationViewController: UICollectionViewDelegate {
 
 //MARK: - CompositionalLayout
 extension BaseInformationViewController {
-    private func configureCompositionalIconLayout() -> UICollectionViewLayout {
+    private func configureCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             

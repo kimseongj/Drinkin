@@ -12,6 +12,7 @@ class AppCoordinator: NSObject, Coordinator {
     let window: UIWindow?
     let appDIContainer: AppDIContainer
     static var tabBarHeight: CGFloat = 0
+    static let tabBarController = UITabBarController()
     
     init(_ window: UIWindow?, appDIContainer: AppDIContainer) {
         self.window = window
@@ -26,7 +27,6 @@ class AppCoordinator: NSObject, Coordinator {
     }
     
     func configureTabBarController() -> UITabBarController {
-        let tabBarController = UITabBarController()
         let selectedTextAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
         
         UITabBar.appearance().unselectedItemTintColor = UIColor.black
@@ -56,11 +56,11 @@ class AppCoordinator: NSObject, Coordinator {
         let homeBarViewController = homeBarVCCoordinator.startPush()
         homeBarViewController.tabBarItem = homeBarTabBarItem
         
-        tabBarController.viewControllers = [mainViewController,
+        AppCoordinator.tabBarController.viewControllers = [mainViewController,
                                             cocktailViewController,
                                             homeBarViewController]
         
-        return tabBarController
+        return AppCoordinator.tabBarController
     }
     
     func childDidFinish(_ child: Coordinator?) { }
