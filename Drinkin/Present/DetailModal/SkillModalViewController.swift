@@ -7,7 +7,9 @@
 
 import UIKit
 
-class SkillModalViewController: UIViewController {
+final class SkillModalViewController: UIViewController {
+    private var viewModel: SkillModalViewModel
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "스푼"
@@ -25,25 +27,38 @@ class SkillModalViewController: UIViewController {
         return label
     }()
     
+    init(viewModel: SkillModalViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        configureBackgroundColor()
         configureUI()
+    }
+    
+    private func configureBackgroundColor() {
+        view.backgroundColor = .white
     }
     
     private func configureUI() {
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
-            make.centerX.equalToSuperview()
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(40)
+            $0.centerX.equalToSuperview()
         }
         
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+        descriptionLabel.snp.makeConstraints { 
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
         }
     }
 

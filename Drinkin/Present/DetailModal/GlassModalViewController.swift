@@ -7,7 +7,9 @@
 
 import UIKit
 
-class GlassModalViewController: UIViewController {
+final class GlassModalViewController: UIViewController {
+    private var viewModel: GlassModalViewModel
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -55,7 +57,7 @@ class GlassModalViewController: UIViewController {
         return label
     }()
     
-    private let purchaseInformationLabel: UILabel = {
+    private let purchaseLabel: UILabel = {
         let label = UILabel()
         label.text = "구매처"
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
@@ -70,10 +72,23 @@ class GlassModalViewController: UIViewController {
         return label
     }()
     
+    init(viewModel: GlassModalViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        configureBackgroundColor()
         configureUI()
+    }
+    
+    private func configureBackgroundColor() {
+        view.backgroundColor = .white
     }
     
     private func configureUI() {
@@ -83,7 +98,7 @@ class GlassModalViewController: UIViewController {
         view.addSubview(informationLabel)
         view.addSubview(capacityLabel)
         view.addSubview(capacityDescriptionLabel)
-        view.addSubview(purchaseInformationLabel)
+        view.addSubview(purchaseLabel)
         view.addSubview(purchaseLinkLabel)
         
         imageView.snp.makeConstraints { make in
@@ -100,6 +115,32 @@ class GlassModalViewController: UIViewController {
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
+        }
+        
+        informationLabel.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        capacityLabel.snp.makeConstraints {
+            $0.top.equalTo(informationLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        capacityDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(capacityLabel.snp.top)
+            $0.leading.equalTo(capacityLabel.snp.trailing).offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+        }
+        
+        purchaseLabel.snp.makeConstraints {
+            $0.top.equalTo(capacityLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        purchaseLinkLabel.snp.makeConstraints {
+            $0.top.equalTo(purchaseLabel.snp.top)
+            $0.leading.equalTo(purchaseLabel.snp.trailing).offset(16)
         }
     }
 
