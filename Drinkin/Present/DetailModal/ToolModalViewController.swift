@@ -71,6 +71,11 @@ final class ToolModalViewController: UIViewController {
         super.viewDidLoad()
         configureBackgroundColor()
         configureUI()
+        viewModel.fetchToolDetail { [weak self] in
+            guard let self = self else { return }
+            
+            self.fill(toolDetail: $0)
+        }
     }
     
     private func configureBackgroundColor() {
@@ -88,6 +93,7 @@ final class ToolModalViewController: UIViewController {
         imageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(40)
             $0.centerX.equalToSuperview()
+            $0.size.equalTo(100)
         }
         
         titleLabel.snp.makeConstraints {
@@ -117,7 +123,12 @@ final class ToolModalViewController: UIViewController {
         }
     }
     
-    private func fill() {
+    private func fill(toolDetail: ToolDetailResult) {
+        guard let imageURL = URL(string: toolDetail.imageURI) else { return }
         
+        imageView.load(url: imageURL)
+        titleLabel.text = toolDetail.toolName
+        descriptionLabel.text = toolDetail.description
+        purchaseLinkLabel.text = toolDetail.purchaseLink
     }
 }

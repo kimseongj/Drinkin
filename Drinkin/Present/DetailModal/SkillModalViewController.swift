@@ -12,7 +12,6 @@ final class SkillModalViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "스푼"
         label.font = UIFont(name: FontStrings.themeFont, size: 24)
         
         return label
@@ -22,7 +21,6 @@ final class SkillModalViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
-        label.text = "바 스푼은 재료를 저을 때 사용한다. 일반 스푼과 다르게, 더 기다랗고 젓는 데 도움이 되는 꼬인 줄기 부분이 있다."
         
         return label
     }()
@@ -40,6 +38,11 @@ final class SkillModalViewController: UIViewController {
         super.viewDidLoad()
         configureBackgroundColor()
         configureUI()
+        viewModel.fetchSkillDetail { [weak self] in
+            guard let self = self else { return }
+            
+            self.fill(skillDetail: $0)
+        }
     }
     
     private func configureBackgroundColor() {
@@ -62,7 +65,8 @@ final class SkillModalViewController: UIViewController {
         }
     }
 
-    private func fill() {
-        
+    private func fill(skillDetail: SkillDetailResult) {
+        titleLabel.text = skillDetail.skillName
+        descriptionLabel.text = skillDetail.description
     }
 }
