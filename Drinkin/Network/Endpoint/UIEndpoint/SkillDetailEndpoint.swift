@@ -12,7 +12,7 @@ struct SkillDetailEndpoint: EndpointMakeable {
     
     var path: String = "/skill"
     
-    var method: String = HTTPMethod.post.rawValue
+    var method: String = HTTPMethod.get.rawValue
     
     var queryItems: [URLQueryItem] = []
     

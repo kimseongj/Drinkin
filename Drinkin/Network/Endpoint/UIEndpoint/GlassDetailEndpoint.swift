@@ -12,7 +12,7 @@ struct GlassDetailEndpoint: EndpointMakeable {
     
     var path: String = "/glass"
     
-    var method: String = HTTPMethod.post.rawValue
+    var method: String = HTTPMethod.get.rawValue
     
     var queryItems: [URLQueryItem] = []
     
