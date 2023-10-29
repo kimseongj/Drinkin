@@ -11,13 +11,18 @@ class GlassModalVCCoordinator: Coordinator {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    let glassID: Int
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, glassID: Int) {
         self.navigationController = navigationController
+        self.glassID = glassID
     }
     
     func start() {
-        let vc = ToolModalViewController()
+        let repository: GlassDetailRepository = DefaultGlassDetailRepository(glassID: glassID)
+        let viewModel: GlassModalViewModel = DefaultGlassModalViewModel(glassDetailRepository: repository)
+        let vc = GlassModalViewController(viewModel: viewModel)
+        
         navigationController.present(vc, animated: true)
     }
     

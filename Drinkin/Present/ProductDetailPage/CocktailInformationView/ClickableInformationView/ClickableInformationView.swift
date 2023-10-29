@@ -92,7 +92,16 @@ final class ClickableInformationView: UIView {
 //MARK: - InformationCollectionView Delegate
 extension ClickableInformationView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.pushSkillModalVC()
+        switch title {
+        case InformationStrings.tool:
+            delegate?.pushToolModalVC(toolID: indexPath.row)
+        case InformationStrings.skill:
+            delegate?.pushSkillModalVC(skillID: indexPath.row)
+        case InformationStrings.glass:
+            delegate?.pushGlassModalVC(glassID: indexPath.row)
+        default:
+            return
+        }
     }
 }
 

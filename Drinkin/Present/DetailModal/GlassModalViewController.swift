@@ -7,7 +7,9 @@
 
 import UIKit
 
-class GlassModalViewController: UIViewController {
+final class GlassModalViewController: UIViewController {
+    private var viewModel: GlassModalViewModel
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -17,7 +19,6 @@ class GlassModalViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "스푼"
         label.font = UIFont(name: FontStrings.themeFont, size: 24)
         
         return label
@@ -27,7 +28,6 @@ class GlassModalViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
-        label.text = "바 스푼은 재료를 저을 때 사용한다. 일반 스푼과 다르게, 더 기다랗고 젓는 데 도움이 되는 꼬인 줄기 부분이 있다."
         
         return label
     }()
@@ -44,6 +44,7 @@ class GlassModalViewController: UIViewController {
         let label = UILabel()
         label.text = "용량"
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
+        label.textAlignment = .left
         
         return label
     }()
@@ -55,7 +56,7 @@ class GlassModalViewController: UIViewController {
         return label
     }()
     
-    private let purchaseInformationLabel: UILabel = {
+    private let purchaseLabel: UILabel = {
         let label = UILabel()
         label.text = "구매처"
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
@@ -70,10 +71,28 @@ class GlassModalViewController: UIViewController {
         return label
     }()
     
+    init(viewModel: GlassModalViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        configureBackgroundColor()
         configureUI()
+        viewModel.fetchGlassDetail { [weak self] in
+            guard let self = self else { return }
+            
+            self.fill(glassDetail: $0)
+        }
+    }
+    
+    private func configureBackgroundColor() {
+        view.backgroundColor = .white
     }
     
     private func configureUI() {
@@ -83,27 +102,60 @@ class GlassModalViewController: UIViewController {
         view.addSubview(informationLabel)
         view.addSubview(capacityLabel)
         view.addSubview(capacityDescriptionLabel)
-        view.addSubview(purchaseInformationLabel)
+        view.addSubview(purchaseLabel)
         view.addSubview(purchaseLinkLabel)
         
-        imageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
-            make.centerX.equalToSuperview()
+        imageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(40)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(100)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(12)
-            make.centerX.equalToSuperview()
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(imageView.snp.bottom).offset(12)
+            $0.centerX.equalToSuperview()
         }
         
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+        }
+        
+        informationLabel.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        capacityLabel.snp.makeConstraints {
+            $0.top.equalTo(informationLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        capacityDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(capacityLabel.snp.top)
+            $0.leading.equalTo(capacityLabel.snp.trailing).offset(16)
+        }
+        
+        purchaseLabel.snp.makeConstraints {
+            $0.top.equalTo(capacityLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        
+        purchaseLinkLabel.snp.makeConstraints {
+            $0.top.equalTo(purchaseLabel.snp.top)
+            $0.leading.equalTo(purchaseLabel.snp.trailing).offset(16)
         }
     }
 
-    private func fill() {
+    private func fill(glassDetail: GlassDetailResult) {
+        guard let imageURL = URL(string: glassDetail.imageURI) else { return }
         
+        imageView.load(url: imageURL)
+        titleLabel.text = glassDetail.glassName
+        descriptionLabel.text = glassDetail.description
+        capacityDescriptionLabel.text = glassDetail.capacity
+        purchaseLinkLabel.text = glassDetail.purchaseLink
     }
 }
+

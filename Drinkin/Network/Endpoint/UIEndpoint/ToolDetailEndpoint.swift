@@ -12,7 +12,7 @@ struct ToolDetailEndpoint: EndpointMakeable {
     
     var path: String = "/tool"
     
-    var method: String = HTTPMethod.post.rawValue
+    var method: String = HTTPMethod.get.rawValue
     
     var queryItems: [URLQueryItem] = []
     

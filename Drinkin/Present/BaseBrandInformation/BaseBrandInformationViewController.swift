@@ -73,6 +73,19 @@ final class BaseBrandInformationViewController: UIViewController {
         return label
     }()
     
+    private let recommendCocktailButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("이 재료를 사용하는 칵테일 보기", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = .black
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1).cgColor
+        
+        return button
+    }()
+    
     init(viewModel: BaseBrandInformationViewModel?) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -109,6 +122,7 @@ final class BaseBrandInformationViewController: UIViewController {
         view.addSubview(classificationDescriptionLabel)
         view.addSubview(abvLabel)
         view.addSubview(abvDescriptionLabel)
+        view.addSubview(recommendCocktailButton)
         
         brandImageView.snp.makeConstraints {
             $0.size.equalTo(brandImageSize)
@@ -144,6 +158,12 @@ final class BaseBrandInformationViewController: UIViewController {
         abvDescriptionLabel.snp.makeConstraints {
             $0.top.equalTo(abvLabel.snp.top)
             $0.leading.equalTo(abvLabel.snp.trailing).offset(16)
+        }
+        
+        recommendCocktailButton.snp.makeConstraints {
+            $0.height.equalTo(52)
+            $0.leading.trailing.bottom.equalTo(safeArea)
+        
         }
     }
     

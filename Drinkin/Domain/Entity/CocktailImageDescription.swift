@@ -12,20 +12,19 @@ struct CocktailImageDescription: Codable {
     let previewDescriptionList: [ImageDescription]
 
     enum CodingKeys: String, CodingKey {
-        case previewDescriptionList = "preview_description_list"
+        case previewDescriptionList = "results"
     }
 }
 
 // MARK: - PreviewDescriptionList
 struct ImageDescription: Codable, Hashable {
     let id: Int
-    let category, cocktailNameKo, cocktailNameEn: String
+    let category, cocktailNameKo: String
     let imageURI: String
 
     enum CodingKeys: String, CodingKey {
         case id, category
         case cocktailNameKo = "cocktail_name_ko"
-        case cocktailNameEn = "cocktail_name_en"
         case imageURI = "image_uri"
     }
 }

@@ -8,10 +8,10 @@
 import Foundation
 
 struct AccessTokenConversionEndpoint: EndpointMakeable {
-    var baseURL: String = "https://ed41530a-7b99-47dd-99eb-54ef60188c0f.mock.pstmn.io"
-
-    var path: String = "/firstlogin"
-    
+    var baseURL: String = "http://13.209.22.43:8000"
+// "https://ed41530a-7b99-47dd-99eb-54ef60188c0f.mock.pstmn.io"
+    var path: String = "/v1/kakao-login"
+    // /firstlogin
     var method: String = HTTPMethod.post.rawValue
     
     var queryItems: [URLQueryItem] = []

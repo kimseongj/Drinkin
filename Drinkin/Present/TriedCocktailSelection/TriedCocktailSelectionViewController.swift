@@ -12,7 +12,7 @@ import Combine
 final class TriedCocktailSelectionViewController: UIViewController {
     var delegate: TriedCocktailSelectionVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
-    private var viewModel: TriedCocktailSelectionViewModel?
+    private var viewModel: TriedCocktailSelectionViewModel
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription>?
    
     
@@ -88,7 +88,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return completeSelectionButton
     }()
     
-    init(viewModel: TriedCocktailSelectionViewModel?) {
+    init(viewModel: TriedCocktailSelectionViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -107,7 +107,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         renewCompleteSelectionButton()
         configureCocktailDataSource()
         binding()
-        viewModel?.fetchCocktailPreviewDescription()
+        viewModel.fetchCocktailPreviewDescription()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -209,14 +209,14 @@ final class TriedCocktailSelectionViewController: UIViewController {
 //MARK: - CategoryDataSource
 extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let categoryListCount = viewModel?.categoryList.count else { return 0 }
+        let categoryListCount = viewModel.categoryList.count
         
         return categoryListCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-        guard let categoryListName = viewModel?.categoryList[indexPath.row] else { return  UICollectionViewCell() }
+        let categoryListName = viewModel.categoryList[indexPath.row] //else { return  UICollectionViewCell() }
         
         if categoryListName == CategoryListStrings.whole {
             cell.isSelected = true
@@ -232,16 +232,16 @@ extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
 extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
-            guard let currentCategoryName = viewModel?.categoryList[indexPath.row] else { return }
-            viewModel?.currentCategoryName = currentCategoryName
-            viewModel?.filterCocktailList()
+            let currentCategoryName = viewModel.categoryList[indexPath.row]
+            viewModel.currentCategoryName = currentCategoryName
+            viewModel.filterCocktailList()
         } else {
             
             if let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell {
                 cell.presentSelected()
             }
-            viewModel?.selectCocktail(index: indexPath.row)
-            renewCompleteSelectionButton(isCellsSelected: viewModel?.checkCocktailSelected() ?? false )
+            viewModel.selectCocktail(index: indexPath.row)
+            renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())
         }
     }
     
@@ -249,8 +249,8 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
         if collectionView == cocktailCollectionView {
             guard let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell else { return }
             
-            viewModel?.deselectCocktail(index: indexPath.row)
-            renewCompleteSelectionButton(isCellsSelected: viewModel?.checkCocktailSelected() ?? false )
+            viewModel.deselectCocktail(index: indexPath.row)
+            renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())
             cell.presentDeselected()
         }
     }
@@ -289,7 +289,7 @@ extension TriedCocktailSelectionViewController {
 //MARK: - Binding
 extension TriedCocktailSelectionViewController {
     private func binding() {
-        guard let viewModel else { return }
+        //guard let viewModel else { return }
         viewModel.filteredSelectableCocktailListPublisher.receive(on: RunLoop.main).sink {
             self.applySnapshot(previewDescriptionList: $0)
         }.store(in: &cancelBag)

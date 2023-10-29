@@ -10,7 +10,7 @@ import Foundation
 //MARK: - SelectablePreviewDescription
 struct SelectablePreviewDescription: Hashable {
     let id: Int
-    let category, cocktailNameKo, cocktailNameEn: String
+    let category, cocktailNameKo: String
     let imageURI: String
     var isSelected: Bool = false
 }

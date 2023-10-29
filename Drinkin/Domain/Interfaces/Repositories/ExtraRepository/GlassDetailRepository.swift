@@ -5,8 +5,8 @@
 //  Created by kimseongjun on 2023/10/27.
 //
 
-import Foundation
+import Combine
 
 protocol GlassDetailRepository {
-    func fetchGlassDetail()
+    func fetchGlassDetail() -> AnyPublisher<GlassDetail, Error>
 }

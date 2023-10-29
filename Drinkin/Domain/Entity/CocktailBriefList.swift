@@ -25,7 +25,7 @@ struct CocktailBrief: Codable, Hashable {
     let description: String
     let ingredientList: [IngredientList]
     let garnishList: [GarnishList]
-    let categoryList: [CategoryList]
+    let baseList: [BaseList]
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,17 +37,17 @@ struct CocktailBrief: Codable, Hashable {
         case description
         case ingredientList = "ingredient_list"
         case garnishList = "garnish_list"
-        case categoryList = "category_list"
+        case baseList = "base_list"
     }
 }
 
 // MARK: - CategoryList
-struct CategoryList: Codable, Hashable {
-    let categoryNameKo: String
+struct BaseList: Codable, Hashable {
+    let baseNameKo: String
     let hold: Bool
 
     enum CodingKeys: String, CodingKey {
-        case categoryNameKo = "category_name_ko"
+        case baseNameKo = "base_name_ko"
         case hold
     }
 }
@@ -73,3 +73,4 @@ struct IngredientList: Codable, Hashable {
         case hold
     }
 }
+
