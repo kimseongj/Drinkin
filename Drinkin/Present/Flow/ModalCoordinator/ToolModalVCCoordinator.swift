@@ -11,13 +11,18 @@ class ToolModalVCCoordinator: Coordinator {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    let toolID: Int
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, toolID: Int) {
         self.navigationController = navigationController
+        self.toolID = toolID
     }
     
     func start() {
-        let vc = ToolModalViewController()
+        let repository: ToolDetailRepository = DefaultToolDetailRepository(toolID: toolID)
+        let viewModel: ToolModalViewModel = DefaultToolModalViewModel(toolDetailRepository: repository)
+        let vc = ToolModalViewController(viewModel: viewModel)
+        
         navigationController.present(vc, animated: true)
     }
     

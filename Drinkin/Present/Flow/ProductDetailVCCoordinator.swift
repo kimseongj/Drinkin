@@ -8,9 +8,9 @@ import UIKit
 
 protocol ProductDetailVCDelegate: AnyObject {
     func pushBaseInformationVC(baseID: Int)
-    func pushToolModalVC()
-    func pushSkillModalVC()
-    func pushGlassModalVC()
+    func pushToolModalVC(toolID: Int)
+    func pushSkillModalVC(skillID: Int)
+    func pushGlassModalVC(glassID: Int)
     func didFinishProductDetailVC()
 }
 
@@ -51,24 +51,24 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
         baseInformationVCCoordinator.start()
     }
     
-    func pushToolModalVC() {
-        let toolModalVCCoordinator = ToolModalVCCoordinator(navigationController: navigationController)
+    func pushToolModalVC(toolID: Int) {
+        let toolModalVCCoordinator = ToolModalVCCoordinator(navigationController: navigationController, toolID: toolID)
         
         toolModalVCCoordinator.parentCoordinator = self
         childCoordinators.append(toolModalVCCoordinator)
         toolModalVCCoordinator.start()
     }
     
-    func pushSkillModalVC() {
-        let buildModalVCCoordinator = SkillModalVCCoordinator(navigationController: navigationController)
+    func pushSkillModalVC(skillID: Int) {
+        let buildModalVCCoordinator = SkillModalVCCoordinator(navigationController: navigationController, skillID: skillID)
         
         buildModalVCCoordinator.parentCoordinator = self
         childCoordinators.append(buildModalVCCoordinator)
         buildModalVCCoordinator.start()
     }
     
-    func pushGlassModalVC() {
-        let glassModalVCCoordinator = GlassModalVCCoordinator(navigationController: navigationController)
+    func pushGlassModalVC(glassID: Int) {
+        let glassModalVCCoordinator = GlassModalVCCoordinator(navigationController: navigationController, glassID: glassID)
         
         glassModalVCCoordinator.parentCoordinator = self
         childCoordinators.append(glassModalVCCoordinator)

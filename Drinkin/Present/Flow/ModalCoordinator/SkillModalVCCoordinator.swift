@@ -11,13 +11,18 @@ class SkillModalVCCoordinator: Coordinator {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
+    let skillID: Int
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, skillID: Int) {
         self.navigationController = navigationController
+        self.skillID = skillID
     }
     
     func start() {
-        let vc = ToolModalViewController()
+        let repository: SkillDetailRepository = DefaultSkillDetailRepository(skillID: skillID)
+        let viewModel: SkillModalViewModel = DefaultSkillModalViewModel(skillDetailRepository: repository)
+        let vc = SkillModalViewController(viewModel: viewModel)
+        
         navigationController.present(vc, animated: true)
     }
     
