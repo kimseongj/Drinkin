@@ -68,7 +68,6 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
             let convertedPreviewDescription = SelectablePreviewDescription(id: $0.id,
                                           category: $0.category,
                                           cocktailNameKo: $0.cocktailNameKo,
-                                          cocktailNameEn: $0.cocktailNameEn,
                                           imageURI: $0.imageURI
                                           )
             selectableCocktailList.append(convertedPreviewDescription)

@@ -90,10 +90,10 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         
         switch title {
         case InformationStrings.base:
-            if validBriefDescription.categoryList.count == 0 {
+            if validBriefDescription.baseList.count == 0 {
                 return 1
             } else {
-                return validBriefDescription.categoryList.count
+                return validBriefDescription.baseList.count
             }
         case InformationStrings.ingredient:
             if validBriefDescription.ingredientList.count == 0 {
@@ -119,10 +119,10 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
         
         switch title {
         case InformationStrings.base:
-            if validBriefDescription.categoryList.count == 0 {
+            if validBriefDescription.baseList.count == 0 {
                 cell.makeEmptyCell()
             } else {
-                cell.fill(with: validBriefDescription.categoryList[indexPath.row].categoryNameKo) 
+                cell.fill(with: validBriefDescription.baseList[indexPath.row].baseNameKo) 
                 cell.makeHoldedItemCell()
             }
         case InformationStrings.ingredient:

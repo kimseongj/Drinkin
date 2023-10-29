@@ -125,6 +125,7 @@
 		1C8713612AED031100583A9F /* ToolModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8713602AED031100583A9F /* ToolModalViewModel.swift */; };
 		1C8713632AED032100583A9F /* SkillModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8713622AED032100583A9F /* SkillModalViewModel.swift */; };
 		1C8713652AED032D00583A9F /* GlassModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8713642AED032D00583A9F /* GlassModalViewModel.swift */; };
+		1C8713682AEE439700583A9F /* ItemInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8713672AEE439700583A9F /* ItemInformationViewController.swift */; };
 		1C8804A82AAD792400FB7844 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8804A72AAD792400FB7844 /* LoginViewModel.swift */; };
 		1C93EDE92AEA509B0080E33A /* SkillModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C93EDE82AEA509B0080E33A /* SkillModalViewController.swift */; };
 		1C93EDEB2AEA50C50080E33A /* GlassModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C93EDEA2AEA50C50080E33A /* GlassModalViewController.swift */; };
@@ -342,6 +343,7 @@
 		1C8713602AED031100583A9F /* ToolModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolModalViewModel.swift; sourceTree = "<group>"; };
 		1C8713622AED032100583A9F /* SkillModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalViewModel.swift; sourceTree = "<group>"; };
 		1C8713642AED032D00583A9F /* GlassModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewModel.swift; sourceTree = "<group>"; };
+		1C8713672AEE439700583A9F /* ItemInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInformationViewController.swift; sourceTree = "<group>"; };
 		1C8804A72AAD792400FB7844 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		1C93EDE82AEA509B0080E33A /* SkillModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalViewController.swift; sourceTree = "<group>"; };
 		1C93EDEA2AEA50C50080E33A /* GlassModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewController.swift; sourceTree = "<group>"; };
@@ -892,6 +894,7 @@
 				1C0768812ABD6C020003D4BF /* LoginSetting */,
 				1C0768882ABDDA490003D4BF /* BaseInformation */,
 				1CDB85B12ACFD3CA00360852 /* BaseBrandInformation */,
+				1C8713662AEE437800583A9F /* ItemInformation */,
 				1C93EDEC2AEA51EA0080E33A /* MakeableCocktailList */,
 			);
 			path = Present;
@@ -989,6 +992,14 @@
 				1C87135E2AEBCF0A00583A9F /* GlassDetail.swift */,
 			);
 			path = ExtraEntity;
+			sourceTree = "<group>";
+		};
+		1C8713662AEE437800583A9F /* ItemInformation */ = {
+			isa = PBXGroup;
+			children = (
+				1C8713672AEE439700583A9F /* ItemInformationViewController.swift */,
+			);
+			path = ItemInformation;
 			sourceTree = "<group>";
 		};
 		1C93EDEC2AEA51EA0080E33A /* MakeableCocktailList */ = {
@@ -1448,6 +1459,7 @@
 				1C0768922ABEFCCD0003D4BF /* UIViewController + Extension.swift in Sources */,
 				1C0328E42ADE5078002E144E /* CocktailDetailRepository.swift in Sources */,
 				1CA969302AA044C70076731B /* HoldedItemCell.swift in Sources */,
+				1C8713682AEE439700583A9F /* ItemInformationViewController.swift in Sources */,
 				1CCE88E329E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift in Sources */,
 				1CCE88EF29EBAB7900D3E1D2 /* ProductDetailViewController.swift in Sources */,
 				1CA969212A91D99E0076731B /* SelectTriedCocktailUsecase.swift in Sources */,
