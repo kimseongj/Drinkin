@@ -6,16 +6,20 @@
 //
 
 import Foundation
+import Combine
 
 final class DefaultToolDetailRepository: ToolDetailRepository {
     let toolID: Int
+    let provider = Provider()
     var endpoint: EndpointMakeable = ToolDetailEndpoint()
     
     init(toolID: Int) {
         self.toolID = toolID
     }
     
-    func fetchToolDetail() {
+    func fetchToolDetail() -> AnyPublisher<ToolDetail, Error> {
         //endpoint.insertQuery(queryParameter: "id", queryValue: toolID.description)
+        
+        return provider.fetchData(endpoint: endpoint).eraseToAnyPublisher()
     }
 }
