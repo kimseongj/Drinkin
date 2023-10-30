@@ -20,6 +20,7 @@ struct CocktailBriefList: Codable {
 struct CocktailBrief: Codable, Hashable {
     let id: Int
     let cocktailNameKo: String
+    let category: String
     let imageURI: String
     let levelScore, abvScore, sugarContentScore: Int
     let description: String
@@ -30,6 +31,7 @@ struct CocktailBrief: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case id
         case cocktailNameKo = "cocktail_name_ko"
+        case category
         case imageURI = "image_uri"
         case levelScore = "level_score"
         case abvScore = "abv_score"
