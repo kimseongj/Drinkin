@@ -10,8 +10,10 @@ import SnapKit
 
 final class IntroductionView: UIView {
     private weak var delegate: ProductDetailVCDelegate?
-    private var baseDataSource: UICollectionViewDiffableDataSource<Section, DetailCategory>?
+    private var baseDataSource: UICollectionViewDiffableDataSource<Section, DetailBase>?
     private var ingredientDataSource: UICollectionViewDiffableDataSource<Section, DetailIngredient>?
+    private var ingredientIDList: [Int] = []
+    private var baseIDList: [Int] = []
     
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
@@ -165,6 +167,9 @@ final class IntroductionView: UIView {
         cocktailTitleLabel.text = cocktailDesription.cocktailNameKo
         cocktailTDescriptionLabel.text = cocktailDesription.description
         fillRecipeStackView(with: cocktailDesription.recipeList)
+        
+        baseIDList = cocktailDesription.baseList.map { $0.id }
+        ingredientIDList = cocktailDesription.ingredientList.map { $0.id }
     }
     
     func fillRecipeStackView(with recipeList: [String]) {
@@ -219,7 +224,7 @@ extension IntroductionView {
 //MARK: - BaseDiffableDataSource
 extension IntroductionView {
     private func configureBaseDataSource() {
-        self.baseDataSource = UICollectionViewDiffableDataSource<Section, DetailCategory> (collectionView: baseCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
+        self.baseDataSource = UICollectionViewDiffableDataSource<Section, DetailBase> (collectionView: baseCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeBaseCell.identifier, for: indexPath) as? RecipeBaseCell else { return nil }
             
             cell.check(hold: detailCategory.hold)
@@ -229,10 +234,10 @@ extension IntroductionView {
         }
     }
     
-    func applybaseSnapshot(detailCategoryList: [DetailCategory]?) {
+    func applybaseSnapshot(detailCategoryList: [DetailBase]?) {
         guard let validDetailCategoryList = detailCategoryList else { return }
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailCategory>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailBase>()
         snapshot.appendSections([.main])
         snapshot.appendItems(validDetailCategoryList)
         self.baseDataSource?.apply(snapshot, animatingDifferences: true)
@@ -268,7 +273,7 @@ extension IntroductionView {
 extension IntroductionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == baseCollectionView {
-            delegate?.pushBaseInformationVC(baseID: 0)
+            delegate?.pushBaseInformationVC(baseID: baseIDList[indexPath.row])
         } else {
             
         }

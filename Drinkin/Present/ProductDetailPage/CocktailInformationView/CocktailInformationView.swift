@@ -89,8 +89,8 @@ final class CocktailInformationView: UIView {
         levelView.fill(with: cocktailDescription.level)
         sugarContentView.fill(with: cocktailDescription.sugarContent)
         
-        toolView.applySnapshot(cocktailDescription: cocktailDescription)
-        skillView.applySnapshot(cocktailDescription: cocktailDescription)
-        glassView.applySnapshot(cocktailDescription: cocktailDescription)
+        toolView.fill(with: cocktailDescription)
+        skillView.fill(with: cocktailDescription)
+        glassView.fill(with: cocktailDescription)
     }
 }

@@ -15,7 +15,7 @@ struct CocktailDescription: Codable {
     let description: String
     let recipeList: [String]
     let abv, level, sugarContent: String
-    let categoryList: [DetailCategory]
+    let baseList: [DetailBase]
     let ingredientList: [DetailIngredient]
     let toolList: [CocktailTool]
     let skillList: [CocktailSkill]
@@ -30,7 +30,7 @@ struct CocktailDescription: Codable {
         case recipeList = "recipe_list"
         case abv, level
         case sugarContent = "sugar_content"
-        case categoryList = "category_list"
+        case baseList = "base_list"
         case ingredientList = "ingredient_list"
         case toolList = "tool_list"
         case skillList = "skill_list"
@@ -39,15 +39,16 @@ struct CocktailDescription: Codable {
 }
 
 // MARK: - DetailCategory
-struct DetailCategory: Codable, Hashable {
+struct DetailBase: Codable, Hashable {
     let id: Int
-    let categoryNameKo: String
+    let baseNameKo: String
     let hold: Bool
+    let brands: [String]
 
     enum CodingKeys: String, CodingKey {
         case id
-        case categoryNameKo = "category_name_ko"
-        case hold
+        case baseNameKo = "base_name_ko"
+        case hold, brands
     }
 }
 

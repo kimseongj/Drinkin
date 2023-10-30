@@ -10,10 +10,11 @@ import SnapKit
 
 final class ClickableInformationView: UIView {
     weak var delegate: ProductDetailVCDelegate?
-    private var title: String = ""
     private var toolDataSource: UICollectionViewDiffableDataSource<Section, CocktailTool>!
     private var skillDataSource: UICollectionViewDiffableDataSource<Section, CocktailSkill>!
     private var glassDataSource: UICollectionViewDiffableDataSource<Section, CocktailGlass>!
+    private var title: String = ""
+    private var idList: [Int] = []
     
     private var skillLabelView: UIView = {
         let view = UIView()
@@ -79,6 +80,25 @@ final class ClickableInformationView: UIView {
             $0.top.equalToSuperview().offset(24)
             $0.leading.equalTo(skillLabelView.snp.trailing)
         }
+    }
+    
+    func fill(with cocktailDescription: CocktailDescription) {
+        fetchIDList(cocktailDescription: cocktailDescription)
+        applySnapshot(cocktailDescription: cocktailDescription)
+    }
+    
+    func fetchIDList(cocktailDescription: CocktailDescription) {
+        switch title {
+        case InformationStrings.tool:
+            self.idList = cocktailDescription.toolList.map { $0.id }
+        case InformationStrings.skill:
+            self.idList = cocktailDescription.skillList.map { $0.id }
+        case InformationStrings.glass:
+            self.idList = cocktailDescription.glassList.map { $0.id }
+        default:
+            return
+        }
+        
     }
     
     func configurelInformationCollectionView() {

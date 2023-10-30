@@ -8,9 +8,9 @@
 import Foundation
 
 struct ProductDetailEndpoint: EndpointMakeable {
-    var baseURL: String = "https://c5260079-5391-4802-b98a-4d146a533121.mock.pstmn.io"
+    var baseURL: String = "http://13.209.22.43:8000"
     
-    var path: String = "/productdetail"
+    var path: String = "/v1/cocktails"
     
     var method: String = HTTPMethod.get.rawValue
     

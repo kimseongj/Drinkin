@@ -57,7 +57,6 @@
 		1C16A86B2A13AD3D001640E2 /* CocktailRecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16A86A2A13AD3D001640E2 /* CocktailRecommendViewController.swift */; };
 		1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C16A86C2A13ADA5001640E2 /* UnloggedinMainViewController.swift */; };
 		1C18B7912ADF96E90086B1A0 /* TipAndContentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18B7902ADF96E90086B1A0 /* TipAndContentList.swift */; };
-		1C18B7932ADF97F80086B1A0 /* TipAndContentListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18B7922ADF97F80086B1A0 /* TipAndContentListEndpoint.swift */; };
 		1C195F972AEB7FD700562E13 /* MakeableCocktailListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C195F962AEB7FD700562E13 /* MakeableCocktailListViewModel.swift */; };
 		1C195F9D2AEB916B00562E13 /* ToolDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C195F9C2AEB916B00562E13 /* ToolDetailRepository.swift */; };
 		1C195F9F2AEB918000562E13 /* SkillDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C195F9E2AEB918000562E13 /* SkillDetailRepository.swift */; };
@@ -126,6 +125,7 @@
 		1C8713632AED032100583A9F /* SkillModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8713622AED032100583A9F /* SkillModalViewModel.swift */; };
 		1C8713652AED032D00583A9F /* GlassModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8713642AED032D00583A9F /* GlassModalViewModel.swift */; };
 		1C8713682AEE439700583A9F /* ItemInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8713672AEE439700583A9F /* ItemInformationViewController.swift */; };
+		1C87136A2AEF625300583A9F /* ItemDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8713692AEF625300583A9F /* ItemDetail.swift */; };
 		1C8804A82AAD792400FB7844 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8804A72AAD792400FB7844 /* LoginViewModel.swift */; };
 		1C93EDE92AEA509B0080E33A /* SkillModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C93EDE82AEA509B0080E33A /* SkillModalViewController.swift */; };
 		1C93EDEB2AEA50C50080E33A /* GlassModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C93EDEA2AEA50C50080E33A /* GlassModalViewController.swift */; };
@@ -281,7 +281,6 @@
 		1C16A86A2A13AD3D001640E2 /* CocktailRecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecommendViewController.swift; sourceTree = "<group>"; };
 		1C16A86C2A13ADA5001640E2 /* UnloggedinMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloggedinMainViewController.swift; sourceTree = "<group>"; };
 		1C18B7902ADF96E90086B1A0 /* TipAndContentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentList.swift; sourceTree = "<group>"; };
-		1C18B7922ADF97F80086B1A0 /* TipAndContentListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipAndContentListEndpoint.swift; sourceTree = "<group>"; };
 		1C195F962AEB7FD700562E13 /* MakeableCocktailListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableCocktailListViewModel.swift; sourceTree = "<group>"; };
 		1C195F9C2AEB916B00562E13 /* ToolDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolDetailRepository.swift; sourceTree = "<group>"; };
 		1C195F9E2AEB918000562E13 /* SkillDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDetailRepository.swift; sourceTree = "<group>"; };
@@ -344,6 +343,7 @@
 		1C8713622AED032100583A9F /* SkillModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalViewModel.swift; sourceTree = "<group>"; };
 		1C8713642AED032D00583A9F /* GlassModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewModel.swift; sourceTree = "<group>"; };
 		1C8713672AEE439700583A9F /* ItemInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInformationViewController.swift; sourceTree = "<group>"; };
+		1C8713692AEF625300583A9F /* ItemDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetail.swift; sourceTree = "<group>"; };
 		1C8804A72AAD792400FB7844 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		1C93EDE82AEA509B0080E33A /* SkillModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModalViewController.swift; sourceTree = "<group>"; };
 		1C93EDEA2AEA50C50080E33A /* GlassModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassModalViewController.swift; sourceTree = "<group>"; };
@@ -990,6 +990,7 @@
 				1C87135A2AEBCDFB00583A9F /* ToolDetail.swift */,
 				1C87135C2AEBCEF700583A9F /* SkillDetail.swift */,
 				1C87135E2AEBCF0A00583A9F /* GlassDetail.swift */,
+				1C8713692AEF625300583A9F /* ItemDetail.swift */,
 			);
 			path = ExtraEntity;
 			sourceTree = "<group>";
@@ -1097,7 +1098,6 @@
 		1CA968F02A8F66410076731B /* UIEndpoint */ = {
 			isa = PBXGroup;
 			children = (
-				1C18B7922ADF97F80086B1A0 /* TipAndContentListEndpoint.swift */,
 				1C7A10482A74FB14009961A1 /* ProductDetailEndpoint.swift */,
 				1CA8ED282A6AB9BD00CE5E1A /* CocktailRecommendEndpoint.swift */,
 				1CA968EE2A8F587D0076731B /* TriedCocktailEndpoint.swift */,
@@ -1480,7 +1480,6 @@
 				1C0768782ABD66320003D4BF /* ItemFilterEndpoint.swift in Sources */,
 				1C0328EA2ADE50DF002E144E /* CocktailQueryRepository.swift in Sources */,
 				1CB299152A7247AF001F31BF /* CocktailRecommendCell.swift in Sources */,
-				1C18B7932ADF97F80086B1A0 /* TipAndContentListEndpoint.swift in Sources */,
 				1C0768802ABD6BFD0003D4BF /* LoginSettingViewController.swift in Sources */,
 				1C8713562AEBC4BC00583A9F /* SkillDetailEndpoint.swift in Sources */,
 				1C0328E22ADE505D002E144E /* CocktailPreviewListRepository.swift in Sources */,
@@ -1499,6 +1498,7 @@
 				1CA968EF2A8F587D0076731B /* TriedCocktailEndpoint.swift in Sources */,
 				1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */,
 				1CA969192A9078860076731B /* TokenType.swift in Sources */,
+				1C87136A2AEF625300583A9F /* ItemDetail.swift in Sources */,
 				1C18B7912ADF96E90086B1A0 /* TipAndContentList.swift in Sources */,
 				1CCE601C2AE505050026427C /* AddItemEndpoint.swift in Sources */,
 				1CB299112A724136001F31BF /* CocktailRecommendDIContainer.swift in Sources */,

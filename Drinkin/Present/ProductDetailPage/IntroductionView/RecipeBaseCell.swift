@@ -19,7 +19,6 @@ final class RecipeBaseCell: UICollectionViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 12)
-        label.text = "ZXCZXVASDFGASD, zxcasdaseqwe, ASDASFGSDF"
         
         return label
     }()
@@ -72,7 +71,8 @@ final class RecipeBaseCell: UICollectionViewCell {
         }
     }
     
-    func fill(detailCategory: DetailCategory) {
-        titleLabel.text = detailCategory.categoryNameKo
+    func fill(detailCategory: DetailBase) {
+        titleLabel.text = detailCategory.baseNameKo
+        descriptionLabel.text = detailCategory.brands.map { $0 }.joined(separator: ", ")
     }
 }
