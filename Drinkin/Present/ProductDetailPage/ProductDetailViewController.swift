@@ -122,10 +122,12 @@ class ProductDetailViewController: UIViewController {
     private func fill(with cocktailDescription: CocktailDescription?) {
         guard let validCocktailDescription = cocktailDescription else { return }
         
+        let baseList = validCocktailDescription.baseList.sorted(by: { $0.hold && !$1.hold })
+        let ingredientList = validCocktailDescription.ingredientList.sorted(by: { $0.hold && !$1.hold })
         introductionView.fill(with: validCocktailDescription)
         cocktailInformationView.fill(with: validCocktailDescription)
-        introductionView.applybaseSnapshot(detailCategoryList: validCocktailDescription.categoryList)
-        introductionView.applyIngredientSnapshot(detailIngredientList: validCocktailDescription.ingredientList)
+        introductionView.applybaseSnapshot(detailCategoryList: baseList)
+        introductionView.applyIngredientSnapshot(detailIngredientList: ingredientList)
     }
     
 //    private func configureMarkButton() {
