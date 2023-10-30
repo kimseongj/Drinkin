@@ -76,4 +76,10 @@ final class AppDIContainer {
         
         return UserMadeCocktailListDIContainer(dependencies: dependencies)
     }
+    
+    func makeIngredientInformationDIContainer(ingredientID: Int) -> IngredientInformationDIContainer {
+        let dependencies = IngredientInformationDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, ingredientID: ingredientID)
+        
+        return IngredientInformationDIContainer(dependencies: dependencies)
+    }
 }

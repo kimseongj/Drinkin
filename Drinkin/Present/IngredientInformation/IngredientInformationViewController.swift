@@ -1,5 +1,5 @@
 //
-//  ItemInformationViewController.swift
+//  IngredientInformationViewController.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/29.
@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 import Combine
 
-final class ItemInformationViewController: UIViewController {
-    //private var viewModel: ItemInformation
+final class IngredientInformationViewController: UIViewController {
+    private var viewModel: IngredientInformationViewModel
     private var cancelBag: Set<AnyCancellable> = []
     
     private let scrollView: UIScrollView = {
@@ -21,7 +21,7 @@ final class ItemInformationViewController: UIViewController {
         return scrollView
     }()
     
-    private let itemImageView: UIImageView = {
+    private let ingredientImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         
@@ -45,7 +45,7 @@ final class ItemInformationViewController: UIViewController {
     
     private let purchaseLabel: UILabel = {
         let label = UILabel()
-        label.text = "구 매 처"
+        label.text = "구  매  처"
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
         
         return label
@@ -86,10 +86,23 @@ final class ItemInformationViewController: UIViewController {
         return button
     }()
     
+    init(viewModel: IngredientInformationViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackgroudColor()
         configureUI()
+        viewModel.fetchIngredientDetail { [weak self] in
+            guard let self = self else { return }
+            self.fill(with: $0)
+        }
     }
     
     private func configureBackgroudColor() {
@@ -98,8 +111,8 @@ final class ItemInformationViewController: UIViewController {
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
-        let itemImageSize = view.bounds.width * 0.27
-        view.addSubview(itemImageView)
+        let ingredientImageSize = view.bounds.width * 0.27
+        view.addSubview(ingredientImageView)
         view.addSubview(titleLabel)
         view.addSubview(informationLabel)
         view.addSubview(purchaseLabel)
@@ -108,14 +121,14 @@ final class ItemInformationViewController: UIViewController {
         view.addSubview(expirationDateDescriptionLabel)
         view.addSubview(recommendCocktailButton)
         
-        itemImageView.snp.makeConstraints {
-            $0.size.equalTo(itemImageSize)
+        ingredientImageView.snp.makeConstraints {
+            $0.size.equalTo(ingredientImageSize)
             $0.top.equalTo(safeArea.snp.top).offset(8)
             $0.centerX.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(itemImageView.snp.bottom).offset(12)
+            $0.top.equalTo(ingredientImageView.snp.bottom).offset(12)
             $0.centerX.equalToSuperview()
         }
         
@@ -124,14 +137,14 @@ final class ItemInformationViewController: UIViewController {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        purchaseLinkLabel.snp.makeConstraints {
+        purchaseLabel.snp.makeConstraints {
             $0.top.equalTo(informationLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
         }
         
         purchaseLinkLabel.snp.makeConstraints{
-            $0.top.equalTo(purchaseLinkLabel.snp.top)
-            $0.leading.equalTo(purchaseLinkLabel.snp.trailing).offset(16)
+            $0.top.equalTo(purchaseLabel.snp.top)
+            $0.leading.equalTo(purchaseLabel.snp.trailing).offset(16)
         }
         
         expirationDateLabel.snp.makeConstraints {
@@ -150,10 +163,10 @@ final class ItemInformationViewController: UIViewController {
         }
     }
     
-    private func fill(with itemDetail: ItemDetailResult) {
+    private func fill(with itemDetail: IngredientDetailResult) {
         guard let imageURL = URL(string: itemDetail.imageURI) else { return }
         
-        itemImageView.load(url: imageURL)
+        ingredientImageView.load(url: imageURL)
         titleLabel.text = itemDetail.itemName
         purchaseLinkLabel.text = itemDetail.purchaseLink
         expirationDateDescriptionLabel.text = itemDetail.expirationDate
