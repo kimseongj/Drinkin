@@ -39,11 +39,11 @@ final class CocktailRecommendCell: UICollectionViewCell {
     //MARK: - SummaryOfCocktailView
     private let summaryOfCocktailView = UIView()
     
-    private let subtitleLabel: UILabel = {
+    private let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1)
-        label.text = "위스키베이스"
+
         return label
     }()
     
@@ -152,6 +152,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
         
         cocktailImageView.load(url: validImageURL)
         fetchTitle(briefDescription.cocktailNameKo)
+        fetchSubtitle(briefDescription.category)
         fetchLevel(levelGrade: briefDescription.levelScore, abvGrade: briefDescription.abvScore, sugarContentGrade: briefDescription.sugarContentScore)
         descriptionLabel.text = briefDescription.description
         configureHoldViews(briefDescription: briefDescription)
@@ -175,16 +176,16 @@ extension CocktailRecommendCell {
 //MARK: - SummaryOfCocktailView
 extension CocktailRecommendCell {
     private func configureSummaryOfCocktailView() {
-        summaryOfCocktailView.addSubview(subtitleLabel)
+        summaryOfCocktailView.addSubview(categoryLabel)
         summaryOfCocktailView.addSubview(titleLabel)
         
-        subtitleLabel.snp.makeConstraints { make in
+        categoryLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(2)
             make.leading.equalToSuperview().offset(2)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(5)
+            make.top.equalTo(categoryLabel.snp.bottom).offset(5)
             make.leading.equalToSuperview().offset(2)
         }
     }
@@ -194,7 +195,7 @@ extension CocktailRecommendCell {
     }
     
     func fetchSubtitle(_ subtitle: String) {
-        subtitleLabel.text = subtitle
+        categoryLabel.text = subtitle
     }
     
     private func fetchLevel(levelGrade: Int,
