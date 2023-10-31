@@ -15,20 +15,7 @@ protocol CellButtonDelegate: AnyObject {
 final class CocktailRecommendCell: UICollectionViewCell {
     weak var delegate: CellButtonDelegate?
     var cocktailID: Int?
-    
-    private let briefDescriptionView = UIView()
-    
-    //MARK: - VisualDescriptionView
-    private let visualDescriptionStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.distribution = .fill
-        stackView.spacing = 20
-        stackView.alignment = .center
-        stackView.axis = .horizontal
-        
-        return stackView
-    }()
-    
+
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -53,6 +40,14 @@ final class CocktailRecommendCell: UICollectionViewCell {
         label.textColor = .black
         
         return label
+    }()
+    
+    private let scoreStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        
+        return stackView
     }()
     
     //MARK: - TextDescriptionView
@@ -103,6 +98,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         holdStackView.subviews.forEach { $0.removeFromSuperview() }
+        scoreStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func configureBackgroundColor() {
@@ -114,49 +110,51 @@ final class CocktailRecommendCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        self.addSubview(visualDescriptionStackView)
+        self.addSubview(cocktailImageView)
+        self.addSubview(summaryOfCocktailView)
         self.addSubview(textDescriptionView)
         self.addSubview(seeMoreButton)
+
         
-        cocktailImageView.snp.makeConstraints{ make in
-            make.height.equalTo(120)
-            make.width.equalTo(120)
+        cocktailImageView.snp.makeConstraints{
+            $0.height.equalTo(120)
+            $0.width.equalTo(120)
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(20)
         }
         
-        visualDescriptionStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+        summaryOfCocktailView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(24)
+            $0.leading.equalTo(cocktailImageView.snp.trailing).offset(20)
         }
         
         textDescriptionView.snp.makeConstraints {
-            $0.top.equalTo(visualDescriptionStackView.snp.bottom).offset(20)
+            $0.top.equalTo(summaryOfCocktailView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalTo(seeMoreButton.snp.top).offset(-10)
         }
         
-        seeMoreButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalToSuperview().offset(-24)
-            make.height.equalTo(42)
+        seeMoreButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-24)
+            $0.height.equalTo(42)
         }
         
-        configureVisualDescriptionStackView()
         configureSummaryOfCocktailView()
         configureTextDescriptionView()
     }
     
-    func configureCell(briefDescription: CocktailBrief) {
-        guard let validImageURL = URL(string: briefDescription.imageURI) else { return }
+    func configureCell(cocktailBrief: CocktailBrief) {
+        guard let validImageURL = URL(string: cocktailBrief.imageURI) else { return }
         
         cocktailImageView.load(url: validImageURL)
-        fetchTitle(briefDescription.cocktailNameKo)
-        fetchSubtitle(briefDescription.category)
-        fetchLevel(levelGrade: briefDescription.levelScore, abvGrade: briefDescription.abvScore, sugarContentGrade: briefDescription.sugarContentScore)
-        descriptionLabel.text = briefDescription.description
-        configureHoldViews(briefDescription: briefDescription)
+        fetchTitle(cocktailBrief.cocktailNameKo)
+        fetchSubtitle(cocktailBrief.category)
+        fetchLevel(levelGrade: cocktailBrief.levelScore, abvGrade: cocktailBrief.abvScore, sugarContentGrade: cocktailBrief.sugarContentScore)
+        descriptionLabel.text = cocktailBrief.description
+        configureHoldViews(cocktailBrief: cocktailBrief)
     }
     
     @objc private func buttonTapped() {
@@ -166,28 +164,28 @@ final class CocktailRecommendCell: UICollectionViewCell {
     }
 }
 
-//MARK: - VisualDescriptionView
-extension CocktailRecommendCell {
-    private func configureVisualDescriptionStackView() {
-        visualDescriptionStackView.addArrangedSubview(cocktailImageView)
-        visualDescriptionStackView.addArrangedSubview(summaryOfCocktailView)
-    }
-}
-
 //MARK: - SummaryOfCocktailView
 extension CocktailRecommendCell {
     private func configureSummaryOfCocktailView() {
         summaryOfCocktailView.addSubview(categoryLabel)
         summaryOfCocktailView.addSubview(titleLabel)
+        summaryOfCocktailView.addSubview(scoreStackView)
         
-        categoryLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(2)
-            make.leading.equalToSuperview().offset(2)
+        categoryLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(2)
+            $0.leading.equalToSuperview().offset(2)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(categoryLabel.snp.bottom).offset(5)
-            make.leading.equalToSuperview().offset(2)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(categoryLabel.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().offset(2)
+        }
+        
+        scoreStackView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(2)
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -210,25 +208,9 @@ extension CocktailRecommendCell {
         let sugarContentGradePresentationView = GradePresentationView(title: InformationStrings.sugarContent,
                                                                       grade: sugarContentGrade)
         
-        summaryOfCocktailView.addSubview(levelGradePresentationView)
-        summaryOfCocktailView.addSubview(abvGradePresentationView)
-        summaryOfCocktailView.addSubview(sugarContentGradePresentationView)
-        
-        levelGradePresentationView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().offset(2)
-        }
-        
-        abvGradePresentationView.snp.makeConstraints {
-            $0.top.equalTo(levelGradePresentationView.snp.bottom).offset(5)
-            $0.leading.equalToSuperview().offset(2)
-        }
-        
-        sugarContentGradePresentationView.snp.makeConstraints {
-            $0.top.equalTo(abvGradePresentationView.snp.bottom).offset(5)
-            $0.leading.equalToSuperview().offset(2)
-            $0.bottom.equalToSuperview().offset(-2)
-        }
+        scoreStackView.addArrangedSubview(levelGradePresentationView)
+        scoreStackView.addArrangedSubview(abvGradePresentationView)
+        scoreStackView.addArrangedSubview(sugarContentGradePresentationView)
     }
 }
 
@@ -238,10 +220,10 @@ extension CocktailRecommendCell {
         textDescriptionView.addSubview(descriptionLabel)
         textDescriptionView.addSubview(holdStackView)
         
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         holdStackView.snp.makeConstraints {
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(20)
@@ -250,13 +232,12 @@ extension CocktailRecommendCell {
         }
     }
     
-    private func configureHoldViews(briefDescription: CocktailBrief) {
-        
-        let baseView = HoldView(briefDescription: briefDescription,
+    private func configureHoldViews(cocktailBrief: CocktailBrief) {
+        let baseView = HoldView(cocktailBrief: cocktailBrief,
                                 title: InformationStrings.base)
-        let ingredientView = HoldView(briefDescription: briefDescription,
+        let ingredientView = HoldView(cocktailBrief: cocktailBrief,
                                       title: InformationStrings.ingredient)
-        let garnishView = HoldView(briefDescription: briefDescription,
+        let garnishView = HoldView(cocktailBrief: cocktailBrief,
                                    title: InformationStrings.garnish)
         
         holdStackView.addArrangedSubview(baseView)
