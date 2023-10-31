@@ -110,13 +110,12 @@ final class CocktailRecommendViewController: UIViewController {
 //MARK: - DiffableDataSource
 extension CocktailRecommendViewController {
     private func configureDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource<Section, CocktailBrief> (collectionView: recommendCocktailCollectionView) { (collectionView, indexPath, briefDescription) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailRecommendCell.identifier, for: indexPath) as? CocktailRecommendCell else { return nil
-            }
+        self.dataSource = UICollectionViewDiffableDataSource<Section, CocktailBrief> (collectionView: recommendCocktailCollectionView) { (collectionView, indexPath, cocktailBrief) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailRecommendCell.identifier, for: indexPath) as? CocktailRecommendCell else { return nil }
             
             cell.delegate = self
-            cell.cocktailID = briefDescription.id
-            cell.configureCell(briefDescription: briefDescription)
+            cell.cocktailID = cocktailBrief.id
+            cell.configureCell(cocktailBrief: cocktailBrief)
             
             return cell
         }
@@ -135,7 +134,8 @@ extension CocktailRecommendViewController {
     private func binding() {
         guard let viewModel else { return }
         
-        viewModel.briefDescriptionListPublisher.receive(on: RunLoop.main).sink {
+        viewModel.briefDescriptionListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
             self.applySnapshot(briefDescriptionList: $0)
         }.store(in: &cancelBag)
     }
