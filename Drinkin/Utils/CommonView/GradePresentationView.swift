@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 final class GradePresentationView: UIView {
-    var title: String = ""
-    var grade: Int = 0
+    var title: String?
+    var grade: Int?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -22,7 +22,7 @@ final class GradePresentationView: UIView {
     
     private lazy var gradeView = GradeView(grade: grade)
     
-    init(title: String, grade: Int) {
+    init(title: String?, grade: Int?) {
         super.init(frame: .zero)
         self.title = title
         self.grade = grade
