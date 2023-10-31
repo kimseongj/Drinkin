@@ -135,7 +135,7 @@ extension CocktailRecommendViewController {
     private func binding() {
         guard let viewModel else { return }
         
-        viewModel.briefDescriptionListPublisher.sink {
+        viewModel.briefDescriptionListPublisher.receive(on: RunLoop.main).sink {
             self.applySnapshot(briefDescriptionList: $0)
         }.store(in: &cancelBag)
     }
