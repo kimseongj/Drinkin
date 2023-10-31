@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol MakeableCocktailListRepository {
     func fetchMakeableCocktailsByBrand() -> AnyPublisher<MakeableCocktailList, Error>
