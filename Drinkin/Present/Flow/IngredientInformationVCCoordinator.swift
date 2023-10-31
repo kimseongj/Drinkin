@@ -31,4 +31,12 @@ final class IngredientInformationVCCoordinator: Coordinator {
     func childDidFinish(_ child: Coordinator?) {
         parentCoordinator?.childDidFinish(self)
     }
+    
+//    func pushMakeableCocktailListVC(baseID: Int) {
+//        let makeableCocktailListVCCoordinator = MakeableCocktailListVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer, baseID: baseID)
+//        
+//        makeableCocktailListVCCoordinator.parentCoordinator = self
+//        childCoordinators.append(makeableCocktailListVCCoordinator)
+//        makeableCocktailListVCCoordinator.start()
+//    }
 }

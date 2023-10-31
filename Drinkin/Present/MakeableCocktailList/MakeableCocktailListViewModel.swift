@@ -13,5 +13,13 @@ protocol MakeableCocktailListViewModel {
 }
 
 final class DefaultMakeableCocktailListViewModel: MakeableCocktailListViewModel {
+    private let makeableCocktailListRepository: MakeableCocktailListRepository
     
+    init(makeableCocktailListRepository: MakeableCocktailListRepository) {
+        self.makeableCocktailListRepository = makeableCocktailListRepository
+    }
+    
+    func fetchMakeableCocktailList() {
+        
+    }
 }
