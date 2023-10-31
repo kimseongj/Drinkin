@@ -133,6 +133,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
             $0.top.equalTo(visualDescriptionStackView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(seeMoreButton.snp.top).offset(-10)
         }
         
         seeMoreButton.snp.makeConstraints { make in
