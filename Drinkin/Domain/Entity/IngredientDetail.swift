@@ -1,5 +1,5 @@
 //
-//  ItemDetail.swift
+//  IngredientDetail.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/30.
@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - Welcome
-struct ItemDetail: Codable {
-    let results: ItemDetailResult
+struct IngredientDetail: Codable {
+    let results: IngredientDetailResult
 }
 
 // MARK: - Results
-struct ItemDetailResult: Codable {
+struct IngredientDetailResult: Codable {
     let imageURI: String
     let itemName, purchaseLink, expirationDate: String
 

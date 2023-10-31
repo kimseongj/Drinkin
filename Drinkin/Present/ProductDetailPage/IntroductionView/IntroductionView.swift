@@ -142,6 +142,7 @@ final class IntroductionView: UIView {
     
     private func configureBaseCollectionView() {
         baseCollectionView.delegate = self
+        ingredientCollectionView.delegate = self
     }
        
     func updateBaseCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
@@ -275,7 +276,7 @@ extension IntroductionView: UICollectionViewDelegate {
         if collectionView == baseCollectionView {
             delegate?.pushBaseInformationVC(baseID: baseIDList[indexPath.row])
         } else {
-            
+            delegate?.pushIngredientInformationVC(ingredientID: ingredientIDList[indexPath.row])
         }
     }
 }
