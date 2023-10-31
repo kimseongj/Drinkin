@@ -26,7 +26,8 @@ class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
     }
     
     func fetchBriefDescription() {
-        cocktailBriefListRepository.fetchCocktailBriefList().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        cocktailBriefListRepository.fetchCocktailBriefList().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            guard let self = self else { return }
             self.briefDescriptionList = $0.briefDescriptionList
         }).store(in: &cancelBag)
     }

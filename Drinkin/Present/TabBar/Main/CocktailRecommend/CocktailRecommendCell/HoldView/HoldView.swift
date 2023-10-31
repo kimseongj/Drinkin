@@ -10,7 +10,7 @@ import SnapKit
 
 final class HoldView: UIView {
     private var title = MiscStrings.emptySpace
-    private var briefDescription: CocktailBrief?
+    private var cocktailBrief: CocktailBrief
     
     private var holdLabelView: UIView = {
         let label = UIView()
@@ -36,10 +36,10 @@ final class HoldView: UIView {
         return label
     }()
     
-    init(briefDescription: CocktailBrief, title: String) {
-        super.init(frame: .zero)
+    init(cocktailBrief: CocktailBrief, title: String) {
         self.title = title
-        self.briefDescription = briefDescription
+        self.cocktailBrief = cocktailBrief
+        super.init(frame: .zero)
         configureUI()
         setHoldCollectionView()
     }
@@ -86,26 +86,24 @@ final class HoldView: UIView {
 
 extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let validBriefDescription = briefDescription else { return 0 }
-        
         switch title {
         case InformationStrings.base:
-            if validBriefDescription.baseList.count == 0 {
+            if cocktailBrief.baseList.count == 0 {
                 return 1
             } else {
-                return validBriefDescription.baseList.count
+                return cocktailBrief.baseList.count
             }
         case InformationStrings.ingredient:
-            if validBriefDescription.ingredientList.count == 0 {
+            if cocktailBrief.ingredientList.count == 0 {
                 return 1
             } else {
-                return validBriefDescription.ingredientList.count
+                return cocktailBrief.ingredientList.count
             }
         case InformationStrings.garnish:
-            if validBriefDescription.garnishList.count == 0 {
+            if cocktailBrief.garnishList.count == 0 {
                 return 1
             } else {
-                return validBriefDescription.garnishList.count
+                return cocktailBrief.garnishList.count
             }
         default:
             return 0
@@ -115,34 +113,54 @@ extension HoldView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = holdCollectionView.dequeueReusableCell(withReuseIdentifier: HoldCollectionViewCell.identifier, for: indexPath) as! HoldCollectionViewCell
         
-        guard let validBriefDescription = briefDescription else { return cell }
-        
         switch title {
         case InformationStrings.base:
-            if validBriefDescription.baseList.count == 0 {
+            if cocktailBrief.baseList.count == 0 {
                 cell.makeEmptyCell()
-            } else {
-                cell.fill(with: validBriefDescription.baseList[indexPath.row].baseNameKo) 
-                cell.makeHoldedItemCell()
+                return cell
             }
+            
+            let configuredCell = configureCell(itemName: cocktailBrief.baseList[indexPath.row].baseNameKo,
+                                 hold: cocktailBrief.baseList[indexPath.row].hold,
+                                 cell: cell)
+            return configuredCell
+            
         case InformationStrings.ingredient:
-            if validBriefDescription.ingredientList.count == 0 {
+            if cocktailBrief.ingredientList.count == 0 {
                 cell.makeEmptyCell()
-            } else {
-                cell.fill(with: validBriefDescription.ingredientList[indexPath.row].ingredientNameKo)
-                cell.makeHoldedItemCell()
+                return cell
             }
+            
+            let configuredCell = configureCell(itemName: cocktailBrief.ingredientList[indexPath.row].ingredientNameKo,
+                                 hold: cocktailBrief.ingredientList[indexPath.row].hold,
+                                 cell: cell)
+            return configuredCell
+            
         case InformationStrings.garnish:
-            if validBriefDescription.garnishList.count == 0 {
+            if cocktailBrief.garnishList.count == 0 {
                 cell.makeEmptyCell()
-            } else {
-                cell.fill(with: validBriefDescription.garnishList[indexPath.row].garnishNameKo)
-                cell.makeHoldedItemCell()
+                return cell
             }
-        default: break
+            
+            let configuredCell = configureCell(itemName: cocktailBrief.garnishList[indexPath.row].garnishNameKo,
+                                 hold: cocktailBrief.garnishList[indexPath.row].hold,
+                                 cell: cell)
+            return configuredCell
+            
+        default:
+            return cell
+        }
+    }
+    
+    private func configureCell(itemName: String, hold: Bool, cell: HoldCollectionViewCell) -> HoldCollectionViewCell {
+        cell.fill(with: itemName)
+        
+        if hold == true {
+            cell.makeHoldedItemCell()
+            return cell
         }
         
+        cell.makeUnholdedItemCell()
         return cell
     }
 }
-
