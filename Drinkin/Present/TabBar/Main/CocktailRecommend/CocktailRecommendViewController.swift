@@ -10,12 +10,6 @@ import SnapKit
 import Combine
 
 final class CocktailRecommendViewController: UIViewController {
-    private enum Constant {
-        static let heightRatio = 0.7
-        static let widthRatio = 0.8
-        static let itemSpacing = 18.0
-    }
-    
     private var viewModel: CocktailRecommendViewModel?
     weak var delegate: MainViewDelegate?
     private var cancelBag: Set<AnyCancellable> = []
@@ -25,7 +19,7 @@ final class CocktailRecommendViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = calculateItemSize()
-        layout.minimumLineSpacing = Constant.itemSpacing
+        layout.minimumLineSpacing = 18
         
         return layout
     }()
@@ -107,8 +101,7 @@ final class CocktailRecommendViewController: UIViewController {
     
     private func calculateContentInset() -> UIEdgeInsets {
         let insetX = (view.bounds.width - calculateItemSize().width) / 2.0
-        let insetY = (view.bounds.height - calculateItemSize().height) / 2.0
-        let collectionViewContentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
+        let collectionViewContentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
         
         return collectionViewContentInset
     }
@@ -155,7 +148,7 @@ extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
     targetContentOffset: UnsafeMutablePointer<CGPoint>
   ) {
     let scrolledOffsetX = targetContentOffset.pointee.x + scrollView.contentInset.left
-    let cellWidth = calculateItemSize().width + Constant.itemSpacing
+    let cellWidth = calculateItemSize().width + 18
     let index = round(scrolledOffsetX / cellWidth)
     targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
   }
