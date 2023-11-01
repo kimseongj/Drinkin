@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-protocol DismissDelegate {
-    func dismissCurrentViewController()
+protocol DismissTriedCocktailSelectionVCDelegate {
+    func dismissTriedCocktailSelectionVC()
 }
 
 final class RecommendPopupViewController: UIViewController {
-    var delegate: DismissDelegate?
+    var delegate: DismissTriedCocktailSelectionVCDelegate?
     
     private let contentView: UIView = {
         let view = UIView()
@@ -109,6 +109,6 @@ final class RecommendPopupViewController: UIViewController {
     @objc
     private func tapRecommendButton() {
         self.dismiss(animated: true)
-        delegate?.dismissCurrentViewController()
+        delegate?.dismissTriedCocktailSelectionVC()
     }
 }
