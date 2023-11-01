@@ -6,6 +6,7 @@ protocol CocktailFilterViewModel {
     var detailFilter: CocktailFilter? { get }
     var selectedDetailFilterIndexPath: IndexPath? { get set }
     var filterTypeList: [FilterType] { get }
+    var filteredCocktailList: [CocktailPreview] { get }
     var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
     var textFilterTypeList: [String] { get }
     
@@ -56,7 +57,9 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
 extension DefaultCocktailFilterViewModel {
     func fetchCocktailList() {
         filterCocktailListUsecase.fetchCocktailList().sink(receiveCompletion: {
-            print("\($0)")}, receiveValue: {
+            print("\($0)")}, receiveValue: { [weak self] in
+                guard let self = self else { return }
+                
                 self.filteredCocktailList = $0.cocktailList
             }).store(in: &cancelBag)
     }
@@ -64,11 +67,12 @@ extension DefaultCocktailFilterViewModel {
     func fetchCocktailFilter(completion: @escaping () -> Void) {
         cocktailFilterRepository.fetchCocktailFilter()
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { print("\($0)")},
-                  receiveValue: {
-            self.detailFilter = $0
-            completion()
-        }).store(in: &cancelBag)
+            .sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+                guard let self = self else { return }
+                
+                self.detailFilter = $0
+                completion()
+            }).store(in: &cancelBag)
     }
     
     func fetchDetailFilter(filterType: FilterType) -> [String] {
@@ -114,8 +118,9 @@ extension DefaultCocktailFilterViewModel {
     
     func clearFilter(index: Int) {
         filterCocktailListUsecase.clearFilter(queryParameter: filterTypeList[index].queryDescription)
+        fetchCocktailList()
     }
-
+    
     func clearAllFilter() {
         for (index, _) in textFilterTypeList.enumerated() {
             textFilterTypeList[index] = filterTypeList[index].descriptionko

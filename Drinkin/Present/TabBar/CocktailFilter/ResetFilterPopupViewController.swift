@@ -1,19 +1,19 @@
 //
-//  RecommendPopupViewController.swift
+//  ResetFilterPopupViewController.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/07/04.
+//  Created by kimseongjun on 2023/11/01.
 //
 
 import UIKit
 import SnapKit
 
-protocol DismissTriedCocktailSelectionVCDelegate {
-    func dismissTriedCocktailSelectionVC()
+protocol ResetFilterDelegate {
+    func resetFilter()
 }
 
-final class RecommendPopupViewController: UIViewController {
-    var delegate: DismissTriedCocktailSelectionVCDelegate?
+final class ResetFilterPopupViewController: UIViewController {
+    var delegate: ResetFilterDelegate?
     
     private let contentView: UIView = {
         let view = UIView()
@@ -25,41 +25,45 @@ final class RecommendPopupViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "마셔봤던 칵테일이 없나요?"
+        label.text = "필터를 모두 초기화하시겠어요?"
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textColor = .black
         
         return label
     }()
     
-    private let firstDescriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "맛과 난이도 등을 고려해"
+        label.text = "설정한 모든 필터가 초기화됩니다."
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = UIColor(red: 0.47, green: 0.46, blue: 0.45, alpha: 1)
        
         return label
     }()
     
-    private let secondDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "추천해드릴 수 있습니다."
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = UIColor(red: 0.47, green: 0.46, blue: 0.45, alpha: 1)
+    private lazy var dismissButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("닫기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 3
+        button.addTarget(self, action: #selector(tapDismissButton), for: .touchUpInside)
         
-        return label
+        return button
     }()
     
-    private lazy var recommendButton: UIButton = {
+    private lazy var resetButton: UIButton = {
         let button = UIButton()
-        button.setTitle("추천 받기", for: .normal)
+        button.setTitle("초기화", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.backgroundColor = .black
         button.layer.cornerRadius = 20
         button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
         button.layer.borderWidth = 3
-        button.addTarget(self, action: #selector(tapRecommendButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapResetButton), for: .touchUpInside)
         
         return button
     }()
@@ -72,9 +76,9 @@ final class RecommendPopupViewController: UIViewController {
     private func configureUI() {
         view.addSubview(contentView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(firstDescriptionLabel)
-        contentView.addSubview(secondDescriptionLabel)
-        contentView.addSubview(recommendButton)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(dismissButton)
+        contentView.addSubview(resetButton)
         
         contentView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -87,28 +91,37 @@ final class RecommendPopupViewController: UIViewController {
             $0.top.equalToSuperview().offset(24)
         }
         
-        firstDescriptionLabel.snp.makeConstraints {
+        descriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(titleLabel.snp.bottom).offset(18)
         }
         
-        secondDescriptionLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(firstDescriptionLabel.snp.bottom).offset(8)
-        }
-        
-        recommendButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(secondDescriptionLabel.snp.bottom).offset(18)
+        dismissButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview().multipliedBy(0.75)
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(18)
             $0.bottom.equalToSuperview().offset(-24)
             $0.height.equalTo(42)
-            $0.width.equalTo(104)
+            $0.width.equalTo(74)
+        }
+        
+        resetButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview().multipliedBy(1.25)
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(18)
+            $0.bottom.equalToSuperview().offset(-24)
+            $0.height.equalTo(42)
+            $0.width.equalTo(87)
         }
     }
     
     @objc
-    private func tapRecommendButton() {
+    private func tapDismissButton() {
         self.dismiss(animated: true)
-        delegate?.dismissTriedCocktailSelectionVC()
+    }
+    
+    @objc
+    private func tapResetButton() {
+        delegate?.resetFilter()
+        self.dismiss(animated: true)
     }
 }
+

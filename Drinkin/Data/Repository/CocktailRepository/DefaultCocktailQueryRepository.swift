@@ -24,6 +24,9 @@ final class DefaultCocktailQueryRepository: CocktailQueryRepository {
     }
     
     func insertQuery(queryParameter: String, queryValue: String) {
+        if endpoint.queryItems.contains(where: { $0.name == queryParameter }) {
+            endpoint.queryItems.removeAll(where: { $0.name == queryParameter })
+        }
         endpoint.insertQuery(queryParameter: queryParameter, queryValue: queryValue)
     }
     

@@ -121,5 +121,6 @@ extension CocktailFilterModalViewController: UITableViewDelegate {
         tableView.cellForRow(at: indexPath)?.isSelected = true
         viewModel?.selectedDetailFilterIndexPath = indexPath
         viewModel?.insertDetailFilter(filterType: filterType, detailFilterIndex: indexPath.row)
+        self.dismiss(animated: true)
     }
 }

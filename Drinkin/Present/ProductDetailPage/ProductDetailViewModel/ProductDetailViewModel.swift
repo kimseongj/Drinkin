@@ -29,7 +29,9 @@ class DefaultProductDetailViewModel: ProductDetailViewModel {
     
     func fetchDescription() {
         cocktailDetailRepository.fetchCocktailDescription()
-            .sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+            .sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+                guard let self = self else { return }
+                
                 self.cocktailDescription = $0
             }).store(in: &cancelBag)
     }

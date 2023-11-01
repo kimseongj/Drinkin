@@ -8,9 +8,9 @@
 import Foundation
 
 struct ItemListEndpoint: EndpointMakeable {
-    var baseURL: String = "https://1e10ad7d-7845-4433-aa0c-b658bf7d2078.mock.pstmn.io"
+    var baseURL: String = "https://32e7f79c-3b44-4fc1-a3f1-6332dabc37b4.mock.pstmn.io"
 
-    var path: String = "/ingredient"
+    var path: String = "/itemlist"
     
     var method: String = HTTPMethod.get.rawValue
     
