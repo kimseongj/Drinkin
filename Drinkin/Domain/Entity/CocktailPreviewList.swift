@@ -18,12 +18,13 @@ struct CocktailPreviewList: Codable {
 
 // MARK: - CocktailList
 struct CocktailPreview: Codable, Hashable {
-    let id = UUID()
+    let id: Int
     let cocktailNameKo: String
     let imageURI: String
     let levelGrade, sugarContentGrade, abvGrade, ingredientQuantity: Int
 
     enum CodingKeys: String, CodingKey {
+        case id
         case cocktailNameKo = "cocktail_name_ko"
         case imageURI = "image_uri"
         case levelGrade = "level_score"
