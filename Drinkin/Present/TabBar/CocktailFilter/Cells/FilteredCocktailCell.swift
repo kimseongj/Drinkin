@@ -47,14 +47,6 @@ final class FilteredCocktailCell: UICollectionViewCell {
         return stackView
     }()
     
-    private let levelGradePresentationView = GradePresentationView(title: "난이도", grade: 2)
-    
-    private let sugarContentPresentationView = GradePresentationView(title: "당    도", grade: 2)
-    
-    private let abvGradePresentationView = GradePresentationView(title: "도    수", grade: 1)
-    
-    private let ingredientPresentationView = IngredientQuantityView(ingredientQuantity: 2)
-    
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         
@@ -70,6 +62,12 @@ final class FilteredCocktailCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        firstSubStackView.subviews.forEach { $0.removeFromSuperview() }
+        secondSubStackView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
     private func configureUI() {
         contentView.backgroundColor = .white
         self.layer.borderWidth = 3
@@ -80,10 +78,6 @@ final class FilteredCocktailCell: UICollectionViewCell {
         contentView.addSubview(cocktailImageView)
         mainStackView.addArrangedSubview(firstSubStackView)
         mainStackView.addArrangedSubview(secondSubStackView)
-        firstSubStackView.addArrangedSubview(levelGradePresentationView)
-        firstSubStackView.addArrangedSubview(sugarContentPresentationView)
-        secondSubStackView.addArrangedSubview(abvGradePresentationView)
-        secondSubStackView.addArrangedSubview(ingredientPresentationView)
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
@@ -108,10 +102,22 @@ final class FilteredCocktailCell: UICollectionViewCell {
         guard let imageURI = URL(string: previewDescription.imageURI) else { return }
         
         titleLabel.text = previewDescription.cocktailNameKo
-        levelGradePresentationView.grade = previewDescription.levelGrade
-        sugarContentPresentationView.grade = previewDescription.sugarContentGrade
-        abvGradePresentationView.grade = previewDescription.abvGrade
-        ingredientPresentationView.ingredientQuantity = previewDescription.ingredientQuantity
         cocktailImageView.load(url: imageURI)
+        configureScoreView(levelScore: previewDescription.levelGrade,
+                           sugarContentScore: previewDescription.sugarContentGrade,
+                           abvScore: previewDescription.abvGrade,
+                           ingredientQuantity: previewDescription.ingredientQuantity)
+    }
+    
+    private func configureScoreView(levelScore: Int, sugarContentScore: Int, abvScore: Int, ingredientQuantity: Int) {
+        let levelGradePresentationView = GradePresentationView(title: "난이도", grade: levelScore)
+        let sugarContentPresentationView = GradePresentationView(title: "당    도", grade: sugarContentScore)
+        let abvGradePresentationView = GradePresentationView(title: "도    수", grade: abvScore)
+        let ingredientPresentationView = IngredientQuantityView(ingredientQuantity: ingredientQuantity)
+        
+        firstSubStackView.addArrangedSubview(levelGradePresentationView)
+        firstSubStackView.addArrangedSubview(sugarContentPresentationView)
+        secondSubStackView.addArrangedSubview(abvGradePresentationView)
+        secondSubStackView.addArrangedSubview(ingredientPresentationView)
     }
 }
