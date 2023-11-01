@@ -6,6 +6,7 @@ protocol CocktailFilterViewModel {
     var detailFilter: CocktailFilter? { get }
     var selectedDetailFilterIndexPath: IndexPath? { get set }
     var filterTypeList: [FilterType] { get }
+    var filteredCocktailList: [CocktailPreview] { get }
     var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
     var textFilterTypeList: [String] { get }
     
@@ -117,6 +118,7 @@ extension DefaultCocktailFilterViewModel {
     
     func clearFilter(index: Int) {
         filterCocktailListUsecase.clearFilter(queryParameter: filterTypeList[index].queryDescription)
+        fetchCocktailList()
     }
     
     func clearAllFilter() {
