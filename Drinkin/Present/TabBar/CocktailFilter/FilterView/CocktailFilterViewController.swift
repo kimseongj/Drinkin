@@ -11,10 +11,10 @@ import Combine
 
 final class CocktailFilterViewController: UIViewController {
     private var viewModel: CocktailFilterViewModel?
+    var delegate: CocktailFilterFlowDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
-    
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -26,17 +26,17 @@ final class CocktailFilterViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "칵테일 리스트"
-        label.font = UIFont(name: "RixYeoljeongdo_Pro Regular", size: 20)
+        label.font = UIFont(name: FontStrings.themeFont, size: 20)
         
         return label
     }()
     
-    private let initializationButton: UIButton = {
+    private let resetFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("필터 초기화", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.addTarget(self, action: #selector(tapInitializationButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapResetFilterButton), for: .touchUpInside)
         
         return button
     }()
@@ -77,6 +77,7 @@ final class CocktailFilterViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureFilterSelectionCollectionView()
+        configureFilteredCollectionView()
         makeSelectionFilterCollectionViewDisable()
         viewModel?.fetchCocktailFilter(completion: { [weak self] in
             self?.makeSelectionFilterCollectionViewEnable()
@@ -88,6 +89,11 @@ final class CocktailFilterViewController: UIViewController {
         cocktailBinding()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppCoordinator.tabBarController.tabBar.isHidden = false
+    }
+    
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
@@ -95,7 +101,7 @@ final class CocktailFilterViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(titleLabel)
-        view.addSubview(initializationButton)
+        view.addSubview(resetFilterButton)
         view.addSubview(filterSelectionCollectionView)
         view.addSubview(filteredCollectionView)
         
@@ -104,7 +110,7 @@ final class CocktailFilterViewController: UIViewController {
             $0.leading.equalTo(safeArea.snp.leading).offset(16)
         }
         
-        initializationButton.snp.makeConstraints {
+        resetFilterButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)
             $0.trailing.equalTo(safeArea.snp.trailing).offset(-16)
         }
@@ -144,7 +150,17 @@ final class CocktailFilterViewController: UIViewController {
         filterSelectionCollectionView.isUserInteractionEnabled = true
     }
     
-    @objc private func tapInitializationButton() {
+    @objc private func tapResetFilterButton() {
+        let resetFilterPopupViewController = ResetFilterPopupViewController()
+        resetFilterPopupViewController.delegate = self
+        resetFilterPopupViewController.modalPresentationStyle = .formSheet
+        present(resetFilterPopupViewController, animated: true)
+    }
+}
+
+//MARK: - ResetDelegate
+extension CocktailFilterViewController: ResetFilterDelegate {
+    func resetFilter() {
         viewModel?.clearAllFilter()
         viewModel?.fetchCocktailList()
     }
@@ -252,7 +268,9 @@ extension CocktailFilterViewController: UICollectionViewDelegate {
             cocktailFilterModalViewController.modalPresentationStyle = .overFullScreen
             present(cocktailFilterModalViewController, animated: false)
         } else {
-            
+            guard let viewModel = viewModel else { return }
+           let cocktailID = viewModel.filteredCocktailList[indexPath.row].id
+            delegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
         }
     }
 }
