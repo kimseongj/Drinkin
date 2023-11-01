@@ -34,7 +34,7 @@ final class CocktailFilterDICotainer {
     }
     
     func makeFilterCocktailListUsecase() -> FilterCocktailListUsecase {
-        return DefaultFilterCocktailListUsecase(cocktailListRepository: makeCocktailListRepository())
+        return DefaultFilterCocktailListUsecase(cocktailQueryRepository: makeCocktailListRepository())
     }
     
     

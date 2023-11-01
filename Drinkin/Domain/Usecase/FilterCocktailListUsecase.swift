@@ -16,25 +16,25 @@ protocol FilterCocktailListUsecase {
 }
 
 final class DefaultFilterCocktailListUsecase: FilterCocktailListUsecase {
-    private let cocktailListRepository: CocktailQueryRepository
+    private let cocktailQueryRepository: CocktailQueryRepository
     
-    init(cocktailListRepository: CocktailQueryRepository) {
-        self.cocktailListRepository = cocktailListRepository
+    init(cocktailQueryRepository: CocktailQueryRepository) {
+        self.cocktailQueryRepository = cocktailQueryRepository
     }
     
     func fetchCocktailList() -> AnyPublisher<CocktailPreviewList, Error> {
-        return cocktailListRepository.fetchCocktailPreviewList()
+        return cocktailQueryRepository.fetchCocktailPreviewList()
     }
     
     func addFilter(queryParameter: String, queryValue: String) {
-        cocktailListRepository.insertQuery(queryParameter: queryParameter, queryValue: queryValue)
+        cocktailQueryRepository.insertQuery(queryParameter: queryParameter, queryValue: queryValue)
     }
     
     func clearFilter(queryParameter: String) {
-        cocktailListRepository.removeQuery(queryParameter: queryParameter)
+        cocktailQueryRepository.removeQuery(queryParameter: queryParameter)
     }
     
     func clearAllFilter() {
-        cocktailListRepository.removeAllQuery()
+        cocktailQueryRepository.removeAllQuery()
     }
 }
