@@ -132,6 +132,10 @@ final class CocktailFilterViewController: UIViewController {
         }
     }
     
+    private func configureFilteredCollectionView() {
+        filteredCollectionView.delegate = self
+    }
+    
     private func makeSelectionFilterCollectionViewDisable() {
         filterSelectionCollectionView.isUserInteractionEnabled = false
     }
@@ -199,7 +203,9 @@ extension CocktailFilterViewController {
 //MARK: - Binding
 extension CocktailFilterViewController {
     private func filterBinding() {
-        viewModel?.textFilterTypeListPublisher.receive(on: RunLoop.main).sink {
+        viewModel?.textFilterTypeListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            
             self.applyFilterSnapshot(filterList: $0)
         }.store(in: &cancelBag)
     }
@@ -207,7 +213,9 @@ extension CocktailFilterViewController {
 
 extension CocktailFilterViewController {
     private func cocktailBinding() {
-        viewModel?.filteredCocktailListPublisher.receive(on: RunLoop.main).sink {
+        viewModel?.filteredCocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            
             self.applyCocktailSnapshot(filteredItems: $0)
         }.store(in: &cancelBag)
     }
