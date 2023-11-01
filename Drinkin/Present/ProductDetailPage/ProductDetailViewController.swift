@@ -129,22 +129,13 @@ class ProductDetailViewController: UIViewController {
         introductionView.applybaseSnapshot(detailCategoryList: baseList)
         introductionView.applyIngredientSnapshot(detailIngredientList: ingredientList)
     }
-    
-//    private func configureMarkButton() {
-//        if viewModel?. == true {
-//            bookmarkCocktailButton.isSelected
-//        }
-//
-//        if viewModel?. == true {
-//            markMadeCocktailButton.isSelected
-//        }
-//    }
 }
 
 //MARK: - Binding
 extension ProductDetailViewController {
     private func binding() {
-        viewModel?.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink {
+        viewModel?.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
             self.fill(with: $0)
         }.store(in: &cancelBag)
     }
