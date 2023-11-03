@@ -14,7 +14,7 @@ protocol CellDeleteButtonDelegate: AnyObject {
 }
 
 final class MyHomeBarViewController: UIViewController {
-    private var viewModel: MyHomeBarViewModel?
+    private var viewModel: MyHomeBarViewModel
     var delegate: MyHomeBarVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -157,7 +157,7 @@ final class MyHomeBarViewController: UIViewController {
         return button
     }()
         
-    init(viewModel: MyHomeBarViewModel?) {
+    init(viewModel: MyHomeBarViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -170,7 +170,7 @@ final class MyHomeBarViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureHoldedItemCollectionView()
-        viewModel?.fetchHoldedItem()
+        viewModel.fetchHoldedItem()
         configureDataSource()
         binding()
     }
@@ -333,8 +333,6 @@ extension MyHomeBarViewController {
 //MARK: - Binding
 extension MyHomeBarViewController {
     private func binding() {
-        guard let viewModel else { return }
-        
         viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink {
             self.applySnapshot(holdedItemList: $0)
         }.store(in: &cancelBag)
@@ -344,6 +342,6 @@ extension MyHomeBarViewController {
 //MARK: - CellDelteButtonDelegate
 extension MyHomeBarViewController: CellDeleteButtonDelegate {
     func deleteHoldedItem(holdedItem: String) {
-        viewModel?.deleteHoldedItem(holdedItem: holdedItem)
+        viewModel.deleteHoldedItem(holdedItem: holdedItem)
     }
 }
