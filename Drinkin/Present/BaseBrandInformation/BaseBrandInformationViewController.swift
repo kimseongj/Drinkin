@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 final class BaseBrandInformationViewController: UIViewController {
-    private var viewModel: BaseBrandInformationViewModel?
+    private var viewModel: BaseBrandInformationViewModel
     private var cancelBag: Set<AnyCancellable> = []
     
     private let scrollView: UIScrollView = {
@@ -86,7 +86,7 @@ final class BaseBrandInformationViewController: UIViewController {
         return button
     }()
     
-    init(viewModel: BaseBrandInformationViewModel?) {
+    init(viewModel: BaseBrandInformationViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -97,7 +97,7 @@ final class BaseBrandInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.fetchBaseBrandDetail()
+        viewModel.fetchBaseBrandDetail()
         binding()
         configureBackgroundColor()
         configureUI()
@@ -182,7 +182,7 @@ final class BaseBrandInformationViewController: UIViewController {
 //MARK: - Binding
 extension BaseBrandInformationViewController {
     private func binding() {
-        viewModel?.baseBrandDetailPublisher.receive(on: RunLoop.main).sink {
+        viewModel.baseBrandDetailPublisher.receive(on: RunLoop.main).sink {
             self.fill(with: $0)
         }.store(in: &cancelBag)
     }
