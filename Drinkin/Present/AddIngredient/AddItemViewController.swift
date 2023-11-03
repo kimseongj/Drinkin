@@ -117,7 +117,7 @@ final class AddItemViewController: UIViewController {
 extension AddItemViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == itemFilterCollectionView {
-            viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row])!)
+            viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row]))
         } else {
             if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
                 cell.presentHoldItem()
