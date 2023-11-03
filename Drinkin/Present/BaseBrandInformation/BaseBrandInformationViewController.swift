@@ -168,8 +168,6 @@ final class BaseBrandInformationViewController: UIViewController {
     }
     
     private func fill(with brandDetail: BrandDetail?) {
-        
-        
         guard let brandDetail = brandDetail, let brandImageURL = URL(string: brandDetail.imageURI) else { return }
         
         brandImageView.load(url: brandImageURL)
@@ -182,7 +180,9 @@ final class BaseBrandInformationViewController: UIViewController {
 //MARK: - Binding
 extension BaseBrandInformationViewController {
     private func binding() {
-        viewModel.baseBrandDetailPublisher.receive(on: RunLoop.main).sink {
+        viewModel.baseBrandDetailPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            
             self.fill(with: $0)
         }.store(in: &cancelBag)
     }
