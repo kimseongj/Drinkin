@@ -14,7 +14,7 @@ protocol SavedCocktailListViewModel {
     func fetchCocktailPreviewDescription()
 }
 
-class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
+final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     private let savedCocktailListRepository: SavedCocktailListRepository
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -26,7 +26,8 @@ class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     }
     
     func fetchCocktailPreviewDescription() {
-        savedCocktailListRepository.fetchSavedCocktailList().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        savedCocktailListRepository.fetchSavedCocktailList().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            guard let self = self else { return}
             self.previewDescriptionList = $0.cocktailList
         }).store(in: &cancelBag)
     }
