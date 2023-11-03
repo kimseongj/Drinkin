@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class GlassModalViewController: UIViewController {
     private var viewModel: GlassModalViewModel

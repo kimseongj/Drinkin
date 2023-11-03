@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class MarkMadeCocktailButton: UIButton {
     override var isSelected: Bool {

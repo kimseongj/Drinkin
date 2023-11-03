@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class SkillModalViewController: UIViewController {
     private var viewModel: SkillModalViewModel

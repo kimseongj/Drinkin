@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class UnloggedinMainViewController: UIViewController {
     private weak var delegate: MainViewDelegate?
