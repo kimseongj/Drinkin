@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ScoreView.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/05/06.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class GradeView: UIStackView {
-    var grade: Int?
+class ScoreView: UIStackView {
+    var score: Int?
     
-    init(grade: Int?) {
+    init(score: Int?) {
         super.init(frame: CGRect())
         self.spacing = 4
-        self.grade = grade
+        self.score = score
         determineLevel()
     }
     
@@ -21,7 +21,7 @@ class GradeView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureLevelOne() {
+    private func configureScoreOne() {
         let firstRectangleView = YellowRectangleView()
         let secondRectangleView = EmptyRectangleView()
         let thirdRectangleView = EmptyRectangleView()
@@ -31,7 +31,7 @@ class GradeView: UIStackView {
         self.addArrangedSubview(thirdRectangleView)
     }
     
-    private func configureLevelTwo() {
+    private func configureScoreTwo() {
         let firstRectangleView = YellowRectangleView()
         let secondRectangleView = YellowRectangleView()
         let thirdRectangleView = EmptyRectangleView()
@@ -41,7 +41,7 @@ class GradeView: UIStackView {
         self.addArrangedSubview(thirdRectangleView)
     }
     
-    private func configureLevelThree() {
+    private func configureScoreThree() {
         let firstRectangleView = YellowRectangleView()
         let secondRectangleView = YellowRectangleView()
         let thirdRectangleView = YellowRectangleView()
@@ -52,13 +52,13 @@ class GradeView: UIStackView {
     }
     
     private func determineLevel() {
-        switch grade {
+        switch score {
         case 1:
-           configureLevelOne()
+           configureScoreOne()
         case 2:
-            configureLevelTwo()
+            configureScoreTwo()
         case 3:
-            configureLevelThree()
+            configureScoreThree()
         default: break
         }
     }

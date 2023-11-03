@@ -98,26 +98,26 @@ final class FilteredCocktailCell: UICollectionViewCell {
         }
     }
     
-    func fill(with previewDescription: CocktailPreview) {
-        guard let imageURI = URL(string: previewDescription.imageURI) else { return }
+    func fill(with cocktailPreview: CocktailPreview) {
+        guard let imageURI = URL(string: cocktailPreview.imageURI) else { return }
         
-        titleLabel.text = previewDescription.cocktailNameKo
+        titleLabel.text = cocktailPreview.cocktailNameKo
         cocktailImageView.load(url: imageURI)
-        configureScoreView(levelScore: previewDescription.levelGrade,
-                           sugarContentScore: previewDescription.sugarContentGrade,
-                           abvScore: previewDescription.abvGrade,
-                           ingredientQuantity: previewDescription.ingredientQuantity)
+        configureScoreView(levelScore: cocktailPreview.levelScore,
+                           sugarContentScore: cocktailPreview.sugarContentScore,
+                           abvScore: cocktailPreview.abvScore,
+                           ingredientQuantity: cocktailPreview.ingredientQuantity)
     }
     
     private func configureScoreView(levelScore: Int, sugarContentScore: Int, abvScore: Int, ingredientQuantity: Int) {
-        let levelGradePresentationView = GradePresentationView(title: "난이도", grade: levelScore)
-        let sugarContentPresentationView = GradePresentationView(title: "당    도", grade: sugarContentScore)
-        let abvGradePresentationView = GradePresentationView(title: "도    수", grade: abvScore)
+        let levelScorePresentationView = ScorePresentationView(title: "난이도", score: levelScore)
+        let sugarContentScorePresentationView = ScorePresentationView(title: "당    도", score: sugarContentScore)
+        let abvGradeScorePresentationView = ScorePresentationView(title: "도    수", score: abvScore)
         let ingredientPresentationView = IngredientQuantityView(ingredientQuantity: ingredientQuantity)
         
-        firstSubStackView.addArrangedSubview(levelGradePresentationView)
-        firstSubStackView.addArrangedSubview(sugarContentPresentationView)
-        secondSubStackView.addArrangedSubview(abvGradePresentationView)
+        firstSubStackView.addArrangedSubview(levelScorePresentationView)
+        firstSubStackView.addArrangedSubview(sugarContentScorePresentationView)
+        secondSubStackView.addArrangedSubview(abvGradeScorePresentationView)
         secondSubStackView.addArrangedSubview(ingredientPresentationView)
     }
 }

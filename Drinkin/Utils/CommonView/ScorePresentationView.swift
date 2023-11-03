@@ -1,5 +1,5 @@
 //
-//  GradeView.swift
+//  ScorePresentationView.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/07/03.
@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-final class GradePresentationView: UIView {
+final class ScorePresentationView: UIView {
     var title: String?
-    var grade: Int?
+    var score: Int?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -20,12 +20,12 @@ final class GradePresentationView: UIView {
         return label
     }()
     
-    private lazy var gradeView = GradeView(grade: grade)
+    private lazy var scoreView = ScoreView(score: score)
     
-    init(title: String?, grade: Int?) {
+    init(title: String?, score: Int?) {
         super.init(frame: .zero)
         self.title = title
-        self.grade = grade
+        self.score = score
         
         configureUI()
     }
@@ -36,7 +36,7 @@ final class GradePresentationView: UIView {
     
     private func configureUI() {
         self.addSubview(titleLabel)
-        self.addSubview(gradeView)
+        self.addSubview(scoreView)
         
         switch title {
         case "난이도":
@@ -46,7 +46,7 @@ final class GradePresentationView: UIView {
                 $0.bottom.equalToSuperview()
             }
             
-            gradeView.snp.makeConstraints {
+            scoreView.snp.makeConstraints {
                 $0.centerY.equalToSuperview()
                 $0.leading.equalTo(titleLabel.snp.trailing).offset(12)
                 $0.trailing.equalToSuperview()
@@ -58,7 +58,7 @@ final class GradePresentationView: UIView {
                 $0.bottom.equalToSuperview()
             }
 
-            gradeView.snp.makeConstraints {
+            scoreView.snp.makeConstraints {
                 $0.centerY.equalToSuperview()
                 $0.leading.equalTo(titleLabel.snp.trailing).offset(11)
                 $0.trailing.equalToSuperview()

@@ -76,7 +76,7 @@
 		1C504CD72AB47035005A0B25 /* CocktailListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504CD62AB47035005A0B25 /* CocktailListEndpoint.swift */; };
 		1C504CDA2AB47268005A0B25 /* CocktailFilterEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504CD92AB47268005A0B25 /* CocktailFilterEndpoint.swift */; };
 		1C504CDC2AB5E6B7005A0B25 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C504CDB2AB5E6B7005A0B25 /* FilterType.swift */; };
-		1C57317A2A06879400C19EE1 /* GradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5731792A06879400C19EE1 /* GradeView.swift */; };
+		1C57317A2A06879400C19EE1 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5731792A06879400C19EE1 /* ScoreView.swift */; };
 		1C58ECE12A63CA3A00AC2603 /* DefaultCocktailImageListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58ECE02A63CA3A00AC2603 /* DefaultCocktailImageListRepository.swift */; };
 		1C58ECE32A63CA8100AC2603 /* DefaultCocktailBriefListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58ECE22A63CA8100AC2603 /* DefaultCocktailBriefListRepository.swift */; };
 		1C58ECE52A63CA9300AC2603 /* DefaultCocktailDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58ECE42A63CA9300AC2603 /* DefaultCocktailDetailRepository.swift */; };
@@ -106,7 +106,7 @@
 		1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6636532A067F4B00C85374 /* SelectedView.swift */; };
 		1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */; };
 		1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */; };
-		1C71A4B02A5292A300F1814A /* GradePresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C71A4AF2A5292A300F1814A /* GradePresentationView.swift */; };
+		1C71A4B02A5292A300F1814A /* ScorePresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C71A4AF2A5292A300F1814A /* ScorePresentationView.swift */; };
 		1C74FD5F2AB6969300823E73 /* CocktailFilterDICotainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74FD5E2AB6969300823E73 /* CocktailFilterDICotainer.swift */; };
 		1C7807FA2AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7807F92AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift */; };
 		1C7A10442A74F6FF009961A1 /* CocktailDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7A10432A74F6FF009961A1 /* CocktailDescription.swift */; };
@@ -305,7 +305,7 @@
 		1C504CD62AB47035005A0B25 /* CocktailListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListEndpoint.swift; sourceTree = "<group>"; };
 		1C504CD92AB47268005A0B25 /* CocktailFilterEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterEndpoint.swift; sourceTree = "<group>"; };
 		1C504CDB2AB5E6B7005A0B25 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
-		1C5731792A06879400C19EE1 /* GradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeView.swift; sourceTree = "<group>"; };
+		1C5731792A06879400C19EE1 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		1C58ECE02A63CA3A00AC2603 /* DefaultCocktailImageListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCocktailImageListRepository.swift; sourceTree = "<group>"; };
 		1C58ECE22A63CA8100AC2603 /* DefaultCocktailBriefListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCocktailBriefListRepository.swift; sourceTree = "<group>"; };
 		1C58ECE42A63CA9300AC2603 /* DefaultCocktailDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCocktailDetailRepository.swift; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 		1C6636532A067F4B00C85374 /* SelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedView.swift; sourceTree = "<group>"; };
 		1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowRectangleView.swift; sourceTree = "<group>"; };
 		1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRectangleView.swift; sourceTree = "<group>"; };
-		1C71A4AF2A5292A300F1814A /* GradePresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradePresentationView.swift; sourceTree = "<group>"; };
+		1C71A4AF2A5292A300F1814A /* ScorePresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePresentationView.swift; sourceTree = "<group>"; };
 		1C74FD5E2AB6969300823E73 /* CocktailFilterDICotainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterDICotainer.swift; sourceTree = "<group>"; };
 		1C7807F92AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMadeCocktailListEndpoint.swift; sourceTree = "<group>"; };
 		1C7A10432A74F6FF009961A1 /* CocktailDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDescription.swift; sourceTree = "<group>"; };
@@ -524,14 +524,14 @@
 			path = UserRepository;
 			sourceTree = "<group>";
 		};
-		1C04C18529DEEC2F00E381C2 /* RectangleView */ = {
+		1C04C18529DEEC2F00E381C2 /* ScoreView */ = {
 			isa = PBXGroup;
 			children = (
 				1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */,
 				1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */,
-				1C5731792A06879400C19EE1 /* GradeView.swift */,
+				1C5731792A06879400C19EE1 /* ScoreView.swift */,
 			);
-			path = RectangleView;
+			path = ScoreView;
 			sourceTree = "<group>";
 		};
 		1C04C18629DEEC3100E381C2 /* LoadingView */ = {
@@ -1237,8 +1237,8 @@
 		1C71A4AE2A52929300F1814A /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
-				1C04C18529DEEC2F00E381C2 /* RectangleView */,
-				1C71A4AF2A5292A300F1814A /* GradePresentationView.swift */,
+				1C04C18529DEEC2F00E381C2 /* ScoreView */,
+				1C71A4AF2A5292A300F1814A /* ScorePresentationView.swift */,
 				1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */,
 				1C9BAB1B29EFAEC500E979AC /* MutableSizeCollectionView.swift */,
 				1C951D482ABB38CA00662B35 /* MutableSizeTableView.swift */,
@@ -1771,7 +1771,7 @@
 				1CCE88DF29E949A900D3E1D2 /* MyHomeBarVCCoordinator.swift in Sources */,
 				1C5906A72A21DBE0001F048B /* CocktailFilterViewModel.swift in Sources */,
 				1C504CCB2AB45D40005A0B25 /* FetchPreviewDescriptionUsecase.swift in Sources */,
-				1C71A4B02A5292A300F1814A /* GradePresentationView.swift in Sources */,
+				1C71A4B02A5292A300F1814A /* ScorePresentationView.swift in Sources */,
 				1C195F9F2AEB918000562E13 /* SkillDetailRepository.swift in Sources */,
 				1C9F4C8D2AAD8DAF0020DB48 /* CocktailPreviewList.swift in Sources */,
 				1C504CC72AB4256F005A0B25 /* CocktailFilter.swift in Sources */,
@@ -1831,7 +1831,7 @@
 				1C0768692ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift in Sources */,
 				1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */,
 				1CDAB4292AD7DE5D00E30181 /* DefaultItemRepository.swift in Sources */,
-				1C57317A2A06879400C19EE1 /* GradeView.swift in Sources */,
+				1C57317A2A06879400C19EE1 /* ScoreView.swift in Sources */,
 				1C504CDC2AB5E6B7005A0B25 /* FilterType.swift in Sources */,
 				1CDB85B32ACFD75D00360852 /* BaseInformationEndpoint.swift in Sources */,
 				1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */,
