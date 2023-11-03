@@ -8,7 +8,7 @@
 import UIKit
 
 final class UnloggedinMainViewController: UIViewController {
-    weak var delegate: MainViewDelegate?
+    private weak var delegate: MainViewDelegate?
 
     private let logoImage1: UIImageView = {
         let logoImage = UIImageView()

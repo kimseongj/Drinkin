@@ -22,7 +22,7 @@ protocol AddIngredientViewModel {
     func deselectItem(index: Int)
 }
 
-class DefaultAddIngredientViewModel: AddIngredientViewModel {
+final class DefaultAddIngredientViewModel: AddIngredientViewModel {
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var itemFilterList: [String] = []

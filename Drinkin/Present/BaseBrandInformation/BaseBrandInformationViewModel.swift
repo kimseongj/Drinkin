@@ -26,7 +26,9 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
     }
     
     func fetchBaseBrandDetail() {
-        baseBrandDetailRepository.fetchBaseBrandDetail().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        baseBrandDetailRepository.fetchBaseBrandDetail().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
             self.baseBrandDetail = $0.brandDetail
         }).store(in: &cancelBag)
     }

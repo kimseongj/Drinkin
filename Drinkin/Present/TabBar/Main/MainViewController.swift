@@ -7,7 +7,7 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
     var delegate: MainViewDelegate?
     static var login: Bool = false

@@ -86,7 +86,9 @@ extension SavedCocktailListViewController {
 //MARK: - Binding
 extension SavedCocktailListViewController {
     private func binding() {
-        viewModel.previewDescriptionListPublisher.receive(on: RunLoop.main).sink {
+        viewModel.previewDescriptionListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return}
+            
             self.applySnapshot(previewDescriptionList: $0)
         }.store(in: &cancelBag)
     }

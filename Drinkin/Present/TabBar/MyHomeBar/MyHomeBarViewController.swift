@@ -333,7 +333,9 @@ extension MyHomeBarViewController {
 //MARK: - Binding
 extension MyHomeBarViewController {
     private func binding() {
-        viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink {
+        viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            
             self.applySnapshot(holdedItemList: $0)
         }.store(in: &cancelBag)
     }

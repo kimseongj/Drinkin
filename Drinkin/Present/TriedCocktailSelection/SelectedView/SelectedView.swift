@@ -7,7 +7,7 @@
 
 import UIKit
 
-class  SelectedView: UIView {
+final class SelectedView: UIView {
     private let selectCircleView = SelectCircleView()
     
     override init(frame: CGRect) {

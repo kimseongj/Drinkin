@@ -47,7 +47,8 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     }
 
     func fetchCocktailPreviewDescription() {
-        selectTriedCocktailUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        selectTriedCocktailUsecase.execute().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            guard let self = self else { return }
             self.cocktailList = $0.previewDescriptionList
             self.convertSelectableCocktailList()
             self.filterCocktailList()

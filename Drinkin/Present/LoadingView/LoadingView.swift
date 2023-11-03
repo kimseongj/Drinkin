@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class LoadingView: UIView {
+final class LoadingView: UIView {
     
     let mainLoadingTitle: UILabel = {
         let mainLoadingTitle = UILabel()

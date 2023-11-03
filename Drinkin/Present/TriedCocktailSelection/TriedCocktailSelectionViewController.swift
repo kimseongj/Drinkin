@@ -216,7 +216,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-        let categoryListName = viewModel.categoryList[indexPath.row] //else { return  UICollectionViewCell() }
+        let categoryListName = viewModel.categoryList[indexPath.row]
         
         if categoryListName == CategoryListStrings.whole {
             cell.isSelected = true
@@ -259,9 +259,10 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
 //MARK: - CocktailDiffableDataSource
 extension TriedCocktailSelectionViewController {
     private func configureCocktailDataSource() {
-        cocktailDataSource = UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription> (collectionView: cocktailCollectionView) { (collectionView, indexPath, previewDescription) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as? CocktailSelectionCell else { return nil
+        cocktailDataSource = UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription> (collectionView: cocktailCollectionView) { [weak self] (collectionView, indexPath, previewDescription) -> UICollectionViewCell? in
+            guard let self = self, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as? CocktailSelectionCell else { return nil
             }
+            
             cell.fill(with: previewDescription)
             
             self.cocktailCollectionView.deselectItem(at: indexPath, animated: true)
@@ -289,8 +290,8 @@ extension TriedCocktailSelectionViewController {
 //MARK: - Binding
 extension TriedCocktailSelectionViewController {
     private func binding() {
-        //guard let viewModel else { return }
-        viewModel.filteredSelectableCocktailListPublisher.receive(on: RunLoop.main).sink {
+        viewModel.filteredSelectableCocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
             self.applySnapshot(previewDescriptionList: $0)
         }.store(in: &cancelBag)
     }
@@ -322,6 +323,5 @@ extension TriedCocktailSelectionViewController {
 extension TriedCocktailSelectionViewController: DismissTriedCocktailSelectionVCDelegate {
     func dismissTriedCocktailSelectionVC() {
         self.dismiss(animated: true)
-        //delegate?.presentLoginVC()
     }
 }

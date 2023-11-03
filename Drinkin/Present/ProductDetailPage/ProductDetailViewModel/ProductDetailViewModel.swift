@@ -15,7 +15,7 @@ protocol ProductDetailViewModel {
     func fetchDescription()
 }
 
-class DefaultProductDetailViewModel: ProductDetailViewModel {
+final class DefaultProductDetailViewModel: ProductDetailViewModel {
     private let cocktailDetailRepository: CocktailDetailRepository
     private var cancelBag: Set<AnyCancellable> = []
     
