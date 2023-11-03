@@ -69,18 +69,18 @@ final class CocktailRecommendViewController: UIViewController {
         view.addSubview(logoImage)
         view.addSubview(recommendCocktailCollectionView)
         
-        logoImage.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(safeArea)
-            make.height.equalTo(15)
-            make.width.equalTo(80)
+        logoImage.snp.makeConstraints { 
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(safeArea)
+            $0.height.equalTo(15)
+            $0.width.equalTo(80)
         }
         
-        recommendCocktailCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(logoImage.snp.bottom).offset(20)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+        recommendCocktailCollectionView.snp.makeConstraints {
+            $0.top.equalTo(logoImage.snp.bottom).offset(20)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
     

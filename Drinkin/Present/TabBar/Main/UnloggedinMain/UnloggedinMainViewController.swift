@@ -83,41 +83,41 @@ final class UnloggedinMainViewController: UIViewController {
         skeletonView.addSubview(recommendLabel2)
         view.addSubview(startButton)
         
-        logoImage1.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(safeArea)
-            make.height.equalTo(25)
-            make.width.equalTo(120)
+        logoImage1.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(safeArea)
+            $0.height.equalTo(25)
+            $0.width.equalTo(120)
         }
         
-        skeletonView.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.85)
-            make.height.equalTo(view.bounds.width)
-            make.centerY.centerX.equalToSuperview()
+        skeletonView.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(0.85)
+            $0.height.equalTo(view.bounds.width)
+            $0.centerY.centerX.equalToSuperview()
         }
         
-        exampleCocktailImageView.snp.makeConstraints { make in
-            make.width.equalTo(100)
-            make.height.equalTo(100)
-            make.bottom.equalTo(recommendLabel1.snp.top).offset(-4)
-            make.centerX.equalToSuperview()
+        exampleCocktailImageView.snp.makeConstraints {
+            $0.width.equalTo(100)
+            $0.height.equalTo(100)
+            $0.bottom.equalTo(recommendLabel1.snp.top).offset(-4)
+            $0.centerX.equalToSuperview()
         }
         
-        recommendLabel1.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(recommendLabel2.snp.top).offset(-4)
+        recommendLabel1.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(recommendLabel2.snp.top).offset(-4)
         }
         
-        recommendLabel2.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+        recommendLabel2.snp.makeConstraints { 
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
         }
         
-        startButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.height.equalTo(39)
-            make.width.equalTo(108)
-            make.top.equalTo(recommendLabel2.snp.bottom).offset(10)
+        startButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(39)
+            $0.width.equalTo(108)
+            $0.top.equalTo(recommendLabel2.snp.bottom).offset(10)
         }
     }
     

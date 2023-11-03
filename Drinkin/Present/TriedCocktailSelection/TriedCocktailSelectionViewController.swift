@@ -125,39 +125,39 @@ final class TriedCocktailSelectionViewController: UIViewController {
         view.addSubview(cocktailCollectionView)
         view.addSubview(completeSelectionButton)
         
-        mainLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeArea).offset(16)
-            make.leading.equalToSuperview().offset(16)
+        mainLabel.snp.makeConstraints {
+            $0.top.equalTo(safeArea).offset(16)
+            $0.leading.equalToSuperview().offset(16)
         }
         
-        subLabel.snp.makeConstraints { make in
-            make.top.equalTo(mainLabel.snp.bottom)
-            make.leading.equalToSuperview().offset(16)
+        subLabel.snp.makeConstraints {
+            $0.top.equalTo(mainLabel.snp.bottom)
+            $0.leading.equalToSuperview().offset(16)
         }
         
-        exitButton.snp.makeConstraints { make in
-            make.top.equalTo(safeArea).offset(22)
-            make.trailing.equalToSuperview().offset(-22)
+        exitButton.snp.makeConstraints {
+            $0.top.equalTo(safeArea).offset(22)
+            $0.trailing.equalToSuperview().offset(-22)
         }
         
-        categoryCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(exitButton.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(50)
+        categoryCollectionView.snp.makeConstraints {
+            $0.top.equalTo(exitButton.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.height.equalTo(50)
         }
         
-        cocktailCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(categoryCollectionView.snp.bottom).offset(11)
-            make.leading.equalToSuperview().offset(7)
-            make.trailing.equalToSuperview().offset(-7)
-            make.bottom.equalTo(completeSelectionButton.snp.top)
+        cocktailCollectionView.snp.makeConstraints {
+            $0.top.equalTo(categoryCollectionView.snp.bottom).offset(11)
+            $0.leading.equalToSuperview().offset(7)
+            $0.trailing.equalToSuperview().offset(-7)
+            $0.bottom.equalTo(completeSelectionButton.snp.top)
         }
         
-        completeSelectionButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(safeArea.snp.bottom)
-            make.height.equalTo(54)
+        completeSelectionButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(safeArea.snp.bottom)
+            $0.height.equalTo(54)
         }
     }
     

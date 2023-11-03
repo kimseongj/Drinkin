@@ -45,16 +45,16 @@ final class HoldCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(yellowRectangleView)
         contentView.addSubview(titleLabel)
         
-        yellowRectangleView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalTo(titleLabel.snp.leading).offset(-4)
+        yellowRectangleView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(titleLabel.snp.leading).offset(-4)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(2)
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-2)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(2)
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-2)
         }
     }
     
@@ -62,16 +62,16 @@ final class HoldCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(emptyRectangleView)
         contentView.addSubview(titleLabel)
         
-        emptyRectangleView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalTo(titleLabel.snp.leading).offset(-4)
+        emptyRectangleView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(titleLabel.snp.leading).offset(-4)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(2)
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-2)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(2)
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-2)
         }
     }
     

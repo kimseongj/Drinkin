@@ -39,16 +39,16 @@ final class CocktailSelectionCell: UICollectionViewCell {
         self.addSubview(cocktailNameLabel)
         self.addSubview(selectedView)
         
-        cocktailImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview().offset(-8)
-            make.top.equalToSuperview().offset(8)
+        cocktailImageView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(8)
+            $0.trailing.equalToSuperview().offset(-8)
+            $0.top.equalToSuperview().offset(8)
         }
         
-        cocktailNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(cocktailImageView.snp.bottom).offset(8)
-            make.bottom.equalToSuperview().offset(-16)
-            make.centerX.equalToSuperview()
+        cocktailNameLabel.snp.makeConstraints {
+            $0.top.equalTo(cocktailImageView.snp.bottom).offset(8)
+            $0.bottom.equalToSuperview().offset(-16)
+            $0.centerX.equalToSuperview()
         }
         
         selectedView.snp.makeConstraints {

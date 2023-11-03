@@ -30,11 +30,11 @@ class FilterSelectionCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 4
         contentView.addSubview(categoryNameLabel)
         
-        categoryNameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.leading.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().offset(-10)
-            make.bottom.equalToSuperview().offset(-10)
+        categoryNameLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
+            $0.leading.equalToSuperview().offset(10)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-10)
         }
     }
     
