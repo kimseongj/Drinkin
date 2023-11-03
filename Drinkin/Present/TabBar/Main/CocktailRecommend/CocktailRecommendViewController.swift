@@ -11,7 +11,7 @@ import Combine
 
 final class CocktailRecommendViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
-    weak var delegate: MainViewDelegate?
+    private weak var delegate: MainViewDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailBrief>?
     
