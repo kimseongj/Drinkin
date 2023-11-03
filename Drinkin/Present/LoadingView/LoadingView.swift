@@ -62,16 +62,16 @@ final class LoadingView: UIView {
         self.addSubview(mainLoadingTitle)
         self.addSubview(subLoadingTitle)
         
-        mainLoadingTitle.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(296)
-            make.height.equalTo(50)
-            make.centerX.equalToSuperview()
+        mainLoadingTitle.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(296)
+            $0.height.equalTo(50)
+            $0.centerX.equalToSuperview()
         }
         
-        subLoadingTitle.snp.makeConstraints { make in
-            make.top.equalTo(mainLoadingTitle.snp.bottom).offset(6)
-            make.height.equalTo(18)
-            make.centerX.equalToSuperview()
+        subLoadingTitle.snp.makeConstraints {
+            $0.top.equalTo(mainLoadingTitle.snp.bottom).offset(6)
+            $0.height.equalTo(18)
+            $0.centerX.equalToSuperview()
         }
         
     }

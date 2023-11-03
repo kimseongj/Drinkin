@@ -21,15 +21,15 @@ struct CocktailPreview: Codable, Hashable {
     let id: Int
     let cocktailNameKo: String
     let imageURI: String
-    let levelGrade, sugarContentGrade, abvGrade, ingredientQuantity: Int
+    let levelScore, sugarContentScore, abvScore, ingredientQuantity: Int
 
     enum CodingKeys: String, CodingKey {
         case id
         case cocktailNameKo = "cocktail_name_ko"
         case imageURI = "image_uri"
-        case levelGrade = "level_score"
-        case sugarContentGrade = "sugar_content_score"
-        case abvGrade = "abv_score"
+        case levelScore = "level_score"
+        case sugarContentScore = "sugar_content_score"
+        case abvScore = "abv_score"
         case ingredientQuantity = "ingredient_quantity"
     }
 }

@@ -55,22 +55,22 @@ final class HoldView: UIView {
         holdLabelView.addSubview(holdLabel)
         self.addSubview(holdCollectionView)
         
-        holdLabelView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalTo(holdCollectionView.snp.leading).offset(-16)
-            make.top.equalToSuperview()
-            make.bottom.equalTo(holdCollectionView)
-            make.width.equalTo(40)
+        holdLabelView.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(holdCollectionView.snp.leading).offset(-16)
+            $0.top.equalToSuperview()
+            $0.bottom.equalTo(holdCollectionView)
+            $0.width.equalTo(40)
         }
         
-        holdLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalToSuperview().offset(2)
+        holdLabel.snp.makeConstraints { 
+            $0.leading.equalToSuperview()
+            $0.top.equalToSuperview().offset(2)
         }
         
-        holdCollectionView.snp.makeConstraints { make in
-            make.trailing.bottom.equalToSuperview()
-            make.top.equalToSuperview()
+        holdCollectionView.snp.makeConstraints { 
+            $0.trailing.bottom.equalToSuperview()
+            $0.top.equalToSuperview()
         }
     }
     

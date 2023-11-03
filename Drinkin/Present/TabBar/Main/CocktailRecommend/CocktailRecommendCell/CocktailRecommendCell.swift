@@ -152,7 +152,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
         cocktailImageView.load(url: validImageURL)
         fetchTitle(cocktailBrief.cocktailNameKo)
         fetchSubtitle(cocktailBrief.category)
-        fetchLevel(levelGrade: cocktailBrief.levelScore, abvGrade: cocktailBrief.abvScore, sugarContentGrade: cocktailBrief.sugarContentScore)
+        fetchScore(levelScore: cocktailBrief.levelScore, abvScore: cocktailBrief.abvScore, sugarContentScore: cocktailBrief.sugarContentScore)
         descriptionLabel.text = cocktailBrief.description
         configureHoldViews(cocktailBrief: cocktailBrief)
     }
@@ -197,20 +197,20 @@ extension CocktailRecommendCell {
         categoryLabel.text = subtitle
     }
     
-    private func fetchLevel(levelGrade: Int,
-                            abvGrade: Int,
-                            sugarContentGrade: Int) {
+    private func fetchScore(levelScore: Int,
+                            abvScore: Int,
+                            sugarContentScore: Int) {
         
-        let levelGradePresentationView = GradePresentationView(title: InformationStrings.level,
-                                                               grade: levelGrade)
-        let abvGradePresentationView = GradePresentationView(title: InformationStrings.abv,
-                                                             grade: abvGrade)
-        let sugarContentGradePresentationView = GradePresentationView(title: InformationStrings.sugarContent,
-                                                                      grade: sugarContentGrade)
+        let levelScorePresentationView = ScorePresentationView(title: InformationStrings.level,
+                                                               score: levelScore)
+        let abvScorePresentationView = ScorePresentationView(title: InformationStrings.abv,
+                                                             score: abvScore)
+        let sugarContentScorePresentationView = ScorePresentationView(title: InformationStrings.sugarContent,
+                                                                      score: sugarContentScore)
         
-        scoreStackView.addArrangedSubview(levelGradePresentationView)
-        scoreStackView.addArrangedSubview(abvGradePresentationView)
-        scoreStackView.addArrangedSubview(sugarContentGradePresentationView)
+        scoreStackView.addArrangedSubview(levelScorePresentationView)
+        scoreStackView.addArrangedSubview(abvScorePresentationView)
+        scoreStackView.addArrangedSubview(sugarContentScorePresentationView)
     }
 }
 
