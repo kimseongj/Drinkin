@@ -14,7 +14,7 @@ protocol UserMadeCocktailListViewModel {
     func fetchCocktailPreviewDescription()
 }
 
-class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel {
+final class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel {
     private let userMadeCocktailListRepository: UserMadeCocktailListRepository
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -26,7 +26,9 @@ class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel {
     }
     
     func fetchCocktailPreviewDescription() {
-        userMadeCocktailListRepository.fetchUserMadeCocktailList().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        userMadeCocktailListRepository.fetchUserMadeCocktailList().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
             self.previewDescriptionList = $0.cocktailList
         }).store(in: &cancelBag)
     }
