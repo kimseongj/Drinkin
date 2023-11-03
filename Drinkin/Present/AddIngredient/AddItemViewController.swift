@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 final class AddItemViewController: UIViewController {
-    private var viewModel: AddIngredientViewModel?
+    private var viewModel: AddIngredientViewModel
     private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var itemDataSource: UICollectionViewDiffableDataSource<Section, ItemPreview>!
@@ -39,7 +39,7 @@ final class AddItemViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: AddIngredientViewModel?) {
+    init(viewModel: AddIngredientViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,14 +59,14 @@ final class AddItemViewController: UIViewController {
         configureItemDataSource()
         filterBinding()
         itemBinding()
-        viewModel?.fetchItemFilter()
-        viewModel?.fetchItemList()
+        viewModel.fetchItemFilter()
+        viewModel.fetchItemList()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel?.fetchSelectedItemList()
-        viewModel?.addSelectedItems(completion: {
+        viewModel.fetchSelectedItemList()
+        viewModel.addSelectedItems(completion: {
             
         })
     }
@@ -117,11 +117,11 @@ final class AddItemViewController: UIViewController {
 extension AddItemViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == itemFilterCollectionView {
-            viewModel?.filterItems(itemCategory: (viewModel?.itemFilterList[indexPath.row])!)
+            viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row]))
         } else {
             if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
                 cell.presentHoldItem()
-                viewModel?.selectItem(index: indexPath.row)
+                viewModel.selectItem(index: indexPath.row)
             }
         }
     }
@@ -131,7 +131,7 @@ extension AddItemViewController: UICollectionViewDelegate {
             guard let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell else { return }
             
             cell.presentUnholdItem()
-            viewModel?.deselectItem(index: indexPath.row)
+            viewModel.deselectItem(index: indexPath.row)
         }
     }
 }
@@ -192,14 +192,14 @@ extension AddItemViewController {
 //MARK: - Binding
 extension AddItemViewController {
     private func itemBinding() {
-        viewModel?.filteredItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel.filteredItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.applyItemSnapshot(itemPreviewList: $0)
         }.store(in: &cancelBag)
     }
     
     private func filterBinding() {
-        viewModel?.itemFilterPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel.itemFilterPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.applyItemFilterSnapshot(itemFilterList: $0)
         }.store(in: &cancelBag)

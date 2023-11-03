@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class CocktailFilterModalViewController: UIViewController {
-    private var viewModel: CocktailFilterViewModel?
+    private var viewModel: CocktailFilterViewModel
     private let filterType: FilterType
     
     private let contentView: UIView = {
@@ -39,7 +39,7 @@ final class CocktailFilterModalViewController: UIViewController {
         return button
     }()
     
-    init(filterType: FilterType, viewModel: CocktailFilterViewModel?) {
+    init(filterType: FilterType, viewModel: CocktailFilterViewModel) {
         self.filterType = filterType
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -96,13 +96,10 @@ final class CocktailFilterModalViewController: UIViewController {
 //MARK: - FilterTableView DataSource
 extension CocktailFilterModalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModel = viewModel else { return 0 }
-        
         return viewModel.fetchDetailFilter(filterType: filterType).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let viewModel = viewModel else { return UITableViewCell() }
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailFilterCell.identifier, for: indexPath) as! DetailFilterCell
         cell.fill(with: viewModel.fetchDetailFilter(filterType: filterType)[indexPath.row])
         cell.selectionStyle = .none
@@ -114,13 +111,13 @@ extension CocktailFilterModalViewController: UITableViewDataSource {
 //MARK: - FilterTableView Delegate 
 extension CocktailFilterModalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let previousSelectedIndexPath = viewModel?.selectedDetailFilterIndexPath {
+        if let previousSelectedIndexPath = viewModel.selectedDetailFilterIndexPath {
             tableView.cellForRow(at: previousSelectedIndexPath)?.isSelected = false
         }
         
         tableView.cellForRow(at: indexPath)?.isSelected = true
-        viewModel?.selectedDetailFilterIndexPath = indexPath
-        viewModel?.insertDetailFilter(filterType: filterType, detailFilterIndex: indexPath.row)
+        viewModel.selectedDetailFilterIndexPath = indexPath
+        viewModel.insertDetailFilter(filterType: filterType, detailFilterIndex: indexPath.row)
         self.dismiss(animated: true)
     }
 }

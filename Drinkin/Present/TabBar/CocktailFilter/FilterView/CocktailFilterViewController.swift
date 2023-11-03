@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 final class CocktailFilterViewController: UIViewController {
-    private var viewModel: CocktailFilterViewModel?
+    private var viewModel: CocktailFilterViewModel
     var delegate: CocktailFilterFlowDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
@@ -64,7 +64,7 @@ final class CocktailFilterViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: CocktailFilterViewModel? = nil) {
+    init(viewModel: CocktailFilterViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -79,10 +79,11 @@ final class CocktailFilterViewController: UIViewController {
         configureFilterSelectionCollectionView()
         configureFilteredCollectionView()
         makeSelectionFilterCollectionViewDisable()
-        viewModel?.fetchCocktailFilter(completion: { [weak self] in
-            self?.makeSelectionFilterCollectionViewEnable()
+        viewModel.fetchCocktailFilter(completion: { [weak self] in
+            guard let self = self else { return }
+            self.makeSelectionFilterCollectionViewEnable()
         })
-        viewModel?.fetchCocktailList()
+        viewModel.fetchCocktailList()
         configureFilterDataSource()
         filterBinding()
         configureCocktailDataSource()
@@ -161,8 +162,8 @@ final class CocktailFilterViewController: UIViewController {
 //MARK: - ResetDelegate
 extension CocktailFilterViewController: ResetFilterDelegate {
     func resetFilter() {
-        viewModel?.clearAllFilter()
-        viewModel?.fetchCocktailList()
+        viewModel.clearAllFilter()
+        viewModel.fetchCocktailList()
     }
 }
 
@@ -174,13 +175,13 @@ extension CocktailFilterViewController {
             
             cell.fill(with: categoryName)
             
-            if self.viewModel?.textFilterTypeList[indexPath.row] != self.viewModel?.filterTypeList[indexPath.row].descriptionko && self.viewModel?.filterTypeList[indexPath.row] != FilterType.category {
+            if self.viewModel.textFilterTypeList[indexPath.row] != self.viewModel.filterTypeList[indexPath.row].descriptionko && self.viewModel.filterTypeList[indexPath.row] != FilterType.category {
                 cell.makeFixedCell()
             } else {
                 cell.makeDefaultCell()
             }
             
-            if self.viewModel?.filterTypeList[indexPath.row] == FilterType.category {
+            if self.viewModel.filterTypeList[indexPath.row] == FilterType.category {
                 cell.makeBlackCell()
             }
             
@@ -219,7 +220,7 @@ extension CocktailFilterViewController {
 //MARK: - Binding
 extension CocktailFilterViewController {
     private func filterBinding() {
-        viewModel?.textFilterTypeListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel.textFilterTypeListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             
             self.applyFilterSnapshot(filterList: $0)
@@ -229,7 +230,7 @@ extension CocktailFilterViewController {
 
 extension CocktailFilterViewController {
     private func cocktailBinding() {
-        viewModel?.filteredCocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel.filteredCocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             
             self.applyCocktailSnapshot(filteredItems: $0)
@@ -262,13 +263,10 @@ extension CocktailFilterViewController {
 extension CocktailFilterViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filterSelectionCollectionView {
-            guard let viewModel = viewModel else { return }
-            
             let cocktailFilterModalViewController = CocktailFilterModalViewController(filterType: viewModel.filterTypeList[indexPath.row], viewModel: viewModel)
             cocktailFilterModalViewController.modalPresentationStyle = .overFullScreen
             present(cocktailFilterModalViewController, animated: false)
         } else {
-            guard let viewModel = viewModel else { return }
            let cocktailID = viewModel.filteredCocktailList[indexPath.row].id
             delegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
         }

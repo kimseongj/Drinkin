@@ -11,7 +11,7 @@ import SnapKit
 import Combine
 
 final class UserMadeCocktailListViewController: UIViewController {
-    private var viewModel: UserMadeCocktailListViewModel?
+    private var viewModel: UserMadeCocktailListViewModel
     private var cancelBag: Set<AnyCancellable> = []
     private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
     
@@ -24,7 +24,7 @@ final class UserMadeCocktailListViewController: UIViewController {
     }()
     
     
-    init(viewModel: UserMadeCocktailListViewModel?) {
+    init(viewModel: UserMadeCocktailListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -40,7 +40,7 @@ final class UserMadeCocktailListViewController: UIViewController {
         configureUI()
         configureDataSource()
         binding()
-        viewModel?.fetchCocktailPreviewDescription()
+        viewModel.fetchCocktailPreviewDescription()
     }
     
     private func configureBackgroundColor() {
@@ -87,7 +87,6 @@ extension UserMadeCocktailListViewController {
 //MARK: - Binding
 extension UserMadeCocktailListViewController {
     private func binding() {
-        guard let viewModel else { return }
         viewModel.previewDescriptionListPublisher.receive(on: RunLoop.main).sink {
             self.applySnapshot(previewDescriptionList: $0)
         }.store(in: &cancelBag)
