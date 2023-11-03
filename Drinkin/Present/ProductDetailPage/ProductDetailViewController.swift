@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
-class ProductDetailViewController: UIViewController {
+final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
     var delegate: ProductDetailVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []

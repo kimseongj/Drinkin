@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class InformationCell: UICollectionViewCell {
+final class InformationCell: UICollectionViewCell {
     private let label: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardBold, size: 14)
