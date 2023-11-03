@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 final class BaseInformationViewController: UIViewController {
-    private var viewModel: BaseInformationViewModel?
+    private var viewModel: BaseInformationViewModel
     var flowDelegate: BaseInformationVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     private var brandImageDescriptionDataSource: UICollectionViewDiffableDataSource<Section, BrandImageDescription>!
@@ -45,7 +45,7 @@ final class BaseInformationViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: BaseInformationViewModel?) {
+    init(viewModel: BaseInformationViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,7 +61,7 @@ final class BaseInformationViewController: UIViewController {
         configureDataSource()
         configureBaseBrandCollectionView()
         binding()
-        viewModel?.fetchBaseDetail()
+        viewModel.fetchBaseDetail()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +119,7 @@ final class BaseInformationViewController: UIViewController {
 //MARK: - BaseBrandCollectionView Delegate
 extension BaseInformationViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let brandID = viewModel?.returnBrandID(index: indexPath.row) else { return }
+        let brandID = viewModel.returnBrandID(index: indexPath.row) 
         flowDelegate?.pushBaseBrandInformationVC(brandID: brandID)
     }
 }
@@ -179,7 +179,7 @@ extension BaseInformationViewController {
 //MARK: - Binding
 extension BaseInformationViewController {
     private func binding() {
-        viewModel?.baseDetailPublisher.receive(on: RunLoop.main).sink {
+        viewModel.baseDetailPublisher.receive(on: RunLoop.main).sink {
             self.fill(with: $0)
         }.store(in: &cancelBag)
     }
