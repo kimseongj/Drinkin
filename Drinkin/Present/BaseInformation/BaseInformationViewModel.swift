@@ -27,7 +27,9 @@ final class DefaultBaseInformationViewModel: BaseInformationViewModel {
     }
     
     func fetchBaseDetail() {
-        baseDetailRepository.fetchBaseDetail().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+        baseDetailRepository.fetchBaseDetail().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
             self.baseDetail = $0
         }).store(in: &cancelBag)
     }
