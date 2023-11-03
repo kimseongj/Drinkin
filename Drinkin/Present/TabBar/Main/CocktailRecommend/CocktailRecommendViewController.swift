@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 final class CocktailRecommendViewController: UIViewController {
-    private var viewModel: CocktailRecommendViewModel?
+    private var viewModel: CocktailRecommendViewModel
     weak var delegate: MainViewDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailBrief>?
@@ -42,7 +42,7 @@ final class CocktailRecommendViewController: UIViewController {
         return collectionView
     }()
  
-    init(viewModel: CocktailRecommendViewModel?) {
+    init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -57,7 +57,7 @@ final class CocktailRecommendViewController: UIViewController {
         setupRecommendCocktailCollectionView()
         configureDataSource()
         binding()
-        viewModel?.fetchBriefDescription()
+        viewModel.fetchBriefDescription()
     }
     
     func configureBackgroundColor() {
@@ -132,8 +132,6 @@ extension CocktailRecommendViewController {
 //MARK: - Binding
 extension CocktailRecommendViewController {
     private func binding() {
-        guard let viewModel else { return }
-        
         viewModel.briefDescriptionListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.applySnapshot(briefDescriptionList: $0)

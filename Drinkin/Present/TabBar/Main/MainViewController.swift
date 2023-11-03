@@ -8,14 +8,14 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-    private var viewModel: CocktailRecommendViewModel?
+    private var viewModel: CocktailRecommendViewModel
     var delegate: MainViewDelegate?
     static var login: Bool = false
  
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
     private let unloggedinMainViewController = UnloggedinMainViewController()
     
-    init(viewModel: CocktailRecommendViewModel? = nil) {
+    init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
