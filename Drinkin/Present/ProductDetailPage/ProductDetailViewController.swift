@@ -10,9 +10,9 @@ import SnapKit
 import Combine
 
 class ProductDetailViewController: UIViewController {
+    private var viewModel: ProductDetailViewModel
     var delegate: ProductDetailVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
-    private var viewModel: ProductDetailViewModel?
    
     private let scrollView : UIScrollView = {
         let scrollView = UIScrollView()
@@ -58,7 +58,7 @@ class ProductDetailViewController: UIViewController {
         sender.isSelected.toggle()
     }
     
-    init(viewModel: ProductDetailViewModel?) {
+    init(viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -73,7 +73,7 @@ class ProductDetailViewController: UIViewController {
         configureUI()
         introductionView.configureDelegate(delegate: delegate)
         binding()
-        viewModel?.fetchDescription()
+        viewModel.fetchDescription()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,7 +134,7 @@ class ProductDetailViewController: UIViewController {
 //MARK: - Binding
 extension ProductDetailViewController {
     private func binding() {
-        viewModel?.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.fill(with: $0)
         }.store(in: &cancelBag)
