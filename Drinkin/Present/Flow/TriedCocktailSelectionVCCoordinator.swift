@@ -7,7 +7,6 @@
 import UIKit
 
 protocol TriedCocktailSelectionVCDelegate: AnyObject {
-    func presentLoginVC()
     func didFinishTriedCocktailSelectionVC()
 }
 
@@ -31,13 +30,6 @@ class TriedCocktailSelectionVCCoordinator: Coordinator, TriedCocktailSelectionVC
         vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true)
         triedCocktailSelectionViewController = vc
-    }
-    
-    func presentLoginVC() {
-        let vc = LoginViewController()
-        
-        vc.modalPresentationStyle = .fullScreen
-        triedCocktailSelectionViewController?.present(vc, animated: true)
     }
     
     func childDidFinish(_ child: Coordinator?) {
