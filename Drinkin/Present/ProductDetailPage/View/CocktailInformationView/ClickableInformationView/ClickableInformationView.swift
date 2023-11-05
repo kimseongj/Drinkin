@@ -17,7 +17,7 @@ final class ClickableInformationView: UIView {
     private var title: String = ""
     private var idList: [Int] = []
     
-    private var skillLabelView: UIView = {
+    private var titleLabelView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         
@@ -33,7 +33,7 @@ final class ClickableInformationView: UIView {
         return collectionView
     }()
     
-    private let skillLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
@@ -55,23 +55,23 @@ final class ClickableInformationView: UIView {
     }
     
     private func configureTitle() {
-        skillLabel.text = title
+        titleLabel.text = title
     }
     
     func configureUI() {
         self.backgroundColor = .white
-        self.addSubview(skillLabelView)
-        skillLabelView.addSubview(skillLabel)
+        self.addSubview(titleLabelView)
+        titleLabelView.addSubview(titleLabel)
         self.addSubview(informationCollectionView)
         
-        skillLabelView.snp.makeConstraints {
+        titleLabelView.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview().offset(24)
             $0.bottom.equalTo(informationCollectionView)
             $0.width.equalTo(65)
         }
         
-        skillLabel.snp.makeConstraints {
+        titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(7)
         }
@@ -79,7 +79,7 @@ final class ClickableInformationView: UIView {
         informationCollectionView.snp.makeConstraints {
             $0.trailing.bottom.equalToSuperview()
             $0.top.equalToSuperview().offset(24)
-            $0.leading.equalTo(skillLabelView.snp.trailing)
+            $0.leading.equalTo(titleLabelView.snp.trailing)
         }
     }
     
@@ -138,8 +138,7 @@ extension ClickableInformationView {
         switch title {
         case InformationStrings.tool:
             self.toolDataSource = UICollectionViewDiffableDataSource<Section, CocktailTool> (collectionView: informationCollectionView) { (collectionView, indexPath, cocktailTool) -> UICollectionViewCell? in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil
-                }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil }
                 
                 cell.fill(with: cocktailTool)
                 
@@ -147,8 +146,7 @@ extension ClickableInformationView {
             }
         case InformationStrings.skill:
             self.skillDataSource = UICollectionViewDiffableDataSource<Section, CocktailSkill> (collectionView: informationCollectionView) { (collectionView, indexPath, cocktailSkill) -> UICollectionViewCell? in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil
-                }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil }
                 
                 cell.fill(with: cocktailSkill)
                 
@@ -156,8 +154,7 @@ extension ClickableInformationView {
             }
         case InformationStrings.glass:
             self.glassDataSource = UICollectionViewDiffableDataSource<Section, CocktailGlass> (collectionView: informationCollectionView) { (collectionView, indexPath, cocktailGlass) -> UICollectionViewCell? in
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil
-                }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InformationCell.identifier, for: indexPath) as? InformationCell else { return nil }
                 
                 cell.fill(with: cocktailGlass)
                 
