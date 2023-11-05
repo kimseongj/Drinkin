@@ -7,7 +7,7 @@
 
 import Foundation
 
-class KeychainManager {
+class TokenManager {
     func saveToken(tokenType: TokenType, token: String) throws {
         let account = tokenType.description
         guard let password = token.data(using: String.Encoding.utf8) else { return }
