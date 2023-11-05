@@ -11,7 +11,7 @@ import Combine
 
 final class CocktailRecommendViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
-    private weak var delegate: MainViewDelegate?
+    private weak var delegate: MainFlowDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailBrief>?
     
@@ -84,7 +84,7 @@ final class CocktailRecommendViewController: UIViewController {
         }
     }
     
-    func sendDelegate(_ delegate: MainViewDelegate?) {
+    func sendDelegate(_ delegate: MainFlowDelegate?) {
         self.delegate = delegate
     }
     

@@ -9,7 +9,7 @@ import SnapKit
 
 final class MainViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
-    var delegate: MainViewDelegate?
+    var delegate: MainFlowDelegate?
     static var login: Bool = false
  
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
