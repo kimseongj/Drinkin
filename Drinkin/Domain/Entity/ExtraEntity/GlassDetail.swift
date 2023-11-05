@@ -9,18 +9,15 @@ import Foundation
 
 // MARK: - GlassDetail
 struct GlassDetail: Codable {
-    let result: GlassDetailResult
-}
-
-// MARK: - GlassDetail
-struct GlassDetailResult: Codable {
-    let imageURI, glassName, description, capacity: String
+    let id: Int
+    let imageURI, glassName, description, volume: String
     let purchaseLink: String
 
     enum CodingKeys: String, CodingKey {
+        case id
         case imageURI = "image_uri"
-        case glassName = "glass_name"
-        case description, capacity
+        case glassName = "glass_name_ko"
+        case description, volume
         case purchaseLink = "purchase_link"
     }
 }
