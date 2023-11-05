@@ -23,6 +23,17 @@ final class BaseInformationViewController: UIViewController {
         return scrollView
     }()
     
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.spacing = 40
+        
+        return stackView
+    }()
+    
+    private let informationView = UIView()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.themeFont, size: 24)
@@ -76,16 +87,24 @@ final class BaseInformationViewController: UIViewController {
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(scrollView)
-        scrollView.addSubview(titleLabel)
-        scrollView.addSubview(descriptionLabel)
-        scrollView.addSubview(baseBrandCollectionView)
+        scrollView.addSubview(stackView)
+        stackView.addArrangedSubview(informationView)
+        informationView.addSubview(titleLabel)
+        informationView.addSubview(descriptionLabel)
+        stackView.addArrangedSubview(baseBrandCollectionView)
+        
         
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
         
+        stackView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalTo(scrollView)
+            $0.width.equalTo(scrollView.snp.width)
+        }
+        
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeArea.snp.top).offset(8)
+            $0.top.equalToSuperview().offset(8)
             $0.centerX.equalToSuperview()
         }
         
@@ -93,13 +112,14 @@ final class BaseInformationViewController: UIViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview()
         }
         
         baseBrandCollectionView.snp.makeConstraints {
-            $0.top.equalTo(descriptionLabel.snp.bottom).offset(40)
+//            $0.top.equalTo(descriptionLabel.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.width.equalToSuperview()
+//            $0.bottom.equalToSuperview()
+//            $0.width.equalToSuperview()
         }
     }
     
@@ -167,8 +187,12 @@ extension BaseInformationViewController {
     }
     
     private func updateCollectionViewHeight(cellCount: Int) {
-        let cellLineCount: Int = cellCount / 2
+        var cellLineCount: Float = ceil(Float(cellCount) / 2)
         let cellLineHeigt: CGFloat = view.bounds.width / 2 + 10
+        
+        if cellLineCount == 0 {
+            cellLineCount = 1
+        }
         
         baseBrandCollectionView.snp.makeConstraints {
             $0.height.equalTo(cellLineHeigt * CGFloat(cellLineCount))

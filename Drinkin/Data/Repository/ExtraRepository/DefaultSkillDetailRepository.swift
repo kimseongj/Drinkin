@@ -8,16 +8,16 @@
 import Combine
 
 final class DefaultSkillDetailRepository: SkillDetailRepository {
-    let skillID: Int
     let provider = Provider()
     var endpoint: EndpointMakeable = SkillDetailEndpoint()
+    let skillID: Int
     
     init(skillID: Int) {
         self.skillID = skillID
     }
     
     func fetchSkillDetail() -> AnyPublisher<SkillDetail, Error> {
-        //endpoint.insertQuery(queryParameter: "id", queryValue: toolID.description)
+        endpoint.insertPathParmeter(pathParameter: skillID.description)
         
         return provider.fetchData(endpoint: endpoint).eraseToAnyPublisher()
     }

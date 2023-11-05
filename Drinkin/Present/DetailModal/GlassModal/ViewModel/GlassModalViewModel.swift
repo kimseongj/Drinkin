@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol GlassModalViewModel {
-    func fetchGlassDetail(completion: @escaping (GlassDetailResult) -> Void)
+    func fetchGlassDetail(completion: @escaping (GlassDetail) -> Void)
 }
 
 final class DefaultGlassModalViewModel: GlassModalViewModel {
@@ -20,9 +20,9 @@ final class DefaultGlassModalViewModel: GlassModalViewModel {
         self.glassDetailRepository = glassDetailRepository
     }
     
-    func fetchGlassDetail(completion: @escaping (GlassDetailResult) -> Void) {
+    func fetchGlassDetail(completion: @escaping (GlassDetail) -> Void) {
         glassDetailRepository.fetchGlassDetail().receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            completion($0.result)
+            completion($0)
         }).store(in: &cancelBag)
     }
 }

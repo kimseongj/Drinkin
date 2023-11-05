@@ -34,8 +34,7 @@ class LoginVCCoordinator: Coordinator, LoginFlowDelegate {
     func presentTriedCocktailSelectionVC() {
         let triedCocktailSelectionViewCoordinator = TriedCocktailSelectionVCCoordinator(navigationController: navigationController,
                                                                                         appDIContainer: appDIContainer)
-        triedCocktailSelectionViewCoordinator.parentCoordinator = self
-        childCoordinators.append(triedCocktailSelectionViewCoordinator)
+
         triedCocktailSelectionViewCoordinator.start()
     }
     

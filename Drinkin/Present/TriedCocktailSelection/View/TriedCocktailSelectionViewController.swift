@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 final class TriedCocktailSelectionViewController: UIViewController {
-    var delegate: TriedCocktailSelectionVCDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: TriedCocktailSelectionViewModel
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription>?
@@ -198,6 +197,10 @@ final class TriedCocktailSelectionViewController: UIViewController {
     private func dismissViewController() {
         self.dismiss(animated: true)
     }
+    
+    deinit {
+        print("deinit")
+    }
 }
 
 //MARK: - CategoryDataSource
@@ -208,7 +211,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
         return categoryListCount
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell { 
         let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         let categoryListName = viewModel.categoryList[indexPath.row]
         
@@ -254,8 +257,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
 extension TriedCocktailSelectionViewController {
     private func configureCocktailDataSource() {
         cocktailDataSource = UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription> (collectionView: cocktailCollectionView) { [weak self] (collectionView, indexPath, previewDescription) -> UICollectionViewCell? in
-            guard let self = self, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as? CocktailSelectionCell else { return nil
-            }
+            guard let self = self, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as? CocktailSelectionCell else { return nil }
             
             cell.fill(with: previewDescription)
             
@@ -286,6 +288,7 @@ extension TriedCocktailSelectionViewController {
     private func binding() {
         viewModel.filteredSelectableCocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
+            
             self.applySnapshot(previewDescriptionList: $0)
         }.store(in: &cancelBag)
     }

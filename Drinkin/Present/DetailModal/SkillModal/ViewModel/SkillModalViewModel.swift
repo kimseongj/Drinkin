@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol SkillModalViewModel {
-    func fetchSkillDetail(completion: @escaping (SkillDetailResult) -> Void)
+    func fetchSkillDetail(completion: @escaping (SkillDetail) -> Void)
 }
 
 final class DefaultSkillModalViewModel: SkillModalViewModel {
@@ -20,9 +20,9 @@ final class DefaultSkillModalViewModel: SkillModalViewModel {
         self.skillDetailRepository = skillDetailRepository
     }
     
-    func fetchSkillDetail(completion: @escaping (SkillDetailResult) -> Void) {
+    func fetchSkillDetail(completion: @escaping (SkillDetail) -> Void) {
         skillDetailRepository.fetchSkillDetail().receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            completion($0.result)
+            completion($0)
         }).store(in: &cancelBag)
     }
 }

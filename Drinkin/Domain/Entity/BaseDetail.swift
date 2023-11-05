@@ -12,9 +12,9 @@ struct BaseDetail: Codable {
     let brandList: [BrandImageDescription]
 
     enum CodingKeys: String, CodingKey {
-        case baseName = "base_name"
-        case baseDescription = "base_description"
-        case brandList = "brand_list"
+        case baseName = "base_name_ko"
+        case baseDescription = "description"
+        case brandList = "base_brands"
     }
 }
 
@@ -26,6 +26,6 @@ struct BrandImageDescription: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case id
         case imageURI = "image_uri"
-        case brandName = "brand_name"
+        case brandName = "base_brand_name_ko"
     }
 }

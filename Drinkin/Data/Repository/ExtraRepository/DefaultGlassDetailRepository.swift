@@ -17,7 +17,8 @@ final class DefaultGlassDetailRepository: GlassDetailRepository {
     }
     
     func fetchGlassDetail() -> AnyPublisher<GlassDetail, Error> {
-        //endpoint.insertQuery(queryParameter: "id", queryValue: toolID.description)
+        endpoint.insertPathParmeter(pathParameter: glassID.description)
+        
         return provider.fetchData(endpoint: endpoint).eraseToAnyPublisher()
     }
 }

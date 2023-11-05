@@ -21,6 +21,10 @@ struct Provider {
                     
                 }
                 
+                if httpResponse?.statusCode == 404 {
+                 print("40404040404040404")
+                }
+                
                 return $0.data
             }
             .decode(type: T.self, decoder: JSONDecoder())

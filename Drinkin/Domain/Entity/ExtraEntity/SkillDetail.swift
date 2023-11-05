@@ -9,15 +9,12 @@ import Foundation
 
 // MARK: - SkillDetail
 struct SkillDetail: Codable {
-    let result: SkillDetailResult
-}
-
-// MARK: - SkillDetailResult
-struct SkillDetailResult: Codable {
+    let id: Int
     let skillName, description: String
 
     enum CodingKeys: String, CodingKey {
-        case skillName = "skill_name"
+        case id
+        case skillName = "skill_name_ko"
         case description
     }
 }

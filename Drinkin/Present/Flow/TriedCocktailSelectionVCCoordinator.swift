@@ -25,15 +25,14 @@ class TriedCocktailSelectionVCCoordinator: Coordinator, TriedCocktailSelectionVC
     func start() {
         let triedCocktailSelectionDIContainer = appDIContainer.makeTriedCocktailSelectionDIContainer()
         let vc = triedCocktailSelectionDIContainer.makeTriedCocktailSelectionViewController()
-        
-        vc.delegate = self
+
         vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true)
         triedCocktailSelectionViewController = vc
     }
     
     func childDidFinish(_ child: Coordinator?) {
-        parentCoordinator?.childDidFinish(self)
+    
     }
     
     func didFinishTriedCocktailSelectionVC() {

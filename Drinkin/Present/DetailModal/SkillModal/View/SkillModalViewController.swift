@@ -66,7 +66,7 @@ final class SkillModalViewController: UIViewController {
         }
     }
 
-    private func fill(skillDetail: SkillDetailResult) {
+    private func fill(skillDetail: SkillDetail) {
         titleLabel.text = skillDetail.skillName
         descriptionLabel.text = skillDetail.description
     }

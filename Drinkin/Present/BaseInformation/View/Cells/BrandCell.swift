@@ -52,7 +52,7 @@ final class BrandCell: UICollectionViewCell {
     func fill(with brandImageDescription: BrandImageDescription) {
         guard let imageURL = URL(string: brandImageDescription.imageURI) else { return }
         
-        titleLabel.text = brandImageDescription.brandName
         brandImageView.load(url: imageURL)
+        titleLabel.text = brandImageDescription.brandName
     }
 }

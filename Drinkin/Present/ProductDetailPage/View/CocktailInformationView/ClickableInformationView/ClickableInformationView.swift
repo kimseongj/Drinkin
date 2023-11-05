@@ -10,6 +10,7 @@ import SnapKit
 
 final class ClickableInformationView: UIView {
     weak var delegate: ProductDetailVCDelegate?
+    private var cocktailDescription: CocktailDescription?
     private var toolDataSource: UICollectionViewDiffableDataSource<Section, CocktailTool>!
     private var skillDataSource: UICollectionViewDiffableDataSource<Section, CocktailSkill>!
     private var glassDataSource: UICollectionViewDiffableDataSource<Section, CocktailGlass>!
@@ -87,6 +88,10 @@ final class ClickableInformationView: UIView {
         applySnapshot(cocktailDescription: cocktailDescription)
     }
     
+    func fillCocktailDescrion(cocktailDescription: CocktailDescription?) {
+        self.cocktailDescription = cocktailDescription
+    }
+    
     func fetchIDList(cocktailDescription: CocktailDescription) {
         switch title {
         case InformationStrings.tool:
@@ -112,13 +117,15 @@ final class ClickableInformationView: UIView {
 //MARK: - InformationCollectionView Delegate
 extension ClickableInformationView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let validCocktailDescription = cocktailDescription else { return }
+        
         switch title {
         case InformationStrings.tool:
-            delegate?.pushToolModalVC(toolID: indexPath.row)
+            delegate?.pushToolModalVC(toolID: validCocktailDescription.toolList[indexPath.row].id)
         case InformationStrings.skill:
-            delegate?.pushSkillModalVC(skillID: indexPath.row)
+            delegate?.pushSkillModalVC(skillID: validCocktailDescription.skillList[indexPath.row].id)
         case InformationStrings.glass:
-            delegate?.pushGlassModalVC(glassID: indexPath.row)
+            delegate?.pushGlassModalVC(glassID: validCocktailDescription.glassList[indexPath.row].id)
         default:
             return
         }

@@ -22,7 +22,7 @@ final class DefaultBaseDetailRepository: BaseDetailRepository {
     }
     
     func fetchBaseDetail() -> AnyPublisher<BaseDetail, Error> {
-        //endpoint.insertQuery(queryParameter: "base_id", queryValue: baseID.description)
+        endpoint.insertPathParmeter(pathParameter: baseID.description)
         
         return provider.fetchData(endpoint: endpoint)
     }
