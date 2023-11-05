@@ -14,9 +14,11 @@ class LoginService {
     static var accessToken: String?
     static var refreshToken: String?
     
-    func fetch(accessToken: String) {
+    func fetch(accessToken: String, completion: @escaping() -> Void) {
         let request = provider.makePostRequest(endpoint: AccessTokenConversionEndpoint(), accessToken: accessToken, holdedCocktailList: [1, 2, 3, 4, 5])
         
-        provider.postAccessTokenAndHoldedItem(request: request)
+        provider.postAccessTokenAndHoldedItem(request: request) {
+            completion()
+        }
     }
 }

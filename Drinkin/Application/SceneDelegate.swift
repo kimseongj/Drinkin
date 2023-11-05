@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
     let appDIContainer = AppDIContainer()
+    let tokenManager = TokenManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
@@ -20,6 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(windowScene: windowScene)
         self.appCoordinator = AppCoordinator(window, appDIContainer: appDIContainer)
         appCoordinator?.start()
+        do {
+                    try tokenManager.deleteToken(tokenType: TokenType.accessToken)
+                    
+                    try tokenManager.deleteToken(tokenType: TokenType.refreshToken)
+
+                } catch {
+                    print("saveError")
+                }
         
 //         window = UIWindow(windowScene: windowScene) // SceneDelegate의 프로퍼티에 설정해줌
 //         let viewController = LoginViewController()

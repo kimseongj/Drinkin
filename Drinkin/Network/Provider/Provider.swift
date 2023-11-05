@@ -9,6 +9,8 @@ import Foundation
 import Combine
 
 struct Provider {
+    let loginManager = LoginManager()
+    
     func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, Error> {
         let request = endpoint.makeURLRequest()
         
@@ -33,4 +35,39 @@ struct Provider {
             .decode(type: T.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
+    
+//    func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, Error> {
+//        var request = endpoint.makeURLRequest()
+//        request?.setValue("Bearer \("newAccessToken.accessToken")", forHTTPHeaderField: "Authorization")
+//        
+//        return URLSession.shared.dataTaskPublisher(for: request!)
+//            .tryMap { data, response in
+//                let httpResponse = response as! HTTPURLResponse
+//                if httpResponse.statusCode == 401 {
+//                    throw APIError.unauthorized
+//                }
+//                return data
+//            }
+//            .decode(type: T.self, decoder: JSONDecoder())
+//            .catch { error in
+//                if let apiError = error as? APIError, apiError == .unauthorized {
+//                    // Renew the AccessToken
+//                    return loginManager.renewAccessTokenPublisher()
+//                        .flatMap { newAccessToken in
+//                            
+//                            var newRequest = request
+//                            newRequest!.setValue("Bearer \(newAccessToken.accessToken)", forHTTPHeaderField: "Authorization")
+//                            
+//                            // Make the API call with the renewed AccessToken
+//                            return URLSession.shared.dataTaskPublisher(for: newRequest!)
+//                                .map(\.data)
+//                                .decode(type: T.self, decoder: JSONDecoder())
+//                        }
+//                        .eraseToAnyPublisher()
+//                }
+//                return Fail(error: error)
+//                    .eraseToAnyPublisher()
+//            }
+//            .eraseToAnyPublisher()
+//    }
 }

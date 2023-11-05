@@ -53,6 +53,12 @@ final class AppDIContainer {
         return MyHomeBarDIContainer(dependencies: dependencies)
     }
     
+    func makeLoginDIContainer() -> LoginDIContainer {
+        let dependencies = LoginDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
+        
+        return LoginDIContainer(dependencies: dependencies)
+    }
+    
     func makeLoginSettingDIContainer() -> LoginSettingDIContainer {
         let dependencies = LoginSettingDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
         

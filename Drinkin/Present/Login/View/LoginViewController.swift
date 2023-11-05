@@ -7,14 +7,32 @@
 
 import UIKit
 import SnapKit
+import Combine
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
-    let loginViewModel = LoginViewModel()
+    private var viewModel: LoginViewModel
+    var delegate: LoginFlowDelegate?
+    private var cancelBag: Set<AnyCancellable> = []
     
     private let dismissButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "delete_icon"), for: .normal)
+        
+        let deleteImageView: UIImageView = {
+           let imageView = UIImageView()
+            imageView.image = UIImage(named: "delete_icon")
+            imageView.contentMode = .scaleAspectFit
+            
+            return imageView
+        }()
+
+        button.addSubview(deleteImageView)
+        
+        deleteImageView.snp.makeConstraints {
+            $0.size.equalTo(20)
+            $0.center.equalToSuperview()
+        }
+        
         button.addTarget(self, action: #selector(dismissLoginVC), for: .touchUpInside)
         
         return button
@@ -29,11 +47,12 @@ final class LoginViewController: UIViewController {
         return stackView
     }()
     
-    lazy var kakaoLoginStatusLabel: UILabel = {
-        let label = UILabel()
-        label.text = "로그인 여부 라벨"
+    private let cocktailImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "cocktail_image")
+        imageView.contentMode = .scaleAspectFit
         
-        return label
+        return imageView
     }()
     
     private let logoImageView: UIImageView = {
@@ -48,7 +67,7 @@ final class LoginViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         label.textAlignment = .center
-        label.text = "갖고있는 재료, 추천 칵테일을 저장하기 위해"
+        label.text = "계정을 생성하고"
         
         return label
     }()
@@ -57,61 +76,146 @@ final class LoginViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         label.textAlignment = .center
-        label.text = "로그인 해주세요"
+        label.text = "칵테일을 추천 받아보세요."
         
         return label
     }()
     
-    lazy var kakaoLoginButton: UIButton = {
+    let kakaoLoginButton: UIButton = {
         let button = UIButton()
+        
         button.backgroundColor = ColorPalette.kakaoThemeColor
-        button.titleLabel?.textColor = .black
-        button.setImage(ImageStorage.kakaoLoginIcon, for: .normal)
-        button.setTitle("카카오로 로그인", for: .normal)
-        button.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
+        button.layer.cornerRadius = 12
+        
+        let view = UIView()
+        let kakakoLogoImageView:UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "kakao_logo")
+            imageView.contentMode = .scaleAspectFit
+
+            return imageView
+        }()
+
+        let kakaoLoginLabel: UILabel = {
+           let label = UILabel()
+            label.text = "카카오톡으로 계속하기"
+            label.textColor = .black
+            label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
+
+            return label
+        }()
+        
+        view.addSubview(kakakoLogoImageView)
+        view.addSubview(kakaoLoginLabel)
+
+        kakakoLogoImageView.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+            $0.size.equalTo(18)
+        }
+
+        kakaoLoginLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(kakakoLogoImageView.snp.trailing).offset(8)
+            $0.trailing.equalToSuperview()
+        }
+
+        button.addSubview(view)
+
+        view.snp.makeConstraints {
+            $0.centerY.centerX.equalToSuperview()
+        }
+        
+        button.addTarget(self, action: #selector(loginButtonClicked), for: .allTouchEvents)
         
         return button
     }()
     
-    lazy var appleLoginButton: UIButton = {
+    let appleLoginButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black
-        button.titleLabel?.textColor = .white
-        button.setImage(ImageStorage.appleLoginIcon, for: .normal)
-        button.setTitle("Apple로 로그인", for: .normal)
+        button.layer.cornerRadius = 12
         button.addTarget(self, action: #selector(appleLoginButtonClicked), for: .touchUpInside)
+        
+        let view = UIView()
+        let appleLogoImageView:UIImageView = {
+            let imageView = UIImageView()
+            imageView.image = UIImage(named: "apple_logo")
+            imageView.contentMode = .scaleAspectFit
+
+            return imageView
+        }()
+
+        let appleLoginLabel: UILabel = {
+           let label = UILabel()
+            label.text = "Apple로 계속하기"
+            label.textColor = .white
+            label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
+
+            return label
+        }()
+
+        view.addSubview(appleLogoImageView)
+        view.addSubview(appleLoginLabel)
+
+        appleLogoImageView.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+            $0.size.equalTo(18)
+        }
+
+        appleLoginLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(appleLogoImageView.snp.trailing).offset(8)
+            $0.trailing.equalToSuperview()
+        }
+
+        button.addSubview(view)
+
+        view.snp.makeConstraints {
+            $0.centerY.centerX.equalToSuperview()
+        }
         
         return button
     }()
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
+        binding()
     }
     
     @objc
     private func dismissLoginVC() {
+        print("dismissClicked")
         self.dismiss(animated: true)
     }
     
     @objc
     private func loginButtonClicked() {
-        print("loginButtonClicked")
-        loginViewModel.handleKakaoLogin()
+        print("kakaoClicked")
+        viewModel.handleKakaoLogin()
     }
     
     @objc
     private func appleLoginButtonClicked() {
         print("appleClicked")
-        
-        loginViewModel.performRequests()
+        viewModel.performRequests()
     }
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(dismissButton)
+        view.addSubview(cocktailImageView)
         view.addSubview(logoImageView)
         view.addSubview(descriptionLabel1)
         view.addSubview(descriptionLabel2)
@@ -125,21 +229,27 @@ final class LoginViewController: UIViewController {
             $0.leading.equalToSuperview().offset(20)
         }
         
+        cocktailImageView.snp.makeConstraints {
+            $0.size.equalTo(200)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(safeArea.snp.top).offset(40)
+        }
+        
         logoImageView.snp.makeConstraints {
+            $0.top.equalTo(cocktailImageView.snp.bottom).offset(20)
             $0.width.equalTo(190)
             $0.height.equalTo(60)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(view.bounds.height * 0.2)
         }
         
         descriptionLabel1.snp.makeConstraints {
-            $0.top.equalTo(logoImageView.snp.bottom).offset(60)
             $0.centerX.equalToSuperview()
         }
         
         descriptionLabel2.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(descriptionLabel1.snp.bottom).offset(5)
+            $0.bottom.equalTo(stackView.snp.top).offset(-30)
         }
         
         stackView.snp.makeConstraints {
@@ -148,13 +258,13 @@ final class LoginViewController: UIViewController {
         }
         
         kakaoLoginButton.snp.makeConstraints {
-            $0.height.equalTo(60)
-            $0.width.equalTo(200)
+            $0.height.equalTo(50)
+            $0.width.equalTo(300)
         }
         
         appleLoginButton.snp.makeConstraints {
-            $0.height.equalTo(60)
-            $0.width.equalTo(200)
+            $0.height.equalTo(50)
+            $0.width.equalTo(300)
         }
     }
 }
@@ -162,5 +272,18 @@ final class LoginViewController: UIViewController {
 extension LoginViewController:  ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+extension LoginViewController {
+    func binding() {
+        viewModel.tokenExistencePublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            
+            if $0 == true {
+                self.dismiss(animated: true)
+                self.delegate?.presentTriedCocktailSelectionVC()
+            }
+        }.store(in: &cancelBag)
     }
 }

@@ -7,12 +7,13 @@
 
 import UIKit
 
-protocol MainViewDelegate: AnyObject {
+protocol MainFlowDelegate: AnyObject {
+    func presentLoginVC()
     func pushTriedCocktailSelectionVC()
     func pushProductDetailVC(cocktailID: Int)
 }
 
-class MainVCCoordinator: Coordinator, MainViewDelegate {
+class MainVCCoordinator: Coordinator, MainFlowDelegate {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -43,6 +44,15 @@ class MainVCCoordinator: Coordinator, MainViewDelegate {
         navigationController.setViewControllers([mainViewController], animated: false)
         
         return navigationController
+    }
+    
+    func presentLoginVC() {
+        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        
+        loginVCCoordinator.parentCoordinator = self
+        childCoordinators.append(loginVCCoordinator)
+        
+        loginVCCoordinator.start()
     }
     
     func pushTriedCocktailSelectionVC() {
