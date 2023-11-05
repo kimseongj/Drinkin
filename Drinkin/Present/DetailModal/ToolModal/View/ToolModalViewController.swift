@@ -123,7 +123,7 @@ final class ToolModalViewController: UIViewController {
         }
     }
     
-    private func fill(toolDetail: ToolDetailResult) {
+    private func fill(toolDetail: ToolDetail) {
         guard let imageURL = URL(string: toolDetail.imageURI) else { return }
         
         imageView.load(url: imageURL)

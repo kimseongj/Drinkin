@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 final class CocktailInformationView: UIView {
+    private var cocktailDescription: CocktailDescription?
+    
     private let informationLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -24,11 +26,12 @@ final class CocktailInformationView: UIView {
     let abvView = TextInformationView(title: InformationStrings.abv)
     let levelView = TextInformationView(title: InformationStrings.level)
     let sugarContentView = TextInformationView(title: InformationStrings.sugarContent)
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+        
+    init() {
+        super.init(frame: CGRect.zero)
         self.backgroundColor = .white
         configureUI()
+        fillCocktailDescription()
     }
     
     required init?(coder: NSCoder) {
@@ -84,6 +87,12 @@ final class CocktailInformationView: UIView {
         }
     }
     
+    func fillCocktailDescription() {
+        toolView.fillCocktailDescrion(cocktailDescription: cocktailDescription)
+        skillView.fillCocktailDescrion(cocktailDescription: cocktailDescription)
+        glassView.fillCocktailDescrion(cocktailDescription: cocktailDescription)
+    }
+    
     func fill(with cocktailDescription: CocktailDescription) {  
         abvView.fill(with: cocktailDescription.abv)
         levelView.fill(with: cocktailDescription.level)
@@ -92,5 +101,10 @@ final class CocktailInformationView: UIView {
         toolView.fill(with: cocktailDescription)
         skillView.fill(with: cocktailDescription)
         glassView.fill(with: cocktailDescription)
+    }
+    
+    func fillCocktailDescription(cocktailDescription: CocktailDescription?) {
+        self.cocktailDescription = cocktailDescription
+        fillCocktailDescription()
     }
 }

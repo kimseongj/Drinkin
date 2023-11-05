@@ -15,7 +15,7 @@ class LoginService {
     static var refreshToken: String?
     
     func fetch(accessToken: String, completion: @escaping() -> Void) {
-        let request = provider.makePostRequest(endpoint: AccessTokenConversionEndpoint(), accessToken: accessToken, holdedCocktailList: [1, 2, 3, 4, 5])
+        let request = provider.makePostRequest(endpoint: KakaoAccessTokenConversionEndpoint(), accessToken: accessToken, holdedCocktailList: [1, 2, 3, 4, 5])
         
         provider.postAccessTokenAndHoldedItem(request: request) {
             completion()

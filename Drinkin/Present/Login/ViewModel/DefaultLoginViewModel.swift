@@ -114,6 +114,12 @@ extension DefaultLoginViewModel: ASAuthorizationControllerDelegate {
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
 
+            if let authorizationCode = appleIDCredential.authorizationCode {
+                // authorizationCode를 사용하여 accessToken을 얻을 수 있음
+                let accessToken = String(data: authorizationCode, encoding: .utf8)
+                print("accessToken: \(accessToken ?? "N/A")")
+            }
+            
             tokenExistence = true
         default:
             break

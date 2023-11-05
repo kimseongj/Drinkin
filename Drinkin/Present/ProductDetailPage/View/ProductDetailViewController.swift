@@ -137,6 +137,7 @@ extension ProductDetailViewController {
         viewModel.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.fill(with: $0)
+            self.cocktailInformationView.fillCocktailDescription(cocktailDescription: $0)
         }.store(in: &cancelBag)
     }
 }
