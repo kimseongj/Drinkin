@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol DismissTriedCocktailSelectionVCDelegate {
-    func dismissTriedCocktailSelectionVC()
+    func dismissTriedCocktailSelectionViewController()
 }
 
 final class RecommendPopupViewController: UIViewController {
@@ -109,6 +109,6 @@ final class RecommendPopupViewController: UIViewController {
     @objc
     private func tapRecommendButton() {
         self.dismiss(animated: true)
-        delegate?.dismissTriedCocktailSelectionVC()
+        delegate?.dismissTriedCocktailSelectionViewController()
     }
 }

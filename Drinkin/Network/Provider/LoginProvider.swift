@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class LoginProvider {
-    private let keychainManager = KeychainManager()
+    private let keychainManager = TokenManager()
     private var cancelBag: Set<AnyCancellable> = []
 
     func makePostRequest(endpoint: EndpointMakeable, accessToken: String, holdedCocktailList: [Int]) -> URLRequest? {
@@ -27,7 +27,7 @@ class LoginProvider {
         return request
     }
     
-    func postAccessTokenAndHoldedItem(request: URLRequest?) {
+    func postAccessTokenAndHoldedItem(request: URLRequest?, completion: @escaping () -> Void) {
         guard let request else { return }
         
         URLSession.shared.dataTaskPublisher(for: request)
@@ -44,6 +44,7 @@ class LoginProvider {
                 
                 do {
                     try self.keychainManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
+                    completion()
                 } catch {
                     print("saveError")
                 }

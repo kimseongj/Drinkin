@@ -1,4 +1,4 @@
-//
+ //
 //  LoginViewModel.swift
 //  Drinkin
 //
@@ -11,25 +11,42 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import AuthenticationServices
 
-class LoginViewModel: NSObject, ObservableObject {
-    static var validAccessToken: String?
+protocol LoginViewModel {
+    var tokenExistencePublisher: Published<Bool>.Publisher { get }
+    
+    func handleKakaoLogin()
+    func performRequests()
+}
+
+final class DefaultLoginViewModel: NSObject, ObservableObject, LoginViewModel {
+    private let loginRepository: LoginRepository
+    private var canelBag: Set<AnyCancellable> = []
     var loginService = LoginService()
     lazy var authorizationController = ASAuthorizationController(authorizationRequests: [createRequest()])
+    @Published var tokenExistence: Bool = false
+    var tokenExistencePublisher: Published<Bool>.Publisher { $tokenExistence }
     
-    override init() {
+    init(loginRepository: LoginRepository) {
+        self.loginRepository = loginRepository
         super.init()
         createAccount()
+    }
+    
+    func checkTokenExistence() {
+        tokenExistence = LoginManager.shared.checkTokenExistence()
     }
 }
 
 //MARK: -KakaoLogin
-extension LoginViewModel {
+extension DefaultLoginViewModel {
     func handleKakaoLogin() {
         print("KakoAuthVM - handleKakao")
         
         // 카카오톡 실행 가능 여부 확인
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+            UserApi.shared.loginWithKakaoTalk { [weak self] (oauthToken, error) in
+                guard let self = self else { return }
+                
                 if let error = error {
                     print(error)
                 }
@@ -38,11 +55,15 @@ extension LoginViewModel {
                     
                     guard let accessToken = oauthToken?.accessToken else { return }
                     
-                    self.loginService.fetch(accessToken: accessToken)
+                    self.loginService.fetch(accessToken: accessToken) {
+                        self.tokenExistence = true
+                    }
                 }
             }
         } else { // 카카오톡 실행이 안될 경우
-            UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+            UserApi.shared.loginWithKakaoAccount { [weak self] (oauthToken, error) in
+                guard let self = self else { return }
+                
                 if let error = error {
                     print(error)
                 }
@@ -51,7 +72,9 @@ extension LoginViewModel {
                     
                     guard let accessToken = oauthToken?.accessToken else { return }
             
-                    self.loginService.fetch(accessToken: accessToken)
+                    self.loginService.fetch(accessToken: accessToken) {
+                        self.tokenExistence = true
+                    }
                 }
             }
         }
@@ -59,7 +82,7 @@ extension LoginViewModel {
 }
 
 //MARK: - AppleLogin
-extension LoginViewModel: ASAuthorizationControllerDelegate {
+extension DefaultLoginViewModel: ASAuthorizationControllerDelegate {
     func createRequest() -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -91,6 +114,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
 
+            tokenExistence = true
         default:
             break
         }

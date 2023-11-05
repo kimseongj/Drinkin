@@ -47,10 +47,12 @@ class MainVCCoordinator: Coordinator, MainFlowDelegate {
     }
     
     func presentLoginVC() {
-        let vc = LoginViewController()
+        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
         
-        vc.modalPresentationStyle = .fullScreen
-        navigationController.present(vc, animated: true)
+        loginVCCoordinator.parentCoordinator = self
+        childCoordinators.append(loginVCCoordinator)
+        
+        loginVCCoordinator.start()
     }
     
     func pushTriedCocktailSelectionVC() {

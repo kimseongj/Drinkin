@@ -11,7 +11,7 @@ import Combine
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
-    let viewModel = DefaultLoginViewModel()
+    private var viewModel: LoginViewModel
     private var cancelBag: Set<AnyCancellable> = []
     
     private let dismissButton: UIButton = {
@@ -175,6 +175,15 @@ final class LoginViewController: UIViewController {
         
         return button
     }()
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
