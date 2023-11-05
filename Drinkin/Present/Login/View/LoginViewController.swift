@@ -12,6 +12,7 @@ import AuthenticationServices
 
 final class LoginViewController: UIViewController {
     private var viewModel: LoginViewModel
+    var delegate: LoginFlowDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     
     private let dismissButton: UIButton = {
@@ -276,11 +277,12 @@ extension LoginViewController:  ASAuthorizationControllerPresentationContextProv
 
 extension LoginViewController {
     func binding() {
-        viewModel.tokenExistencePublisher.sink { [weak self] in
+        viewModel.tokenExistencePublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             
             if $0 == true {
                 self.dismiss(animated: true)
+                self.delegate?.presentTriedCocktailSelectionVC()
             }
         }.store(in: &cancelBag)
     }

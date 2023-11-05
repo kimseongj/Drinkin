@@ -7,7 +7,11 @@
 
 import UIKit
 
-class LoginVCCoordinator: Coordinator {
+protocol LoginFlowDelegate {
+    func presentTriedCocktailSelectionVC()
+}
+
+class LoginVCCoordinator: Coordinator, LoginFlowDelegate {
     weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
@@ -22,6 +26,7 @@ class LoginVCCoordinator: Coordinator {
         let loginDIContainer = appDIContainer.makeLoginDIContainer()
         
         let loginViewController = loginDIContainer.makeLoginViewController()
+        loginViewController.delegate = self
         loginViewController.modalPresentationStyle = .fullScreen
         navigationController.present(loginViewController, animated: true)
     }
@@ -29,7 +34,6 @@ class LoginVCCoordinator: Coordinator {
     func presentTriedCocktailSelectionVC() {
         let triedCocktailSelectionViewCoordinator = TriedCocktailSelectionVCCoordinator(navigationController: navigationController,
                                                                                         appDIContainer: appDIContainer)
-        
         triedCocktailSelectionViewCoordinator.parentCoordinator = self
         childCoordinators.append(triedCocktailSelectionViewCoordinator)
         triedCocktailSelectionViewCoordinator.start()
