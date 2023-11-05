@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol BaseBrandInformationViewModel {
-    var baseBrandDetailPublisher: Published<BrandDetail?>.Publisher { get }
+    var baseBrandDetailPublisher: Published<BaseBrandDetail?>.Publisher { get }
     
     func fetchBaseBrandDetail()
 }
@@ -18,8 +18,8 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
     private let baseBrandDetailRepository: BaseBrandDetailRepository
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var baseBrandDetail: BrandDetail?
-    var baseBrandDetailPublisher: Published<BrandDetail?>.Publisher { $baseBrandDetail }
+    @Published var baseBrandDetail: BaseBrandDetail?
+    var baseBrandDetailPublisher: Published<BaseBrandDetail?>.Publisher { $baseBrandDetail }
     
     init(baseBrandDetailRepository: BaseBrandDetailRepository) {
         self.baseBrandDetailRepository = baseBrandDetailRepository
@@ -29,7 +29,7 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
         baseBrandDetailRepository.fetchBaseBrandDetail().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
             guard let self = self else { return }
             
-            self.baseBrandDetail = $0.brandDetail
+            self.baseBrandDetail = $0
         }).store(in: &cancelBag)
     }
 }

@@ -7,23 +7,16 @@
 
 import Foundation
 
-struct BaseBrandDetail: Codable {
-    let brandDetail: BrandDetail
-    
-    enum CodingKeys: String, CodingKey {
-        case brandDetail = "base_brand"
-    }
-}
-
-struct BrandDetail: Codable, Hashable {
+struct BaseBrandDetail: Codable, Hashable {
     let imageURI: String
-    let brandName: String
-    let classification: String
+    let baseBrandName: String
+//    let classification: String
     let abv: String
     
     enum CodingKeys: String, CodingKey {
         case imageURI = "image_uri"
-        case brandName = "brand_name"
-        case classification, abv
+        case baseBrandName = "base_brand_name_ko"
+//        case classification
+        case abv
     }
 }

@@ -20,6 +20,13 @@ final class CocktailInformationView: UIView {
         return label
     }()
     
+    private let informationStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        
+        return stackView
+    }()
+    
     let toolView = ClickableInformationView(title: InformationStrings.tool)
     let skillView = ClickableInformationView(title: InformationStrings.skill)
     let glassView = ClickableInformationView(title: InformationStrings.glass)
@@ -38,15 +45,64 @@ final class CocktailInformationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    private func configureUI() {
+//        self.addSubview(informationLabel)
+//        self.addSubview(toolView)
+//        self.addSubview(skillView)
+//        self.addSubview(glassView)
+//        self.addSubview(skillView)
+//        self.addSubview(abvView)
+//        self.addSubview(levelView)
+//        self.addSubview(sugarContentView)
+//
+//        informationLabel.snp.makeConstraints {
+//            $0.top.equalToSuperview().offset(16)
+//            $0.leading.equalToSuperview().offset(16)
+//            $0.trailing.equalToSuperview().offset(-16)
+//            $0.height.equalTo(17)
+//        }
+//
+//        toolView.snp.makeConstraints {
+//            $0.top.equalTo(informationLabel.snp.bottom)
+//            $0.trailing.leading.equalToSuperview()
+//        }
+//
+//        skillView.snp.makeConstraints {
+//            $0.top.equalTo(toolView.snp.bottom)
+//            $0.trailing.leading.equalToSuperview()
+//        }
+//
+//        glassView.snp.makeConstraints {
+//            $0.top.equalTo(skillView.snp.bottom)
+//            $0.trailing.leading.equalToSuperview()
+//        }
+//
+//        abvView.snp.makeConstraints {
+//            $0.top.equalTo(glassView.snp.bottom)
+//            $0.trailing.leading.equalToSuperview()
+//        }
+//
+//        levelView.snp.makeConstraints {
+//            $0.top.equalTo(abvView.snp.bottom)
+//            $0.trailing.leading.equalToSuperview()
+//        }
+//
+//        sugarContentView.snp.makeConstraints {
+//            $0.top.equalTo(levelView.snp.bottom)
+//            $0.trailing.leading.equalToSuperview()
+//            $0.bottom.equalToSuperview()
+//        }
+//    }
+    
     private func configureUI() {
         self.addSubview(informationLabel)
-        self.addSubview(toolView)
-        self.addSubview(skillView)
-        self.addSubview(glassView)
-        self.addSubview(skillView)
-        self.addSubview(abvView)
-        self.addSubview(levelView)
-        self.addSubview(sugarContentView)
+        self.addSubview(informationStackView)
+        informationStackView.addArrangedSubview(toolView)
+        informationStackView.addArrangedSubview(skillView)
+        informationStackView.addArrangedSubview(glassView)
+        informationStackView.addArrangedSubview(abvView)
+        informationStackView.addArrangedSubview(levelView)
+        informationStackView.addArrangedSubview(sugarContentView)
         
         informationLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
@@ -55,33 +111,8 @@ final class CocktailInformationView: UIView {
             $0.height.equalTo(17)
         }
         
-        toolView.snp.makeConstraints {
+        informationStackView.snp.makeConstraints {
             $0.top.equalTo(informationLabel.snp.bottom)
-            $0.trailing.leading.equalToSuperview()
-        }
-        
-        skillView.snp.makeConstraints {
-            $0.top.equalTo(toolView.snp.bottom)
-            $0.trailing.leading.equalToSuperview()
-        }
-        
-        glassView.snp.makeConstraints {
-            $0.top.equalTo(skillView.snp.bottom)
-            $0.trailing.leading.equalToSuperview()
-        }
-        
-        abvView.snp.makeConstraints {
-            $0.top.equalTo(glassView.snp.bottom)
-            $0.trailing.leading.equalToSuperview()
-        }
-        
-        levelView.snp.makeConstraints {
-            $0.top.equalTo(abvView.snp.bottom)
-            $0.trailing.leading.equalToSuperview()
-        }
-        
-        sugarContentView.snp.makeConstraints {
-            $0.top.equalTo(levelView.snp.bottom)
             $0.trailing.leading.equalToSuperview()
             $0.bottom.equalToSuperview()
         }

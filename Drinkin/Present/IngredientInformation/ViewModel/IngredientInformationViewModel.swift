@@ -16,8 +16,8 @@ final class DefaultIngredientInformationViewModel: IngredientInformationViewMode
     private let ingredientDetailRepository: IngredientDetailRepository
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var baseBrandDetail: BrandDetail?
-    var baseBrandDetailPublisher: Published<BrandDetail?>.Publisher { $baseBrandDetail }
+    @Published var baseBrandDetail: BaseBrandDetail?
+    var baseBrandDetailPublisher: Published<BaseBrandDetail?>.Publisher { $baseBrandDetail }
     
     init(ingredientDetailRepository: IngredientDetailRepository) {
         self.ingredientDetailRepository = ingredientDetailRepository

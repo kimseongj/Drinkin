@@ -167,12 +167,12 @@ final class BaseBrandInformationViewController: UIViewController {
         }
     }
     
-    private func fill(with brandDetail: BrandDetail?) {
+    private func fill(with brandDetail: BaseBrandDetail?) {
         guard let brandDetail = brandDetail, let brandImageURL = URL(string: brandDetail.imageURI) else { return }
         
         brandImageView.load(url: brandImageURL)
-        titleLabel.text = brandDetail.brandName
-        classificationDescriptionLabel.text = brandDetail.classification
+        titleLabel.text = brandDetail.baseBrandName
+//        classificationDescriptionLabel.text = brandDetail.classification
         abvDescriptionLabel.text = brandDetail.abv
     }
 }
