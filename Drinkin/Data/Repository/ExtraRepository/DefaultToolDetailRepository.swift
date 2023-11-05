@@ -18,7 +18,7 @@ final class DefaultToolDetailRepository: ToolDetailRepository {
     }
     
     func fetchToolDetail() -> AnyPublisher<ToolDetail, Error> {
-        //endpoint.insertQuery(queryParameter: "id", queryValue: toolID.description)
+        endpoint.insertPathParmeter(pathParameter: toolID.description)
         
         return provider.fetchData(endpoint: endpoint).eraseToAnyPublisher()
     }
