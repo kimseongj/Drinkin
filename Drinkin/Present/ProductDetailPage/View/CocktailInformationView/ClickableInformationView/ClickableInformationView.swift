@@ -67,7 +67,7 @@ final class ClickableInformationView: UIView {
         titleLabelView.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.top.equalToSuperview().offset(24)
-            $0.bottom.equalTo(informationCollectionView)
+            $0.height.equalTo(33)
             $0.width.equalTo(65)
         }
         
@@ -80,6 +80,7 @@ final class ClickableInformationView: UIView {
             $0.trailing.bottom.equalToSuperview()
             $0.top.equalToSuperview().offset(24)
             $0.leading.equalTo(titleLabelView.snp.trailing)
+            $0.height.greaterThanOrEqualTo(33)
         }
     }
     
@@ -103,7 +104,6 @@ final class ClickableInformationView: UIView {
         default:
             return
         }
-        
     }
     
     func configurelInformationCollectionView() {
