@@ -275,8 +275,6 @@ extension IntroductionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == baseCollectionView {
             delegate?.pushBaseInformationVC(baseID: baseIDList[indexPath.row])
-        } else {
-            delegate?.pushIngredientInformationVC(ingredientID: ingredientIDList[indexPath.row])
-        }
+        } 
     }
 }
