@@ -19,13 +19,13 @@ final class LoginViewController: UIViewController {
         let button = UIButton()
         
         let deleteImageView: UIImageView = {
-           let imageView = UIImageView()
+            let imageView = UIImageView()
             imageView.image = UIImage(named: "delete_icon")
             imageView.contentMode = .scaleAspectFit
             
             return imageView
         }()
-
+        
         button.addSubview(deleteImageView)
         
         deleteImageView.snp.makeConstraints {
@@ -81,98 +81,103 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    let kakaoLoginButton: UIButton = {
+    private lazy var kakaoLoginButton: UIButton = {
         let button = UIButton()
         
         button.backgroundColor = ColorPalette.kakaoThemeColor
         button.layer.cornerRadius = 12
         
         let view = UIView()
-        let kakakoLogoImageView:UIImageView = {
+        view.isUserInteractionEnabled = false
+        
+        let kakaoLogoImageView:UIImageView = {
             let imageView = UIImageView()
             imageView.image = UIImage(named: "kakao_logo")
             imageView.contentMode = .scaleAspectFit
-
+            
             return imageView
         }()
-
+        
         let kakaoLoginLabel: UILabel = {
-           let label = UILabel()
+            let label = UILabel()
             label.text = "카카오톡으로 계속하기"
             label.textColor = .black
             label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
-
+            
             return label
         }()
         
-        view.addSubview(kakakoLogoImageView)
+        button.addSubview(view)
+        view.addSubview(kakaoLogoImageView)
         view.addSubview(kakaoLoginLabel)
-
-        kakakoLogoImageView.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview()
+        
+        kakaoLogoImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
             $0.size.equalTo(18)
         }
-
+        
         kakaoLoginLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(kakakoLogoImageView.snp.trailing).offset(8)
+            $0.leading.equalTo(kakaoLogoImageView.snp.trailing).offset(8)
             $0.trailing.equalToSuperview()
         }
-
-        button.addSubview(view)
-
+        
         view.snp.makeConstraints {
             $0.centerY.centerX.equalToSuperview()
+            $0.height.equalTo(20)
         }
         
-        button.addTarget(self, action: #selector(loginButtonClicked), for: .allTouchEvents)
+        button.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
         
         return button
     }()
     
-    let appleLoginButton: UIButton = {
+    private let appleLoginButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .black
-        button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(appleLoginButtonClicked), for: .touchUpInside)
         
         let view = UIView()
+        view.isUserInteractionEnabled = false
+        
         let appleLogoImageView:UIImageView = {
             let imageView = UIImageView()
             imageView.image = UIImage(named: "apple_logo")
             imageView.contentMode = .scaleAspectFit
-
+            
             return imageView
         }()
-
+        
         let appleLoginLabel: UILabel = {
-           let label = UILabel()
+            let label = UILabel()
             label.text = "Apple로 계속하기"
             label.textColor = .white
             label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
-
+            
             return label
         }()
-
+        
+        button.addSubview(view)
         view.addSubview(appleLogoImageView)
         view.addSubview(appleLoginLabel)
-
+        
         appleLogoImageView.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview()
             $0.size.equalTo(18)
         }
-
+        
         appleLoginLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(appleLogoImageView.snp.trailing).offset(8)
             $0.trailing.equalToSuperview()
         }
-
-        button.addSubview(view)
-
+        
         view.snp.makeConstraints {
             $0.centerY.centerX.equalToSuperview()
         }
+        
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 12
+        button.addTarget(self, action: #selector(appleLoginButtonClicked), for: .touchUpInside)
         
         return button
     }()
@@ -219,6 +224,7 @@ final class LoginViewController: UIViewController {
         view.addSubview(logoImageView)
         view.addSubview(descriptionLabel1)
         view.addSubview(descriptionLabel2)
+        view.addSubview(kakaoLoginButton)
         view.addSubview(stackView)
         
         stackView.addArrangedSubview(kakaoLoginButton)
@@ -255,6 +261,8 @@ final class LoginViewController: UIViewController {
         stackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(view.bounds.height * 0.8)
+//            $0.height.equalTo(50)
+//            $0.width.equalTo(300)
         }
         
         kakaoLoginButton.snp.makeConstraints {
