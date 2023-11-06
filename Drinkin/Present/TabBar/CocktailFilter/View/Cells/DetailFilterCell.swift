@@ -48,9 +48,9 @@ final class DetailFilterCell: UITableViewCell {
         contentView.addSubview(checkImageView)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(15)
             $0.leading.equalToSuperview().offset(24)
-            $0.bottom.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-15)
         }
         
         checkImageView.snp.makeConstraints {
