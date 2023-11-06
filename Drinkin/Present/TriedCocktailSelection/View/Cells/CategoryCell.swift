@@ -51,10 +51,5 @@ final class CategoryCell: UICollectionViewCell {
     
     func fill(with categoryName: String) {
         categoryNameLabel.text = categoryName
-        
-        if isSelected == true {
-            self.backgroundColor = .black
-            categoryNameLabel.textColor = .white
-        }
     }
 }

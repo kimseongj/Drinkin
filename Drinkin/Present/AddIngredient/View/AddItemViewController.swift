@@ -202,6 +202,7 @@ extension AddItemViewController {
         viewModel.itemFilterPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.applyItemFilterSnapshot(itemFilterList: $0)
+            self.itemFilterCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: [])
         }.store(in: &cancelBag)
     }
 }

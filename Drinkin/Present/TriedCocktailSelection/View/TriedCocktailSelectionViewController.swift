@@ -197,10 +197,6 @@ final class TriedCocktailSelectionViewController: UIViewController {
     private func dismissViewController() {
         self.dismiss(animated: true)
     }
-    
-    deinit {
-        print("deinit")
-    }
 }
 
 //MARK: - CategoryDataSource
