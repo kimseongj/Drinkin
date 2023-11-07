@@ -754,7 +754,6 @@
 			children = (
 				1CA8ED4A2A6BAEC800CE5E1A /* ViewModel */,
 				1C6924AF2AF4BC8C00E56888 /* View */,
-				1CC9D3E62A1901BF00654A5D /* CocktailRecommendCell */,
 			);
 			path = CocktailRecommend;
 			sourceTree = "<group>";
@@ -1017,6 +1016,7 @@
 		1C6924AF2AF4BC8C00E56888 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1CC9D3E62A1901BF00654A5D /* CocktailRecommendCell */,
 				1C16A86A2A13AD3D001640E2 /* CocktailRecommendViewController.swift */,
 			);
 			path = View;

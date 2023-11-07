@@ -94,7 +94,7 @@ final class CocktailRecommendViewController: UIViewController {
     }
     
     private func calculateItemSize() -> CGSize {
-        let itemSize = CGSize(width: view.bounds.width * 0.85, height: view.bounds.height * 0.75)
+        let itemSize = CGSize(width: view.bounds.width * 0.85, height: view.bounds.height * 0.72)
         
         return itemSize
     }

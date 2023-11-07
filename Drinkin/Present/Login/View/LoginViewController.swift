@@ -261,8 +261,6 @@ final class LoginViewController: UIViewController {
         stackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(view.bounds.height * 0.8)
-//            $0.height.equalTo(50)
-//            $0.width.equalTo(300)
         }
         
         kakaoLoginButton.snp.makeConstraints {
@@ -290,7 +288,9 @@ extension LoginViewController {
             
             if $0 == true {
                 self.dismiss(animated: true)
+                
                 self.delegate?.presentTriedCocktailSelectionVC()
+                
             }
         }.store(in: &cancelBag)
     }
