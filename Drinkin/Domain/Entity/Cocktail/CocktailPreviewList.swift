@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - ScoreList로 바꿀것
 struct CocktailPreviewList: Codable {
     let cocktailList: [CocktailPreview]
 

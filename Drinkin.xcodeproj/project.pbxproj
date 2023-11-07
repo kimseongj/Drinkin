@@ -800,6 +800,57 @@
 			path = CocktailFilterEndpoint;
 			sourceTree = "<group>";
 		};
+		1C5146592AFA211500C1B7B1 /* Cocktail */ = {
+			isa = PBXGroup;
+			children = (
+				1C8713792AEFBEF200583A9F /* MakeableCocktailList.swift */,
+				1CA969282A949D070076731B /* SelectablePreviewDescription.swift */,
+				1C9F4C8C2AAD8DAF0020DB48 /* CocktailPreviewList.swift */,
+				1C9F4C8A2AAD8D7A0020DB48 /* CocktailImageDescription.swift */,
+				1C7A10432A74F6FF009961A1 /* CocktailDescription.swift */,
+				1C58ECE62A63CB4700AC2603 /* CocktailBriefList.swift */,
+			);
+			path = Cocktail;
+			sourceTree = "<group>";
+		};
+		1C51465A2AFA247000C1B7B1 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				1C0768732ABD58930003D4BF /* ItemFilterList.swift */,
+				1C504CC62AB4256F005A0B25 /* CocktailFilter.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		1C51465B2AFA249700C1B7B1 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				1C0768C02AC9806E0003D4BF /* BaseBrandDetail.swift */,
+				1CDB85C32AD12E7600360852 /* BaseDetail.swift */,
+				1C07686F2ABD52CB0003D4BF /* ItemList.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		1C51465C2AFA24E500C1B7B1 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				1CA969312AA082CB0076731B /* HoldedItem.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		1C51465D2AFA24F500C1B7B1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */,
+				1CA9695B2AA1BAA10076731B /* FirstLogin.swift */,
+				1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */,
+				1C58C5252AF51D7400D6CC83 /* AccessToken.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		1C58C5222AF4F07100D6CC83 /* LoginManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,23 +968,12 @@
 		1C66711029F8225A00B0E41F /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				1C51465D2AFA24F500C1B7B1 /* Login */,
+				1C51465C2AFA24E500C1B7B1 /* User */,
+				1C51465B2AFA249700C1B7B1 /* Item */,
+				1C5146592AFA211500C1B7B1 /* Cocktail */,
+				1C51465A2AFA247000C1B7B1 /* Filter */,
 				1C8713592AEBCDE800583A9F /* ExtraEntity */,
-				1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */,
-				1C58ECE62A63CB4700AC2603 /* CocktailBriefList.swift */,
-				1C7A10432A74F6FF009961A1 /* CocktailDescription.swift */,
-				1CA969282A949D070076731B /* SelectablePreviewDescription.swift */,
-				1CA969312AA082CB0076731B /* HoldedItem.swift */,
-				1CA9695B2AA1BAA10076731B /* FirstLogin.swift */,
-				1C9F4C8A2AAD8D7A0020DB48 /* CocktailImageDescription.swift */,
-				1C9F4C8C2AAD8DAF0020DB48 /* CocktailPreviewList.swift */,
-				1C504CC62AB4256F005A0B25 /* CocktailFilter.swift */,
-				1C07686F2ABD52CB0003D4BF /* ItemList.swift */,
-				1C0768732ABD58930003D4BF /* ItemFilterList.swift */,
-				1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */,
-				1CDB85C32AD12E7600360852 /* BaseDetail.swift */,
-				1C0768C02AC9806E0003D4BF /* BaseBrandDetail.swift */,
-				1C8713792AEFBEF200583A9F /* MakeableCocktailList.swift */,
-				1C58C5252AF51D7400D6CC83 /* AccessToken.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
