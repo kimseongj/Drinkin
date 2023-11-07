@@ -8,8 +8,6 @@
 import UIKit
 
 class SavedCocktailListVCCoordinator: Coordinator {
-    weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     
@@ -23,9 +21,5 @@ class SavedCocktailListVCCoordinator: Coordinator {
         let vc = savedCocktailListDIContainer.makeSavedCocktailListViewController()
         
         navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func childDidFinish(_ child: Coordinator?) {
-        parentCoordinator?.childDidFinish(self)
     }
 }

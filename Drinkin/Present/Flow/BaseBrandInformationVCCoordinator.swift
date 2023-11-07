@@ -8,8 +8,6 @@
 import UIKit
 
 final class BaseBrandInformationVCCoordinator: Coordinator {
-    weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     let baseBrandID: Int
@@ -26,9 +24,5 @@ final class BaseBrandInformationVCCoordinator: Coordinator {
         let vc = baseBrandInformationDIContainer.makeBaseBrandInformationViewController()
         vc.makeBlackBackBarButton()
         navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func childDidFinish(_ child: Coordinator?) {
-        parentCoordinator?.childDidFinish(self)
     }
 }

@@ -12,8 +12,6 @@ protocol LoginFlowDelegate {
 }
 
 class LoginVCCoordinator: Coordinator, LoginFlowDelegate {
-    weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -34,13 +32,6 @@ class LoginVCCoordinator: Coordinator, LoginFlowDelegate {
     func presentTriedCocktailSelectionVC() {
         let triedCocktailSelectionViewCoordinator = TriedCocktailSelectionVCCoordinator(navigationController: navigationController,
                                                                                         appDIContainer: appDIContainer)
-
         triedCocktailSelectionViewCoordinator.start()
-    }
-    
-    func childDidFinish(_ child: Coordinator?) { }
-    
-    func didFinsihLoginVC() {
-        
     }
 }

@@ -8,8 +8,6 @@
 import UIKit
 
 class AddIngredientVCCoordinator: Coordinator {
-    weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     
@@ -23,9 +21,5 @@ class AddIngredientVCCoordinator: Coordinator {
         let vc = addIngredientDIContainer.makeAddIngredientViewController()
         
         navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func childDidFinish(_ child: Coordinator?) {
-        parentCoordinator?.childDidFinish(self)
     }
 }

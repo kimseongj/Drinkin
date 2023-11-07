@@ -15,7 +15,6 @@ protocol MyHomeBarVCDelegate: AnyObject {
 }
 
 class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -24,15 +23,6 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
         self.appDIContainer = appDIContainer
     }
     func start() { }
-    
-    func childDidFinish(_ child: Coordinator?) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
-    }
     
     func startPush() -> UINavigationController {
         let myHomeBarDIContainer = appDIContainer.makeMyHomeBarDIContainer()
@@ -47,25 +37,21 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
     
     func pushLoginSettingVC() {
         let loginSettingVCCoordinator = LoginSettingVCCoordinator(navigationController: navigationController)
-        
         loginSettingVCCoordinator.start()
     }
     
     func pushAddIngredientVC() {
         let addIngredientVCCoordinator = AddIngredientVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
-        
         addIngredientVCCoordinator.start()
     }
     
     func pushSavedCocktailListVC() {
         let savedCocktailListVCCoordinator = SavedCocktailListVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
-        
         savedCocktailListVCCoordinator.start()
     }
     
     func pushUserMadeCocktailListVC() {
         let userMadeCocktailListVCCoordinator = UserMadeCocktailListVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
-        
         userMadeCocktailListVCCoordinator.start()
     }
 }

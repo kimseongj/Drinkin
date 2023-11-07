@@ -14,8 +14,6 @@ protocol MainFlowDelegate: AnyObject {
 }
 
 class MainVCCoordinator: Coordinator, MainFlowDelegate {
-    weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -25,15 +23,6 @@ class MainVCCoordinator: Coordinator, MainFlowDelegate {
     }
     
     func start() { }
-    
-    func childDidFinish(_ child: Coordinator?) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
-    }
     
     func startPush() -> UINavigationController {
         let cocktailRecommendDIContainer = appDIContainer.makeCocktailRecommendDIContainer()
@@ -48,19 +37,12 @@ class MainVCCoordinator: Coordinator, MainFlowDelegate {
     
     func presentLoginVC() {
         let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
-        
-        loginVCCoordinator.parentCoordinator = self
-        childCoordinators.append(loginVCCoordinator)
-        
         loginVCCoordinator.start()
     }
     
     func pushTriedCocktailSelectionVC() {
         let triedCocktailSelectionViewCoordinator = TriedCocktailSelectionVCCoordinator(navigationController: navigationController,
                                                                                         appDIContainer: appDIContainer)
-        
-        triedCocktailSelectionViewCoordinator.parentCoordinator = self
-        childCoordinators.append(triedCocktailSelectionViewCoordinator)
         triedCocktailSelectionViewCoordinator.start()
     }
     
@@ -68,8 +50,6 @@ class MainVCCoordinator: Coordinator, MainFlowDelegate {
         let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController,
                                                                     appDIContainer: appDIContainer,
                                                                     cocktailID: cocktailID)
-        productDetailVCCoordinator.parentCoordinator = self
-        childCoordinators.append(productDetailVCCoordinator)
         productDetailVCCoordinator.start()
     }
 }

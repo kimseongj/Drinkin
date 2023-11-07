@@ -8,7 +8,6 @@
 import UIKit
 
 class GlassModalVCCoordinator: Coordinator {
-    weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let glassID: Int
@@ -25,6 +24,4 @@ class GlassModalVCCoordinator: Coordinator {
         
         navigationController.present(vc, animated: true)
     }
-    
-    func childDidFinish(_ child: Coordinator?) { }
 }

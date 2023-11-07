@@ -80,11 +80,6 @@ final class ProductDetailViewController: UIViewController {
         AppCoordinator.tabBarController.tabBar.isHidden = true
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        delegate?.didFinishProductDetailVC()
-    }
-    
     private func configureBackgroundColor() {
         view.backgroundColor = .white
     }

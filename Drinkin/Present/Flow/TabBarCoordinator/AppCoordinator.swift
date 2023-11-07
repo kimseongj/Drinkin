@@ -8,7 +8,6 @@
 import UIKit
 
 class AppCoordinator: NSObject, Coordinator {
-    var childCoordinators = [Coordinator]()
     let window: UIWindow?
     let appDIContainer: AppDIContainer
     static var tabBarHeight: CGFloat = 0
@@ -62,6 +61,4 @@ class AppCoordinator: NSObject, Coordinator {
         
         return AppCoordinator.tabBarController
     }
-    
-    func childDidFinish(_ child: Coordinator?) { }
 }

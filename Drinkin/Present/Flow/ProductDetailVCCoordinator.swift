@@ -11,12 +11,9 @@ protocol ProductDetailVCDelegate: AnyObject {
     func pushToolModalVC(toolID: Int)
     func pushSkillModalVC(skillID: Int)
     func pushGlassModalVC(glassID: Int)
-    func didFinishProductDetailVC()
 }
 
 class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
-    weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     var cocktailID: Int
@@ -45,37 +42,21 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
     
     func pushBaseInformationVC(baseID: Int) {
         let baseInformationVCCoordinator = BaseInformationVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer, baseID: baseID)
-        
-        baseInformationVCCoordinator.parentCoordinator = self
-        childCoordinators.append(baseInformationVCCoordinator)
         baseInformationVCCoordinator.start()
     }
     
     func pushToolModalVC(toolID: Int) {
         let toolModalVCCoordinator = ToolModalVCCoordinator(navigationController: navigationController, toolID: toolID)
-        
-        toolModalVCCoordinator.parentCoordinator = self
-        childCoordinators.append(toolModalVCCoordinator)
         toolModalVCCoordinator.start()
     }
     
     func pushSkillModalVC(skillID: Int) {
         let buildModalVCCoordinator = SkillModalVCCoordinator(navigationController: navigationController, skillID: skillID)
-        
-        buildModalVCCoordinator.parentCoordinator = self
-        childCoordinators.append(buildModalVCCoordinator)
         buildModalVCCoordinator.start()
     }
     
     func pushGlassModalVC(glassID: Int) {
         let glassModalVCCoordinator = GlassModalVCCoordinator(navigationController: navigationController, glassID: glassID)
-        
-        glassModalVCCoordinator.parentCoordinator = self
-        childCoordinators.append(glassModalVCCoordinator)
         glassModalVCCoordinator.start()
-    }
-    
-    func didFinishProductDetailVC() {
-        parentCoordinator?.childDidFinish(self)
     }
 }

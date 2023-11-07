@@ -8,8 +8,6 @@
 import UIKit
 
 class LoginSettingVCCoordinator: Coordinator {
-    weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -21,9 +19,5 @@ class LoginSettingVCCoordinator: Coordinator {
         let vc = LoginSettingViewController()
         
         navigationController.pushViewController(vc, animated: true)
-    }
-    
-    func childDidFinish(_ child: Coordinator?) {
-        parentCoordinator?.childDidFinish(self)
     }
 }
