@@ -49,9 +49,9 @@ final class MainViewController: UIViewController {
     private func configureUnloggedinMainView() {
         view.addSubview(unloggedinMainViewController.view)
         
-        unloggedinMainViewController.view.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
+        unloggedinMainViewController.view.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
     
@@ -66,9 +66,9 @@ final class MainViewController: UIViewController {
     private func configureLoggedinMainView() { 
         view.addSubview(loggedinMainViewController.view)
         
-        loggedinMainViewController.view.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
+        loggedinMainViewController.view.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
 }
