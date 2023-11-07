@@ -14,7 +14,7 @@ final class LoginDIContainer {
     }
     
     let dependencies: Dependencies
-    let ingredientInformationEndpoint = IngredientDetailEndpoint()
+    let kakaoAccessTokenConversionEndpoint = KakaoAccessTokenConversionEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -23,7 +23,7 @@ final class LoginDIContainer {
     func makeLoginRepository() -> LoginRepository {
         return DefaultLoginRepository(tokenManager: dependencies.tokenManager,
                                                  provider: dependencies.provider,
-                                                 endpoint: ingredientInformationEndpoint
+                                                 endpoint: kakaoAccessTokenConversionEndpoint
                                                  )
     }
     

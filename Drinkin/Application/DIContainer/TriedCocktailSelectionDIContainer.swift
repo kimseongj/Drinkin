@@ -15,7 +15,7 @@ final class TriedCocktailSelectionDIContainer {
     }
     
     let dependencies: Dependencies
-    let triedCocktailEndpoint = TriedCocktailEndpoint()
+    let triedCocktailEndpoint = CocktailsEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies

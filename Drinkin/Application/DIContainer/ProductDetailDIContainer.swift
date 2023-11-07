@@ -15,7 +15,7 @@ final class ProductDetailDIContainer {
     }
     
     let dependencies: Dependencies
-    let productDetailEndpoint = ProductDetailEndpoint()
+    let productDetailEndpoint = CocktailsEndpoint()
     
     
     init(dependencies: Dependencies) {

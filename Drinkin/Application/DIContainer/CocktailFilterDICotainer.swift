@@ -15,7 +15,7 @@ final class CocktailFilterDICotainer {
     
     let dependencies: Dependencies
     let cocktailFilterEndpoint = CocktailFilterEndpoint()
-    let cocktailListEndpoint = CocktailListEndpoint()
+    let cocktailListEndpoint = CocktailsEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
