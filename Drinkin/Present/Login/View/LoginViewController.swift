@@ -20,7 +20,7 @@ final class LoginViewController: UIViewController {
         
         let deleteImageView: UIImageView = {
             let imageView = UIImageView()
-            imageView.image = UIImage(named: "delete_icon")
+            imageView.image = ImageStorage.deleteIcon
             imageView.contentMode = .scaleAspectFit
             
             return imageView
@@ -49,7 +49,7 @@ final class LoginViewController: UIViewController {
     
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "cocktail_image")
+        imageView.image = ImageStorage.cocktaiImage
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -57,7 +57,7 @@ final class LoginViewController: UIViewController {
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "drinkin_description_logo")
+        imageView.image = ImageStorage.drinkinDescriptionLogo
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -92,7 +92,7 @@ final class LoginViewController: UIViewController {
         
         let kakaoLogoImageView:UIImageView = {
             let imageView = UIImageView()
-            imageView.image = UIImage(named: "kakao_logo")
+            imageView.image = ImageStorage.kakaoIcon
             imageView.contentMode = .scaleAspectFit
             
             return imageView
@@ -141,7 +141,7 @@ final class LoginViewController: UIViewController {
         
         let appleLogoImageView:UIImageView = {
             let imageView = UIImageView()
-            imageView.image = UIImage(named: "apple_logo")
+            imageView.image = ImageStorage.appleIcon
             imageView.contentMode = .scaleAspectFit
             
             return imageView
