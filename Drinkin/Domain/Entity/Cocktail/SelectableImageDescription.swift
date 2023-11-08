@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SelectablePreviewDescription: Hashable {
+struct SelectableImageDescription: Hashable {
     let id: Int
     let category, cocktailNameKo: String
     let imageURI: String

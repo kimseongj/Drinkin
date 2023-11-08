@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol TriedCocktailSelectionViewModel {
-    var selectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { get }
-    var filteredSelectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { get }
+    var selectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { get }
+    var filteredSelectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { get }
     var categoryList: [String] { get }
     var currentCategoryName: String { get set }
     
@@ -26,11 +26,11 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     private let selectTriedCocktailUsecase: SelectTriedCocktailUsecase
     @Published var cocktailList: [ImageDescription] = []
     var currentCategoryName: String = CategoryListStrings.whole
-    @Published var selectableCocktailList: [SelectablePreviewDescription] = []
-    @Published var filteredSelectableCocktailList: [SelectablePreviewDescription] = []
+    @Published var selectableCocktailList: [SelectableImageDescription] = []
+    @Published var filteredSelectableCocktailList: [SelectableImageDescription] = []
     
-    var selectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { $selectableCocktailList }
-    var filteredSelectableCocktailListPublisher: Published<[SelectablePreviewDescription]>.Publisher { $filteredSelectableCocktailList }
+    var selectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { $selectableCocktailList }
+    var filteredSelectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { $filteredSelectableCocktailList }
 
     var categoryList: [String] = [CategoryListStrings.whole,
                                   CategoryListStrings.whiskey,
@@ -66,7 +66,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     
     func convertSelectableCocktailList() {
         cocktailList.forEach {
-            let convertedPreviewDescription = SelectablePreviewDescription(id: $0.id,
+            let convertedPreviewDescription = SelectableImageDescription(id: $0.id,
                                           category: $0.category,
                                           cocktailNameKo: $0.cocktailNameKo,
                                           imageURI: $0.imageURI

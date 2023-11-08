@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol SelectTriedCocktailUsecase {
-    func execute() -> AnyPublisher<CocktailImageDescription, Error>
+    func execute() -> AnyPublisher<CocktailImageList, Error>
 }
 
 class DefaultSelectTriedCocktailUsecase: SelectTriedCocktailUsecase {
@@ -19,7 +19,7 @@ class DefaultSelectTriedCocktailUsecase: SelectTriedCocktailUsecase {
         self.triedCocktailRepository = triedCocktailRepository
     }
     
-    func execute() -> AnyPublisher<CocktailImageDescription, Error> {
+    func execute() -> AnyPublisher<CocktailImageList, Error> {
         return triedCocktailRepository.fetchCocktailImageList()
     }
 }
