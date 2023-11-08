@@ -13,14 +13,14 @@ protocol FilterTriedCocktailUsecase {
 }
 
 class DefaultFilterTriedCocktailUsecase: FilterTriedCocktailUsecase {
-    private let triedCocktailRepository: CocktailImageListRepository
+    private let cocktailImageListRepository: CocktailImageListRepository
     
-    init(triedCocktailRepository: CocktailImageListRepository) {
-        self.triedCocktailRepository = triedCocktailRepository
+    init(cocktailImageListRepository: CocktailImageListRepository) {
+        self.cocktailImageListRepository = cocktailImageListRepository
     }
 
     func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error> {
-        triedCocktailRepository.fetchCocktailImageList()
+        cocktailImageListRepository.fetchCocktailImageList()
     }
     
     func filterCocktail(cocktailCategory: String, cocktailList: [SelectableImageDescription]) {
