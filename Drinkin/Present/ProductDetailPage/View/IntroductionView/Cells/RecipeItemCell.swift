@@ -1,8 +1,8 @@
 //
-//  ItemCell.swift
+//  RecipeItemCell.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/08/03.
+//  Created by kimseongjun on 2023/11/08.
 //
 
 import UIKit

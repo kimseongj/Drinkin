@@ -36,7 +36,7 @@ final class RecommendPopupViewController: UIViewController {
         let label = UILabel()
         label.text = "맛과 난이도 등을 고려해"
         label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = UIColor(red: 0.47, green: 0.46, blue: 0.45, alpha: 1)
+        label.textColor = ColorPalette.subTitleGrayColor
        
         return label
     }()
@@ -45,7 +45,7 @@ final class RecommendPopupViewController: UIViewController {
         let label = UILabel()
         label.text = "추천해드릴 수 있습니다."
         label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = UIColor(red: 0.47, green: 0.46, blue: 0.45, alpha: 1)
+        label.textColor = ColorPalette.subTitleGrayColor
         
         return label
     }()
@@ -57,7 +57,7 @@ final class RecommendPopupViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.backgroundColor = .black
         button.layer.cornerRadius = 20
-        button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
+        button.layer.borderColor = ColorPalette.buttonBorderColor
         button.layer.borderWidth = 3
         button.addTarget(self, action: #selector(tapRecommendButton), for: .touchUpInside)
         

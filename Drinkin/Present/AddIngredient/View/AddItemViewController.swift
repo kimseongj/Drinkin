@@ -142,10 +142,6 @@ extension AddItemViewController {
         filterDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: itemFilterCollectionView) { collectionView, indexPath, itemFilter in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemFilterCell.identifier, for: indexPath) as? ItemFilterCell else { return UICollectionViewCell() }
             
-            if itemFilter == "전체" {
-//                self.itemFilterCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
-            }
-            
             cell.fill(with: itemFilter)
             
             return cell

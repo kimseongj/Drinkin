@@ -29,4 +29,6 @@ enum ColorPalette {
                                                  alpha: 0.9)
     
     static let buttonBorderColor: CGColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
+    
+    static let cellGrayBorderColor: CGColor = UIColor(red: 0.909, green: 0.906, blue: 0.903, alpha: 1).cgColor
 }

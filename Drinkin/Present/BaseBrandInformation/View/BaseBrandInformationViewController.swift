@@ -81,7 +81,7 @@ final class BaseBrandInformationViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1).cgColor
+        button.layer.borderColor = ColorPalette.buttonBorderColor
         
         return button
     }()

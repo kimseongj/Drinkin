@@ -27,7 +27,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
     private let subLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1)
+        label.textColor = ColorPalette.subTitleGrayColor
         label.text = "선택을 기반으로 다양한 칵테일을 추천해 드립니다."
         
         return label
@@ -77,10 +77,10 @@ final class TriedCocktailSelectionViewController: UIViewController {
     
     private let completeSelectionButton: UIButton = {
         let completeSelectionButton = UIButton()
-        completeSelectionButton.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
+        completeSelectionButton.layer.borderColor = ColorPalette.buttonBorderColor
         completeSelectionButton.layer.borderWidth = 3
         completeSelectionButton.backgroundColor = .black
-        completeSelectionButton.titleLabel?.textColor = UIColor(red: 0.909, green: 0.906, blue: 0.903, alpha: 1)
+        completeSelectionButton.titleLabel?.textColor = .white
         completeSelectionButton.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
         
         return completeSelectionButton
