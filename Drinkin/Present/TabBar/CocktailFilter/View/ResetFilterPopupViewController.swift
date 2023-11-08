@@ -36,7 +36,7 @@ final class ResetFilterPopupViewController: UIViewController {
         let label = UILabel()
         label.text = "설정한 모든 필터가 초기화됩니다."
         label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = UIColor(red: 0.47, green: 0.46, blue: 0.45, alpha: 1)
+        label.textColor = ColorPalette.subTitleGrayColor
        
         return label
     }()
@@ -61,7 +61,7 @@ final class ResetFilterPopupViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.backgroundColor = .black
         button.layer.cornerRadius = 20
-        button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
+        button.layer.borderColor = ColorPalette.buttonBorderColor
         button.layer.borderWidth = 3
         button.addTarget(self, action: #selector(tapResetButton), for: .touchUpInside)
         
@@ -93,7 +93,7 @@ final class ResetFilterPopupViewController: UIViewController {
         
         descriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom).offset(18)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
         
         dismissButton.snp.makeConstraints {
