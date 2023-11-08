@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - CocktailImageDescription
 struct CocktailImageDescription: Codable {
     let previewDescriptionList: [ImageDescription]
 
@@ -16,7 +15,6 @@ struct CocktailImageDescription: Codable {
     }
 }
 
-// MARK: - PreviewDescriptionList
 struct ImageDescription: Codable, Hashable {
     let id: Int
     let category, cocktailNameKo: String

@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - CocktailBriefList
 struct CocktailBriefList: Codable {
     let briefDescriptionList: [CocktailBrief]
     
@@ -16,7 +15,6 @@ struct CocktailBriefList: Codable {
     }
 }
 
-// MARK: - CocktailBrief
 struct CocktailBrief: Codable, Hashable {
     let id: Int
     let cocktailNameKo: String
@@ -43,7 +41,6 @@ struct CocktailBrief: Codable, Hashable {
     }
 }
 
-// MARK: - CategoryList
 struct BaseList: Codable, Hashable {
     let baseNameKo: String
     let hold: Bool
@@ -54,7 +51,6 @@ struct BaseList: Codable, Hashable {
     }
 }
 
-// MARK: - GarnishList
 struct GarnishList: Codable, Hashable {
     let garnishNameKo: String
     let hold: Bool

@@ -7,7 +7,6 @@
 
 import Foundation
 
-//MARK: - MakeableCocktailList -> CocktailPreviewList랑 동일
 struct MakeableCocktailList: Codable, Hashable {
     let itemFilterList: [String]
     

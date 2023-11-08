@@ -28,17 +28,6 @@ final class DefaultFilterItemUsecase: FilterItemUsecase {
     }
     
     func filterItem(itemCategory: String, itemList: [ItemPreview], completion: @escaping ([ItemPreview]) -> Void) {
-        //        itemRepository.fetchIngredientList().sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-        //            var filteredItemList: [ItemPreview] = []
-        //
-        //            if itemCategory == "전체" {
-        //                filteredItemList = $0.itemList
-        //            } else {
-        //                filteredItemList = $0.itemList.filter { $0.category == itemCategory }
-        //            }
-        //
-        //            completion(filteredItemList)
-        //        }).store(in: &cancelBag)
         if itemCategory == "전체" {
             completion(itemList)
         } else {

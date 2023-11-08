@@ -7,7 +7,6 @@
 
 import Foundation
 
-//MARK: - IngredientFilter
 struct ItemFilterList: Codable, Hashable {
     let itemFilterList: [String]
     

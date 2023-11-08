@@ -16,7 +16,6 @@ struct CocktailPreviewList: Codable {
     }
 }
 
-// MARK: - CocktailList
 struct CocktailPreview: Codable, Hashable {
     let id: Int
     let cocktailNameKo: String

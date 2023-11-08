@@ -7,7 +7,6 @@
 
 import Foundation
  
-//MARK: - CocktailDescription
 struct CocktailDescription: Codable {
     let id: Int
     let cocktailNameKo, cocktailNameEng: String
@@ -38,7 +37,6 @@ struct CocktailDescription: Codable {
     }
 }
 
-// MARK: - DetailCategory
 struct DetailBase: Codable, Hashable {
     let id: Int
     let baseNameKo: String
@@ -52,7 +50,6 @@ struct DetailBase: Codable, Hashable {
     }
 }
 
-// MARK: - DetailIngredient
 struct DetailIngredient: Codable, Hashable {
     let id: Int
     let ingredientNameKo: String
@@ -65,7 +62,6 @@ struct DetailIngredient: Codable, Hashable {
     }
 }
 
-// MARK: - CocktailTool
 struct CocktailTool: Codable, Hashable {
     let id: Int
     let toolNameKo: String
@@ -76,7 +72,6 @@ struct CocktailTool: Codable, Hashable {
     }
 }
 
-// MARK: - CocktailSkill
 struct CocktailSkill: Codable, Hashable {
     let id: Int
     let skillNameKo: String
@@ -87,7 +82,6 @@ struct CocktailSkill: Codable, Hashable {
     }
 }
 
-// MARK: - CocktailGlass
 struct CocktailGlass: Codable, Hashable {
     let id: Int
     let glassNameKo: String
