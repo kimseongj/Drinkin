@@ -9,10 +9,6 @@ import UIKit
 import SnapKit
 
 final class HoldedItemCell: UICollectionViewCell {
-    private enum Constraint {
-        static let padding: Int = 12
-    }
-    
     weak var delegate: CellDeleteButtonDelegate?
     
     private let titleLabel: UILabel = {
@@ -24,7 +20,7 @@ final class HoldedItemCell: UICollectionViewCell {
     
     private let deleteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "delete_icon"), for: .normal)
+        button.setImage(ImageStorage.deleteIcon, for: .normal)
         button.tintColor = .black
         button.addTarget(self, action: #selector(tapDeleteButton), for: .touchUpInside)
         
@@ -42,7 +38,7 @@ final class HoldedItemCell: UICollectionViewCell {
     }
     
     private func configureBackgroundColor() {
-        contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        contentView.backgroundColor = ColorPalette.grayCellColor
     }
     
     private func configureUI() {
@@ -51,16 +47,16 @@ final class HoldedItemCell: UICollectionViewCell {
         contentView.addSubview(deleteButton)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Constraint.padding)
-            $0.leading.equalToSuperview().offset(Constraint.padding)
-            $0.bottom.equalToSuperview().offset(-Constraint.padding)
+            $0.top.equalToSuperview().offset(12)
+            $0.leading.equalToSuperview().offset(12)
+            $0.bottom.equalToSuperview().offset(-12)
         }
         
         deleteButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Constraint.padding)
+            $0.top.equalToSuperview().offset(12)
             $0.leading.equalTo(titleLabel.snp.trailing).offset(8)
-            $0.trailing.equalToSuperview().offset(-Constraint.padding)
-            $0.bottom.equalToSuperview().offset(-Constraint.padding)
+            $0.trailing.equalToSuperview().offset(-12)
+            $0.bottom.equalToSuperview().offset(-12)
         }
     }
     

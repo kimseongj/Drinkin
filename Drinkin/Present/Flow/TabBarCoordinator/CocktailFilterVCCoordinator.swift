@@ -12,7 +12,6 @@ protocol CocktailFilterFlowDelegate: AnyObject {
 }
 
 class CocktailFilterVCCoordinator: Coordinator, CocktailFilterFlowDelegate {
-    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -22,15 +21,6 @@ class CocktailFilterVCCoordinator: Coordinator, CocktailFilterFlowDelegate {
     }
     
     func start() { }
-    
-    func childDidFinish(_ child: Coordinator?) {
-        for (index, coordinator) in childCoordinators.enumerated() {
-            if coordinator === child {
-                childCoordinators.remove(at: index)
-                break
-            }
-        }
-    }
     
     func startPush() -> UINavigationController {
         let cocktailFilterDIContainer = appDIContainer.makeCocktailFilterDICotainer()
@@ -47,8 +37,6 @@ class CocktailFilterVCCoordinator: Coordinator, CocktailFilterFlowDelegate {
         let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController,
                                                                     appDIContainer: appDIContainer,
                                                                     cocktailID: cocktailID)
-        productDetailVCCoordinator.parentCoordinator = self
-        childCoordinators.append(productDetailVCCoordinator)
         productDetailVCCoordinator.start()
     }
 }

@@ -27,9 +27,9 @@ final class InformationCell: UICollectionViewCell {
     }
     
     func configureUI() {
-        self.layer.borderColor = UIColor(red: 0.909, green: 0.906, blue: 0.903, alpha: 1).cgColor
-        self.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
-        self.layer.cornerRadius = 2
+        self.layer.borderColor = ColorPalette.cellGrayBorderColor
+        self.backgroundColor = ColorPalette.grayCellColor
+        self.layer.cornerRadius = 4
         self.layer.borderWidth = 1.4
         self.addSubview(label)
         

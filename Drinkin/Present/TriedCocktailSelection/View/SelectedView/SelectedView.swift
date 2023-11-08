@@ -54,7 +54,7 @@ class SelectCircleView: UIView {
         context.beginPath()
         context.setLineWidth(2)
         context.setStrokeColor(UIColor.black.cgColor)
-        context.setFillColor(UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1).cgColor)
+        context.setFillColor(ColorPalette.themeColor.cgColor)
         context.addEllipse(in: circleRect)
         context.drawPath(using: .fillStroke)
 

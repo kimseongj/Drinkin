@@ -8,7 +8,6 @@
 import UIKit
 
 class SkillModalVCCoordinator: Coordinator {
-    weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let skillID: Int
@@ -25,6 +24,4 @@ class SkillModalVCCoordinator: Coordinator {
         
         navigationController.present(vc, animated: true)
     }
-    
-    func childDidFinish(_ child: Coordinator?) { }
 }

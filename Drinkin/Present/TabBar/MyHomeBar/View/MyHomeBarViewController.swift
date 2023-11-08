@@ -42,7 +42,7 @@ final class MyHomeBarViewController: UIViewController {
     
     private let loginSettingButton: UIButton = {
         let button = UIButton()
-        if let originalImage = UIImage(systemName: "person.circle") {
+        if let originalImage = ImageStorage.personCircleIcon {
             let scaledImage = originalImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 36.0))
             button.setImage(scaledImage, for: .normal)
         }
@@ -77,7 +77,7 @@ final class MyHomeBarViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.backgroundColor = .black
         button.layer.cornerRadius = 20
-        button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
+        button.layer.borderColor = ColorPalette.buttonBorderColor
         button.layer.borderWidth = 3
         button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         
@@ -138,7 +138,7 @@ final class MyHomeBarViewController: UIViewController {
         titleLabel.text = "내가 만든 칵테일 목록"
         titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         
-        let arrowImageView = UIImageView(image: UIImage(named: "arrow_icon"))
+        let arrowImageView = UIImageView(image: ImageStorage.arrowIcon)
         
         button.addSubview(arrowImageView)
         button.addSubview(titleLabel)

@@ -8,7 +8,6 @@
 import UIKit
 
 class ToolModalVCCoordinator: Coordinator {
-    weak var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     let toolID: Int
@@ -25,6 +24,4 @@ class ToolModalVCCoordinator: Coordinator {
         
         navigationController.present(vc, animated: true)
     }
-    
-    func childDidFinish(_ child: Coordinator?) { }
 }

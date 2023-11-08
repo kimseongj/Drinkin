@@ -8,7 +8,6 @@
 import UIKit
 
 enum ImageStorage {
-    static let drinkinLogo = UIImage(named: "drinkinLogo")
     static let homeIcon = UIImage(named: "home_icon")
     static let homeFillIcon = UIImage(named: "home_fill_icon")
     static let cocktailIcon = UIImage(named: "cocktail_list_icon")
@@ -24,4 +23,13 @@ enum ImageStorage {
     static let appleLoginIcon = UIImage(named: "apple_logo")
     static let checkEmptyIcon = UIImage(named: "check_empty_icon")
     static let checkFillIcon = UIImage(named: "check_fill_icon")
+    static let deleteIcon = UIImage(named: "delete_icon")
+    static let arrowIcon = UIImage(named: "arrow_icon")
+    static let personCircleIcon = UIImage(systemName: "person.circle")
+    static let kakaoIcon = UIImage(named: "kakao_icon")
+    static let appleIcon = UIImage(named: "apple_icon")
+    
+    static let cocktaiImage = UIImage(named: "cocktail_image")
+    static let drinkinLogo = UIImage(named: "drinkinLogo")
+    static let drinkinDescriptionLogo = UIImage(named: "drinkin_description_logo")
 }

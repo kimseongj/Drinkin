@@ -28,8 +28,8 @@ final class CocktailRecommendCell: UICollectionViewCell {
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1)
+        label.font = UIFont(name: FontStrings.pretendardBold, size: 12)
+        label.textColor = ColorPalette.subTitleGrayColor
 
         return label
     }()
@@ -77,7 +77,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
-        button.layer.borderColor = UIColor(red: 0.467, green: 0.467, blue: 0.459, alpha: 1).cgColor
+        button.layer.borderColor = ColorPalette.buttonBorderColor
         button.layer.borderWidth = 3
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         

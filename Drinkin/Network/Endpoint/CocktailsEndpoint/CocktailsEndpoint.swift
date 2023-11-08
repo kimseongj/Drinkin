@@ -1,13 +1,13 @@
 //
-//  CocktailListEndpoint.swift
+//  CocktailsEndpoint.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/09/15.
+//  Created by kimseongjun on 2023/11/07.
 //
 
 import Foundation
 
-struct CocktailListEndpoint: EndpointMakeable {
+struct CocktailsEndpoint: EndpointMakeable {
     var baseURL: String = "http://13.209.22.43:8000"
     
     var path: String = "/v1/cocktails"

@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - CocktailFilter
 struct CocktailFilter: Codable {
     let category: [String]
     let holdIngredient: [String]
