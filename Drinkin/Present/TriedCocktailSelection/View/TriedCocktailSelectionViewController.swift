@@ -11,7 +11,7 @@ import Combine
 final class TriedCocktailSelectionViewController: UIViewController {
     private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: TriedCocktailSelectionViewModel
-    private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription>?
+    private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectableImageDescription>?
    
     
     //MARK:- mainLabel
@@ -252,7 +252,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
 //MARK: - CocktailDiffableDataSource
 extension TriedCocktailSelectionViewController {
     private func configureCocktailDataSource() {
-        cocktailDataSource = UICollectionViewDiffableDataSource<Section, SelectablePreviewDescription> (collectionView: cocktailCollectionView) { [weak self] (collectionView, indexPath, previewDescription) -> UICollectionViewCell? in
+        cocktailDataSource = UICollectionViewDiffableDataSource<Section, SelectableImageDescription> (collectionView: cocktailCollectionView) { [weak self] (collectionView, indexPath, previewDescription) -> UICollectionViewCell? in
             guard let self = self, let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CocktailSelectionCell.identifier, for: indexPath) as? CocktailSelectionCell else { return nil }
             
             cell.fill(with: previewDescription)
@@ -271,8 +271,8 @@ extension TriedCocktailSelectionViewController {
         }
     }
     
-    private func applySnapshot(previewDescriptionList: [SelectablePreviewDescription]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, SelectablePreviewDescription>()
+    private func applySnapshot(previewDescriptionList: [SelectableImageDescription]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, SelectableImageDescription>()
         snapshot.appendSections([.main])
         snapshot.appendItems(previewDescriptionList)
         self.cocktailDataSource?.apply(snapshot, animatingDifferences: true)

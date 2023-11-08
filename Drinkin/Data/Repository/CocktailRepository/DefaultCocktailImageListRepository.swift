@@ -19,7 +19,7 @@ final class DefaultCocktailImageListRepository: CocktailImageListRepository {
         self.endpoint = endpoint
     }
     
-    func fetchCocktailImageList() -> AnyPublisher<CocktailImageDescription, Error> {
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

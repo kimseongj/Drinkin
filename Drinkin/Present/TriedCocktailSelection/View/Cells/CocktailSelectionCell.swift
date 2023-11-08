@@ -61,7 +61,7 @@ final class CocktailSelectionCell: UICollectionViewCell {
         selectedView.isHidden = true
     }
     
-    func fill(with previewDescription: SelectablePreviewDescription) {
+    func fill(with previewDescription: SelectableImageDescription) {
         guard let imageURL = URL(string: previewDescription.imageURI) else { return }
         
         cocktailImageView.load(url: imageURL)
