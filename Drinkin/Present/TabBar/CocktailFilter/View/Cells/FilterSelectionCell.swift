@@ -26,7 +26,7 @@ class FilterSelectionCell: UICollectionViewCell {
     }
     
     private func cellSetting() {
-        contentView.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+        contentView.backgroundColor = ColorPalette.filterCellColor
         contentView.layer.cornerRadius = 4
         contentView.addSubview(categoryNameLabel)
         
@@ -39,7 +39,7 @@ class FilterSelectionCell: UICollectionViewCell {
     }
     
     func fill(with categoryName: String) {
-        categoryNameLabel.text = categoryName + " ▼"
+        categoryNameLabel.text = categoryName + MiscStrings.InvertedTriangle
     }
     
     func makeBlackCell() {
@@ -49,13 +49,13 @@ class FilterSelectionCell: UICollectionViewCell {
     
     func makeFixedCell() {
         contentView.layer.borderWidth = 3
-        contentView.backgroundColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
+        contentView.backgroundColor = ColorPalette.themeColor
         categoryNameLabel.textColor = .black
     }
     
     func makeDefaultCell() {
         contentView.layer.borderWidth = 0
-        contentView.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
-        categoryNameLabel.textColor = .black 
+        contentView.backgroundColor = ColorPalette.filterCellColor
+        categoryNameLabel.textColor = .black
     }
 }

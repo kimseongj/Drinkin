@@ -10,4 +10,5 @@ import Foundation
 enum MiscStrings {
     static let emptySpace: String = ""
     static let hyphen: String = "-"
+    static let InvertedTriangle: String = " ▼"
 }
