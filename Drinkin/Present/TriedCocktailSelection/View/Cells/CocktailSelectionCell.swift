@@ -13,7 +13,6 @@ final class CocktailSelectionCell: UICollectionViewCell {
     private lazy var cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
         
         return imageView
     }()
