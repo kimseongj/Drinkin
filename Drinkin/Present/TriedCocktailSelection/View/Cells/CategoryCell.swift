@@ -14,7 +14,7 @@ final class CategoryCell: UICollectionViewCell {
                 self.backgroundColor = .black
                 categoryNameLabel.textColor = .white
             } else {
-                self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+                self.backgroundColor = ColorPalette.filterCellColor
                 categoryNameLabel.textColor = .black
             }
         }
@@ -37,7 +37,7 @@ final class CategoryCell: UICollectionViewCell {
     }
     
     private func cellSetting() {
-        self.backgroundColor = UIColor(red: 0.946, green: 0.946, blue: 0.946, alpha: 1)
+        self.backgroundColor = ColorPalette.filterCellColor
         self.layer.cornerRadius = 4
         self.addSubview(categoryNameLabel)
         

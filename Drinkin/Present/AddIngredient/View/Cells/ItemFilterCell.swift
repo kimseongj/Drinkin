@@ -38,7 +38,7 @@ final class ItemFilterCell: UICollectionViewCell {
     }
     
     private func configureBackgroundColor() {
-        contentView.backgroundColor = ColorPalette.categoryCellColor
+        contentView.backgroundColor = ColorPalette.filterCellColor
     }
     
     private func configureUI() {
@@ -63,7 +63,7 @@ final class ItemFilterCell: UICollectionViewCell {
     }
     
     func presentDeselected() {
-        contentView.backgroundColor = ColorPalette.categoryCellColor
+        contentView.backgroundColor = ColorPalette.filterCellColor
         categoryNameLabel.textColor = .black
     }
 }
