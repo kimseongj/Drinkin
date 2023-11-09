@@ -105,7 +105,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         renewCompleteSelectionButton()
         configureCocktailDataSource()
         binding()
-        viewModel.fetchCocktailPreviewDescription()
+        viewModel.fetchCocktailImageList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -227,11 +227,11 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
         if collectionView == categoryCollectionView {
             let currentCategoryName = viewModel.categoryList[indexPath.row]
             viewModel.currentCategoryName = currentCategoryName
-            viewModel.filterCocktailList()
+            viewModel.filterCocktailList(cocktailCategory: viewModel.currentCategoryName)
         } else {
             
             if let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell {
-                cell.presentSelected()
+            cell.presentSelected()
             }
             viewModel.selectCocktail(index: indexPath.row)
             renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())

@@ -155,7 +155,7 @@
 		1CA969172A9078690076731B /* KeyChainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969162A9078690076731B /* KeyChainError.swift */; };
 		1CA969192A9078860076731B /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969182A9078860076731B /* TokenType.swift */; };
 		1CA9691B2A90D64B0076731B /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9691A2A90D64B0076731B /* Provider.swift */; };
-		1CA969212A91D99E0076731B /* SelectTriedCocktailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969202A91D99E0076731B /* SelectTriedCocktailUsecase.swift */; };
+		1CA969212A91D99E0076731B /* AddTriedCocktailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969202A91D99E0076731B /* AddTriedCocktailUsecase.swift */; };
 		1CA969232A9332860076731B /* CategoryListStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969222A9332860076731B /* CategoryListStrings.swift */; };
 		1CA969252A9334980076731B /* TriedCocktailSelectionDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */; };
 		1CA969292A949D070076731B /* SelectableImageDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969282A949D070076731B /* SelectableImageDescription.swift */; };
@@ -372,7 +372,7 @@
 		1CA969162A9078690076731B /* KeyChainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainError.swift; sourceTree = "<group>"; };
 		1CA969182A9078860076731B /* TokenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
 		1CA9691A2A90D64B0076731B /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
-		1CA969202A91D99E0076731B /* SelectTriedCocktailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTriedCocktailUsecase.swift; sourceTree = "<group>"; };
+		1CA969202A91D99E0076731B /* AddTriedCocktailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTriedCocktailUsecase.swift; sourceTree = "<group>"; };
 		1CA969222A9332860076731B /* CategoryListStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListStrings.swift; sourceTree = "<group>"; };
 		1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriedCocktailSelectionDIContainer.swift; sourceTree = "<group>"; };
 		1CA969282A949D070076731B /* SelectableImageDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableImageDescription.swift; sourceTree = "<group>"; };
@@ -1381,11 +1381,11 @@
 		1CA20ED42A567E9A009FDD90 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
-				1CA969202A91D99E0076731B /* SelectTriedCocktailUsecase.swift */,
 				1CDAB4242AD3DFE200E30181 /* FilterCocktailListUsecase.swift */,
 				1CDAB42A2AD7DF0500E30181 /* AddItemUsecase.swift */,
 				1C3374972AE105DF0078F562 /* ManageMarkingCokctailUsecase.swift */,
 				1CCE60172AE4B2D90026427C /* FilterItemUsecase.swift */,
+				1CA969202A91D99E0076731B /* AddTriedCocktailUsecase.swift */,
 				1C51466E2AFBBE2100C1B7B1 /* FilterTriedCocktailUsecase.swift */,
 			);
 			path = Usecase;
@@ -1760,7 +1760,7 @@
 				1CA969302AA044C70076731B /* HoldedItemCell.swift in Sources */,
 				1CCE88E329E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift in Sources */,
 				1CCE88EF29EBAB7900D3E1D2 /* ProductDetailViewController.swift in Sources */,
-				1CA969212A91D99E0076731B /* SelectTriedCocktailUsecase.swift in Sources */,
+				1CA969212A91D99E0076731B /* AddTriedCocktailUsecase.swift in Sources */,
 				1C951D492ABB38CA00662B35 /* MutableSizeTableView.swift in Sources */,
 				1C0328DC2ADE4A09002E144E /* HoldedItemRepository.swift in Sources */,
 				1C58ECE32A63CA8100AC2603 /* DefaultCocktailBriefListRepository.swift in Sources */,
@@ -1972,6 +1972,7 @@
 /* Begin XCBuildConfiguration section */
 		1C5CAADE29DB1AE50053F19A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C5146702AFBBE8A00C1B7B1 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2086,6 +2087,7 @@
 		};
 		1C5CAAE129DB1AE50053F19A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C5146702AFBBE8A00C1B7B1 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol AddItemUsecase {
-    func addItem(itemList: [String]) -> AnyPublisher<HoldedItem, Error>
+    func addItems(itemList: [String]) -> AnyPublisher<HoldedItem, Error>
 }
 
 final class DefaultAddItemUsecase: AddItemUsecase {
@@ -19,7 +19,7 @@ final class DefaultAddItemUsecase: AddItemUsecase {
         self.itemRepository = itemRepository
     }
     
-    func addItem(itemList: [String]) -> AnyPublisher<HoldedItem, Error> {
+    func addItems(itemList: [String]) -> AnyPublisher<HoldedItem, Error> {
         return itemRepository.postIngredientList(receipeItems: itemList)
     }
 }

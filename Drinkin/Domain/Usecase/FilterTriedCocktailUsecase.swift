@@ -9,7 +9,8 @@ import Foundation
 import Combine
 
 protocol FilterTriedCocktailUsecase {
-    
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error>
+    func filterCocktail(cocktailCategory: String, selectableCocktailList: [SelectableImageDescription]) -> [SelectableImageDescription]
 }
 
 class DefaultFilterTriedCocktailUsecase: FilterTriedCocktailUsecase {
@@ -23,8 +24,11 @@ class DefaultFilterTriedCocktailUsecase: FilterTriedCocktailUsecase {
         cocktailImageListRepository.fetchCocktailImageList()
     }
     
-    func filterCocktail(cocktailCategory: String, cocktailList: [SelectableImageDescription]) {
-        
+    func filterCocktail(cocktailCategory: String, selectableCocktailList: [SelectableImageDescription]) -> [SelectableImageDescription] {
+        if cocktailCategory == CategoryListStrings.whole {
+            return selectableCocktailList
+        } else {
+            return selectableCocktailList.filter { $0.category == cocktailCategory }
+        }
     }
- 
 }
