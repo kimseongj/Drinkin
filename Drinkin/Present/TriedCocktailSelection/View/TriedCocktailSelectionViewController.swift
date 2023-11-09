@@ -225,9 +225,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
 extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
-            let currentCategoryName = viewModel.categoryList[indexPath.row]
-            viewModel.currentCategoryName = currentCategoryName
-            viewModel.filterCocktailList(cocktailCategory: viewModel.currentCategoryName)
+            viewModel.filterCocktailList(cocktailCategoryIndex: indexPath.row)
         } else {
             
             if let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell {

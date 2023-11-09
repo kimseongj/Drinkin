@@ -10,34 +10,34 @@ import Combine
 
 protocol TriedCocktailSelectionViewModelInput {
     func fetchCocktailImageList()
-    func filterCocktailList(cocktailCategory: String)
+    func filterCocktailList(cocktailCategoryIndex: Int)
     func selectCocktail(index: Int)
     func deselectCocktail(index: Int)
     func checkCocktailSelected() -> Bool
 }
 
 protocol TriedCocktailSelectionViewModelOutput {
-    var selectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { get }
     var filteredSelectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { get }
     var categoryList: [String] { get }
-    var currentCategoryName: String { get set }
 }
 
 typealias TriedCocktailSelectionViewModel = TriedCocktailSelectionViewModelInput & TriedCocktailSelectionViewModelOutput
 
 final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewModel {
-    private var cancelBag: Set<AnyCancellable> = []
     private let addTriedCocktailUsecase: AddTriedCocktailUsecase
     private let filterTriedCocktailUsecase: FilterTriedCocktailUsecase
+
+    init(filterTriedCocktailUsecase: FilterTriedCocktailUsecase,
+         addTriedCocktailUsecase: AddTriedCocktailUsecase) {
+        self.filterTriedCocktailUsecase = filterTriedCocktailUsecase
+        self.addTriedCocktailUsecase = addTriedCocktailUsecase
+    }
     
-    var currentCategoryName: String = CategoryListStrings.whole
-    @Published var cocktailList: [ImageDescription] = []
-    @Published var selectableCocktailList: [SelectableImageDescription] = []
+    private var cancelBag: Set<AnyCancellable> = []
+    var selectableCocktailList: [SelectableImageDescription] = []
+    
+    //MARK: - Output
     @Published var filteredSelectableCocktailList: [SelectableImageDescription] = []
-    
-    var selectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { $selectableCocktailList }
-    var filteredSelectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { $filteredSelectableCocktailList }
-    
     var categoryList: [String] = [CategoryListStrings.whole,
                                   CategoryListStrings.whiskey,
                                   CategoryListStrings.liqueur,
@@ -48,34 +48,21 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
                                   CategoryListStrings.nonAlcoholic,
                                   CategoryListStrings.mixing]
     
-    init(filterTriedCocktailUsecase: FilterTriedCocktailUsecase,
-         addTriedCocktailUsecase: AddTriedCocktailUsecase) {
-        self.filterTriedCocktailUsecase = filterTriedCocktailUsecase
-        self.addTriedCocktailUsecase = addTriedCocktailUsecase
-    }
+    var filteredSelectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { $filteredSelectableCocktailList }
     
+    //MARK: - Input
     func fetchCocktailImageList() {
         filterTriedCocktailUsecase.fetchCocktailImageList().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
             guard let self = self else { return }
-            self.cocktailList = $0.previewDescriptionList
-            self.convertSelectableCocktailList()
+            self.convertSelectableCocktailList(cocktailList: $0.cocktailImageList)
             self.filteredSelectableCocktailList = self.selectableCocktailList
         }).store(in: &cancelBag)
     }
-    
-    func filterCocktailList(cocktailCategory: String) {
+
+    func filterCocktailList(cocktailCategoryIndex: Int) {
+        let cocktailCategory = categoryList[cocktailCategoryIndex]
+        
         filteredSelectableCocktailList = filterTriedCocktailUsecase.filterCocktail(cocktailCategory: cocktailCategory, selectableCocktailList: selectableCocktailList)
-    }
-    
-    func convertSelectableCocktailList() {
-        cocktailList.forEach {
-            let convertedImageDescrtipon = SelectableImageDescription(id: $0.id,
-                                                                      category: $0.category,
-                                                                      cocktailNameKo: $0.cocktailNameKo,
-                                                                      imageURI: $0.imageURI
-            )
-            selectableCocktailList.append(convertedImageDescrtipon)
-        }
     }
     
     func selectCocktail(index: Int) {
@@ -97,23 +84,37 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
         }
     }
     
-    func extractSelectedCocktailID() -> [Int] {
-        let selectedCocktaiIDList = filteredSelectableCocktailList.filter {
-            $0.isSelected == true
-        }.map { $0.id }
-        
-        return selectedCocktaiIDList
-    }
-    
-    func checkCocktailSelected() -> Bool {
+    func checkCocktailSelected() -> Bool {  // input인가 output인가 그것이 문제로다
         let result = selectableCocktailList.contains { $0.isSelected == true }
         
         return result
+    }
+    
+    
+    
+    
+    
+    
+    
+    func convertSelectableCocktailList(cocktailList: [ImageDescription]) {
+        cocktailList.forEach {
+            let convertedImageDescrtipon = SelectableImageDescription(id: $0.id,
+                                                                      category: $0.category,
+                                                                      cocktailNameKo: $0.cocktailNameKo,
+                                                                      imageURI: $0.imageURI
+            )
+            selectableCocktailList.append(convertedImageDescrtipon)
+        }
     }
     
     func makeSelectedCocktailIDList() -> [Int] {
         let selectedCocktailIdList = selectableCocktailList.filter { $0.isSelected == true }.map { $0.id }
         
         return selectedCocktailIdList
+    }
+    
+    func addTriedCocktailList() {
+        let selectedCocktailIDList = makeSelectedCocktailIDList()
+        // addTriedCocktailUsecase.
     }
 }
