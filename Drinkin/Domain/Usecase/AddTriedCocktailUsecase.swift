@@ -9,11 +9,17 @@ import Foundation
 import Combine
 
 protocol AddTriedCocktailUsecase {
-    
+    func addTriedCocktails(cocktailID: [Int]) -> AnyPublisher<PostResponse, Error>
 }
 
-class DefaultAddTriedCocktailUsecase: AddTriedCocktailUsecase {
-    func addTriedCocktails(cocktailID: [Int]) {
-        
+final class DefaultAddTriedCocktailUsecase: AddTriedCocktailUsecase {
+    private let additionRepository: AdditionRepository
+    
+    init(additionRepository: AdditionRepository) {
+        self.additionRepository = additionRepository
+    }
+    
+    func addTriedCocktails(cocktailID: [Int]) -> AnyPublisher<PostResponse, Error> {
+        additionRepository.postTriedCocktail(cocktailIDList: CocktailIDList(cocktailIDList: cocktailID))
     }
 }

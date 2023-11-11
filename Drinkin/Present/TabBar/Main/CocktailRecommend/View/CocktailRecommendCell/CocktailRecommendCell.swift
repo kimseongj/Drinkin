@@ -149,7 +149,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
     func configureCell(cocktailBrief: CocktailBrief) {
         guard let validImageURL = URL(string: cocktailBrief.imageURI) else { return }
         
-        cocktailImageView.load(url: validImageURL)
+        cocktailImageView.load(urlString: validImageURL)
         fetchTitle(cocktailBrief.cocktailNameKo)
         fetchSubtitle(cocktailBrief.category)
         fetchScore(levelScore: cocktailBrief.levelScore, abvScore: cocktailBrief.abvScore, sugarContentScore: cocktailBrief.sugarContentScore)
