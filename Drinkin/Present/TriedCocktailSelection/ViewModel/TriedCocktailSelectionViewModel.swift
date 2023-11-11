@@ -14,6 +14,7 @@ protocol TriedCocktailSelectionViewModelInput {
     func selectCocktail(index: Int)
     func deselectCocktail(index: Int)
     func checkCocktailSelected() -> Bool
+    func addTriedCocktailList(completion: @escaping () -> Void)
 }
 
 protocol TriedCocktailSelectionViewModelOutput {
@@ -58,18 +59,25 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
             self.filteredSelectableCocktailList = self.selectableCocktailList
         }).store(in: &cancelBag)
     }
+    
+    func convertSelectableCocktailList(cocktailList: [ImageDescription]) {
+        cocktailList.forEach {
+            let convertedImageDescrtipon = SelectableImageDescription(id: $0.id,
+                                                                      category: $0.category,
+                                                                      cocktailNameKo: $0.cocktailNameKo,
+                                                                      imageURI: $0.imageURI)
+            selectableCocktailList.append(convertedImageDescrtipon)
+        }
+    }
 
     func filterCocktailList(cocktailCategoryIndex: Int) {
         let cocktailCategory = categoryList[cocktailCategoryIndex]
-        
         filteredSelectableCocktailList = filterTriedCocktailUsecase.filterCocktail(cocktailCategory: cocktailCategory, selectableCocktailList: selectableCocktailList)
     }
     
     func selectCocktail(index: Int) {
         let selectedID = filteredSelectableCocktailList[index].id
-        
         filteredSelectableCocktailList[index].isSelected = true
-        
         if let selectedCocktailIndex = selectableCocktailList.firstIndex(where: { $0.id == selectedID }) {
             selectableCocktailList[selectedCocktailIndex].isSelected = true
         }
@@ -77,44 +85,37 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     
     func deselectCocktail(index: Int) {
         let selectedID = filteredSelectableCocktailList[index].id
-        
         filteredSelectableCocktailList[index].isSelected = false
         if let selectedCocktailIndex = selectableCocktailList.firstIndex(where: { $0.id == selectedID }) {
             selectableCocktailList[selectedCocktailIndex].isSelected = false
         }
     }
     
-    func checkCocktailSelected() -> Bool {  // input인가 output인가 그것이 문제로다
+    func checkCocktailSelected() -> Bool {
         let result = selectableCocktailList.contains { $0.isSelected == true }
         
         return result
     }
     
-    
-    
-    
-    
-    
-    
-    func convertSelectableCocktailList(cocktailList: [ImageDescription]) {
-        cocktailList.forEach {
-            let convertedImageDescrtipon = SelectableImageDescription(id: $0.id,
-                                                                      category: $0.category,
-                                                                      cocktailNameKo: $0.cocktailNameKo,
-                                                                      imageURI: $0.imageURI
-            )
-            selectableCocktailList.append(convertedImageDescrtipon)
-        }
+    func addTriedCocktailList(completion: @escaping () -> Void) {
+        let selectedCocktailList = makeSelectedCocktailIDList()
+        
+        addTriedCocktailUsecase.addTriedCocktails(cocktailID: selectedCocktailList).receive(on: RunLoop.main).sink(receiveCompletion: {
+            switch $0 {
+            case .finished:
+                print("finished")
+            case .failure(_):
+                print("RequestError")
+            }
+        }, receiveValue: {
+            print($0)
+            completion()
+        }).store(in: &cancelBag)
     }
     
     func makeSelectedCocktailIDList() -> [Int] {
         let selectedCocktailIdList = selectableCocktailList.filter { $0.isSelected == true }.map { $0.id }
         
         return selectedCocktailIdList
-    }
-    
-    func addTriedCocktailList() {
-        let selectedCocktailIDList = makeSelectedCocktailIDList()
-        // addTriedCocktailUsecase.
     }
 }

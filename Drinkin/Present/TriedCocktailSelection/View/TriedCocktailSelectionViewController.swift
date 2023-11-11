@@ -176,12 +176,12 @@ final class TriedCocktailSelectionViewController: UIViewController {
         switch isCellsSelected {
         case false:
             completeSelectionButton.setTitle("다음", for: .normal)
-            completeSelectionButton.removeTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
+            completeSelectionButton.removeTarget(self, action: #selector(dismissAndAddTriedCocktailList), for: .touchUpInside)
             completeSelectionButton.addTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
         case true:
             completeSelectionButton.setTitle("선택 완료", for: .normal)
             completeSelectionButton.removeTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
-            completeSelectionButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
+            completeSelectionButton.addTarget(self, action: #selector(dismissAndAddTriedCocktailList), for: .touchUpInside)
         }
     }
     
@@ -194,8 +194,11 @@ final class TriedCocktailSelectionViewController: UIViewController {
     }
     
     @objc
-    private func dismissViewController() {
-        self.dismiss(animated: true)
+    private func dismissAndAddTriedCocktailList() {
+        viewModel.addTriedCocktailList { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
     }
 }
 
