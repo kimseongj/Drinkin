@@ -15,26 +15,33 @@ final class TriedCocktailSelectionDIContainer {
     }
     
     let dependencies: Dependencies
+    let addTriedCocktailListEndpoint = AddTriedCocktailListEndpoint()
     let triedCocktailEndpoint = CocktailsEndpoint()
     
     init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
     
+    //MARK: - FilterTriedCocktail
     func makeCoktailImageListRepository() -> CocktailImageListRepository {
         return DefaultCocktailImageListRepository(tokenManager: dependencies.tokenManager,
-                                              provider: dependencies.provider,
-                                              endpoint: triedCocktailEndpoint)
+                                                  provider: dependencies.provider,
+                                                  endpoint: triedCocktailEndpoint)
     }
     
-    //MARK: - FilterTriedCocktailUsecase
     func makeFilterTriedCocktailUsecase() -> FilterTriedCocktailUsecase {
         return DefaultFilterTriedCocktailUsecase(cocktailImageListRepository: makeCoktailImageListRepository())
     }
     
-    //MARK: - AddTriedCocktailUsecase
+    //MARK: - AddTriedCocktail
+    func makeAddtionRepository() -> AdditionRepository {
+        return DefaultAdditionRepository(tokenManager: dependencies.tokenManager,
+                                         provider: dependencies.provider,
+                                         endpoint: addTriedCocktailListEndpoint)
+    }
+    
     func makeAddTriedCocktailUsecase() -> AddTriedCocktailUsecase {
-        return DefaultAddTriedCocktailUsecase()
+        return DefaultAddTriedCocktailUsecase(additionRepository: makeAddtionRepository())
     }
     
     func makeTriedCocktailSelectionViewModel() -> TriedCocktailSelectionViewModel {
