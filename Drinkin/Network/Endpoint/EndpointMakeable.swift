@@ -22,7 +22,7 @@ protocol EndpointMakeable {
     
     func makeURL() -> URL?
     func makeURLRequest() -> URLRequest?
-    func makeJsonPostRequest<T: Encodable>(endPoint: EndpointMakeable, bodyItem: T) -> URLRequest?
+    func makeJsonPostRequest<T: Encodable>(bodyItem: T) -> URLRequest?
 }
 
 extension EndpointMakeable {
@@ -68,7 +68,7 @@ extension EndpointMakeable {
         return urlRequest
     }
     
-    func makeJsonPostRequest<T: Encodable>(endPoint: EndpointMakeable, bodyItem: T) -> URLRequest? {
+    func makeJsonPostRequest<B: Encodable>(bodyItem: B) -> URLRequest? {
         guard var request = makeURLRequest() else { return nil }
         let requestBody = bodyItem
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
