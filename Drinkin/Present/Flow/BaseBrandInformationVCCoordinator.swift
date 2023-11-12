@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class BaseBrandInformationVCCoordinator: Coordinator {
+protocol BaseBrandInformationVCFlow: AnyObject {
+    func pushMakeableCocktailListVC(brandID: Int)
+}
+
+final class BaseBrandInformationVCCoordinator: Coordinator, BaseBrandInformationVCFlow {
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     let baseBrandID: Int
@@ -21,8 +25,17 @@ final class BaseBrandInformationVCCoordinator: Coordinator {
     func start() {
         let baseBrandInformationDIContainer = appDIContainer.makeBaseBrandInformationDIContainer(brandID: baseBrandID)
         
-        let vc = baseBrandInformationDIContainer.makeBaseBrandInformationViewController()
-        vc.makeBlackBackBarButton()
+        let baseBrandInformationVC = baseBrandInformationDIContainer.makeBaseBrandInformationViewController()
+        baseBrandInformationVC.makeBlackBackBarButton()
+        baseBrandInformationVC.flowDelegate = self
+        
+        navigationController.pushViewController(baseBrandInformationVC, animated: true)
+    }
+    
+    func pushMakeableCocktailListVC(brandID: Int) {
+        let makeableCocktailListDIContainer = appDIContainer.makeMakeableCocktailListDIContainer(brandID: brandID)
+        
+        let vc = makeableCocktailListDIContainer.makeMakeableCocktailListViewController()
         navigationController.pushViewController(vc, animated: true)
     }
 }
