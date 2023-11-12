@@ -11,6 +11,7 @@ import Combine
 
 final class BaseBrandInformationViewController: UIViewController {
     private var viewModel: BaseBrandInformationViewModel
+    var flowDelegate: BaseBrandInformationVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
     private let scrollView: UIScrollView = {
@@ -61,7 +62,7 @@ final class BaseBrandInformationViewController: UIViewController {
     private let abvLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
-        label.text = "당   도"
+        label.text = "도   수"
         
         return label
     }()
@@ -82,6 +83,7 @@ final class BaseBrandInformationViewController: UIViewController {
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.layer.borderWidth = 3
         button.layer.borderColor = ColorPalette.buttonBorderColor
+        button.addTarget(self, action: #selector(tapRecommendCocktailButton), for: .touchUpInside)
         
         return button
     }()
@@ -174,6 +176,11 @@ final class BaseBrandInformationViewController: UIViewController {
         titleLabel.text = brandDetail.baseBrandName
 //        classificationDescriptionLabel.text = brandDetail.classification
         abvDescriptionLabel.text = brandDetail.abv
+    }
+    
+    @objc
+    private func tapRecommendCocktailButton() {
+        flowDelegate?.pushMakeableCocktailListVC(brandID: viewModel.brandID)
     }
 }
 
