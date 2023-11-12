@@ -10,5 +10,4 @@ import Combine
 
 protocol MakeableCocktailListRepository {
     func fetchMakeableCocktailsByBrand() -> AnyPublisher<MakeableCocktailList, Error>
-    func fetchMakeableCocktailsByIngredient() -> AnyPublisher<MakeableCocktailList, Error>
 }
