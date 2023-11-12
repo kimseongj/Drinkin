@@ -16,7 +16,7 @@ final class RecipeBaseCell: UICollectionViewCell {
         return label
     }()
     
-    private let descriptionLabel: UILabel = {
+    private let brandsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 12)
         
@@ -35,10 +35,10 @@ final class RecipeBaseCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        self.layer.borderWidth = 2
-        self.layer.cornerRadius = 4
+        contentView.layer.borderWidth = 2
+        contentView.layer.cornerRadius = 4
         contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(brandsLabel)
         contentView.addSubview(checkImageView)
         
         titleLabel.snp.makeConstraints {
@@ -46,14 +46,14 @@ final class RecipeBaseCell: UICollectionViewCell {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        descriptionLabel.snp.makeConstraints {
+        brandsLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().offset(-12)
         }
         
         checkImageView.snp.makeConstraints {
             $0.height.width.equalTo(14)
-            $0.leading.equalTo(descriptionLabel.snp.trailing).offset(4)
+            $0.leading.equalTo(brandsLabel.snp.trailing).offset(4)
             $0.trailing.equalToSuperview().offset(-16)
             $0.centerY.equalToSuperview()
         }
@@ -63,16 +63,20 @@ final class RecipeBaseCell: UICollectionViewCell {
         switch hold {
         case true:
             contentView.backgroundColor = ColorPalette.themeColor
+            contentView.layer.borderColor = UIColor.black.cgColor
+            brandsLabel.textColor = .black
             checkImageView.image = ImageStorage.checkIcon
             
         case false:
-            contentView.backgroundColor = .white
+            contentView.backgroundColor = ColorPalette.grayCellColor
+            contentView.layer.borderColor = ColorPalette.cellGrayBorderColor
+            brandsLabel.textColor = ColorPalette.subTitleGrayColor
             checkImageView.image = nil
         }
     }
     
     func fill(detailCategory: DetailBase) {
         titleLabel.text = detailCategory.baseNameKo
-        descriptionLabel.text = detailCategory.brands.map { $0 }.joined(separator: ", ")
+        brandsLabel.text = detailCategory.brands.map { $0 }.joined(separator: ", ")
     }
 }
