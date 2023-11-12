@@ -50,9 +50,7 @@ final class BrandCell: UICollectionViewCell {
     }
     
     func fill(with brandImageDescription: BrandImageDescription) {
-        guard let imageURL = URL(string: brandImageDescription.imageURI) else { return }
-        
-        brandImageView.load(url: imageURL)
+        brandImageView.load(urlString: brandImageDescription.imageURI)
         titleLabel.text = brandImageDescription.brandName
     }
 }

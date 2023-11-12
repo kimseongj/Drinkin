@@ -124,9 +124,7 @@ final class ToolModalViewController: UIViewController {
     }
     
     private func fill(toolDetail: ToolDetail) {
-        guard let imageURL = URL(string: toolDetail.imageURI) else { return }
-        
-        imageView.load(urlString: imageURL)
+        imageView.load(urlString: toolDetail.imageURI)
         titleLabel.text = toolDetail.toolName
         descriptionLabel.text = toolDetail.description
         purchaseLinkLabel.text = toolDetail.purchaseLink

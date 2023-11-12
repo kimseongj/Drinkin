@@ -76,6 +76,11 @@
 		1C5146652AFA2AD000C1B7B1 /* CocktailsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5146642AFA2AD000C1B7B1 /* CocktailsEndpoint.swift */; };
 		1C51466B2AFB57EA00C1B7B1 /* RecipeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51466A2AFB57EA00C1B7B1 /* RecipeItemCell.swift */; };
 		1C51466F2AFBBE2100C1B7B1 /* FilterTriedCocktailUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51466E2AFBBE2100C1B7B1 /* FilterTriedCocktailUsecase.swift */; };
+		1C5146732AFCDC1B00C1B7B1 /* DefaultAdditionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5146722AFCDC1B00C1B7B1 /* DefaultAdditionRepository.swift */; };
+		1C5146762AFD0B0000C1B7B1 /* CocktailIDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5146752AFD0B0000C1B7B1 /* CocktailIDList.swift */; };
+		1C5146782AFD0E9500C1B7B1 /* AddTriedCocktailListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5146772AFD0E9500C1B7B1 /* AddTriedCocktailListEndpoint.swift */; };
+		1C51467B2AFD109D00C1B7B1 /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51467A2AFD109D00C1B7B1 /* PostResponse.swift */; };
+		1C51467D2AFD10F400C1B7B1 /* AdditionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51467C2AFD10F300C1B7B1 /* AdditionRepository.swift */; };
 		1C57317A2A06879400C19EE1 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5731792A06879400C19EE1 /* ScoreView.swift */; };
 		1C58C5242AF4F07D00D6CC83 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58C5232AF4F07D00D6CC83 /* LoginManager.swift */; };
 		1C58C5262AF51D7400D6CC83 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58C5252AF51D7400D6CC83 /* AccessToken.swift */; };
@@ -104,6 +109,7 @@
 		1C5CAB0129DB51680053F19A /* EndpointMakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0029DB51680053F19A /* EndpointMakeable.swift */; };
 		1C5CAB0429DB51D10053F19A /* DefaultHoldedItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0329DB51D10053F19A /* DefaultHoldedItemRepository.swift */; };
 		1C5CAB0629DB51D50053F19A /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0529DB51D50053F19A /* DefaultLoginRepository.swift */; };
+		1C5CBB0D2AFF4732004FE626 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CBB0C2AFF4732004FE626 /* ImageCacheManager.swift */; };
 		1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */; };
 		1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6636532A067F4B00C85374 /* SelectedView.swift */; };
 		1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */; };
@@ -300,6 +306,11 @@
 		1C51466A2AFB57EA00C1B7B1 /* RecipeItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeItemCell.swift; sourceTree = "<group>"; };
 		1C51466E2AFBBE2100C1B7B1 /* FilterTriedCocktailUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTriedCocktailUsecase.swift; sourceTree = "<group>"; };
 		1C5146702AFBBE8A00C1B7B1 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		1C5146722AFCDC1B00C1B7B1 /* DefaultAdditionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAdditionRepository.swift; sourceTree = "<group>"; };
+		1C5146752AFD0B0000C1B7B1 /* CocktailIDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailIDList.swift; sourceTree = "<group>"; };
+		1C5146772AFD0E9500C1B7B1 /* AddTriedCocktailListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTriedCocktailListEndpoint.swift; sourceTree = "<group>"; };
+		1C51467A2AFD109D00C1B7B1 /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
+		1C51467C2AFD10F300C1B7B1 /* AdditionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionRepository.swift; sourceTree = "<group>"; };
 		1C5731792A06879400C19EE1 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		1C58C5232AF4F07D00D6CC83 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		1C58C5252AF51D7400D6CC83 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
@@ -321,6 +332,7 @@
 		1C5CAB0029DB51680053F19A /* EndpointMakeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointMakeable.swift; sourceTree = "<group>"; };
 		1C5CAB0329DB51D10053F19A /* DefaultHoldedItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHoldedItemRepository.swift; sourceTree = "<group>"; };
 		1C5CAB0529DB51D50053F19A /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
+		1C5CBB0C2AFF4732004FE626 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCorrdinator.swift; sourceTree = "<group>"; };
 		1C6636532A067F4B00C85374 /* SelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedView.swift; sourceTree = "<group>"; };
 		1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowRectangleView.swift; sourceTree = "<group>"; };
@@ -507,6 +519,7 @@
 				1C0328DB2ADE4A09002E144E /* HoldedItemRepository.swift */,
 				1C0328DD2ADE4A24002E144E /* UserMadeCocktailListRepository.swift */,
 				1C0328DF2ADE4A41002E144E /* SavedCocktailListRepository.swift */,
+				1C51467C2AFD10F300C1B7B1 /* AdditionRepository.swift */,
 			);
 			path = UserRepository;
 			sourceTree = "<group>";
@@ -796,6 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				1C8713792AEFBEF200583A9F /* MakeableCocktailList.swift */,
+				1C5146752AFD0B0000C1B7B1 /* CocktailIDList.swift */,
 				1CA969282A949D070076731B /* SelectableImageDescription.swift */,
 				1C9F4C8C2AAD8DAF0020DB48 /* CocktailPreviewList.swift */,
 				1C9F4C8A2AAD8D7A0020DB48 /* CocktailImageList.swift */,
@@ -879,8 +893,17 @@
 				1CA969352AA0B59A0076731B /* HoldedItemEndpoint.swift */,
 				1C7807F92AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift */,
 				1C9F4C902AAD92700020DB48 /* SavedCocktailListEndpoint.swift */,
+				1C5146772AFD0E9500C1B7B1 /* AddTriedCocktailListEndpoint.swift */,
 			);
 			path = UserEndpoint;
+			sourceTree = "<group>";
+		};
+		1C5146792AFD108C00C1B7B1 /* PostResponse */ = {
+			isa = PBXGroup;
+			children = (
+				1C51467A2AFD109D00C1B7B1 /* PostResponse.swift */,
+			);
+			path = PostResponse;
 			sourceTree = "<group>";
 		};
 		1C58C5222AF4F07100D6CC83 /* LoginManager */ = {
@@ -997,9 +1020,18 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		1C5CBB0B2AFF4720004FE626 /* ImageCacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				1C5CBB0C2AFF4732004FE626 /* ImageCacheManager.swift */,
+			);
+			path = ImageCacheManager;
+			sourceTree = "<group>";
+		};
 		1C66711029F8225A00B0E41F /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				1C5146792AFD108C00C1B7B1 /* PostResponse */,
 				1C51465D2AFA24F500C1B7B1 /* Login */,
 				1C51465C2AFA24E500C1B7B1 /* User */,
 				1C5146592AFA211500C1B7B1 /* Cocktail */,
@@ -1512,6 +1544,7 @@
 		1CC9D3EB2A19033100654A5D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1C5CBB0B2AFF4720004FE626 /* ImageCacheManager */,
 				1CA968E52A8E40120076731B /* Enum */,
 				1CB299082A6E4A73001F31BF /* Extension */,
 				1C71A4AE2A52929300F1814A /* CommonView */,
@@ -1587,6 +1620,7 @@
 				1C5CAB0329DB51D10053F19A /* DefaultHoldedItemRepository.swift */,
 				1CDE6FA42AAEA8DF000D7BE3 /* DefaultUserMadeCocktailListRepository.swift */,
 				1C9F4C8E2AAD91AE0020DB48 /* DefaultSavedCocktailListRepository.swift */,
+				1C5146722AFCDC1B00C1B7B1 /* DefaultAdditionRepository.swift */,
 			);
 			path = UserRepository;
 			sourceTree = "<group>";
@@ -1819,6 +1853,8 @@
 				1CF26FA12A8B52BD0066E754 /* TriedCocktailSelectionViewController.swift in Sources */,
 				1CCE88EB29E953E400D3E1D2 /* LoginProvider.swift in Sources */,
 				1CDB85BA2AD040B600360852 /* BookmarkCocktailButton.swift in Sources */,
+				1C5146782AFD0E9500C1B7B1 /* AddTriedCocktailListEndpoint.swift in Sources */,
+				1C51467B2AFD109D00C1B7B1 /* PostResponse.swift in Sources */,
 				1C8713632AED032100583A9F /* SkillModalViewModel.swift in Sources */,
 				1C58C5282AF51DBC00D6CC83 /* RenewAccessTokenEndpoint.swift in Sources */,
 				1C9F4C8F2AAD91AE0020DB48 /* DefaultSavedCocktailListRepository.swift in Sources */,
@@ -1861,6 +1897,7 @@
 				1C58ECE12A63CA3A00AC2603 /* DefaultCocktailImageListRepository.swift in Sources */,
 				1CA969292A949D070076731B /* SelectableImageDescription.swift in Sources */,
 				1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */,
+				1C5146762AFD0B0000C1B7B1 /* CocktailIDList.swift in Sources */,
 				1CBDA5492ADFC312000F1F7D /* BaseBrandInformationEndpoint.swift in Sources */,
 				1C58C5262AF51D7400D6CC83 /* AccessToken.swift in Sources */,
 				1C0328F22ADE5164002E144E /* ItemFilterRepository.swift in Sources */,
@@ -1874,6 +1911,7 @@
 				1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */,
 				1CDAB4292AD7DE5D00E30181 /* DefaultItemRepository.swift in Sources */,
 				1C57317A2A06879400C19EE1 /* ScoreView.swift in Sources */,
+				1C51467D2AFD10F400C1B7B1 /* AdditionRepository.swift in Sources */,
 				1C504CDC2AB5E6B7005A0B25 /* FilterType.swift in Sources */,
 				1CDB85B32ACFD75D00360852 /* BaseInformationEndpoint.swift in Sources */,
 				1C0809DC29E041E000265706 /* LoginViewController.swift in Sources */,
@@ -1921,6 +1959,7 @@
 				1CDB85BC2AD040CA00360852 /* MarkMadeCocktailButton.swift in Sources */,
 				1C41D9342AAF0CC300D50F4F /* SavedCocktailListViewModel.swift in Sources */,
 				1CCE890229EBBCCA00D3E1D2 /* HTTPMethod.swift in Sources */,
+				1C5146732AFCDC1B00C1B7B1 /* DefaultAdditionRepository.swift in Sources */,
 				1CDB85B02ACFD3C600360852 /* BaseBrandInformationViewController.swift in Sources */,
 				1CCE88E929E94B5400D3E1D2 /* GlassModalVCCoordinator.swift in Sources */,
 				1C93EDEE2AEA51F70080E33A /* MakeableCocktailListViewController.swift in Sources */,
@@ -1930,6 +1969,7 @@
 				1C51466B2AFB57EA00C1B7B1 /* RecipeItemCell.swift in Sources */,
 				1CC9D3EA2A19027400654A5D /* HoldCollectionViewCell.swift in Sources */,
 				1CCE88F529EBAC2500D3E1D2 /* LeftAlignmentLayout.swift in Sources */,
+				1C5CBB0D2AFF4732004FE626 /* ImageCacheManager.swift in Sources */,
 				1C598F8C2A7D35ED00B9DC93 /* ProductDetailViewModel.swift in Sources */,
 				1C8713582AEBC4D900583A9F /* GlassDetailEndpoint.swift in Sources */,
 				1CA8ED262A65915600CE5E1A /* TokenManager.swift in Sources */,
