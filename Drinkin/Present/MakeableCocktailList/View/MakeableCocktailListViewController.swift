@@ -10,6 +10,7 @@ import SnapKit
 
 final class MakeableCocktailListViewController: UIViewController {
     private let viewModel: MakeableCocktailListViewModel
+    var delegate: MakeableCocktailListVCFlow?
     
     private lazy var cocktailCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
@@ -28,11 +29,19 @@ final class MakeableCocktailListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
+        configureUI()
         
+    }
+    
+    private func configureNavigationBar() {
+        navigationItem.title = "만들 수 있는 칵테일 목록"
     }
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
+        
+        view.backgroundColor = .white
         
         view.addSubview(cocktailCollectionView)
         
@@ -42,6 +51,8 @@ final class MakeableCocktailListViewController: UIViewController {
     }
 }
 
+
+//MARK: - CocktailCollectionView Compostional Layout
 extension MakeableCocktailListViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))

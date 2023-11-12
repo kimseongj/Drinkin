@@ -12,26 +12,20 @@ final class DefaultMakeableCocktailListRepository: MakeableCocktailListRepositor
     let tokenManager: TokenManager
     let provider: Provider
     var endpoint: EndpointMakeable
-    let id: Int
+    let brandID: Int
     
     init(tokenManager: TokenManager,
          provider: Provider,
          endpoint: EndpointMakeable,
-         id: Int) {
+         brandID: Int) {
         self.tokenManager = tokenManager
         self.provider = provider
         self.endpoint = endpoint
-        self.id = id
+        self.brandID = brandID
     }
     
-    func fetchMakeableCocktailsByBrand() -> AnyPublisher<MakeableCocktailList, Error> {
-        endpoint.insertPathParmeter(pathParameter: id.description)
-        
-        return provider.fetchData(endpoint: endpoint)
-    }
-    
-    func fetchMakeableCocktailsByIngredient() -> AnyPublisher<MakeableCocktailList, Error> {
-        endpoint.insertPathParmeter(pathParameter: id.description)
+    func fetchMakeableCocktails() -> AnyPublisher<MakeableCocktailList, Error> {
+        //endpoint.insertPathParmeter(pathParameter: brandID.description)
         
         return provider.fetchData(endpoint: endpoint)
     }

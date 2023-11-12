@@ -49,10 +49,12 @@ final class RecipeItemCell: UICollectionViewCell {
         switch hold {
         case true:
             contentView.backgroundColor = ColorPalette.themeColor
+            contentView.layer.borderColor = UIColor.black.cgColor
             checkImageView.image = ImageStorage.checkIcon
             
         case false:
-            contentView.backgroundColor = .white
+            contentView.backgroundColor = ColorPalette.grayCellColor
+            contentView.layer.borderColor = ColorPalette.cellGrayBorderColor
             checkImageView.image = nil
         }
     }

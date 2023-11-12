@@ -10,6 +10,7 @@ import Combine
 
 protocol BaseBrandInformationViewModel {
     var baseBrandDetailPublisher: Published<BaseBrandDetail?>.Publisher { get }
+    var brandID: Int { get set }
     
     func fetchBaseBrandDetail()
 }
@@ -21,6 +22,8 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
     @Published var baseBrandDetail: BaseBrandDetail?
     var baseBrandDetailPublisher: Published<BaseBrandDetail?>.Publisher { $baseBrandDetail }
     
+    var brandID: Int = 0
+    
     init(baseBrandDetailRepository: BaseBrandDetailRepository) {
         self.baseBrandDetailRepository = baseBrandDetailRepository
     }
@@ -30,6 +33,8 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
             guard let self = self else { return }
             
             self.baseBrandDetail = $0
+            self.brandID = $0.id
+            
         }).store(in: &cancelBag)
     }
 }
