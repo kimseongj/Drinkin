@@ -103,9 +103,7 @@ final class ItemCell: UICollectionViewCell {
     }
     
     func fill(with itemPreview: ItemPreview) {
-        guard let imageURL = URL(string: itemPreview.imageURI) else { return }
-        
-        itemImageView.load(url: imageURL)
+        itemImageView.load(urlString: itemPreview.imageURI)
         itemTitleLabel.text = itemPreview.itemName
         categoryLabel.text = itemPreview.category
     }

@@ -9,22 +9,26 @@ import Foundation
 import Combine
 
 protocol FilterTriedCocktailUsecase {
-    
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error>
+    func filterCocktail(cocktailCategory: String, selectableCocktailList: [SelectableImageDescription]) -> [SelectableImageDescription]
 }
 
 class DefaultFilterTriedCocktailUsecase: FilterTriedCocktailUsecase {
-    private let triedCocktailRepository: CocktailImageListRepository
+    private let cocktailImageListRepository: CocktailImageListRepository
     
-    init(triedCocktailRepository: CocktailImageListRepository) {
-        self.triedCocktailRepository = triedCocktailRepository
+    init(cocktailImageListRepository: CocktailImageListRepository) {
+        self.cocktailImageListRepository = cocktailImageListRepository
     }
 
     func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error> {
-        triedCocktailRepository.fetchCocktailImageList()
+        cocktailImageListRepository.fetchCocktailImageList()
     }
     
-    func filterCocktail(cocktailCategory: String, cocktailList: [SelectableImageDescription]) {
-        
+    func filterCocktail(cocktailCategory: String, selectableCocktailList: [SelectableImageDescription]) -> [SelectableImageDescription] {
+        if cocktailCategory == CategoryListStrings.whole {
+            return selectableCocktailList
+        } else {
+            return selectableCocktailList.filter { $0.category == cocktailCategory }
+        }
     }
- 
 }

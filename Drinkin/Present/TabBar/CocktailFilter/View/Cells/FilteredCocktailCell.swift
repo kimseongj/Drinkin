@@ -99,10 +99,8 @@ final class FilteredCocktailCell: UICollectionViewCell {
     }
     
     func fill(with cocktailPreview: CocktailPreview) {
-        guard let imageURI = URL(string: cocktailPreview.imageURI) else { return }
-        
         titleLabel.text = cocktailPreview.cocktailNameKo
-        cocktailImageView.load(url: imageURI)
+        cocktailImageView.load(urlString: cocktailPreview.imageURI)
         configureScoreView(levelScore: cocktailPreview.levelScore,
                            sugarContentScore: cocktailPreview.sugarContentScore,
                            abvScore: cocktailPreview.abvScore,

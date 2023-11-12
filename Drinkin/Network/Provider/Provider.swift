@@ -22,7 +22,7 @@ struct Provider {
                 }
                 
                 if httpResponse?.statusCode == 404 {
-                 print("40404040404040404")
+                    
                 }
                 
                 return $0.data
@@ -32,7 +32,7 @@ struct Provider {
     }
     
     func postData<B: Encodable, T: Decodable>(endpoint: EndpointMakeable, bodyItem: B) -> AnyPublisher<T, Error> {
-        let request = endpoint.makeJsonPostRequest(endPoint: endpoint, bodyItem: bodyItem)
+        let request = endpoint.makeJsonPostRequest(bodyItem: bodyItem)
         
         return URLSession.shared.dataTaskPublisher(for: request!)
             .map { $0.data }

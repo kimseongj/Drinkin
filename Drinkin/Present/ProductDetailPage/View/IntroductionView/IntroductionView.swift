@@ -162,9 +162,7 @@ final class IntroductionView: UIView {
     }
     
     func fill(with cocktailDesription: CocktailDescription) {
-        guard let validImageURL = URL(string: cocktailDesription.imageURI) else { return }
-        
-        cocktailImageView.load(url: validImageURL)
+        cocktailImageView.load(urlString: cocktailDesription.imageURI)
         cocktailTitleLabel.text = cocktailDesription.cocktailNameKo
         cocktailTDescriptionLabel.text = cocktailDesription.description
         fillRecipeStackView(with: cocktailDesription.recipeList)

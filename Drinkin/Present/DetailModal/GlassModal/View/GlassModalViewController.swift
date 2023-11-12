@@ -150,9 +150,7 @@ final class GlassModalViewController: UIViewController {
     }
 
     private func fill(glassDetail: GlassDetail) {
-        guard let imageURL = URL(string: glassDetail.imageURI) else { return }
-        
-        imageView.load(url: imageURL)
+        imageView.load(urlString:  glassDetail.imageURI)
         titleLabel.text = glassDetail.glassName
         descriptionLabel.text = glassDetail.description
         capacityDescriptionLabel.text = glassDetail.volume

@@ -8,10 +8,10 @@
 import Foundation
 
 struct CocktailImageList: Codable {
-    let previewDescriptionList: [ImageDescription]
+    let cocktailImageList: [ImageDescription]
 
     enum CodingKeys: String, CodingKey {
-        case previewDescriptionList = "results"
+        case cocktailImageList = "results"
     }
 }
 

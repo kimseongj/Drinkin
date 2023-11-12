@@ -88,7 +88,7 @@ final class DefaultAddIngredientViewModel: AddIngredientViewModel {
         let isSelectedItemChanged = compareSelectedItem()
         
         if isSelectedItemChanged {
-            addItemUsecase.addItem(itemList: selectedItemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
+            addItemUsecase.addItems(itemList: selectedItemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
                 completion()
             }).store(in: &cancelBag)
         } else {

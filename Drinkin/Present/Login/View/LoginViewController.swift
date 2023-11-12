@@ -288,8 +288,11 @@ extension LoginViewController {
             
             if $0 == true {
                 self.dismiss(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.delegate?.presentTriedCocktailSelectionVC()
+                }
                 
-                self.delegate?.presentTriedCocktailSelectionVC()
+                //self.delegate?.presentTriedCocktailSelectionVC()
                 
             }
         }.store(in: &cancelBag)

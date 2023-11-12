@@ -23,6 +23,11 @@ final class CocktailSelectionCell: UICollectionViewCell {
         return cocktailNameLabel
     }()
  
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cocktailImageView.image = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -34,18 +39,18 @@ final class CocktailSelectionCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        self.addSubview(cocktailImageView)
-        self.addSubview(cocktailNameLabel)
-        self.addSubview(selectedView)
+        contentView.addSubview(cocktailImageView)
+        contentView.addSubview(cocktailNameLabel)
+        contentView.addSubview(selectedView)
         
         cocktailImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(8)
             $0.trailing.equalToSuperview().offset(-8)
             $0.top.equalToSuperview().offset(8)
+            $0.height.equalTo(contentView.bounds.width - 16)
         }
         
         cocktailNameLabel.snp.makeConstraints {
-            $0.top.equalTo(cocktailImageView.snp.bottom).offset(8)
             $0.bottom.equalToSuperview().offset(-16)
             $0.centerX.equalToSuperview()
         }
@@ -56,15 +61,13 @@ final class CocktailSelectionCell: UICollectionViewCell {
     }
     
     private func configureBackground(){
-        self.backgroundColor = ColorPalette.grayCellColor
-        self.layer.cornerRadius = 4
+        contentView.backgroundColor = ColorPalette.grayCellColor
+        contentView.layer.cornerRadius = 4
         selectedView.isHidden = true
     }
     
     func fill(with previewDescription: SelectableImageDescription) {
-        guard let imageURL = URL(string: previewDescription.imageURI) else { return }
-        
-        cocktailImageView.load(url: imageURL)
+        cocktailImageView.load(urlString: previewDescription.imageURI)
         cocktailNameLabel.text = previewDescription.cocktailNameKo
     }
     
