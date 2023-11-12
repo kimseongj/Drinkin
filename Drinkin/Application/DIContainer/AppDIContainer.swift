@@ -36,9 +36,15 @@ final class AppDIContainer {
     }
     
     func makeBaseBrandInformationDIContainer(brandID: Int) -> BaseBrandInformationDIContainer {
-        let dependecies = BaseBrandInformationDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, brandID: brandID)
+        let dependencies = BaseBrandInformationDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, brandID: brandID)
         
-        return BaseBrandInformationDIContainer(dependencies: dependecies)
+        return BaseBrandInformationDIContainer(dependencies: dependencies)
+    }
+    
+    func makeMakeableCocktailListDIContainer(brandID: Int) -> MakeableCocktailListDIContainer {
+        let dependencies = MakeableCocktailListDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, brandID: brandID)
+        
+        return MakeableCocktailListDIContainer(dependencies: dependencies)
     }
     
     func makeCocktailFilterDICotainer() -> CocktailFilterDICotainer {
