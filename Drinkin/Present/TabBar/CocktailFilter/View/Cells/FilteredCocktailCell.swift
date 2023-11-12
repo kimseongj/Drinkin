@@ -9,10 +9,6 @@ import UIKit
 import SnapKit
 
 final class FilteredCocktailCell: UICollectionViewCell {
-    private enum Constant {
-        
-    }
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.themeFont, size: 20)
