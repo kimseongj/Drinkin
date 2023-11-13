@@ -105,9 +105,9 @@ final class MakeableCocktailCell: UICollectionViewCell {
     }
     
     private func configureScoreView(levelScore: Int, sugarContentScore: Int, abvScore: Int) {
-        let levelScorePresentationView = ScorePresentationView(title: "난이도", score: levelScore)
-        let sugarContentScorePresentationView = ScorePresentationView(title: "당    도", score: sugarContentScore)
-        let abvGradeScorePresentationView = ScorePresentationView(title: "도    수", score: abvScore)
+        let levelScorePresentationView = ScorePresentationView(title: InformationStrings.level, score: levelScore)
+        let sugarContentScorePresentationView = ScorePresentationView(title: InformationStrings.sugarContent, score: sugarContentScore)
+        let abvGradeScorePresentationView = ScorePresentationView(title: InformationStrings.abv, score: abvScore)
    
         scoreStackView.addArrangedSubview(levelScorePresentationView)
         scoreStackView.addArrangedSubview(sugarContentScorePresentationView)

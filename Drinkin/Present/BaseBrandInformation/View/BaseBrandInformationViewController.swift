@@ -47,7 +47,7 @@ final class BaseBrandInformationViewController: UIViewController {
     private let classificationLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
-        label.text = "분   류"
+        label.text = InformationStrings.classification
         
         return label
     }()
@@ -62,7 +62,7 @@ final class BaseBrandInformationViewController: UIViewController {
     private let abvLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
-        label.text = "도   수"
+        label.text = InformationStrings.abv
         
         return label
     }()

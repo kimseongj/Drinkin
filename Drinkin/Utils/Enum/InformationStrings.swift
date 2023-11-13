@@ -17,4 +17,7 @@ enum InformationStrings {
     static let glass: String = "글라스"
     static let skill: String = "기    법"
     static let tool: String = "도    구"
+    static let volume: String = "용   량"
+    static let purchase: String = "구매처"
+    static let classification: String = "분    류"
 }

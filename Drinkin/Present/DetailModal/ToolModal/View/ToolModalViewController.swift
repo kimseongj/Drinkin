@@ -45,7 +45,7 @@ final class ToolModalViewController: UIViewController {
     
     private let purchaseLabel: UILabel = {
         let label = UILabel()
-        label.text = "구매처"
+        label.text = InformationStrings.purchase
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
         
         return label
