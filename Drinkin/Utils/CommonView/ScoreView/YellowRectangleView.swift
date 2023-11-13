@@ -20,7 +20,7 @@ class YellowRectangleView: UIView {
     }
     
     private func configureUI() {
-        self.backgroundColor = UIColor(red: 1, green: 0.706, blue: 0.259, alpha: 1)
+        self.backgroundColor = ColorPalette.themeColor
         self.layer.cornerRadius = 2
         self.layer.borderWidth = 2
         self.snp.makeConstraints {
