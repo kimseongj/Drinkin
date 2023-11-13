@@ -24,11 +24,11 @@ class CocktailFilterVCCoordinator: Coordinator, CocktailFilterVCFlow {
     
     func startPush() -> UINavigationController {
         let cocktailFilterDIContainer = appDIContainer.makeCocktailFilterDICotainer()
-        let filterViewController = cocktailFilterDIContainer.makeCocktailFilterViewController()
+        let cocktailFilterViewController = cocktailFilterDIContainer.makeCocktailFilterViewController()
         
-        filterViewController.flowDelegate = self
-        filterViewController.makeBlackBackBarButton()
-        navigationController.setViewControllers([filterViewController], animated: false)
+        cocktailFilterViewController.flowDelegate = self
+        cocktailFilterViewController.makeBlackBackBarButton()
+        navigationController.setViewControllers([cocktailFilterViewController], animated: false)
         
         return navigationController
     }

@@ -8,7 +8,6 @@ import UIKit
 
 class TriedCocktailSelectionVCCoordinator: Coordinator {
     var navigationController: UINavigationController
-    var triedCocktailSelectionViewController: TriedCocktailSelectionViewController?
     let appDIContainer: AppDIContainer
     
     init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
@@ -18,10 +17,9 @@ class TriedCocktailSelectionVCCoordinator: Coordinator {
     
     func start() {
         let triedCocktailSelectionDIContainer = appDIContainer.makeTriedCocktailSelectionDIContainer()
-        let vc = triedCocktailSelectionDIContainer.makeTriedCocktailSelectionViewController()
+        let triedCocktailSelectionViewController = triedCocktailSelectionDIContainer.makeTriedCocktailSelectionViewController()
         
-        vc.modalPresentationStyle = .fullScreen
-        navigationController.present(vc, animated: true)
-        triedCocktailSelectionViewController = vc
+        triedCocktailSelectionViewController.modalPresentationStyle = .fullScreen
+        navigationController.present(triedCocktailSelectionViewController, animated: true)
     }
 }

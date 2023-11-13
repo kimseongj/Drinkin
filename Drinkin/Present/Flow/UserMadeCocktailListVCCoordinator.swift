@@ -18,8 +18,8 @@ class UserMadeCocktailListVCCoordinator: Coordinator {
 
     func start() {
         let userMadeCocktailListDIContainer = appDIContainer.makeUserMadeCocktailListDIContainer()
-        let vc = userMadeCocktailListDIContainer.makeUserMadeCocktailListViewController()
+        let userMadeCocktailListViewController = userMadeCocktailListDIContainer.makeUserMadeCocktailListViewController()
         
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.pushViewController(userMadeCocktailListViewController, animated: true)
     }
 }

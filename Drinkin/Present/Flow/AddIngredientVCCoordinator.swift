@@ -18,8 +18,8 @@ class AddIngredientVCCoordinator: Coordinator {
     
     func start() {
         let addIngredientDIContainer = appDIContainer.makeAddIngredientDIContainer()
-        let vc = addIngredientDIContainer.makeAddIngredientViewController()
+        let addIngredientViewController = addIngredientDIContainer.makeAddIngredientViewController()
         
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.pushViewController(addIngredientViewController, animated: true)
     }
 }
