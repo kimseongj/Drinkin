@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class UnloggedinMainViewController: UIViewController {
-    private weak var delegate: MainFlowDelegate?
+    private weak var flowDelegate: MainVCFlow?
 
     private let logoImage1: UIImageView = {
         let logoImage = UIImageView()
@@ -63,7 +63,7 @@ final class UnloggedinMainViewController: UIViewController {
     }()
     
     @objc func startButtonAction() {
-        delegate?.presentLoginVC()
+        flowDelegate?.presentLoginVC()
     }
     
     override func viewDidLoad() {
@@ -122,7 +122,7 @@ final class UnloggedinMainViewController: UIViewController {
         }
     }
     
-    func sendDelegate(_ delegate: MainFlowDelegate?) {
-        self.delegate = delegate
+    func sendDelegate(_ delegate: MainVCFlow?) {
+        self.flowDelegate = delegate
     }
 }

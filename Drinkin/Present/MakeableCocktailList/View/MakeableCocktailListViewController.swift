@@ -11,7 +11,7 @@ import Combine
 
 final class MakeableCocktailListViewController: UIViewController {
     private let viewModel: MakeableCocktailListViewModel
-    var delegate: MakeableCocktailListVCFlow?
+    var flowDelegate: MakeableCocktailListVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     private var makeableCocktailListDataSource: UICollectionViewDiffableDataSource<Section, MakeableCocktail>!
     
@@ -69,7 +69,7 @@ extension MakeableCocktailListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cocktailID = viewModel.makeableCocktailList[indexPath.row].id
         
-        delegate?.pushProductDetailVC(cocktailID: cocktailID)
+        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
         
     }
 }

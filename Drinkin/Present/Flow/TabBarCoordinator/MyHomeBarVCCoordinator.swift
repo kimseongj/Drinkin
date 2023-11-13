@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol MyHomeBarVCDelegate: AnyObject {
+protocol MyHomeBarVCFlow: AnyObject {
     func pushLoginSettingVC()
     func pushAddIngredientVC()
     func pushSavedCocktailListVC()
     func pushUserMadeCocktailListVC()
 }
 
-class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
+class HomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -29,7 +29,7 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
         let myHomeBarViewController = myHomeBarDIContainer.makeMyHomeBarViewController()
         
         myHomeBarViewController.makeBlackBackBarButton()
-        myHomeBarViewController.delegate = self
+        myHomeBarViewController.flowDelegate = self
         navigationController.setViewControllers([myHomeBarViewController], animated: false)
         
         return navigationController

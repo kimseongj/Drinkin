@@ -15,7 +15,7 @@ protocol CellDeleteButtonDelegate: AnyObject {
 
 final class MyHomeBarViewController: UIViewController {
     private var viewModel: MyHomeBarViewModel
-    var delegate: MyHomeBarVCDelegate?
+    var flowDelegate: MyHomeBarVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
     private var isTrue: Bool = true
@@ -291,22 +291,22 @@ final class MyHomeBarViewController: UIViewController {
     
     @objc
     private func tapLoginSettingButton() {
-        delegate?.pushLoginSettingVC()
+        flowDelegate?.pushLoginSettingVC()
     }
     
     @objc
     private func tapAddButton() {
-        delegate?.pushAddIngredientVC()
+        flowDelegate?.pushAddIngredientVC()
     }
     
     @objc
     private func tapSavedCocktailListButton() {
-        delegate?.pushSavedCocktailListVC()
+        flowDelegate?.pushSavedCocktailListVC()
     }
     
     @objc
     private func tapUserMadeCocktailListButton() {
-        delegate?.pushUserMadeCocktailListVC()
+        flowDelegate?.pushUserMadeCocktailListVC()
     }
 }
 

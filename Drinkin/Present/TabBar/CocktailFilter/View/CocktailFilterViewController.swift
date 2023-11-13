@@ -11,7 +11,7 @@ import Combine
 
 final class CocktailFilterViewController: UIViewController {
     private var viewModel: CocktailFilterViewModel
-    var delegate: CocktailFilterFlowDelegate?
+    var flowDelegate: CocktailFilterVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
@@ -268,7 +268,7 @@ extension CocktailFilterViewController: UICollectionViewDelegate {
             present(cocktailFilterModalViewController, animated: false)
         } else {
            let cocktailID = viewModel.filteredCocktailList[indexPath.row].id
-            delegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
+            flowDelegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
         }
     }
 }

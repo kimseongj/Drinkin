@@ -12,7 +12,7 @@ import AuthenticationServices
 
 final class LoginViewController: UIViewController {
     private var viewModel: LoginViewModel
-    var delegate: LoginFlowDelegate?
+    var flowDelegate: LoginVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
     private let dismissButton: UIButton = {
@@ -289,11 +289,8 @@ extension LoginViewController {
             if $0 == true {
                 self.dismiss(animated: true)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.delegate?.presentTriedCocktailSelectionVC()
+                    self.flowDelegate?.presentTriedCocktailSelectionVC()
                 }
-                
-                //self.delegate?.presentTriedCocktailSelectionVC()
-                
             }
         }.store(in: &cancelBag)
     }

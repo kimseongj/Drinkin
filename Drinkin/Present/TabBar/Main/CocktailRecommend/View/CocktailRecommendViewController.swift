@@ -11,7 +11,7 @@ import Combine
 
 final class CocktailRecommendViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
-    private weak var delegate: MainFlowDelegate?
+    private weak var flowDelegate: MainVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailBrief>?
     
@@ -84,8 +84,8 @@ final class CocktailRecommendViewController: UIViewController {
         }
     }
     
-    func sendDelegate(_ delegate: MainFlowDelegate?) {
-        self.delegate = delegate
+    func sendDelegate(_ delegate: MainVCFlow?) {
+        self.flowDelegate = delegate
     }
     
     func setupRecommendCocktailCollectionView() {
@@ -154,7 +154,7 @@ extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
 
 extension CocktailRecommendViewController: CellButtonDelegate {
     func pushProductDetailVC(withID cocktailID: Int) {
-        delegate?.pushProductDetailVC(cocktailID: cocktailID)
+        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
         print(cocktailID)
     }
 }

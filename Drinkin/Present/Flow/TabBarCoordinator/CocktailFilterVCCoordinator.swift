@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol CocktailFilterFlowDelegate: AnyObject {
+protocol CocktailFilterVCFlow: AnyObject {
     func pushProductDetailVCCoordinator(cocktailID: Int)
 }
 
-class CocktailFilterVCCoordinator: Coordinator, CocktailFilterFlowDelegate {
+class CocktailFilterVCCoordinator: Coordinator, CocktailFilterVCFlow {
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -26,7 +26,7 @@ class CocktailFilterVCCoordinator: Coordinator, CocktailFilterFlowDelegate {
         let cocktailFilterDIContainer = appDIContainer.makeCocktailFilterDICotainer()
         let filterViewController = cocktailFilterDIContainer.makeCocktailFilterViewController()
         
-        filterViewController.delegate = self
+        filterViewController.flowDelegate = self
         filterViewController.makeBlackBackBarButton()
         navigationController.setViewControllers([filterViewController], animated: false)
         

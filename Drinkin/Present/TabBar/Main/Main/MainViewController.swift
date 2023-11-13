@@ -9,7 +9,7 @@ import SnapKit
 
 final class MainViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
-    var delegate: MainFlowDelegate?
+    var flowDelegate: MainVCFlow?
     static var login: Bool = false
  
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
@@ -43,7 +43,7 @@ final class MainViewController: UIViewController {
     private func fetchUnloggedinMainView() {
         addChild(unloggedinMainViewController)
         configureUnloggedinMainView()
-        unloggedinMainViewController.sendDelegate(delegate)
+        unloggedinMainViewController.sendDelegate(flowDelegate)
     }
     
     private func configureUnloggedinMainView() {
@@ -60,7 +60,7 @@ final class MainViewController: UIViewController {
         unloggedinMainViewController.view.removeFromSuperview()
         addChild(loggedinMainViewController)
         configureLoggedinMainView()
-        loggedinMainViewController.sendDelegate(delegate)
+        loggedinMainViewController.sendDelegate(flowDelegate)
     }
     
     private func configureLoggedinMainView() { 

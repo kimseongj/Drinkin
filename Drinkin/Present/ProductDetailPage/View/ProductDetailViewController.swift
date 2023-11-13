@@ -11,7 +11,7 @@ import Combine
 
 final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
-    var delegate: ProductDetailVCDelegate?
+    var flowDelegate: ProductDetailVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
    
     private let scrollView : UIScrollView = {
@@ -71,7 +71,7 @@ final class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         configureBackgroundColor()
         configureUI()
-        introductionView.configureDelegate(delegate: delegate)
+        introductionView.configureDelegate(delegate: flowDelegate)
         binding()
         viewModel.fetchDescription()
     }

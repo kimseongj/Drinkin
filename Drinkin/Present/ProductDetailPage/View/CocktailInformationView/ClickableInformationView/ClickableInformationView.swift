@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class ClickableInformationView: UIView {
-    weak var delegate: ProductDetailVCDelegate?
+    weak var flowDelegate: ProductDetailVCFlow?
     private var cocktailDescription: CocktailDescription?
     private var toolDataSource: UICollectionViewDiffableDataSource<Section, CocktailTool>!
     private var skillDataSource: UICollectionViewDiffableDataSource<Section, CocktailSkill>!
@@ -121,11 +121,11 @@ extension ClickableInformationView: UICollectionViewDelegate {
         
         switch title {
         case InformationStrings.tool:
-            delegate?.pushToolModalVC(toolID: validCocktailDescription.toolList[indexPath.row].id)
+            flowDelegate?.pushToolModalVC(toolID: validCocktailDescription.toolList[indexPath.row].id)
         case InformationStrings.skill:
-            delegate?.pushSkillModalVC(skillID: validCocktailDescription.skillList[indexPath.row].id)
+            flowDelegate?.pushSkillModalVC(skillID: validCocktailDescription.skillList[indexPath.row].id)
         case InformationStrings.glass:
-            delegate?.pushGlassModalVC(glassID: validCocktailDescription.glassList[indexPath.row].id)
+            flowDelegate?.pushGlassModalVC(glassID: validCocktailDescription.glassList[indexPath.row].id)
         default:
             return
         }

@@ -6,14 +6,14 @@
 
 import UIKit
 
-protocol ProductDetailVCDelegate: AnyObject {
+protocol ProductDetailVCFlow: AnyObject {
     func pushBaseInformationVC(baseID: Int)
     func pushToolModalVC(toolID: Int)
     func pushSkillModalVC(skillID: Int)
     func pushGlassModalVC(glassID: Int)
 }
 
-class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
+class ProductDetailVCCoordinator: Coordinator, ProductDetailVCFlow {
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     var cocktailID: Int
@@ -29,10 +29,10 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCDelegate {
         let productDetailViewModel =  productDetailDIContainer.makeProductDetailViewModel()
         let productDetailViewController = productDetailDIContainer.makeProductDetailViewController(viewModel: productDetailViewModel)
         
-        productDetailViewController.delegate = self
-        productDetailViewController.cocktailInformationView.toolView.delegate = self
-        productDetailViewController.cocktailInformationView.skillView.delegate = self
-        productDetailViewController.cocktailInformationView.glassView.delegate = self
+        productDetailViewController.flowDelegate = self
+        productDetailViewController.cocktailInformationView.toolView.flowDelegate = self
+        productDetailViewController.cocktailInformationView.skillView.flowDelegate = self
+        productDetailViewController.cocktailInformationView.glassView.flowDelegate = self
         productDetailViewController.makeBlackBackBarButton()
         
         navigationController.pushViewController(productDetailViewController, animated: true)

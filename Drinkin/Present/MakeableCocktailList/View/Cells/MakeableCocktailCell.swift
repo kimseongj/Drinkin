@@ -91,7 +91,7 @@ final class MakeableCocktailCell: UICollectionViewCell {
         scoreStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview())
+            $0.trailing.equalToSuperview()
         }
     }
     

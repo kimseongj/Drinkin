@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class IntroductionView: UIView {
-    private weak var delegate: ProductDetailVCDelegate?
+    private weak var flowDelegate: ProductDetailVCFlow?
     private var baseDataSource: UICollectionViewDiffableDataSource<Section, DetailBase>?
     private var ingredientDataSource: UICollectionViewDiffableDataSource<Section, DetailIngredient>?
     private var ingredientIDList: [Int] = []
@@ -157,8 +157,8 @@ final class IntroductionView: UIView {
         }
     }
     
-    func configureDelegate(delegate: ProductDetailVCDelegate?) {
-        self.delegate = delegate
+    func configureDelegate(delegate: ProductDetailVCFlow?) {
+        self.flowDelegate = delegate
     }
     
     func fill(with cocktailDesription: CocktailDescription) {
@@ -272,7 +272,7 @@ extension IntroductionView {
 extension IntroductionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == baseCollectionView {
-            delegate?.pushBaseInformationVC(baseID: baseIDList[indexPath.row])
+            flowDelegate?.pushBaseInformationVC(baseID: baseIDList[indexPath.row])
         } 
     }
 }
