@@ -39,7 +39,7 @@ final class ScorePresentationView: UIView {
         self.addSubview(scoreView)
         
         switch title {
-        case "난이도":
+        case InformationStrings.level:
             titleLabel.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalToSuperview()
@@ -51,7 +51,7 @@ final class ScorePresentationView: UIView {
                 $0.leading.equalTo(titleLabel.snp.trailing).offset(12)
                 $0.trailing.equalToSuperview()
             }
-        case  "당    도", "도    수":
+        case  InformationStrings.sugarContent, InformationStrings.abv:
             titleLabel.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalToSuperview()
