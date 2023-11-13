@@ -8,7 +8,7 @@
 import Combine
 
 final class DefaultSkillDetailRepository: SkillDetailRepository {
-    let provider = Provider()
+    let provider = DefaultProvider()
     var endpoint: EndpointMakeable = SkillDetailEndpoint()
     let skillID: Int
     

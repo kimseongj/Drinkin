@@ -9,7 +9,7 @@ import Foundation
 
 final class AppDIContainer {
     private lazy var tokenManager = TokenManager()
-    private lazy var provider = Provider()
+    private lazy var provider = DefaultProvider()
     
     func makeTriedCocktailSelectionDIContainer() -> TriedCocktailSelectionDIContainer {
         let dependencies = TriedCocktailSelectionDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)

@@ -8,7 +8,12 @@
 import Foundation
 import Combine
 
-struct Provider {
+protocol Provider {
+    func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, Error>
+    func postData<B: Encodable, T: Decodable>(endpoint: EndpointMakeable, bodyItem: B) -> AnyPublisher<T, Error>
+}
+
+struct DefaultProvider: Provider {
     let loginManager = LoginManager()
     
     func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, Error> {

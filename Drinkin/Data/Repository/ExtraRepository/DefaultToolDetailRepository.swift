@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class DefaultToolDetailRepository: ToolDetailRepository {
-    let provider = Provider()
+    let provider = DefaultProvider()
     var endpoint: EndpointMakeable = ToolDetailEndpoint()
     let toolID: Int
     
