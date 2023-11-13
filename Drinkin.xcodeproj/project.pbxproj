@@ -644,15 +644,7 @@
 				1C0809E229E043FF00265706 /* Coordinator.swift */,
 				1C0809DE29E043AE00265706 /* TabBarCoordinator */,
 				1C0809DF29E043BA00265706 /* ModalCoordinator */,
-				1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */,
-				1CCE88E229E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift */,
-				1CB0AD022AAAF91300847544 /* SavedCocktailListVCCoordinator.swift */,
-				1CB0AD042AAC3EF000847544 /* UserMadeCocktailListVCCoordinator.swift */,
-				1C0768682ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift */,
-				1C07687D2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift */,
-				1C0768BC2AC972570003D4BF /* BaseInformationVCCoordinator.swift */,
-				1C1F39BE2ADFFE420091A95B /* BaseBrandInformationVCCoordinator.swift */,
-				1C5CBB142B00A641004FE626 /* MakeableCocktailListVCCoordinator.swift */,
+				1C6973772B01FF3100402368 /* FlowCoordinator */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -1333,6 +1325,49 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		1C6973772B01FF3100402368 /* FlowCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1CCE88E029E94A3500D3E1D2 /* ProductDetailVCCoordinator.swift */,
+				1CCE88E229E94A7D00D3E1D2 /* TriedCocktailSelectionVCCoordinator.swift */,
+				1CB0AD022AAAF91300847544 /* SavedCocktailListVCCoordinator.swift */,
+				1CB0AD042AAC3EF000847544 /* UserMadeCocktailListVCCoordinator.swift */,
+				1C0768682ABD2FB30003D4BF /* LoginSettingVCCoordinator.swift */,
+				1C07687D2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift */,
+				1C0768BC2AC972570003D4BF /* BaseInformationVCCoordinator.swift */,
+				1C1F39BE2ADFFE420091A95B /* BaseBrandInformationVCCoordinator.swift */,
+				1C5CBB142B00A641004FE626 /* MakeableCocktailListVCCoordinator.swift */,
+			);
+			path = FlowCoordinator;
+			sourceTree = "<group>";
+		};
+		1C6973782B02029F00402368 /* TabBarDIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				1CB299102A724136001F31BF /* CocktailRecommendDIContainer.swift */,
+				1C74FD5E2AB6969300823E73 /* CocktailFilterDICotainer.swift */,
+				1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */,
+			);
+			path = TabBarDIContainer;
+			sourceTree = "<group>";
+		};
+		1C69737A2B0202CD00402368 /* FlowDIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */,
+				1C7A10452A74F8BA009961A1 /* ProductDetailDIContainer.swift */,
+				1CDB85BF2AD11E0800360852 /* BaseInformationDIContainer.swift */,
+				1CBDA5512ADFD09B000F1F7D /* BaseBrandInformationDIContainer.swift */,
+				1C87137B2AF087FB00583A9F /* MakeableCocktailListDIContainer.swift */,
+				1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */,
+				1C07687B2ABD66F10003D4BF /* AddIngredientDIContainer.swift */,
+				1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */,
+				1CD75BA62AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift */,
+				1CA0543D2AF73BF300F31B66 /* LoginDIContainer.swift */,
+			);
+			path = FlowDIContainer;
+			sourceTree = "<group>";
+		};
 		1C71A4AD2A52928500F1814A /* CommonTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -1430,12 +1465,12 @@
 		1CA20ED42A567E9A009FDD90 /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				1C51466E2AFBBE2100C1B7B1 /* FilterTriedCocktailUsecase.swift */,
+				1C3374972AE105DF0078F562 /* ManageMarkingCokctailUsecase.swift */,
 				1CDAB4242AD3DFE200E30181 /* FilterCocktailListUsecase.swift */,
 				1CDAB42A2AD7DF0500E30181 /* AddItemUsecase.swift */,
-				1C3374972AE105DF0078F562 /* ManageMarkingCokctailUsecase.swift */,
 				1CCE60172AE4B2D90026427C /* FilterItemUsecase.swift */,
 				1CA969202A91D99E0076731B /* AddTriedCocktailUsecase.swift */,
-				1C51466E2AFBBE2100C1B7B1 /* FilterTriedCocktailUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -1469,14 +1504,14 @@
 				1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */,
 				1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */,
 				1CA968E62A8E40200076731B /* InformationStrings.swift */,
+				1CA969222A9332860076731B /* CategoryListStrings.swift */,
+				1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */,
 				1CA968E82A8E423B0076731B /* MiscStrings.swift */,
 				1CA968EA2A8E43EC0076731B /* ImageStorage.swift */,
 				1CA969182A9078860076731B /* TokenType.swift */,
-				1CA969222A9332860076731B /* CategoryListStrings.swift */,
 				1C504CDB2AB5E6B7005A0B25 /* FilterType.swift */,
 				1CED21972A739A700078916A /* Section.swift */,
 				1C951D462ABB389000662B35 /* ColorPalette.swift */,
-				1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1521,9 +1556,9 @@
 		1CB2990E2A72405A001F31BF /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				1CB2990F2A724092001F31BF /* DIContainer */,
 				1C5CAACF29DB1AE30053F19A /* AppDelegate.swift */,
 				1C5CAAD129DB1AE30053F19A /* SceneDelegate.swift */,
+				1CB2990F2A724092001F31BF /* DIContainer */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -1532,19 +1567,8 @@
 			isa = PBXGroup;
 			children = (
 				1C0768C42AC9A9510003D4BF /* AppDIContainer.swift */,
-				1CB299102A724136001F31BF /* CocktailRecommendDIContainer.swift */,
-				1C74FD5E2AB6969300823E73 /* CocktailFilterDICotainer.swift */,
-				1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */,
-				1CA969242A9334980076731B /* TriedCocktailSelectionDIContainer.swift */,
-				1C7A10452A74F8BA009961A1 /* ProductDetailDIContainer.swift */,
-				1CDB85BF2AD11E0800360852 /* BaseInformationDIContainer.swift */,
-				1CBDA5512ADFD09B000F1F7D /* BaseBrandInformationDIContainer.swift */,
-				1C87137B2AF087FB00583A9F /* MakeableCocktailListDIContainer.swift */,
-				1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */,
-				1C07687B2ABD66F10003D4BF /* AddIngredientDIContainer.swift */,
-				1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */,
-				1CD75BA62AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift */,
-				1CA0543D2AF73BF300F31B66 /* LoginDIContainer.swift */,
+				1C6973782B02029F00402368 /* TabBarDIContainer */,
+				1C69737A2B0202CD00402368 /* FlowDIContainer */,
 			);
 			path = DIContainer;
 			sourceTree = "<group>";
@@ -1561,13 +1585,13 @@
 		1CC9D3EB2A19033100654A5D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1C5CBB0B2AFF4720004FE626 /* ImageCacheManager */,
 				1CA968E52A8E40120076731B /* Enum */,
 				1CB299082A6E4A73001F31BF /* Extension */,
+				1CC9D3EC2A19034900654A5D /* Protocol */,
 				1C71A4AE2A52929300F1814A /* CommonView */,
 				1C71A4AD2A52928500F1814A /* CommonTool */,
 				1CA969152A9059800076731B /* TokenManager */,
-				1CC9D3EC2A19034900654A5D /* Protocol */,
+				1C5CBB0B2AFF4720004FE626 /* ImageCacheManager */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
