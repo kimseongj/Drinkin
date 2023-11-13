@@ -110,7 +110,7 @@
 		1C5CAB0429DB51D10053F19A /* DefaultHoldedItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0329DB51D10053F19A /* DefaultHoldedItemRepository.swift */; };
 		1C5CAB0629DB51D50053F19A /* DefaultLoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CAB0529DB51D50053F19A /* DefaultLoginRepository.swift */; };
 		1C5CBB0D2AFF4732004FE626 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CBB0C2AFF4732004FE626 /* ImageCacheManager.swift */; };
-		1C5CBB112B00701B004FE626 /* MakeableCocktialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CBB102B00701B004FE626 /* MakeableCocktialCell.swift */; };
+		1C5CBB112B00701B004FE626 /* MakeableCocktailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CBB102B00701B004FE626 /* MakeableCocktailCell.swift */; };
 		1C5CBB132B00A3A6004FE626 /* MakeableCocktailListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CBB122B00A3A6004FE626 /* MakeableCocktailListEndpoint.swift */; };
 		1C5CBB152B00A641004FE626 /* MakeableCocktailListVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5CBB142B00A641004FE626 /* MakeableCocktailListVCCoordinator.swift */; };
 		1C60F6E229E527AC001C0416 /* MainVCCorrdinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */; };
@@ -336,7 +336,7 @@
 		1C5CAB0529DB51D50053F19A /* DefaultLoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginRepository.swift; sourceTree = "<group>"; };
 		1C5CBB0C2AFF4732004FE626 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		1C5CBB0E2B006FD6004FE626 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		1C5CBB102B00701B004FE626 /* MakeableCocktialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableCocktialCell.swift; sourceTree = "<group>"; };
+		1C5CBB102B00701B004FE626 /* MakeableCocktailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableCocktailCell.swift; sourceTree = "<group>"; };
 		1C5CBB122B00A3A6004FE626 /* MakeableCocktailListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableCocktailListEndpoint.swift; sourceTree = "<group>"; };
 		1C5CBB142B00A641004FE626 /* MakeableCocktailListVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeableCocktailListVCCoordinator.swift; sourceTree = "<group>"; };
 		1C60F6E129E527AC001C0416 /* MainVCCorrdinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCorrdinator.swift; sourceTree = "<group>"; };
@@ -1039,7 +1039,7 @@
 		1C5CBB0F2B007015004FE626 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				1C5CBB102B00701B004FE626 /* MakeableCocktialCell.swift */,
+				1C5CBB102B00701B004FE626 /* MakeableCocktailCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2008,7 +2008,7 @@
 				1CCE88DD29E9498D00D3E1D2 /* CocktailFilterVCCoordinator.swift in Sources */,
 				1CA20ED12A54073F009FDD90 /* RecommendPopupViewController.swift in Sources */,
 				1C5906A52A21D5B3001F048B /* FilteredCocktailCell.swift in Sources */,
-				1C5CBB112B00701B004FE626 /* MakeableCocktialCell.swift in Sources */,
+				1C5CBB112B00701B004FE626 /* MakeableCocktailCell.swift in Sources */,
 				1CD75BA72AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift in Sources */,
 				1C195FA52AEB91A900562E13 /* DefaultSkillDetailRepository.swift in Sources */,
 				1C0768BD2AC972570003D4BF /* BaseInformationVCCoordinator.swift in Sources */,
