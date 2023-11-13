@@ -28,8 +28,10 @@ final class RecipeItemCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        self.layer.borderWidth = 2
-        self.layer.cornerRadius = 4
+        contentView.layer.borderWidth = 2
+        contentView.layer.cornerRadius = 4
+        contentView.backgroundColor = ColorPalette.grayCellColor
+        contentView.layer.borderColor = ColorPalette.cellGrayBorderColor
         contentView.addSubview(titleLabel)
         contentView.addSubview(checkImageView)
         

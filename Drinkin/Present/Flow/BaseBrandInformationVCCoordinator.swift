@@ -33,9 +33,9 @@ final class BaseBrandInformationVCCoordinator: Coordinator, BaseBrandInformation
     }
     
     func pushMakeableCocktailListVC(brandID: Int) {
-        let makeableCocktailListDIContainer = appDIContainer.makeMakeableCocktailListDIContainer(brandID: brandID)
-        
-        let vc = makeableCocktailListDIContainer.makeMakeableCocktailListViewController()
-        navigationController.pushViewController(vc, animated: true)
+        let makeableCocktailListVCCoordinator = MakeableCocktailListVCCoordinator(navigationController: navigationController,
+                                                                                  appDIContainer: appDIContainer,
+                                                                                  baseBrandID: brandID)
+        makeableCocktailListVCCoordinator.start()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  MakeableCocktialCell.swift
+//  MakeableCocktailCell.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/11/12.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class MakeableCocktialCell: UICollectionViewCell {
+final class MakeableCocktailCell: UICollectionViewCell {
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -16,7 +16,9 @@ final class MakeableCocktialCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let subTitleLabel: UILabel = {
+    private let descriptionView = UIView()
+    
+    private let categoryLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardBold, size: 12)
         label.textColor = ColorPalette.subTitleGrayColor
@@ -33,9 +35,9 @@ final class MakeableCocktialCell: UICollectionViewCell {
     
     private let scoreStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.distribution = .fill
-        stackView.spacing = 8
+        stackView.spacing = 4
         
         return stackView
     }()
@@ -60,9 +62,10 @@ final class MakeableCocktialCell: UICollectionViewCell {
         self.layer.borderColor = UIColor.black.cgColor
         
         contentView.addSubview(cocktailImageView)
-        contentView.addSubview(subTitleLabel)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(scoreStackView)
+        contentView.addSubview(descriptionView)
+        descriptionView.addSubview(categoryLabel)
+        descriptionView.addSubview(titleLabel)
+        descriptionView.addSubview(scoreStackView)
  
         cocktailImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -70,29 +73,35 @@ final class MakeableCocktialCell: UICollectionViewCell {
             $0.size.width.equalTo(100)
         }
         
-        subTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalTo(cocktailImageView.snp.trailing).offset(20)
+        descriptionView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.centerX.equalToSuperview()
         }
         
+        categoryLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview()
+        }
+            
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(subTitleLabel.snp.bottom)
-            $0.leading.equalTo(cocktailImageView.snp.trailing).offset(20)
+            $0.top.equalTo(categoryLabel.snp.bottom).offset(5)
+            $0.leading.equalToSuperview()
         }
         
         scoreStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(cocktailImageView.snp.trailing).offset(20)
-            $0.bottom.equalToSuperview().offset(-28)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview())
         }
     }
     
-    func fill(with cocktailPreview: CocktailPreview) {
-        titleLabel.text = cocktailPreview.cocktailNameKo
-        cocktailImageView.load(urlString: cocktailPreview.imageURI)
-        configureScoreView(levelScore: cocktailPreview.levelScore,
-                           sugarContentScore: cocktailPreview.sugarContentScore,
-                           abvScore: cocktailPreview.abvScore)
+    func fill(with makeableCocktail: MakeableCocktail) {
+        categoryLabel.text = makeableCocktail.category
+        titleLabel.text = makeableCocktail.cocktailName
+        cocktailImageView.load(urlString: makeableCocktail.imageURI)
+        configureScoreView(levelScore: makeableCocktail.levelScore,
+                           sugarContentScore: makeableCocktail.sugarContentScore,
+                           abvScore: makeableCocktail.abvScore)
     }
     
     private func configureScoreView(levelScore: Int, sugarContentScore: Int, abvScore: Int) {

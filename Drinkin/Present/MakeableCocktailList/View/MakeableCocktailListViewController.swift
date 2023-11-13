@@ -7,13 +7,17 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 final class MakeableCocktailListViewController: UIViewController {
     private let viewModel: MakeableCocktailListViewModel
     var delegate: MakeableCocktailListVCFlow?
+    private var cancelBag: Set<AnyCancellable> = []
+    private var makeableCocktailListDataSource: UICollectionViewDiffableDataSource<Section, MakeableCocktail>!
     
-    private lazy var cocktailCollectionView: UICollectionView = {
+    private lazy var makeableCocktailCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
+        collectionView.register(MakeableCocktailCell.self, forCellWithReuseIdentifier: MakeableCocktailCell.identifier)
         
         return collectionView
     }()
@@ -31,7 +35,10 @@ final class MakeableCocktailListViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureUI()
-        
+        configureMakeableCocktailCollectionView()
+        configureDataSource()
+        binding()
+        viewModel.fetchMakeableCocktailList()
     }
     
     private func configureNavigationBar() {
@@ -43,14 +50,29 @@ final class MakeableCocktailListViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        view.addSubview(cocktailCollectionView)
+        view.addSubview(makeableCocktailCollectionView)
         
-        cocktailCollectionView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalTo(safeArea)
+        makeableCocktailCollectionView.snp.makeConstraints {
+            $0.top.bottom.equalTo(safeArea)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
         }
+    }
+    
+    private func configureMakeableCocktailCollectionView() {
+        makeableCocktailCollectionView.delegate = self
     }
 }
 
+//MARK: - Delegate
+extension MakeableCocktailListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cocktailID = viewModel.makeableCocktailList[indexPath.row].id
+        
+        delegate?.pushProductDetailVC(cocktailID: cocktailID)
+        
+    }
+}
 
 //MARK: - CocktailCollectionView Compostional Layout
 extension MakeableCocktailListViewController {
@@ -67,5 +89,36 @@ extension MakeableCocktailListViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+}
+
+//MARK: - DiffableDataSource
+extension MakeableCocktailListViewController {
+    private func configureDataSource() {
+        makeableCocktailListDataSource = UICollectionViewDiffableDataSource<Section,MakeableCocktail> (collectionView: makeableCocktailCollectionView) { (collectionView, indexPath, makeableCocktail) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MakeableCocktailCell.identifier, for: indexPath) as? MakeableCocktailCell else { return nil }
+            
+            cell.fill(with: makeableCocktail)
+            
+            return cell
+        }
+    }
+    
+    private func applySnapshot(makeableCocktailList: [MakeableCocktail]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, MakeableCocktail>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(makeableCocktailList)
+        makeableCocktailListDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+//MARK: - Binding
+extension MakeableCocktailListViewController {
+    private func binding() {
+        viewModel.makeableCocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            
+            self.applySnapshot(makeableCocktailList: $0)
+        }.store(in: &cancelBag)
     }
 }

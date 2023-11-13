@@ -8,19 +8,28 @@
 import Foundation
 
 struct MakeableCocktailList: Codable, Hashable {
-    let itemFilterList: [String]
+    let makeableCocktailList: [MakeableCocktail]
     
     enum CodingKeys: String, CodingKey {
-        case itemFilterList = "item_filter_list"
+        case makeableCocktailList = "results"
     }
 }
 
 struct MakeableCocktail:Codable, Hashable {
     let id: Int
     let imageURI: String
-    let categoryName: String
+    let category: String
     let cocktailName: String
-    let levelScore: String
-    let abvScore: String
-    let sugarContentScore: String
+    let levelScore: Int
+    let abvScore: Int
+    let sugarContentScore: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id, category
+        case imageURI = "image_uri"
+        case cocktailName = "cocktail_name_ko"
+        case levelScore = "level_score"
+        case abvScore = "abv_score"
+        case sugarContentScore = "sugar_content_score"
+    }
 }

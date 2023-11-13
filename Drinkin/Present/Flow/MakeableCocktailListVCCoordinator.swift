@@ -26,6 +26,7 @@ final class MakeableCocktailListVCCoordinator: Coordinator, MakeableCocktailList
         let makeableCocktailListDIContainer = appDIContainer.makeMakeableCocktailListDIContainer(brandID: baseBrandID)
         
         let vc = makeableCocktailListDIContainer.makeMakeableCocktailListViewController()
+        vc.makeBlackBackBarButton()
         vc.delegate = self
         
         navigationController.pushViewController(vc, animated: true)
