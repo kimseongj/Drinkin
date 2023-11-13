@@ -100,7 +100,8 @@ extension DefaultLoginViewModel: ASAuthorizationControllerDelegate {
         authorizationController.performRequests()
     }
     
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
@@ -132,7 +133,8 @@ extension DefaultLoginViewModel: ASAuthorizationControllerDelegate {
     }
         
     // Apple ID 연동 실패 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithError error: Error) {
         // Handle error.
     }
 }

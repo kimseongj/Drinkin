@@ -43,7 +43,8 @@ class LoginProvider {
                 guard let self = self else { return }
                 
                 do {
-                    try self.keychainManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
+                    try self.keychainManager.saveToken(tokenType: TokenType.accessToken,
+                                                       token: $0.accessToken)
                     completion()
                 } catch {
                     print("saveError")

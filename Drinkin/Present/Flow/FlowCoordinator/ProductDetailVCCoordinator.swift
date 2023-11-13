@@ -38,25 +38,28 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCFlow {
         navigationController.pushViewController(productDetailViewController, animated: true)
     }
     
-    func childDidFinish(_ child: Coordinator?) { }
-    
     func pushBaseInformationVC(baseID: Int) {
-        let baseInformationVCCoordinator = BaseInformationVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer, baseID: baseID)
+        let baseInformationVCCoordinator = BaseInformationVCCoordinator(navigationController: navigationController,
+                                                                        appDIContainer: appDIContainer,
+                                                                        baseID: baseID)
         baseInformationVCCoordinator.start()
     }
     
     func pushToolModalVC(toolID: Int) {
-        let toolModalVCCoordinator = ToolModalVCCoordinator(navigationController: navigationController, toolID: toolID)
+        let toolModalVCCoordinator = ToolModalVCCoordinator(navigationController: navigationController,
+                                                            toolID: toolID)
         toolModalVCCoordinator.start()
     }
     
     func pushSkillModalVC(skillID: Int) {
-        let buildModalVCCoordinator = SkillModalVCCoordinator(navigationController: navigationController, skillID: skillID)
+        let buildModalVCCoordinator = SkillModalVCCoordinator(navigationController: navigationController,
+                                                              skillID: skillID)
         buildModalVCCoordinator.start()
     }
     
     func pushGlassModalVC(glassID: Int) {
-        let glassModalVCCoordinator = GlassModalVCCoordinator(navigationController: navigationController, glassID: glassID)
+        let glassModalVCCoordinator = GlassModalVCCoordinator(navigationController: navigationController,
+                                                              glassID: glassID)
         glassModalVCCoordinator.start()
     }
 }

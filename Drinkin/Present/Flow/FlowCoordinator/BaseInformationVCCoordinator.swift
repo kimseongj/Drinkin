@@ -31,7 +31,9 @@ final class BaseInformationVCCoordinator: Coordinator, BaseInformationVCFlow {
     }
     
     func pushBaseBrandInformationVC(brandID: Int) {
-        let baseBrandInformationVCCoordinator = BaseBrandInformationVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer, baseBrandID: brandID)
+        let baseBrandInformationVCCoordinator = BaseBrandInformationVCCoordinator(navigationController: navigationController,
+                                                                                  appDIContainer: appDIContainer,
+                                                                                  baseBrandID: brandID)
         baseBrandInformationVCCoordinator.start()
     }
 }

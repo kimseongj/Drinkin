@@ -56,8 +56,9 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
 //MARK: - Fetch Data
 extension DefaultCocktailFilterViewModel {
     func fetchCocktailList() {
-        filterCocktailListUsecase.fetchCocktailList().sink(receiveCompletion: {
-            print("\($0)")}, receiveValue: { [weak self] in
+        filterCocktailListUsecase.fetchCocktailList()
+            .sink(receiveCompletion: { print("\($0)") },
+                  receiveValue: { [weak self] in
                 guard let self = self else { return }
                 
                 self.filteredCocktailList = $0.cocktailList
@@ -67,7 +68,8 @@ extension DefaultCocktailFilterViewModel {
     func fetchCocktailFilter(completion: @escaping () -> Void) {
         cocktailFilterRepository.fetchCocktailFilter()
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+            .sink(receiveCompletion: { print("\($0)")},
+                  receiveValue: { [weak self] in
                 guard let self = self else { return }
                 
                 self.detailFilter = $0

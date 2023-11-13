@@ -104,9 +104,15 @@ final class FilteredCocktailCell: UICollectionViewCell {
     }
     
     private func configureScoreView(levelScore: Int, sugarContentScore: Int, abvScore: Int, ingredientQuantity: Int) {
-        let levelScorePresentationView = ScorePresentationView(title: InformationStrings.level, score: levelScore)
-        let sugarContentScorePresentationView = ScorePresentationView(title: InformationStrings.sugarContent, score: sugarContentScore)
-        let abvGradeScorePresentationView = ScorePresentationView(title: InformationStrings.abv, score: abvScore)
+        let levelScorePresentationView = ScorePresentationView(title: InformationStrings.level,
+                                                               score: levelScore)
+        
+        let sugarContentScorePresentationView = ScorePresentationView(title: InformationStrings.sugarContent,
+                                                                      score: sugarContentScore)
+        
+        let abvGradeScorePresentationView = ScorePresentationView(title: InformationStrings.abv,
+                                                                  score: abvScore)
+        
         let ingredientPresentationView = IngredientQuantityView(ingredientQuantity: ingredientQuantity)
         
         firstSubStackView.addArrangedSubview(levelScorePresentationView)

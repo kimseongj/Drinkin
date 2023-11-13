@@ -23,9 +23,11 @@ final class DefaultToolModalViewModel: ToolModalViewModel {
     }
     
     func fetchToolDetail(completion: @escaping (ToolDetail) -> Void) {
-        toolDetailRepository.fetchToolDetail().receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-            completion($0
-            )
+        toolDetailRepository.fetchToolDetail()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { print("\($0)")},
+                  receiveValue: {
+            completion($0)
         }).store(in: &cancelBag)
     }
 }

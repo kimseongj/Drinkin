@@ -36,7 +36,8 @@ class MainVCCoordinator: Coordinator, MainVCFlow {
     }
     
     func presentLoginVC() {
-        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController,
+                                                    appDIContainer: appDIContainer)
         loginVCCoordinator.start()
     }
     

@@ -29,13 +29,15 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
     }
     
     func fetchBaseBrandDetail() {
-        baseBrandDetailRepository.fetchBaseBrandDetail().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            self.baseBrandDetail = $0
-            self.brandID = $0.id
-            
-        }).store(in: &cancelBag)
+        baseBrandDetailRepository.fetchBaseBrandDetail()
+            .sink(receiveCompletion: { print("\($0)")},
+                  receiveValue: { [weak self] in
+                guard let self = self else { return }
+                
+                self.baseBrandDetail = $0
+                self.brandID = $0.id
+                
+            }).store(in: &cancelBag)
     }
 }
 

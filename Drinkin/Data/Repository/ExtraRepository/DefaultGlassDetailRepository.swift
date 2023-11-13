@@ -8,9 +8,9 @@
 import Combine
 
 final class DefaultGlassDetailRepository: GlassDetailRepository {
-    let glassID: Int
     let provider = Provider()
     var endpoint: EndpointMakeable = GlassDetailEndpoint()
+    let glassID: Int
     
     init(glassID: Int) {
         self.glassID = glassID

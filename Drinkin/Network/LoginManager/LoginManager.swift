@@ -19,7 +19,8 @@ final class LoginManager {
         var renewAccessTokenEndpoint = RenewAccessTokenEndpoint()
         do {
             if let refreshToken = try tokenManager.readToken(tokenType: TokenType.refreshToken) {
-                renewAccessTokenEndpoint.insertQuery(queryParameter: "refresh_token", queryValue: refreshToken)
+                renewAccessTokenEndpoint.insertQuery(queryParameter: "refresh_token",
+                                                     queryValue: refreshToken)
             }
         } catch {
             

@@ -41,17 +41,20 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
     }
     
     func pushAddIngredientVC() {
-        let addIngredientVCCoordinator = AddIngredientVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        let addIngredientVCCoordinator = AddIngredientVCCoordinator(navigationController: navigationController,
+                                                                    appDIContainer: appDIContainer)
         addIngredientVCCoordinator.start()
     }
     
     func pushSavedCocktailListVC() {
-        let savedCocktailListVCCoordinator = SavedCocktailListVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        let savedCocktailListVCCoordinator = SavedCocktailListVCCoordinator(navigationController: navigationController,
+                                                                            appDIContainer: appDIContainer)
         savedCocktailListVCCoordinator.start()
     }
     
     func pushUserMadeCocktailListVC() {
-        let userMadeCocktailListVCCoordinator = UserMadeCocktailListVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        let userMadeCocktailListVCCoordinator = UserMadeCocktailListVCCoordinator(navigationController: navigationController,
+                                                                                  appDIContainer: appDIContainer)
         userMadeCocktailListVCCoordinator.start()
     }
 }

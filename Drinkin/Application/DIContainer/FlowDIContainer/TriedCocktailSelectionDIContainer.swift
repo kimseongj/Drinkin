@@ -45,7 +45,8 @@ final class TriedCocktailSelectionDIContainer {
     }
     
     func makeTriedCocktailSelectionViewModel() -> TriedCocktailSelectionViewModel {
-        return DefaultTriedCocktailSelectionViewModel(filterTriedCocktailUsecase: makeFilterTriedCocktailUsecase(), addTriedCocktailUsecase: makeAddTriedCocktailUsecase())
+        return DefaultTriedCocktailSelectionViewModel(filterTriedCocktailUsecase: makeFilterTriedCocktailUsecase(),
+                                                      addTriedCocktailUsecase: makeAddTriedCocktailUsecase())
     }
     
     func makeTriedCocktailSelectionViewController() -> TriedCocktailSelectionViewController {

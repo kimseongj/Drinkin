@@ -27,10 +27,13 @@ final class DefaultMakeableCocktailListViewModel: MakeableCocktailListViewModel 
     }
     
     func fetchMakeableCocktailList() {
-        makeableCocktailListRepository.fetchMakeableCocktails().receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            self.makeableCocktailList = $0.makeableCocktailList
-        }).store(in: &cancelBag)
+        makeableCocktailListRepository.fetchMakeableCocktails()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { print("\($0)")},
+                  receiveValue: { [weak self] in
+                guard let self = self else { return }
+                
+                self.makeableCocktailList = $0.makeableCocktailList
+            }).store(in: &cancelBag)
     }
 }

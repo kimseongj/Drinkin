@@ -23,7 +23,9 @@ final class CocktailFilterDICotainer {
     
     //MARK: - CocktailFilter
     func makeCocktailFilterRepository() -> CocktailFilterRepository {
-        return DefaultCocktailFilterRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, endpoint: cocktailFilterEndpoint)
+        return DefaultCocktailFilterRepository(tokenManager: dependencies.tokenManager,
+                                               provider: dependencies.provider,
+                                               endpoint: cocktailFilterEndpoint)
     }
     
     //MARK: - filterCocktailList
@@ -39,7 +41,8 @@ final class CocktailFilterDICotainer {
     
     
     func makeCocktailFilterViewModel() -> CocktailFilterViewModel {
-        return DefaultCocktailFilterViewModel(cocktailFilterRepository: makeCocktailFilterRepository(), filterCocktailListUsecase: makeFilterCocktailListUsecase())
+        return DefaultCocktailFilterViewModel(cocktailFilterRepository: makeCocktailFilterRepository(),
+                                              filterCocktailListUsecase: makeFilterCocktailListUsecase())
     }
     
     func makeCocktailFilterViewController() -> CocktailFilterViewController {

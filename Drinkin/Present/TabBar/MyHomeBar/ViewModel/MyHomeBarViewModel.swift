@@ -28,7 +28,9 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     }
     
     func fetchHoldedItem() {
-        holdedItemRepository.fetchHoldedItem().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
+        holdedItemRepository.fetchHoldedItem()
+            .sink(receiveCompletion: { print("\($0)")},
+                  receiveValue: { [weak self] in
             guard let self = self else { return }
             self.holdedItemList = $0.holdedItemList
         }).store(in: &cancelBag)

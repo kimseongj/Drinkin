@@ -47,19 +47,23 @@ final class DefaultAddIngredientViewModel: AddIngredientViewModel {
     }
     
     func fetchItemFilter() {
-        ingredientFilterRepository.fetchIngredientFilter().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
-            guard let self = self else { return }
-            self.itemFilterList = $0.itemFilterList
-        }).store(in: &cancelBag)
+        ingredientFilterRepository.fetchIngredientFilter()
+            .sink(receiveCompletion: { print("\($0)")},
+                  receiveValue: { [weak self] in
+                guard let self = self else { return }
+                self.itemFilterList = $0.itemFilterList
+            }).store(in: &cancelBag)
     }
     
     func fetchItemList() {
-        filterItemUsecase.fetchItemList().sink(receiveCompletion: { print("\($0)") }, receiveValue: { [weak self] in
-            guard let self = self else { return }
-            self.itemList = $0.itemList
-            self.filteredItemList = $0.itemList
-            self.fetchAlreadySelectedItemList(itemList: $0.itemList)
-        }).store(in: &cancelBag)
+        filterItemUsecase.fetchItemList()
+            .sink(receiveCompletion: { print("\($0)") },
+                  receiveValue: { [weak self] in
+                guard let self = self else { return }
+                self.itemList = $0.itemList
+                self.filteredItemList = $0.itemList
+                self.fetchAlreadySelectedItemList(itemList: $0.itemList)
+            }).store(in: &cancelBag)
     }
     
     func fetchAlreadySelectedItemList(itemList: [ItemPreview]) {
@@ -88,9 +92,11 @@ final class DefaultAddIngredientViewModel: AddIngredientViewModel {
         let isSelectedItemChanged = compareSelectedItem()
         
         if isSelectedItemChanged {
-            addItemUsecase.addItems(itemList: selectedItemList).sink(receiveCompletion: { print("\($0)")}, receiveValue: { _ in
-                completion()
-            }).store(in: &cancelBag)
+            addItemUsecase.addItems(itemList: selectedItemList)
+                .sink(receiveCompletion: { print("\($0)")},
+                      receiveValue: { _ in
+                    completion()
+                }).store(in: &cancelBag)
         } else {
             return
         }

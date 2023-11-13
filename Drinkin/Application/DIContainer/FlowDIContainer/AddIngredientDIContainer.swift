@@ -25,12 +25,17 @@ final class AddIngredientDIContainer {
     
     //MARK: - ItemFilter
     func makeItemFilterRepository() -> ItemFilterRepository {
-        return DefaultItemFilterRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, endpoint: itemFilterEndpoint)
+        return DefaultItemFilterRepository(tokenManager: dependencies.tokenManager,
+                                           provider: dependencies.provider,
+                                           endpoint: itemFilterEndpoint)
     }
     
     //MARK: - filterItemUsecase
     func makeItemRepository() -> ItemRepository {
-        return DefaultItemRepository(tokenManager: dependencies.tokenManager, provider: dependencies.provider, ingredientListEndpoint: itemListEndpoint, addIngredientEndpoint: addItemEndpoint)
+        return DefaultItemRepository(tokenManager: dependencies.tokenManager,
+                                     provider: dependencies.provider,
+                                     ingredientListEndpoint: itemListEndpoint,
+                                     addIngredientEndpoint: addItemEndpoint)
     }
     
     func makeFilterItemUsecase() -> FilterItemUsecase {
@@ -44,7 +49,9 @@ final class AddIngredientDIContainer {
     
     
     func makeAddIngredientViewModel() -> AddIngredientViewModel {
-        return DefaultAddIngredientViewModel(ingredientFilterRepository: makeItemFilterRepository(), filterItemUsecase: makeFilterItemUsecase(), addItemUsecase: makeAddItemUsecase())
+        return DefaultAddIngredientViewModel(ingredientFilterRepository: makeItemFilterRepository(),
+                                             filterItemUsecase: makeFilterItemUsecase(),
+                                             addItemUsecase: makeAddItemUsecase())
     }
     
     func makeAddIngredientViewController() -> AddItemViewController {
