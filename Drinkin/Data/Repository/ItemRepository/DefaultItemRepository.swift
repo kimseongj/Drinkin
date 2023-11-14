@@ -10,22 +10,15 @@ import Combine
 
 final class DefaultItemRepository: ItemRepository {
     let provider: Provider
-    let itemListEndpoint: EndpointMakeable
-    let addItemEndpoint: EndpointMakeable
+    let endpoint: EndpointMakeable
     
     init(provider: Provider,
-         itemListEndpoint: EndpointMakeable,
-         addItemEndpoint: EndpointMakeable) {
+         endpoint: EndpointMakeable) {
         self.provider = provider
-        self.itemListEndpoint = itemListEndpoint
-        self.addItemEndpoint = addItemEndpoint
+        self.endpoint = endpoint
     }
     
     func fetchItemList() -> AnyPublisher<ItemList, Error> {
-        return provider.fetchData(endpoint: itemListEndpoint)
-    }
-    
-    func postItemList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error> {
-        return provider.postData(endpoint: addItemEndpoint, bodyItem: receipeItems)
+        return provider.fetchData(endpoint: endpoint)
     }
 }

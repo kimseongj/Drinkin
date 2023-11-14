@@ -10,5 +10,5 @@ import Combine
 
 protocol AdditionRepository {
     func postTriedCocktail(cocktailIDList: CocktailIDList) -> AnyPublisher<PostResponse, Error>
-    func postHoldedItem()
+    func postHoldedItem(items: Encodable) -> AnyPublisher<HoldedItem, Error>
 }

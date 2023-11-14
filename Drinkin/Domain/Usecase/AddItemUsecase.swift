@@ -13,13 +13,13 @@ protocol AddItemUsecase {
 }
 
 final class DefaultAddItemUsecase: AddItemUsecase {
-    private let itemRepository: ItemRepository
+    private let additionRepository: AdditionRepository
     
-    init(itemRepository: ItemRepository) {
-        self.itemRepository = itemRepository
+    init(additionRepository: AdditionRepository) {
+        self.additionRepository = additionRepository
     }
     
     func addItems(itemList: [String]) -> AnyPublisher<HoldedItem, Error> {
-        return itemRepository.postItemList(receipeItems: itemList)
+        return additionRepository.postHoldedItem(items: itemList)
     }
 }

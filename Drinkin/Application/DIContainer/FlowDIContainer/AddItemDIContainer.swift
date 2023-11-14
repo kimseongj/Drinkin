@@ -27,8 +27,8 @@ final class AddItemDIContainer {
     //MARK: - filterItemUsecase
     func makeItemRepository() -> ItemRepository {
         return DefaultItemRepository(provider: provider,
-                                     itemListEndpoint: itemListEndpoint,
-                                     addItemEndpoint: addItemEndpoint)
+                                     endpoint: itemListEndpoint
+                                     )
     }
     
     func makeFilterItemUsecase() -> FilterItemUsecase {
@@ -36,8 +36,12 @@ final class AddItemDIContainer {
     }
     
     //MARK: - AddItemUsecase
+    func makeAdditionRepository() -> AdditionRepository {
+        return DefaultAdditionRepository(provider: provider, endpoint: addItemEndpoint)
+    }
+    
     func makeAddItemUsecase() -> AddItemUsecase {
-        return DefaultAddItemUsecase(itemRepository: makeItemRepository())
+        return DefaultAddItemUsecase(additionRepository: makeAdditionRepository())
     }
     
     

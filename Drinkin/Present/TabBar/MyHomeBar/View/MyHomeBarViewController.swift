@@ -18,7 +18,7 @@ final class MyHomeBarViewController: UIViewController {
     var flowDelegate: MyHomeBarVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
-    private var isTrue: Bool = false
+    private var isTrue: Bool = true
     private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, String>?
     
     private let titleLabel: UILabel = {
