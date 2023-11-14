@@ -8,7 +8,12 @@
 import Foundation
 
 final class AppDIContainer {
-    private lazy var provider = DefaultProvider()
+
+    private let provider: Provider
+    
+    init(provider: Provider) {
+        self.provider = provider
+    }
     
     func makeTriedCocktailSelectionDIContainer() -> TriedCocktailSelectionDIContainer {
         TriedCocktailSelectionDIContainer(provider: provider)
