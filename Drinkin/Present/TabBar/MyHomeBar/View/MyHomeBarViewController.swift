@@ -18,9 +18,8 @@ final class MyHomeBarViewController: UIViewController {
     var flowDelegate: MyHomeBarVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
-    private var isTrue: Bool = true
+    private var isTrue: Bool = false
     private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, String>?
-    
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -56,7 +55,7 @@ final class MyHomeBarViewController: UIViewController {
     
     private lazy var addLabel1: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
         label.text = "첫번 째 재료를 추가하고"
         
         return label
@@ -64,7 +63,7 @@ final class MyHomeBarViewController: UIViewController {
     
     private lazy var addLabel2: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
         label.text = "만들 수 있는 칵테일을 찾아보세요."
         
         return label
@@ -111,7 +110,7 @@ final class MyHomeBarViewController: UIViewController {
         titleLabel.text = "저장한 칵테일 목록"
         titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         
-        let arrowImageView = UIImageView(image: UIImage(named: "arrow_icon"))
+        let arrowImageView = UIImageView(image: ImageStorage.arrowIcon)
         
         button.addSubview(titleLabel)
         button.addSubview(arrowImageView)

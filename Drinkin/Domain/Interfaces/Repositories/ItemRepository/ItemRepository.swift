@@ -8,6 +8,6 @@
 import Combine
 
 protocol ItemRepository {
-    func fetchIngredientList() -> AnyPublisher<ItemList, Error>
-    func postIngredientList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error>
+    func fetchItemList() -> AnyPublisher<ItemList, Error>
+    func postItemList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error>
 }

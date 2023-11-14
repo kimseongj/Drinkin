@@ -30,7 +30,7 @@
 		1C0768742ABD58930003D4BF /* ItemFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768732ABD58930003D4BF /* ItemFilterList.swift */; };
 		1C0768762ABD64E20003D4BF /* DefaultItemFilterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768752ABD64E20003D4BF /* DefaultItemFilterRepository.swift */; };
 		1C0768782ABD66320003D4BF /* ItemFilterEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768772ABD66320003D4BF /* ItemFilterEndpoint.swift */; };
-		1C07687C2ABD66F10003D4BF /* AddIngredientDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07687B2ABD66F10003D4BF /* AddIngredientDIContainer.swift */; };
+		1C07687C2ABD66F10003D4BF /* AddItemDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07687B2ABD66F10003D4BF /* AddItemDIContainer.swift */; };
 		1C07687E2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07687D2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift */; };
 		1C0768802ABD6BFD0003D4BF /* LoginSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C07687F2ABD6BFD0003D4BF /* LoginSettingViewController.swift */; };
 		1C0768832ABD75360003D4BF /* LoginSettingDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */; };
@@ -263,7 +263,7 @@
 		1C0768732ABD58930003D4BF /* ItemFilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilterList.swift; sourceTree = "<group>"; };
 		1C0768752ABD64E20003D4BF /* DefaultItemFilterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultItemFilterRepository.swift; sourceTree = "<group>"; };
 		1C0768772ABD66320003D4BF /* ItemFilterEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFilterEndpoint.swift; sourceTree = "<group>"; };
-		1C07687B2ABD66F10003D4BF /* AddIngredientDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientDIContainer.swift; sourceTree = "<group>"; };
+		1C07687B2ABD66F10003D4BF /* AddItemDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemDIContainer.swift; sourceTree = "<group>"; };
 		1C07687D2ABD691B0003D4BF /* AddIngredientVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddIngredientVCCoordinator.swift; sourceTree = "<group>"; };
 		1C07687F2ABD6BFD0003D4BF /* LoginSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSettingViewController.swift; sourceTree = "<group>"; };
 		1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSettingDIContainer.swift; sourceTree = "<group>"; };
@@ -1360,12 +1360,72 @@
 				1CBDA5512ADFD09B000F1F7D /* BaseBrandInformationDIContainer.swift */,
 				1C87137B2AF087FB00583A9F /* MakeableCocktailListDIContainer.swift */,
 				1C0768822ABD75360003D4BF /* LoginSettingDIContainer.swift */,
-				1C07687B2ABD66F10003D4BF /* AddIngredientDIContainer.swift */,
+				1C07687B2ABD66F10003D4BF /* AddItemDIContainer.swift */,
 				1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */,
 				1CD75BA62AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift */,
 				1CA0543D2AF73BF300F31B66 /* LoginDIContainer.swift */,
 			);
 			path = FlowDIContainer;
+			sourceTree = "<group>";
+		};
+		1C69737B2B02F8B800402368 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				1CA968E62A8E40200076731B /* InformationStrings.swift */,
+				1CA969222A9332860076731B /* CategoryListStrings.swift */,
+				1CA968E82A8E423B0076731B /* MiscStrings.swift */,
+				1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
+		1C69737C2B02F93B00402368 /* HTTPMethod */ = {
+			isa = PBXGroup;
+			children = (
+				1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */,
+			);
+			path = HTTPMethod;
+			sourceTree = "<group>";
+		};
+		1C69737D2B02F94500402368 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				1CA968EA2A8E43EC0076731B /* ImageStorage.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		1C69737E2B02F94E00402368 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				1C951D462ABB389000662B35 /* ColorPalette.swift */,
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		1C69737F2B02F95400402368 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				1C504CDB2AB5E6B7005A0B25 /* FilterType.swift */,
+				1CA969182A9078860076731B /* TokenType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
+		1C6973802B02F96300402368 /* DiffableDataSourceSection */ = {
+			isa = PBXGroup;
+			children = (
+				1CED21972A739A700078916A /* Section.swift */,
+			);
+			path = DiffableDataSourceSection;
+			sourceTree = "<group>";
+		};
+		1C6973812B0310C900402368 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		1C71A4AD2A52928500F1814A /* CommonTool */ = {
@@ -1501,17 +1561,13 @@
 			isa = PBXGroup;
 			children = (
 				1C0768A12AC1EE5A0003D4BF /* ErrorEnum */,
-				1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */,
-				1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */,
-				1CA968E62A8E40200076731B /* InformationStrings.swift */,
-				1CA969222A9332860076731B /* CategoryListStrings.swift */,
-				1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */,
-				1CA968E82A8E423B0076731B /* MiscStrings.swift */,
-				1CA968EA2A8E43EC0076731B /* ImageStorage.swift */,
-				1CA969182A9078860076731B /* TokenType.swift */,
-				1C504CDB2AB5E6B7005A0B25 /* FilterType.swift */,
-				1CED21972A739A700078916A /* Section.swift */,
-				1C951D462ABB389000662B35 /* ColorPalette.swift */,
+				1C69737C2B02F93B00402368 /* HTTPMethod */,
+				1C69737B2B02F8B800402368 /* Strings */,
+				1C69737D2B02F94500402368 /* Image */,
+				1C69737E2B02F94E00402368 /* Color */,
+				1C6973812B0310C900402368 /* Font */,
+				1C69737F2B02F95400402368 /* Type */,
+				1C6973802B02F96300402368 /* DiffableDataSourceSection */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1866,7 +1922,7 @@
 				1C16A86D2A13ADA5001640E2 /* UnloggedinMainViewController.swift in Sources */,
 				1CA9692D2A9DA4700076731B /* DetailFilterCell.swift in Sources */,
 				1CA969342AA08E540076731B /* MyHomeBarViewModel.swift in Sources */,
-				1C07687C2ABD66F10003D4BF /* AddIngredientDIContainer.swift in Sources */,
+				1C07687C2ABD66F10003D4BF /* AddItemDIContainer.swift in Sources */,
 				1CDAB4272AD3E19100E30181 /* DefaultCocktailQueryRepository.swift in Sources */,
 				1C195FA12AEB918800562E13 /* GlassDetailRepository.swift in Sources */,
 				1CB2990A2A6E4A8B001F31BF /* UIImage +Extension.swift in Sources */,

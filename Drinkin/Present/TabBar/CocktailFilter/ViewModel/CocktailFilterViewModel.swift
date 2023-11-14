@@ -1,15 +1,17 @@
 import Foundation
 import Combine
 
-protocol CocktailFilterViewModel {
+protocol CocktailFilterViewModelOutput {
+    var filteredCocktailList: [CocktailPreview] { get }
     var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
+    var textFilterTypeList: [String] { get }
+    var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
+    var filterTypeList: [FilterType] { get }
     var detailFilter: CocktailFilter? { get }
     var selectedDetailFilterIndexPath: IndexPath? { get set }
-    var filterTypeList: [FilterType] { get }
-    var filteredCocktailList: [CocktailPreview] { get }
-    var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
-    var textFilterTypeList: [String] { get }
-    
+}
+
+protocol CocktailFilterViewModelInput {
     func fetchCocktailList()
     func fetchCocktailFilter(completion: @escaping () -> Void)
     func fetchDetailFilter(filterType: FilterType) -> [String]
@@ -17,42 +19,41 @@ protocol CocktailFilterViewModel {
     func clearAllFilter()
 }
 
+typealias CocktailFilterViewModel = CocktailFilterViewModelOutput & CocktailFilterViewModelInput
+
 final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     private let cocktailFilterRepository: CocktailFilterRepository
     private let filterCocktailListUsecase: FilterCocktailListUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
+    //MARK: - Init
+    init(cocktailFilterRepository: CocktailFilterRepository,
+         filterCocktailListUsecase: FilterCocktailListUsecase) {
+        self.cocktailFilterRepository = cocktailFilterRepository
+        self.filterCocktailListUsecase = filterCocktailListUsecase
+    }
+    
+    //MARK: - Output
     @Published var filteredCocktailList: [CocktailPreview] = []
-    
     var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { $filteredCocktailList }
-    
-    var detailFilter: CocktailFilter? = nil
-    
-    var selectedDetailFilterIndexPath: IndexPath?
-    
-    var filterTypeList: [FilterType] = [FilterType.category,
-                                        FilterType.holdIngredient,
-                                        FilterType.level,
-                                        FilterType.abv,
-                                        FilterType.sugarContent,
-                                        FilterType.ingredientQuantity]
-    
     @Published var textFilterTypeList: [String] = [FilterType.category.descriptionko,
                                                    FilterType.holdIngredient.descriptionko,
                                                    FilterType.level.descriptionko,
                                                    FilterType.abv.descriptionko,
                                                    FilterType.sugarContent.descriptionko,
                                                    FilterType.ingredientQuantity.descriptionko]
-    
     var textFilterTypeListPublisher: Published<[String]>.Publisher { $textFilterTypeList }
-    
-    init(cocktailFilterRepository: CocktailFilterRepository,
-         filterCocktailListUsecase: FilterCocktailListUsecase) {
-        self.cocktailFilterRepository = cocktailFilterRepository
-        self.filterCocktailListUsecase = filterCocktailListUsecase
-    }
+    var filterTypeList: [FilterType] = [FilterType.category,
+                                        FilterType.holdIngredient,
+                                        FilterType.level,
+                                        FilterType.abv,
+                                        FilterType.sugarContent,
+                                        FilterType.ingredientQuantity]
+    var detailFilter: CocktailFilter? = nil
+    var selectedDetailFilterIndexPath: IndexPath?
 }
 
+//MARK: - Input
 //MARK: - Fetch Data
 extension DefaultCocktailFilterViewModel {
     func fetchCocktailList() {

@@ -20,6 +20,6 @@ final class DefaultAddItemUsecase: AddItemUsecase {
     }
     
     func addItems(itemList: [String]) -> AnyPublisher<HoldedItem, Error> {
-        return itemRepository.postIngredientList(receipeItems: itemList)
+        return itemRepository.postItemList(receipeItems: itemList)
     }
 }

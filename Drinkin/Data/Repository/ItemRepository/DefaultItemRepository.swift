@@ -11,24 +11,24 @@ import Combine
 final class DefaultItemRepository: ItemRepository {
     let tokenManager: TokenManager
     let provider: Provider
-    let ingredientListEndpoint: EndpointMakeable
-    let addIngredientEndpoint: EndpointMakeable
+    let itemListEndpoint: EndpointMakeable
+    let addItemEndpoint: EndpointMakeable
     
     init(tokenManager: TokenManager,
          provider: Provider,
-         ingredientListEndpoint: EndpointMakeable,
-         addIngredientEndpoint: EndpointMakeable) {
+         itemListEndpoint: EndpointMakeable,
+         addItemEndpoint: EndpointMakeable) {
         self.tokenManager = tokenManager
         self.provider = provider
-        self.ingredientListEndpoint = ingredientListEndpoint
-        self.addIngredientEndpoint = addIngredientEndpoint
+        self.itemListEndpoint = itemListEndpoint
+        self.addItemEndpoint = addItemEndpoint
     }
     
-    func fetchIngredientList() -> AnyPublisher<ItemList, Error> {
-        return provider.fetchData(endpoint: ingredientListEndpoint)
+    func fetchItemList() -> AnyPublisher<ItemList, Error> {
+        return provider.fetchData(endpoint: itemListEndpoint)
     }
     
-    func postIngredientList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error> {
-        return provider.postData(endpoint: addIngredientEndpoint, bodyItem: receipeItems)
+    func postItemList(receipeItems: Encodable) -> AnyPublisher<HoldedItem, Error> {
+        return provider.postData(endpoint: addItemEndpoint, bodyItem: receipeItems)
     }
 }

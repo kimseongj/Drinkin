@@ -71,10 +71,10 @@ final class AppDIContainer {
         return LoginSettingDIContainer(dependencies: dependencies)
     }
     
-    func makeAddIngredientDIContainer() -> AddIngredientDIContainer {
-        let dependencies = AddIngredientDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
+    func makeAddItemDIContainer() -> AddItemDIContainer {
+        let dependencies = AddItemDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
         
-        return AddIngredientDIContainer(dependencies: dependencies)
+        return AddItemDIContainer(dependencies: dependencies)
     }
     
     func makeSavedCocktailListDIContainer() -> SavedCocktailListDIContainer {

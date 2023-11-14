@@ -8,23 +8,33 @@
 import Foundation
 import Combine
 
-protocol CocktailRecommendViewModel {
-    var briefDescriptionListPublisher: Published<[CocktailBrief]>.Publisher { get }
-    
+
+
+protocol CocktailRecommendViewModelInput {
     func fetchBriefDescription()
 }
 
+protocol CocktailRecommendViewModelOutput {
+    var briefDescriptionListPublisher: Published<[CocktailBrief]>.Publisher { get }
+}
+
+typealias CocktailRecommendViewModel = CocktailRecommendViewModelInput & CocktailRecommendViewModelOutput
+
 class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
-    private var cancelBag: Set<AnyCancellable> = []
     private let cocktailBriefListRepository: CocktailBriefListRepository
+    private var cancelBag: Set<AnyCancellable> = []
+    
     @Published var briefDescriptionList: [CocktailBrief] = []
     
-    var briefDescriptionListPublisher: Published<[CocktailBrief]>.Publisher { $briefDescriptionList }
-    
+    //MARK: - Init
     init(cocktailBriefListRepository: CocktailBriefListRepository) {
         self.cocktailBriefListRepository = cocktailBriefListRepository
     }
     
+    //MARK: - Output
+    var briefDescriptionListPublisher: Published<[CocktailBrief]>.Publisher { $briefDescriptionList }
+    
+    //MARK: - Input
     func fetchBriefDescription() {
         cocktailBriefListRepository.fetchCocktailBriefList()
             .sink(receiveCompletion: { print("\($0)")},

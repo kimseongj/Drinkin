@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class AddIngredientDIContainer {
+final class AddItemDIContainer {
     struct Dependencies {
         let tokenManager: TokenManager
         let provider: Provider
@@ -34,8 +34,8 @@ final class AddIngredientDIContainer {
     func makeItemRepository() -> ItemRepository {
         return DefaultItemRepository(tokenManager: dependencies.tokenManager,
                                      provider: dependencies.provider,
-                                     ingredientListEndpoint: itemListEndpoint,
-                                     addIngredientEndpoint: addItemEndpoint)
+                                     itemListEndpoint: itemListEndpoint,
+                                     addItemEndpoint: addItemEndpoint)
     }
     
     func makeFilterItemUsecase() -> FilterItemUsecase {
@@ -48,13 +48,13 @@ final class AddIngredientDIContainer {
     }
     
     
-    func makeAddIngredientViewModel() -> AddIngredientViewModel {
-        return DefaultAddIngredientViewModel(ingredientFilterRepository: makeItemFilterRepository(),
+    func makeAddItemViewModel() -> AddItemViewModel {
+        return DefaultAddItemtViewModel(ingredientFilterRepository: makeItemFilterRepository(),
                                              filterItemUsecase: makeFilterItemUsecase(),
                                              addItemUsecase: makeAddItemUsecase())
     }
     
-    func makeAddIngredientViewController() -> AddItemViewController {
-        return AddItemViewController(viewModel: makeAddIngredientViewModel() )
+    func makeAddItemViewController() -> AddItemViewController {
+        return AddItemViewController(viewModel: makeAddItemViewModel() )
     }
 }

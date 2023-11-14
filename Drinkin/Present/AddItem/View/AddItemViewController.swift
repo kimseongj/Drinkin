@@ -10,7 +10,7 @@ import SnapKit
 import Combine
 
 final class AddItemViewController: UIViewController {
-    private var viewModel: AddIngredientViewModel
+    private var viewModel: AddItemViewModel
     private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var itemDataSource: UICollectionViewDiffableDataSource<Section, ItemPreview>!
@@ -39,7 +39,7 @@ final class AddItemViewController: UIViewController {
         return collectionView
     }()
     
-    init(viewModel: AddIngredientViewModel) {
+    init(viewModel: AddItemViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

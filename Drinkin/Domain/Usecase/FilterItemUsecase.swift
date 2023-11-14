@@ -26,7 +26,7 @@ final class DefaultFilterItemUsecase: FilterItemUsecase {
     }
     
     func fetchItemList() -> AnyPublisher<ItemList, Error> {
-        itemRepository.fetchIngredientList()
+        itemRepository.fetchItemList()
     }
     
     func filterItem(itemCategory: String,

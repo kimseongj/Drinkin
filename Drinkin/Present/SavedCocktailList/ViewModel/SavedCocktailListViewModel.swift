@@ -8,23 +8,31 @@
 import Foundation
 import Combine
 
-protocol SavedCocktailListViewModel {
-    var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { get }
-    
+protocol SavedCocktailListViewModelInput {
     func fetchCocktailPreviewDescription()
 }
+
+protocol SavedCocktailListViewModelOutput {
+    var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { get }
+}
+
+typealias SavedCocktailListViewModel = SavedCocktailListViewModelInput & SavedCocktailListViewModelOutput
 
 final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     private let savedCocktailListRepository: SavedCocktailListRepository
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var previewDescriptionList: [CocktailPreview] = []
-    var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { $previewDescriptionList }
     
+    //MARK: - Init
     init(savedCocktailListRepository: SavedCocktailListRepository) {
         self.savedCocktailListRepository = savedCocktailListRepository
     }
     
+    //MARK: - Output
+    var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { $previewDescriptionList }
+    
+    //MARK: - Input
     func fetchCocktailPreviewDescription() {
         savedCocktailListRepository.fetchSavedCocktailList()
             .sink(receiveCompletion: { print("\($0)")},

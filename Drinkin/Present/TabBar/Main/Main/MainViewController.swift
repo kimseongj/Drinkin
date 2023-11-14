@@ -24,9 +24,10 @@ final class MainViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        configureBackgroundColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +41,10 @@ final class MainViewController: UIViewController {
         }
     }
         
+    private func configureBackgroundColor() {
+        view.backgroundColor = .white
+    }
+    
     private func fetchUnloggedinMainView() {
         addChild(unloggedinMainViewController)
         configureUnloggedinMainView()

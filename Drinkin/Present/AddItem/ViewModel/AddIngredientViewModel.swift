@@ -8,35 +8,41 @@
 import Foundation
 import Combine
 
-protocol AddIngredientViewModel {
-    var itemFilterList: [String] { get }
-    var itemFilterPublisher: Published<[String]>.Publisher { get }
-    var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { get }
-    
+protocol AddItemViewModelInput {
     func fetchItemFilter()
     func fetchItemList()
     func filterItems(itemCategory: String)
-    func addSelectedItems(completion: @escaping () -> Void)
-    func fetchSelectedItemList()
     func selectItem(index: Int)
     func deselectItem(index: Int)
+    func fetchSelectedItemList()
+    func addSelectedItems(completion: @escaping () -> Void)
 }
 
-final class DefaultAddIngredientViewModel: AddIngredientViewModel {
+protocol AddItemViewModelOutput {
+    var itemFilterList: [String] { get }
+    var itemFilterPublisher: Published<[String]>.Publisher { get }
+    var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { get }
+}
+
+typealias AddItemViewModel = AddItemViewModelInput & AddItemViewModelOutput
+
+final class DefaultAddItemtViewModel: AddItemViewModel {
+    private let ingredientFilterRepository: ItemFilterRepository
+    private let filterItemUsecase: FilterItemUsecase
+    private let addItemUsecase: AddItemUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var itemFilterList: [String] = []
     @Published var itemList: [ItemPreview] = []
     @Published var filteredItemList: [ItemPreview] = []
     var alreadySelectedItemList: [String] = []
     var selectedItemList: [String] = []
+    
+    //MARK: - Output
+    @Published var itemFilterList: [String] = []
     var itemFilterPublisher: Published<[String]>.Publisher { $itemFilterList }
     var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { $filteredItemList }
     
-    private let ingredientFilterRepository: ItemFilterRepository
-    private let filterItemUsecase: FilterItemUsecase
-    private let addItemUsecase: AddItemUsecase
-    
+    //MARK: - Init
     init(ingredientFilterRepository: ItemFilterRepository,
          filterItemUsecase: FilterItemUsecase,
          addItemUsecase: AddItemUsecase
@@ -45,7 +51,12 @@ final class DefaultAddIngredientViewModel: AddIngredientViewModel {
         self.filterItemUsecase = filterItemUsecase
         self.addItemUsecase = addItemUsecase
     }
-    
+}
+
+//MARK: - Input
+//MARK: - Fetch Data
+extension DefaultAddItemtViewModel {
+
     func fetchItemFilter() {
         ingredientFilterRepository.fetchIngredientFilter()
             .sink(receiveCompletion: { print("\($0)")},
@@ -66,28 +77,45 @@ final class DefaultAddIngredientViewModel: AddIngredientViewModel {
             }).store(in: &cancelBag)
     }
     
-    func fetchAlreadySelectedItemList(itemList: [ItemPreview]) {
+    private func fetchAlreadySelectedItemList(itemList: [ItemPreview]) {
         alreadySelectedItemList = itemList.filter {
             $0.hold == true
         }.map {
             $0.itemName
         }
     }
-    
-    func fetchSelectedItemList() {
-        selectedItemList = itemList.filter {
-            $0.hold == true
-        }.map {
-            $0.itemName
-        }
-    }
-    
+}
+
+//MARK: - FilterItem
+extension DefaultAddItemtViewModel {
     func filterItems(itemCategory: String) {
         filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList) {
             self.filteredItemList = $0
         }
     }
+}
+
+//MARK: - Select & Deselect Item
+extension DefaultAddItemtViewModel {
+    func selectItem(index: Int) {
+        let selectedItemName = filteredItemList[index].itemName
+        
+        if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            itemList[selectedItemIndex].hold = true
+        }
+    }
     
+    func deselectItem(index: Int) {
+        let selectedItemName = filteredItemList[index].itemName
+        
+        if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            itemList[selectedItemIndex].hold = false
+        }
+    }
+}
+
+//MARK: - AddSelectedItem
+extension DefaultAddItemtViewModel {
     func addSelectedItems(completion: @escaping () -> Void) {
         let isSelectedItemChanged = compareSelectedItem()
         
@@ -109,19 +137,11 @@ final class DefaultAddIngredientViewModel: AddIngredientViewModel {
         return alreadySelectedItemSet != selectedItemSet
     }
     
-    func selectItem(index: Int) {
-        let selectedItemName = filteredItemList[index].itemName
-        
-        if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
-            itemList[selectedItemIndex].hold = true
-        }
-    }
-    
-    func deselectItem(index: Int) {
-        let selectedItemName = filteredItemList[index].itemName
-        
-        if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
-            itemList[selectedItemIndex].hold = false
+    func fetchSelectedItemList() {
+        selectedItemList = itemList.filter {
+            $0.hold == true
+        }.map {
+            $0.itemName
         }
     }
 }
