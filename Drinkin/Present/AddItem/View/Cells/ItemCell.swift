@@ -55,6 +55,8 @@ final class ItemCell: UICollectionViewCell {
         return imageView
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -63,6 +65,8 @@ final class ItemCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         contentView.layer.borderWidth = 3
@@ -101,6 +105,8 @@ final class ItemCell: UICollectionViewCell {
         
         checkImageView.isHidden = true
     }
+    
+    //MARK: - Fill Cell
     
     func fill(with itemPreview: ItemPreview) {
         itemImageView.load(urlString: itemPreview.imageURI)

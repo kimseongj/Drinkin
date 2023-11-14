@@ -88,6 +88,13 @@ final class BaseBrandInformationViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapRecommendCocktailButton() {
+        flowDelegate?.pushMakeableCocktailListVC(brandID: viewModel.brandID)
+    }
+    
+    //MARK: - Init
+    
     init(viewModel: BaseBrandInformationViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -97,11 +104,12 @@ final class BaseBrandInformationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.fetchBaseBrandDetail()
         binding()
-        configureBackgroundColor()
         configureUI()
     }
     
@@ -110,11 +118,11 @@ final class BaseBrandInformationViewController: UIViewController {
         AppCoordinator.tabBarController.tabBar.isHidden = true
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        view.backgroundColor = .white
+        
         let safeArea = view.safeAreaLayoutGuide
         let brandImageSize = view.bounds.width * 0.27
         view.addSubview(brandImageView)
@@ -169,6 +177,8 @@ final class BaseBrandInformationViewController: UIViewController {
         }
     }
     
+    //MARK: - Fill View
+    
     private func fill(with brandDetail: BaseBrandDetail?) {
         guard let brandDetail = brandDetail else { return }
         
@@ -177,14 +187,10 @@ final class BaseBrandInformationViewController: UIViewController {
 //        classificationDescriptionLabel.text = brandDetail.classification
         abvDescriptionLabel.text = brandDetail.abv
     }
-    
-    @objc
-    private func tapRecommendCocktailButton() {
-        flowDelegate?.pushMakeableCocktailListVC(brandID: viewModel.brandID)
-    }
 }
 
 //MARK: - Binding
+
 extension BaseBrandInformationViewController {
     private func binding() {
         viewModel.baseBrandDetailPublisher.receive(on: RunLoop.main).sink { [weak self] in

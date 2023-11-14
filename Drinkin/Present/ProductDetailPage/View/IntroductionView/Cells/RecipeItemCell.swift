@@ -18,6 +18,8 @@ final class RecipeItemCell: UICollectionViewCell {
     
     private let checkImageView = UIImageView()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
@@ -26,6 +28,8 @@ final class RecipeItemCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         contentView.layer.borderWidth = 2
@@ -60,6 +64,8 @@ final class RecipeItemCell: UICollectionViewCell {
             checkImageView.image = nil
         }
     }
+    
+    //MARK: - Fill Cell
     
     func fill(detailIgredient: DetailIngredient) {
         titleLabel.text = detailIgredient.ingredientNameKo

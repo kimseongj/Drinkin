@@ -33,7 +33,9 @@ final class CocktailInformationView: UIView {
     let abvView = TextInformationView(title: InformationStrings.abv)
     let levelView = TextInformationView(title: InformationStrings.level)
     let sugarContentView = TextInformationView(title: InformationStrings.sugarContent)
-        
+      
+    //MARK: - Init
+    
     init() {
         super.init(frame: CGRect.zero)
         self.backgroundColor = .white
@@ -44,6 +46,8 @@ final class CocktailInformationView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         self.addSubview(informationLabel)
@@ -69,10 +73,12 @@ final class CocktailInformationView: UIView {
         }
     }
     
+    //MARK: - Fill View
+    
     func fillCocktailDescription() {
-        toolView.fillCocktailDescrion(cocktailDescription: cocktailDescription)
-        skillView.fillCocktailDescrion(cocktailDescription: cocktailDescription)
-        glassView.fillCocktailDescrion(cocktailDescription: cocktailDescription)
+        toolView.receive(cocktailDescription: cocktailDescription)
+        skillView.receive(cocktailDescription: cocktailDescription)
+        glassView.receive(cocktailDescription: cocktailDescription)
     }
     
     func fill(with cocktailDescription: CocktailDescription) {  
@@ -85,7 +91,7 @@ final class CocktailInformationView: UIView {
         glassView.fill(with: cocktailDescription)
     }
     
-    func fillCocktailDescription(cocktailDescription: CocktailDescription?) {
+    func receive(cocktailDescription: CocktailDescription?) {
         self.cocktailDescription = cocktailDescription
         fillCocktailDescription()
     }

@@ -27,9 +27,16 @@ final class HoldedItemCell: UICollectionViewCell {
         return button
     }()
     
+    @objc
+    private func tapDeleteButton() {
+        guard let titleText = titleLabel.text else { return }
+        delegate?.deleteHoldedItem(holdedItem: titleText)
+    }
+    
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        configureBackgroundColor()
         configureUI()
     }
     
@@ -37,11 +44,11 @@ final class HoldedItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureBackgroundColor() {
-        contentView.backgroundColor = ColorPalette.grayCellColor
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        contentView.backgroundColor = ColorPalette.grayCellColor
+        
         contentView.layer.cornerRadius = 4
         contentView.addSubview(titleLabel)
         contentView.addSubview(deleteButton)
@@ -60,13 +67,9 @@ final class HoldedItemCell: UICollectionViewCell {
         }
     }
     
+    //MARK: - FillCell
+    
     func fill(with itemName: String) {
         titleLabel.text = itemName
-    }
-    
-    @objc
-    func tapDeleteButton() {
-        guard let titleText = titleLabel.text else { return }
-        delegate?.deleteHoldedItem(holdedItem: titleText)
     }
 }

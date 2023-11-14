@@ -17,6 +17,8 @@ final class InformationCell: UICollectionViewCell {
         return label
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -26,7 +28,9 @@ final class InformationCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureUI() {
+    //MARK: - ConfigureUI
+    
+    private func configureUI() {
         self.layer.borderColor = ColorPalette.cellGrayBorderColor
         self.backgroundColor = ColorPalette.grayCellColor
         self.layer.cornerRadius = 4
@@ -41,6 +45,8 @@ final class InformationCell: UICollectionViewCell {
         }
     }
     
+    //MARK: - Fill Cell
+        
     func fill(with cocktailTool: CocktailTool) {
         label.text = cocktailTool.toolNameKo
     }

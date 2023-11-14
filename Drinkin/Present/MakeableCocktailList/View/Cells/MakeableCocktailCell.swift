@@ -9,6 +9,11 @@ import UIKit
 import SnapKit
 
 final class MakeableCocktailCell: UICollectionViewCell {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        scoreStackView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -42,6 +47,8 @@ final class MakeableCocktailCell: UICollectionViewCell {
         return stackView
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
@@ -51,10 +58,7 @@ final class MakeableCocktailCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        scoreStackView.subviews.forEach { $0.removeFromSuperview() }
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         contentView.backgroundColor = .white
@@ -94,6 +98,8 @@ final class MakeableCocktailCell: UICollectionViewCell {
             $0.trailing.equalToSuperview()
         }
     }
+    
+    //MARK: - Fill Cell
     
     func fill(with makeableCocktail: MakeableCocktail) {
         categoryLabel.text = makeableCocktail.category

@@ -72,6 +72,8 @@ final class GlassModalViewController: UIViewController {
         return label
     }()
     
+    //MARK: - Init
+    
     init(viewModel: GlassModalViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -81,9 +83,10 @@ final class GlassModalViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
         configureUI()
         viewModel.fetchGlassDetail { [weak self] in
             guard let self = self else { return }
@@ -92,11 +95,11 @@ final class GlassModalViewController: UIViewController {
         }
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        view.backgroundColor = .white
+        
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
@@ -149,6 +152,8 @@ final class GlassModalViewController: UIViewController {
         }
     }
 
+    //MARK: - Fill View
+    
     private func fill(glassDetail: GlassDetail) {
         imageView.load(urlString:  glassDetail.imageURI)
         titleLabel.text = glassDetail.glassName

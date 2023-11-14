@@ -13,8 +13,6 @@ final class TriedCocktailSelectionViewController: UIViewController {
     private var viewModel: TriedCocktailSelectionViewModel
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectableImageDescription>?
    
-    
-    //MARK:- mainLabel
     private let mainLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -23,7 +21,6 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return label
     }()
     
-    //MARK:- subLabel
     private let subLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
@@ -33,16 +30,14 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return label
     }()
     
-    //MARK:- exitButton
     private let exitButton: UIButton = {
         let exitButton = UIButton()
-        exitButton.setImage(UIImage(systemName: "multiply"), for: .normal)
+        exitButton.setImage(ImageStorage.deleteIcon, for: .normal)
         exitButton.addTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
         
         return exitButton
     }()
     
-    //MARK:- baseCollectionView
     private let categoryCollectionView: UICollectionView =  {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -58,7 +53,6 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return view
     }()
     
-    //MARK:- cocktailCollectionView
     private lazy var cocktailCollectionView: UICollectionView = {
         let flowLayout = configureCompositionalLayout()
         
@@ -74,17 +68,18 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return collectionView
     }()
     
-    
     private let completeSelectionButton: UIButton = {
         let completeSelectionButton = UIButton()
         completeSelectionButton.layer.borderColor = ColorPalette.buttonBorderColor
         completeSelectionButton.layer.borderWidth = 3
         completeSelectionButton.backgroundColor = .black
         completeSelectionButton.titleLabel?.textColor = .white
-        completeSelectionButton.titleLabel?.font = UIFont(name: "Pretendard-Black", size: 15)
+        completeSelectionButton.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         
         return completeSelectionButton
     }()
+    
+    //MARK: - Init
     
     init(viewModel: TriedCocktailSelectionViewModel) {
         self.viewModel = viewModel
@@ -94,6 +89,8 @@ final class TriedCocktailSelectionViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,6 +109,8 @@ final class TriedCocktailSelectionViewController: UIViewController {
         super.viewWillAppear(animated)
         categoryCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: [])
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
@@ -159,19 +158,6 @@ final class TriedCocktailSelectionViewController: UIViewController {
         }
     }
     
-    private func configureCocktailCollectionView() {
-        cocktailCollectionView.delegate = self
-    }
-    
-    private func configureBaseTypeCollectionView() {
-        categoryCollectionView.dataSource = self
-        categoryCollectionView.delegate = self
-        
-        if let flowLayout = categoryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        }
-    }
-    
     private func renewCompleteSelectionButton(isCellsSelected: Bool = false) {
         switch isCellsSelected {
         case false:
@@ -202,7 +188,33 @@ final class TriedCocktailSelectionViewController: UIViewController {
     }
 }
 
+//MARK: - Delegate
+
+extension TriedCocktailSelectionViewController: DismissTriedCocktailSelectionVCDelegate {
+    func dismissTriedCocktailSelectionViewController() {
+        self.dismiss(animated: true)
+    }
+}
+
+//MARK: - ConfigureCollectionView
+
+extension TriedCocktailSelectionViewController {
+    private func configureCocktailCollectionView() {
+        cocktailCollectionView.delegate = self
+    }
+    
+    private func configureBaseTypeCollectionView() {
+        categoryCollectionView.dataSource = self
+        categoryCollectionView.delegate = self
+        
+        if let flowLayout = categoryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
+    }
+}
+
 //MARK: - CategoryDataSource
+
 extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let categoryListCount = viewModel.categoryList.count
@@ -224,33 +236,8 @@ extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
     }
 }
 
-//MARK: - cocktailCollectionView, categoryCollectionView Delegate
-extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == categoryCollectionView {
-            viewModel.filterCocktailList(cocktailCategoryIndex: indexPath.row)
-        } else {
-            
-            if let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell {
-            cell.presentSelected()
-            }
-            viewModel.selectCocktail(index: indexPath.row)
-            renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if collectionView == cocktailCollectionView {
-            guard let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell else { return }
-            
-            viewModel.deselectCocktail(index: indexPath.row)
-            renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())
-            cell.presentDeselected()
-        }
-    }
-}
-
 //MARK: - CocktailDiffableDataSource
+
 extension TriedCocktailSelectionViewController {
     private func configureCocktailDataSource() {
         cocktailDataSource = UICollectionViewDiffableDataSource<Section, SelectableImageDescription> (collectionView: cocktailCollectionView) { [weak self] (collectionView, indexPath, previewDescription) -> UICollectionViewCell? in
@@ -281,6 +268,7 @@ extension TriedCocktailSelectionViewController {
 }
 
 //MARK: - Binding
+
 extension TriedCocktailSelectionViewController {
     private func binding() {
         viewModel.filteredSelectableCocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -292,6 +280,7 @@ extension TriedCocktailSelectionViewController {
 }
 
 //MARK: - CompositionalLayout
+
 extension TriedCocktailSelectionViewController {
     private func configureCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
@@ -313,9 +302,29 @@ extension TriedCocktailSelectionViewController {
     }
 }
 
-//MARK: - Dismiss ViewController
-extension TriedCocktailSelectionViewController: DismissTriedCocktailSelectionVCDelegate {
-    func dismissTriedCocktailSelectionViewController() {
-        self.dismiss(animated: true)
+//MARK: - cocktailCollectionView, categoryCollectionView Delegate
+
+extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categoryCollectionView {
+            viewModel.filterCocktailList(cocktailCategoryIndex: indexPath.row)
+        } else {
+            
+            if let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell {
+            cell.presentSelected()
+            }
+            viewModel.selectCocktail(index: indexPath.row)
+            renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView == cocktailCollectionView {
+            guard let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell else { return }
+            
+            viewModel.deselectCocktail(index: indexPath.row)
+            renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())
+            cell.presentDeselected()
+        }
     }
 }

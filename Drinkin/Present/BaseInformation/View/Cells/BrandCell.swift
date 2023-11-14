@@ -18,9 +18,10 @@ final class BrandCell: UICollectionViewCell {
         return label
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureBackgroundColor()
         configureUI()
     }
     
@@ -28,11 +29,11 @@ final class BrandCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureBackgroundColor() {
-        contentView.backgroundColor = ColorPalette.grayCellColor
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        contentView.backgroundColor = ColorPalette.grayCellColor
+        
         contentView.addSubview(brandImageView)
         contentView.addSubview(titleLabel)
         
@@ -48,6 +49,8 @@ final class BrandCell: UICollectionViewCell {
             $0.bottom.equalToSuperview().offset(-8)
         }
     }
+    
+    //MARK: - Fill Cell
     
     func fill(with brandImageDescription: BrandImageDescription) {
         brandImageView.load(urlString: brandImageDescription.imageURI)

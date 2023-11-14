@@ -22,6 +22,7 @@ final class UserMadeCocktailListViewController: UIViewController {
         return collectionView
     }()
     
+    //MARK: - Init
     
     init(viewModel: UserMadeCocktailListViewModel) {
         self.viewModel = viewModel
@@ -32,9 +33,10 @@ final class UserMadeCocktailListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
         configureNavigationItemTitle()
         configureUI()
         configureDataSource()
@@ -42,15 +44,15 @@ final class UserMadeCocktailListViewController: UIViewController {
         viewModel.fetchCocktailPreviewDescription()
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
+    //MARK: - ConfigureUI
     
     private func configureNavigationItemTitle() {
         self.navigationItem.title = "내가 만든 칵테일 목록"
     }
     
     private func configureUI() {
+        view.backgroundColor = .white
+        
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(cocktailListCollectionView)
         
@@ -64,6 +66,7 @@ final class UserMadeCocktailListViewController: UIViewController {
 }
 
 //MARK: - CocktailListCollectionView DiffableDataSource
+
 extension UserMadeCocktailListViewController {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, CocktailPreview> (collectionView: cocktailListCollectionView) { collectionView, indexPath, previewDescription in
@@ -84,6 +87,7 @@ extension UserMadeCocktailListViewController {
 }
 
 //MARK: - Binding
+
 extension UserMadeCocktailListViewController {
     private func binding() {
         viewModel.previewDescriptionListPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -94,6 +98,7 @@ extension UserMadeCocktailListViewController {
 }
 
 //MARK: - CocktailListCollectionView Compositional Layout
+
 extension UserMadeCocktailListViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),

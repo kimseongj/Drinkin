@@ -51,6 +51,11 @@ final class MyHomeBarViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapLoginSettingButton() {
+        flowDelegate?.pushLoginSettingVC()
+    }
+    
     private let addItemView = UIView()
     
     private lazy var addLabel1: UILabel = {
@@ -93,6 +98,11 @@ final class MyHomeBarViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapAddButton() {
+        flowDelegate?.pushAddIngredientVC()
+    }
+    
     private let holdedItemCollectionView: UICollectionView = {
         let layout = UICollectionViewLayout()
         let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
@@ -129,6 +139,11 @@ final class MyHomeBarViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapSavedCocktailListButton() {
+        flowDelegate?.pushSavedCocktailListVC()
+    }
+    
     private let userMadeCocktailListButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
@@ -155,7 +170,14 @@ final class MyHomeBarViewController: UIViewController {
         
         return button
     }()
+    
+    @objc
+    private func tapUserMadeCocktailListButton() {
+        flowDelegate?.pushUserMadeCocktailListVC()
+    }
         
+    //MARK: - Init
+    
     init(viewModel: MyHomeBarViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -164,6 +186,8 @@ final class MyHomeBarViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,11 +198,11 @@ final class MyHomeBarViewController: UIViewController {
         binding()
     }
     
+    //MARK: - ConfigureUI
     private func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
-        
         view.backgroundColor = .white
         
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(titleLabel)
         view.addSubview(loginSettingButton)
         view.addSubview(holdIngredientLabel)
@@ -281,35 +305,20 @@ final class MyHomeBarViewController: UIViewController {
             $0.height.equalTo(60)
         }
     }
-    
+}
+
+//MARK: - ConfigureCollectionView
+
+extension MyHomeBarViewController {
     private func configureHoldedItemCollectionView() {
         if let flowLayout = holdedItemCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
-    
-    @objc
-    private func tapLoginSettingButton() {
-        flowDelegate?.pushLoginSettingVC()
-    }
-    
-    @objc
-    private func tapAddButton() {
-        flowDelegate?.pushAddIngredientVC()
-    }
-    
-    @objc
-    private func tapSavedCocktailListButton() {
-        flowDelegate?.pushSavedCocktailListVC()
-    }
-    
-    @objc
-    private func tapUserMadeCocktailListButton() {
-        flowDelegate?.pushUserMadeCocktailListVC()
-    }
 }
 
 //MARK: - DiffableDataSource
+
 extension MyHomeBarViewController {
     private func configureDataSource() {
         self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, itemName) -> UICollectionViewCell? in
@@ -330,6 +339,7 @@ extension MyHomeBarViewController {
 }
 
 //MARK: - Binding
+
 extension MyHomeBarViewController {
     private func binding() {
         viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -341,6 +351,7 @@ extension MyHomeBarViewController {
 }
 
 //MARK: - CellDelteButtonDelegate
+
 extension MyHomeBarViewController: CellDeleteButtonDelegate {
     func deleteHoldedItem(holdedItem: String) {
         viewModel.deleteHoldedItem(holdedItem: holdedItem)

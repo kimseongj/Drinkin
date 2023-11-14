@@ -39,6 +39,13 @@ final class CocktailFilterModalViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapDismissButton() {
+        self.dismiss(animated: false)
+    }
+    
+    //MARK: - Init
+    
     init(filterType: FilterType, viewModel: CocktailFilterViewModel) {
         self.filterType = filterType
         self.viewModel = viewModel
@@ -49,14 +56,19 @@ final class CocktailFilterModalViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        configureBackgroundColor()
         configureFilterTableView()
     }
     
+    //MARK: - ConfigureUI()
+    
     private func configureUI() {
+        view.backgroundColor = ColorPalette.blackTransparencyColor
+        
         view.addSubview(contentView)
         contentView.addSubview(filterTableView)
         contentView.addSubview(dismissButton)
@@ -78,22 +90,19 @@ final class CocktailFilterModalViewController: UIViewController {
             $0.height.equalTo(60)
         }
     }
-    
-    private func configureBackgroundColor() {
-        view.backgroundColor = ColorPalette.blackTransparencyColor
-    }
-    
+}
+
+//MARK: - ConfigureTableView
+
+extension CocktailFilterModalViewController {
     private func configureFilterTableView() {
         filterTableView.dataSource = self
         filterTableView.delegate = self
     }
-    
-    @objc private func tapDismissButton() {
-        self.dismiss(animated: false)
-    }
 }
 
 //MARK: - FilterTableView DataSource
+
 extension CocktailFilterModalViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.fetchDetailFilter(filterType: filterType).count
@@ -108,7 +117,8 @@ extension CocktailFilterModalViewController: UITableViewDataSource {
     }
 }
 
-//MARK: - FilterTableView Delegate 
+//MARK: - FilterTableView Delegate
+
 extension CocktailFilterModalViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let previousSelectedIndexPath = viewModel.selectedDetailFilterIndexPath {

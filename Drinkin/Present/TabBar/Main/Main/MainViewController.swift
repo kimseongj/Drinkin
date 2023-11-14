@@ -11,10 +11,11 @@ final class MainViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
     var flowDelegate: MainVCFlow?
     static var login: Bool = false
- 
+    
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
     private let unloggedinMainViewController = UnloggedinMainViewController()
     
+    //MARK: - Init
     init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -40,11 +41,15 @@ final class MainViewController: UIViewController {
             fetchUnloggedinMainView()
         }
     }
-        
+    
+    //MARK: - ConfigureUI
     private func configureBackgroundColor() {
         view.backgroundColor = .white
     }
-    
+}
+
+//MARK: - UnloggedinVC Present
+extension MainViewController {
     private func fetchUnloggedinMainView() {
         addChild(unloggedinMainViewController)
         configureUnloggedinMainView()
@@ -59,7 +64,10 @@ final class MainViewController: UIViewController {
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
-    
+}
+
+//MARK: - LoggedinVC Present
+extension MainViewController {
     private func fetchLoggedinMainView() {
         unloggedinMainViewController.removeFromParent()
         unloggedinMainViewController.view.removeFromSuperview()
@@ -68,7 +76,7 @@ final class MainViewController: UIViewController {
         loggedinMainViewController.sendDelegate(flowDelegate)
     }
     
-    private func configureLoggedinMainView() { 
+    private func configureLoggedinMainView() {
         view.addSubview(loggedinMainViewController.view)
         
         loggedinMainViewController.view.snp.makeConstraints {
@@ -76,4 +84,5 @@ final class MainViewController: UIViewController {
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
+    
 }

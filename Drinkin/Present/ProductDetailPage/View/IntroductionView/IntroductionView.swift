@@ -75,6 +75,8 @@ final class IntroductionView: UIView {
         return stackView
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -86,6 +88,8 @@ final class IntroductionView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         self.backgroundColor = .white
@@ -140,26 +144,7 @@ final class IntroductionView: UIView {
         }
     }
     
-    private func configureBaseCollectionView() {
-        baseCollectionView.delegate = self
-        ingredientCollectionView.delegate = self
-    }
-       
-    func updateBaseCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
-        collectionView.snp.makeConstraints {
-            $0.height.equalTo(cellCount * 70)
-        }
-    }
-    
-    func updateItemCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
-        collectionView.snp.makeConstraints {
-            $0.height.equalTo(cellCount * 50)
-        }
-    }
-    
-    func configureDelegate(delegate: ProductDetailVCFlow?) {
-        self.flowDelegate = delegate
-    }
+    //MARK: - Fill View
     
     func fill(with cocktailDesription: CocktailDescription) {
         cocktailImageView.load(urlString: cocktailDesription.imageURI)
@@ -181,6 +166,88 @@ final class IntroductionView: UIView {
         }
     }
 }
+
+//MARK: - Delegate
+
+extension IntroductionView {
+    func configureDelegate(delegate: ProductDetailVCFlow?) {
+        self.flowDelegate = delegate
+    }
+}
+
+//MARK: - Configure CollectionView
+
+extension IntroductionView {
+    private func configureBaseCollectionView() {
+        baseCollectionView.delegate = self
+        ingredientCollectionView.delegate = self
+    }
+    
+    private func updateBaseCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
+        collectionView.snp.makeConstraints {
+            $0.height.equalTo(cellCount * 70)
+        }
+    }
+    
+    private func updateItemCollectionViewHeight(collectionView: UICollectionView, cellCount: Int) {
+        collectionView.snp.makeConstraints {
+            $0.height.equalTo(cellCount * 50)
+        }
+    }
+}
+
+//MARK: - BaseDiffableDataSource
+
+extension IntroductionView {
+    private func configureBaseDataSource() {
+        self.baseDataSource = UICollectionViewDiffableDataSource<Section, DetailBase> (collectionView: baseCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeBaseCell.identifier, for: indexPath) as? RecipeBaseCell else { return nil }
+            
+            cell.check(hold: detailCategory.hold)
+            cell.fill(detailCategory: detailCategory)
+            
+            return cell
+        }
+    }
+    
+    func applybaseSnapshot(detailCategoryList: [DetailBase]?) {
+        guard let validDetailCategoryList = detailCategoryList else { return }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailBase>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(validDetailCategoryList)
+        self.baseDataSource?.apply(snapshot, animatingDifferences: true)
+        updateBaseCollectionViewHeight(collectionView: baseCollectionView, cellCount: validDetailCategoryList.count)
+    }
+}
+
+//MARK: - IngredientDiffableDataSource
+
+extension IntroductionView {
+    private func configureIngredientDataSource() {
+        self.ingredientDataSource = UICollectionViewDiffableDataSource<Section, DetailIngredient> (collectionView: ingredientCollectionView) { (collectionView, indexPath, detailIngredient) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeItemCell.identifier, for: indexPath) as? RecipeItemCell else { return nil
+            }
+            
+            cell.check(hold: detailIngredient.hold)
+            cell.fill(detailIgredient: detailIngredient)
+            
+            return cell
+        }
+    }
+    
+    func applyIngredientSnapshot(detailIngredientList: [DetailIngredient]?) {
+        guard let validDetailIngredientList = detailIngredientList else { return }
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailIngredient>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(validDetailIngredientList)
+        self.ingredientDataSource?.apply(snapshot, animatingDifferences: true)
+        updateItemCollectionViewHeight(collectionView: ingredientCollectionView, cellCount: validDetailIngredientList.count)
+    }
+}
+
+//MARK: - BaseCompositionalLayout, ItemCompositionalLayout
 
 extension IntroductionView {
     private func configureBaseCompositionalLayout() -> UICollectionViewLayout {
@@ -220,54 +287,7 @@ extension IntroductionView {
     }
 }
 
-//MARK: - BaseDiffableDataSource
-extension IntroductionView {
-    private func configureBaseDataSource() {
-        self.baseDataSource = UICollectionViewDiffableDataSource<Section, DetailBase> (collectionView: baseCollectionView) { (collectionView, indexPath, detailCategory) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeBaseCell.identifier, for: indexPath) as? RecipeBaseCell else { return nil }
-            
-            cell.check(hold: detailCategory.hold)
-            cell.fill(detailCategory: detailCategory)
-            
-            return cell
-        }
-    }
-    
-    func applybaseSnapshot(detailCategoryList: [DetailBase]?) {
-        guard let validDetailCategoryList = detailCategoryList else { return }
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailBase>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(validDetailCategoryList)
-        self.baseDataSource?.apply(snapshot, animatingDifferences: true)
-        updateBaseCollectionViewHeight(collectionView: baseCollectionView, cellCount: validDetailCategoryList.count)
-    }
-}
-
-//MARK: - IngredientDiffableDataSource
-extension IntroductionView {
-    private func configureIngredientDataSource() {
-        self.ingredientDataSource = UICollectionViewDiffableDataSource<Section, DetailIngredient> (collectionView: ingredientCollectionView) { (collectionView, indexPath, detailIngredient) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecipeItemCell.identifier, for: indexPath) as? RecipeItemCell else { return nil
-            }
-            
-            cell.check(hold: detailIngredient.hold)
-            cell.fill(detailIgredient: detailIngredient)
-            
-            return cell
-        }
-    }
-    
-    func applyIngredientSnapshot(detailIngredientList: [DetailIngredient]?) {
-        guard let validDetailIngredientList = detailIngredientList else { return }
-        
-        var snapshot = NSDiffableDataSourceSnapshot<Section, DetailIngredient>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(validDetailIngredientList)
-        self.ingredientDataSource?.apply(snapshot, animatingDifferences: true)
-        updateItemCollectionViewHeight(collectionView: ingredientCollectionView, cellCount: validDetailIngredientList.count)
-    }
-}
+//MARK: - BaseCollectionView Delegate
 
 extension IntroductionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

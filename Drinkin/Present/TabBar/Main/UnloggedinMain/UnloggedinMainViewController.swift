@@ -66,10 +66,12 @@ final class UnloggedinMainViewController: UIViewController {
         flowDelegate?.presentLoginVC()
     }
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         configureUI()
     }
     
+    //MARK: - ConfigureUI
     private func configureUI() {
         view.backgroundColor = .white
         
@@ -119,6 +121,7 @@ final class UnloggedinMainViewController: UIViewController {
         }
     }
     
+    //MARK: - ViewController Delegate 
     func sendDelegate(_ delegate: MainVCFlow?) {
         self.flowDelegate = delegate
     }

@@ -38,6 +38,12 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func dismissLoginVC() {
+        print("dismissClicked")
+        self.dismiss(animated: true)
+    }
+    
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -128,10 +134,16 @@ final class LoginViewController: UIViewController {
             $0.height.equalTo(20)
         }
         
-        button.addTarget(self, action: #selector(loginButtonClicked), for: .touchUpInside)
+        button.addTarget(self, action: #selector(kakaoLoginButtonClicked), for: .touchUpInside)
         
         return button
     }()
+    
+    @objc
+    private func kakaoLoginButtonClicked() {
+        print("kakaoClicked")
+        viewModel.handleKakaoLogin()
+    }
     
     private let appleLoginButton: UIButton = {
         let button = UIButton()
@@ -182,6 +194,14 @@ final class LoginViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func appleLoginButtonClicked() {
+        print("appleClicked")
+        viewModel.performRequests()
+    }
+    
+    //MARK: - Init
+    
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -191,34 +211,20 @@ final class LoginViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         configureUI()
         binding()
     }
     
-    @objc
-    private func dismissLoginVC() {
-        print("dismissClicked")
-        self.dismiss(animated: true)
-    }
-    
-    @objc
-    private func loginButtonClicked() {
-        print("kakaoClicked")
-        viewModel.handleKakaoLogin()
-    }
-    
-    @objc
-    private func appleLoginButtonClicked() {
-        print("appleClicked")
-        viewModel.performRequests()
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
+        view.backgroundColor = .white
         
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(dismissButton)
         view.addSubview(cocktailImageView)
         view.addSubview(logoImageView)
@@ -275,11 +281,15 @@ final class LoginViewController: UIViewController {
     }
 }
 
+//MARK: - Apple ASAuthorizationControllerPresentationContextProviding
+
 extension LoginViewController:  ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
 }
+
+//MARK: - Binding
 
 extension LoginViewController {
     func binding() {

@@ -42,6 +42,7 @@ final class CocktailRecommendViewController: UIViewController {
         return collectionView
     }()
  
+    //MARK: - Init
     init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -51,8 +52,8 @@ final class CocktailRecommendViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
-        configureBackgroundColor()
         configureUI()
         setupRecommendCocktailCollectionView()
         configureDataSource()
@@ -60,11 +61,10 @@ final class CocktailRecommendViewController: UIViewController {
         viewModel.fetchBriefDescription()
     }
     
-    func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
-    
+    //MARK: - ConfigureUI
     func configureUI() {
+        view.backgroundColor = .white
+        
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(logoImage)
         view.addSubview(recommendCocktailCollectionView)
@@ -84,10 +84,21 @@ final class CocktailRecommendViewController: UIViewController {
         }
     }
     
+    //MARK: - SendDelegate 
     func sendDelegate(_ delegate: MainVCFlow?) {
         self.flowDelegate = delegate
     }
-    
+}
+
+//MARK: - CellButtonDelegate
+extension CocktailRecommendViewController: CellButtonDelegate {
+    func pushProductDetailVC(withID cocktailID: Int) {
+        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
+    }
+}
+
+//MARK: - ConfigureCollectionView
+extension CocktailRecommendViewController {
     func setupRecommendCocktailCollectionView() {
         recommendCocktailCollectionView.register(CocktailRecommendCell.self, forCellWithReuseIdentifier: CocktailRecommendCell.identifier)
         recommendCocktailCollectionView.delegate = self
@@ -139,6 +150,7 @@ extension CocktailRecommendViewController {
     }
 } 
 
+//MARK: - CollectionViewFlowLayout
 extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
   func scrollViewWillEndDragging(
     _ scrollView: UIScrollView,
@@ -150,11 +162,4 @@ extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
     let index = round(scrolledOffsetX / cellWidth)
     targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
   }
-}
-
-extension CocktailRecommendViewController: CellButtonDelegate {
-    func pushProductDetailVC(withID cocktailID: Int) {
-        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
-        print(cocktailID)
-    }
 }

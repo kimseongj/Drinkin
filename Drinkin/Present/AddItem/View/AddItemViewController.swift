@@ -39,6 +39,8 @@ final class AddItemViewController: UIViewController {
         return collectionView
     }()
     
+    //MARK: - Init
+    
     init(viewModel: AddItemViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -48,10 +50,11 @@ final class AddItemViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTitle()
-        configureBackgroundColor()
         configureUI()
         configureFilterCollectionView()
         configureItemCollectionView()
@@ -71,15 +74,15 @@ final class AddItemViewController: UIViewController {
         })
     }
     
+    //MARK: - ConfigureUI
+    
     private func configureTitle() {
         self.title = "재료 추가하기"
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
-    
     private func configureUI() {
+        view.backgroundColor = .white
+        
         let safeArea = view.safeAreaLayoutGuide
         
         view.addSubview(itemFilterCollectionView)
@@ -99,7 +102,11 @@ final class AddItemViewController: UIViewController {
             $0.bottom.equalTo(safeArea.snp.bottom)
         }
     }
-    
+}
+
+//MARK: - ConfigureCollectionView
+
+extension AddItemViewController {
     private func configureFilterCollectionView() {
         itemFilterCollectionView.delegate = self
     
@@ -113,30 +120,8 @@ final class AddItemViewController: UIViewController {
     }
 }
 
-//MARK: - FilterCollectionView ItemCollectionView Delegate
-extension AddItemViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == itemFilterCollectionView {
-            viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row]))
-        } else {
-            if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
-                cell.presentHoldItem()
-                viewModel.selectItem(index: indexPath.row)
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if collectionView == itemCollectionView {
-            guard let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell else { return }
-            
-            cell.presentUnholdItem()
-            viewModel.deselectItem(index: indexPath.row)
-        }
-    }
-}
-
 //MARK: - ItemFilterCollectionView DiffableDataSource
+
 extension AddItemViewController {
     private func configureItemFilterDataSource() {
         filterDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: itemFilterCollectionView) { collectionView, indexPath, itemFilter in
@@ -157,6 +142,7 @@ extension AddItemViewController {
 }
 
 //MARK: - ItemCollectionView DiffableDataSource
+
 extension AddItemViewController {
     private func configureItemDataSource() {
         itemDataSource = UICollectionViewDiffableDataSource<Section, ItemPreview> (collectionView: itemCollectionView) { [weak self] (collectionView, indexPath, itemPreview) in
@@ -186,6 +172,7 @@ extension AddItemViewController {
 }
 
 //MARK: - Binding
+
 extension AddItemViewController {
     private func itemBinding() {
         viewModel.filteredItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -205,6 +192,7 @@ extension AddItemViewController {
 
 
 //MARK: - ItemCollectionView Compositional Layout
+
 extension AddItemViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -222,5 +210,29 @@ extension AddItemViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+}
+
+//MARK: - FilterCollectionView ItemCollectionView Delegate
+
+extension AddItemViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == itemFilterCollectionView {
+            viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row]))
+        } else {
+            if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
+                cell.presentHoldItem()
+                viewModel.selectItem(index: indexPath.row)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView == itemCollectionView {
+            guard let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell else { return }
+            
+            cell.presentUnholdItem()
+            viewModel.deselectItem(index: indexPath.row)
+        }
     }
 }

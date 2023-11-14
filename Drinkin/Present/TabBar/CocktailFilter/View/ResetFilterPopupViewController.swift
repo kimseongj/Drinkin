@@ -54,6 +54,11 @@ final class ResetFilterPopupViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapDismissButton() {
+        self.dismiss(animated: true)
+    }
+    
     private lazy var resetButton: UIButton = {
         let button = UIButton()
         button.setTitle("초기화", for: .normal)
@@ -68,10 +73,20 @@ final class ResetFilterPopupViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapResetButton() {
+        delegate?.resetFilter()
+        self.dismiss(animated: true)
+    }
+    
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         view.addSubview(contentView)
@@ -112,16 +127,4 @@ final class ResetFilterPopupViewController: UIViewController {
             $0.width.equalTo(87)
         }
     }
-    
-    @objc
-    private func tapDismissButton() {
-        self.dismiss(animated: true)
-    }
-    
-    @objc
-    private func tapResetButton() {
-        delegate?.resetFilter()
-        self.dismiss(animated: true)
-    }
 }
-

@@ -22,6 +22,8 @@ final class MakeableCocktailListViewController: UIViewController {
         return collectionView
     }()
     
+    //MARK: - Init
+    
     init(viewModel: MakeableCocktailListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +32,8 @@ final class MakeableCocktailListViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,15 +45,16 @@ final class MakeableCocktailListViewController: UIViewController {
         viewModel.fetchMakeableCocktailList()
     }
     
+    //MARK: - ConfigureUI
+    
     private func configureNavigationBar() {
         navigationItem.title = "만들 수 있는 칵테일 목록"
     }
     
     private func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
-        
         view.backgroundColor = .white
         
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(makeableCocktailCollectionView)
         
         makeableCocktailCollectionView.snp.makeConstraints {
@@ -64,35 +69,8 @@ final class MakeableCocktailListViewController: UIViewController {
     }
 }
 
-//MARK: - Delegate
-extension MakeableCocktailListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cocktailID = viewModel.makeableCocktailList[indexPath.row].id
-        
-        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
-        
-    }
-}
-
-//MARK: - CocktailCollectionView Compostional Layout
-extension MakeableCocktailListViewController {
-    private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(150))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 8
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
-        return layout
-    }
-}
-
 //MARK: - DiffableDataSource
+
 extension MakeableCocktailListViewController {
     private func configureDataSource() {
         makeableCocktailListDataSource = UICollectionViewDiffableDataSource<Section,MakeableCocktail> (collectionView: makeableCocktailCollectionView) { (collectionView, indexPath, makeableCocktail) -> UICollectionViewCell? in
@@ -113,6 +91,7 @@ extension MakeableCocktailListViewController {
 }
 
 //MARK: - Binding
+
 extension MakeableCocktailListViewController {
     private func binding() {
         viewModel.makeableCocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -120,5 +99,35 @@ extension MakeableCocktailListViewController {
             
             self.applySnapshot(makeableCocktailList: $0)
         }.store(in: &cancelBag)
+    }
+}
+
+//MARK: - CocktailCollectionView Compostional Layout
+
+extension MakeableCocktailListViewController {
+    private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(150))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 8
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+    }
+}
+
+//MARK: - Delegate
+
+extension MakeableCocktailListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cocktailID = viewModel.makeableCocktailList[indexPath.row].id
+        
+        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
+        
     }
 }
