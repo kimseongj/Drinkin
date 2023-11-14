@@ -8,30 +8,25 @@
 import Foundation
 
 final class MakeableCocktailListDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-        let brandID: Int
+    let provider: Provider
+    let brandID: Int
+    let makeableEndpoint = MakeableCocktailListEndpoint()
+    
+    init(provider: Provider, brandID: Int) {
+        self.provider = provider
+        self.brandID = brandID
     }
     
-    let dependencies: Dependencies
-    let makeableEndpoint = MakeableCocktailListEndpoint()
-
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
-    }
-
     func makeMakeableCocktailListRepository() -> MakeableCocktailListRepository {
-        return DefaultMakeableCocktailListRepository(tokenManager: dependencies.tokenManager,
-                                                     provider: dependencies.provider,
+        return DefaultMakeableCocktailListRepository(provider: provider,
                                                      endpoint: makeableEndpoint,
-                                                     brandID: dependencies.brandID)
+                                                     brandID: brandID)
     }
-
+    
     func makeMakeableCocktailListViewModel() -> MakeableCocktailListViewModel {
         return DefaultMakeableCocktailListViewModel(makeableCocktailListRepository: makeMakeableCocktailListRepository())
     }
-
+    
     func makeMakeableCocktailListViewController() -> MakeableCocktailListViewController {
         return MakeableCocktailListViewController(viewModel: makeMakeableCocktailListViewModel())
     }

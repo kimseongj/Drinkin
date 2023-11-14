@@ -8,23 +8,16 @@
 import Foundation
 
 final class LoginDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
     let kakaoAccessTokenConversionEndpoint = KakaoAccessTokenConversionEndpoint()
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider) {
+        self.provider = provider
     }
     
     func makeLoginRepository() -> LoginRepository {
-        return DefaultLoginRepository(tokenManager: dependencies.tokenManager,
-                                                 provider: dependencies.provider,
-                                                 endpoint: kakaoAccessTokenConversionEndpoint
-                                                 )
+        return DefaultLoginRepository(provider: provider,
+                                      endpoint: kakaoAccessTokenConversionEndpoint)
     }
     
     func makeLoginViewModel() -> LoginViewModel {

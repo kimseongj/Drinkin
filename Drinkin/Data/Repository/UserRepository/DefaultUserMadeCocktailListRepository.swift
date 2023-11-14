@@ -8,13 +8,11 @@
 import Foundation
 import Combine
 
-final class DefaultUserMadeCocktailListRepository: UserMadeCocktailListRepository {    
-    let tokenManager: TokenManager
+final class DefaultUserMadeCocktailListRepository: UserMadeCocktailListRepository {
     let provider: Provider
     let endpoint: EndpointMakeable
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
-        self.tokenManager = tokenManager
+    init(provider: Provider, endpoint: EndpointMakeable) {
         self.provider = provider
         self.endpoint = endpoint
     }

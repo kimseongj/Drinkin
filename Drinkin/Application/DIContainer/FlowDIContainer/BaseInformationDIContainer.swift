@@ -8,24 +8,19 @@
 import Foundation
 
 final class BaseInformationDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-        let baseID: Int
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
+    let baseID: Int
     let baseInformationEndpoint = BaseInformationEndpoint()
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider, baseID: Int) {
+        self.provider = provider
+        self.baseID = baseID
     }
     
     func makeBaseDetailRepository() -> BaseDetailRepository {
-        return DefaultBaseDetailRepository(tokenManager: dependencies.tokenManager,
-                                           provider: dependencies.provider,
+        return DefaultBaseDetailRepository(provider: provider,
                                            endpoint: baseInformationEndpoint,
-                                           baseID: dependencies.baseID)
+                                           baseID: baseID)
     }
     
     func makeBaseInformationViewModel() -> BaseInformationViewModel {

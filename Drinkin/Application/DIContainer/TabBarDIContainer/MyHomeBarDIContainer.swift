@@ -8,21 +8,15 @@
 import Foundation
 
 final class MyHomeBarDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
         let provider: Provider
-    }
-    
-    let dependencies: Dependencies
     let holdedItemEndpoint = HoldedItemEndpoint()
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider) {
+        self.provider = provider
     }
     
     func makeHoldedItemRepository() -> HoldedItemRepository {
-        return DefaultHoldedItemRepository(tokenManager: dependencies.tokenManager,
-                                           provider: dependencies.provider,
+        return DefaultHoldedItemRepository(provider: provider,
                                            endpoint: holdedItemEndpoint)
     }
     

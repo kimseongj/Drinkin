@@ -8,31 +8,24 @@
 import Foundation
 
 final class CocktailFilterDICotainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
     let cocktailFilterEndpoint = CocktailFilterEndpoint()
     let cocktailListEndpoint = CocktailsEndpoint()
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider) {
+        self.provider = provider
     }
     
     //MARK: - CocktailFilter
     func makeCocktailFilterRepository() -> CocktailFilterRepository {
-        return DefaultCocktailFilterRepository(tokenManager: dependencies.tokenManager,
-                                               provider: dependencies.provider,
+        return DefaultCocktailFilterRepository(provider: provider,
                                                endpoint: cocktailFilterEndpoint)
     }
     
     //MARK: - filterCocktailList
     func makeCocktailListRepository() -> CocktailQueryRepository {
-        return DefaultCocktailQueryRepository(tokenManager: dependencies.tokenManager,
-                                             provider: dependencies.provider,
-                                             endpoint: cocktailListEndpoint)
+        return DefaultCocktailQueryRepository(provider: provider,
+                                              endpoint: cocktailListEndpoint)
     }
     
     func makeFilterCocktailListUsecase() -> FilterCocktailListUsecase {

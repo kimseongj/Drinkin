@@ -8,27 +8,22 @@
 import Foundation
 
 final class ProductDetailDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-        let cocktailID: Int
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
+    let cocktailID: Int
     let productDetailEndpoint = CocktailsEndpoint()
     
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider, cocktailID: Int) {
+        self.provider = provider
+        self.cocktailID = cocktailID
     }
     
     func makeCocktailDescriptionRepository() -> CocktailDetailRepository {
-        return DefaultCocktailDetailRepository(tokenManager: dependencies.tokenManager,
-                                            provider: dependencies.provider,
-                                            endpoint: productDetailEndpoint,
-                                               cocktailID: dependencies.cocktailID)
+        return DefaultCocktailDetailRepository(provider: provider,
+                                               endpoint: productDetailEndpoint,
+                                               cocktailID: cocktailID)
     }
-
+    
     func makeProductDetailViewModel() -> ProductDetailViewModel {
         return DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository())
     }

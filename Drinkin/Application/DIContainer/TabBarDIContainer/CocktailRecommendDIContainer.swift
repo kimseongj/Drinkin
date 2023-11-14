@@ -8,24 +8,18 @@
 import Foundation
 
 final class CocktailRecommendDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
     let cocktailRecommendEndpoint = CocktailRecommendEndpoint()
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider) {
+        self.provider = provider
     }
     
     func makeCocktailBriefListRepository() -> CocktailBriefListRepository {
-        return DefaultCocktailBriefListRepository(tokenManager: dependencies.tokenManager,
-                                                 provider: dependencies.provider,
-                                                 endpoint: cocktailRecommendEndpoint)
+        return DefaultCocktailBriefListRepository(provider: provider,
+                                                  endpoint: cocktailRecommendEndpoint)
     }
-        
+    
     func makeCocktailRecommendViewModel() -> CocktailRecommendViewModel {
         return DefaultCocktailRecommendViewModel(cocktailBriefListRepository: makeCocktailBriefListRepository())
     }

@@ -9,31 +9,24 @@ import Foundation
 import UIKit
 
 final class AddItemDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
     let itemFilterEndpoint = ItemFilterEndpoint()
     let itemListEndpoint = ItemListEndpoint()
     let addItemEndpoint = AddItemEndpoint()
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider) {
+        self.provider = provider
     }
     
     //MARK: - ItemFilter
     func makeItemFilterRepository() -> ItemFilterRepository {
-        return DefaultItemFilterRepository(tokenManager: dependencies.tokenManager,
-                                           provider: dependencies.provider,
+        return DefaultItemFilterRepository(provider: provider,
                                            endpoint: itemFilterEndpoint)
     }
     
     //MARK: - filterItemUsecase
     func makeItemRepository() -> ItemRepository {
-        return DefaultItemRepository(tokenManager: dependencies.tokenManager,
-                                     provider: dependencies.provider,
+        return DefaultItemRepository(provider: provider,
                                      itemListEndpoint: itemListEndpoint,
                                      addItemEndpoint: addItemEndpoint)
     }
@@ -50,8 +43,8 @@ final class AddItemDIContainer {
     
     func makeAddItemViewModel() -> AddItemViewModel {
         return DefaultAddItemtViewModel(ingredientFilterRepository: makeItemFilterRepository(),
-                                             filterItemUsecase: makeFilterItemUsecase(),
-                                             addItemUsecase: makeAddItemUsecase())
+                                        filterItemUsecase: makeFilterItemUsecase(),
+                                        addItemUsecase: makeAddItemUsecase())
     }
     
     func makeAddItemViewController() -> AddItemViewController {

@@ -8,14 +8,10 @@
 import Foundation
 
 final class LoginSettingDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-    }
+    let provider: Provider
     
-    let dependencies: Dependencies
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider) {
+        self.provider = provider
     }
 }

@@ -9,13 +9,11 @@ import Foundation
 import Combine
 
 final class DefaultBaseBrandDetailRepository: BaseBrandDetailRepository {
-    let tokenManager: TokenManager
     let provider: Provider
     var endpoint: EndpointMakeable
     let brandID: Int
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable, brandID: Int) {
-        self.tokenManager = tokenManager
+    init(provider: Provider, endpoint: EndpointMakeable, brandID: Int) {
         self.provider = provider
         self.endpoint = endpoint
         self.brandID = brandID

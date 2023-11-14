@@ -9,13 +9,11 @@ import Foundation
 import Combine
 
 final class DefaultCocktailPreviewListRepository: CocktailPreviewListRepository {
-    let tokenManager: TokenManager
     let provider: Provider
     var endpoint: EndpointMakeable
     let cocktailID: Int
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable, cocktailID: Int) {
-        self.tokenManager = tokenManager
+    init(provider: Provider, endpoint: EndpointMakeable, cocktailID: Int) {
         self.provider = provider
         self.endpoint = endpoint
         self.cocktailID = cocktailID

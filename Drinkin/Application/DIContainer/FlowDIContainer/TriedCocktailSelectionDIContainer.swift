@@ -9,23 +9,17 @@ import Foundation
 import UIKit
 
 final class TriedCocktailSelectionDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
     let addTriedCocktailListEndpoint = AddTriedCocktailListEndpoint()
     let triedCocktailEndpoint = CocktailsEndpoint()
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider) {
+        self.provider = provider
     }
     
     //MARK: - FilterTriedCocktail
     func makeCoktailImageListRepository() -> CocktailImageListRepository {
-        return DefaultCocktailImageListRepository(tokenManager: dependencies.tokenManager,
-                                                  provider: dependencies.provider,
+        return DefaultCocktailImageListRepository(provider: provider,
                                                   endpoint: triedCocktailEndpoint)
     }
     
@@ -35,8 +29,7 @@ final class TriedCocktailSelectionDIContainer {
     
     //MARK: - AddTriedCocktail
     func makeAddtionRepository() -> AdditionRepository {
-        return DefaultAdditionRepository(tokenManager: dependencies.tokenManager,
-                                         provider: dependencies.provider,
+        return DefaultAdditionRepository(provider: provider,
                                          endpoint: addTriedCocktailListEndpoint)
     }
     

@@ -9,12 +9,10 @@ import Foundation
 import Combine
 
 final class DefaultLoginRepository: LoginRepository {
-    let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
-        self.tokenManager = tokenManager
+    init(provider: Provider, endpoint: EndpointMakeable) {
         self.provider = provider
         self.endpoint = endpoint
     }

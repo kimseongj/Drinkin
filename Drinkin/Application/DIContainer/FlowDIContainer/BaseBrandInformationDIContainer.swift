@@ -8,24 +8,19 @@
 import Foundation
 
 final class BaseBrandInformationDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-        let brandID: Int
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
+    let brandID: Int
     let baseBrandInformationEndpoint = BaseBrandInformationEndpoint()
     
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider, brandID: Int) {
+        self.provider = provider
+        self.brandID = brandID
     }
     
     func makeBaseBrandDetailRepository() -> BaseBrandDetailRepository {
-        return DefaultBaseBrandDetailRepository(tokenManager: dependencies.tokenManager,
-                                                provider: dependencies.provider,
+        return DefaultBaseBrandDetailRepository(provider: provider,
                                                 endpoint: baseBrandInformationEndpoint,
-                                                brandID: dependencies.brandID)
+                                                brandID: brandID)
     }
     
     func makeBaseBrandInformationViewModel() -> BaseBrandInformationViewModel {

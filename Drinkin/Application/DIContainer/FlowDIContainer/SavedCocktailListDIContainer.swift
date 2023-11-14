@@ -8,22 +8,15 @@
 import Foundation
 
 final class SavedCocktailListDIContainer {
-    struct Dependencies {
-        let tokenManager: TokenManager
-        let provider: Provider
-    }
-    
-    let dependencies: Dependencies
+    let provider: Provider
     let savedCocktailListEndpoint = SavedCocktailListEndpoint()
 
-    
-    init(dependencies: Dependencies) {
-        self.dependencies = dependencies
+    init(provider: Provider) {
+        self.provider = provider
     }
     
     func makeSavedCocktailListRepository() -> SavedCocktailListRepository {
-        return DefaultSavedCocktailListRepository(tokenManager: dependencies.tokenManager,
-                                                  provider: dependencies.provider,
+        return DefaultSavedCocktailListRepository(provider: provider,
                                                   endpoint: savedCocktailListEndpoint)
     }
     
