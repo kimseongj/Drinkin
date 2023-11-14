@@ -30,6 +30,7 @@ enum ImageStorage {
     static let appleIcon = UIImage(named: "apple_icon")
     
     static let cocktaiImage = UIImage(named: "cocktail_image")
-    static let drinkinLogo = UIImage(named: "drinkinLogo")
+    static let drinkinLogo = UIImage(named: "drinkin_logo")
     static let drinkinDescriptionLogo = UIImage(named: "drinkin_description_logo")
+    static let skeletonViewImage = UIImage(named: "skeleton_view")
 }
