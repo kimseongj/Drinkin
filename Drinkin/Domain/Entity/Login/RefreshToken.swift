@@ -1,18 +1,16 @@
 //
-//  asdasd.swift
+//  RefreshToken.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/04/16.
+//  Created by kimseongjun on 2023/11/14.
 //
 
 import Foundation
 
-struct LoginToken: Codable {
-    let accessToken: String
+struct RefreshToken: Codable {
     let refreshToken: String
     
     private enum CodingKeys: String, CodingKey {
-        case accessToken = "access_token"
         case refreshToken = "refresh_token"
     }
 }
