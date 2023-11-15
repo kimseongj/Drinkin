@@ -11,9 +11,10 @@ import KakaoSDKAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
-    let provider = DefaultProvider()
-    lazy var appDIContainer = AppDIContainer(provider: provider)
-    let tokenManager = TokenManager()
+    let tokenManager = DefaultTokenManager()
+    lazy var provider = DefaultProvider(tokenManager: tokenManager)
+    lazy var loginProvider = DefaultLoginProvider(tokenManager: tokenManager)
+    lazy var appDIContainer = AppDIContainer(provider: provider, loginProvider: loginProvider)
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
