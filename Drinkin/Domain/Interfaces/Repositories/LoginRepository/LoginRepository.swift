@@ -8,5 +8,6 @@
 import Combine
 
 protocol LoginRepository {
-    
+    func kakaoLoginPublisher(accessToken: String) -> AnyPublisher<LoginToken, Error>
+    func appleLoginPublisher(accessToken: String) -> AnyPublisher<LoginToken, Error>
 }

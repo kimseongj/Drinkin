@@ -9,11 +9,23 @@ import Foundation
 import Combine
 
 final class DefaultLoginRepository: LoginRepository {
-    let provider: Provider
-    let endpoint: EndpointMakeable
+    let loginProvider: LoginProvider
+    let kakaoLoginEndpoint: EndpointMakeable
+    let appleLoginEndpoint: EndpointMakeable
     
-    init(provider: Provider, endpoint: EndpointMakeable) {
-        self.provider = provider
-        self.endpoint = endpoint
+    init(loginProvider: LoginProvider,
+         kakaoLoginEndpoint: EndpointMakeable,
+         appleLoginEndpoint: EndpointMakeable) {
+        self.loginProvider = loginProvider
+        self.kakaoLoginEndpoint = kakaoLoginEndpoint
+        self.appleLoginEndpoint = appleLoginEndpoint
+    }
+    
+    func kakaoLoginPublisher(accessToken: String) -> AnyPublisher<LoginToken, Error> {
+        loginProvider.postAccessToken(endpoint: kakaoLoginEndpoint, accessToken: accessToken)
+    }
+    
+    func appleLoginPublisher(accessToken: String) -> AnyPublisher<LoginToken, Error> {
+        loginProvider.postAccessToken(endpoint: appleLoginEndpoint, accessToken: accessToken)
     }
 }
