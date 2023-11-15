@@ -10,9 +10,11 @@ import Foundation
 final class AppDIContainer {
 
     private let provider: Provider
+    private let loginProvider: LoginProvider
     
-    init(provider: Provider) {
+    init(provider: Provider, loginProvider: LoginProvider) {
         self.provider = provider
+        self.loginProvider = loginProvider
     }
     
     func makeTriedCocktailSelectionDIContainer() -> TriedCocktailSelectionDIContainer {
@@ -48,7 +50,7 @@ final class AppDIContainer {
     }
     
     func makeLoginDIContainer() -> LoginDIContainer {
-        LoginDIContainer(provider: provider)
+        LoginDIContainer(loginProvider: loginProvider)
     }
     
     func makeLoginSettingDIContainer() -> LoginSettingDIContainer {

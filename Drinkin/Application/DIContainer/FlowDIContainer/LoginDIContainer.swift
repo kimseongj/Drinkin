@@ -8,16 +8,18 @@
 import Foundation
 
 final class LoginDIContainer {
-    let provider: Provider
-    let kakaoAccessTokenConversionEndpoint = KakaoAccessTokenConversionEndpoint()
+    let loginProvider: LoginProvider
+    let kakaoLoginEndpoint = KakaoAccessTokenConversionEndpoint()
+    let appleLoginEndpoint = AppleAccessTokenConversionEndpoint()
     
-    init(provider: Provider) {
-        self.provider = provider
+    init(loginProvider: LoginProvider) {
+        self.loginProvider = loginProvider
     }
     
     func makeLoginRepository() -> LoginRepository {
-        return DefaultLoginRepository(provider: provider,
-                                      endpoint: kakaoAccessTokenConversionEndpoint)
+        return DefaultLoginRepository(loginProvider: loginProvider,
+                                      kakaoLoginEndpoint: kakaoLoginEndpoint,
+                                      appleLoginEndpoint: appleLoginEndpoint)
     }
     
     func makeLoginViewModel() -> LoginViewModel {
