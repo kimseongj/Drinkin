@@ -18,7 +18,7 @@ final class DefaultItemRepository: ItemRepository {
         self.endpoint = endpoint
     }
     
-    func fetchItemList() -> AnyPublisher<ItemList, Error> {
+    func fetchItemList() -> AnyPublisher<ItemList, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

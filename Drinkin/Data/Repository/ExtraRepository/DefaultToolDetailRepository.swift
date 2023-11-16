@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 final class DefaultToolDetailRepository: ToolDetailRepository {
-    let provider = DefaultProvider()
+    let provider = DefaultProvider(tokenManager: DefaultTokenManager())
     var endpoint: EndpointMakeable = ToolDetailEndpoint()
     let toolID: Int
     
@@ -17,7 +17,7 @@ final class DefaultToolDetailRepository: ToolDetailRepository {
         self.toolID = toolID
     }
     
-    func fetchToolDetail() -> AnyPublisher<ToolDetail, Error> {
+    func fetchToolDetail() -> AnyPublisher<ToolDetail, APIError> {
         endpoint.insertPathParmeter(pathParameter: toolID.description)
         
         return provider.fetchData(endpoint: endpoint).eraseToAnyPublisher()

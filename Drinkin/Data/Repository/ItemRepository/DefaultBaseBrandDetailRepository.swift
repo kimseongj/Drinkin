@@ -19,7 +19,7 @@ final class DefaultBaseBrandDetailRepository: BaseBrandDetailRepository {
         self.brandID = brandID
     }
     
-    func fetchBaseBrandDetail() -> AnyPublisher<BaseBrandDetail, Error> {
+    func fetchBaseBrandDetail() -> AnyPublisher<BaseBrandDetail, APIError> {
         endpoint.insertPathParmeter(pathParameter: brandID.description)
         
         return provider.fetchData(endpoint: endpoint)

@@ -17,7 +17,7 @@ final class DefaultItemFilterRepository: ItemFilterRepository {
         self.endpoint = endpoint
     }
     
-    func fetchIngredientFilter() -> AnyPublisher<ItemFilterList, Error> {
+    func fetchIngredientFilter() -> AnyPublisher<ItemFilterList, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

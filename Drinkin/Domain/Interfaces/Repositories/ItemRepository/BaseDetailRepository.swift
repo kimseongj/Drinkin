@@ -8,5 +8,5 @@
 import Combine
 
 protocol BaseDetailRepository {
-    func fetchBaseDetail() -> AnyPublisher<BaseDetail, Error>
+    func fetchBaseDetail() -> AnyPublisher<BaseDetail, APIError>
 }

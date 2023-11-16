@@ -8,5 +8,5 @@
 import Combine
 
 protocol GlassDetailRepository {
-    func fetchGlassDetail() -> AnyPublisher<GlassDetail, Error>
+    func fetchGlassDetail() -> AnyPublisher<GlassDetail, APIError>
 }

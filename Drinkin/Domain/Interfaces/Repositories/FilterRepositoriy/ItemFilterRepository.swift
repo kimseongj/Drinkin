@@ -8,5 +8,5 @@
 import Combine
 
 protocol ItemFilterRepository {
-    func fetchIngredientFilter() -> AnyPublisher<ItemFilterList, Error>
+    func fetchIngredientFilter() -> AnyPublisher<ItemFilterList, APIError>
 }

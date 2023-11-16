@@ -8,7 +8,7 @@
 import Combine
 
 final class DefaultSkillDetailRepository: SkillDetailRepository {
-    let provider = DefaultProvider()
+    let provider = DefaultProvider(tokenManager: DefaultTokenManager())
     var endpoint: EndpointMakeable = SkillDetailEndpoint()
     let skillID: Int
     
@@ -16,7 +16,7 @@ final class DefaultSkillDetailRepository: SkillDetailRepository {
         self.skillID = skillID
     }
     
-    func fetchSkillDetail() -> AnyPublisher<SkillDetail, Error> {
+    func fetchSkillDetail() -> AnyPublisher<SkillDetail, APIError> {
         endpoint.insertPathParmeter(pathParameter: skillID.description)
         
         return provider.fetchData(endpoint: endpoint).eraseToAnyPublisher()

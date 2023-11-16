@@ -17,7 +17,7 @@ final class DefaultCocktailQueryRepository: CocktailQueryRepository {
         self.endpoint = endpoint
     }
     
-    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, Error> {
+    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
     

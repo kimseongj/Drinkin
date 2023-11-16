@@ -7,5 +7,5 @@
 import Combine
 
 protocol UserMadeCocktailListRepository {
-    func fetchUserMadeCocktailList() -> AnyPublisher<CocktailPreviewList, Error>
+    func fetchUserMadeCocktailList() -> AnyPublisher<CocktailPreviewList, APIError>
 }

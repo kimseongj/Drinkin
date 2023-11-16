@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol FilterCocktailListUsecase {
-    func fetchCocktailList() -> AnyPublisher<CocktailPreviewList, Error>
+    func fetchCocktailList() -> AnyPublisher<CocktailPreviewList, APIError>
     func addFilter(queryParameter: String, queryValue: String)
     func clearFilter(queryParameter: String)
     func clearAllFilter()
@@ -22,7 +22,7 @@ final class DefaultFilterCocktailListUsecase: FilterCocktailListUsecase {
         self.cocktailQueryRepository = cocktailQueryRepository
     }
     
-    func fetchCocktailList() -> AnyPublisher<CocktailPreviewList, Error> {
+    func fetchCocktailList() -> AnyPublisher<CocktailPreviewList, APIError> {
         return cocktailQueryRepository.fetchCocktailPreviewList()
     }
     

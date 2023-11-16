@@ -8,5 +8,5 @@
 import Combine
 
 protocol ToolDetailRepository {
-    func fetchToolDetail() -> AnyPublisher<ToolDetail, Error>
+    func fetchToolDetail() -> AnyPublisher<ToolDetail, APIError>
 }

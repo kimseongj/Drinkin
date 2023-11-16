@@ -7,5 +7,5 @@
 import Combine
 
 protocol CocktailDetailRepository {
-    func fetchCocktailDescription() -> AnyPublisher<CocktailDescription, Error>
+    func fetchCocktailDescription() -> AnyPublisher<CocktailDescription, APIError>
 }

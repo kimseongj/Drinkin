@@ -17,7 +17,7 @@ final class DefaultCocktailFilterRepository: CocktailFilterRepository {
         self.endpoint = endpoint
     }
     
-    func fetchCocktailFilter() -> AnyPublisher<CocktailFilter, Error> {
+    func fetchCocktailFilter() -> AnyPublisher<CocktailFilter, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

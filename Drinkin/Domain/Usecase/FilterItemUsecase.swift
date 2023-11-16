@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol FilterItemUsecase {
-    func fetchItemList() -> AnyPublisher<ItemList, Error>
+    func fetchItemList() -> AnyPublisher<ItemList, APIError>
     func filterItem(itemCategory: String,
                     itemList: [ItemPreview],
                     completion: @escaping ([ItemPreview]) -> Void)
@@ -25,7 +25,7 @@ final class DefaultFilterItemUsecase: FilterItemUsecase {
         self.itemRepository = itemRepository
     }
     
-    func fetchItemList() -> AnyPublisher<ItemList, Error> {
+    func fetchItemList() -> AnyPublisher<ItemList, APIError> {
         itemRepository.fetchItemList()
     }
     

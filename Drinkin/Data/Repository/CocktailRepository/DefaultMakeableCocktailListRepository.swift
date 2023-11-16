@@ -21,7 +21,7 @@ final class DefaultMakeableCocktailListRepository: MakeableCocktailListRepositor
         self.brandID = brandID
     }
     
-    func fetchMakeableCocktails() -> AnyPublisher<MakeableCocktailList, Error> {
+    func fetchMakeableCocktails() -> AnyPublisher<MakeableCocktailList, APIError> {
         //endpoint.insertPathParmeter(pathParameter: brandID.description)
         
         return provider.fetchData(endpoint: endpoint)

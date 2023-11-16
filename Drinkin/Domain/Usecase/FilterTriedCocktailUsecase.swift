@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol FilterTriedCocktailUsecase {
-    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error>
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, APIError>
     func filterCocktail(cocktailCategory: String, selectableCocktailList: [SelectableImageDescription]) -> [SelectableImageDescription]
 }
 
@@ -20,7 +20,7 @@ class DefaultFilterTriedCocktailUsecase: FilterTriedCocktailUsecase {
         self.cocktailImageListRepository = cocktailImageListRepository
     }
 
-    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error> {
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, APIError> {
         cocktailImageListRepository.fetchCocktailImageList()
     }
     

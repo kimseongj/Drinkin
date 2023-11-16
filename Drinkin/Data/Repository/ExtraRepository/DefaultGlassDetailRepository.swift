@@ -8,7 +8,7 @@
 import Combine
 
 final class DefaultGlassDetailRepository: GlassDetailRepository {
-    let provider = DefaultProvider()
+    let provider = DefaultProvider(tokenManager: DefaultTokenManager())
     var endpoint: EndpointMakeable = GlassDetailEndpoint()
     let glassID: Int
     
@@ -16,7 +16,7 @@ final class DefaultGlassDetailRepository: GlassDetailRepository {
         self.glassID = glassID
     }
     
-    func fetchGlassDetail() -> AnyPublisher<GlassDetail, Error> {
+    func fetchGlassDetail() -> AnyPublisher<GlassDetail, APIError> {
         endpoint.insertPathParmeter(pathParameter: glassID.description)
         
         return provider.fetchData(endpoint: endpoint).eraseToAnyPublisher()

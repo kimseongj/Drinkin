@@ -8,5 +8,5 @@
 import Combine
 
 protocol ItemRepository {
-    func fetchItemList() -> AnyPublisher<ItemList, Error>
+    func fetchItemList() -> AnyPublisher<ItemList, APIError>
 }

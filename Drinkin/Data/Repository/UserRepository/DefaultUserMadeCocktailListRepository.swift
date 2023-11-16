@@ -17,7 +17,7 @@ final class DefaultUserMadeCocktailListRepository: UserMadeCocktailListRepositor
         self.endpoint = endpoint
     }
     
-    func fetchUserMadeCocktailList() -> AnyPublisher<CocktailPreviewList, Error> {
+    func fetchUserMadeCocktailList() -> AnyPublisher<CocktailPreviewList, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

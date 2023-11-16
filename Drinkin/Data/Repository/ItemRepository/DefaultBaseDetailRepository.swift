@@ -19,7 +19,7 @@ final class DefaultBaseDetailRepository: BaseDetailRepository {
         self.baseID = baseID
     }
     
-    func fetchBaseDetail() -> AnyPublisher<BaseDetail, Error> {
+    func fetchBaseDetail() -> AnyPublisher<BaseDetail, APIError> {
         endpoint.insertPathParmeter(pathParameter: baseID.description)
         
         return provider.fetchData(endpoint: endpoint)

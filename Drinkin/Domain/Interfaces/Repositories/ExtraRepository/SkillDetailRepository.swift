@@ -8,5 +8,5 @@
 import Combine
 
 protocol SkillDetailRepository {
-    func fetchSkillDetail() -> AnyPublisher<SkillDetail, Error>
+    func fetchSkillDetail() -> AnyPublisher<SkillDetail, APIError>
 }

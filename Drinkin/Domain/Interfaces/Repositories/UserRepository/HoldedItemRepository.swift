@@ -7,5 +7,5 @@
 import Combine
 
 protocol HoldedItemRepository {
-    func fetchHoldedItem() -> AnyPublisher<HoldedItem, Error>
+    func fetchHoldedItem() -> AnyPublisher<HoldedItem, APIError>
 }

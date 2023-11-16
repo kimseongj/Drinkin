@@ -17,7 +17,7 @@ final class DefaultHoldedItemRepository: HoldedItemRepository {
         self.endpoint = endpoint
     }
     
-    func fetchHoldedItem() -> AnyPublisher<HoldedItem, Error> {
+    func fetchHoldedItem() -> AnyPublisher<HoldedItem, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
 }
