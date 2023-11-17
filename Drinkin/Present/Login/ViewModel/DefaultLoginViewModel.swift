@@ -1,4 +1,4 @@
- //
+//
 //  LoginViewModel.swift
 //  Drinkin
 //
@@ -20,8 +20,8 @@ protocol LoginViewModel {
 
 final class DefaultLoginViewModel: NSObject, ObservableObject, LoginViewModel {
     private let loginRepository: LoginRepository
-    private var canelBag: Set<AnyCancellable> = []
-    var loginService = LoginService()
+    private let tokenManager = DefaultTokenManager()
+    private var cancelBag: Set<AnyCancellable> = []
     lazy var authorizationController = ASAuthorizationController(authorizationRequests: [createRequest()])
     @Published var tokenExistence: Bool = false
     var tokenExistencePublisher: Published<Bool>.Publisher { $tokenExistence }
@@ -31,13 +31,10 @@ final class DefaultLoginViewModel: NSObject, ObservableObject, LoginViewModel {
         super.init()
         createAccount()
     }
-    
-    func checkTokenExistence() {
-        tokenExistence = LoginManager.shared.checkTokenExistence()
-    }
 }
 
 //MARK: -KakaoLogin
+
 extension DefaultLoginViewModel {
     func handleKakaoLogin() {
         print("KakoAuthVM - handleKakao")
@@ -55,9 +52,16 @@ extension DefaultLoginViewModel {
                     
                     guard let accessToken = oauthToken?.accessToken else { return }
                     
-                    self.loginService.fetch(accessToken: accessToken) {
-                        self.tokenExistence = true
-                    }
+                    self.loginRepository.kakaoLoginPublisher(accessToken: accessToken).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+                        print("\($0)")
+                        do {
+                            try self.tokenManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
+                            try self.tokenManager.saveToken(tokenType: TokenType.refreshToken, token: $0.refreshToken)
+                        } catch {
+                            
+                        }
+                    }).store(in: &self.cancelBag)
+                    self.tokenExistence = true
                 }
             }
         } else { // 카카오톡 실행이 안될 경우
@@ -71,10 +75,20 @@ extension DefaultLoginViewModel {
                     print("loginWithKakaoAccount() success.")
                     
                     guard let accessToken = oauthToken?.accessToken else { return }
-            
-                    self.loginService.fetch(accessToken: accessToken) {
-                        self.tokenExistence = true
-                    }
+                    
+                    self.loginRepository.kakaoLoginPublisher(accessToken: accessToken).sink(receiveCompletion: { print("\($0)")}, receiveValue: { [self] in
+                        print("\($0)")
+                        do {
+                            try self.tokenManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
+                            try self.tokenManager.saveToken(tokenType: TokenType.refreshToken, token: $0.refreshToken)
+                        } catch {
+                            
+                        }
+                    }).store(in: &self.cancelBag)
+                    self.tokenExistence = true
+                    
+                    self.tokenExistence = true
+                    
                 }
             }
         }
@@ -82,6 +96,7 @@ extension DefaultLoginViewModel {
 }
 
 //MARK: - AppleLogin
+
 extension DefaultLoginViewModel: ASAuthorizationControllerDelegate {
     func createRequest() -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -103,35 +118,42 @@ extension DefaultLoginViewModel: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
-        // Apple ID
+            // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-                
+            
             // 계정 정보 가져오기
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
-                
+            
             print("User ID : \(userIdentifier)")
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-
-            if let authorizationCode = appleIDCredential.authorizationCode {
-                guard let accessToken = String(data: authorizationCode, encoding: .utf8) else {
-                    print("aapleLogin eeeeeerorr")
-                    return }
+            
+            if let identityToken = appleIDCredential.identityToken,
+               let identityTokenString = String(data: identityToken, encoding: .utf8) {
+                print("identityToken: \(identityTokenString)")
                 
-                self.loginService.fetch(accessToken: accessToken) {
+                
+                self.loginRepository.appleLoginPublisher(accessToken: identityTokenString).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
+                    print("\($0)")
+                    do {
+                        try self.tokenManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
+                        try self.tokenManager.saveToken(tokenType: TokenType.refreshToken, token: $0.refreshToken)
+                    } catch {
+                        
+                    }
                     self.tokenExistence = true
-                    print("aappllee login success")
-                }
+                }).store(in: &self.cancelBag)
+                
+                
             }
             
-            tokenExistence = true
         default:
             break
         }
     }
-        
+    
     // Apple ID 연동 실패 시
     func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithError error: Error) {
