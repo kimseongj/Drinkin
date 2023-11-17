@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,20 +17,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="byz-mF-fgY">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="theme_image" translatesAutoresizingMaskIntoConstraints="NO" id="hvh-z1-cXm">
-                                        <rect key="frame" x="0.0" y="46" width="393" height="759"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" name="theme_color"/>
-                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drinkin_description_logo" translatesAutoresizingMaskIntoConstraints="NO" id="2dR-BM-1D8">
+                                <rect key="frame" x="56.666666666666657" y="396" width="280" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="8hn-BQ-NgA"/>
+                                    <constraint firstAttribute="width" constant="280" id="xyZ-sv-s1l"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="theme_color"/>
+                        <constraints>
+                            <constraint firstItem="2dR-BM-1D8" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Kxz-ft-WhB"/>
+                            <constraint firstItem="2dR-BM-1D8" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="rxl-N8-K0M"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -40,12 +39,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="theme_image" width="750" height="1334"/>
+        <image name="drinkin_description_logo" width="382" height="134"/>
         <namedColor name="theme_color">
             <color red="1" green="0.70588235294117652" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
