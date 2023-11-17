@@ -7,9 +7,11 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 final class ToolModalViewController: UIViewController {
     private var viewModel: ToolModalViewModel
+    private var cancelBag: Set<AnyCancellable> = []
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -74,11 +76,8 @@ final class ToolModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        viewModel.fetchToolDetail { [weak self] in
-            guard let self = self else { return }
-            
-            self.fill(toolDetail: $0)
-        }
+        errorBinding()
+        fetchToolData()
     }
     
     //MARK: - ConfigureUI
@@ -133,5 +132,33 @@ final class ToolModalViewController: UIViewController {
         titleLabel.text = toolDetail.toolName
         descriptionLabel.text = toolDetail.description
         purchaseLinkLabel.text = toolDetail.purchaseLink
+    }
+    
+    //MARK: Fetch Data
+    private func fetchToolData() {
+        viewModel.fetchToolDetail { [weak self] in
+            guard let self = self else { return }
+            
+            self.fill(toolDetail: $0)
+        }
+    }
+}
+
+//MARK: - Handling Error
+extension ToolModalViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+                guard let self = self else { return }
+                
+                switch $0 {
+                case .noError:
+                    break
+                default:
+                    print("\($0)")
+                    self.showAlert(errorType: $0)
+                }
+            }).store(in: &cancelBag)
     }
 }

@@ -7,9 +7,11 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 final class SkillModalViewController: UIViewController {
     private var viewModel: SkillModalViewModel
+    private var cancelBag: Set<AnyCancellable> = []
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -41,11 +43,8 @@ final class SkillModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        viewModel.fetchSkillDetail { [weak self] in
-            guard let self = self else { return }
-            
-            self.fill(skillDetail: $0)
-        }
+        errorBinding()
+        fetchSkillData()
     }
     
     //MARK: - ConfigureUI
@@ -73,5 +72,33 @@ final class SkillModalViewController: UIViewController {
     private func fill(skillDetail: SkillDetail) {
         titleLabel.text = skillDetail.skillName
         descriptionLabel.text = skillDetail.description
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchSkillData() {
+        viewModel.fetchSkillDetail { [weak self] in
+            guard let self = self else { return }
+            
+            self.fill(skillDetail: $0)
+        }
+    }
+}
+
+//MARK: - Handling Error
+extension SkillModalViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }

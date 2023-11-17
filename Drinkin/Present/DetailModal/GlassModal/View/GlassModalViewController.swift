@@ -7,9 +7,11 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 final class GlassModalViewController: UIViewController {
     private var viewModel: GlassModalViewModel
+    private var cancelBag: Set<AnyCancellable> = []
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -88,11 +90,8 @@ final class GlassModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        viewModel.fetchGlassDetail { [weak self] in
-            guard let self = self else { return }
-            
-            self.fill(glassDetail: $0)
-        }
+        errorBinding()
+        fetchGlassData()
     }
     
     //MARK: - ConfigureUI
@@ -160,5 +159,33 @@ final class GlassModalViewController: UIViewController {
         descriptionLabel.text = glassDetail.description
         volumeDescriptionLabel.text = glassDetail.volume
         purchaseLinkLabel.text = glassDetail.purchaseLink
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchGlassData() {
+        viewModel.fetchGlassDetail { [weak self] in
+            guard let self = self else { return }
+            
+            self.fill(glassDetail: $0)
+        }
+    }
+}
+
+//MARK: - Handling Error
+extension GlassModalViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }
