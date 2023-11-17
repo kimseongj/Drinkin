@@ -75,6 +75,7 @@ final class SkillModalViewController: UIViewController {
     }
     
     //MARK: - Fetch Data
+    
     private func fetchSkillData() {
         viewModel.fetchSkillDetail { [weak self] in
             guard let self = self else { return }
@@ -85,6 +86,7 @@ final class SkillModalViewController: UIViewController {
 }
 
 //MARK: - Handling Error
+
 extension SkillModalViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher

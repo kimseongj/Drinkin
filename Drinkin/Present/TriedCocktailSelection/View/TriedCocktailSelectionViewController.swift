@@ -331,6 +331,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
 }
 
 //MARK: - Handling Error
+
 extension TriedCocktailSelectionViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher

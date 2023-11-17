@@ -290,6 +290,7 @@ extension CocktailFilterViewController: UICollectionViewDelegate {
 }
 
 //MARK: - Handling Error
+
 extension CocktailFilterViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher

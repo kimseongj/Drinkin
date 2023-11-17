@@ -162,6 +162,7 @@ final class GlassModalViewController: UIViewController {
     }
     
     //MARK: - Fetch Data
+    
     private func fetchGlassData() {
         viewModel.fetchGlassDetail { [weak self] in
             guard let self = self else { return }
@@ -172,6 +173,7 @@ final class GlassModalViewController: UIViewController {
 }
 
 //MARK: - Handling Error
+
 extension GlassModalViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher

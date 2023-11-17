@@ -145,6 +145,7 @@ final class ToolModalViewController: UIViewController {
 }
 
 //MARK: - Handling Error
+
 extension ToolModalViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher

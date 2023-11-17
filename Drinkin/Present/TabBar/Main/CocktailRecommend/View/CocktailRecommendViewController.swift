@@ -166,6 +166,7 @@ extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: - Handling Error
+
 extension CocktailRecommendViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher
