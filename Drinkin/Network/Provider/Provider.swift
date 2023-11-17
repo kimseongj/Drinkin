@@ -9,74 +9,173 @@ import Foundation
 import Combine
 
 protocol Provider {
-    func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, Error>
-    func postData<B: Encodable, T: Decodable>(endpoint: EndpointMakeable, bodyItem: B) -> AnyPublisher<T, Error>
+    func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, APIError>
+    func postData<B: Encodable, T: Decodable>(endpoint: EndpointMakeable, bodyItem: B) -> AnyPublisher<T, APIError>
 }
 
 struct DefaultProvider: Provider {
-    let loginManager = LoginManager()
+    private let tokenManager: TokenManager
     
-    func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, Error> {
-        let request = endpoint.makeURLRequest()
-        
-        return URLSession.shared.dataTaskPublisher(for: request!)
-            .map {
-                let httpResponse = $0.response as? HTTPURLResponse
-                if httpResponse?.statusCode == 401 {
-                    
-                }
-                
-                if httpResponse?.statusCode == 404 {
-                    
-                }
-                
-                return $0.data
-            }
-            .decode(type: T.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+    init(tokenManager: TokenManager) {
+        self.tokenManager = tokenManager
     }
     
-    func postData<B: Encodable, T: Decodable>(endpoint: EndpointMakeable, bodyItem: B) -> AnyPublisher<T, Error> {
+    //MARK: - FetchData
+    
+    func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, APIError> {
+        var request = endpoint.makeURLRequest()
+        //request?.setValue("Bearer \("newAccessToken.accessToken")", forHTTPHeaderField: "Authorization")
+        
+        return URLSession.shared.dataTaskPublisher(for: request!)
+            .tryMap { data, response in
+                let httpResponse = response as! HTTPURLResponse
+                switch httpResponse.statusCode {
+                case 200..<300:
+                    return data
+                case 401:
+                    throw APIError.unauthorized
+                case 404:
+                    throw APIError.notFound
+                default:
+                    throw APIError.networkError(NSError(domain: "Network", code: httpResponse.statusCode, userInfo: nil))
+                }
+            }
+            .decode(type: T.self, decoder: JSONDecoder())
+            .mapError { error in
+                switch error {
+                case is URLError:
+                    return APIError.networkError(error)
+                case is DecodingError:
+                    return APIError.decodingError
+                default:
+                    return error as? APIError ?? APIError.networkError(error)
+                }
+            }
+            .catch { error in
+                if case APIError.unauthorized = error {
+                    return renewAccessTokenPublisher().flatMap { accessToken in
+                        var newRequest = request
+                        //newRequest!.setValue("Bearer \("ASD")", forHTTPHeaderField: "Authorization")
+                        
+                        return URLSession.shared.dataTaskPublisher(for: newRequest!)
+                            .tryMap { data, response in
+                                let httpResponse = response as! HTTPURLResponse
+                                switch httpResponse.statusCode {
+                                case 200..<300:
+                                    return data
+                                case 401:
+                                    throw APIError.unauthorized
+                                case 404:
+                                    throw APIError.notFound
+                                default:
+                                    throw APIError.networkError(NSError(domain: "Network", code: httpResponse.statusCode, userInfo: nil))
+                                }
+                            }
+                            .decode(type: T.self, decoder: JSONDecoder())
+                            .mapError { error in
+                                switch error {
+                                case is URLError:
+                                    return APIError.networkError(error)
+                                case is DecodingError:
+                                    return APIError.decodingError
+                                default:
+                                    return error as? APIError ?? APIError.networkError(error)
+                                }
+                            }.eraseToAnyPublisher()
+                    }.eraseToAnyPublisher()
+                }
+                
+                return Fail(error: error).eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+
+    //MARK: - PostData
+    
+    func postData<B: Encodable, T: Decodable>(endpoint: EndpointMakeable, bodyItem: B) -> AnyPublisher<T, APIError> {
         let request = endpoint.makeJsonPostRequest(bodyItem: bodyItem)
         
         return URLSession.shared.dataTaskPublisher(for: request!)
-            .map { $0.data }
+            .tryMap { data, response in
+                let httpResponse = response as! HTTPURLResponse
+                switch httpResponse.statusCode {
+                case 200..<300:
+                    return data
+                case 401:
+                    throw APIError.unauthorized
+                case 404:
+                    throw APIError.notFound
+                default: break
+                }
+                
+                return data
+            }
             .decode(type: T.self, decoder: JSONDecoder())
+            .mapError { error in
+                switch error {
+                case is URLError:
+                    return APIError.networkError(error)
+                case is DecodingError:
+                    return APIError.decodingError
+                default:
+                    return error as? APIError ?? APIError.networkError(error)
+                }
+            }
             .eraseToAnyPublisher()
     }
     
-//    func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, Error> {
-//        var request = endpoint.makeURLRequest()
-//        request?.setValue("Bearer \("newAccessToken.accessToken")", forHTTPHeaderField: "Authorization")
-//        
-//        return URLSession.shared.dataTaskPublisher(for: request!)
-//            .tryMap { data, response in
-//                let httpResponse = response as! HTTPURLResponse
-//                if httpResponse.statusCode == 401 {
-//                    throw APIError.unauthorized
-//                }
-//                return data
-//            }
-//            .decode(type: T.self, decoder: JSONDecoder())
-//            .catch { error in
-//                if let apiError = error as? APIError, apiError == .unauthorized {
-//                    // Renew the AccessToken
-//                    return loginManager.renewAccessTokenPublisher()
-//                        .flatMap { newAccessToken in
-//                            
-//                            var newRequest = request
-//                            newRequest!.setValue("Bearer \(newAccessToken.accessToken)", forHTTPHeaderField: "Authorization")
-//                            
-//                            // Make the API call with the renewed AccessToken
-//                            return URLSession.shared.dataTaskPublisher(for: newRequest!)
-//                                .map(\.data)
-//                                .decode(type: T.self, decoder: JSONDecoder())
-//                        }
-//                        .eraseToAnyPublisher()
-//                }
-//                return Fail(error: error)
-//                    .eraseToAnyPublisher()
-//            }
-//            .eraseToAnyPublisher()
-//    }
+    //MARK: - RenewAccessToken
+    
+    func renewAccessTokenPublisher() -> AnyPublisher<AccessToken, APIError> {
+        var renewAccessTokenEndpoint = RenewAccessTokenEndpoint()
+        do {
+            if let refreshToken = try tokenManager.readToken(tokenType: TokenType.refreshToken) {
+                renewAccessTokenEndpoint.insertQuery(queryParameter: "refresh_token",
+                                                     queryValue: refreshToken)
+            }
+        } catch {
+            
+        }
+        
+        let request = renewAccessTokenEndpoint.makeURLRequest()
+        
+        return URLSession.shared.dataTaskPublisher(for: request!)
+            .tryMap { data, response in
+                let httpResponse = response as! HTTPURLResponse
+                switch httpResponse.statusCode {
+                case 200..<300:
+                    return data
+                case 401:
+                    throw APIError.refreshTokenExpired
+                case 404:
+                    throw APIError.notFound
+                default:
+                    throw APIError.networkError(NSError(domain: "Network", code: httpResponse.statusCode, userInfo: nil))
+                }
+            }
+            .decode(type: AccessToken.self, decoder: JSONDecoder())
+            .mapError { error in
+                switch error {
+                case is URLError:
+                    return APIError.networkError(error)
+                case is DecodingError:
+                    return APIError.decodingError
+                default:
+                    switch error as? APIError {
+                    case .refreshTokenExpired:
+                        do {
+                            try tokenManager.deleteToken(tokenType: TokenType.refreshToken)
+                            try tokenManager.deleteToken(tokenType: TokenType.accessToken)
+                        } catch {
+                            
+                        }
+                    default:
+                        break
+                    }
+                    
+                    return error as? APIError ?? APIError.networkError(error)
+                }
+            }
+            .eraseToAnyPublisher()
+    }
 }
