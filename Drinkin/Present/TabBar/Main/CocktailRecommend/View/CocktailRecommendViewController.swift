@@ -58,6 +58,7 @@ final class CocktailRecommendViewController: UIViewController {
         setupRecommendCocktailCollectionView()
         configureDataSource()
         binding()
+        errorBinding()
         viewModel.fetchBriefDescription()
     }
     
@@ -162,4 +163,23 @@ extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
     let index = round(scrolledOffsetX / cellWidth)
     targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
   }
+}
+
+//MARK: - Handling Error
+extension CocktailRecommendViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
+    }
 }
