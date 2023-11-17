@@ -2,6 +2,7 @@ import Foundation
 import Combine
 
 protocol CocktailFilterViewModelOutput {
+    var errorHandlingPublisher: Published<APIError>.Publisher { get }
     var filteredCocktailList: [CocktailPreview] { get }
     var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
     var textFilterTypeList: [String] { get }
@@ -26,7 +27,10 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     private let filterCocktailListUsecase: FilterCocktailListUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
+    @Published var errorType: APIError = APIError.noError
+    
     //MARK: - Init
+    
     init(cocktailFilterRepository: CocktailFilterRepository,
          filterCocktailListUsecase: FilterCocktailListUsecase) {
         self.cocktailFilterRepository = cocktailFilterRepository
@@ -34,6 +38,8 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     }
     
     //MARK: - Output
+    
+    var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     @Published var filteredCocktailList: [CocktailPreview] = []
     var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { $filteredCocktailList }
     @Published var textFilterTypeList: [String] = [FilterType.category.descriptionko,
@@ -51,31 +57,87 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
                                         FilterType.ingredientQuantity]
     var detailFilter: CocktailFilter? = nil
     var selectedDetailFilterIndexPath: IndexPath?
-}
+    }
 
 //MARK: - Input
 //MARK: - Fetch Data
+
+enum ErrorHandling {
+    case normal
+    case unauthorized
+    case notFound
+    case networkError
+    case docodingError
+    case refreshTokenExpired
+}
+
 extension DefaultCocktailFilterViewModel {
     func fetchCocktailList() {
         filterCocktailListUsecase.fetchCocktailList()
-            .sink(receiveCompletion: { print("\($0)") },
-                  receiveValue: { [weak self] in
-                guard let self = self else { return }
-                
-                self.filteredCocktailList = $0.cocktailList
-            }).store(in: &cancelBag)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.filteredCocktailList = $0.cocktailList.sorted(by: {$0.cocktailNameKo < $1.cocktailNameKo})
+                }
+            ).store(in: &cancelBag)
     }
     
     func fetchCocktailFilter(completion: @escaping () -> Void) {
         cocktailFilterRepository.fetchCocktailFilter()
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { print("\($0)")},
-                  receiveValue: { [weak self] in
-                guard let self = self else { return }
-                
-                self.detailFilter = $0
-                completion()
-            }).store(in: &cancelBag)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.detailFilter = $0
+                    completion()
+                }
+            ).store(in: &cancelBag)
     }
     
     func fetchDetailFilter(filterType: FilterType) -> [String] {
@@ -99,6 +161,7 @@ extension DefaultCocktailFilterViewModel {
 }
 
 //MARK: - Filter Cocktail
+
 extension DefaultCocktailFilterViewModel {
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int) {
         if let index = filterTypeList.firstIndex(of: filterType) {

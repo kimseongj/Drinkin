@@ -100,6 +100,7 @@ final class CocktailFilterViewController: UIViewController {
         filterBinding()
         configureCocktailDataSource()
         cocktailBinding()
+        errorBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -285,5 +286,24 @@ extension CocktailFilterViewController: UICollectionViewDelegate {
            let cocktailID = viewModel.filteredCocktailList[indexPath.row].id
             flowDelegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
         }
+    }
+}
+
+//MARK: - Handling Error
+extension CocktailFilterViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }
