@@ -38,7 +38,6 @@
 		1C07688A2ABDDA760003D4BF /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768892ABDDA760003D4BF /* BrandCell.swift */; };
 		1C0768922ABEFCCD0003D4BF /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */; };
 		1C0768A32AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */; };
-		1C0768A52AC1F1060003D4BF /* FirstLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */; };
 		1C0768A72AC1F4890003D4BF /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A62AC1F4890003D4BF /* APIError.swift */; };
 		1C0768A92AC1F4990003D4BF /* TabBarTitleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */; };
 		1C0768AF2AC2A50A0003D4BF /* FontStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */; };
@@ -82,7 +81,6 @@
 		1C51467B2AFD109D00C1B7B1 /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51467A2AFD109D00C1B7B1 /* PostResponse.swift */; };
 		1C51467D2AFD10F400C1B7B1 /* AdditionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C51467C2AFD10F300C1B7B1 /* AdditionRepository.swift */; };
 		1C57317A2A06879400C19EE1 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C5731792A06879400C19EE1 /* ScoreView.swift */; };
-		1C58C5242AF4F07D00D6CC83 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58C5232AF4F07D00D6CC83 /* LoginManager.swift */; };
 		1C58C5262AF51D7400D6CC83 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58C5252AF51D7400D6CC83 /* AccessToken.swift */; };
 		1C58C5282AF51DBC00D6CC83 /* RenewAccessTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58C5272AF51DBC00D6CC83 /* RenewAccessTokenEndpoint.swift */; };
 		1C58ECE12A63CA3A00AC2603 /* DefaultCocktailImageListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58ECE02A63CA3A00AC2603 /* DefaultCocktailImageListRepository.swift */; };
@@ -117,6 +115,7 @@
 		1C6636542A067F4B00C85374 /* SelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6636532A067F4B00C85374 /* SelectedView.swift */; };
 		1C66713D29F95AF000B0E41F /* YellowRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */; };
 		1C66713F29F95B2700B0E41F /* EmptyRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */; };
+		1C6973842B03959A00402368 /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6973832B03959A00402368 /* RefreshToken.swift */; };
 		1C71A4B02A5292A300F1814A /* ScorePresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C71A4AF2A5292A300F1814A /* ScorePresentationView.swift */; };
 		1C74FD5F2AB6969300823E73 /* CocktailFilterDICotainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C74FD5E2AB6969300823E73 /* CocktailFilterDICotainer.swift */; };
 		1C7807FA2AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7807F92AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift */; };
@@ -175,7 +174,6 @@
 		1CA969342AA08E540076731B /* MyHomeBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969332AA08E540076731B /* MyHomeBarViewModel.swift */; };
 		1CA969362AA0B59A0076731B /* HoldedItemEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969352AA0B59A0076731B /* HoldedItemEndpoint.swift */; };
 		1CA9695A2AA18AB40076731B /* MyHomeBarDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */; };
-		1CA9695C2AA1BAA10076731B /* FirstLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9695B2AA1BAA10076731B /* FirstLogin.swift */; };
 		1CA9695E2AA30BBB0076731B /* LoginVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA9695D2AA30BBB0076731B /* LoginVCCoordinator.swift */; };
 		1CAFB67D2A5C328700A44167 /* IngredientQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */; };
 		1CB096EF2A2A091000B7CA71 /* FilterSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB096EE2A2A091000B7CA71 /* FilterSelectionCell.swift */; };
@@ -213,7 +211,6 @@
 		1CCE88FE29EBB32300D3E1D2 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FD29EBB32300D3E1D2 /* CategoryCell.swift */; };
 		1CCE890029EBBC3C00D3E1D2 /* KakaoAccessTokenConversionEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE88FF29EBBC3C00D3E1D2 /* KakaoAccessTokenConversionEndpoint.swift */; };
 		1CCE890229EBBCCA00D3E1D2 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */; };
-		1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890329EBBD9800D3E1D2 /* LoginService.swift */; };
 		1CCE890629EBC13C00D3E1D2 /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */; };
 		1CCE890829EBC49400D3E1D2 /* RefreshEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */; };
 		1CD75BA52AAD98C50040F085 /* SavedCocktailListDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */; };
@@ -271,7 +268,6 @@
 		1C0768892ABDDA760003D4BF /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAccessTokenEndpoint.swift; sourceTree = "<group>"; };
-		1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLoginResponse.swift; sourceTree = "<group>"; };
 		1C0768A62AC1F4890003D4BF /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarTitleStrings.swift; sourceTree = "<group>"; };
 		1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStrings.swift; sourceTree = "<group>"; };
@@ -314,7 +310,6 @@
 		1C51467A2AFD109D00C1B7B1 /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
 		1C51467C2AFD10F300C1B7B1 /* AdditionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionRepository.swift; sourceTree = "<group>"; };
 		1C5731792A06879400C19EE1 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
-		1C58C5232AF4F07D00D6CC83 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		1C58C5252AF51D7400D6CC83 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		1C58C5272AF51DBC00D6CC83 /* RenewAccessTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenewAccessTokenEndpoint.swift; sourceTree = "<group>"; };
 		1C58ECE02A63CA3A00AC2603 /* DefaultCocktailImageListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCocktailImageListRepository.swift; sourceTree = "<group>"; };
@@ -343,6 +338,7 @@
 		1C6636532A067F4B00C85374 /* SelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedView.swift; sourceTree = "<group>"; };
 		1C66713C29F95AF000B0E41F /* YellowRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowRectangleView.swift; sourceTree = "<group>"; };
 		1C66713E29F95B2700B0E41F /* EmptyRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRectangleView.swift; sourceTree = "<group>"; };
+		1C6973832B03959A00402368 /* RefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToken.swift; sourceTree = "<group>"; };
 		1C71A4AF2A5292A300F1814A /* ScorePresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePresentationView.swift; sourceTree = "<group>"; };
 		1C74FD5E2AB6969300823E73 /* CocktailFilterDICotainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailFilterDICotainer.swift; sourceTree = "<group>"; };
 		1C7807F92AAEDE5E0036FB80 /* UserMadeCocktailListEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMadeCocktailListEndpoint.swift; sourceTree = "<group>"; };
@@ -401,7 +397,6 @@
 		1CA969332AA08E540076731B /* MyHomeBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarViewModel.swift; sourceTree = "<group>"; };
 		1CA969352AA0B59A0076731B /* HoldedItemEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldedItemEndpoint.swift; sourceTree = "<group>"; };
 		1CA969592AA18AB40076731B /* MyHomeBarDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHomeBarDIContainer.swift; sourceTree = "<group>"; };
-		1CA9695B2AA1BAA10076731B /* FirstLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLogin.swift; sourceTree = "<group>"; };
 		1CA9695D2AA30BBB0076731B /* LoginVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCCoordinator.swift; sourceTree = "<group>"; };
 		1CAFB67C2A5C328700A44167 /* IngredientQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientQuantityView.swift; sourceTree = "<group>"; };
 		1CB096EE2A2A091000B7CA71 /* FilterSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectionCell.swift; sourceTree = "<group>"; };
@@ -440,7 +435,6 @@
 		1CCE88FD29EBB32300D3E1D2 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		1CCE88FF29EBBC3C00D3E1D2 /* KakaoAccessTokenConversionEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAccessTokenConversionEndpoint.swift; sourceTree = "<group>"; };
 		1CCE890129EBBCCA00D3E1D2 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		1CCE890329EBBD9800D3E1D2 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
 		1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshEndpoint.swift; sourceTree = "<group>"; };
 		1CD75BA42AAD98C50040F085 /* SavedCocktailListDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCocktailListDIContainer.swift; sourceTree = "<group>"; };
@@ -787,14 +781,6 @@
 			path = Provider;
 			sourceTree = "<group>";
 		};
-		1C504CD22AB46D71005A0B25 /* LoginService */ = {
-			isa = PBXGroup;
-			children = (
-				1CCE890329EBBD9800D3E1D2 /* LoginService.swift */,
-			);
-			path = LoginService;
-			sourceTree = "<group>";
-		};
 		1C504CD82AB4725A005A0B25 /* FilterEndpoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -849,9 +835,8 @@
 			isa = PBXGroup;
 			children = (
 				1CCE890529EBC13C00D3E1D2 /* LoginToken.swift */,
-				1CA9695B2AA1BAA10076731B /* FirstLogin.swift */,
-				1C0768A42AC1F1060003D4BF /* FirstLoginResponse.swift */,
 				1C58C5252AF51D7400D6CC83 /* AccessToken.swift */,
+				1C6973832B03959A00402368 /* RefreshToken.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -904,14 +889,6 @@
 				1C51467A2AFD109D00C1B7B1 /* PostResponse.swift */,
 			);
 			path = PostResponse;
-			sourceTree = "<group>";
-		};
-		1C58C5222AF4F07100D6CC83 /* LoginManager */ = {
-			isa = PBXGroup;
-			children = (
-				1C58C5232AF4F07D00D6CC83 /* LoginManager.swift */,
-			);
-			path = LoginManager;
 			sourceTree = "<group>";
 		};
 		1C598F862A7B494600B9DC93 /* TextInformationView */ = {
@@ -999,9 +976,7 @@
 		1C5CAAFF29DB51560053F19A /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				1C58C5222AF4F07100D6CC83 /* LoginManager */,
 				1CA8ED272A69558C00CE5E1A /* Endpoint */,
-				1C504CD22AB46D71005A0B25 /* LoginService */,
 				1C504CD02AB46D4F005A0B25 /* Provider */,
 			);
 			path = Network;
@@ -1943,7 +1918,6 @@
 				1CBDA5502ADFC74B000F1F7D /* BaseBrandInformationViewModel.swift in Sources */,
 				1C5CAB0629DB51D50053F19A /* DefaultLoginRepository.swift in Sources */,
 				1CCE88DF29E949A900D3E1D2 /* MyHomeBarVCCoordinator.swift in Sources */,
-				1C58C5242AF4F07D00D6CC83 /* LoginManager.swift in Sources */,
 				1C5906A72A21DBE0001F048B /* CocktailFilterViewModel.swift in Sources */,
 				1C71A4B02A5292A300F1814A /* ScorePresentationView.swift in Sources */,
 				1C195F9F2AEB918000562E13 /* SkillDetailRepository.swift in Sources */,
@@ -1973,10 +1947,8 @@
 				1CCE601E2AE515390026427C /* ItemListEndpoint.swift in Sources */,
 				1CA9695E2AA30BBB0076731B /* LoginVCCoordinator.swift in Sources */,
 				1C0768C52AC9A9510003D4BF /* AppDIContainer.swift in Sources */,
-				1CCE890429EBBD9800D3E1D2 /* LoginService.swift in Sources */,
 				1C504CDA2AB47268005A0B25 /* CocktailFilterEndpoint.swift in Sources */,
 				1CA9691B2A90D64B0076731B /* Provider.swift in Sources */,
-				1C0768A52AC1F1060003D4BF /* FirstLoginResponse.swift in Sources */,
 				1CA8ED4C2A6BAEF100CE5E1A /* CocktailRecommendViewModel.swift in Sources */,
 				1CCE60182AE4B2D90026427C /* FilterItemUsecase.swift in Sources */,
 				1CED21982A739A700078916A /* Section.swift in Sources */,
@@ -2027,7 +1999,6 @@
 				1C04C19629DEED2700E381C2 /* MyHomeBarViewController.swift in Sources */,
 				1CCE890629EBC13C00D3E1D2 /* LoginToken.swift in Sources */,
 				1C07686E2ABD38C70003D4BF /* AddIngredientViewModel.swift in Sources */,
-				1CA9695C2AA1BAA10076731B /* FirstLogin.swift in Sources */,
 				1C5CAAD029DB1AE30053F19A /* AppDelegate.swift in Sources */,
 				1C0328E82ADE50C6002E144E /* CocktailImageListRepository.swift in Sources */,
 				1CA969232A9332860076731B /* CategoryListStrings.swift in Sources */,
@@ -2091,6 +2062,7 @@
 				1C5CBB112B00701B004FE626 /* MakeableCocktailCell.swift in Sources */,
 				1CD75BA72AAD98DF0040F085 /* UserMadeCocktailListDIContainer.swift in Sources */,
 				1C195FA52AEB91A900562E13 /* DefaultSkillDetailRepository.swift in Sources */,
+				1C6973842B03959A00402368 /* RefreshToken.swift in Sources */,
 				1C0768BD2AC972570003D4BF /* BaseInformationVCCoordinator.swift in Sources */,
 				1CF8D5862AF2225700FCDA58 /* ResetFilterPopupViewController.swift in Sources */,
 			);

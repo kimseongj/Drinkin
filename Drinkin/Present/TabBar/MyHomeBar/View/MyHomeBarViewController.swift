@@ -196,6 +196,7 @@ final class MyHomeBarViewController: UIViewController {
         viewModel.fetchHoldedItem()
         configureDataSource()
         binding()
+        errorBinding()
     }
     
     //MARK: - ConfigureUI
@@ -355,5 +356,24 @@ extension MyHomeBarViewController {
 extension MyHomeBarViewController: CellDeleteButtonDelegate {
     func deleteHoldedItem(holdedItem: String) {
         viewModel.deleteHoldedItem(holdedItem: holdedItem)
+    }
+}
+
+//MARK: - Handling Error
+extension MyHomeBarViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }
