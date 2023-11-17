@@ -41,6 +41,7 @@ final class UserMadeCocktailListViewController: UIViewController {
         configureUI()
         configureDataSource()
         binding()
+        errorBinding()
         viewModel.fetchCocktailPreviewDescription()
     }
     
@@ -116,5 +117,25 @@ extension UserMadeCocktailListViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+}
+
+//MARK: - Handling Error
+
+extension UserMadeCocktailListViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }

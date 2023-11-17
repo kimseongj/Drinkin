@@ -200,6 +200,7 @@ final class MyHomeBarViewController: UIViewController {
     }
     
     //MARK: - ConfigureUI
+    
     private func configureUI() {
         view.backgroundColor = .white
         
@@ -360,6 +361,7 @@ extension MyHomeBarViewController: CellDeleteButtonDelegate {
 }
 
 //MARK: - Handling Error
+
 extension MyHomeBarViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher

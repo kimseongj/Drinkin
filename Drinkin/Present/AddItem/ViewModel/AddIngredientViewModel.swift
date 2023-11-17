@@ -19,6 +19,7 @@ protocol AddItemViewModelInput {
 }
 
 protocol AddItemViewModelOutput {
+    var errorHandlingPublisher: Published<APIError>.Publisher { get }
     var itemFilterList: [String] { get }
     var itemFilterPublisher: Published<[String]>.Publisher { get }
     var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { get }
@@ -32,12 +33,14 @@ final class DefaultAddItemtViewModel: AddItemViewModel {
     private let addItemUsecase: AddItemUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
+    @Published var errorType: APIError = APIError.noError
     @Published var itemList: [ItemPreview] = []
     @Published var filteredItemList: [ItemPreview] = []
     var alreadySelectedItemList: [String] = []
     var selectedItemList: [String] = []
     
     //MARK: - Output
+    var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     @Published var itemFilterList: [String] = []
     var itemFilterPublisher: Published<[String]>.Publisher { $itemFilterList }
     var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { $filteredItemList }
@@ -56,25 +59,71 @@ final class DefaultAddItemtViewModel: AddItemViewModel {
 //MARK: - Input
 //MARK: - Fetch Data
 extension DefaultAddItemtViewModel {
-
+    
     func fetchItemFilter() {
         ingredientFilterRepository.fetchIngredientFilter()
-            .sink(receiveCompletion: { print("\($0)")},
-                  receiveValue: { [weak self] in
-                guard let self = self else { return }
-                self.itemFilterList = $0.itemFilterList
-            }).store(in: &cancelBag)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return }
+                    self.itemFilterList = $0.itemFilterList
+                }
+            ).store(in: &cancelBag)
     }
     
     func fetchItemList() {
         filterItemUsecase.fetchItemList()
-            .sink(receiveCompletion: { print("\($0)") },
-                  receiveValue: { [weak self] in
-                guard let self = self else { return }
-                self.itemList = $0.itemList
-                self.filteredItemList = $0.itemList
-                self.fetchAlreadySelectedItemList(itemList: $0.itemList)
-            }).store(in: &cancelBag)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return }
+                    self.itemList = $0.itemList
+                    self.filteredItemList = $0.itemList
+                    self.fetchAlreadySelectedItemList(itemList: $0.itemList)
+                }
+            ).store(in: &cancelBag)
     }
     
     private func fetchAlreadySelectedItemList(itemList: [ItemPreview]) {

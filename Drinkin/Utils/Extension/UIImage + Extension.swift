@@ -1,5 +1,5 @@
 //
-//  UIImage +Extension.swift
+//  UIImage + Extension.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/07/24.

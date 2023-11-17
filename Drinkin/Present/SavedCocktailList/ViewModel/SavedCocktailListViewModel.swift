@@ -13,6 +13,7 @@ protocol SavedCocktailListViewModelInput {
 }
 
 protocol SavedCocktailListViewModelOutput {
+    var errorHandlingPublisher: Published<APIError>.Publisher { get }
     var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { get }
 }
 
@@ -22,6 +23,7 @@ final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     private let savedCocktailListRepository: SavedCocktailListRepository
     private var cancelBag: Set<AnyCancellable> = []
     
+    @Published var errorType: APIError = APIError.noError
     @Published var previewDescriptionList: [CocktailPreview] = []
     
     //MARK: - Init
@@ -30,15 +32,39 @@ final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     }
     
     //MARK: - Output
+    var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { $previewDescriptionList }
     
     //MARK: - Input
     func fetchCocktailPreviewDescription() {
         savedCocktailListRepository.fetchSavedCocktailList()
-            .sink(receiveCompletion: { print("\($0)")},
-                  receiveValue: { [weak self] in
-                guard let self = self else { return}
-                self.previewDescriptionList = $0.cocktailList
-            }).store(in: &cancelBag)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return}
+                    self.previewDescriptionList = $0.cocktailList
+                }
+            ).store(in: &cancelBag)
     }
 }

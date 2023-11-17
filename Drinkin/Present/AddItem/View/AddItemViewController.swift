@@ -62,6 +62,7 @@ final class AddItemViewController: UIViewController {
         configureItemDataSource()
         filterBinding()
         itemBinding()
+        errorBinding()
         viewModel.fetchItemFilter()
         viewModel.fetchItemList()
     }
@@ -234,5 +235,25 @@ extension AddItemViewController: UICollectionViewDelegate {
             cell.presentUnholdItem()
             viewModel.deselectItem(index: indexPath.row)
         }
+    }
+}
+
+//MARK: - Handling Error
+
+extension AddItemViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }

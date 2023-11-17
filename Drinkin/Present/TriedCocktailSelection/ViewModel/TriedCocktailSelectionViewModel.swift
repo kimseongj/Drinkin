@@ -18,6 +18,7 @@ protocol TriedCocktailSelectionViewModelInput {
 }
 
 protocol TriedCocktailSelectionViewModelOutput {
+    var errorHandlingPublisher: Published<APIError>.Publisher { get }
     var filteredSelectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { get }
     var categoryList: [String] { get }
 }
@@ -29,6 +30,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     private let filterTriedCocktailUsecase: FilterTriedCocktailUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
+    @Published var errorType: APIError = APIError.noError
     var selectableCocktailList: [SelectableImageDescription] = []
     @Published var filteredSelectableCocktailList: [SelectableImageDescription] = []
     
@@ -40,6 +42,8 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     }
     
     //MARK: - Output
+    var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
+    
     var categoryList: [String] = [CategoryListStrings.whole,
                                   CategoryListStrings.whiskey,
                                   CategoryListStrings.liqueur,
@@ -58,12 +62,35 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
 extension DefaultTriedCocktailSelectionViewModel {
     func fetchCocktailImageList() {
         filterTriedCocktailUsecase.fetchCocktailImageList()
-            .sink(receiveCompletion: { print("\($0)")},
-                  receiveValue: { [weak self] in
-                guard let self = self else { return }
-                self.convertSelectableCocktailList(cocktailList: $0.cocktailImageList)
-                self.filteredSelectableCocktailList = self.selectableCocktailList
-            }).store(in: &cancelBag)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return }
+                    self.convertSelectableCocktailList(cocktailList: $0.cocktailImageList)
+                    self.filteredSelectableCocktailList = self.selectableCocktailList.sorted { $0.cocktailNameKo < $1.cocktailNameKo }
+                }
+            ).store(in: &cancelBag)
     }
     
     func convertSelectableCocktailList(cocktailList: [ImageDescription]) {

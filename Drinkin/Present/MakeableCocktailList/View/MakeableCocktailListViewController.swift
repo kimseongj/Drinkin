@@ -42,6 +42,7 @@ final class MakeableCocktailListViewController: UIViewController {
         configureMakeableCocktailCollectionView()
         configureDataSource()
         binding()
+        errorBinding()
         viewModel.fetchMakeableCocktailList()
     }
     
@@ -129,5 +130,25 @@ extension MakeableCocktailListViewController: UICollectionViewDelegate {
         
         flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
         
+    }
+}
+
+//MARK: - Handling Error
+
+extension MakeableCocktailListViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }

@@ -75,6 +75,7 @@ final class BaseInformationViewController: UIViewController {
         configureDataSource()
         configureBaseBrandCollectionView()
         binding()
+        errorBinding()
         viewModel.fetchBaseDetail()
     }
     
@@ -219,5 +220,25 @@ extension BaseInformationViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let brandID = viewModel.returnBrandID(index: indexPath.row)
         flowDelegate?.pushBaseBrandInformationVC(brandID: brandID)
+    }
+}
+
+//MARK: - Handling Error
+
+extension BaseInformationViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }

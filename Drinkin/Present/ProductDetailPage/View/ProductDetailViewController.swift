@@ -75,6 +75,7 @@ final class ProductDetailViewController: UIViewController {
         configureUI()
         introductionView.configureDelegate(delegate: flowDelegate)
         binding()
+        errorBinding()
         viewModel.fetchDescription()
     }
     
@@ -131,6 +132,7 @@ final class ProductDetailViewController: UIViewController {
 }
 
 //MARK: - Binding
+
 extension ProductDetailViewController {
     private func binding() {
         viewModel.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -138,5 +140,25 @@ extension ProductDetailViewController {
             self.fill(with: $0)
             self.cocktailInformationView.receive(cocktailDescription: $0)
         }.store(in: &cancelBag)
+    }
+}
+
+//MARK: - Handling Error
+
+extension ProductDetailViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }
