@@ -27,9 +27,10 @@ final class ItemFilterCell: UICollectionViewCell {
         return label
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureBackgroundColor()
         configureUI()
     }
     
@@ -37,12 +38,12 @@ final class ItemFilterCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureBackgroundColor() {
-        contentView.backgroundColor = ColorPalette.filterCellColor
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        contentView.backgroundColor = ColorPalette.filterCellColor
         contentView.layer.cornerRadius = 4
+        
         contentView.addSubview(categoryNameLabel)
         
         categoryNameLabel.snp.makeConstraints {
@@ -52,6 +53,8 @@ final class ItemFilterCell: UICollectionViewCell {
             $0.bottom.equalToSuperview().offset(-10)
         }
     }
+    
+    //MARK: - Fill Cell
     
     func fill(with itemFilter: String) {
         categoryNameLabel.text = itemFilter

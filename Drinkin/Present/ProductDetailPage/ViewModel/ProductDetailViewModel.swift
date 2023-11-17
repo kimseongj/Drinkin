@@ -9,11 +9,15 @@ import Foundation
 import Combine
 
 
-protocol ProductDetailViewModel {
-    var cocktailDescriptionPublisher: Published< CocktailDescription?>.Publisher { get }
-    
+protocol ProductDetailViewModelInput {
     func fetchDescription()
 }
+
+protocol ProductDetailViewModelOutput {
+    var cocktailDescriptionPublisher: Published< CocktailDescription?>.Publisher { get }
+}
+
+typealias ProductDetailViewModel = ProductDetailViewModelInput & ProductDetailViewModelOutput
 
 final class DefaultProductDetailViewModel: ProductDetailViewModel {
     private let cocktailDetailRepository: CocktailDetailRepository
@@ -21,12 +25,15 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
     
     @Published var cocktailDescription: CocktailDescription?
     
-    var cocktailDescriptionPublisher: Published<CocktailDescription?>.Publisher { $cocktailDescription }
-    
+    //MARK: - Init
     init(cocktailDetailRepository: CocktailDetailRepository) {
         self.cocktailDetailRepository = cocktailDetailRepository
     }
     
+    //MARK: - Output
+    var cocktailDescriptionPublisher: Published<CocktailDescription?>.Publisher { $cocktailDescription }
+    
+    //MARK: - Input
     func fetchDescription() {
         cocktailDetailRepository.fetchCocktailDescription()
             .sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in

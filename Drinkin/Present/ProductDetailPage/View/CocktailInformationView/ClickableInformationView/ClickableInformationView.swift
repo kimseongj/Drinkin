@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class ClickableInformationView: UIView {
-    weak var delegate: ProductDetailVCDelegate?
+    weak var flowDelegate: ProductDetailVCFlow?
     private var cocktailDescription: CocktailDescription?
     private var toolDataSource: UICollectionViewDiffableDataSource<Section, CocktailTool>!
     private var skillDataSource: UICollectionViewDiffableDataSource<Section, CocktailSkill>!
@@ -41,6 +41,8 @@ final class ClickableInformationView: UIView {
         return label
     }()
     
+    //MARK: - Init
+    
     init(title: String) {
         super.init(frame: .zero)
         self.title = title
@@ -54,12 +56,17 @@ final class ClickableInformationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    
+    //MARK: - ConfigureUI
+    
     private func configureTitle() {
         titleLabel.text = title
     }
     
-    func configureUI() {
+    private func configureUI() {
         self.backgroundColor = .white
+        
         self.addSubview(titleLabelView)
         titleLabelView.addSubview(titleLabel)
         self.addSubview(informationCollectionView)
@@ -84,12 +91,13 @@ final class ClickableInformationView: UIView {
         }
     }
     
+    //MARK: - Fill View
     func fill(with cocktailDescription: CocktailDescription) {
         fetchIDList(cocktailDescription: cocktailDescription)
         applySnapshot(cocktailDescription: cocktailDescription)
     }
     
-    func fillCocktailDescrion(cocktailDescription: CocktailDescription?) {
+    func receive(cocktailDescription: CocktailDescription?) {
         self.cocktailDescription = cocktailDescription
     }
     
@@ -105,8 +113,12 @@ final class ClickableInformationView: UIView {
             return
         }
     }
-    
-    func configurelInformationCollectionView() {
+}
+
+//MARK: - ConfigureCollectionView
+
+extension ClickableInformationView {
+    private func configurelInformationCollectionView() {
         informationCollectionView.delegate = self
         if let flowLayout = informationCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -114,27 +126,10 @@ final class ClickableInformationView: UIView {
     }
 }
 
-//MARK: - InformationCollectionView Delegate
-extension ClickableInformationView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let validCocktailDescription = cocktailDescription else { return }
-        
-        switch title {
-        case InformationStrings.tool:
-            delegate?.pushToolModalVC(toolID: validCocktailDescription.toolList[indexPath.row].id)
-        case InformationStrings.skill:
-            delegate?.pushSkillModalVC(skillID: validCocktailDescription.skillList[indexPath.row].id)
-        case InformationStrings.glass:
-            delegate?.pushGlassModalVC(glassID: validCocktailDescription.glassList[indexPath.row].id)
-        default:
-            return
-        }
-    }
-}
-
 //MARK: - InformationCollectionView DiffableDataSource
+
 extension ClickableInformationView {
-    func configureDataSource() {
+    private func configureDataSource() {
         switch title {
         case InformationStrings.tool:
             self.toolDataSource = UICollectionViewDiffableDataSource<Section, CocktailTool> (collectionView: informationCollectionView) { (collectionView, indexPath, cocktailTool) -> UICollectionViewCell? in
@@ -165,7 +160,7 @@ extension ClickableInformationView {
         }
     }
     
-    func applySnapshot(cocktailDescription: CocktailDescription) {
+    private func applySnapshot(cocktailDescription: CocktailDescription) {
         switch title {
         case InformationStrings.tool:
             var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailTool>()
@@ -182,6 +177,24 @@ extension ClickableInformationView {
             snapshot.appendSections([.main])
             snapshot.appendItems(cocktailDescription.glassList)
             self.glassDataSource?.apply(snapshot, animatingDifferences: true)
+        default:
+            return
+        }
+    }
+}
+
+//MARK: - InformationCollectionView Delegate
+extension ClickableInformationView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let validCocktailDescription = cocktailDescription else { return }
+        
+        switch title {
+        case InformationStrings.tool:
+            flowDelegate?.pushToolModalVC(toolID: validCocktailDescription.toolList[indexPath.row].id)
+        case InformationStrings.skill:
+            flowDelegate?.pushSkillModalVC(skillID: validCocktailDescription.skillList[indexPath.row].id)
+        case InformationStrings.glass:
+            flowDelegate?.pushGlassModalVC(glassID: validCocktailDescription.glassList[indexPath.row].id)
         default:
             return
         }

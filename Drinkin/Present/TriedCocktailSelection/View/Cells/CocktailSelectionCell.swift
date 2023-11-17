@@ -8,6 +8,11 @@
 import UIKit
 
 final class CocktailSelectionCell: UICollectionViewCell {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cocktailImageView.image = nil
+    }
+    
     private let selectedView = SelectedView()
         
     private lazy var cocktailImageView: UIImageView = {
@@ -22,23 +27,25 @@ final class CocktailSelectionCell: UICollectionViewCell {
         cocktailNameLabel.font = UIFont(name: FontStrings.themeFont, size: 13)
         return cocktailNameLabel
     }()
- 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        cocktailImageView.image = nil
-    }
+    
+    //MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
-        configureBackground()
+        makeSelectedViewHidden()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - ConfigureUI
+    
     private func configureUI() {
+        contentView.backgroundColor = ColorPalette.grayCellColor
+        contentView.layer.cornerRadius = 4
+        
         contentView.addSubview(cocktailImageView)
         contentView.addSubview(cocktailNameLabel)
         contentView.addSubview(selectedView)
@@ -60,11 +67,11 @@ final class CocktailSelectionCell: UICollectionViewCell {
         }
     }
     
-    private func configureBackground(){
-        contentView.backgroundColor = ColorPalette.grayCellColor
-        contentView.layer.cornerRadius = 4
+    private func makeSelectedViewHidden() {
         selectedView.isHidden = true
     }
+    
+    //MARK: - Fill Cell
     
     func fill(with previewDescription: SelectableImageDescription) {
         cocktailImageView.load(urlString: previewDescription.imageURI)

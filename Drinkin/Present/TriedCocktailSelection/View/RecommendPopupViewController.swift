@@ -64,10 +64,20 @@ final class RecommendPopupViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapRecommendButton() {
+        self.dismiss(animated: true)
+        delegate?.dismissTriedCocktailSelectionViewController()
+    }
+    
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         view.addSubview(contentView)
@@ -104,11 +114,5 @@ final class RecommendPopupViewController: UIViewController {
             $0.height.equalTo(42)
             $0.width.equalTo(104)
         }
-    }
-    
-    @objc
-    private func tapRecommendButton() {
-        self.dismiss(animated: true)
-        delegate?.dismissTriedCocktailSelectionViewController()
     }
 }

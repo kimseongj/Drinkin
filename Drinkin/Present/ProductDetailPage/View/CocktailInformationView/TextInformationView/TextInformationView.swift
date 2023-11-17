@@ -34,6 +34,8 @@ final class TextInformationView: UIView {
         return label
     }()
     
+    //MARK: - Init
+    
     init(title: String) {
         super.init(frame: .zero)
         self.title = title
@@ -44,6 +46,8 @@ final class TextInformationView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         self.addSubview(titleLabelView)

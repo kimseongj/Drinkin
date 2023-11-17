@@ -27,16 +27,20 @@ final class CategoryCell: UICollectionViewCell {
         return label
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.cellSetting()
+        self.configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func cellSetting() {
+    //MARK: - ConfigureUI
+    
+    private func configureUI() {
         self.backgroundColor = ColorPalette.filterCellColor
         self.layer.cornerRadius = 4
         self.addSubview(categoryNameLabel)
@@ -48,6 +52,8 @@ final class CategoryCell: UICollectionViewCell {
             $0.bottom.equalToSuperview().offset(-10)
         }
     }
+    
+    //MARK: Fill Cell
     
     func fill(with categoryName: String) {
         categoryNameLabel.text = categoryName

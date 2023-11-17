@@ -15,12 +15,11 @@ protocol CellDeleteButtonDelegate: AnyObject {
 
 final class MyHomeBarViewController: UIViewController {
     private var viewModel: MyHomeBarViewModel
-    var delegate: MyHomeBarVCDelegate?
+    var flowDelegate: MyHomeBarVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
     private var isTrue: Bool = true
     private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, String>?
-    
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -52,11 +51,16 @@ final class MyHomeBarViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapLoginSettingButton() {
+        flowDelegate?.pushLoginSettingVC()
+    }
+    
     private let addItemView = UIView()
     
     private lazy var addLabel1: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
         label.text = "첫번 째 재료를 추가하고"
         
         return label
@@ -64,7 +68,7 @@ final class MyHomeBarViewController: UIViewController {
     
     private lazy var addLabel2: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 15)
         label.text = "만들 수 있는 칵테일을 찾아보세요."
         
         return label
@@ -94,6 +98,11 @@ final class MyHomeBarViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapAddButton() {
+        flowDelegate?.pushAddIngredientVC()
+    }
+    
     private let holdedItemCollectionView: UICollectionView = {
         let layout = UICollectionViewLayout()
         let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
@@ -111,7 +120,7 @@ final class MyHomeBarViewController: UIViewController {
         titleLabel.text = "저장한 칵테일 목록"
         titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         
-        let arrowImageView = UIImageView(image: UIImage(named: "arrow_icon"))
+        let arrowImageView = UIImageView(image: ImageStorage.arrowIcon)
         
         button.addSubview(titleLabel)
         button.addSubview(arrowImageView)
@@ -129,6 +138,11 @@ final class MyHomeBarViewController: UIViewController {
         
         return button
     }()
+    
+    @objc
+    private func tapSavedCocktailListButton() {
+        flowDelegate?.pushSavedCocktailListVC()
+    }
     
     private let userMadeCocktailListButton: UIButton = {
         let button = UIButton()
@@ -156,7 +170,14 @@ final class MyHomeBarViewController: UIViewController {
         
         return button
     }()
+    
+    @objc
+    private func tapUserMadeCocktailListButton() {
+        flowDelegate?.pushUserMadeCocktailListVC()
+    }
         
+    //MARK: - Init
+    
     init(viewModel: MyHomeBarViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -166,6 +187,8 @@ final class MyHomeBarViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -173,13 +196,14 @@ final class MyHomeBarViewController: UIViewController {
         viewModel.fetchHoldedItem()
         configureDataSource()
         binding()
+        errorBinding()
     }
     
+    //MARK: - ConfigureUI
     private func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
-        
         view.backgroundColor = .white
         
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(titleLabel)
         view.addSubview(loginSettingButton)
         view.addSubview(holdIngredientLabel)
@@ -282,35 +306,20 @@ final class MyHomeBarViewController: UIViewController {
             $0.height.equalTo(60)
         }
     }
-    
+}
+
+//MARK: - ConfigureCollectionView
+
+extension MyHomeBarViewController {
     private func configureHoldedItemCollectionView() {
         if let flowLayout = holdedItemCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
-    
-    @objc
-    private func tapLoginSettingButton() {
-        delegate?.pushLoginSettingVC()
-    }
-    
-    @objc
-    private func tapAddButton() {
-        delegate?.pushAddIngredientVC()
-    }
-    
-    @objc
-    private func tapSavedCocktailListButton() {
-        delegate?.pushSavedCocktailListVC()
-    }
-    
-    @objc
-    private func tapUserMadeCocktailListButton() {
-        delegate?.pushUserMadeCocktailListVC()
-    }
 }
 
 //MARK: - DiffableDataSource
+
 extension MyHomeBarViewController {
     private func configureDataSource() {
         self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, itemName) -> UICollectionViewCell? in
@@ -331,6 +340,7 @@ extension MyHomeBarViewController {
 }
 
 //MARK: - Binding
+
 extension MyHomeBarViewController {
     private func binding() {
         viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -342,8 +352,28 @@ extension MyHomeBarViewController {
 }
 
 //MARK: - CellDelteButtonDelegate
+
 extension MyHomeBarViewController: CellDeleteButtonDelegate {
     func deleteHoldedItem(holdedItem: String) {
         viewModel.deleteHoldedItem(holdedItem: holdedItem)
+    }
+}
+
+//MARK: - Handling Error
+extension MyHomeBarViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }

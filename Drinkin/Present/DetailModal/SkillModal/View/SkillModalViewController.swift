@@ -26,6 +26,7 @@ final class SkillModalViewController: UIViewController {
         return label
     }()
     
+    //MARK: - Init
     init(viewModel: SkillModalViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -35,9 +36,10 @@ final class SkillModalViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
         configureUI()
         viewModel.fetchSkillDetail { [weak self] in
             guard let self = self else { return }
@@ -46,11 +48,11 @@ final class SkillModalViewController: UIViewController {
         }
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        view.backgroundColor = .white
+        
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         
@@ -66,6 +68,8 @@ final class SkillModalViewController: UIViewController {
         }
     }
 
+    //MARK: - Fill View
+    
     private func fill(skillDetail: SkillDetail) {
         titleLabel.text = skillDetail.skillName
         descriptionLabel.text = skillDetail.description

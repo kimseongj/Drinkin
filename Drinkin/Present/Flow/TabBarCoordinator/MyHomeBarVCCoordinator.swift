@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol MyHomeBarVCDelegate: AnyObject {
+protocol MyHomeBarVCFlow: AnyObject {
     func pushLoginSettingVC()
     func pushAddIngredientVC()
     func pushSavedCocktailListVC()
     func pushUserMadeCocktailListVC()
 }
 
-class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
+class HomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -29,7 +29,7 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
         let myHomeBarViewController = myHomeBarDIContainer.makeMyHomeBarViewController()
         
         myHomeBarViewController.makeBlackBackBarButton()
-        myHomeBarViewController.delegate = self
+        myHomeBarViewController.flowDelegate = self
         navigationController.setViewControllers([myHomeBarViewController], animated: false)
         
         return navigationController
@@ -41,17 +41,20 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCDelegate {
     }
     
     func pushAddIngredientVC() {
-        let addIngredientVCCoordinator = AddIngredientVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        let addIngredientVCCoordinator = AddIngredientVCCoordinator(navigationController: navigationController,
+                                                                    appDIContainer: appDIContainer)
         addIngredientVCCoordinator.start()
     }
     
     func pushSavedCocktailListVC() {
-        let savedCocktailListVCCoordinator = SavedCocktailListVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        let savedCocktailListVCCoordinator = SavedCocktailListVCCoordinator(navigationController: navigationController,
+                                                                            appDIContainer: appDIContainer)
         savedCocktailListVCCoordinator.start()
     }
     
     func pushUserMadeCocktailListVC() {
-        let userMadeCocktailListVCCoordinator = UserMadeCocktailListVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        let userMadeCocktailListVCCoordinator = UserMadeCocktailListVCCoordinator(navigationController: navigationController,
+                                                                                  appDIContainer: appDIContainer)
         userMadeCocktailListVCCoordinator.start()
     }
 }

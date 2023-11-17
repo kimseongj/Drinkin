@@ -8,5 +8,5 @@
 import Combine
 
 protocol CocktailFilterRepository {
-    func fetchCocktailFilter() -> AnyPublisher<CocktailFilter, Error>
+    func fetchCocktailFilter() -> AnyPublisher<CocktailFilter, APIError>
 }

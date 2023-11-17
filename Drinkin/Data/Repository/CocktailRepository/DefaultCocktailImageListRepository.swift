@@ -9,17 +9,15 @@ import Foundation
 import Combine
 
 final class DefaultCocktailImageListRepository: CocktailImageListRepository {
-    let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
-        self.tokenManager = tokenManager
+    init(provider: Provider, endpoint: EndpointMakeable) {
         self.provider = provider
         self.endpoint = endpoint
     }
     
-    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error> {
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

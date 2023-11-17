@@ -30,6 +30,8 @@ final class BookmarkCocktailButton: UIButton {
         return label
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -38,6 +40,8 @@ final class BookmarkCocktailButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         self.addSubview(buttonImageView)

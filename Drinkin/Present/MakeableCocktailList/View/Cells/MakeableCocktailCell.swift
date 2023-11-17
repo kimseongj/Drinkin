@@ -9,6 +9,11 @@ import UIKit
 import SnapKit
 
 final class MakeableCocktailCell: UICollectionViewCell {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        scoreStackView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
     private let cocktailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -42,6 +47,8 @@ final class MakeableCocktailCell: UICollectionViewCell {
         return stackView
     }()
     
+    //MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
@@ -51,10 +58,7 @@ final class MakeableCocktailCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        scoreStackView.subviews.forEach { $0.removeFromSuperview() }
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         contentView.backgroundColor = .white
@@ -91,9 +95,11 @@ final class MakeableCocktailCell: UICollectionViewCell {
         scoreStackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
             $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview())
+            $0.trailing.equalToSuperview()
         }
     }
+    
+    //MARK: - Fill Cell
     
     func fill(with makeableCocktail: MakeableCocktail) {
         categoryLabel.text = makeableCocktail.category
@@ -105,9 +111,14 @@ final class MakeableCocktailCell: UICollectionViewCell {
     }
     
     private func configureScoreView(levelScore: Int, sugarContentScore: Int, abvScore: Int) {
-        let levelScorePresentationView = ScorePresentationView(title: "난이도", score: levelScore)
-        let sugarContentScorePresentationView = ScorePresentationView(title: "당    도", score: sugarContentScore)
-        let abvGradeScorePresentationView = ScorePresentationView(title: "도    수", score: abvScore)
+        let levelScorePresentationView = ScorePresentationView(title: InformationStrings.level,
+                                                               score: levelScore)
+        
+        let sugarContentScorePresentationView = ScorePresentationView(title: InformationStrings.sugarContent,
+                                                                      score: sugarContentScore)
+        
+        let abvGradeScorePresentationView = ScorePresentationView(title: InformationStrings.abv,
+                                                                  score: abvScore)
    
         scoreStackView.addArrangedSubview(levelScorePresentationView)
         scoreStackView.addArrangedSubview(sugarContentScorePresentationView)

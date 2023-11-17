@@ -9,17 +9,15 @@ import Foundation
 import Combine
 
 final class DefaultCocktailQueryRepository: CocktailQueryRepository {
-    let tokenManager: TokenManager
     let provider: Provider
     var endpoint: EndpointMakeable
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
-        self.tokenManager = tokenManager
+    init(provider: Provider, endpoint: EndpointMakeable) {
         self.provider = provider
         self.endpoint = endpoint
     }
     
-    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, Error> {
+    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AccessToken: Decodable {
+struct AccessToken: Codable {
     let accessToken: String
     
     private enum CodingKeys: String, CodingKey {

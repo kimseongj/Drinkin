@@ -8,7 +8,10 @@
 import Foundation
 
 enum APIError: Error {
-    case data
-    case request
+    case noError
+    case decodingError
     case unauthorized
+    case notFound
+    case refreshTokenExpired
+    case networkError(Error)
 }

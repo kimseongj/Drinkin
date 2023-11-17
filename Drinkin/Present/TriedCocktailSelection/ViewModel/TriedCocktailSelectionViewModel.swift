@@ -27,18 +27,19 @@ typealias TriedCocktailSelectionViewModel = TriedCocktailSelectionViewModelInput
 final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewModel {
     private let addTriedCocktailUsecase: AddTriedCocktailUsecase
     private let filterTriedCocktailUsecase: FilterTriedCocktailUsecase
-
+    private var cancelBag: Set<AnyCancellable> = []
+    
+    var selectableCocktailList: [SelectableImageDescription] = []
+    @Published var filteredSelectableCocktailList: [SelectableImageDescription] = []
+    
+    //MARK: - Init
     init(filterTriedCocktailUsecase: FilterTriedCocktailUsecase,
          addTriedCocktailUsecase: AddTriedCocktailUsecase) {
         self.filterTriedCocktailUsecase = filterTriedCocktailUsecase
         self.addTriedCocktailUsecase = addTriedCocktailUsecase
     }
     
-    private var cancelBag: Set<AnyCancellable> = []
-    var selectableCocktailList: [SelectableImageDescription] = []
-    
     //MARK: - Output
-    @Published var filteredSelectableCocktailList: [SelectableImageDescription] = []
     var categoryList: [String] = [CategoryListStrings.whole,
                                   CategoryListStrings.whiskey,
                                   CategoryListStrings.liqueur,
@@ -50,14 +51,19 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
                                   CategoryListStrings.mixing]
     
     var filteredSelectableCocktailListPublisher: Published<[SelectableImageDescription]>.Publisher { $filteredSelectableCocktailList }
-    
-    //MARK: - Input
+}
+
+//MARK: - Input
+//MARK: - Fetch Data
+extension DefaultTriedCocktailSelectionViewModel {
     func fetchCocktailImageList() {
-        filterTriedCocktailUsecase.fetchCocktailImageList().sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
-            guard let self = self else { return }
-            self.convertSelectableCocktailList(cocktailList: $0.cocktailImageList)
-            self.filteredSelectableCocktailList = self.selectableCocktailList
-        }).store(in: &cancelBag)
+        filterTriedCocktailUsecase.fetchCocktailImageList()
+            .sink(receiveCompletion: { print("\($0)")},
+                  receiveValue: { [weak self] in
+                guard let self = self else { return }
+                self.convertSelectableCocktailList(cocktailList: $0.cocktailImageList)
+                self.filteredSelectableCocktailList = self.selectableCocktailList
+            }).store(in: &cancelBag)
     }
     
     func convertSelectableCocktailList(cocktailList: [ImageDescription]) {
@@ -69,12 +75,19 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
             selectableCocktailList.append(convertedImageDescrtipon)
         }
     }
+}
 
+//MARK: - Filter Cocktail
+extension DefaultTriedCocktailSelectionViewModel {
     func filterCocktailList(cocktailCategoryIndex: Int) {
         let cocktailCategory = categoryList[cocktailCategoryIndex]
-        filteredSelectableCocktailList = filterTriedCocktailUsecase.filterCocktail(cocktailCategory: cocktailCategory, selectableCocktailList: selectableCocktailList)
+        filteredSelectableCocktailList = filterTriedCocktailUsecase.filterCocktail(cocktailCategory: cocktailCategory,
+                                                                                   selectableCocktailList: selectableCocktailList)
     }
-    
+}
+
+//MARK: - Select & Deselect Cocktail
+extension DefaultTriedCocktailSelectionViewModel {
     func selectCocktail(index: Int) {
         let selectedID = filteredSelectableCocktailList[index].id
         filteredSelectableCocktailList[index].isSelected = true
@@ -90,7 +103,10 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
             selectableCocktailList[selectedCocktailIndex].isSelected = false
         }
     }
-    
+}
+
+//MARK: - Add TriedCocktail
+extension DefaultTriedCocktailSelectionViewModel {
     func checkCocktailSelected() -> Bool {
         let result = selectableCocktailList.contains { $0.isSelected == true }
         
@@ -100,17 +116,13 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     func addTriedCocktailList(completion: @escaping () -> Void) {
         let selectedCocktailList = makeSelectedCocktailIDList()
         
-        addTriedCocktailUsecase.addTriedCocktails(cocktailID: selectedCocktailList).receive(on: RunLoop.main).sink(receiveCompletion: {
-            switch $0 {
-            case .finished:
-                print("finished")
-            case .failure(_):
-                print("RequestError")
-            }
-        }, receiveValue: {
-            print($0)
-            completion()
-        }).store(in: &cancelBag)
+        addTriedCocktailUsecase.addTriedCocktails(cocktailID: selectedCocktailList)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { print("\($0)") },
+                  receiveValue: {
+                print($0)
+                completion()
+            }).store(in: &cancelBag)
     }
     
     func makeSelectedCocktailIDList() -> [Int] {

@@ -1,15 +1,18 @@
 import Foundation
 import Combine
 
-protocol CocktailFilterViewModel {
+protocol CocktailFilterViewModelOutput {
+    var errorHandlingPublisher: Published<APIError>.Publisher { get }
+    var filteredCocktailList: [CocktailPreview] { get }
     var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
+    var textFilterTypeList: [String] { get }
+    var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
+    var filterTypeList: [FilterType] { get }
     var detailFilter: CocktailFilter? { get }
     var selectedDetailFilterIndexPath: IndexPath? { get set }
-    var filterTypeList: [FilterType] { get }
-    var filteredCocktailList: [CocktailPreview] { get }
-    var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
-    var textFilterTypeList: [String] { get }
-    
+}
+
+protocol CocktailFilterViewModelInput {
     func fetchCocktailList()
     func fetchCocktailFilter(completion: @escaping () -> Void)
     func fetchDetailFilter(filterType: FilterType) -> [String]
@@ -17,62 +20,124 @@ protocol CocktailFilterViewModel {
     func clearAllFilter()
 }
 
+typealias CocktailFilterViewModel = CocktailFilterViewModelOutput & CocktailFilterViewModelInput
+
 final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     private let cocktailFilterRepository: CocktailFilterRepository
     private let filterCocktailListUsecase: FilterCocktailListUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
-    @Published var filteredCocktailList: [CocktailPreview] = []
+    @Published var errorType: APIError = APIError.noError
     
-    var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { $filteredCocktailList }
-    
-    var detailFilter: CocktailFilter? = nil
-    
-    var selectedDetailFilterIndexPath: IndexPath?
-    
-    var filterTypeList: [FilterType] = [FilterType.category,
-                                        FilterType.holdIngredient,
-                                        FilterType.level,
-                                        FilterType.abv,
-                                        FilterType.sugarContent,
-                                        FilterType.ingredientQuantity]
-    
-    @Published var textFilterTypeList: [String] = [FilterType.category.descriptionko,
-                                                   FilterType.holdIngredient.descriptionko,
-                                                   FilterType.level.descriptionko,
-                                                   FilterType.abv.descriptionko,
-                                                   FilterType.sugarContent.descriptionko,
-                                                   FilterType.ingredientQuantity.descriptionko]
-    
-    var textFilterTypeListPublisher: Published<[String]>.Publisher { $textFilterTypeList }
+    //MARK: - Init
     
     init(cocktailFilterRepository: CocktailFilterRepository,
          filterCocktailListUsecase: FilterCocktailListUsecase) {
         self.cocktailFilterRepository = cocktailFilterRepository
         self.filterCocktailListUsecase = filterCocktailListUsecase
     }
+    
+    //MARK: - Output
+    
+    var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
+    @Published var filteredCocktailList: [CocktailPreview] = []
+    var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { $filteredCocktailList }
+    @Published var textFilterTypeList: [String] = [FilterType.category.descriptionko,
+                                                   FilterType.holdIngredient.descriptionko,
+                                                   FilterType.level.descriptionko,
+                                                   FilterType.abv.descriptionko,
+                                                   FilterType.sugarContent.descriptionko,
+                                                   FilterType.ingredientQuantity.descriptionko]
+    var textFilterTypeListPublisher: Published<[String]>.Publisher { $textFilterTypeList }
+    var filterTypeList: [FilterType] = [FilterType.category,
+                                        FilterType.holdIngredient,
+                                        FilterType.level,
+                                        FilterType.abv,
+                                        FilterType.sugarContent,
+                                        FilterType.ingredientQuantity]
+    var detailFilter: CocktailFilter? = nil
+    var selectedDetailFilterIndexPath: IndexPath?
+    }
+
+//MARK: - Input
+//MARK: - Fetch Data
+
+enum ErrorHandling {
+    case normal
+    case unauthorized
+    case notFound
+    case networkError
+    case docodingError
+    case refreshTokenExpired
 }
 
-//MARK: - Fetch Data
 extension DefaultCocktailFilterViewModel {
     func fetchCocktailList() {
-        filterCocktailListUsecase.fetchCocktailList().sink(receiveCompletion: {
-            print("\($0)")}, receiveValue: { [weak self] in
-                guard let self = self else { return }
-                
-                self.filteredCocktailList = $0.cocktailList
-            }).store(in: &cancelBag)
+        filterCocktailListUsecase.fetchCocktailList()
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.filteredCocktailList = $0.cocktailList.sorted(by: {$0.cocktailNameKo < $1.cocktailNameKo})
+                }
+            ).store(in: &cancelBag)
     }
     
     func fetchCocktailFilter(completion: @escaping () -> Void) {
         cocktailFilterRepository.fetchCocktailFilter()
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { print("\($0)")}, receiveValue: { [weak self] in
-                guard let self = self else { return }
-                
-                self.detailFilter = $0
-                completion()
-            }).store(in: &cancelBag)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.detailFilter = $0
+                    completion()
+                }
+            ).store(in: &cancelBag)
     }
     
     func fetchDetailFilter(filterType: FilterType) -> [String] {
@@ -96,6 +161,7 @@ extension DefaultCocktailFilterViewModel {
 }
 
 //MARK: - Filter Cocktail
+
 extension DefaultCocktailFilterViewModel {
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int) {
         if let index = filterTypeList.firstIndex(of: filterType) {

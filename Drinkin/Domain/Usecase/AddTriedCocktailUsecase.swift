@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol AddTriedCocktailUsecase {
-    func addTriedCocktails(cocktailID: [Int]) -> AnyPublisher<PostResponse, Error>
+    func addTriedCocktails(cocktailID: [Int]) -> AnyPublisher<PostResponse, APIError>
 }
 
 final class DefaultAddTriedCocktailUsecase: AddTriedCocktailUsecase {
@@ -19,7 +19,7 @@ final class DefaultAddTriedCocktailUsecase: AddTriedCocktailUsecase {
         self.additionRepository = additionRepository
     }
     
-    func addTriedCocktails(cocktailID: [Int]) -> AnyPublisher<PostResponse, Error> {
+    func addTriedCocktails(cocktailID: [Int]) -> AnyPublisher<PostResponse, APIError> {
         additionRepository.postTriedCocktail(cocktailIDList: CocktailIDList(cocktailIDList: cocktailID))
     }
 }

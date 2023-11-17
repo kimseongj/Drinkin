@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol LoginFlowDelegate {
+protocol LoginVCFlow {
     func presentTriedCocktailSelectionVC()
 }
 
-class LoginVCCoordinator: Coordinator, LoginFlowDelegate {
+class LoginVCCoordinator: Coordinator, LoginVCFlow {
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -24,7 +24,7 @@ class LoginVCCoordinator: Coordinator, LoginFlowDelegate {
         let loginDIContainer = appDIContainer.makeLoginDIContainer()
         
         let loginViewController = loginDIContainer.makeLoginViewController()
-        loginViewController.delegate = self
+        loginViewController.flowDelegate = self
         loginViewController.modalPresentationStyle = .fullScreen
         navigationController.present(loginViewController, animated: true)
     }

@@ -11,7 +11,7 @@ import Combine
 
 final class CocktailFilterViewController: UIViewController {
     private var viewModel: CocktailFilterViewModel
-    var delegate: CocktailFilterFlowDelegate?
+    var flowDelegate: CocktailFilterVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
@@ -41,6 +41,14 @@ final class CocktailFilterViewController: UIViewController {
         return button
     }()
     
+    @objc
+    private func tapResetFilterButton() {
+        let resetFilterPopupViewController = ResetFilterPopupViewController()
+        resetFilterPopupViewController.delegate = self
+        resetFilterPopupViewController.modalPresentationStyle = .formSheet
+        present(resetFilterPopupViewController, animated: true)
+    }
+    
     private let filterSelectionCollectionView: UICollectionView =  {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -64,6 +72,8 @@ final class CocktailFilterViewController: UIViewController {
         return collectionView
     }()
     
+    //MARK: - Init
+    
     init(viewModel: CocktailFilterViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -72,6 +82,8 @@ final class CocktailFilterViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +100,7 @@ final class CocktailFilterViewController: UIViewController {
         filterBinding()
         configureCocktailDataSource()
         cocktailBinding()
+        errorBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +108,7 @@ final class CocktailFilterViewController: UIViewController {
         AppCoordinator.tabBarController.tabBar.isHidden = false
     }
     
+    //MARK: - ConfigureUI
     
     private func configureUI() {
         let safeArea = view.safeAreaLayoutGuide
@@ -130,7 +144,19 @@ final class CocktailFilterViewController: UIViewController {
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
-    
+}
+
+//MARK: - ResetDelegate
+
+extension CocktailFilterViewController: ResetFilterDelegate {
+    func resetFilter() {
+        viewModel.clearAllFilter()
+    }
+}
+
+//MARK: - ConfigureCollectionView
+
+extension CocktailFilterViewController {
     private func configureFilterSelectionCollectionView() {
         filterSelectionCollectionView.delegate = self
         
@@ -150,24 +176,10 @@ final class CocktailFilterViewController: UIViewController {
     private func makeSelectionFilterCollectionViewEnable() {
         filterSelectionCollectionView.isUserInteractionEnabled = true
     }
-    
-    @objc private func tapResetFilterButton() {
-        let resetFilterPopupViewController = ResetFilterPopupViewController()
-        resetFilterPopupViewController.delegate = self
-        resetFilterPopupViewController.modalPresentationStyle = .formSheet
-        present(resetFilterPopupViewController, animated: true)
-    }
-}
-
-//MARK: - ResetDelegate
-extension CocktailFilterViewController: ResetFilterDelegate {
-    func resetFilter() {
-        viewModel.clearAllFilter()
-        viewModel.fetchCocktailList()
-    }
 }
 
 //MARK: - FilterSelectionCollectionView DiffableDataSource
+
 extension CocktailFilterViewController {
     private func configureFilterDataSource() {
         filterDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: filterSelectionCollectionView) { (collectionView, indexPath, categoryName) in
@@ -198,6 +210,7 @@ extension CocktailFilterViewController {
 }
 
 //MARK: - FilteredCollectionView DiffableDataSource
+
 extension CocktailFilterViewController {
     private func configureCocktailDataSource() {
         cocktailDataSource = UICollectionViewDiffableDataSource<Section, CocktailPreview> (collectionView: filteredCollectionView) { collectionView, indexPath, filteredItem in
@@ -218,6 +231,7 @@ extension CocktailFilterViewController {
 }
 
 //MARK: - Binding
+
 extension CocktailFilterViewController {
     private func filterBinding() {
         viewModel.textFilterTypeListPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -239,6 +253,7 @@ extension CocktailFilterViewController {
 }
 
 //MARK: - FilteredCocktailCollectionView Compositional Layout
+
 extension CocktailFilterViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -260,6 +275,7 @@ extension CocktailFilterViewController {
 }
 
 //MARK: - FilteredCollectionView, FilterSelectionCollectionView Delegate
+
 extension CocktailFilterViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filterSelectionCollectionView {
@@ -268,7 +284,26 @@ extension CocktailFilterViewController: UICollectionViewDelegate {
             present(cocktailFilterModalViewController, animated: false)
         } else {
            let cocktailID = viewModel.filteredCocktailList[indexPath.row].id
-            delegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
+            flowDelegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
         }
+    }
+}
+
+//MARK: - Handling Error
+extension CocktailFilterViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }

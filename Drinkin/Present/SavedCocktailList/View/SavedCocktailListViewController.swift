@@ -23,6 +23,8 @@ final class SavedCocktailListViewController: UIViewController {
         return collectionView
     }()
     
+    //MARK: - Init
+    
     init(viewModel: SavedCocktailListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -32,9 +34,10 @@ final class SavedCocktailListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
         configureNavigationItemTitle()
         configureUI()
         configureDataSource()
@@ -42,15 +45,15 @@ final class SavedCocktailListViewController: UIViewController {
         viewModel.fetchCocktailPreviewDescription()
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
+    //MARK: - ConfigureUI
     
     private func configureNavigationItemTitle() {
         self.navigationItem.title = "저장한 칵테일 목록"
     }
     
     private func configureUI() {
+        view.backgroundColor = .white
+        
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(cocktailListCollectionView)
         
@@ -64,6 +67,7 @@ final class SavedCocktailListViewController: UIViewController {
 }
 
 //MARK: - CocktailListCollectionView DiffableDataSource
+
 extension SavedCocktailListViewController {
     private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, CocktailPreview> (collectionView: cocktailListCollectionView) { collectionView, indexPath, previewDescription in
@@ -84,6 +88,7 @@ extension SavedCocktailListViewController {
 }
 
 //MARK: - Binding
+
 extension SavedCocktailListViewController {
     private func binding() {
         viewModel.previewDescriptionListPublisher.receive(on: RunLoop.main).sink { [weak self] in

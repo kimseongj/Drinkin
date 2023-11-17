@@ -8,7 +8,7 @@
 import Combine
 
 protocol CocktailQueryRepository {
-    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, Error>
+    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, APIError>
     func insertQuery(queryParameter: String, queryValue: String)
     func removeQuery(queryParameter: String)
     func removeAllQuery()

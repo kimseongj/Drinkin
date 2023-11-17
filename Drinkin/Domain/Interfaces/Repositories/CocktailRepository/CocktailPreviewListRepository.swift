@@ -7,5 +7,5 @@
 import Combine
 
 protocol CocktailPreviewListRepository {
-    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, Error>
+    func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, APIError>
 }

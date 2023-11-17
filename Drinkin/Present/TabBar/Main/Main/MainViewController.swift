@@ -9,12 +9,13 @@ import SnapKit
 
 final class MainViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
-    var delegate: MainFlowDelegate?
+    var flowDelegate: MainVCFlow?
     static var login: Bool = false
- 
+    
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
     private let unloggedinMainViewController = UnloggedinMainViewController()
     
+    //MARK: - Init
     init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -24,9 +25,10 @@ final class MainViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        configureBackgroundColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,11 +41,19 @@ final class MainViewController: UIViewController {
             fetchUnloggedinMainView()
         }
     }
-        
+    
+    //MARK: - ConfigureUI
+    private func configureBackgroundColor() {
+        view.backgroundColor = .white
+    }
+}
+
+//MARK: - UnloggedinVC Present
+extension MainViewController {
     private func fetchUnloggedinMainView() {
         addChild(unloggedinMainViewController)
         configureUnloggedinMainView()
-        unloggedinMainViewController.sendDelegate(delegate)
+        unloggedinMainViewController.sendDelegate(flowDelegate)
     }
     
     private func configureUnloggedinMainView() {
@@ -54,16 +64,19 @@ final class MainViewController: UIViewController {
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
-    
+}
+
+//MARK: - LoggedinVC Present
+extension MainViewController {
     private func fetchLoggedinMainView() {
         unloggedinMainViewController.removeFromParent()
         unloggedinMainViewController.view.removeFromSuperview()
         addChild(loggedinMainViewController)
         configureLoggedinMainView()
-        loggedinMainViewController.sendDelegate(delegate)
+        loggedinMainViewController.sendDelegate(flowDelegate)
     }
     
-    private func configureLoggedinMainView() { 
+    private func configureLoggedinMainView() {
         view.addSubview(loggedinMainViewController.view)
         
         loggedinMainViewController.view.snp.makeConstraints {
@@ -71,4 +84,5 @@ final class MainViewController: UIViewController {
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
+    
 }

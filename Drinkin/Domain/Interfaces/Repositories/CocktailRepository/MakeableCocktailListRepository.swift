@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol MakeableCocktailListRepository {
-    func fetchMakeableCocktails() -> AnyPublisher<MakeableCocktailList, Error>
+    func fetchMakeableCocktails() -> AnyPublisher<MakeableCocktailList, APIError>
 }

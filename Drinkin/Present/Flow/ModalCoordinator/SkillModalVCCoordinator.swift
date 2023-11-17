@@ -20,8 +20,8 @@ class SkillModalVCCoordinator: Coordinator {
     func start() {
         let repository: SkillDetailRepository = DefaultSkillDetailRepository(skillID: skillID)
         let viewModel: SkillModalViewModel = DefaultSkillModalViewModel(skillDetailRepository: repository)
-        let vc = SkillModalViewController(viewModel: viewModel)
+        let skillModalViewController = SkillModalViewController(viewModel: viewModel)
         
-        navigationController.present(vc, animated: true)
+        navigationController.present(skillModalViewController, animated: true)
     }
 }

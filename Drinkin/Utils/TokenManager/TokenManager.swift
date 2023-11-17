@@ -7,7 +7,14 @@
 
 import Foundation
 
-class TokenManager {
+protocol TokenManager {
+    func saveToken(tokenType: TokenType, token: String) throws
+    func readToken(tokenType: TokenType) throws -> String?
+    func updateToken(tokenType: TokenType, token: String) throws
+    func deleteToken(tokenType: TokenType) throws
+}
+
+struct DefaultTokenManager: TokenManager {
     func saveToken(tokenType: TokenType, token: String) throws {
         let account = tokenType.description
         guard let password = token.data(using: String.Encoding.utf8) else { return }

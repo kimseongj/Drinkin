@@ -12,7 +12,6 @@ final class SelectedView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureBackgroundColor()
         configureUI()
     }
     
@@ -20,11 +19,10 @@ final class SelectedView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureBackgroundColor() {
-        self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
-    }
-    
     private func configureUI() {
+        self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
+        self.layer.cornerRadius = 4
+        
         self.addSubview(selectCircleView)
         
         selectCircleView.snp.makeConstraints {

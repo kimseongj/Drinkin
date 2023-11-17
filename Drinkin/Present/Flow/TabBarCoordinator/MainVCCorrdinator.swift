@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol MainFlowDelegate: AnyObject {
+protocol MainVCFlow: AnyObject {
     func presentLoginVC()
     func pushTriedCocktailSelectionVC()
     func pushProductDetailVC(cocktailID: Int)
 }
 
-class MainVCCoordinator: Coordinator, MainFlowDelegate {
+class MainVCCoordinator: Coordinator, MainVCFlow {
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -29,14 +29,15 @@ class MainVCCoordinator: Coordinator, MainFlowDelegate {
         let mainViewController = MainViewController(viewModel: cocktailRecommendDIContainer.makeCocktailRecommendViewModel())
         
         mainViewController.makeBlackBackBarButton()
-        mainViewController.delegate = self
+        mainViewController.flowDelegate = self
         navigationController.setViewControllers([mainViewController], animated: false)
         
         return navigationController
     }
     
     func presentLoginVC() {
-        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
+        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController,
+                                                    appDIContainer: appDIContainer)
         loginVCCoordinator.start()
     }
     

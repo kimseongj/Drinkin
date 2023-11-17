@@ -8,84 +8,64 @@
 import Foundation
 
 final class AppDIContainer {
-    private lazy var tokenManager = TokenManager()
-    private lazy var provider = Provider()
+
+    private let provider: Provider
+    private let loginProvider: LoginProvider
+    
+    init(provider: Provider, loginProvider: LoginProvider) {
+        self.provider = provider
+        self.loginProvider = loginProvider
+    }
     
     func makeTriedCocktailSelectionDIContainer() -> TriedCocktailSelectionDIContainer {
-        let dependencies = TriedCocktailSelectionDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return TriedCocktailSelectionDIContainer(dependencies: dependencies)
+        TriedCocktailSelectionDIContainer(provider: provider)
     }
     
     func makeCocktailRecommendDIContainer() -> CocktailRecommendDIContainer {
-        let dependencies = CocktailRecommendDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return CocktailRecommendDIContainer(dependencies: dependencies)
+        CocktailRecommendDIContainer(provider: provider)
     }
     
     func makeProductDetailDIContainer(cocktailID: Int) -> ProductDetailDIContainer {
-        let dependencies = ProductDetailDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, cocktailID: cocktailID)
-        
-        return ProductDetailDIContainer(dependencies: dependencies)
+        ProductDetailDIContainer(provider: provider, cocktailID: cocktailID)
     }
     
     func makeBaseInformationDIContainer(baseID: Int) -> BaseInformationDIContainer {
-        let dependencies = BaseInformationDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, baseID: baseID)
-        
-        return BaseInformationDIContainer(dependencies: dependencies)
+        BaseInformationDIContainer(provider: provider, baseID: baseID)
     }
     
     func makeBaseBrandInformationDIContainer(brandID: Int) -> BaseBrandInformationDIContainer {
-        let dependencies = BaseBrandInformationDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, brandID: brandID)
-        
-        return BaseBrandInformationDIContainer(dependencies: dependencies)
+        BaseBrandInformationDIContainer(provider: provider, brandID: brandID)
     }
     
     func makeMakeableCocktailListDIContainer(brandID: Int) -> MakeableCocktailListDIContainer {
-        let dependencies = MakeableCocktailListDIContainer.Dependencies(tokenManager: tokenManager, provider: provider, brandID: brandID)
-        
-        return MakeableCocktailListDIContainer(dependencies: dependencies)
+        MakeableCocktailListDIContainer(provider: provider, brandID: brandID)
     }
     
     func makeCocktailFilterDICotainer() -> CocktailFilterDICotainer {
-        let dependencies = CocktailFilterDICotainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return CocktailFilterDICotainer(dependencies: dependencies)
+        CocktailFilterDICotainer(provider: provider)
     }
     
     func makeMyHomeBarDIContainer() -> MyHomeBarDIContainer {
-        let dependencies = MyHomeBarDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return MyHomeBarDIContainer(dependencies: dependencies)
+        MyHomeBarDIContainer(provider: provider)
     }
     
     func makeLoginDIContainer() -> LoginDIContainer {
-        let dependencies = LoginDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return LoginDIContainer(dependencies: dependencies)
+        LoginDIContainer(loginProvider: loginProvider)
     }
     
     func makeLoginSettingDIContainer() -> LoginSettingDIContainer {
-        let dependencies = LoginSettingDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return LoginSettingDIContainer(dependencies: dependencies)
+        LoginSettingDIContainer(provider: provider)
     }
     
-    func makeAddIngredientDIContainer() -> AddIngredientDIContainer {
-        let dependencies = AddIngredientDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return AddIngredientDIContainer(dependencies: dependencies)
+    func makeAddItemDIContainer() -> AddItemDIContainer {
+        AddItemDIContainer(provider: provider)
     }
     
     func makeSavedCocktailListDIContainer() -> SavedCocktailListDIContainer {
-        let dependencies = SavedCocktailListDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return SavedCocktailListDIContainer(dependencies: dependencies)
+        SavedCocktailListDIContainer(provider: provider)
     }
     
     func makeUserMadeCocktailListDIContainer() -> UserMadeCocktailListDIContainer {
-        let dependencies = UserMadeCocktailListDIContainer.Dependencies(tokenManager: tokenManager, provider: provider)
-        
-        return UserMadeCocktailListDIContainer(dependencies: dependencies)
+        UserMadeCocktailListDIContainer(provider: provider)
     }
 }

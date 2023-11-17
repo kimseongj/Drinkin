@@ -9,17 +9,15 @@ import Foundation
 import Combine
 
 final class DefaultItemFilterRepository: ItemFilterRepository {
-    let tokenManager: TokenManager
     let provider: Provider
     let endpoint: EndpointMakeable
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable) {
-        self.tokenManager = tokenManager
+    init(provider: Provider, endpoint: EndpointMakeable) {
         self.provider = provider
         self.endpoint = endpoint
     }
     
-    func fetchIngredientFilter() -> AnyPublisher<ItemFilterList, Error> {
+    func fetchIngredientFilter() -> AnyPublisher<ItemFilterList, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

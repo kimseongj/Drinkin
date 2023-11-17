@@ -20,8 +20,8 @@ class ToolModalVCCoordinator: Coordinator {
     func start() {
         let repository: ToolDetailRepository = DefaultToolDetailRepository(toolID: toolID)
         let viewModel: ToolModalViewModel = DefaultToolModalViewModel(toolDetailRepository: repository)
-        let vc = ToolModalViewController(viewModel: viewModel)
+        let toolModalViewController = ToolModalViewController(viewModel: viewModel)
         
-        navigationController.present(vc, animated: true)
+        navigationController.present(toolModalViewController, animated: true)
     }
 }

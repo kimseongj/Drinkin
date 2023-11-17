@@ -9,19 +9,17 @@ import Foundation
 import Combine
 
 final class DefaultBaseDetailRepository: BaseDetailRepository {
-    let tokenManager: TokenManager
     let provider: Provider
     var endpoint: EndpointMakeable
     let baseID: Int
     
-    init(tokenManager: TokenManager, provider: Provider, endpoint: EndpointMakeable, baseID: Int) {
-        self.tokenManager = tokenManager
+    init(provider: Provider, endpoint: EndpointMakeable, baseID: Int) {
         self.provider = provider
         self.endpoint = endpoint
         self.baseID = baseID
     }
     
-    func fetchBaseDetail() -> AnyPublisher<BaseDetail, Error> {
+    func fetchBaseDetail() -> AnyPublisher<BaseDetail, APIError> {
         endpoint.insertPathParmeter(pathParameter: baseID.description)
         
         return provider.fetchData(endpoint: endpoint)

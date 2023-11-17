@@ -8,5 +8,5 @@
 import Combine
 
 protocol CocktailImageListRepository {
-    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, Error>
+    func fetchCocktailImageList() -> AnyPublisher<CocktailImageList, APIError>
 }

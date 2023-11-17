@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 final class HoldCollectionViewCell: UICollectionViewCell {
-    
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardBold, size: 14)

@@ -11,7 +11,7 @@ import Combine
 
 final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
-    var delegate: ProductDetailVCDelegate?
+    var flowDelegate: ProductDetailVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
    
     private let scrollView : UIScrollView = {
@@ -39,8 +39,12 @@ final class ProductDetailViewController: UIViewController {
         
         return button
     }()
-   
     
+    @objc
+    private func tapMarkMadeCocktailButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+   
     private let bookmarkCocktailButton: BookmarkCocktailButton = {
         let button = BookmarkCocktailButton()
         button.addTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
@@ -49,14 +53,11 @@ final class ProductDetailViewController: UIViewController {
     }()
     
     @objc
-    private func tapMarkMadeCocktailButton(_ sender: UIButton) {
-        sender.isSelected.toggle()
-    }
-    
-    @objc
     private func tapBookmarkCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
     }
+    
+    //MARK: - Init
     
     init(viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
@@ -67,11 +68,12 @@ final class ProductDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
         configureUI()
-        introductionView.configureDelegate(delegate: delegate)
+        introductionView.configureDelegate(delegate: flowDelegate)
         binding()
         viewModel.fetchDescription()
     }
@@ -80,11 +82,11 @@ final class ProductDetailViewController: UIViewController {
         AppCoordinator.tabBarController.tabBar.isHidden = true
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        view.backgroundColor = .white
+        
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(introductionView)
@@ -114,6 +116,8 @@ final class ProductDetailViewController: UIViewController {
         }
     }
     
+    //MARK: - Fill Views
+    
     private func fill(with cocktailDescription: CocktailDescription?) {
         guard let validCocktailDescription = cocktailDescription else { return }
         
@@ -132,7 +136,7 @@ extension ProductDetailViewController {
         viewModel.cocktailDescriptionPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.fill(with: $0)
-            self.cocktailInformationView.fillCocktailDescription(cocktailDescription: $0)
+            self.cocktailInformationView.receive(cocktailDescription: $0)
         }.store(in: &cancelBag)
     }
 }

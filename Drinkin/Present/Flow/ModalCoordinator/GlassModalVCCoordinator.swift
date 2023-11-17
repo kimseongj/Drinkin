@@ -20,8 +20,8 @@ class GlassModalVCCoordinator: Coordinator {
     func start() {
         let repository: GlassDetailRepository = DefaultGlassDetailRepository(glassID: glassID)
         let viewModel: GlassModalViewModel = DefaultGlassModalViewModel(glassDetailRepository: repository)
-        let vc = GlassModalViewController(viewModel: viewModel)
+        let glassModalViewController = GlassModalViewController(viewModel: viewModel)
         
-        navigationController.present(vc, animated: true)
+        navigationController.present(glassModalViewController, animated: true)
     }
 }

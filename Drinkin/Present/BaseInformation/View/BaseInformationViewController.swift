@@ -56,6 +56,8 @@ final class BaseInformationViewController: UIViewController {
         return collectionView
     }()
     
+    //MARK: - Init
+    
     init(viewModel: BaseInformationViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -65,9 +67,10 @@ final class BaseInformationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
         configureUI()
         configureDataSource()
         configureBaseBrandCollectionView()
@@ -80,11 +83,11 @@ final class BaseInformationViewController: UIViewController {
         AppCoordinator.tabBarController.tabBar.isHidden = true
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        view.backgroundColor = .white
+        
         let safeArea = view.safeAreaLayoutGuide
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
@@ -120,6 +123,8 @@ final class BaseInformationViewController: UIViewController {
         }
     }
     
+    //MARK: - Fill View
+    
     private func fill(with baseDescription: BaseDetail?) {
         guard let validBaseDescription = baseDescription else { return }
         
@@ -127,43 +132,19 @@ final class BaseInformationViewController: UIViewController {
         descriptionLabel.text = validBaseDescription.baseDescription
         applySnapshot(brandImageDescriptionList: validBaseDescription.brandList)
     }
-    
+}
+
+//MARK: - ConfigureCollectionVIew
+
+extension BaseInformationViewController {
     private func configureBaseBrandCollectionView() {
         baseBrandCollectionView.delegate = self
     }
 }
 
-//MARK: - BaseBrandCollectionView Delegate
-extension BaseInformationViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let brandID = viewModel.returnBrandID(index: indexPath.row) 
-        flowDelegate?.pushBaseBrandInformationVC(brandID: brandID)
-    }
-}
-
-//MARK: - CompositionalLayout
-extension BaseInformationViewController {
-    private func configureCompositionalLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout {
-            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
-            
-            let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
-            
-            return section
-        }
-        return layout
-    }
-}
 
 //MARK: - DiffableDataSource
+
 extension BaseInformationViewController {
     private func configureDataSource() {
         brandImageDescriptionDataSource = UICollectionViewDiffableDataSource<Section,BrandImageDescription> (collectionView: baseBrandCollectionView) { (collectionView, indexPath, brandImageDescription) -> UICollectionViewCell? in
@@ -198,6 +179,7 @@ extension BaseInformationViewController {
 }
 
 //MARK: - Binding
+
 extension BaseInformationViewController {
     private func binding() {
         viewModel.baseDetailPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -208,4 +190,34 @@ extension BaseInformationViewController {
     }
 }
 
+//MARK: - CompositionalLayout
 
+extension BaseInformationViewController {
+    private func configureCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout {
+            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+            
+            return section
+        }
+        return layout
+    }
+}
+
+//MARK: - BaseBrandCollectionView Delegate
+
+extension BaseInformationViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let brandID = viewModel.returnBrandID(index: indexPath.row)
+        flowDelegate?.pushBaseBrandInformationVC(brandID: brandID)
+    }
+}

@@ -41,16 +41,16 @@ final class GlassModalViewController: UIViewController {
         return label
     }()
     
-    private let capacityLabel: UILabel = {
+    private let volumeLabel: UILabel = {
         let label = UILabel()
-        label.text = "용량"
+        label.text = InformationStrings.volume
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
         label.textAlignment = .left
         
         return label
     }()
     
-    private let capacityDescriptionLabel: UILabel = {
+    private let volumeDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardBold, size: 15)
         
@@ -59,7 +59,7 @@ final class GlassModalViewController: UIViewController {
     
     private let purchaseLabel: UILabel = {
         let label = UILabel()
-        label.text = "구매처"
+        label.text = InformationStrings.purchase
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
         
         return label
@@ -72,6 +72,8 @@ final class GlassModalViewController: UIViewController {
         return label
     }()
     
+    //MARK: - Init
+    
     init(viewModel: GlassModalViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -81,9 +83,10 @@ final class GlassModalViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
         configureUI()
         viewModel.fetchGlassDetail { [weak self] in
             guard let self = self else { return }
@@ -92,17 +95,17 @@ final class GlassModalViewController: UIViewController {
         }
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
+    //MARK: - ConfigureUI
     
     private func configureUI() {
+        view.backgroundColor = .white
+        
         view.addSubview(imageView)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(informationLabel)
-        view.addSubview(capacityLabel)
-        view.addSubview(capacityDescriptionLabel)
+        view.addSubview(volumeLabel)
+        view.addSubview(volumeDescriptionLabel)
         view.addSubview(purchaseLabel)
         view.addSubview(purchaseLinkLabel)
         
@@ -128,18 +131,18 @@ final class GlassModalViewController: UIViewController {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        capacityLabel.snp.makeConstraints {
+        volumeLabel.snp.makeConstraints {
             $0.top.equalTo(informationLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
         }
         
-        capacityDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(capacityLabel.snp.top)
-            $0.leading.equalTo(capacityLabel.snp.trailing).offset(16)
+        volumeDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(volumeLabel.snp.top)
+            $0.leading.equalTo(volumeLabel.snp.trailing).offset(16)
         }
         
         purchaseLabel.snp.makeConstraints {
-            $0.top.equalTo(capacityLabel.snp.bottom).offset(20)
+            $0.top.equalTo(volumeLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
         }
         
@@ -149,12 +152,13 @@ final class GlassModalViewController: UIViewController {
         }
     }
 
+    //MARK: - Fill View
+    
     private func fill(glassDetail: GlassDetail) {
         imageView.load(urlString:  glassDetail.imageURI)
         titleLabel.text = glassDetail.glassName
         descriptionLabel.text = glassDetail.description
-        capacityDescriptionLabel.text = glassDetail.volume
+        volumeDescriptionLabel.text = glassDetail.volume
         purchaseLinkLabel.text = glassDetail.purchaseLink
     }
 }
-

@@ -9,17 +9,17 @@ import Foundation
 import Combine
 
 protocol AddItemUsecase {
-    func addItems(itemList: [String]) -> AnyPublisher<HoldedItem, Error>
+    func addItems(itemList: [String]) -> AnyPublisher<HoldedItem, APIError>
 }
 
 final class DefaultAddItemUsecase: AddItemUsecase {
-    private let itemRepository: ItemRepository
+    private let additionRepository: AdditionRepository
     
-    init(itemRepository: ItemRepository) {
-        self.itemRepository = itemRepository
+    init(additionRepository: AdditionRepository) {
+        self.additionRepository = additionRepository
     }
     
-    func addItems(itemList: [String]) -> AnyPublisher<HoldedItem, Error> {
-        return itemRepository.postIngredientList(receipeItems: itemList)
+    func addItems(itemList: [String]) -> AnyPublisher<HoldedItem, APIError> {
+        return additionRepository.postHoldedItem(items: itemList)
     }
 }

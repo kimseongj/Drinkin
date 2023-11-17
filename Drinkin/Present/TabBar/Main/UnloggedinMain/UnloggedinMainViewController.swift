@@ -9,25 +9,25 @@ import UIKit
 import SnapKit
 
 final class UnloggedinMainViewController: UIViewController {
-    private weak var delegate: MainFlowDelegate?
+    weak var flowDelegate: MainVCFlow?
 
-    private let logoImage1: UIImageView = {
+    private let logoImage: UIImageView = {
         let logoImage = UIImageView()
-        logoImage.image = UIImage(named: "drinkinLogo")
+        logoImage.image = ImageStorage.drinkinLogo
         
         return logoImage
     }()
     
     private let skeletonView: UIImageView = {
         let skeletonView = UIImageView()
-        skeletonView.image = UIImage(named: "skeletonView")
+        skeletonView.image = ImageStorage.skeletonViewImage
         
         return skeletonView
     }()
     
     private let exampleCocktailImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "exampleCocktail")
+        imageView.image = ImageStorage.cocktaiImage
         
         return imageView
     }()
@@ -63,28 +63,27 @@ final class UnloggedinMainViewController: UIViewController {
     }()
     
     @objc func startButtonAction() {
-        delegate?.presentLoginVC()
+        flowDelegate?.presentLoginVC()
     }
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
-        configureBackgroundColor()
         configureUI()
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
-    
+    //MARK: - ConfigureUI
     private func configureUI() {
+        view.backgroundColor = .white
+        
         let safeArea = view.safeAreaLayoutGuide
-        view.addSubview(logoImage1)
+        view.addSubview(logoImage)
         view.addSubview(skeletonView)
         skeletonView.addSubview(exampleCocktailImageView)
         skeletonView.addSubview(recommendLabel1)
         skeletonView.addSubview(recommendLabel2)
         view.addSubview(startButton)
         
-        logoImage1.snp.makeConstraints {
+        logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(safeArea)
             $0.height.equalTo(25)
@@ -122,7 +121,8 @@ final class UnloggedinMainViewController: UIViewController {
         }
     }
     
-    func sendDelegate(_ delegate: MainFlowDelegate?) {
-        self.delegate = delegate
+    //MARK: - ViewController Delegate 
+    func sendDelegate(_ delegate: MainVCFlow?) {
+        self.flowDelegate = delegate
     }
 }
