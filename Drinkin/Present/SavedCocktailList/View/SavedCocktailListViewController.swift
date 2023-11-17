@@ -42,6 +42,7 @@ final class SavedCocktailListViewController: UIViewController {
         configureUI()
         configureDataSource()
         binding()
+        errorBinding()
         viewModel.fetchCocktailPreviewDescription()
     }
     
@@ -100,6 +101,7 @@ extension SavedCocktailListViewController {
 }
 
 //MARK: - CocktailListCollectionView Compositional Layout
+
 extension SavedCocktailListViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -117,5 +119,25 @@ extension SavedCocktailListViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+}
+
+//MARK: - Handling Error
+
+extension SavedCocktailListViewController {
+    func errorBinding() {
+        viewModel.errorHandlingPublisher
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] in
+            guard let self = self else { return }
+            
+            switch $0 {
+            case .noError:
+                break
+            default:
+                print("\($0)")
+                self.showAlert(errorType: $0)
+            }
+        }).store(in: &cancelBag)
     }
 }
