@@ -121,6 +121,42 @@ struct DefaultProvider: Provider {
                     return error as? APIError ?? APIError.networkError(error)
                 }
             }
+            .catch { error in
+                if case APIError.unauthorized = error {
+                    return renewAccessTokenPublisher().flatMap { accessToken in
+                        var newRequest = request
+                        //newRequest!.setValue("Bearer \("ASD")", forHTTPHeaderField: "Authorization")
+                        
+                        return URLSession.shared.dataTaskPublisher(for: newRequest!)
+                            .tryMap { data, response in
+                                let httpResponse = response as! HTTPURLResponse
+                                switch httpResponse.statusCode {
+                                case 200..<300:
+                                    return data
+                                case 401:
+                                    throw APIError.unauthorized
+                                case 404:
+                                    throw APIError.notFound
+                                default:
+                                    throw APIError.networkError(NSError(domain: "Network", code: httpResponse.statusCode, userInfo: nil))
+                                }
+                            }
+                            .decode(type: T.self, decoder: JSONDecoder())
+                            .mapError { error in
+                                switch error {
+                                case is URLError:
+                                    return APIError.networkError(error)
+                                case is DecodingError:
+                                    return APIError.decodingError
+                                default:
+                                    return error as? APIError ?? APIError.networkError(error)
+                                }
+                            }.eraseToAnyPublisher()
+                    }.eraseToAnyPublisher()
+                }
+                
+                return Fail(error: error).eraseToAnyPublisher()
+            }
             .eraseToAnyPublisher()
     }
     
