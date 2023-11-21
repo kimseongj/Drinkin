@@ -35,6 +35,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     @Published var filteredSelectableCocktailList: [SelectableImageDescription] = []
     
     //MARK: - Init
+    
     init(filterTriedCocktailUsecase: FilterTriedCocktailUsecase,
          addTriedCocktailUsecase: AddTriedCocktailUsecase) {
         self.filterTriedCocktailUsecase = filterTriedCocktailUsecase
@@ -42,6 +43,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     
     var categoryList: [String] = [CategoryListStrings.whole,
