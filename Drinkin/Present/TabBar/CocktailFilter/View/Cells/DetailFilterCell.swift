@@ -28,7 +28,7 @@ final class DetailFilterCell: UITableViewCell {
     
     private let checkImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageStorage.checkIcon
+        imageView.image = ImageStorage.changeableCheckIcon
         imageView.tintColor = .white
         
         return imageView
