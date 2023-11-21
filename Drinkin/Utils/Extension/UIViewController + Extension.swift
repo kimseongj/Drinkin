@@ -8,11 +8,15 @@
 import UIKit
 
 extension UIViewController {
+    //MARK: - Make Custom NavigationBackBarButton
+    
     func makeBlackBackBarButton() {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
+    
+    //MARK: - Make Alert
     
     func showAlert(errorType: APIError) {
         switch errorType {
@@ -40,5 +44,32 @@ extension UIViewController {
         alertController.addAction(okAction)
         
         return alertController
+    }
+    
+    //MARK: - Redirect To LoggedOut Screen
+    
+    func redirectToLoggedOutScreen() {
+        if let tabBarController = self.tabBarController {
+            if let firstNavController = tabBarController.viewControllers?.first as? UINavigationController,
+               let firstRootViewController = firstNavController.viewControllers.first {
+                
+                firstNavController.popToViewController(firstRootViewController, animated: true)
+                
+                tabBarController.selectedIndex = 0
+            }
+        }
+    }
+    
+    //MARK: - HandlingError
+    
+    func handlingError(errorType: APIError) {
+        switch errorType {
+        case .noError:
+            return
+        case .refreshTokenExpired:
+            redirectToLoggedOutScreen()
+        default:
+            showAlert(errorType: errorType)
+        }
     }
 }
