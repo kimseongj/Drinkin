@@ -108,10 +108,10 @@ final class ItemCell: UICollectionViewCell {
     
     //MARK: - Fill Cell
     
-    func fill(with itemPreview: ItemPreview) {
-        itemImageView.load(urlString: itemPreview.imageURI)
-        itemTitleLabel.text = itemPreview.itemName
-        categoryLabel.text = itemPreview.category
+    func fill(with item: Item) {
+        itemImageView.load(urlString: item.imageURI)
+        itemTitleLabel.text = item.itemName
+        categoryLabel.text = item.detail
     }
     
     func presentHoldItem() {

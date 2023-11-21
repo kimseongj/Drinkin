@@ -1,5 +1,5 @@
 //
-//  AddItemsPage.swift
+//  ItemSelectionList.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/09/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AddItemsPage: Codable {
+struct ItemSelectionList: Codable {
     let itemFilterList: [ItemFilter]
     let itemList: [Item]
 

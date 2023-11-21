@@ -24,7 +24,15 @@ struct DefaultProvider: Provider {
     
     func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, APIError> {
         var request = endpoint.makeURLRequest()
-        //request?.setValue("Bearer \("newAccessToken.accessToken")", forHTTPHeaderField: "Authorization")
+        
+        do {
+            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
+                request!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            }
+            
+        } catch {
+            print("keychain Error")
+        }
         
         return URLSession.shared.dataTaskPublisher(for: request!)
             .tryMap { data, response in
@@ -55,7 +63,11 @@ struct DefaultProvider: Provider {
                 if case APIError.unauthorized = error {
                     return renewAccessTokenPublisher().flatMap { accessToken in
                         var newRequest = request
-                        //newRequest!.setValue("Bearer \("ASD")", forHTTPHeaderField: "Authorization")
+                        do {
+                            try newRequest!.setValue("Bearer \(tokenManager.readToken(tokenType: TokenType.accessToken))", forHTTPHeaderField: "Authorization")
+                        } catch {
+                            print("keychain Error")
+                        }
                         
                         return URLSession.shared.dataTaskPublisher(for: newRequest!)
                             .tryMap { data, response in
@@ -125,7 +137,12 @@ struct DefaultProvider: Provider {
                 if case APIError.unauthorized = error {
                     return renewAccessTokenPublisher().flatMap { accessToken in
                         var newRequest = request
-                        //newRequest!.setValue("Bearer \("ASD")", forHTTPHeaderField: "Authorization")
+                        
+                        do {
+                            try newRequest!.setValue("Bearer \(tokenManager.readToken(tokenType: TokenType.accessToken))", forHTTPHeaderField: "Authorization")
+                        } catch {
+                            print("keychain Error")
+                        }
                         
                         return URLSession.shared.dataTaskPublisher(for: newRequest!)
                             .tryMap { data, response in

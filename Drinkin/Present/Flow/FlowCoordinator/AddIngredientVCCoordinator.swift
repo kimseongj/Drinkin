@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddIngredientVCCoordinator: Coordinator {
+class ItemSelectionVCCoordinator: Coordinator {
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     
@@ -17,9 +17,9 @@ class AddIngredientVCCoordinator: Coordinator {
     }
     
     func start() {
-        let addItemDIContainer = appDIContainer.makeAddItemDIContainer()
-        let addItemViewController = addItemDIContainer.makeAddItemViewController()
+        let itemSelectionDIContainer = appDIContainer.makeItemSelectionDIContainer()
+        let itemSelectionViewController = itemSelectionDIContainer.makeItemSelectionViewController()
         
-        navigationController.pushViewController(addItemViewController, animated: true)
+        navigationController.pushViewController(itemSelectionViewController, animated: true)
     }
 }

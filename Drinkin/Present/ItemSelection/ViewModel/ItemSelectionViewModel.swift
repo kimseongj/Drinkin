@@ -1,5 +1,5 @@
 //
-//  AddIngredientViewModel.swift
+//  ItemSelectionViewModel.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/09/22.
@@ -8,9 +8,8 @@
 import Foundation
 import Combine
 
-protocol AddItemViewModelInput {
-    func fetchItemFilter()
-    func fetchItemList()
+protocol ItemSelectionViewModelInput {
+    func fetchItemData()
     func filterItems(itemCategory: String)
     func selectItem(index: Int)
     func deselectItem(index: Int)
@@ -18,39 +17,36 @@ protocol AddItemViewModelInput {
     func addSelectedItems(completion: @escaping () -> Void)
 }
 
-protocol AddItemViewModelOutput {
+protocol ItemSelectionViewModelOutput {
     var errorHandlingPublisher: Published<APIError>.Publisher { get }
-    var itemFilterList: [String] { get }
-    var itemFilterPublisher: Published<[String]>.Publisher { get }
-    var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { get }
+    var itemFilterList: [ItemFilter] { get }
+    var itemFilterPublisher: Published<[ItemFilter]>.Publisher { get }
+    var filteredItemListPublisher: Published<[Item]>.Publisher { get }
 }
 
-typealias AddItemViewModel = AddItemViewModelInput & AddItemViewModelOutput
+typealias ItemSelectionViewModel = ItemSelectionViewModelInput & ItemSelectionViewModelOutput
 
-final class DefaultAddItemtViewModel: AddItemViewModel {
-    private let ingredientFilterRepository: ItemFilterRepository
+final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
     private let filterItemUsecase: FilterItemUsecase
     private let addItemUsecase: AddItemUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
-    @Published var itemList: [ItemPreview] = []
-    @Published var filteredItemList: [ItemPreview] = []
+    @Published var itemList: [Item] = []
+    @Published var filteredItemList: [Item] = []
     var alreadySelectedItemList: [String] = []
     var selectedItemList: [String] = []
     
     //MARK: - Output
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
-    @Published var itemFilterList: [String] = []
-    var itemFilterPublisher: Published<[String]>.Publisher { $itemFilterList }
-    var filteredItemListPublisher: Published<[ItemPreview]>.Publisher { $filteredItemList }
+    @Published var itemFilterList: [ItemFilter] = []
+    var itemFilterPublisher: Published<[ItemFilter]>.Publisher { $itemFilterList }
+    var filteredItemListPublisher: Published<[Item]>.Publisher { $filteredItemList }
     
     //MARK: - Init
-    init(ingredientFilterRepository: ItemFilterRepository,
-         filterItemUsecase: FilterItemUsecase,
+    init(filterItemUsecase: FilterItemUsecase,
          addItemUsecase: AddItemUsecase
     ) {
-        self.ingredientFilterRepository = ingredientFilterRepository
         self.filterItemUsecase = filterItemUsecase
         self.addItemUsecase = addItemUsecase
     }
@@ -58,10 +54,9 @@ final class DefaultAddItemtViewModel: AddItemViewModel {
 
 //MARK: - Input
 //MARK: - Fetch Data
-extension DefaultAddItemtViewModel {
-    
-    func fetchItemFilter() {
-        ingredientFilterRepository.fetchIngredientFilter()
+extension DefaultItemSelectiontViewModel {
+    func fetchItemData() {
+        filterItemUsecase.fetchItemData()
             .sink(
                 receiveCompletion: { [weak self] completion in
                     guard let self = self else { return }
@@ -88,37 +83,7 @@ extension DefaultAddItemtViewModel {
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
                     self.itemFilterList = $0.itemFilterList
-                }
-            ).store(in: &cancelBag)
-    }
-    
-    func fetchItemList() {
-        filterItemUsecase.fetchItemList()
-            .sink(
-                receiveCompletion: { [weak self] completion in
-                    guard let self = self else { return }
-                    switch completion {
-                    case .failure(let error):
-                        switch error {
-                        case .unauthorized:
-                            self.errorType = .unauthorized
-                        case .notFound:
-                            self.errorType = .notFound
-                        case .networkError(_):
-                            self.errorType = .networkError(error)
-                        case .decodingError:
-                            self.errorType = .decodingError
-                        case .refreshTokenExpired:
-                            self.errorType = .refreshTokenExpired
-                        case .noError:
-                            break
-                        }
-                    case .finished:
-                        return
-                    }
-                },
-                receiveValue: { [weak self] in
-                    guard let self = self else { return }
+                    
                     self.itemList = $0.itemList
                     self.filteredItemList = $0.itemList
                     self.fetchAlreadySelectedItemList(itemList: $0.itemList)
@@ -126,7 +91,7 @@ extension DefaultAddItemtViewModel {
             ).store(in: &cancelBag)
     }
     
-    private func fetchAlreadySelectedItemList(itemList: [ItemPreview]) {
+    private func fetchAlreadySelectedItemList(itemList: [Item]) {
         alreadySelectedItemList = itemList.filter {
             $0.hold == true
         }.map {
@@ -136,7 +101,7 @@ extension DefaultAddItemtViewModel {
 }
 
 //MARK: - FilterItem
-extension DefaultAddItemtViewModel {
+extension DefaultItemSelectiontViewModel {
     func filterItems(itemCategory: String) {
         filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList) {
             self.filteredItemList = $0
@@ -145,7 +110,7 @@ extension DefaultAddItemtViewModel {
 }
 
 //MARK: - Select & Deselect Item
-extension DefaultAddItemtViewModel {
+extension DefaultItemSelectiontViewModel {
     func selectItem(index: Int) {
         let selectedItemName = filteredItemList[index].itemName
         
@@ -164,13 +129,14 @@ extension DefaultAddItemtViewModel {
 }
 
 //MARK: - AddSelectedItem
-extension DefaultAddItemtViewModel {
+
+extension DefaultItemSelectiontViewModel {
     func addSelectedItems(completion: @escaping () -> Void) {
         let isSelectedItemChanged = compareSelectedItem()
         
         if isSelectedItemChanged {
             addItemUsecase.addItems(itemList: selectedItemList)
-                .sink(receiveCompletion: { print("\($0)")},
+                .receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")},
                       receiveValue: { _ in
                     completion()
                 }).store(in: &cancelBag)

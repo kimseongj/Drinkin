@@ -57,8 +57,8 @@ final class AppDIContainer {
         LoginSettingDIContainer(provider: provider)
     }
     
-    func makeAddItemDIContainer() -> AddItemDIContainer {
-        AddItemDIContainer(provider: provider)
+    func makeItemSelectionDIContainer() -> ItemSelectionDIContainer {
+        ItemSelectionDIContainer(provider: provider)
     }
     
     func makeSavedCocktailListDIContainer() -> SavedCocktailListDIContainer {
