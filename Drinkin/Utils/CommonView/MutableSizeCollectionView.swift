@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MutableSizeCollectionView: UICollectionView {
+final class MutableSizeCollectionView: UICollectionView {
     override var contentSize: CGSize {
         didSet {
             if oldValue.height != self.contentSize.height {

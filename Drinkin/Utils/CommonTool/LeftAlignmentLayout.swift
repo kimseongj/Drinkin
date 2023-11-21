@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
+final class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let cellSpacing: CGFloat = 8
         self.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
