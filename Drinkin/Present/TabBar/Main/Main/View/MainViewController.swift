@@ -16,6 +16,7 @@ final class MainViewController: UIViewController {
     private let unloggedinMainViewController = UnloggedinMainViewController()
     
     //MARK: - Init
+    
     init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -26,6 +27,7 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackgroundColor()
@@ -43,12 +45,14 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - ConfigureUI
+    
     private func configureBackgroundColor() {
         view.backgroundColor = .white
     }
 }
 
 //MARK: - UnloggedinVC Present
+
 extension MainViewController {
     private func fetchUnloggedinMainView() {
         addChild(unloggedinMainViewController)
@@ -67,6 +71,7 @@ extension MainViewController {
 }
 
 //MARK: - LoggedinVC Present
+
 extension MainViewController {
     private func fetchLoggedinMainView() {
         unloggedinMainViewController.removeFromParent()
