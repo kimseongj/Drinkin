@@ -59,6 +59,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
 
 //MARK: - Input
 //MARK: - Fetch Data
+
 extension DefaultTriedCocktailSelectionViewModel {
     func fetchCocktailImageList() {
         filterTriedCocktailUsecase.fetchCocktailImageList()
@@ -105,6 +106,7 @@ extension DefaultTriedCocktailSelectionViewModel {
 }
 
 //MARK: - Filter Cocktail
+
 extension DefaultTriedCocktailSelectionViewModel {
     func filterCocktailList(cocktailCategoryIndex: Int) {
         let cocktailCategory = categoryList[cocktailCategoryIndex]
@@ -114,6 +116,7 @@ extension DefaultTriedCocktailSelectionViewModel {
 }
 
 //MARK: - Select & Deselect Cocktail
+
 extension DefaultTriedCocktailSelectionViewModel {
     func selectCocktail(index: Int) {
         let selectedID = filteredSelectableCocktailList[index].id
@@ -133,6 +136,7 @@ extension DefaultTriedCocktailSelectionViewModel {
 }
 
 //MARK: - Add TriedCocktail
+
 extension DefaultTriedCocktailSelectionViewModel {
     func checkCocktailSelected() -> Bool {
         let result = selectableCocktailList.contains { $0.isSelected == true }
