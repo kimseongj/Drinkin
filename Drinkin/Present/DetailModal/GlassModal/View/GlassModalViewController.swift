@@ -150,7 +150,7 @@ final class GlassModalViewController: UIViewController {
             $0.leading.equalTo(purchaseLabel.snp.trailing).offset(16)
         }
     }
-
+    
     //MARK: - Fill View
     
     private func fill(glassDetail: GlassDetail) {
@@ -179,15 +179,8 @@ extension GlassModalViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

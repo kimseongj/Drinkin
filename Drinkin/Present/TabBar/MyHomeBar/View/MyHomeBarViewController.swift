@@ -106,7 +106,7 @@ final class MyHomeBarViewController: UIViewController {
         let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
         collectionView.register(HoldedItemCell.self, forCellWithReuseIdentifier: HoldedItemCell.identifier)
         collectionView.backgroundColor = .white
- 
+        
         return collectionView
     }()
     
@@ -173,7 +173,7 @@ final class MyHomeBarViewController: UIViewController {
     private func tapUserMadeCocktailListButton() {
         flowDelegate?.pushUserMadeCocktailListVC()
     }
-        
+    
     //MARK: - Init
     
     init(viewModel: MyHomeBarViewModel) {
@@ -381,7 +381,7 @@ extension MyHomeBarViewController {
         if holdedItemCollectionView.isHidden {
             holdedItemCollectionView.isHidden = false
         }
-            
+        
         if smallAddButton.isHidden {
             smallAddButton.isHidden = false
         }
@@ -465,15 +465,8 @@ extension MyHomeBarViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

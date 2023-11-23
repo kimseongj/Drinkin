@@ -13,7 +13,7 @@ final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
     var flowDelegate: ProductDetailVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
-   
+    
     private let scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
@@ -44,7 +44,7 @@ final class ProductDetailViewController: UIViewController {
     private func tapMarkMadeCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
     }
-   
+    
     private lazy var bookmarkCocktailButton: BookmarkCocktailButton = {
         let button = BookmarkCocktailButton()
         button.addTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
@@ -150,8 +150,8 @@ extension ProductDetailViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
+                guard let self = self else { return }
                 self.handlingError(errorType: $0)
-        }).store(in: &cancelBag)
+            }).store(in: &cancelBag)
     }
 }

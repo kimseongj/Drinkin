@@ -38,10 +38,10 @@ final class CocktailRecommendViewController: UIViewController {
         collectionView.clipsToBounds = true
         collectionView.contentInset = calculateContentInset()
         collectionView.isScrollEnabled = true
-
+        
         return collectionView
     }()
- 
+    
     //MARK: - Init
     init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
@@ -70,7 +70,7 @@ final class CocktailRecommendViewController: UIViewController {
         view.addSubview(logoImage)
         view.addSubview(recommendCocktailCollectionView)
         
-        logoImage.snp.makeConstraints { 
+        logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(safeArea)
             $0.height.equalTo(15)
@@ -85,7 +85,7 @@ final class CocktailRecommendViewController: UIViewController {
         }
     }
     
-    //MARK: - SendDelegate 
+    //MARK: - SendDelegate
     func sendDelegate(_ delegate: MainVCFlow?) {
         self.flowDelegate = delegate
     }
@@ -153,16 +153,16 @@ extension CocktailRecommendViewController {
 
 //MARK: - CollectionViewFlowLayout
 extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
-  func scrollViewWillEndDragging(
-    _ scrollView: UIScrollView,
-    withVelocity velocity: CGPoint,
-    targetContentOffset: UnsafeMutablePointer<CGPoint>
-  ) {
-    let scrolledOffsetX = targetContentOffset.pointee.x + scrollView.contentInset.left
-    let cellWidth = calculateItemSize().width + 18
-    let index = round(scrolledOffsetX / cellWidth)
-    targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
-  }
+    func scrollViewWillEndDragging(
+        _ scrollView: UIScrollView,
+        withVelocity velocity: CGPoint,
+        targetContentOffset: UnsafeMutablePointer<CGPoint>
+    ) {
+        let scrolledOffsetX = targetContentOffset.pointee.x + scrollView.contentInset.left
+        let cellWidth = calculateItemSize().width + 18
+        let index = round(scrolledOffsetX / cellWidth)
+        targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
+    }
 }
 
 //MARK: - Handling Error
@@ -172,15 +172,8 @@ extension CocktailRecommendViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

@@ -12,7 +12,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
     private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: TriedCocktailSelectionViewModel
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectableImageDescription>?
-   
+    
     private let mainLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -222,7 +222,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
         return categoryListCount
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell { 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         let categoryListName = viewModel.categoryList[indexPath.row]
         
@@ -311,7 +311,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
         } else {
             
             if let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell {
-            cell.presentSelected()
+                cell.presentSelected()
             }
             viewModel.selectCocktail(index: indexPath.row)
             renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())
@@ -336,15 +336,8 @@ extension TriedCocktailSelectionViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }
