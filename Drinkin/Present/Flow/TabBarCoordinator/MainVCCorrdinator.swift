@@ -25,8 +25,8 @@ class MainVCCoordinator: Coordinator, MainVCFlow {
     func start() { }
     
     func startPush() -> UINavigationController {
-        let cocktailRecommendDIContainer = appDIContainer.makeCocktailRecommendDIContainer()
-        let mainViewController = MainViewController(viewModel: cocktailRecommendDIContainer.makeCocktailRecommendViewModel())
+        let mainDIContainer = appDIContainer.makeMainDIContainer()
+        let mainViewController = mainDIContainer.makeMainViewController()
         
         mainViewController.makeBlackBackBarButton()
         mainViewController.flowDelegate = self
