@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct LoginManager {
-    let tokenManager = DefaultTokenManager()
-    private func isAuthenticated() -> Bool {
+final class LoginManager {
+    static let shared = LoginManager()
+    let tokenManager: TokenManager = DefaultTokenManager()
+    
+    private init() {}
+    
+    func isAuthenticated() -> Bool {
         do {
             let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken)
             return accessToken != nil
