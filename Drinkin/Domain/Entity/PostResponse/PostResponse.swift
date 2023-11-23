@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct PostResponse: Codable {
+struct PostResponse: Decodable {
     let result: String
 }

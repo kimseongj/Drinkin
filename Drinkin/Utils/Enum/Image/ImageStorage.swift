@@ -15,6 +15,7 @@ enum ImageStorage {
     static let myBarIcon = UIImage(named: "my_bar_icon")
     static let myBarFillIcon = UIImage(named: "my_bar_fill_icon")
     static let checkIcon = UIImage(named: "check_icon")
+    static let changeableCheckIcon = UIImage(systemName: "checkmark")
     static let bookmarkIcon = UIImage(named: "bookmark_icon")
     static let bookmarkFillIcon = UIImage(named: "bookmark_fill_icon")
     static let heartIcon = UIImage(named: "heart_icon")

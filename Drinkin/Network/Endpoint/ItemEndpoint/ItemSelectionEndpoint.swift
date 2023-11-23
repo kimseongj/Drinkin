@@ -1,5 +1,5 @@
 //
-//  ItemListEndpoint.swift
+//  ItemSelectionEndpoint.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/22.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct ItemListEndpoint: EndpointMakeable {
-    var baseURL: String = "https://32e7f79c-3b44-4fc1-a3f1-6332dabc37b4.mock.pstmn.io"
+struct ItemSelectionEndpoint: EndpointMakeable {
+    var baseURL: String = "http://13.209.22.43:8000"
 
-    var path: String = "/itemlist"
+    var path: String = "/v1/add-item-page"
     
     var method: String = HTTPMethod.get.rawValue
     

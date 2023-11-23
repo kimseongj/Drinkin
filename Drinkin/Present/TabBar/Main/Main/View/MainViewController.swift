@@ -10,12 +10,12 @@ import SnapKit
 final class MainViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
     var flowDelegate: MainVCFlow?
-    static var login: Bool = false
     
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
     private let unloggedinMainViewController = UnloggedinMainViewController()
     
     //MARK: - Init
+    
     init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -26,6 +26,7 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackgroundColor()
@@ -35,7 +36,7 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(true)
         AppCoordinator.tabBarController.tabBar.isHidden = false
         
-        if MainViewController.login {
+        if LoginManager.shared.isAuthenticated() {
             fetchLoggedinMainView()
         } else {
             fetchUnloggedinMainView()
@@ -43,14 +44,21 @@ final class MainViewController: UIViewController {
     }
     
     //MARK: - ConfigureUI
+    
     private func configureBackgroundColor() {
         view.backgroundColor = .white
     }
 }
 
 //MARK: - UnloggedinVC Present
+
 extension MainViewController {
     private func fetchUnloggedinMainView() {
+        if self.children.contains(loggedinMainViewController) {
+                    loggedinMainViewController.removeFromParent()
+                    loggedinMainViewController.view.removeFromSuperview()
+        }
+    
         addChild(unloggedinMainViewController)
         configureUnloggedinMainView()
         unloggedinMainViewController.sendDelegate(flowDelegate)
@@ -67,10 +75,14 @@ extension MainViewController {
 }
 
 //MARK: - LoggedinVC Present
+
 extension MainViewController {
     private func fetchLoggedinMainView() {
-        unloggedinMainViewController.removeFromParent()
-        unloggedinMainViewController.view.removeFromSuperview()
+        if self.children.contains(unloggedinMainViewController) {
+                    unloggedinMainViewController.removeFromParent()
+                    unloggedinMainViewController.view.removeFromSuperview()
+        }
+        
         addChild(loggedinMainViewController)
         configureLoggedinMainView()
         loggedinMainViewController.sendDelegate(flowDelegate)
@@ -84,5 +96,4 @@ extension MainViewController {
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
-    
 }

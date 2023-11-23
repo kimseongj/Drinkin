@@ -24,7 +24,15 @@ struct DefaultProvider: Provider {
     
     func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, APIError> {
         var request = endpoint.makeURLRequest()
-        //request?.setValue("Bearer \("newAccessToken.accessToken")", forHTTPHeaderField: "Authorization")
+        
+//        do {
+//            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
+//                request!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+//            }
+//
+//        } catch {
+//            print("keychain Error")
+//        }
         
         return URLSession.shared.dataTaskPublisher(for: request!)
             .tryMap { data, response in
@@ -55,7 +63,11 @@ struct DefaultProvider: Provider {
                 if case APIError.unauthorized = error {
                     return renewAccessTokenPublisher().flatMap { accessToken in
                         var newRequest = request
-                        //newRequest!.setValue("Bearer \("ASD")", forHTTPHeaderField: "Authorization")
+                        do {
+                            try newRequest!.setValue("Bearer \(tokenManager.readToken(tokenType: TokenType.accessToken))", forHTTPHeaderField: "Authorization")
+                        } catch {
+                            print("keychain Error")
+                        }
                         
                         return URLSession.shared.dataTaskPublisher(for: newRequest!)
                             .tryMap { data, response in
@@ -120,6 +132,48 @@ struct DefaultProvider: Provider {
                 default:
                     return error as? APIError ?? APIError.networkError(error)
                 }
+            }
+            .catch { error in
+                if case APIError.unauthorized = error {
+                    return renewAccessTokenPublisher().flatMap { accessToken in
+                        var newRequest = request
+                        
+                        do {
+                            try tokenManager.updateToken(tokenType: TokenType.accessToken, token: accessToken.accessToken)
+                            try newRequest!.setValue("Bearer \(String(describing: tokenManager.readToken(tokenType: TokenType.accessToken)))", forHTTPHeaderField: "Authorization")
+                        } catch {
+                            print("keychain Error")
+                        }
+                        
+                        return URLSession.shared.dataTaskPublisher(for: newRequest!)
+                            .tryMap { data, response in
+                                let httpResponse = response as! HTTPURLResponse
+                                switch httpResponse.statusCode {
+                                case 200..<300:
+                                    return data
+                                case 401:
+                                    throw APIError.unauthorized
+                                case 404:
+                                    throw APIError.notFound
+                                default:
+                                    throw APIError.networkError(NSError(domain: "Network", code: httpResponse.statusCode, userInfo: nil))
+                                }
+                            }
+                            .decode(type: T.self, decoder: JSONDecoder())
+                            .mapError { error in
+                                switch error {
+                                case is URLError:
+                                    return APIError.networkError(error)
+                                case is DecodingError:
+                                    return APIError.decodingError
+                                default:
+                                    return error as? APIError ?? APIError.networkError(error)
+                                }
+                            }.eraseToAnyPublisher()
+                    }.eraseToAnyPublisher()
+                }
+                
+                return Fail(error: error).eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }

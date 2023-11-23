@@ -1,5 +1,5 @@
 //
-//  AddItemViewController.swift
+//  ItemSelectionViewController.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/09/22.
@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 import Combine
 
-final class AddItemViewController: UIViewController {
-    private var viewModel: AddItemViewModel
+final class ItemSelectionViewController: UIViewController {
+    private var viewModel: ItemSelectionViewModel
     private var cancelBag: Set<AnyCancellable> = []
-    private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
-    private var itemDataSource: UICollectionViewDiffableDataSource<Section, ItemPreview>!
+    private var filterDataSource: UICollectionViewDiffableDataSource<Section, ItemFilter>!
+    private var itemDataSource: UICollectionViewDiffableDataSource<Section, Item>!
     
     private let itemFilterCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -41,7 +41,7 @@ final class AddItemViewController: UIViewController {
     
     //MARK: - Init
     
-    init(viewModel: AddItemViewModel) {
+    init(viewModel: ItemSelectionViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,8 +63,7 @@ final class AddItemViewController: UIViewController {
         filterBinding()
         itemBinding()
         errorBinding()
-        viewModel.fetchItemFilter()
-        viewModel.fetchItemList()
+        viewModel.fetchItemData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -107,7 +106,7 @@ final class AddItemViewController: UIViewController {
 
 //MARK: - ConfigureCollectionView
 
-extension AddItemViewController {
+extension ItemSelectionViewController {
     private func configureFilterCollectionView() {
         itemFilterCollectionView.delegate = self
     
@@ -123,19 +122,19 @@ extension AddItemViewController {
 
 //MARK: - ItemFilterCollectionView DiffableDataSource
 
-extension AddItemViewController {
+extension ItemSelectionViewController {
     private func configureItemFilterDataSource() {
-        filterDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: itemFilterCollectionView) { collectionView, indexPath, itemFilter in
+        filterDataSource = UICollectionViewDiffableDataSource<Section, ItemFilter> (collectionView: itemFilterCollectionView) { collectionView, indexPath, itemFilter in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemFilterCell.identifier, for: indexPath) as? ItemFilterCell else { return UICollectionViewCell() }
             
-            cell.fill(with: itemFilter)
+            cell.fill(with: itemFilter.name)
             
             return cell
         }
     }
     
-    private func applyItemFilterSnapshot(itemFilterList: [String]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+    private func applyItemFilterSnapshot(itemFilterList: [ItemFilter]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ItemFilter>()
         snapshot.appendSections([.main])
         snapshot.appendItems(itemFilterList)
         self.filterDataSource?.apply(snapshot, animatingDifferences: true)
@@ -144,13 +143,13 @@ extension AddItemViewController {
 
 //MARK: - ItemCollectionView DiffableDataSource
 
-extension AddItemViewController {
+extension ItemSelectionViewController {
     private func configureItemDataSource() {
-        itemDataSource = UICollectionViewDiffableDataSource<Section, ItemPreview> (collectionView: itemCollectionView) { [weak self] (collectionView, indexPath, itemPreview) in
+        itemDataSource = UICollectionViewDiffableDataSource<Section, Item> (collectionView: itemCollectionView) { [weak self] (collectionView, indexPath, item) in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell, let self = self else { return UICollectionViewCell() }
         
             
-            if itemPreview.hold == true {
+            if item.hold == true {
                 cell.presentHoldItem()
                 self.itemCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
             } else {
@@ -158,27 +157,27 @@ extension AddItemViewController {
                 self.itemCollectionView.deselectItem(at: indexPath, animated: true)
             }
             
-            cell.fill(with: itemPreview)
+            cell.fill(with: item)
             
             return cell
         }
     }
     
-    private func applyItemSnapshot(itemPreviewList: [ItemPreview]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ItemPreview>()
+    private func applyItemSnapshot(itemList: [Item]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(itemPreviewList)
+        snapshot.appendItems(itemList)
         self.itemDataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
 //MARK: - Binding
 
-extension AddItemViewController {
+extension ItemSelectionViewController {
     private func itemBinding() {
         viewModel.filteredItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
-            self.applyItemSnapshot(itemPreviewList: $0)
+            self.applyItemSnapshot(itemList: $0)
         }.store(in: &cancelBag)
     }
     
@@ -194,7 +193,7 @@ extension AddItemViewController {
 
 //MARK: - ItemCollectionView Compositional Layout
 
-extension AddItemViewController {
+extension ItemSelectionViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                              heightDimension: .fractionalHeight(1.0))
@@ -216,10 +215,10 @@ extension AddItemViewController {
 
 //MARK: - FilterCollectionView ItemCollectionView Delegate
 
-extension AddItemViewController: UICollectionViewDelegate {
+extension ItemSelectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == itemFilterCollectionView {
-            viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row]))
+            viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row].subType))
         } else {
             if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
                 cell.presentHoldItem()
@@ -240,7 +239,7 @@ extension AddItemViewController: UICollectionViewDelegate {
 
 //MARK: - Handling Error
 
-extension AddItemViewController {
+extension ItemSelectionViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)

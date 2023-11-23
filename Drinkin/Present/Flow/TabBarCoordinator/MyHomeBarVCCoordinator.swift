@@ -9,7 +9,7 @@ import UIKit
 
 protocol MyHomeBarVCFlow: AnyObject {
     func pushLoginSettingVC()
-    func pushAddIngredientVC()
+    func pushItemSelectionVC()
     func pushSavedCocktailListVC()
     func pushUserMadeCocktailListVC()
 }
@@ -40,10 +40,10 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
         loginSettingVCCoordinator.start()
     }
     
-    func pushAddIngredientVC() {
-        let addIngredientVCCoordinator = AddIngredientVCCoordinator(navigationController: navigationController,
+    func pushItemSelectionVC() {
+        let itemSelectionVCCoordinator = ItemSelectionVCCoordinator(navigationController: navigationController,
                                                                     appDIContainer: appDIContainer)
-        addIngredientVCCoordinator.start()
+        itemSelectionVCCoordinator.start()
     }
     
     func pushSavedCocktailListVC() {

@@ -35,6 +35,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     @Published var filteredSelectableCocktailList: [SelectableImageDescription] = []
     
     //MARK: - Init
+    
     init(filterTriedCocktailUsecase: FilterTriedCocktailUsecase,
          addTriedCocktailUsecase: AddTriedCocktailUsecase) {
         self.filterTriedCocktailUsecase = filterTriedCocktailUsecase
@@ -42,6 +43,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     
     var categoryList: [String] = [CategoryListStrings.whole,
@@ -59,6 +61,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
 
 //MARK: - Input
 //MARK: - Fetch Data
+
 extension DefaultTriedCocktailSelectionViewModel {
     func fetchCocktailImageList() {
         filterTriedCocktailUsecase.fetchCocktailImageList()
@@ -105,6 +108,7 @@ extension DefaultTriedCocktailSelectionViewModel {
 }
 
 //MARK: - Filter Cocktail
+
 extension DefaultTriedCocktailSelectionViewModel {
     func filterCocktailList(cocktailCategoryIndex: Int) {
         let cocktailCategory = categoryList[cocktailCategoryIndex]
@@ -114,6 +118,7 @@ extension DefaultTriedCocktailSelectionViewModel {
 }
 
 //MARK: - Select & Deselect Cocktail
+
 extension DefaultTriedCocktailSelectionViewModel {
     func selectCocktail(index: Int) {
         let selectedID = filteredSelectableCocktailList[index].id
@@ -133,6 +138,7 @@ extension DefaultTriedCocktailSelectionViewModel {
 }
 
 //MARK: - Add TriedCocktail
+
 extension DefaultTriedCocktailSelectionViewModel {
     func checkCocktailSelected() -> Bool {
         let result = selectableCocktailList.contains { $0.isSelected == true }

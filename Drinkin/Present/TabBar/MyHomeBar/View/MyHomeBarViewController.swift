@@ -100,7 +100,7 @@ final class MyHomeBarViewController: UIViewController {
     
     @objc
     private func tapAddButton() {
-        flowDelegate?.pushAddIngredientVC()
+        flowDelegate?.pushItemSelectionVC()
     }
     
     private let holdedItemCollectionView: UICollectionView = {

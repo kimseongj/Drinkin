@@ -1,5 +1,5 @@
 //
-//  DefaultItemRepository.swift
+//  DefaultItemSelectionRepository.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/10/12.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class DefaultItemRepository: ItemRepository {
+final class DefaultItemSelectionRepository: ItemRepository {
     let provider: Provider
     let endpoint: EndpointMakeable
     
@@ -18,7 +18,7 @@ final class DefaultItemRepository: ItemRepository {
         self.endpoint = endpoint
     }
     
-    func fetchItemList() -> AnyPublisher<ItemList, APIError> {
+    func fetchItemData() -> AnyPublisher<ItemSelectionList, APIError> {
         return provider.fetchData(endpoint: endpoint)
     }
 }

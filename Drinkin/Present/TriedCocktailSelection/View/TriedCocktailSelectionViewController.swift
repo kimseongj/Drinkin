@@ -96,7 +96,6 @@ final class TriedCocktailSelectionViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         view.backgroundColor = .white
-        MainViewController.login = true
         configureCocktailCollectionView()
         configureBaseTypeCollectionView()
         renewCompleteSelectionButton()
