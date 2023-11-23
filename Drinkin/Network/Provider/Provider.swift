@@ -25,14 +25,14 @@ struct DefaultProvider: Provider {
     func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, APIError> {
         var request = endpoint.makeURLRequest()
         
-        do {
-            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
-                request!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-            }
-            
-        } catch {
-            print("keychain Error")
-        }
+//        do {
+//            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
+//                request!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+//            }
+//
+//        } catch {
+//            print("keychain Error")
+//        }
         
         return URLSession.shared.dataTaskPublisher(for: request!)
             .tryMap { data, response in
@@ -139,7 +139,8 @@ struct DefaultProvider: Provider {
                         var newRequest = request
                         
                         do {
-                            try newRequest!.setValue("Bearer \(tokenManager.readToken(tokenType: TokenType.accessToken))", forHTTPHeaderField: "Authorization")
+                            try tokenManager.updateToken(tokenType: TokenType.accessToken, token: accessToken.accessToken)
+                            try newRequest!.setValue("Bearer \(String(describing: tokenManager.readToken(tokenType: TokenType.accessToken)))", forHTTPHeaderField: "Authorization")
                         } catch {
                             print("keychain Error")
                         }
