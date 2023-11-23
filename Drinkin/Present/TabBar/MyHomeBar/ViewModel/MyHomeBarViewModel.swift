@@ -28,15 +28,18 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     @Published var holdedItemList: [String] = []
     
     //MARK: - Init
+    
     init(holdedItemRepository: HoldedItemRepository) {
         self.holdedItemRepository = holdedItemRepository
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var holdedItemListPublisher: Published<[String]>.Publisher { $holdedItemList }
     
     //MARK: - Input
+    
     func fetchHoldedItem() {
         holdedItemRepository.fetchHoldedItem()
             .sink(
