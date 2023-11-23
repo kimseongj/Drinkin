@@ -37,7 +37,7 @@ final class MyHomeBarViewController: UIViewController {
         return label
     }()
     
-    private let loginSettingButton: UIButton = {
+    private lazy var loginSettingButton: UIButton = {
         let button = UIButton()
         if let originalImage = ImageStorage.personCircleIcon {
             let scaledImage = originalImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 36.0))
@@ -142,7 +142,7 @@ final class MyHomeBarViewController: UIViewController {
         flowDelegate?.pushSavedCocktailListVC()
     }
     
-    private let userMadeCocktailListButton: UIButton = {
+    private lazy var userMadeCocktailListButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
         

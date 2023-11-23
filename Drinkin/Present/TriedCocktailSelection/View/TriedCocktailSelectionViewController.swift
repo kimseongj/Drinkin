@@ -30,7 +30,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return label
     }()
     
-    private let exitButton: UIButton = {
+    private lazy var exitButton: UIButton = {
         let exitButton = UIButton()
         exitButton.setImage(ImageStorage.deleteIcon, for: .normal)
         exitButton.addTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)

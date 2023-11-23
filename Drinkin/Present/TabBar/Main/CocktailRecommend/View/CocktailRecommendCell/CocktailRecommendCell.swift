@@ -71,7 +71,7 @@ final class CocktailRecommendCell: UICollectionViewCell {
     }()
     
     //MARK: - Button
-    private let seeMoreButton: UIButton = {
+    private lazy var seeMoreButton: UIButton = {
         let button = UIButton()
         button.setTitle("자세히 보기", for: .normal)
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)

@@ -74,7 +74,7 @@ final class BaseBrandInformationViewController: UIViewController {
         return label
     }()
     
-    private let recommendCocktailButton: UIButton = {
+    private lazy var recommendCocktailButton: UIButton = {
         let button = UIButton()
         button.setTitle("이 재료를 사용하는 칵테일 보기", for: .normal)
         button.titleLabel?.textAlignment = .center

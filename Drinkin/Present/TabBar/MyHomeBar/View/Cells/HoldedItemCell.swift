@@ -18,7 +18,7 @@ final class HoldedItemCell: UICollectionViewCell {
         return label
     }()
     
-    private let deleteButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(ImageStorage.deleteIcon, for: .normal)
         button.tintColor = .black

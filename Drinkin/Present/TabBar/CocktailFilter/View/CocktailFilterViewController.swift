@@ -31,7 +31,7 @@ final class CocktailFilterViewController: UIViewController {
         return label
     }()
     
-    private let resetFilterButton: UIButton = {
+    private lazy var resetFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("필터 초기화", for: .normal)
         button.setTitleColor(.black, for: .normal)

@@ -30,7 +30,7 @@ final class CocktailFilterModalViewController: UIViewController {
         return tableView
     }()
     
-    private let dismissButton: UIButton = {
+    private lazy var dismissButton: UIButton = {
         let button = UIButton()
         button.setTitle("닫기", for: .normal)
         button.setTitleColor(.black, for: .normal)

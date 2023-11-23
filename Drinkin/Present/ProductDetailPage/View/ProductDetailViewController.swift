@@ -33,7 +33,7 @@ final class ProductDetailViewController: UIViewController {
     let introductionView = IntroductionView()
     let cocktailInformationView = CocktailInformationView()
     
-    private let markMadeCocktailButton: MarkMadeCocktailButton = {
+    private lazy var markMadeCocktailButton: MarkMadeCocktailButton = {
         let button = MarkMadeCocktailButton()
         button.addTarget(self, action: #selector(tapMarkMadeCocktailButton), for: .touchUpInside)
         
@@ -45,7 +45,7 @@ final class ProductDetailViewController: UIViewController {
         sender.isSelected.toggle()
     }
    
-    private let bookmarkCocktailButton: BookmarkCocktailButton = {
+    private lazy var bookmarkCocktailButton: BookmarkCocktailButton = {
         let button = BookmarkCocktailButton()
         button.addTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
         

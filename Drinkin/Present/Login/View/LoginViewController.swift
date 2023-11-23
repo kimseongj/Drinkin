@@ -15,7 +15,7 @@ final class LoginViewController: UIViewController {
     var flowDelegate: LoginVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
-    private let dismissButton: UIButton = {
+    private lazy var dismissButton: UIButton = {
         let button = UIButton()
         
         let deleteImageView: UIImageView = {
@@ -145,7 +145,7 @@ final class LoginViewController: UIViewController {
         viewModel.handleKakaoLogin()
     }
     
-    private let appleLoginButton: UIButton = {
+    private lazy var appleLoginButton: UIButton = {
         let button = UIButton()
         
         let view = UIView()
