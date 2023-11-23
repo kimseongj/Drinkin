@@ -10,7 +10,6 @@ import SnapKit
 final class MainViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
     var flowDelegate: MainVCFlow?
-    static var login: Bool = false
     
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
     private let unloggedinMainViewController = UnloggedinMainViewController()
@@ -37,7 +36,7 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(true)
         AppCoordinator.tabBarController.tabBar.isHidden = false
         
-        if MainViewController.login {
+        if LoginManager.shared.isAuthenticated() {
             fetchLoggedinMainView()
         } else {
             fetchUnloggedinMainView()
@@ -55,6 +54,11 @@ final class MainViewController: UIViewController {
 
 extension MainViewController {
     private func fetchUnloggedinMainView() {
+        if self.children.contains(loggedinMainViewController) {
+                    loggedinMainViewController.removeFromParent()
+                    loggedinMainViewController.view.removeFromSuperview()
+        }
+    
         addChild(unloggedinMainViewController)
         configureUnloggedinMainView()
         unloggedinMainViewController.sendDelegate(flowDelegate)
@@ -74,8 +78,11 @@ extension MainViewController {
 
 extension MainViewController {
     private func fetchLoggedinMainView() {
-        unloggedinMainViewController.removeFromParent()
-        unloggedinMainViewController.view.removeFromSuperview()
+        if self.children.contains(unloggedinMainViewController) {
+                    unloggedinMainViewController.removeFromParent()
+                    unloggedinMainViewController.view.removeFromSuperview()
+        }
+        
         addChild(loggedinMainViewController)
         configureLoggedinMainView()
         loggedinMainViewController.sendDelegate(flowDelegate)
@@ -89,5 +96,4 @@ extension MainViewController {
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
     }
-    
 }
