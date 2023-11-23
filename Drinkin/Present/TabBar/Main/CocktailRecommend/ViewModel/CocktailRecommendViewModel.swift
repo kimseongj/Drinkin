@@ -29,15 +29,18 @@ class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
     @Published var briefDescriptionList: [CocktailBrief] = []
     
     //MARK: - Init
+    
     init(cocktailBriefListRepository: CocktailBriefListRepository) {
         self.cocktailBriefListRepository = cocktailBriefListRepository
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var briefDescriptionListPublisher: Published<[CocktailBrief]>.Publisher { $briefDescriptionList }
     
     //MARK: - Input
+    
     func fetchBriefDescription() {
         cocktailBriefListRepository.fetchCocktailBriefList()
             .sink(

@@ -17,12 +17,14 @@ final class CocktailFilterDICotainer {
     }
     
     //MARK: - CocktailFilter
+    
     func makeCocktailFilterRepository() -> CocktailFilterRepository {
         return DefaultCocktailFilterRepository(provider: provider,
                                                endpoint: cocktailFilterEndpoint)
     }
     
     //MARK: - filterCocktailList
+    
     func makeCocktailListRepository() -> CocktailQueryRepository {
         return DefaultCocktailQueryRepository(provider: provider,
                                               endpoint: cocktailListEndpoint)

@@ -18,6 +18,7 @@ final class TriedCocktailSelectionDIContainer {
     }
     
     //MARK: - FilterTriedCocktail
+    
     func makeCoktailImageListRepository() -> CocktailImageListRepository {
         return DefaultCocktailImageListRepository(provider: provider,
                                                   endpoint: triedCocktailEndpoint)
@@ -28,6 +29,7 @@ final class TriedCocktailSelectionDIContainer {
     }
     
     //MARK: - AddTriedCocktail
+    
     func makeAddtionRepository() -> AdditionRepository {
         return DefaultAdditionRepository(provider: provider,
                                          endpoint: addTriedCocktailListEndpoint)
