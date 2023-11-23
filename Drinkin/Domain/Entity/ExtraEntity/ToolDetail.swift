@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - ToolDetail
 struct ToolDetail: Codable {
     let id: Int
     let imageURI: String

@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - GlassDetail
 struct GlassDetail: Codable {
     let id: Int
     let imageURI, glassName, description, volume: String
