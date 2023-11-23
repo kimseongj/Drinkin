@@ -18,16 +18,16 @@ final class MakeableCocktailListDIContainer {
     }
     
     func makeMakeableCocktailListRepository() -> MakeableCocktailListRepository {
-        return DefaultMakeableCocktailListRepository(provider: provider,
+        DefaultMakeableCocktailListRepository(provider: provider,
                                                      endpoint: makeableEndpoint,
                                                      brandID: brandID)
     }
     
     func makeMakeableCocktailListViewModel() -> MakeableCocktailListViewModel {
-        return DefaultMakeableCocktailListViewModel(makeableCocktailListRepository: makeMakeableCocktailListRepository())
+        DefaultMakeableCocktailListViewModel(makeableCocktailListRepository: makeMakeableCocktailListRepository())
     }
     
     func makeMakeableCocktailListViewController() -> MakeableCocktailListViewController {
-        return MakeableCocktailListViewController(viewModel: makeMakeableCocktailListViewModel())
+        MakeableCocktailListViewController(viewModel: makeMakeableCocktailListViewModel())
     }
 }

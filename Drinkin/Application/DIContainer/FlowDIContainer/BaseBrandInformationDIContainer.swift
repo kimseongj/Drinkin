@@ -18,16 +18,16 @@ final class BaseBrandInformationDIContainer {
     }
     
     func makeBaseBrandDetailRepository() -> BaseBrandDetailRepository {
-        return DefaultBaseBrandDetailRepository(provider: provider,
+        DefaultBaseBrandDetailRepository(provider: provider,
                                                 endpoint: baseBrandInformationEndpoint,
                                                 brandID: brandID)
     }
     
     func makeBaseBrandInformationViewModel() -> BaseBrandInformationViewModel {
-        return DefaultBaseBrandInformationViewModel(baseBrandDetailRepository: makeBaseBrandDetailRepository())
+        DefaultBaseBrandInformationViewModel(baseBrandDetailRepository: makeBaseBrandDetailRepository())
     }
     
     func makeBaseBrandInformationViewController() -> BaseBrandInformationViewController {
-        return BaseBrandInformationViewController(viewModel: makeBaseBrandInformationViewModel())
+        BaseBrandInformationViewController(viewModel: makeBaseBrandInformationViewModel())
     }
 }

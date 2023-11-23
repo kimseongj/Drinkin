@@ -17,16 +17,16 @@ final class LoginDIContainer {
     }
     
     func makeLoginRepository() -> LoginRepository {
-        return DefaultLoginRepository(loginProvider: loginProvider,
+        DefaultLoginRepository(loginProvider: loginProvider,
                                       kakaoLoginEndpoint: kakaoLoginEndpoint,
                                       appleLoginEndpoint: appleLoginEndpoint)
     }
     
     func makeLoginViewModel() -> LoginViewModel {
-        return DefaultLoginViewModel(loginRepository: makeLoginRepository())
+        DefaultLoginViewModel(loginRepository: makeLoginRepository())
     }
     
     func makeLoginViewController() -> LoginViewController {
-        return LoginViewController(viewModel: makeLoginViewModel())
+        LoginViewController(viewModel: makeLoginViewModel())
     }
 }

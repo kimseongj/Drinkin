@@ -18,6 +18,6 @@ final class DefaultUserMadeCocktailListRepository: UserMadeCocktailListRepositor
     }
     
     func fetchUserMadeCocktailList() -> AnyPublisher<CocktailPreviewList, APIError> {
-        return provider.fetchData(endpoint: endpoint)
+        provider.fetchData(endpoint: endpoint)
     }
 }

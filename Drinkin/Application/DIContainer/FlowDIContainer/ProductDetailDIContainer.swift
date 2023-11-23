@@ -19,16 +19,16 @@ final class ProductDetailDIContainer {
     }
     
     func makeCocktailDescriptionRepository() -> CocktailDetailRepository {
-        return DefaultCocktailDetailRepository(provider: provider,
+        DefaultCocktailDetailRepository(provider: provider,
                                                endpoint: productDetailEndpoint,
                                                cocktailID: cocktailID)
     }
     
     func makeProductDetailViewModel() -> ProductDetailViewModel {
-        return DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository())
+        DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository())
     }
     
     func makeProductDetailViewController(viewModel: ProductDetailViewModel) -> ProductDetailViewController {
-        return ProductDetailViewController(viewModel: viewModel)
+        ProductDetailViewController(viewModel: viewModel)
     }
 }

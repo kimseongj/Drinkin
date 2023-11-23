@@ -19,28 +19,28 @@ final class CocktailFilterDICotainer {
     //MARK: - CocktailFilter
     
     func makeCocktailFilterRepository() -> CocktailFilterRepository {
-        return DefaultCocktailFilterRepository(provider: provider,
-                                               endpoint: cocktailFilterEndpoint)
+        DefaultCocktailFilterRepository(provider: provider,
+                                        endpoint: cocktailFilterEndpoint)
     }
     
     //MARK: - filterCocktailList
     
     func makeCocktailListRepository() -> CocktailQueryRepository {
-        return DefaultCocktailQueryRepository(provider: provider,
-                                              endpoint: cocktailListEndpoint)
+        DefaultCocktailQueryRepository(provider: provider,
+                                       endpoint: cocktailListEndpoint)
     }
     
     func makeFilterCocktailListUsecase() -> FilterCocktailListUsecase {
-        return DefaultFilterCocktailListUsecase(cocktailQueryRepository: makeCocktailListRepository())
+        DefaultFilterCocktailListUsecase(cocktailQueryRepository: makeCocktailListRepository())
     }
     
     
     func makeCocktailFilterViewModel() -> CocktailFilterViewModel {
-        return DefaultCocktailFilterViewModel(cocktailFilterRepository: makeCocktailFilterRepository(),
-                                              filterCocktailListUsecase: makeFilterCocktailListUsecase())
+        DefaultCocktailFilterViewModel(cocktailFilterRepository: makeCocktailFilterRepository(),
+                                       filterCocktailListUsecase: makeFilterCocktailListUsecase())
     }
     
     func makeCocktailFilterViewController() -> CocktailFilterViewController {
-        return CocktailFilterViewController(viewModel: makeCocktailFilterViewModel())
+        CocktailFilterViewController(viewModel: makeCocktailFilterViewModel())
     }
 }
