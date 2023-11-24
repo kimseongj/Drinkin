@@ -13,7 +13,7 @@ extension UIImageView {
         
         guard let imageURL = URL(string: urlString) else { return }
         
-        if let cachedImage = ImageCacheManager.shared.object(forKey: cacheKey) {
+        if let cachedImage = ImageCacheManager.shared.cache.object(forKey: cacheKey) {
             self.image = cachedImage
             
             return
@@ -23,7 +23,7 @@ extension UIImageView {
             if let data = try? Data(contentsOf: imageURL), let image = UIImage(data: data) {
                 DispatchQueue.main.async {
                     self?.image = image
-                    ImageCacheManager.shared.setObject(image, forKey: cacheKey)
+                    ImageCacheManager.shared.cache.setObject(image, forKey: cacheKey)
                     self?.image = image
                 }
             }
