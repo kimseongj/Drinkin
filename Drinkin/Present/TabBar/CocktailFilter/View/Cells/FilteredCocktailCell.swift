@@ -90,13 +90,15 @@ final class FilteredCocktailCell: UICollectionViewCell {
         cocktailImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-16)
-            $0.height.width.equalTo(70)
+            $0.size.equalTo(70)
         }
+        
+        cocktailImageView.showActivityIndicator()
     }
     
     func fill(with cocktailPreview: CocktailPreview) {
         titleLabel.text = cocktailPreview.cocktailNameKo
-        cocktailImageView.load(urlString: cocktailPreview.imageURI)
+        cocktailImageView.load(urlString: cocktailPreview.imageURI) 
         configureScoreView(levelScore: cocktailPreview.levelScore,
                            sugarContentScore: cocktailPreview.sugarContentScore,
                            abvScore: cocktailPreview.abvScore,
