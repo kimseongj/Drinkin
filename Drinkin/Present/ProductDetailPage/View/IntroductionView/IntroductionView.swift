@@ -80,6 +80,7 @@ final class IntroductionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        showImageViewActivityIndicator()
         configureBaseCollectionView()
         configureBaseDataSource()
         configureIngredientDataSource()
@@ -142,6 +143,10 @@ final class IntroductionView: UIView {
             $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    private func showImageViewActivityIndicator() {
+        cocktailImageView.showActivityIndicator()
     }
     
     //MARK: - Fill View

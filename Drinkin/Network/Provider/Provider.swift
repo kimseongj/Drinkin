@@ -64,7 +64,7 @@ struct DefaultProvider: Provider {
                     return renewAccessTokenPublisher().flatMap { accessToken in
                         var newRequest = request
                         do {
-                            try newRequest!.setValue("Bearer \(tokenManager.readToken(tokenType: TokenType.accessToken))", forHTTPHeaderField: "Authorization")
+                            try newRequest!.setValue("Bearer \(String(describing: tokenManager.readToken(tokenType: TokenType.accessToken)))", forHTTPHeaderField: "Authorization")
                         } catch {
                             print("keychain Error")
                         }
