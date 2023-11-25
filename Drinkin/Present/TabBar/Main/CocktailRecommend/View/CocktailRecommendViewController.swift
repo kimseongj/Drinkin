@@ -61,7 +61,7 @@ final class CocktailRecommendViewController: UIViewController {
         configureDataSource()
         binding()
         errorBinding()
-        
+        fetchData()
     }
     
     //MARK: - Fetch Data
@@ -69,7 +69,9 @@ final class CocktailRecommendViewController: UIViewController {
         viewModel.fetchBriefDescription { [weak self] in
             guard let self = self else { return }
             
-            self.hideActivityIndicator()
+            DispatchQueue.main.async {
+                self.hideActivityIndicator()
+            }
         }
     }
     

@@ -52,6 +52,7 @@ final class FilteredCocktailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
+        showActivityIndicator()
     }
     
     required init?(coder: NSCoder) {
@@ -92,17 +93,22 @@ final class FilteredCocktailCell: UICollectionViewCell {
             $0.trailing.equalToSuperview().offset(-16)
             $0.size.equalTo(70)
         }
-        
+    }
+    
+    func showActivityIndicator() {
         cocktailImageView.showActivityIndicator()
     }
     
     func fill(with cocktailPreview: CocktailPreview) {
         titleLabel.text = cocktailPreview.cocktailNameKo
-        cocktailImageView.load(urlString: cocktailPreview.imageURI) 
         configureScoreView(levelScore: cocktailPreview.levelScore,
                            sugarContentScore: cocktailPreview.sugarContentScore,
                            abvScore: cocktailPreview.abvScore,
                            ingredientQuantity: cocktailPreview.ingredientQuantity)
+        cocktailImageView.load(urlString: cocktailPreview.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.cocktailImageView.hideActivityIndicator()
+        }
     }
     
     private func configureScoreView(levelScore: Int, sugarContentScore: Int, abvScore: Int, ingredientQuantity: Int) {

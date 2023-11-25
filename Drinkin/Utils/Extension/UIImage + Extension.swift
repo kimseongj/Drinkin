@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImageView {
-    func load(urlString: String) {
+    func load(urlString: String, completion: @escaping () -> Void) {
         let cacheKey = NSString(string: urlString)
         guard let imageURL = URL(string: urlString) else { return }
         
@@ -26,7 +26,7 @@ extension UIImageView {
                     self.image = image
                     ImageCacheManager.shared.cache.setObject(image, forKey: cacheKey)
                     self.image = image
-                    self.hideActivityIndicator()
+                    completion()
                 }
             }
         }

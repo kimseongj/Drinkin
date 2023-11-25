@@ -86,9 +86,8 @@ final class CocktailRecommendCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        configureBackgroundColor()
         configureUI()
-        setCellBorder()
+        showActivityIndicator()
     }
     
     required init?(coder: NSCoder) {
@@ -101,15 +100,10 @@ final class CocktailRecommendCell: UICollectionViewCell {
         scoreStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func configureBackgroundColor() {
-        self.backgroundColor = .white
-    }
-    
-    private func setCellBorder() {
-        self.layer.borderWidth = 3
-    }
-    
     private func configureUI() {
+        self.backgroundColor = .white
+        self.layer.borderWidth = 3
+        
         self.addSubview(cocktailImageView)
         self.addSubview(summaryOfCocktailView)
         self.addSubview(textDescriptionView)
@@ -146,13 +140,20 @@ final class CocktailRecommendCell: UICollectionViewCell {
         configureTextDescriptionView()
     }
     
+    private func showActivityIndicator() {
+        cocktailImageView.showActivityIndicator()
+    }
+    
     func configureCell(cocktailBrief: CocktailBrief) {
-        cocktailImageView.load(urlString: cocktailBrief.imageURI)
         fetchTitle(cocktailBrief.cocktailNameKo)
         fetchSubtitle(cocktailBrief.category)
         fetchScore(levelScore: cocktailBrief.levelScore, abvScore: cocktailBrief.abvScore, sugarContentScore: cocktailBrief.sugarContentScore)
         descriptionLabel.text = cocktailBrief.description
         configureHoldViews(cocktailBrief: cocktailBrief)
+        cocktailImageView.load(urlString: cocktailBrief.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.cocktailImageView.hideActivityIndicator()
+        }
     }
     
     @objc private func buttonTapped() {

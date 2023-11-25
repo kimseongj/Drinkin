@@ -27,8 +27,8 @@ extension UIViewController {
     
     func showAlert(errorType: APIError) {
         switch errorType {
-        case .networkError:
-            let alertController = makeAlert(title: "이용에 불편을 드려 죄송합니다.", message: "네트워크가 연결되어 있지 않습니다. 다시 시도해주세요.")
+        case .networkError(let error):
+            let alertController = makeAlert(title: "이용에 불편을 드려 죄송합니다. \(error)", message: "네트워크가 연결되어 있지 않습니다. 다시 시도해주세요.")
             present(alertController, animated: true, completion: nil)
         case .refreshTokenExpired:
             let alertController = makeAlert(title: "로그인이 만료되었습니다.", message: "다시 로그인해주세요.")

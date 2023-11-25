@@ -189,16 +189,12 @@ final class MyHomeBarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         configureHoldedItemCollectionView()
         viewModel.fetchHoldedItem()
         configureDataSource()
         binding()
         errorBinding()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configureUI()
     }
     
     //MARK: - ConfigureUI
