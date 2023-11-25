@@ -72,6 +72,7 @@ final class BaseInformationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        showActivityIndicator()
         configureDataSource()
         configureBaseBrandCollectionView()
         binding()
@@ -89,7 +90,6 @@ final class BaseInformationViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
         
-        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(informationView)

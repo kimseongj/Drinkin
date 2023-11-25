@@ -76,6 +76,7 @@ final class ToolModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        showActivityIndicator()
         errorBinding()
         fetchToolData()
     }
@@ -125,13 +126,20 @@ final class ToolModalViewController: UIViewController {
         }
     }
     
+    private func showActivityIndicator() {
+        imageView.showActivityIndicator()
+    }
+    
     //MARK: - Fill View
     
     private func fill(toolDetail: ToolDetail) {
-        imageView.load(urlString: toolDetail.imageURI)
         titleLabel.text = toolDetail.toolName
         descriptionLabel.text = toolDetail.description
         purchaseLinkLabel.text = toolDetail.purchaseLink
+        imageView.load(urlString: toolDetail.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.imageView.hideActivityIndicator()
+        }
     }
     
     //MARK: Fetch Data

@@ -90,6 +90,7 @@ final class GlassModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        showActivityIndicator()
         errorBinding()
         fetchGlassData()
     }
@@ -154,11 +155,14 @@ final class GlassModalViewController: UIViewController {
     //MARK: - Fill View
     
     private func fill(glassDetail: GlassDetail) {
-        imageView.load(urlString:  glassDetail.imageURI)
         titleLabel.text = glassDetail.glassName
         descriptionLabel.text = glassDetail.description
         volumeDescriptionLabel.text = glassDetail.volume
         purchaseLinkLabel.text = glassDetail.purchaseLink
+        imageView.load(urlString:  glassDetail.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.imageView.hideActivityIndicator()
+        }
     }
     
     //MARK: - Fetch Data

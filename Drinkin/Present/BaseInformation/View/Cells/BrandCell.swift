@@ -23,6 +23,7 @@ final class BrandCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        showActivityIndicator()
     }
     
     required init?(coder: NSCoder) {
@@ -50,10 +51,17 @@ final class BrandCell: UICollectionViewCell {
         }
     }
     
+    private func showActivityIndicator() {
+        brandImageView.showActivityIndicator()
+    }
+    
     //MARK: - Fill Cell
     
     func fill(with brandImageDescription: BrandImageDescription) {
-        brandImageView.load(urlString: brandImageDescription.imageURI)
         titleLabel.text = brandImageDescription.brandName
+        brandImageView.load(urlString: brandImageDescription.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.brandImageView.hideActivityIndicator()
+        }
     }
 }

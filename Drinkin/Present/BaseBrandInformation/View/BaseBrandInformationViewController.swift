@@ -108,6 +108,7 @@ final class BaseBrandInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showActivityIndicator()
         viewModel.fetchBaseBrandDetail()
         binding()
         errorBinding()
@@ -182,11 +183,13 @@ final class BaseBrandInformationViewController: UIViewController {
     
     private func fill(with brandDetail: BaseBrandDetail?) {
         guard let brandDetail = brandDetail else { return }
-        
-        brandImageView.load(urlString: brandDetail.imageURI)
         titleLabel.text = brandDetail.baseBrandName
 //        classificationDescriptionLabel.text = brandDetail.classification
         abvDescriptionLabel.text = brandDetail.abv
+        brandImageView.load(urlString: brandDetail.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.brandImageView.hideActivityIndicator()
+        }
     }
 }
 

@@ -52,6 +52,7 @@ final class MakeableCocktailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         configureUI()
+        showActivityIndicator()
     }
     
     required init?(coder: NSCoder) {
@@ -99,15 +100,22 @@ final class MakeableCocktailCell: UICollectionViewCell {
         }
     }
     
+    private func showActivityIndicator() {
+        cocktailImageView.showActivityIndicator()
+    }
+    
     //MARK: - Fill Cell
     
     func fill(with makeableCocktail: MakeableCocktail) {
         categoryLabel.text = makeableCocktail.category
         titleLabel.text = makeableCocktail.cocktailName
-        cocktailImageView.load(urlString: makeableCocktail.imageURI)
         configureScoreView(levelScore: makeableCocktail.levelScore,
                            sugarContentScore: makeableCocktail.sugarContentScore,
                            abvScore: makeableCocktail.abvScore)
+        cocktailImageView.load(urlString: makeableCocktail.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.cocktailImageView.hideActivityIndicator()
+        }
     }
     
     private func configureScoreView(levelScore: Int, sugarContentScore: Int, abvScore: Int) {
