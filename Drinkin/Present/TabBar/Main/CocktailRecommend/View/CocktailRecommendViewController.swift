@@ -43,6 +43,7 @@ final class CocktailRecommendViewController: UIViewController {
     }()
     
     //MARK: - Init
+    
     init(viewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -55,14 +56,25 @@ final class CocktailRecommendViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         configureUI()
+        showActivityIndicator()
         setupRecommendCocktailCollectionView()
         configureDataSource()
         binding()
         errorBinding()
-        viewModel.fetchBriefDescription()
+        
+    }
+    
+    //MARK: - Fetch Data
+    func fetchData() {
+        viewModel.fetchBriefDescription { [weak self] in
+            guard let self = self else { return }
+            
+            self.hideActivityIndicator()
+        }
     }
     
     //MARK: - ConfigureUI
+    
     func configureUI() {
         view.backgroundColor = .white
         
@@ -86,12 +98,14 @@ final class CocktailRecommendViewController: UIViewController {
     }
     
     //MARK: - SendDelegate
+    
     func sendDelegate(_ delegate: MainVCFlow?) {
         self.flowDelegate = delegate
     }
 }
 
 //MARK: - CellButtonDelegate
+
 extension CocktailRecommendViewController: CellButtonDelegate {
     func pushProductDetailVC(withID cocktailID: Int) {
         flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
@@ -99,6 +113,7 @@ extension CocktailRecommendViewController: CellButtonDelegate {
 }
 
 //MARK: - ConfigureCollectionView
+
 extension CocktailRecommendViewController {
     func setupRecommendCocktailCollectionView() {
         recommendCocktailCollectionView.register(CocktailRecommendCell.self, forCellWithReuseIdentifier: CocktailRecommendCell.identifier)
@@ -120,6 +135,7 @@ extension CocktailRecommendViewController {
 }
 
 //MARK: - DiffableDataSource
+
 extension CocktailRecommendViewController {
     private func configureDataSource() {
         self.dataSource = UICollectionViewDiffableDataSource<Section, CocktailBrief> (collectionView: recommendCocktailCollectionView) { (collectionView, indexPath, cocktailBrief) -> UICollectionViewCell? in
@@ -142,6 +158,7 @@ extension CocktailRecommendViewController {
 }
 
 //MARK: - Binding
+
 extension CocktailRecommendViewController {
     private func binding() {
         viewModel.briefDescriptionListPublisher.receive(on: RunLoop.main).sink { [weak self] in
@@ -152,6 +169,7 @@ extension CocktailRecommendViewController {
 } 
 
 //MARK: - CollectionViewFlowLayout
+
 extension CocktailRecommendViewController: UICollectionViewDelegateFlowLayout {
     func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,
