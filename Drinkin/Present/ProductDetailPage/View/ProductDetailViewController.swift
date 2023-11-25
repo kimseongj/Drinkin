@@ -73,14 +73,26 @@ final class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        showActivityIndicator()
         introductionView.configureDelegate(delegate: flowDelegate)
         binding()
         errorBinding()
-        viewModel.fetchDescription()
+        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         AppCoordinator.tabBarController.tabBar.isHidden = true
+    }
+    
+    //MARK: - Fetch Data
+    
+    private func fetchData() {
+        viewModel.fetchDescription {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI

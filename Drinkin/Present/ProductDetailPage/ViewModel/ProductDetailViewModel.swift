@@ -10,7 +10,7 @@ import Combine
 
 
 protocol ProductDetailViewModelInput {
-    func fetchDescription()
+    func fetchDescription(completion: @escaping () -> Void)
 }
 
 protocol ProductDetailViewModelOutput {
@@ -28,16 +28,19 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
     @Published var cocktailDescription: CocktailDescription?
     
     //MARK: - Init
+    
     init(cocktailDetailRepository: CocktailDetailRepository) {
         self.cocktailDetailRepository = cocktailDetailRepository
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var cocktailDescriptionPublisher: Published<CocktailDescription?>.Publisher { $cocktailDescription }
     
     //MARK: - Input
-    func fetchDescription() {
+    
+    func fetchDescription(completion: @escaping () -> Void) {
         cocktailDetailRepository.fetchCocktailDescription()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -66,6 +69,7 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
                     guard let self = self else { return }
                     
                     self.cocktailDescription = $0
+                    completion()
                 }
             ).store(in: &cancelBag)
     }
