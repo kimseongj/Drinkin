@@ -81,3 +81,22 @@ extension UIViewController {
         }
     }
 }
+
+extension UIViewController {
+    
+    func showActivityIndicator(style: UIActivityIndicatorView.Style = .large) {
+        let activityIndicator = UIActivityIndicatorView(style: style)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        self.view.addSubview(activityIndicator)
+        self.view.insertSubview(activityIndicator, at: view.subviews.count)
+        activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        if let activityIndicator = view.subviews.first(where: { $0 is UIActivityIndicatorView }) as? UIActivityIndicatorView {
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
+        }
+    }
+}
