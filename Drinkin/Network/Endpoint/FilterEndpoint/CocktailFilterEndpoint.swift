@@ -8,9 +8,9 @@
 import Foundation
 
 struct CocktailFilterEndpoint: EndpointMakeable {
-    var baseURL: String = "https://7746e0bc-a34b-4f56-8a7b-10f954884482.mock.pstmn.io"
+    var baseURL: String = "http://13.209.22.43:8000"
     
-    var path: String = "/detailfilter"
+    var path: String = "/v1/filters"
     
     var method: String = HTTPMethod.get.rawValue
     
