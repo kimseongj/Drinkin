@@ -34,7 +34,6 @@
 		1C0768872ABDC72D0003D4BF /* BaseInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */; };
 		1C07688A2ABDDA760003D4BF /* BrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768892ABDDA760003D4BF /* BrandCell.swift */; };
 		1C0768922ABEFCCD0003D4BF /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */; };
-		1C0768A32AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */; };
 		1C0768A72AC1F4890003D4BF /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A62AC1F4890003D4BF /* APIError.swift */; };
 		1C0768A92AC1F4990003D4BF /* TabBarTitleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */; };
 		1C0768AF2AC2A50A0003D4BF /* FontStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */; };
@@ -262,7 +261,6 @@
 		1C0768862ABDC72D0003D4BF /* BaseInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInformationViewController.swift; sourceTree = "<group>"; };
 		1C0768892ABDDA760003D4BF /* BrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandCell.swift; sourceTree = "<group>"; };
 		1C0768912ABEFCCD0003D4BF /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
-		1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshAccessTokenEndpoint.swift; sourceTree = "<group>"; };
 		1C0768A62AC1F4890003D4BF /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		1C0768A82AC1F4990003D4BF /* TabBarTitleStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarTitleStrings.swift; sourceTree = "<group>"; };
 		1C0768AE2AC2A50A0003D4BF /* FontStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStrings.swift; sourceTree = "<group>"; };
@@ -1466,7 +1464,6 @@
 				1CCE88FF29EBBC3C00D3E1D2 /* KakaoAccessTokenConversionEndpoint.swift */,
 				1CA054432AF77F5800F31B66 /* AppleAccessTokenConversionEndpoint.swift */,
 				1CCE890729EBC49400D3E1D2 /* RefreshEndpoint.swift */,
-				1C0768A22AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift */,
 				1C58C5272AF51DBC00D6CC83 /* RenewAccessTokenEndpoint.swift */,
 			);
 			path = LoginEndpoint;
@@ -2060,7 +2057,6 @@
 				1C951D472ABB389000662B35 /* ColorPalette.swift in Sources */,
 				1C504CCF2AB46CEA005A0B25 /* DefaultCocktailFilterRepository.swift in Sources */,
 				1CCE88F329EBAC0800D3E1D2 /* IntroductionView.swift in Sources */,
-				1C0768A32AC1EF740003D4BF /* RefreshAccessTokenEndpoint.swift in Sources */,
 				1CC9D3EE2A19035600654A5D /* IdentifierType.swift in Sources */,
 				1CB0AD052AAC3EF100847544 /* UserMadeCocktailListVCCoordinator.swift in Sources */,
 				1C93EDF22AEAA23C0080E33A /* RecipeBaseCell.swift in Sources */,
