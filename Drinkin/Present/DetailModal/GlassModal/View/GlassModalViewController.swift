@@ -91,6 +91,7 @@ final class GlassModalViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         showActivityIndicator()
+        showImageViewActivityIndicator()
         errorBinding()
         fetchGlassData()
     }
@@ -152,6 +153,10 @@ final class GlassModalViewController: UIViewController {
         }
     }
     
+    private func showImageViewActivityIndicator() {
+        imageView.showActivityIndicator()
+    }
+    
     //MARK: - Fill View
     
     private func fill(glassDetail: GlassDetail) {
@@ -170,8 +175,8 @@ final class GlassModalViewController: UIViewController {
     private func fetchGlassData() {
         viewModel.fetchGlassDetail { [weak self] in
             guard let self = self else { return }
-            
             self.fill(glassDetail: $0)
+            self.hideActivityIndicator()
         }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol SavedCocktailListViewModelInput {
-    func fetchCocktailPreviewDescription()
+    func fetchCocktailPreviewDescription(completion: @escaping () -> Void)
 }
 
 protocol SavedCocktailListViewModelOutput {
@@ -36,7 +36,7 @@ final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { $previewDescriptionList }
     
     //MARK: - Input
-    func fetchCocktailPreviewDescription() {
+    func fetchCocktailPreviewDescription(completion: @escaping () -> Void) {
         savedCocktailListRepository.fetchSavedCocktailList()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -64,6 +64,7 @@ final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
                 receiveValue: { [weak self] in
                     guard let self = self else { return}
                     self.previewDescriptionList = $0.cocktailList
+                    completion()
                 }
             ).store(in: &cancelBag)
     }

@@ -55,6 +55,10 @@ final class ItemCell: UICollectionViewCell {
         return imageView
     }()
     
+    override func prepareForReuse() {
+        itemImageView.image = nil
+    }
+    
     //MARK: - Init
     
     override init(frame: CGRect) {

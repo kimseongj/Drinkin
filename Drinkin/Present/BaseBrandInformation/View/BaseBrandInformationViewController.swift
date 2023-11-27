@@ -108,16 +108,27 @@ final class BaseBrandInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         showActivityIndicator()
-        viewModel.fetchBaseBrandDetail()
+        showImageViewActivityIndicator()
+        fetchData()
         binding()
         errorBinding()
-        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppCoordinator.tabBarController.tabBar.isHidden = true
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchBaseBrandDetail() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI
@@ -177,6 +188,10 @@ final class BaseBrandInformationViewController: UIViewController {
             $0.leading.trailing.bottom.equalTo(safeArea)
         
         }
+    }
+    
+    private func showImageViewActivityIndicator() {
+        brandImageView.showActivityIndicator()
     }
     
     //MARK: - Fill View

@@ -39,11 +39,22 @@ final class MakeableCocktailListViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBar()
         configureUI()
+        showActivityIndicator()
         configureMakeableCocktailCollectionView()
         configureDataSource()
         binding()
         errorBinding()
-        viewModel.fetchMakeableCocktailList()
+        fetchData()
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchMakeableCocktailList() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI

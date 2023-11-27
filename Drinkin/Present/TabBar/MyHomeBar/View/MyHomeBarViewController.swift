@@ -190,11 +190,22 @@ final class MyHomeBarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        showActivityIndicator()
+        fetchData()
         configureHoldedItemCollectionView()
-        viewModel.fetchHoldedItem()
         configureDataSource()
         binding()
         errorBinding()
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchHoldedItem() {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI

@@ -77,6 +77,7 @@ final class ToolModalViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         showActivityIndicator()
+        showImageViewActivityIndicator()
         errorBinding()
         fetchToolData()
     }
@@ -126,7 +127,7 @@ final class ToolModalViewController: UIViewController {
         }
     }
     
-    private func showActivityIndicator() {
+    private func showImageViewActivityIndicator() {
         imageView.showActivityIndicator()
     }
     
@@ -146,8 +147,8 @@ final class ToolModalViewController: UIViewController {
     private func fetchToolData() {
         viewModel.fetchToolDetail { [weak self] in
             guard let self = self else { return }
-            
             self.fill(toolDetail: $0)
+            self.hideActivityIndicator()
         }
     }
 }

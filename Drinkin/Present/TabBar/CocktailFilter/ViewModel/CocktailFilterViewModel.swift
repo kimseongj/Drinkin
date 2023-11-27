@@ -13,7 +13,7 @@ protocol CocktailFilterViewModelOutput {
 }
 
 protocol CocktailFilterViewModelInput {
-    func fetchCocktailList()
+    func fetchCocktailList(completion: @escaping () -> Void)
     func fetchCocktailFilter(completion: @escaping () -> Void)
     func fetchDetailFilter(filterType: FilterType) -> [String]
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int)
@@ -72,7 +72,7 @@ enum ErrorHandling {
 }
 
 extension DefaultCocktailFilterViewModel {
-    func fetchCocktailList() {
+    func fetchCocktailList(completion: @escaping () -> Void) {
         filterCocktailListUsecase.fetchCocktailList()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -99,8 +99,8 @@ extension DefaultCocktailFilterViewModel {
                 },
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
-                    
                     self.filteredCocktailList = $0.cocktailList.sorted(by: {$0.cocktailNameKo < $1.cocktailNameKo})
+                    completion()
                 }
             ).store(in: &cancelBag)
     }
@@ -179,12 +179,12 @@ extension DefaultCocktailFilterViewModel {
     
     func filterCocktail(filterType: String, filter: String) {
         filterCocktailListUsecase.addFilter(queryParameter: filterType, queryValue: filter)
-        fetchCocktailList()
+        fetchCocktailList { }
     }
     
     func clearFilter(index: Int) {
         filterCocktailListUsecase.clearFilter(queryParameter: filterTypeList[index].queryDescription)
-        fetchCocktailList()
+        fetchCocktailList { }
     }
     
     func clearAllFilter() {
@@ -193,6 +193,6 @@ extension DefaultCocktailFilterViewModel {
         }
         
         filterCocktailListUsecase.clearAllFilter()
-        fetchCocktailList()
+        fetchCocktailList { }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol ItemSelectionViewModelInput {
-    func fetchItemData()
+    func fetchItemData(completion: @escaping () -> Void)
     func filterItems(itemCategory: String)
     func selectItem(index: Int)
     func deselectItem(index: Int)
@@ -38,12 +38,14 @@ final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
     var selectedItemList: [String] = []
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     @Published var itemFilterList: [ItemFilter] = []
     var itemFilterPublisher: Published<[ItemFilter]>.Publisher { $itemFilterList }
     var filteredItemListPublisher: Published<[Item]>.Publisher { $filteredItemList }
     
     //MARK: - Init
+    
     init(filterItemUsecase: FilterItemUsecase,
          addItemUsecase: AddItemUsecase
     ) {
@@ -54,8 +56,9 @@ final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
 
 //MARK: - Input
 //MARK: - Fetch Data
+
 extension DefaultItemSelectiontViewModel {
-    func fetchItemData() {
+    func fetchItemData(completion: @escaping () -> Void) {
         filterItemUsecase.fetchItemData()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -83,10 +86,10 @@ extension DefaultItemSelectiontViewModel {
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
                     self.itemFilterList = $0.itemFilterList
-                    
-                    self.itemList = $0.itemList
-                    self.filteredItemList = $0.itemList
+                    self.itemList = $0.itemList.sorted { $0.itemName < $1.itemName }
+                    self.filteredItemList = $0.itemList.sorted { $0.itemName < $1.itemName }
                     self.fetchAlreadySelectedItemList(itemList: $0.itemList)
+                    completion()
                 }
             ).store(in: &cancelBag)
     }
@@ -101,6 +104,7 @@ extension DefaultItemSelectiontViewModel {
 }
 
 //MARK: - FilterItem
+
 extension DefaultItemSelectiontViewModel {
     func filterItems(itemCategory: String) {
         filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList) {
@@ -110,6 +114,7 @@ extension DefaultItemSelectiontViewModel {
 }
 
 //MARK: - Select & Deselect Item
+
 extension DefaultItemSelectiontViewModel {
     func selectItem(index: Int) {
         let selectedItemName = filteredItemList[index].itemName

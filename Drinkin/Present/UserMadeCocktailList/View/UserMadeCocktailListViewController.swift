@@ -39,10 +39,21 @@ final class UserMadeCocktailListViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationItemTitle()
         configureUI()
+        showActivityIndicator()
         configureDataSource()
+        fetchData()
         binding()
         errorBinding()
-        viewModel.fetchCocktailPreviewDescription()
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchCocktailPreviewDescription() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI

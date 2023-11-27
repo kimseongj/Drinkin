@@ -56,6 +56,7 @@ final class ItemSelectionViewController: UIViewController {
         super.viewDidLoad()
         configureTitle()
         configureUI()
+        showActivityIndicator()
         configureFilterCollectionView()
         configureItemCollectionView()
         configureItemFilterDataSource()
@@ -63,7 +64,7 @@ final class ItemSelectionViewController: UIViewController {
         filterBinding()
         itemBinding()
         errorBinding()
-        viewModel.fetchItemData()
+        fetchData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,6 +73,16 @@ final class ItemSelectionViewController: UIViewController {
         viewModel.addSelectedItems(completion: {
             
         })
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchItemData() {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI

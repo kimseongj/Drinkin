@@ -43,6 +43,7 @@ final class SkillModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        showActivityIndicator()
         errorBinding()
         fetchSkillData()
     }
@@ -79,8 +80,8 @@ final class SkillModalViewController: UIViewController {
     private func fetchSkillData() {
         viewModel.fetchSkillDetail { [weak self] in
             guard let self = self else { return }
-            
             self.fill(skillDetail: $0)
+            self.hideActivityIndicator()
         }
     }
 }

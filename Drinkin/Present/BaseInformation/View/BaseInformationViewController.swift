@@ -77,12 +77,22 @@ final class BaseInformationViewController: UIViewController {
         configureBaseBrandCollectionView()
         binding()
         errorBinding()
-        viewModel.fetchBaseDetail()
+        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppCoordinator.tabBarController.tabBar.isHidden = true
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchBaseDetail() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI

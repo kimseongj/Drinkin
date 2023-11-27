@@ -14,7 +14,7 @@ extension UIImageView {
         
         if let cachedImage = ImageCacheManager.shared.cache.object(forKey: cacheKey) {
             self.image = cachedImage
-            
+            completion()
             return
         }
         

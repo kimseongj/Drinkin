@@ -88,14 +88,11 @@ final class CocktailFilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        showActivityIndicator()
         configureFilterSelectionCollectionView()
         configureFilteredCollectionView()
         makeSelectionFilterCollectionViewDisable()
-        viewModel.fetchCocktailFilter(completion: { [weak self] in
-            guard let self = self else { return }
-            self.makeSelectionFilterCollectionViewEnable()
-        })
-        viewModel.fetchCocktailList()
+        fetchData()
         configureFilterDataSource()
         filterBinding()
         configureCocktailDataSource()
@@ -106,6 +103,21 @@ final class CocktailFilterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppCoordinator.tabBarController.tabBar.isHidden = false
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchCocktailList() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
+        
+        viewModel.fetchCocktailFilter { [weak self] in
+            guard let self = self else { return }
+            self.makeSelectionFilterCollectionViewEnable()
+        }
     }
     
     //MARK: - ConfigureUI

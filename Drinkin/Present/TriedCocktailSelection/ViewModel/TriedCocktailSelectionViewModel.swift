@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol TriedCocktailSelectionViewModelInput {
-    func fetchCocktailImageList()
+    func fetchCocktailImageList(completion: @escaping () -> Void)
     func filterCocktailList(cocktailCategoryIndex: Int)
     func selectCocktail(index: Int)
     func deselectCocktail(index: Int)
@@ -63,7 +63,7 @@ final class DefaultTriedCocktailSelectionViewModel: TriedCocktailSelectionViewMo
 //MARK: - Fetch Data
 
 extension DefaultTriedCocktailSelectionViewModel {
-    func fetchCocktailImageList() {
+    func fetchCocktailImageList(completion: @escaping () -> Void) {
         filterTriedCocktailUsecase.fetchCocktailImageList()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -92,6 +92,7 @@ extension DefaultTriedCocktailSelectionViewModel {
                     guard let self = self else { return }
                     self.convertSelectableCocktailList(cocktailList: $0.cocktailImageList)
                     self.filteredSelectableCocktailList = self.selectableCocktailList.sorted { $0.cocktailNameKo < $1.cocktailNameKo }
+                    completion()
                 }
             ).store(in: &cancelBag)
     }

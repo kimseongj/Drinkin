@@ -66,10 +66,9 @@ final class CocktailRecommendViewController: UIViewController {
     
     //MARK: - Fetch Data
     func fetchData() {
-        viewModel.fetchBriefDescription { [weak self] in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
+        viewModel.fetchBriefDescription { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.hideActivityIndicator()
             }
         }

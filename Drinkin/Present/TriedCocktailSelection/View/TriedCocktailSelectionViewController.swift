@@ -95,14 +95,14 @@ final class TriedCocktailSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        view.backgroundColor = .white
+        showActivityIndicator()
         configureCocktailCollectionView()
         configureBaseTypeCollectionView()
         renewCompleteSelectionButton()
         configureCocktailDataSource()
+        fetchData()
         errorBinding()
         binding()
-        viewModel.fetchCocktailImageList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,11 +110,22 @@ final class TriedCocktailSelectionViewController: UIViewController {
         categoryCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: [])
     }
     
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchCocktailImageList() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
+    }
+    
     //MARK: - ConfigureUI
     
     private func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
+        view.backgroundColor = .white
         
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(mainLabel)
         view.addSubview(subLabel)
         view.addSubview(exitButton)
