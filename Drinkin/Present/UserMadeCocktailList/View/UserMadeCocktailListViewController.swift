@@ -37,16 +37,17 @@ final class UserMadeCocktailListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationItemTitle()
-        configureUI()
-        showActivityIndicator()
-        configureDataSource()
         fetchData()
         binding()
         errorBinding()
+        configureDataSource()
+        configureNavigationItemTitle()
+        configureUI()
+        showActivityIndicator()
     }
     
     //MARK: - Fetch Data
+    
     private func fetchData() {
         viewModel.fetchCocktailPreviewDescription() { 
             DispatchQueue.main.async { [weak self] in

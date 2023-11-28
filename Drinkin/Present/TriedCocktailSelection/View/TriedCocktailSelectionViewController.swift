@@ -94,15 +94,15 @@ final class TriedCocktailSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+        errorBinding()
+        binding()
+        configureCocktailDataSource()
         configureUI()
         showActivityIndicator()
         configureCocktailCollectionView()
         configureBaseTypeCollectionView()
         renewCompleteSelectionButton()
-        configureCocktailDataSource()
-        fetchData()
-        errorBinding()
-        binding()
     }
     
     override func viewWillAppear(_ animated: Bool) {

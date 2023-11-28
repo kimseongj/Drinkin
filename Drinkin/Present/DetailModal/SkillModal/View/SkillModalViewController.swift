@@ -42,10 +42,10 @@ final class SkillModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchSkillData()
+        errorBinding()
         configureUI()
         showActivityIndicator()
-        errorBinding()
-        fetchSkillData()
     }
     
     //MARK: - ConfigureUI

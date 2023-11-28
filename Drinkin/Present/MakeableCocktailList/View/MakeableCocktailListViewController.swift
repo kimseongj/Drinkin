@@ -37,17 +37,18 @@ final class MakeableCocktailListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+        binding()
+        errorBinding()
+        configureDataSource()
         configureNavigationBar()
         configureUI()
         showActivityIndicator()
         configureMakeableCocktailCollectionView()
-        configureDataSource()
-        binding()
-        errorBinding()
-        fetchData()
     }
     
     //MARK: - Fetch Data
+    
     private func fetchData() {
         viewModel.fetchMakeableCocktailList() { 
             DispatchQueue.main.async { [weak self] in

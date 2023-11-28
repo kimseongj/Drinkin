@@ -54,17 +54,17 @@ final class ItemSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+        filterBinding()
+        itemBinding()
+        errorBinding()
+        configureItemFilterDataSource()
+        configureItemDataSource()
         configureTitle()
         configureUI()
         showActivityIndicator()
         configureFilterCollectionView()
         configureItemCollectionView()
-        configureItemFilterDataSource()
-        configureItemDataSource()
-        filterBinding()
-        itemBinding()
-        errorBinding()
-        fetchData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

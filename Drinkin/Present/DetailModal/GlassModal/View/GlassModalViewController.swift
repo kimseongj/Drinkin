@@ -89,11 +89,11 @@ final class GlassModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchGlassData()
+        errorBinding()
         configureUI()
         showActivityIndicator()
         showImageViewActivityIndicator()
-        errorBinding()
-        fetchGlassData()
     }
     
     //MARK: - ConfigureUI

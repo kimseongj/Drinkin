@@ -72,12 +72,12 @@ final class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        showActivityIndicator()
-        introductionView.configureDelegate(delegate: flowDelegate)
+        fetchData()
         binding()
         errorBinding()
-        fetchData()
+        configureUI()
+        showActivityIndicator()
+        sendDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -140,6 +140,10 @@ final class ProductDetailViewController: UIViewController {
         cocktailInformationView.fill(with: validCocktailDescription)
         introductionView.applybaseSnapshot(detailCategoryList: baseList)
         introductionView.applyIngredientSnapshot(detailIngredientList: ingredientList)
+    }
+    
+    private func sendDelegate() {
+        introductionView.configureDelegate(delegate: flowDelegate)
     }
 }
 

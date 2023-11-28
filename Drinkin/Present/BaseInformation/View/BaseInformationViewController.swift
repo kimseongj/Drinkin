@@ -71,13 +71,13 @@ final class BaseInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        showActivityIndicator()
-        configureDataSource()
-        configureBaseBrandCollectionView()
+        fetchData()
         binding()
         errorBinding()
-        fetchData()
+        configureDataSource()
+        configureUI()
+        showActivityIndicator()
+        configureBaseBrandCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {

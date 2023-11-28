@@ -54,17 +54,19 @@ final class CocktailRecommendViewController: UIViewController {
     }
     
     //MARK: - LifeCycle
+    
     override func viewDidLoad() {
-        configureUI()
-        showActivityIndicator()
-        setupRecommendCocktailCollectionView()
-        configureDataSource()
+        fetchData()
         binding()
         errorBinding()
-        fetchData()
+        configureDataSource()
+        configureUI()
+        showActivityIndicator()
+        configureRecommendCocktailCollectionView()
     }
     
     //MARK: - Fetch Data
+    
     func fetchData() {
         viewModel.fetchBriefDescription { 
             DispatchQueue.main.async { [weak self] in
@@ -116,7 +118,7 @@ extension CocktailRecommendViewController: CellButtonDelegate {
 //MARK: - ConfigureCollectionView
 
 extension CocktailRecommendViewController {
-    func setupRecommendCocktailCollectionView() {
+    func configureRecommendCocktailCollectionView() {
         recommendCocktailCollectionView.register(CocktailRecommendCell.self, forCellWithReuseIdentifier: CocktailRecommendCell.identifier)
         recommendCocktailCollectionView.delegate = self
     }

@@ -38,14 +38,13 @@ final class SavedCocktailListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationItemTitle()
-        configureUI()
-        showActivityIndicator()
-        configureDataSource()
         fetchData()
         binding()
         errorBinding()
-    
+        configureDataSource()
+        configureNavigationItemTitle()
+        configureUI()
+        showActivityIndicator()
     }
     
     //MARK: - Fetch Data

@@ -108,12 +108,12 @@ final class BaseBrandInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        showActivityIndicator()
-        showImageViewActivityIndicator()
         fetchData()
         binding()
         errorBinding()
+        configureUI()
+        showActivityIndicator()
+        showImageViewActivityIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {

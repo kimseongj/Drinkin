@@ -215,8 +215,8 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         binding()
+        configureUI()
     }
     
     //MARK: - ConfigureUI

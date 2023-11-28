@@ -75,11 +75,11 @@ final class ToolModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchToolData()
+        errorBinding()
         configureUI()
         showActivityIndicator()
         showImageViewActivityIndicator()
-        errorBinding()
-        fetchToolData()
     }
     
     //MARK: - ConfigureUI

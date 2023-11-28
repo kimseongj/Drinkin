@@ -87,17 +87,17 @@ final class CocktailFilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+        filterBinding()
+        cocktailBinding()
+        errorBinding()
+        configureFilterDataSource()
+        configureCocktailDataSource()
         configureUI()
         showActivityIndicator()
         configureFilterSelectionCollectionView()
         configureFilteredCollectionView()
         makeSelectionFilterCollectionViewDisable()
-        fetchData()
-        configureFilterDataSource()
-        filterBinding()
-        configureCocktailDataSource()
-        cocktailBinding()
-        errorBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,6 +106,7 @@ final class CocktailFilterViewController: UIViewController {
     }
     
     //MARK: - Fetch Data
+    
     private func fetchData() {
         viewModel.fetchCocktailList() { 
             DispatchQueue.main.async { [weak self] in

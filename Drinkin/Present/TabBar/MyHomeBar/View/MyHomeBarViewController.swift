@@ -189,13 +189,13 @@ final class MyHomeBarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        showActivityIndicator()
         fetchData()
-        configureHoldedItemCollectionView()
-        configureDataSource()
         binding()
         errorBinding()
+        configureDataSource()
+        configureUI()
+        showActivityIndicator()
+        configureHoldedItemCollectionView()
     }
     
     //MARK: - Fetch Data
