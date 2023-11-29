@@ -46,16 +46,31 @@ final class InformationCell: UICollectionViewCell {
     }
     
     //MARK: - Fill Cell
-        
+    
     func fill(with cocktailTool: CocktailTool) {
+        if cocktailTool.toolNameKo == "-" {
+            presentEmpty()
+        }
         label.text = cocktailTool.toolNameKo
     }
     
     func fill(with cocktailSkill: CocktailSkill) {
+        if cocktailSkill.skillNameKo == "-" {
+            presentEmpty()
+        }
         label.text = cocktailSkill.skillNameKo
     }
     
     func fill(with cocktailGlass: CocktailGlass) {
+        if cocktailGlass.glassNameKo == "-" {
+            presentEmpty()
+        }
         label.text = cocktailGlass.glassNameKo
+    }
+    
+    private func presentEmpty() {
+        self.layer.borderWidth = 0
+        self.backgroundColor = .white
+        self.isUserInteractionEnabled = false
     }
 }

@@ -92,6 +92,7 @@ final class ClickableInformationView: UIView {
     }
     
     //MARK: - Fill View
+    
     func fill(with cocktailDescription: CocktailDescription) {
         fetchIDList(cocktailDescription: cocktailDescription)
         applySnapshot(cocktailDescription: cocktailDescription)
@@ -164,16 +165,36 @@ extension ClickableInformationView {
         switch title {
         case InformationStrings.tool:
             var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailTool>()
+            if cocktailDescription.toolList.count == 0 {
+                snapshot.appendSections([.main])
+                snapshot.appendItems([CocktailTool(id: 0, toolNameKo: "-")])
+                self.toolDataSource?.apply(snapshot, animatingDifferences: true)
+                break
+            }
             snapshot.appendSections([.main])
             snapshot.appendItems(cocktailDescription.toolList)
             self.toolDataSource?.apply(snapshot, animatingDifferences: true)
+            
         case InformationStrings.skill:
             var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailSkill>()
+            if cocktailDescription.skillList.count == 0 {
+                snapshot.appendSections([.main])
+                snapshot.appendItems([CocktailSkill(id: 0, skillNameKo: "-")])
+                self.skillDataSource?.apply(snapshot, animatingDifferences: true)
+                break
+            }
             snapshot.appendSections([.main])
             snapshot.appendItems(cocktailDescription.skillList)
             self.skillDataSource?.apply(snapshot, animatingDifferences: true)
+            
         case InformationStrings.glass:
             var snapshot = NSDiffableDataSourceSnapshot<Section, CocktailGlass>()
+            if cocktailDescription.glassList.count == 0 {
+                snapshot.appendSections([.main])
+                snapshot.appendItems([CocktailGlass(id: 0, glassNameKo: "-")])
+                self.glassDataSource?.apply(snapshot, animatingDifferences: true)
+                break
+            }
             snapshot.appendSections([.main])
             snapshot.appendItems(cocktailDescription.glassList)
             self.glassDataSource?.apply(snapshot, animatingDifferences: true)
@@ -184,6 +205,7 @@ extension ClickableInformationView {
 }
 
 //MARK: - InformationCollectionView Delegate
+
 extension ClickableInformationView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let validCocktailDescription = cocktailDescription else { return }
