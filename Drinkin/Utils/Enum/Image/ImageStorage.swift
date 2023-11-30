@@ -26,6 +26,7 @@ enum ImageStorage {
     static let checkFillIcon = UIImage(named: "check_fill_icon")
     static let deleteIcon = UIImage(named: "delete_icon")
     static let arrowIcon = UIImage(named: "arrow_icon")
+    static let backIcon = UIImage(named: "back_icon")
     static let personCircleIcon = UIImage(systemName: "person.circle")
     static let kakaoIcon = UIImage(named: "kakao_icon")
     static let appleIcon = UIImage(named: "apple_icon")
