@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import Combine
 
 final class TriedCocktailSelectionViewController: UIViewController {
@@ -79,6 +80,8 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return completeSelectionButton
     }()
     
+    private let updateView = UpdateView()
+    
     //MARK: - Init
     
     init(viewModel: TriedCocktailSelectionViewModel) {
@@ -132,6 +135,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         view.addSubview(categoryCollectionView)
         view.addSubview(cocktailCollectionView)
         view.addSubview(completeSelectionButton)
+        view.addSubview(updateView)
         
         mainLabel.snp.makeConstraints {
             $0.top.equalTo(safeArea).offset(16)
@@ -167,6 +171,12 @@ final class TriedCocktailSelectionViewController: UIViewController {
             $0.bottom.equalTo(safeArea.snp.bottom)
             $0.height.equalTo(54)
         }
+        
+        updateView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalToSuperview()
+        }
+        
+        updateView.isHidden = true
     }
     
     private func renewCompleteSelectionButton(isCellsSelected: Bool = false) {
@@ -191,9 +201,12 @@ final class TriedCocktailSelectionViewController: UIViewController {
     }
     
     @objc
-    private func dismissAndAddTriedCocktailList() {
+    private func dismissAndAddTriedCocktailList() {        
+        updateView.isHidden = false
+        updateView.startAnimating()
         viewModel.addTriedCocktailList { [weak self] in
             guard let self = self else { return }
+            self.updateView.isHidden = true
             self.dismiss(animated: true)
         }
     }

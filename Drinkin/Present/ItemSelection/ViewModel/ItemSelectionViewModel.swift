@@ -146,7 +146,7 @@ extension DefaultItemSelectiontViewModel {
                     completion()
                 }).store(in: &cancelBag)
         } else {
-            return
+            completion()
         }
     }
     
