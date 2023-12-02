@@ -15,16 +15,20 @@ extension UIViewController {
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
-    
-    //MARK: - Login Recommend Alert
-    
+}
+
+//MARK: - Login Recommend Alert
+
+extension UIViewController {
     func showLoginRecommendAlert() {
         let alertController = makeAlert(title: "로그인 후 이용 가능합니다.", message: "나의 홈바에서 로그인해주세요.")
         present(alertController, animated: true, completion: nil)
     }
-    
+}
+
     //MARK: - Error Alert
     
+extension UIViewController {
     func showAlert(errorType: APIError) {
         switch errorType {
         case .networkError(let error):
@@ -42,11 +46,12 @@ extension UIViewController {
     }
     
     //MARK: - Make Alert
+    
     func makeAlert(title: String, message: String) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "확인", style: .default) { _ in
-            self.dismiss(animated: true)
+            alertController.dismiss(animated: true)
         }
         
         alertController.addAction(okAction)
@@ -81,6 +86,8 @@ extension UIViewController {
         }
     }
 }
+
+//MARK: - ActivityIndicator
 
 extension UIViewController {
     
