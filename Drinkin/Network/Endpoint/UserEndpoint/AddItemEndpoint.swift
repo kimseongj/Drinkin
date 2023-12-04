@@ -8,9 +8,9 @@
 import Foundation
 
 struct AddItemEndpoint: EndpointMakeable {
-    var baseURL: String = ""
+    var baseURL: String = "http://13.209.22.43:8000"
     
-    var path: String = ""
+    var path: String = "/v1/update-hold-item"
     
     var method: String = HTTPMethod.post.rawValue
     
