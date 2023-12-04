@@ -110,7 +110,16 @@ struct DefaultProvider: Provider {
     //MARK: - PostData
     
     func postData<B: Encodable, T: Decodable>(endpoint: EndpointMakeable, bodyItem: B) -> AnyPublisher<T, APIError> {
-        let request = endpoint.makeJsonPostRequest(bodyItem: bodyItem)
+        var request = endpoint.makeJsonPostRequest(bodyItem: bodyItem)
+        
+        do {
+            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
+                request!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            }
+
+        } catch {
+            print("keychain Error")
+        }
         
         return URLSession.shared.dataTaskPublisher(for: request!)
             .tryMap { data, response in
