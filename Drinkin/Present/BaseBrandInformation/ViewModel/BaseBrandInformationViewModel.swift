@@ -28,16 +28,19 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
     @Published var baseBrandDetail: BaseBrandDetail?
     
     //MARK: - Init
+    
     init(baseBrandDetailRepository: BaseBrandDetailRepository) {
         self.baseBrandDetailRepository = baseBrandDetailRepository
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var baseBrandDetailPublisher: Published<BaseBrandDetail?>.Publisher { $baseBrandDetail }
     var brandID: Int = 0
     
     //MARK: - Input
+    
     func fetchBaseBrandDetail(completion: @escaping () -> Void) {
         baseBrandDetailRepository.fetchBaseBrandDetail()
             .sink(
