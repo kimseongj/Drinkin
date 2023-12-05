@@ -7,7 +7,6 @@
 
 import Foundation
 
-//MARK: - HoldedItem
 struct HoldedItem: Codable, Hashable {
     let holdedItemList: [String]
     

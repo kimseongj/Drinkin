@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import SnapKit
 import Combine
 
 final class TriedCocktailSelectionViewController: UIViewController {
     private var cancelBag: Set<AnyCancellable> = []
     private var viewModel: TriedCocktailSelectionViewModel
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, SelectableImageDescription>?
-   
+    
     private let mainLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -30,7 +31,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return label
     }()
     
-    private let exitButton: UIButton = {
+    private lazy var exitButton: UIButton = {
         let exitButton = UIButton()
         exitButton.setImage(ImageStorage.deleteIcon, for: .normal)
         exitButton.addTarget(self, action: #selector(presentPopupViewController), for: .touchUpInside)
@@ -79,6 +80,8 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return completeSelectionButton
     }()
     
+    private let updateView = UpdateView()
+    
     //MARK: - Init
     
     init(viewModel: TriedCocktailSelectionViewModel) {
@@ -94,15 +97,15 @@ final class TriedCocktailSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+        errorBinding()
+        binding()
+        configureCocktailDataSource()
         configureUI()
-        view.backgroundColor = .white
+        showActivityIndicator()
         configureCocktailCollectionView()
         configureBaseTypeCollectionView()
         renewCompleteSelectionButton()
-        configureCocktailDataSource()
-        errorBinding()
-        binding()
-        viewModel.fetchCocktailImageList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,17 +113,29 @@ final class TriedCocktailSelectionViewController: UIViewController {
         categoryCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: [])
     }
     
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchCocktailImageList() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
+    }
+    
     //MARK: - ConfigureUI
     
     private func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
+        view.backgroundColor = .white
         
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(mainLabel)
         view.addSubview(subLabel)
         view.addSubview(exitButton)
         view.addSubview(categoryCollectionView)
         view.addSubview(cocktailCollectionView)
         view.addSubview(completeSelectionButton)
+        view.addSubview(updateView)
         
         mainLabel.snp.makeConstraints {
             $0.top.equalTo(safeArea).offset(16)
@@ -156,6 +171,12 @@ final class TriedCocktailSelectionViewController: UIViewController {
             $0.bottom.equalTo(safeArea.snp.bottom)
             $0.height.equalTo(54)
         }
+        
+        updateView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalToSuperview()
+        }
+        
+        updateView.isHidden = true
     }
     
     private func renewCompleteSelectionButton(isCellsSelected: Bool = false) {
@@ -180,9 +201,12 @@ final class TriedCocktailSelectionViewController: UIViewController {
     }
     
     @objc
-    private func dismissAndAddTriedCocktailList() {
+    private func dismissAndAddTriedCocktailList() {        
+        updateView.isHidden = false
+        updateView.startAnimating()
         viewModel.addTriedCocktailList { [weak self] in
             guard let self = self else { return }
+            self.updateView.isHidden = true
             self.dismiss(animated: true)
         }
     }
@@ -222,7 +246,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDataSource {
         return categoryListCount
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell { 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         let categoryListName = viewModel.categoryList[indexPath.row]
         
@@ -311,7 +335,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
         } else {
             
             if let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell {
-            cell.presentSelected()
+                cell.presentSelected()
             }
             viewModel.selectCocktail(index: indexPath.row)
             renewCompleteSelectionButton(isCellsSelected: viewModel.checkCocktailSelected())
@@ -336,15 +360,8 @@ extension TriedCocktailSelectionViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

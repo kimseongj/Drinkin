@@ -18,10 +18,10 @@ final class DefaultAdditionRepository: AdditionRepository {
     }
     
     func postTriedCocktail(cocktailIDList: CocktailIDList) -> AnyPublisher<PostResponse, APIError> {
-        return provider.postData(endpoint: endpoint, bodyItem: cocktailIDList)
+        provider.postData(endpoint: endpoint, bodyItem: cocktailIDList)
     }
     
-    func postHoldedItem(items: Encodable) -> AnyPublisher<HoldedItem, APIError> {
-        return provider.postData(endpoint: endpoint, bodyItem: items)
+    func postHoldedItem(items: Encodable) -> AnyPublisher<PostResponse, APIError> {
+        provider.postData(endpoint: endpoint, bodyItem: items)
     }
 }

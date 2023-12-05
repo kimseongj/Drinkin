@@ -80,6 +80,7 @@ final class IntroductionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        showImageViewActivityIndicator()
         configureBaseCollectionView()
         configureBaseDataSource()
         configureIngredientDataSource()
@@ -144,13 +145,20 @@ final class IntroductionView: UIView {
         }
     }
     
+    private func showImageViewActivityIndicator() {
+        cocktailImageView.showActivityIndicator()
+    }
+    
     //MARK: - Fill View
     
     func fill(with cocktailDesription: CocktailDescription) {
-        cocktailImageView.load(urlString: cocktailDesription.imageURI)
         cocktailTitleLabel.text = cocktailDesription.cocktailNameKo
         cocktailTDescriptionLabel.text = cocktailDesription.description
         fillRecipeStackView(with: cocktailDesription.recipeList)
+        cocktailImageView.load(urlString: cocktailDesription.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.cocktailImageView.hideActivityIndicator()
+        }
         
         baseIDList = cocktailDesription.baseList.map { $0.id }
         ingredientIDList = cocktailDesription.ingredientList.map { $0.id }

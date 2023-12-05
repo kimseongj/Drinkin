@@ -61,7 +61,6 @@ struct GarnishList: Codable, Hashable {
     }
 }
 
-// MARK: - IngredientList
 struct IngredientList: Codable, Hashable {
     let ingredientNameKo: String
     let hold: Bool

@@ -16,15 +16,15 @@ final class SavedCocktailListDIContainer {
     }
     
     func makeSavedCocktailListRepository() -> SavedCocktailListRepository {
-        return DefaultSavedCocktailListRepository(provider: provider,
+        DefaultSavedCocktailListRepository(provider: provider,
                                                   endpoint: savedCocktailListEndpoint)
     }
     
     func makeSavedCocktailListViewModel() -> SavedCocktailListViewModel {
-        return DefaultSavedCocktailListViewModel(savedCocktailListRepository: makeSavedCocktailListRepository())
+        DefaultSavedCocktailListViewModel(savedCocktailListRepository: makeSavedCocktailListRepository())
     }
     
     func makeSavedCocktailListViewController() -> SavedCocktailListViewController {
-        return SavedCocktailListViewController(viewModel: makeSavedCocktailListViewModel())
+        SavedCocktailListViewController(viewModel: makeSavedCocktailListViewModel())
     }
 }

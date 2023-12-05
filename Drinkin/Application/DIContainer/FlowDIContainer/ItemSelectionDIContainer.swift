@@ -19,31 +19,31 @@ final class ItemSelectionDIContainer {
     
     //MARK: - filterItemUsecase
     func makeItemSelectionRepository() -> ItemRepository {
-        return DefaultItemSelectionRepository(provider: provider,
+        DefaultItemSelectionRepository(provider: provider,
                                      endpoint: itemSelectionEndpoint
                                      )
     }
     
     func makeFilterItemUsecase() -> FilterItemUsecase {
-        return DefaultFilterItemUsecase(itemRepository: makeItemSelectionRepository())
+        DefaultFilterItemUsecase(itemRepository: makeItemSelectionRepository())
     }
     
     //MARK: - AddItemUsecase
     func makeAdditionRepository() -> AdditionRepository {
-        return DefaultAdditionRepository(provider: provider, endpoint: addItemEndpoint)
+        DefaultAdditionRepository(provider: provider, endpoint: addItemEndpoint)
     }
     
     func makeAddItemUsecase() -> AddItemUsecase {
-        return DefaultAddItemUsecase(additionRepository: makeAdditionRepository())
+        DefaultAddItemUsecase(additionRepository: makeAdditionRepository())
     }
     
     
     func makeItemSelectionViewModel() -> ItemSelectionViewModel {
-        return DefaultItemSelectiontViewModel(filterItemUsecase: makeFilterItemUsecase(),
+        DefaultItemSelectiontViewModel(filterItemUsecase: makeFilterItemUsecase(),
                                         addItemUsecase: makeAddItemUsecase())
     }
     
     func makeItemSelectionViewController() -> ItemSelectionViewController {
-        return ItemSelectionViewController(viewModel: makeItemSelectionViewModel() )
+        ItemSelectionViewController(viewModel: makeItemSelectionViewModel() )
     }
 }

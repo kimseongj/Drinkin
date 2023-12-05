@@ -39,6 +39,8 @@ final class ItemSelectionViewController: UIViewController {
         return collectionView
     }()
     
+    private let updateView = UpdateView()
+    
     //MARK: - Init
     
     init(viewModel: ItemSelectionViewModel) {
@@ -54,16 +56,18 @@ final class ItemSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTitle()
-        configureUI()
-        configureFilterCollectionView()
-        configureItemCollectionView()
-        configureItemFilterDataSource()
-        configureItemDataSource()
+        fetchData()
         filterBinding()
         itemBinding()
         errorBinding()
-        viewModel.fetchItemData()
+        configureItemFilterDataSource()
+        configureItemDataSource()
+        configureTitle()
+        configureUI()
+        configureBackBarButton()
+        showActivityIndicator()
+        configureFilterCollectionView()
+        configureItemCollectionView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,6 +76,17 @@ final class ItemSelectionViewController: UIViewController {
         viewModel.addSelectedItems(completion: {
             
         })
+    }
+    
+    //MARK: - Fetch Data
+    
+    private func fetchData() {
+        viewModel.fetchItemData() {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI
@@ -84,9 +99,9 @@ final class ItemSelectionViewController: UIViewController {
         view.backgroundColor = .white
         
         let safeArea = view.safeAreaLayoutGuide
-        
         view.addSubview(itemFilterCollectionView)
         view.addSubview(itemCollectionView)
+        view.addSubview(updateView)
         
         itemFilterCollectionView.snp.makeConstraints {
             $0.top.equalTo(safeArea.snp.top).offset(20)
@@ -101,6 +116,29 @@ final class ItemSelectionViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalTo(safeArea.snp.bottom)
         }
+        
+        updateView.snp.makeConstraints {
+            $0.leading.trailing.top.bottom.equalToSuperview()
+        }
+        
+        updateView.isHidden = true
+    }
+    
+    private func configureBackBarButton() {
+        let backButton = UIBarButtonItem(image: ImageStorage.backIcon, style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.tintColor = .black
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc
+    private func backButtonTapped() {
+        updateView.isHidden = false
+        
+        viewModel.addSelectedItems { [weak self] in
+            guard let self = self else { return }
+            self.updateView.isHidden = true
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -109,7 +147,7 @@ final class ItemSelectionViewController: UIViewController {
 extension ItemSelectionViewController {
     private func configureFilterCollectionView() {
         itemFilterCollectionView.delegate = self
-    
+        
         if let flowLayout = itemFilterCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
@@ -147,7 +185,7 @@ extension ItemSelectionViewController {
     private func configureItemDataSource() {
         itemDataSource = UICollectionViewDiffableDataSource<Section, Item> (collectionView: itemCollectionView) { [weak self] (collectionView, indexPath, item) in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell, let self = self else { return UICollectionViewCell() }
-        
+            
             
             if item.hold == true {
                 cell.presentHoldItem()
@@ -196,17 +234,17 @@ extension ItemSelectionViewController {
 extension ItemSelectionViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                             heightDimension: .fractionalHeight(1.0))
+                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .absolute(84))
+                                               heightDimension: .absolute(84))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                         subitems: [item])
+                                                     subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
-
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
@@ -244,15 +282,8 @@ extension ItemSelectionViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

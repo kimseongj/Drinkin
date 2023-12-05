@@ -37,13 +37,25 @@ final class MakeableCocktailListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
-        configureUI()
-        configureMakeableCocktailCollectionView()
-        configureDataSource()
+        fetchData()
         binding()
         errorBinding()
-        viewModel.fetchMakeableCocktailList()
+        configureDataSource()
+        configureNavigationBar()
+        configureUI()
+        showActivityIndicator()
+        configureMakeableCocktailCollectionView()
+    }
+    
+    //MARK: - Fetch Data
+    
+    private func fetchData() {
+        viewModel.fetchMakeableCocktailList() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI
@@ -140,15 +152,8 @@ extension MakeableCocktailListViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

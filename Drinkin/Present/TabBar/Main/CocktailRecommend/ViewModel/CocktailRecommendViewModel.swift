@@ -11,7 +11,7 @@ import Combine
 
 
 protocol CocktailRecommendViewModelInput {
-    func fetchBriefDescription()
+    func fetchBriefDescription(completion: @escaping () -> Void)
 }
 
 protocol CocktailRecommendViewModelOutput {
@@ -29,16 +29,19 @@ class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
     @Published var briefDescriptionList: [CocktailBrief] = []
     
     //MARK: - Init
+    
     init(cocktailBriefListRepository: CocktailBriefListRepository) {
         self.cocktailBriefListRepository = cocktailBriefListRepository
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var briefDescriptionListPublisher: Published<[CocktailBrief]>.Publisher { $briefDescriptionList }
     
     //MARK: - Input
-    func fetchBriefDescription() {
+    
+    func fetchBriefDescription(completion: @escaping () -> Void) {
         cocktailBriefListRepository.fetchCocktailBriefList()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -66,6 +69,7 @@ class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
                     self.briefDescriptionList = $0.briefDescriptionList
+                    completion()
                 }).store(in: &cancelBag)
     }
 }

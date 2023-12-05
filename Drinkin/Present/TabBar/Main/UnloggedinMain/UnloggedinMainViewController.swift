@@ -48,7 +48,7 @@ final class UnloggedinMainViewController: UIViewController {
         return recommendLabel
     }()
     
-    private let startButton: UIButton = {
+    private lazy var startButton: UIButton = {
         let startButton = UIButton()
         startButton.setTitle("시작하기", for: .normal)
         startButton.setTitleColor(.white, for: .normal)

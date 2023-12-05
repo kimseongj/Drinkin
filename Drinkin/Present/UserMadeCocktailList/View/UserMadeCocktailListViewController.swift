@@ -37,12 +37,24 @@ final class UserMadeCocktailListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationItemTitle()
-        configureUI()
-        configureDataSource()
+        fetchData()
         binding()
         errorBinding()
-        viewModel.fetchCocktailPreviewDescription()
+        configureDataSource()
+        configureNavigationItemTitle()
+        configureUI()
+        showActivityIndicator()
+    }
+    
+    //MARK: - Fetch Data
+    
+    private func fetchData() {
+        viewModel.fetchCocktailPreviewDescription() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI
@@ -103,17 +115,17 @@ extension UserMadeCocktailListViewController {
 extension UserMadeCocktailListViewController {
     private func configureCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                             heightDimension: .fractionalHeight(1.0))
+                                              heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
+        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .absolute(120))
+                                               heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                         subitems: [item])
+                                                       subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
-
+        
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
@@ -127,15 +139,8 @@ extension UserMadeCocktailListViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

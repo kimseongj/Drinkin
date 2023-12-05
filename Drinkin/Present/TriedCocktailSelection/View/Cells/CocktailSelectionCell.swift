@@ -33,6 +33,7 @@ final class CocktailSelectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        showActivityIndicator()
         makeSelectedViewHidden()
     }
     
@@ -67,6 +68,10 @@ final class CocktailSelectionCell: UICollectionViewCell {
         }
     }
     
+    private func showActivityIndicator() {
+        cocktailImageView.showActivityIndicator()
+    }
+    
     private func makeSelectedViewHidden() {
         selectedView.isHidden = true
     }
@@ -74,8 +79,11 @@ final class CocktailSelectionCell: UICollectionViewCell {
     //MARK: - Fill Cell
     
     func fill(with previewDescription: SelectableImageDescription) {
-        cocktailImageView.load(urlString: previewDescription.imageURI)
         cocktailNameLabel.text = previewDescription.cocktailNameKo
+        cocktailImageView.load(urlString: previewDescription.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.cocktailImageView.hideActivityIndicator()
+        }
     }
     
     func presentSelected() {

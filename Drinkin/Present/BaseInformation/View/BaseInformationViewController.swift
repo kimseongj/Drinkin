@@ -71,12 +71,13 @@ final class BaseInformationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        configureDataSource()
-        configureBaseBrandCollectionView()
+        fetchData()
         binding()
         errorBinding()
-        viewModel.fetchBaseDetail()
+        configureDataSource()
+        configureUI()
+        showActivityIndicator()
+        configureBaseBrandCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,12 +85,21 @@ final class BaseInformationViewController: UIViewController {
         AppCoordinator.tabBarController.tabBar.isHidden = true
     }
     
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchBaseDetail() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
+    }
+    
     //MARK: - ConfigureUI
     
     private func configureUI() {
         view.backgroundColor = .white
         
-        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(informationView)
@@ -230,15 +240,8 @@ extension BaseInformationViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

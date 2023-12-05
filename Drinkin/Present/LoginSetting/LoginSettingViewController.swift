@@ -30,15 +30,12 @@ final class LoginSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
         configureUI()
     }
     
-    private func configureBackgroundColor() {
-        view.backgroundColor = .white
-    }
-    
     private func configureUI() {
+        view.backgroundColor = .white
+        
         switch login {
         case true:
             configureLoggedinUI()

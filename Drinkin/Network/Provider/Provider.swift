@@ -25,14 +25,14 @@ struct DefaultProvider: Provider {
     func fetchData<T: Decodable>(endpoint: EndpointMakeable) -> AnyPublisher<T, APIError> {
         var request = endpoint.makeURLRequest()
         
-//        do {
-//            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
-//                request!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-//            }
-//
-//        } catch {
-//            print("keychain Error")
-//        }
+        do {
+            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
+                request!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            }
+
+        } catch {
+            print("keychain Error")
+        }
         
         return URLSession.shared.dataTaskPublisher(for: request!)
             .tryMap { data, response in
@@ -63,8 +63,13 @@ struct DefaultProvider: Provider {
                 if case APIError.unauthorized = error {
                     return renewAccessTokenPublisher().flatMap { accessToken in
                         var newRequest = request
+                        print("\(accessToken)")
                         do {
-                            try newRequest!.setValue("Bearer \(tokenManager.readToken(tokenType: TokenType.accessToken))", forHTTPHeaderField: "Authorization")
+                            try tokenManager.updateToken(tokenType: TokenType.accessToken, token: accessToken.accessToken)
+                            
+                            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
+                                newRequest!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+                            }
                         } catch {
                             print("keychain Error")
                         }
@@ -105,7 +110,16 @@ struct DefaultProvider: Provider {
     //MARK: - PostData
     
     func postData<B: Encodable, T: Decodable>(endpoint: EndpointMakeable, bodyItem: B) -> AnyPublisher<T, APIError> {
-        let request = endpoint.makeJsonPostRequest(bodyItem: bodyItem)
+        var request = endpoint.makeJsonPostRequest(bodyItem: bodyItem)
+        
+        do {
+            if let accessToken = try tokenManager.readToken(tokenType: TokenType.accessToken) {
+                request!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            }
+
+        } catch {
+            print("keychain Error")
+        }
         
         return URLSession.shared.dataTaskPublisher(for: request!)
             .tryMap { data, response in

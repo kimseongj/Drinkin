@@ -19,6 +19,6 @@ final class DefaultItemSelectionRepository: ItemRepository {
     }
     
     func fetchItemData() -> AnyPublisher<ItemSelectionList, APIError> {
-        return provider.fetchData(endpoint: endpoint)
+        provider.fetchData(endpoint: endpoint)
     }
 }

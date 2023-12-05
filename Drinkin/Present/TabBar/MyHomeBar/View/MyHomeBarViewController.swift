@@ -29,8 +29,6 @@ final class MyHomeBarViewController: UIViewController {
         return label
     }()
     
-    private let convertableItemView = UIView()
-    
     private let holdIngredientLabel: UILabel = {
         let label = UILabel()
         label.text = "가지고 있는 재료"
@@ -39,7 +37,7 @@ final class MyHomeBarViewController: UIViewController {
         return label
     }()
     
-    private let loginSettingButton: UIButton = {
+    private lazy var loginSettingButton: UIButton = {
         let button = UIButton()
         if let originalImage = ImageStorage.personCircleIcon {
             let scaledImage = originalImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 36.0))
@@ -56,7 +54,7 @@ final class MyHomeBarViewController: UIViewController {
         flowDelegate?.pushLoginSettingVC()
     }
     
-    private let addItemView = UIView()
+    private lazy var addItemView = UIView()
     
     private lazy var addLabel1: UILabel = {
         let label = UILabel()
@@ -103,16 +101,16 @@ final class MyHomeBarViewController: UIViewController {
         flowDelegate?.pushItemSelectionVC()
     }
     
-    private let holdedItemCollectionView: UICollectionView = {
+    private lazy var holdedItemCollectionView: UICollectionView = {
         let layout = UICollectionViewLayout()
         let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
         collectionView.register(HoldedItemCell.self, forCellWithReuseIdentifier: HoldedItemCell.identifier)
         collectionView.backgroundColor = .white
- 
+        
         return collectionView
     }()
     
-    private let savedCocktailListButton: UIButton = {
+    private lazy var savedCocktailListButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapSavedCocktailListButton), for: .touchUpInside)
         
@@ -144,7 +142,7 @@ final class MyHomeBarViewController: UIViewController {
         flowDelegate?.pushSavedCocktailListVC()
     }
     
-    private let userMadeCocktailListButton: UIButton = {
+    private lazy var userMadeCocktailListButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
         
@@ -175,7 +173,7 @@ final class MyHomeBarViewController: UIViewController {
     private func tapUserMadeCocktailListButton() {
         flowDelegate?.pushUserMadeCocktailListVC()
     }
-        
+    
     //MARK: - Init
     
     init(viewModel: MyHomeBarViewModel) {
@@ -191,12 +189,23 @@ final class MyHomeBarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        configureHoldedItemCollectionView()
-        viewModel.fetchHoldedItem()
-        configureDataSource()
+        fetchData()
         binding()
         errorBinding()
+        configureDataSource()
+        configureUI()
+        showActivityIndicator()
+        configureHoldedItemCollectionView()
+    }
+    
+    //MARK: - Fetch Data
+    private func fetchData() {
+        viewModel.fetchHoldedItem() {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI
@@ -208,7 +217,6 @@ final class MyHomeBarViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(loginSettingButton)
         view.addSubview(holdIngredientLabel)
-        view.addSubview(convertableItemView)
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(safeArea.snp.top)
@@ -224,13 +232,6 @@ final class MyHomeBarViewController: UIViewController {
         holdIngredientLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(34)
             $0.leading.equalTo(safeArea.snp.leading).offset(16)
-        }
-        
-        switch isTrue {
-        case true:
-            configureHoldedItem()
-        case false:
-            configureItem()
         }
     }
     
@@ -347,8 +348,112 @@ extension MyHomeBarViewController {
         viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             
-            self.applySnapshot(holdedItemList: $0)
+            if $0.count == 0 {
+                self.showAddItemView()
+            } else {
+                self.showHoldedItemCollectionVIew(itemList: $0)
+            }
         }.store(in: &cancelBag)
+    }
+    
+    private func showHoldedItemCollectionVIew(itemList: [String]) {
+        view.addSubview(smallAddButton)
+        view.addSubview(holdedItemCollectionView)
+        view.addSubview(savedCocktailListButton)
+        view.addSubview(userMadeCocktailListButton)
+        
+        smallAddButton.snp.makeConstraints {
+            $0.centerY.equalTo(holdIngredientLabel)
+            $0.trailing.equalToSuperview().offset(-16)
+        }
+        
+        holdedItemCollectionView.snp.makeConstraints {
+            $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+        }
+        
+        savedCocktailListButton.snp.makeConstraints {
+            $0.top.equalTo(holdedItemCollectionView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        userMadeCocktailListButton.snp.makeConstraints {
+            $0.top.equalTo(savedCocktailListButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        if holdedItemCollectionView.isHidden {
+            holdedItemCollectionView.isHidden = false
+        }
+        
+        if smallAddButton.isHidden {
+            smallAddButton.isHidden = false
+        }
+        
+        if addItemView.isHidden == false {
+            addItemView.isHidden = true
+        }
+        
+        applySnapshot(holdedItemList: itemList)
+    }
+    
+    private func showAddItemView() {
+        view.addSubview(addItemView)
+        view.addSubview(savedCocktailListButton)
+        view.addSubview(userMadeCocktailListButton)
+        addItemView.addSubview(addLabel1)
+        addItemView.addSubview(addLabel2)
+        addItemView.addSubview(largeAddButton)
+        
+        addItemView.snp.makeConstraints {
+            $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(32)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        addLabel1.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
+        addLabel2.snp.makeConstraints {
+            $0.top.equalTo(addLabel1.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+        }
+        
+        largeAddButton.snp.makeConstraints {
+            $0.top.equalTo(addLabel2.snp.bottom).offset(15)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(39)
+            $0.width.equalTo(108)
+            $0.bottom.equalToSuperview().offset(-32)
+        }
+        
+        savedCocktailListButton.snp.makeConstraints {
+            $0.top.equalTo(addItemView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        userMadeCocktailListButton.snp.makeConstraints {
+            $0.top.equalTo(savedCocktailListButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        if addItemView.isHidden  {
+            addItemView.isHidden = false
+        }
+        
+        if smallAddButton.isHidden == false {
+            smallAddButton.isHidden = true
+        }
+        
+        if holdedItemCollectionView.isHidden == false {
+            holdedItemCollectionView.isHidden = true
+        }
     }
 }
 
@@ -367,15 +472,8 @@ extension MyHomeBarViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

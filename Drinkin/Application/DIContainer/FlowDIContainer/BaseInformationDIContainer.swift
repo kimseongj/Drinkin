@@ -18,16 +18,16 @@ final class BaseInformationDIContainer {
     }
     
     func makeBaseDetailRepository() -> BaseDetailRepository {
-        return DefaultBaseDetailRepository(provider: provider,
+        DefaultBaseDetailRepository(provider: provider,
                                            endpoint: baseInformationEndpoint,
                                            baseID: baseID)
     }
     
     func makeBaseInformationViewModel() -> BaseInformationViewModel {
-        return DefaultBaseInformationViewModel(baseDetailRepository: makeBaseDetailRepository())
+        DefaultBaseInformationViewModel(baseDetailRepository: makeBaseDetailRepository())
     }
     
     func makeBaseInformationViewController() -> BaseInformationViewController {
-        return BaseInformationViewController(viewModel: makeBaseInformationViewModel())
+        BaseInformationViewController(viewModel: makeBaseInformationViewModel())
     }
 }

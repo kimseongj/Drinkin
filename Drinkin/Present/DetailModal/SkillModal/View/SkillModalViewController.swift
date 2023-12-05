@@ -42,9 +42,10 @@ final class SkillModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        errorBinding()
         fetchSkillData()
+        errorBinding()
+        configureUI()
+        showActivityIndicator()
     }
     
     //MARK: - ConfigureUI
@@ -60,13 +61,13 @@ final class SkillModalViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
         
-        descriptionLabel.snp.makeConstraints { 
+        descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
         }
     }
-
+    
     //MARK: - Fill View
     
     private func fill(skillDetail: SkillDetail) {
@@ -79,8 +80,8 @@ final class SkillModalViewController: UIViewController {
     private func fetchSkillData() {
         viewModel.fetchSkillDetail { [weak self] in
             guard let self = self else { return }
-            
             self.fill(skillDetail: $0)
+            self.hideActivityIndicator()
         }
     }
 }
@@ -92,15 +93,8 @@ extension SkillModalViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

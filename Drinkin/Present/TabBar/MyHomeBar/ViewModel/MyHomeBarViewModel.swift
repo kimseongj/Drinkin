@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol MyHomeBarViewModelInput {
-    func fetchHoldedItem()
+    func fetchHoldedItem(completion: @escaping () -> Void)
     func deleteHoldedItem(holdedItem: String)
 }
 
@@ -28,16 +28,19 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     @Published var holdedItemList: [String] = []
     
     //MARK: - Init
+    
     init(holdedItemRepository: HoldedItemRepository) {
         self.holdedItemRepository = holdedItemRepository
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var holdedItemListPublisher: Published<[String]>.Publisher { $holdedItemList }
     
     //MARK: - Input
-    func fetchHoldedItem() {
+    
+    func fetchHoldedItem(completion: @escaping () -> Void) {
         holdedItemRepository.fetchHoldedItem()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -65,6 +68,7 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
                     self.holdedItemList = $0.holdedItemList
+                    completion()
                 }
             ).store(in: &cancelBag)
     }

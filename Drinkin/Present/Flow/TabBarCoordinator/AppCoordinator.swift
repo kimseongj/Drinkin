@@ -11,7 +11,7 @@ class AppCoordinator: NSObject, Coordinator {
     let window: UIWindow?
     let appDIContainer: AppDIContainer
     static var tabBarHeight: CGFloat = 0
-    static let tabBarController = UITabBarController()
+    static let tabBarController = PortraitOnlyTabBarController()
     
     init(_ window: UIWindow?, appDIContainer: AppDIContainer) {
         self.window = window
@@ -25,7 +25,7 @@ class AppCoordinator: NSObject, Coordinator {
         AppCoordinator.tabBarHeight = tabBarController.tabBar.frame.size.height
     }
     
-    func configureTabBarController() -> UITabBarController {
+    func configureTabBarController() -> PortraitOnlyTabBarController {
         let selectedTextAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black]
         
         UITabBar.appearance().unselectedItemTintColor = UIColor.black

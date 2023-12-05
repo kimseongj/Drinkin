@@ -55,11 +55,16 @@ final class ItemCell: UICollectionViewCell {
         return imageView
     }()
     
+    override func prepareForReuse() {
+        itemImageView.image = nil
+    }
+    
     //MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        showActivityIndicator()
     }
     
     required init?(coder: NSCoder) {
@@ -106,12 +111,19 @@ final class ItemCell: UICollectionViewCell {
         checkImageView.isHidden = true
     }
     
+    private func showActivityIndicator() {
+        itemImageView.showActivityIndicator()
+    }
+    
     //MARK: - Fill Cell
     
     func fill(with item: Item) {
-        itemImageView.load(urlString: item.imageURI)
         itemTitleLabel.text = item.itemName
         categoryLabel.text = item.detail
+        itemImageView.load(urlString: item.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.itemImageView.hideActivityIndicator()
+        }
     }
     
     func presentHoldItem() {

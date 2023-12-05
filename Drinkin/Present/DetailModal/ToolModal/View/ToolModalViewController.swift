@@ -75,9 +75,11 @@ final class ToolModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        errorBinding()
         fetchToolData()
+        errorBinding()
+        configureUI()
+        showActivityIndicator()
+        showImageViewActivityIndicator()
     }
     
     //MARK: - ConfigureUI
@@ -125,21 +127,28 @@ final class ToolModalViewController: UIViewController {
         }
     }
     
+    private func showImageViewActivityIndicator() {
+        imageView.showActivityIndicator()
+    }
+    
     //MARK: - Fill View
     
     private func fill(toolDetail: ToolDetail) {
-        imageView.load(urlString: toolDetail.imageURI)
         titleLabel.text = toolDetail.toolName
         descriptionLabel.text = toolDetail.description
         purchaseLinkLabel.text = toolDetail.purchaseLink
+        imageView.load(urlString: toolDetail.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.imageView.hideActivityIndicator()
+        }
     }
     
     //MARK: Fetch Data
     private func fetchToolData() {
         viewModel.fetchToolDetail { [weak self] in
             guard let self = self else { return }
-            
             self.fill(toolDetail: $0)
+            self.hideActivityIndicator()
         }
     }
 }
@@ -152,14 +161,7 @@ extension ToolModalViewController {
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
                 guard let self = self else { return }
-                
-                switch $0 {
-                case .noError:
-                    break
-                default:
-                    print("\($0)")
-                    self.showAlert(errorType: $0)
-                }
+                self.handlingError(errorType: $0)
             }).store(in: &cancelBag)
     }
 }

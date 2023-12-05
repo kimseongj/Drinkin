@@ -18,6 +18,6 @@ class DefaultCocktailBriefListRepository: CocktailBriefListRepository {
     }
     
     func fetchCocktailBriefList() -> AnyPublisher<CocktailBriefList, APIError> {
-        return provider.fetchData(endpoint: endpoint)
+        provider.fetchData(endpoint: endpoint)
     }
 }

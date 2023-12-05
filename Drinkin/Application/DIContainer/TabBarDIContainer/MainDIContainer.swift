@@ -18,17 +18,17 @@ final class MainDIContainer {
     //MARK: - CocktailRecommend
     
     func makeCocktailBriefListRepository() -> CocktailBriefListRepository {
-        return DefaultCocktailBriefListRepository(provider: provider,
+        DefaultCocktailBriefListRepository(provider: provider,
                                                   endpoint: cocktailRecommendEndpoint)
     }
     
     func makeCocktailRecommendViewModel() -> CocktailRecommendViewModel {
-        return DefaultCocktailRecommendViewModel(cocktailBriefListRepository: makeCocktailBriefListRepository())
+        DefaultCocktailRecommendViewModel(cocktailBriefListRepository: makeCocktailBriefListRepository())
     }
     
     //MARK: - MainViewController
     
     func makeMainViewController() -> MainViewController {
-        return MainViewController(viewModel: makeCocktailRecommendViewModel())
+        MainViewController(viewModel: makeCocktailRecommendViewModel())
     }
 }

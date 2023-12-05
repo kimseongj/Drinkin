@@ -7,7 +7,6 @@
 
 import Foundation
 
-// MARK: - SkillDetail
 struct SkillDetail: Codable {
     let id: Int
     let skillName, description: String

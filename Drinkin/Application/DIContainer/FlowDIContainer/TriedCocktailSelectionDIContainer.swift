@@ -18,31 +18,33 @@ final class TriedCocktailSelectionDIContainer {
     }
     
     //MARK: - FilterTriedCocktail
+    
     func makeCoktailImageListRepository() -> CocktailImageListRepository {
-        return DefaultCocktailImageListRepository(provider: provider,
+        DefaultCocktailImageListRepository(provider: provider,
                                                   endpoint: triedCocktailEndpoint)
     }
     
     func makeFilterTriedCocktailUsecase() -> FilterTriedCocktailUsecase {
-        return DefaultFilterTriedCocktailUsecase(cocktailImageListRepository: makeCoktailImageListRepository())
+        DefaultFilterTriedCocktailUsecase(cocktailImageListRepository: makeCoktailImageListRepository())
     }
     
     //MARK: - AddTriedCocktail
+    
     func makeAddtionRepository() -> AdditionRepository {
-        return DefaultAdditionRepository(provider: provider,
+        DefaultAdditionRepository(provider: provider,
                                          endpoint: addTriedCocktailListEndpoint)
     }
     
     func makeAddTriedCocktailUsecase() -> AddTriedCocktailUsecase {
-        return DefaultAddTriedCocktailUsecase(additionRepository: makeAddtionRepository())
+        DefaultAddTriedCocktailUsecase(additionRepository: makeAddtionRepository())
     }
     
     func makeTriedCocktailSelectionViewModel() -> TriedCocktailSelectionViewModel {
-        return DefaultTriedCocktailSelectionViewModel(filterTriedCocktailUsecase: makeFilterTriedCocktailUsecase(),
+        DefaultTriedCocktailSelectionViewModel(filterTriedCocktailUsecase: makeFilterTriedCocktailUsecase(),
                                                       addTriedCocktailUsecase: makeAddTriedCocktailUsecase())
     }
     
     func makeTriedCocktailSelectionViewController() -> TriedCocktailSelectionViewController {
-        return TriedCocktailSelectionViewController(viewModel: makeTriedCocktailSelectionViewModel())
+        TriedCocktailSelectionViewController(viewModel: makeTriedCocktailSelectionViewModel())
     }
 }

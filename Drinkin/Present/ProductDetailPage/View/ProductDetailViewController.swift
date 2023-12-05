@@ -13,7 +13,7 @@ final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
     var flowDelegate: ProductDetailVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
-   
+    
     private let scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
@@ -33,7 +33,7 @@ final class ProductDetailViewController: UIViewController {
     let introductionView = IntroductionView()
     let cocktailInformationView = CocktailInformationView()
     
-    private let markMadeCocktailButton: MarkMadeCocktailButton = {
+    private lazy var markMadeCocktailButton: MarkMadeCocktailButton = {
         let button = MarkMadeCocktailButton()
         button.addTarget(self, action: #selector(tapMarkMadeCocktailButton), for: .touchUpInside)
         
@@ -44,8 +44,8 @@ final class ProductDetailViewController: UIViewController {
     private func tapMarkMadeCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
     }
-   
-    private let bookmarkCocktailButton: BookmarkCocktailButton = {
+    
+    private lazy var bookmarkCocktailButton: BookmarkCocktailButton = {
         let button = BookmarkCocktailButton()
         button.addTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
         
@@ -72,15 +72,27 @@ final class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        introductionView.configureDelegate(delegate: flowDelegate)
+        fetchData()
         binding()
         errorBinding()
-        viewModel.fetchDescription()
+        configureUI()
+        showActivityIndicator()
+        sendDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         AppCoordinator.tabBarController.tabBar.isHidden = true
+    }
+    
+    //MARK: - Fetch Data
+    
+    private func fetchData() {
+        viewModel.fetchDescription {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
     }
     
     //MARK: - ConfigureUI
@@ -129,6 +141,10 @@ final class ProductDetailViewController: UIViewController {
         introductionView.applybaseSnapshot(detailCategoryList: baseList)
         introductionView.applyIngredientSnapshot(detailIngredientList: ingredientList)
     }
+    
+    private func sendDelegate() {
+        introductionView.configureDelegate(delegate: flowDelegate)
+    }
 }
 
 //MARK: - Binding
@@ -150,8 +166,8 @@ extension ProductDetailViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
+                guard let self = self else { return }
                 self.handlingError(errorType: $0)
-        }).store(in: &cancelBag)
+            }).store(in: &cancelBag)
     }
 }

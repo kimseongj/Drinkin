@@ -31,7 +31,7 @@ final class CocktailFilterViewController: UIViewController {
         return label
     }()
     
-    private let resetFilterButton: UIButton = {
+    private lazy var resetFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("필터 초기화", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -87,25 +87,38 @@ final class CocktailFilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
+        filterBinding()
+        cocktailBinding()
+        errorBinding()
+        configureFilterDataSource()
+        configureCocktailDataSource()
         configureUI()
+        showActivityIndicator()
         configureFilterSelectionCollectionView()
         configureFilteredCollectionView()
         makeSelectionFilterCollectionViewDisable()
-        viewModel.fetchCocktailFilter(completion: { [weak self] in
-            guard let self = self else { return }
-            self.makeSelectionFilterCollectionViewEnable()
-        })
-        viewModel.fetchCocktailList()
-        configureFilterDataSource()
-        filterBinding()
-        configureCocktailDataSource()
-        cocktailBinding()
-        errorBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         AppCoordinator.tabBarController.tabBar.isHidden = false
+    }
+    
+    //MARK: - Fetch Data
+    
+    private func fetchData() {
+        viewModel.fetchCocktailList() { 
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.hideActivityIndicator()
+            }
+        }
+        
+        viewModel.fetchCocktailFilter { [weak self] in
+            guard let self = self else { return }
+            self.makeSelectionFilterCollectionViewEnable()
+        }
     }
     
     //MARK: - ConfigureUI
@@ -263,7 +276,7 @@ extension CocktailFilterViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .absolute(120))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                       subitems: [item])
+                                                     subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
@@ -283,7 +296,7 @@ extension CocktailFilterViewController: UICollectionViewDelegate {
             cocktailFilterModalViewController.modalPresentationStyle = .overFullScreen
             present(cocktailFilterModalViewController, animated: false)
         } else {
-           let cocktailID = viewModel.filteredCocktailList[indexPath.row].id
+            let cocktailID = viewModel.filteredCocktailList[indexPath.row].id
             flowDelegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
         }
     }
@@ -296,15 +309,8 @@ extension CocktailFilterViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

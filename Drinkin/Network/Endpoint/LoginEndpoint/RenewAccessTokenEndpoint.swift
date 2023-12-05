@@ -8,9 +8,9 @@
 import Foundation
 
 struct RenewAccessTokenEndpoint: EndpointMakeable {
-    var baseURL: String = ""
+    var baseURL: String = "http://13.209.22.43:8000"
     
-    var path: String = ""
+    var path: String = "/v1/refresh-token"
     
     var method: String = HTTPMethod.get.rawValue
     

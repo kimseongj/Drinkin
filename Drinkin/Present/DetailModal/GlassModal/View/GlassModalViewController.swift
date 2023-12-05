@@ -89,9 +89,11 @@ final class GlassModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        errorBinding()
         fetchGlassData()
+        errorBinding()
+        configureUI()
+        showActivityIndicator()
+        showImageViewActivityIndicator()
     }
     
     //MARK: - ConfigureUI
@@ -150,15 +152,22 @@ final class GlassModalViewController: UIViewController {
             $0.leading.equalTo(purchaseLabel.snp.trailing).offset(16)
         }
     }
-
+    
+    private func showImageViewActivityIndicator() {
+        imageView.showActivityIndicator()
+    }
+    
     //MARK: - Fill View
     
     private func fill(glassDetail: GlassDetail) {
-        imageView.load(urlString:  glassDetail.imageURI)
         titleLabel.text = glassDetail.glassName
         descriptionLabel.text = glassDetail.description
         volumeDescriptionLabel.text = glassDetail.volume
         purchaseLinkLabel.text = glassDetail.purchaseLink
+        imageView.load(urlString:  glassDetail.imageURI) { [weak self] in
+            guard let self = self else { return }
+            self.imageView.hideActivityIndicator()
+        }
     }
     
     //MARK: - Fetch Data
@@ -166,8 +175,8 @@ final class GlassModalViewController: UIViewController {
     private func fetchGlassData() {
         viewModel.fetchGlassDetail { [weak self] in
             guard let self = self else { return }
-            
             self.fill(glassDetail: $0)
+            self.hideActivityIndicator()
         }
     }
 }
@@ -179,15 +188,8 @@ extension GlassModalViewController {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] in
-            guard let self = self else { return }
-            
-            switch $0 {
-            case .noError:
-                break
-            default:
-                print("\($0)")
-                self.showAlert(errorType: $0)
-            }
-        }).store(in: &cancelBag)
+                guard let self = self else { return }
+                self.handlingError(errorType: $0)
+            }).store(in: &cancelBag)
     }
 }

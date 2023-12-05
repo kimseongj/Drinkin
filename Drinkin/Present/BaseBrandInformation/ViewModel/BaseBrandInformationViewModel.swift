@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol BaseBrandInformationViewModelIntput {
-    func fetchBaseBrandDetail()
+    func fetchBaseBrandDetail(completion: @escaping () -> Void)
 }
 
 protocol BaseBrandInformationViewModelOutput {
@@ -28,17 +28,20 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
     @Published var baseBrandDetail: BaseBrandDetail?
     
     //MARK: - Init
+    
     init(baseBrandDetailRepository: BaseBrandDetailRepository) {
         self.baseBrandDetailRepository = baseBrandDetailRepository
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var baseBrandDetailPublisher: Published<BaseBrandDetail?>.Publisher { $baseBrandDetail }
     var brandID: Int = 0
     
     //MARK: - Input
-    func fetchBaseBrandDetail() {
+    
+    func fetchBaseBrandDetail(completion: @escaping () -> Void) {
         baseBrandDetailRepository.fetchBaseBrandDetail()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -67,7 +70,7 @@ final class DefaultBaseBrandInformationViewModel: BaseBrandInformationViewModel 
                     guard let self = self else { return }
                     self.baseBrandDetail = $0
                     self.brandID = $0.id
-                    
+                    completion()
                 }
             ).store(in: &cancelBag)
     }

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol MakeableCocktailListViewModelInput {
-    func fetchMakeableCocktailList()
+    func fetchMakeableCocktailList(completion: @escaping () -> Void)
 }
 
 protocol MakeableCocktailListViewModelOutput {
@@ -38,7 +38,7 @@ final class DefaultMakeableCocktailListViewModel: MakeableCocktailListViewModel 
     var makeableCocktailListPublisher: Published<[MakeableCocktail]>.Publisher { $makeableCocktailList }
     
     //MARK: - Input
-    func fetchMakeableCocktailList() {
+    func fetchMakeableCocktailList(completion: @escaping () -> Void) {
         makeableCocktailListRepository.fetchMakeableCocktails()
             .receive(on: RunLoop.main)
             .sink(
@@ -66,8 +66,8 @@ final class DefaultMakeableCocktailListViewModel: MakeableCocktailListViewModel 
                 },
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
-                    
                     self.makeableCocktailList = $0.makeableCocktailList
+                    completion()
                 }
             ).store(in: &cancelBag)
     }

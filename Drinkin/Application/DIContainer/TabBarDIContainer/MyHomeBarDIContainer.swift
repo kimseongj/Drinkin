@@ -16,15 +16,15 @@ final class MyHomeBarDIContainer {
     }
     
     func makeHoldedItemRepository() -> HoldedItemRepository {
-        return DefaultHoldedItemRepository(provider: provider,
+        DefaultHoldedItemRepository(provider: provider,
                                            endpoint: holdedItemEndpoint)
     }
     
     func makeMyHomeBarViewModel() -> MyHomeBarViewModel {
-        return DefaultMyHomeBarViewModel(holdedItemRepository: makeHoldedItemRepository())
+        DefaultMyHomeBarViewModel(holdedItemRepository: makeHoldedItemRepository())
     }
     
     func makeMyHomeBarViewController() -> MyHomeBarViewController {
-        return MyHomeBarViewController(viewModel: makeMyHomeBarViewModel())
+        MyHomeBarViewController(viewModel: makeMyHomeBarViewModel())
     }
 }
