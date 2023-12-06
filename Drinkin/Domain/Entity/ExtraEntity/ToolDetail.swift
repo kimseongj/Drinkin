@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ToolDetail: Codable {
+struct ToolDetail: Decodable {
     let id: Int
     let imageURI: String
     let toolName: String

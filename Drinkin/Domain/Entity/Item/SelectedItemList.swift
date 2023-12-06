@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct PostItemSelectionList: Encodable {
-    let itemList: [PostItem]
+struct SelectedItemList: Encodable {
+    let itemList: [SelectedItem]
 
     enum CodingKeys: String, CodingKey {
         case itemList = "item_list"
     }
 }
 
-struct PostItem: Encodable, Hashable {
+struct SelectedItem: Encodable, Hashable {
     let type: String
     let id: Int
     

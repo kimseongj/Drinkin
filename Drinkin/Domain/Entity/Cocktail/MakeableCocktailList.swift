@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MakeableCocktailList: Codable, Hashable {
+struct MakeableCocktailList: Decodable, Hashable {
     let makeableCocktailList: [MakeableCocktail]
     
     enum CodingKeys: String, CodingKey {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ItemSelectionList: Codable {
+struct ItemSelectionList: Decodable {
     let itemFilterList: [ItemFilter]
     let itemList: [Item]
 
@@ -17,7 +17,7 @@ struct ItemSelectionList: Codable {
     }
 }
 
-struct ItemFilter: Codable, Hashable {
+struct ItemFilter: Decodable, Hashable {
     let name: String
     let type: String
     let subType: String
@@ -28,7 +28,7 @@ struct ItemFilter: Codable, Hashable {
     }
 }
 
-struct Item: Codable, Hashable {
+struct Item: Decodable, Hashable {
     let itemName: String
     let type: String
     let subType: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GlassDetail: Codable {
+struct GlassDetail: Decodable {
     let id: Int
     let imageURI, glassName, description, volume: String
     let purchaseLink: String

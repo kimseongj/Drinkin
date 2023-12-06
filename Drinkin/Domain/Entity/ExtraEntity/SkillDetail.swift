@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SkillDetail: Codable {
+struct SkillDetail: Decodable {
     let id: Int
     let skillName, description: String
 

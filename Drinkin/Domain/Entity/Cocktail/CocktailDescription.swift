@@ -7,7 +7,7 @@
 
 import Foundation
  
-struct CocktailDescription: Codable {
+struct CocktailDescription: Decodable {
     let id: Int
     let cocktailNameKo, cocktailNameEng: String
     let imageURI: String
@@ -37,7 +37,7 @@ struct CocktailDescription: Codable {
     }
 }
 
-struct DetailBase: Codable, Hashable {
+struct DetailBase: Decodable, Hashable {
     let id: Int
     let baseNameKo: String
     let hold: Bool
@@ -50,7 +50,7 @@ struct DetailBase: Codable, Hashable {
     }
 }
 
-struct DetailIngredient: Codable, Hashable {
+struct DetailIngredient: Decodable, Hashable {
     let id: Int
     let ingredientNameKo: String
     let hold: Bool
@@ -62,7 +62,7 @@ struct DetailIngredient: Codable, Hashable {
     }
 }
 
-struct CocktailTool: Codable, Hashable {
+struct CocktailTool: Decodable, Hashable {
     let id: Int
     let toolNameKo: String
 
@@ -72,7 +72,7 @@ struct CocktailTool: Codable, Hashable {
     }
 }
 
-struct CocktailSkill: Codable, Hashable {
+struct CocktailSkill: Decodable, Hashable {
     let id: Int
     let skillNameKo: String
 
@@ -82,7 +82,7 @@ struct CocktailSkill: Codable, Hashable {
     }
 }
 
-struct CocktailGlass: Codable, Hashable {
+struct CocktailGlass: Decodable, Hashable {
     let id: Int
     let glassNameKo: String
 

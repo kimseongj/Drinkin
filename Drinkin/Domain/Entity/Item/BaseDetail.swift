@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseDetail: Codable {
+struct BaseDetail: Decodable {
     let baseName, baseDescription: String
     let brandList: [BrandImageDescription]
 
