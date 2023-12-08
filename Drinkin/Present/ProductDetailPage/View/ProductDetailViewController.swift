@@ -14,7 +14,7 @@ final class ProductDetailViewController: UIViewController {
     var flowDelegate: ProductDetailVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
-    private let scrollView : UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -22,7 +22,7 @@ final class ProductDetailViewController: UIViewController {
         return scrollView
     }()
     
-    private let stackView : UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 40
