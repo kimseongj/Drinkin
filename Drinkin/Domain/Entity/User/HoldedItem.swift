@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HoldedItem: Codable, Hashable {
+struct HoldedItem: Decodable, Hashable {
     let holdedItemList: [String]
     
     enum CodingKeys: String, CodingKey {
