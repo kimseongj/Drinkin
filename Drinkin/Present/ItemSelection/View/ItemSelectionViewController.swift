@@ -70,14 +70,6 @@ final class ItemSelectionViewController: UIViewController {
         configureItemCollectionView()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.fetchSelectedItemList()
-        viewModel.addSelectedItems(completion: {
-            
-        })
-    }
-    
     //MARK: - Fetch Data
     
     private func fetchData() {
@@ -132,12 +124,17 @@ final class ItemSelectionViewController: UIViewController {
     
     @objc
     private func backButtonTapped() {
-        updateView.isHidden = false
-        
-        viewModel.addSelectedItems { [weak self] in
-            guard let self = self else { return }
-            self.updateView.isHidden = true
-            self.navigationController?.popViewController(animated: true)
+        viewModel.fetchSelectedItemList()
+        if viewModel.isSelectedItemChange() {
+            updateView.isHidden = false
+            updateView.startAnimating()
+            viewModel.addSelectedItems { [weak self] in
+                guard let self = self else { return }
+                self.updateView.isHidden = true
+                self.navigationController?.popViewController(animated: true)
+            }
+        } else {
+            navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -185,7 +182,6 @@ extension ItemSelectionViewController {
     private func configureItemDataSource() {
         itemDataSource = UICollectionViewDiffableDataSource<Section, Item> (collectionView: itemCollectionView) { [weak self] (collectionView, indexPath, item) in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCell.identifier, for: indexPath) as? ItemCell, let self = self else { return UICollectionViewCell() }
-            
             
             if item.hold == true {
                 cell.presentHoldItem()

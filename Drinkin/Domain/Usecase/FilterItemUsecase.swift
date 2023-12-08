@@ -11,8 +11,7 @@ import Combine
 protocol FilterItemUsecase {
     func fetchItemData() -> AnyPublisher<ItemSelectionList, APIError>
     func filterItem(itemCategory: String,
-                    itemList: [Item],
-                    completion: @escaping ([Item]) -> Void)
+                    itemList: [Item]) -> [Item]
 }
 
 final class DefaultFilterItemUsecase: FilterItemUsecase {
@@ -30,13 +29,12 @@ final class DefaultFilterItemUsecase: FilterItemUsecase {
     }
     
     func filterItem(itemCategory: String,
-                    itemList: [Item],
-                    completion: @escaping ([Item]) -> Void) {
+                    itemList: [Item]) -> [Item] {
         if itemCategory == "whole" {
-            completion(itemList)
+            return itemList
         } else {
             let filteredItemList = itemList.filter { $0.subType == itemCategory }
-            completion(filteredItemList)
+            return filteredItemList
         }
     }
 }
