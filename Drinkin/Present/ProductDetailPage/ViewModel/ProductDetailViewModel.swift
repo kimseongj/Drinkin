@@ -22,6 +22,7 @@ typealias ProductDetailViewModel = ProductDetailViewModelInput & ProductDetailVi
 
 final class DefaultProductDetailViewModel: ProductDetailViewModel {
     private let cocktailDetailRepository: CocktailDetailRepository
+    private let manageMarkingCocktailUsecase: ManageMarkingCocktailUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
@@ -29,8 +30,10 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
     
     //MARK: - Init
     
-    init(cocktailDetailRepository: CocktailDetailRepository) {
+    init(cocktailDetailRepository: CocktailDetailRepository,
+         manageMarkingCocktailUsecase: ManageMarkingCocktailUsecase) {
         self.cocktailDetailRepository = cocktailDetailRepository
+        self.manageMarkingCocktailUsecase = manageMarkingCocktailUsecase
     }
     
     //MARK: - Output
@@ -73,4 +76,13 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
                 }
             ).store(in: &cancelBag)
     }
+    
+    func markUserMadeCocktail() {
+        manageMarkingCocktailUsecase.markUserMadeCocktail()
+    }
+    
+    func markSavedCocktail() {
+        manageMarkingCocktailUsecase.markSavedCocktail()
+    }
+    
 }
