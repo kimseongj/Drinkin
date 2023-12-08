@@ -12,7 +12,6 @@ final class ProductDetailDIContainer {
     let cocktailID: Int
     let productDetailEndpoint = CocktailsEndpoint()
     
-    
     init(provider: Provider, cocktailID: Int) {
         self.provider = provider
         self.cocktailID = cocktailID
@@ -24,8 +23,18 @@ final class ProductDetailDIContainer {
                                                cocktailID: cocktailID)
     }
     
+    func makeCocktailMarkingRepository() -> CocktailMarkingRepository {
+        DefaultCocktailMarkingRepository(provider: provider,
+                                         endpoint: productDetailEndpoint)
+    }
+    
+    func makeManageMarkingCocktailUsecase() -> ManageMarkingCocktailUsecase {
+        DefaultManageMarkingCocktailUsecase(cocktailMarkingRepository: makeCocktailMarkingRepository())
+    }
+    
     func makeProductDetailViewModel() -> ProductDetailViewModel {
-        DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository())
+        DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository(),
+                                      manageMarkingCocktailUsecase: makeManageMarkingCocktailUsecase())
     }
     
     func makeProductDetailViewController(viewModel: ProductDetailViewModel) -> ProductDetailViewController {

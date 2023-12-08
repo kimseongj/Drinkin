@@ -8,10 +8,33 @@
 import Foundation
 import Combine
 
-protocol ManageMarkingCokctailUsecase {
-
+protocol ManageMarkingCocktailUsecase {
+    func markUserMadeCocktail()
+    func unmarkUserMadeCocktail()
+    func markSavedCocktail()
+    func unmarkSavedCocktail()
 }
 
-final class DefaultManageMarkingCokctailUsecase: ManageMarkingCokctailUsecase {
-
+final class DefaultManageMarkingCocktailUsecase: ManageMarkingCocktailUsecase {
+    private let cocktailMarkingRepository: CocktailMarkingRepository
+    
+    init(cocktailMarkingRepository: CocktailMarkingRepository) {
+        self.cocktailMarkingRepository = cocktailMarkingRepository
+    }
+    
+    func markUserMadeCocktail() {
+        
+    }
+    
+    func unmarkUserMadeCocktail() {
+        
+    }
+    
+    func markSavedCocktail() {
+        
+    }
+    
+    func unmarkSavedCocktail() {
+        
+    }
 }
