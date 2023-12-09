@@ -10,33 +10,39 @@ import Combine
 
 protocol MyHomeBarViewModelInput {
     func fetchHoldedItem(completion: @escaping () -> Void)
-    func deleteHoldedItem(holdedItem: String)
+    func deleteHoldedItem(holdedItemName: String)
 }
 
 protocol MyHomeBarViewModelOutput  {
     var errorHandlingPublisher: Published<APIError>.Publisher { get }
-    var holdedItemListPublisher: Published<[String]>.Publisher { get }
+    var holdedItemListPublisher: Published<[HoldedItem]>.Publisher { get }
 }
 
-typealias MyHomeBarViewModel = MyHomeBarViewModelInput & MyHomeBarViewModelOutput
+protocol SyncDataDelegate {
+    func synchronizationHoldedItem()
+}
+
+typealias MyHomeBarViewModel = MyHomeBarViewModelInput & MyHomeBarViewModelOutput & SyncDataDelegate
 
 class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     private let holdedItemRepository: HoldedItemRepository
+    private let deleteItemUsecase: DeleteItemUsecase
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
-    @Published var holdedItemList: [String] = []
+    @Published var holdedItemList: [HoldedItem] = []
     
     //MARK: - Init
     
-    init(holdedItemRepository: HoldedItemRepository) {
+    init(holdedItemRepository: HoldedItemRepository, deleteItemUsecase: DeleteItemUsecase) {
         self.holdedItemRepository = holdedItemRepository
+        self.deleteItemUsecase = deleteItemUsecase
     }
     
     //MARK: - Output
     
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
-    var holdedItemListPublisher: Published<[String]>.Publisher { $holdedItemList }
+    var holdedItemListPublisher: Published<[HoldedItem]>.Publisher { $holdedItemList }
     
     //MARK: - Input
     
@@ -73,9 +79,70 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
             ).store(in: &cancelBag)
     }
     
-    func deleteHoldedItem(holdedItem: String) {
-        if let index = holdedItemList.firstIndex(of: holdedItem) {
-            holdedItemList.remove(at: index)
+    func deleteHoldedItem(holdedItemName: String) {
+        if let holdedItemIndex = holdedItemList.firstIndex(where: { $0.itemName == holdedItemName}) {
+            let willRemoveHoldedItem = holdedItemList.remove(at: holdedItemIndex)
+            deleteItemUsecase.delete(holdedItem: willRemoveHoldedItem)
+                .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: {
+                    print($0)
+                }
+            ).store(in: &cancelBag)
         }
+    }
+    
+    //MARK: - SynchronizationDataDelegate
+    func synchronizationHoldedItem() {
+        holdedItemRepository.fetchHoldedItem()
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { [weak self] in
+                    guard let self = self else { return }
+                    self.holdedItemList = $0.holdedItemList
+                }
+            ).store(in: &cancelBag)
     }
 }

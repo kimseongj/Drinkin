@@ -30,7 +30,7 @@ final class HoldedItemCell: UICollectionViewCell {
     @objc
     private func tapDeleteButton() {
         guard let titleText = titleLabel.text else { return }
-        delegate?.deleteHoldedItem(holdedItem: titleText)
+        delegate?.delete(holdedItem: titleText)
     }
     
     //MARK: - Init

@@ -14,6 +14,7 @@ final class ItemSelectionViewController: UIViewController {
     private var cancelBag: Set<AnyCancellable> = []
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, ItemFilter>!
     private var itemDataSource: UICollectionViewDiffableDataSource<Section, Item>!
+    var synchronizationDataDelegate: SyncDataDelegate?
     
     private let itemFilterCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
@@ -131,6 +132,7 @@ final class ItemSelectionViewController: UIViewController {
             viewModel.addSelectedItems { [weak self] in
                 guard let self = self else { return }
                 self.updateView.isHidden = true
+                self.synchronizationDataDelegate?.synchronizationHoldedItem()
                 self.navigationController?.popViewController(animated: true)
             }
         } else {

@@ -9,7 +9,7 @@ import Foundation
 
 final class SavedCocktailListDIContainer {
     let provider: Provider
-    let savedCocktailListEndpoint = SavedCocktailListEndpoint()
+    let bookmarkCocktailListEndpoint = BookmarkCocktailListEndpoint()
 
     init(provider: Provider) {
         self.provider = provider
@@ -17,7 +17,7 @@ final class SavedCocktailListDIContainer {
     
     func makeSavedCocktailListRepository() -> SavedCocktailListRepository {
         DefaultSavedCocktailListRepository(provider: provider,
-                                                  endpoint: savedCocktailListEndpoint)
+                                                  endpoint: bookmarkCocktailListEndpoint)
     }
     
     func makeSavedCocktailListViewModel() -> SavedCocktailListViewModel {

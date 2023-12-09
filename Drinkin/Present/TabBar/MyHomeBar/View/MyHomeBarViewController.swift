@@ -10,16 +10,36 @@ import SnapKit
 import Combine
 
 protocol CellDeleteButtonDelegate: AnyObject {
-    func deleteHoldedItem(holdedItem: String)
+    func delete(holdedItem: String)
 }
 
 final class MyHomeBarViewController: UIViewController {
     private var viewModel: MyHomeBarViewModel
     var flowDelegate: MyHomeBarVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
+    let loginManager = DefaultLoginManager(tokenManager: DefaultTokenManager())
     
-    private var isTrue: Bool = true
-    private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, String>?
+    private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, HoldedItem>?
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isScrollEnabled = true
+        scrollView.alwaysBounceVertical = true
+        scrollView.showsHorizontalScrollIndicator = false
+        
+        return scrollView
+    }()
+    
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 5
+        
+        return stackView
+    }()
+    
+    private let introduceView = UIView()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -81,7 +101,6 @@ final class MyHomeBarViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderColor = ColorPalette.buttonBorderColor
         button.layer.borderWidth = 3
-        button.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         
         return button
     }()
@@ -98,7 +117,7 @@ final class MyHomeBarViewController: UIViewController {
     
     @objc
     private func tapAddButton() {
-        flowDelegate?.pushItemSelectionVC()
+        flowDelegate?.pushItemSelectionVC(syncDataDelegate: viewModel)
     }
     
     private lazy var holdedItemCollectionView: UICollectionView = {
@@ -112,8 +131,6 @@ final class MyHomeBarViewController: UIViewController {
     
     private lazy var savedCocktailListButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(tapSavedCocktailListButton), for: .touchUpInside)
-        
         let titleLabel = UILabel()
         titleLabel.text = "저장한 칵테일 목록"
         titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
@@ -136,11 +153,6 @@ final class MyHomeBarViewController: UIViewController {
         
         return button
     }()
-    
-    @objc
-    private func tapSavedCocktailListButton() {
-        flowDelegate?.pushSavedCocktailListVC()
-    }
     
     private lazy var userMadeCocktailListButton: UIButton = {
         let button = UIButton()
@@ -169,11 +181,6 @@ final class MyHomeBarViewController: UIViewController {
         return button
     }()
     
-    @objc
-    private func tapUserMadeCocktailListButton() {
-        flowDelegate?.pushUserMadeCocktailListVC()
-    }
-    
     //MARK: - Init
     
     init(viewModel: MyHomeBarViewModel) {
@@ -198,7 +205,17 @@ final class MyHomeBarViewController: UIViewController {
         configureHoldedItemCollectionView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if loginManager.isAuthenticated() {
+            configureLoggedinMyHomeBar()
+        } else {
+            configureUnloggedinMyHomeBar()
+        }
+    }
+    
     //MARK: - Fetch Data
+    
     private func fetchData() {
         viewModel.fetchHoldedItem() {
             DispatchQueue.main.async { [weak self] in
@@ -212,52 +229,66 @@ final class MyHomeBarViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
-        
+
         let safeArea = view.safeAreaLayoutGuide
-        view.addSubview(titleLabel)
-        view.addSubview(loginSettingButton)
-        view.addSubview(holdIngredientLabel)
-        
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(safeArea.snp.top)
-            $0.leading.equalTo(safeArea.snp.leading).offset(16)
+
+        view.addSubview(scrollView)
+        scrollView.addSubview(stackView)
+        stackView.addArrangedSubview(introduceView)
+        introduceView.addSubview(titleLabel)
+        introduceView.addSubview(loginSettingButton)
+        introduceView.addSubview(holdIngredientLabel)
+
+        scrollView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
-        
+
+        stackView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
+
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
+        }
+
         loginSettingButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)
-            $0.trailing.equalTo(safeArea.snp.trailing).offset(-16)
+            $0.trailing.equalToSuperview().offset(-16)
             $0.height.width.equalTo(28)
         }
-        
+
         holdIngredientLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(34)
-            $0.leading.equalTo(safeArea.snp.leading).offset(16)
+            $0.leading.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview()
         }
     }
-    
-    private func configureItem() {
-        view.addSubview(addItemView)
-        view.addSubview(savedCocktailListButton)
-        view.addSubview(userMadeCocktailListButton)
+
+        private func configureAddItemView() {
+        stackView.addArrangedSubview(addItemView)
+        stackView.addArrangedSubview(savedCocktailListButton)
+        stackView.addArrangedSubview(userMadeCocktailListButton)
         addItemView.addSubview(addLabel1)
         addItemView.addSubview(addLabel2)
         addItemView.addSubview(largeAddButton)
-        
+
         addItemView.snp.makeConstraints {
-            $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview()
         }
-        
+
         addLabel1.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
-        
+
         addLabel2.snp.makeConstraints {
             $0.top.equalTo(addLabel1.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
         }
-        
+
         largeAddButton.snp.makeConstraints {
             $0.top.equalTo(addLabel2.snp.bottom).offset(15)
             $0.centerX.equalToSuperview()
@@ -265,48 +296,75 @@ final class MyHomeBarViewController: UIViewController {
             $0.width.equalTo(108)
             $0.bottom.equalToSuperview().offset(-32)
         }
-        
+
         savedCocktailListButton.snp.makeConstraints {
-            $0.top.equalTo(addItemView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(60)
         }
-        
+
         userMadeCocktailListButton.snp.makeConstraints {
-            $0.top.equalTo(savedCocktailListButton.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(60)
         }
     }
     
-    private func configureHoldedItem() {
-        view.addSubview(smallAddButton)
-        view.addSubview(holdedItemCollectionView)
-        view.addSubview(savedCocktailListButton)
-        view.addSubview(userMadeCocktailListButton)
+    private func configureListButton(title: String) -> UIButton {
+        let button = UIButton()
+        let titleLabel = UILabel()
+        titleLabel.text = "title"
+        titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         
-        smallAddButton.snp.makeConstraints {
-            $0.centerY.equalTo(holdIngredientLabel)
-            $0.trailing.equalToSuperview().offset(-16)
+        let arrowImageView = UIImageView(image: ImageStorage.arrowIcon)
+        
+        button.addSubview(arrowImageView)
+        button.addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(15)
         }
         
-        holdedItemCollectionView.snp.makeConstraints {
-            $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+        arrowImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.size.equalTo(30)
         }
         
-        savedCocktailListButton.snp.makeConstraints {
-            $0.top.equalTo(holdedItemCollectionView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(60)
-        }
-        
-        userMadeCocktailListButton.snp.makeConstraints {
-            $0.top.equalTo(savedCocktailListButton.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(60)
-        }
+        return button
+    }
+    
+    private func configureLoggedinMyHomeBar() {
+        largeAddButton.removeTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
+        largeAddButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
+        savedCocktailListButton.removeTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
+        savedCocktailListButton.addTarget(self, action: #selector(tapSavedCocktailListButton), for: .touchUpInside)
+        userMadeCocktailListButton.removeTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
+        userMadeCocktailListButton.addTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
+    }
+    
+    private func configureUnloggedinMyHomeBar() {
+//        configureAddItemView()
+        largeAddButton.removeTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
+        largeAddButton.addTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
+        savedCocktailListButton.removeTarget(self, action: #selector(tapSavedCocktailListButton), for: .touchUpInside)
+        savedCocktailListButton.addTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
+        userMadeCocktailListButton.removeTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
+        userMadeCocktailListButton.addTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
+    }
+    
+    @objc
+    private func tapSavedCocktailListButton() {
+        flowDelegate?.pushSavedCocktailListVC()
+    }
+    
+    @objc
+    private func tapUserMadeCocktailListButton() {
+        flowDelegate?.pushUserMadeCocktailListVC()
+    }
+    
+    @objc
+    private func tapUnloggedinButton() {
+        self.showLoginRecommendAlert()
     }
 }
 
@@ -324,17 +382,17 @@ extension MyHomeBarViewController {
 
 extension MyHomeBarViewController {
     private func configureDataSource() {
-        self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, String> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, itemName) -> UICollectionViewCell? in
+        self.holdedItemDataSource = UICollectionViewDiffableDataSource<Section, HoldedItem> (collectionView: holdedItemCollectionView) { (collectionView, indexPath, holdedItem) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoldedItemCell.identifier, for: indexPath) as? HoldedItemCell else { return nil }
-            cell.fill(with: itemName)
+            cell.fill(with: holdedItem.itemName)
             cell.delegate = self
             
             return cell
         }
     }
     
-    private func applySnapshot(holdedItemList: [String]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+    private func applySnapshot(holdedItemList: [HoldedItem]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, HoldedItem>()
         snapshot.appendSections([.main])
         snapshot.appendItems(holdedItemList)
         self.holdedItemDataSource?.apply(snapshot, animatingDifferences: true)
@@ -347,20 +405,26 @@ extension MyHomeBarViewController {
     private func binding() {
         viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
-            
-            if $0.count == 0 {
-                self.showAddItemView()
-            } else {
-                self.showHoldedItemCollectionVIew(itemList: $0)
-            }
+//            if LoginManager.shared.isAuthenticated() {
+//                if $0.count == 0 {
+//                    self.showAddItemView()
+//                } else {
+            self.showHoldedItemCollectionView(holdedItemList: $0)
+//                }
+//            }
         }.store(in: &cancelBag)
     }
     
-    private func showHoldedItemCollectionVIew(itemList: [String]) {
-        view.addSubview(smallAddButton)
-        view.addSubview(holdedItemCollectionView)
-        view.addSubview(savedCocktailListButton)
-        view.addSubview(userMadeCocktailListButton)
+    private func showHoldedItemCollectionView(holdedItemList: [HoldedItem]) {
+        introduceView.addSubview(smallAddButton)
+        applySnapshot(holdedItemList: holdedItemList)
+        
+//        stackView.addArrangedSubview(holdedItemCollectionView)
+//        stackView.addArrangedSubview(savedCocktailListButton)
+//        stackView.addArrangedSubview(userMadeCocktailListButton)
+        scrollView.addSubview(holdedItemCollectionView)
+        scrollView.addSubview(savedCocktailListButton)
+        scrollView.addSubview(userMadeCocktailListButton)
         
         smallAddButton.snp.makeConstraints {
             $0.centerY.equalTo(holdIngredientLabel)
@@ -368,7 +432,7 @@ extension MyHomeBarViewController {
         }
         
         holdedItemCollectionView.snp.makeConstraints {
-            $0.top.equalTo(holdIngredientLabel.snp.bottom).offset(16)
+            $0.top.equalTo(stackView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
         }
@@ -383,6 +447,7 @@ extension MyHomeBarViewController {
             $0.top.equalTo(savedCocktailListButton.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(60)
+            $0.bottom.equalToSuperview()
         }
         
         if holdedItemCollectionView.isHidden {
@@ -396,14 +461,12 @@ extension MyHomeBarViewController {
         if addItemView.isHidden == false {
             addItemView.isHidden = true
         }
-        
-        applySnapshot(holdedItemList: itemList)
     }
     
     private func showAddItemView() {
-        view.addSubview(addItemView)
-        view.addSubview(savedCocktailListButton)
-        view.addSubview(userMadeCocktailListButton)
+        stackView.addArrangedSubview(addItemView)
+        stackView.addArrangedSubview(savedCocktailListButton)
+        stackView.addArrangedSubview(userMadeCocktailListButton)
         addItemView.addSubview(addLabel1)
         addItemView.addSubview(addLabel2)
         addItemView.addSubview(largeAddButton)
@@ -417,7 +480,7 @@ extension MyHomeBarViewController {
             $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
-        
+         
         addLabel2.snp.makeConstraints {
             $0.top.equalTo(addLabel1.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
@@ -460,8 +523,8 @@ extension MyHomeBarViewController {
 //MARK: - CellDelteButtonDelegate
 
 extension MyHomeBarViewController: CellDeleteButtonDelegate {
-    func deleteHoldedItem(holdedItem: String) {
-        viewModel.deleteHoldedItem(holdedItem: holdedItem)
+    func delete(holdedItem: String) {
+        viewModel.deleteHoldedItem(holdedItemName: holdedItem)
     }
 }
 
