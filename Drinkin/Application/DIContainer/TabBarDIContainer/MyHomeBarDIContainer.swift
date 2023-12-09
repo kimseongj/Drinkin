@@ -20,7 +20,7 @@ final class MyHomeBarDIContainer {
     
     func makeHoldedItemRepository() -> HoldedItemRepository {
         DefaultHoldedItemRepository(provider: provider,
-                                           endpoint: holdedItemEndpoint)
+                                    endpoint: holdedItemEndpoint)
     }
     
     
@@ -38,6 +38,7 @@ final class MyHomeBarDIContainer {
     }
     
     func makeMyHomeBarViewController() -> MyHomeBarViewController {
-        MyHomeBarViewController(viewModel: makeMyHomeBarViewModel())
+        MyHomeBarViewController(viewModel: makeMyHomeBarViewModel(),
+                                loginManager: loginManager)
     }
 }

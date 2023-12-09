@@ -31,6 +31,7 @@ final class MainDIContainer {
     //MARK: - MainViewController
     
     func makeMainViewController() -> MainViewController {
-        MainViewController(viewModel: makeCocktailRecommendViewModel())
+        MainViewController(viewModel: makeCocktailRecommendViewModel(),
+                           loginManager: loginManager)
     }
 }

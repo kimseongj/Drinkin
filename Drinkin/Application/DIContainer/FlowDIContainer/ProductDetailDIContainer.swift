@@ -43,6 +43,7 @@ final class ProductDetailDIContainer {
     }
     
     func makeProductDetailViewController(viewModel: ProductDetailViewModel) -> ProductDetailViewController {
-        ProductDetailViewController(viewModel: viewModel)
+        ProductDetailViewController(viewModel: viewModel,
+                                    loginManager: loginManager)
     }
 }

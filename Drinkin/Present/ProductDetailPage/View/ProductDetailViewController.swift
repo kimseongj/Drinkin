@@ -11,6 +11,7 @@ import Combine
 
 final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
+    private let loginManager: LoginManager
     var flowDelegate: ProductDetailVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -61,8 +62,9 @@ final class ProductDetailViewController: UIViewController {
     
     //MARK: - Init
     
-    init(viewModel: ProductDetailViewModel) {
+    init(viewModel: ProductDetailViewModel, loginManager: LoginManager) {
         self.viewModel = viewModel
+        self.loginManager = loginManager
         super.init(nibName: nil, bundle: nil)
     }
     

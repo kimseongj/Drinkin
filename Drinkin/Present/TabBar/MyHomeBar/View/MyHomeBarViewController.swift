@@ -15,9 +15,9 @@ protocol CellDeleteButtonDelegate: AnyObject {
 
 final class MyHomeBarViewController: UIViewController {
     private var viewModel: MyHomeBarViewModel
+    private let loginManager: LoginManager
     var flowDelegate: MyHomeBarVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
-    let loginManager = DefaultLoginManager(tokenManager: DefaultTokenManager())
     
     private var holdedItemDataSource: UICollectionViewDiffableDataSource<Section, HoldedItem>?
     
@@ -183,8 +183,9 @@ final class MyHomeBarViewController: UIViewController {
     
     //MARK: - Init
     
-    init(viewModel: MyHomeBarViewModel) {
+    init(viewModel: MyHomeBarViewModel, loginManager: LoginManager) {
         self.viewModel = viewModel
+        self.loginManager = loginManager
         super.init(nibName: nil, bundle: nil)
     }
     
