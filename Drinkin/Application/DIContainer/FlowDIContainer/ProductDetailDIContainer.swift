@@ -8,12 +8,14 @@
 import Foundation
 
 final class ProductDetailDIContainer {
-    let provider: Provider
-    let cocktailID: Int
-    let productDetailEndpoint = CocktailsEndpoint()
+    private let provider: Provider
+    private let loginManager: LoginManager
+    private let cocktailID: Int
+    private let productDetailEndpoint = CocktailsEndpoint()
     
-    init(provider: Provider, cocktailID: Int) {
+    init(provider: Provider, loginManager: LoginManager, cocktailID: Int) {
         self.provider = provider
+        self.loginManager = loginManager
         self.cocktailID = cocktailID
     }
     
