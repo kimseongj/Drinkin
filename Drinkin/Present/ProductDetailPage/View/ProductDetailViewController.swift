@@ -43,6 +43,7 @@ final class ProductDetailViewController: UIViewController {
     @objc
     private func tapMarkMadeCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
+        viewModel.updateUserMadeCocktail()
     }
     
     private lazy var bookmarkCocktailButton: BookmarkCocktailButton = {
@@ -55,6 +56,7 @@ final class ProductDetailViewController: UIViewController {
     @objc
     private func tapBookmarkCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
+        viewModel.updateBookmarkCocktail()
     }
     
     //MARK: - Init
@@ -140,6 +142,8 @@ final class ProductDetailViewController: UIViewController {
         cocktailInformationView.fill(with: validCocktailDescription)
         introductionView.applybaseSnapshot(detailCategoryList: baseList)
         introductionView.applyIngredientSnapshot(detailIngredientList: ingredientList)
+        bookmarkCocktailButton.isSelected = validCocktailDescription.isBookmark
+        markMadeCocktailButton.isSelected = validCocktailDescription.isMade
     }
     
     private func sendDelegate() {

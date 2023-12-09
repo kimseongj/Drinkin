@@ -12,6 +12,8 @@ final class ProductDetailDIContainer {
     private let loginManager: LoginManager
     private let cocktailID: Int
     private let productDetailEndpoint = CocktailsEndpoint()
+    private let updateUserMadeEndpoint = UpdateMadeCocktailEndpoint()
+    private let updateBookmarkEndpoint = UpdateBookmarkCocktailEndpoint()
     
     init(provider: Provider, loginManager: LoginManager, cocktailID: Int) {
         self.provider = provider
@@ -27,7 +29,8 @@ final class ProductDetailDIContainer {
     
     func makeCocktailMarkingRepository() -> CocktailMarkingRepository {
         DefaultCocktailMarkingRepository(provider: provider,
-                                         endpoint: productDetailEndpoint)
+                                         userMadeEndpoint: updateUserMadeEndpoint,
+                                         bookmarkEndpoint: updateBookmarkEndpoint)
     }
     
     func makeManageMarkingCocktailUsecase() -> ManageMarkingCocktailUsecase {

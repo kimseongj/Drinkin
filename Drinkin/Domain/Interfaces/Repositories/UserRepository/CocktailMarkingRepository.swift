@@ -8,6 +8,6 @@
 import Combine
 
 protocol CocktailMarkingRepository {
-    func postUserMadeCocktail(cocktail: Encodable) -> AnyPublisher<PostResponse, APIError>
-    func postSavedCocktail(cocktail: Encodable) -> AnyPublisher<PostResponse, APIError>
+    func sendUserMadeCocktail(cocktailID: Int) -> AnyPublisher<PostResponse, APIError>
+    func sendBookmarkCocktail(cocktailID: Int) -> AnyPublisher<PostResponse, APIError>
 }

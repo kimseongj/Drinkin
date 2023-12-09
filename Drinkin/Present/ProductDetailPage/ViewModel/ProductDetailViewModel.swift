@@ -11,6 +11,8 @@ import Combine
 
 protocol ProductDetailViewModelInput {
     func fetchDescription(completion: @escaping () -> Void)
+    func updateUserMadeCocktail()
+    func updateBookmarkCocktail()
 }
 
 protocol ProductDetailViewModelOutput {
@@ -77,12 +79,64 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
             ).store(in: &cancelBag)
     }
     
-    func markUserMadeCocktail() {
-        manageMarkingCocktailUsecase.markUserMadeCocktail()
+    func updateUserMadeCocktail() {
+        guard let validcocktailDescription = cocktailDescription else { return }
+        manageMarkingCocktailUsecase.updateUserMadeCocktailMark(cocktailID: validcocktailDescription.id)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { print($0) }
+            ).store(in: &cancelBag)
     }
     
-    func markSavedCocktail() {
-        manageMarkingCocktailUsecase.markSavedCocktail()
+    func updateBookmarkCocktail() {
+        guard let validcocktailDescription = cocktailDescription else { return }
+        manageMarkingCocktailUsecase.updateBookmarkCocktailMark(cocktailID: validcocktailDescription.id)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
+                    switch completion {
+                    case .failure(let error):
+                        switch error {
+                        case .unauthorized:
+                            self.errorType = .unauthorized
+                        case .notFound:
+                            self.errorType = .notFound
+                        case .networkError(_):
+                            self.errorType = .networkError(error)
+                        case .decodingError:
+                            self.errorType = .decodingError
+                        case .refreshTokenExpired:
+                            self.errorType = .refreshTokenExpired
+                        case .noError:
+                            break
+                        }
+                    case .finished:
+                        return
+                    }
+                },
+                receiveValue: { print($0) }
+            ).store(in: &cancelBag)
     }
     
 }

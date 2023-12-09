@@ -10,18 +10,24 @@ import Combine
 
 final class DefaultCocktailMarkingRepository: CocktailMarkingRepository {
     let provider: Provider
-    let endpoint: EndpointMakeable
+    var userMadeEndpoint: EndpointMakeable
+    var bookmarkEndpoint: EndpointMakeable
     
-    init(provider: Provider, endpoint: EndpointMakeable) {
+    init(provider: Provider, userMadeEndpoint: EndpointMakeable, bookmarkEndpoint: EndpointMakeable) {
         self.provider = provider
-        self.endpoint = endpoint
+        self.userMadeEndpoint = userMadeEndpoint
+        self.bookmarkEndpoint = bookmarkEndpoint
     }
     
-    func postUserMadeCocktail(cocktail: Encodable) -> AnyPublisher<PostResponse, APIError> {
-        provider.postData(endpoint: endpoint, bodyItem: cocktail)
+    func sendUserMadeCocktail(cocktailID: Int) -> AnyPublisher<PostResponse, APIError> {
+        userMadeEndpoint.insertQuery(queryParameter: "id", queryValue: String(cocktailID))
+        
+        return provider.fetchData(endpoint: userMadeEndpoint)
     }
     
-    func postSavedCocktail(cocktail: Encodable) -> AnyPublisher<PostResponse, APIError> {
-        provider.postData(endpoint: endpoint, bodyItem: cocktail)
+    func sendBookmarkCocktail(cocktailID: Int) -> AnyPublisher<PostResponse, APIError> {
+        bookmarkEndpoint.insertQuery(queryParameter: "id", queryValue: String(cocktailID))
+        
+        return provider.fetchData(endpoint: bookmarkEndpoint)
     }
 }
