@@ -19,6 +19,8 @@ struct CocktailDescription: Decodable {
     let toolList: [CocktailTool]
     let skillList: [CocktailSkill]
     let glassList: [CocktailGlass]
+    let isBookmark: Bool
+    let isMade: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -34,6 +36,8 @@ struct CocktailDescription: Decodable {
         case toolList = "tool_list"
         case skillList = "skill_list"
         case glassList = "glass"
+        case isBookmark = "is_bookmark"
+        case isMade = "is_made"
     }
 }
 
