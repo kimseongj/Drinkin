@@ -105,6 +105,8 @@ extension DefaultTriedCocktailSelectionViewModel {
                                                                       imageURI: $0.imageURI)
             selectableCocktailList.append(convertedImageDescrtipon)
         }
+        
+        selectableCocktailList.sort { $0.cocktailNameKo < $1.cocktailNameKo }
     }
 }
 
@@ -113,6 +115,9 @@ extension DefaultTriedCocktailSelectionViewModel {
 extension DefaultTriedCocktailSelectionViewModel {
     func filterCocktailList(cocktailCategoryIndex: Int) {
         let cocktailCategory = categoryList[cocktailCategoryIndex]
+        if cocktailCategory == CategoryListStrings.whole {
+            filteredSelectableCocktailList = []
+        }
         filteredSelectableCocktailList = filterTriedCocktailUsecase.filterCocktail(cocktailCategory: cocktailCategory,
                                                                                    selectableCocktailList: selectableCocktailList)
     }
