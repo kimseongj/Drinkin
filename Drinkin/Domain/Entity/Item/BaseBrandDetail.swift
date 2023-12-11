@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BaseBrandDetail: Codable, Hashable {
+struct BaseBrandDetail: Decodable, Hashable {
     let id: Int
     let imageURI: String
     let baseBrandName: String

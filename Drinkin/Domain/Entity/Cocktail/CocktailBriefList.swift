@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CocktailBriefList: Codable {
+struct CocktailBriefList: Decodable {
     let briefDescriptionList: [CocktailBrief]
     
     enum CodingKeys: String, CodingKey {
@@ -15,7 +15,7 @@ struct CocktailBriefList: Codable {
     }
 }
 
-struct CocktailBrief: Codable, Hashable {
+struct CocktailBrief: Decodable, Hashable {
     let id: Int
     let cocktailNameKo: String
     let category: String
@@ -41,7 +41,7 @@ struct CocktailBrief: Codable, Hashable {
     }
 }
 
-struct BaseList: Codable, Hashable {
+struct BaseList: Decodable, Hashable {
     let baseNameKo: String
     let hold: Bool
 
@@ -51,7 +51,7 @@ struct BaseList: Codable, Hashable {
     }
 }
 
-struct GarnishList: Codable, Hashable {
+struct GarnishList: Decodable, Hashable {
     let garnishNameKo: String
     let hold: Bool
 
@@ -61,7 +61,7 @@ struct GarnishList: Codable, Hashable {
     }
 }
 
-struct IngredientList: Codable, Hashable {
+struct IngredientList: Decodable, Hashable {
     let ingredientNameKo: String
     let hold: Bool
 

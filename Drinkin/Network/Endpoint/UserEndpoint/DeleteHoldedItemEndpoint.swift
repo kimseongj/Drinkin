@@ -1,16 +1,16 @@
 //
-//  HoldedItemEndpoint.swift
+//  DeleteHoldedItemEndpoint.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/08/31.
+//  Created by kimseongjun on 2023/12/09.
 //
 
 import Foundation
 
-struct HoldedItemEndpoint: EndpointMakeable {
+struct DeleteHoldedItemEndpoint: EndpointMakeable {
     var baseURL: String = "http://13.209.22.43:8000"
     
-    var path: String = "/v1/holded-item"
+    var path: String = "/v1/delete-holded-item"
     
     var method: String = HTTPMethod.get.rawValue
     

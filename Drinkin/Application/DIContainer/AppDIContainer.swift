@@ -10,14 +10,16 @@ import Foundation
 final class AppDIContainer {
     private let provider: Provider
     private let loginProvider: LoginProvider
+    private let loginManager: LoginManager
     
-    init(provider: Provider, loginProvider: LoginProvider) {
+    init(provider: Provider, loginProvider: LoginProvider, loginManager: LoginManager) {
         self.provider = provider
         self.loginProvider = loginProvider
+        self.loginManager = loginManager
     }
     
     func makeMainDIContainer() -> MainDIContainer {
-        MainDIContainer(provider: provider)
+        MainDIContainer(provider: provider, loginManager: loginManager)
     }
     
     func makeTriedCocktailSelectionDIContainer() -> TriedCocktailSelectionDIContainer {
@@ -29,11 +31,11 @@ final class AppDIContainer {
     }
     
     func makeMyHomeBarDIContainer() -> MyHomeBarDIContainer {
-        MyHomeBarDIContainer(provider: provider)
+        MyHomeBarDIContainer(provider: provider, loginManager: loginManager)
     }
     
     func makeProductDetailDIContainer(cocktailID: Int) -> ProductDetailDIContainer {
-        ProductDetailDIContainer(provider: provider, cocktailID: cocktailID)
+        ProductDetailDIContainer(provider: provider, loginManager: loginManager, cocktailID: cocktailID)
     }
     
     func makeBaseInformationDIContainer(baseID: Int) -> BaseInformationDIContainer {

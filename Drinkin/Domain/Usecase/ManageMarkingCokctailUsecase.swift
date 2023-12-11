@@ -8,10 +8,23 @@
 import Foundation
 import Combine
 
-protocol ManageMarkingCokctailUsecase {
-
+protocol ManageMarkingCocktailUsecase {
+    func updateUserMadeCocktailMark(cocktailID: Int) -> AnyPublisher<PostResponse, APIError>
+    func updateBookmarkCocktailMark(cocktailID: Int) -> AnyPublisher<PostResponse, APIError> 
 }
 
-final class DefaultManageMarkingCokctailUsecase: ManageMarkingCokctailUsecase {
-
+final class DefaultManageMarkingCocktailUsecase: ManageMarkingCocktailUsecase {
+    private let cocktailMarkingRepository: CocktailMarkingRepository
+    
+    init(cocktailMarkingRepository: CocktailMarkingRepository) {
+        self.cocktailMarkingRepository = cocktailMarkingRepository
+    }
+    
+    func updateUserMadeCocktailMark(cocktailID: Int) -> AnyPublisher<PostResponse, APIError> {
+        cocktailMarkingRepository.sendUserMadeCocktail(cocktailID: cocktailID)
+    }
+    
+    func updateBookmarkCocktailMark(cocktailID: Int) -> AnyPublisher<PostResponse, APIError> {
+        cocktailMarkingRepository.sendBookmarkCocktail(cocktailID: cocktailID)
+    }
 }

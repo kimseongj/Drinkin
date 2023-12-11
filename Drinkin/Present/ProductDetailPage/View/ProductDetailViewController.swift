@@ -11,10 +11,11 @@ import Combine
 
 final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
+    private let loginManager: LoginManager
     var flowDelegate: ProductDetailVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
-    private let scrollView : UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -22,7 +23,7 @@ final class ProductDetailViewController: UIViewController {
         return scrollView
     }()
     
-    private let stackView : UIStackView = {
+    private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 40
@@ -43,6 +44,7 @@ final class ProductDetailViewController: UIViewController {
     @objc
     private func tapMarkMadeCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
+        viewModel.updateUserMadeCocktail()
     }
     
     private lazy var bookmarkCocktailButton: BookmarkCocktailButton = {
@@ -55,12 +57,14 @@ final class ProductDetailViewController: UIViewController {
     @objc
     private func tapBookmarkCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
+        viewModel.updateBookmarkCocktail()
     }
     
     //MARK: - Init
     
-    init(viewModel: ProductDetailViewModel) {
+    init(viewModel: ProductDetailViewModel, loginManager: LoginManager) {
         self.viewModel = viewModel
+        self.loginManager = loginManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -140,6 +144,8 @@ final class ProductDetailViewController: UIViewController {
         cocktailInformationView.fill(with: validCocktailDescription)
         introductionView.applybaseSnapshot(detailCategoryList: baseList)
         introductionView.applyIngredientSnapshot(detailIngredientList: ingredientList)
+        bookmarkCocktailButton.isSelected = validCocktailDescription.isBookmark
+        markMadeCocktailButton.isSelected = validCocktailDescription.isMade
     }
     
     private func sendDelegate() {

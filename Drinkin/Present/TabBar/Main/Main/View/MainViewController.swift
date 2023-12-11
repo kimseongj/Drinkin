@@ -9,6 +9,7 @@ import SnapKit
 
 final class MainViewController: UIViewController {
     private var viewModel: CocktailRecommendViewModel
+    private let loginManager: LoginManager
     var flowDelegate: MainVCFlow?
     
     private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
@@ -16,8 +17,9 @@ final class MainViewController: UIViewController {
     
     //MARK: - Init
     
-    init(viewModel: CocktailRecommendViewModel) {
+    init(viewModel: CocktailRecommendViewModel, loginManager: LoginManager) {
         self.viewModel = viewModel
+        self.loginManager = loginManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,7 +38,7 @@ final class MainViewController: UIViewController {
         super.viewWillAppear(true)
         AppCoordinator.tabBarController.tabBar.isHidden = false
         
-        if LoginManager.shared.isAuthenticated() {
+        if loginManager.isAuthenticated() {
             fetchLoggedinMainView()
         } else {
             fetchUnloggedinMainView()

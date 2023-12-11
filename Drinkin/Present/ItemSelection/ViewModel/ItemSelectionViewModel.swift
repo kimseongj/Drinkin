@@ -15,6 +15,7 @@ protocol ItemSelectionViewModelInput {
     func deselectItem(index: Int)
     func fetchSelectedItemList()
     func addSelectedItems(completion: @escaping () -> Void)
+    func isSelectedItemChange() -> Bool
 }
 
 protocol ItemSelectionViewModelOutput {
@@ -34,8 +35,8 @@ final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
     @Published var errorType: APIError = APIError.noError
     @Published var itemList: [Item] = []
     @Published var filteredItemList: [Item] = []
-    var alreadySelectedItemList: [String] = []
-    var selectedItemList: [String] = []
+    var alreadySelectedItemList: [SelectedItem] = []
+    var selectedItemList: [SelectedItem] = []
     
     //MARK: - Output
     
@@ -98,7 +99,7 @@ extension DefaultItemSelectiontViewModel {
         alreadySelectedItemList = itemList.filter {
             $0.hold == true
         }.map {
-            $0.itemName
+            SelectedItem(type: $0.type, id: $0.id)
         }
     }
 }
@@ -107,9 +108,10 @@ extension DefaultItemSelectiontViewModel {
 
 extension DefaultItemSelectiontViewModel {
     func filterItems(itemCategory: String) {
-        filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList) {
-            self.filteredItemList = $0
+        if itemCategory == "whole" {
+            filteredItemList = []
         }
+        filteredItemList = filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList)
     }
 }
 
@@ -137,20 +139,16 @@ extension DefaultItemSelectiontViewModel {
 
 extension DefaultItemSelectiontViewModel {
     func addSelectedItems(completion: @escaping () -> Void) {
-        let isSelectedItemChanged = compareSelectedItem()
-        
-        if isSelectedItemChanged {
-            addItemUsecase.addItems(itemList: selectedItemList)
-                .receive(on: RunLoop.main).sink(receiveCompletion: { print("\($0)")},
-                      receiveValue: { _ in
+        addItemUsecase.addItems(itemList: SelectedItemList(itemList: selectedItemList))
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: { print("\($0)")},
+                receiveValue: { _ in
                     completion()
                 }).store(in: &cancelBag)
-        } else {
-            completion()
-        }
     }
     
-    func compareSelectedItem() -> Bool {
+    func isSelectedItemChange() -> Bool {
         let alreadySelectedItemSet = Set(alreadySelectedItemList)
         let selectedItemSet = Set(selectedItemList)
         
@@ -161,7 +159,7 @@ extension DefaultItemSelectiontViewModel {
         selectedItemList = itemList.filter {
             $0.hold == true
         }.map {
-            $0.itemName
+            SelectedItem(type: $0.type, id: $0.id)
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CocktailImageList: Codable {
+struct CocktailImageList: Decodable {
     let cocktailImageList: [ImageDescription]
 
     enum CodingKeys: String, CodingKey {
@@ -15,7 +15,7 @@ struct CocktailImageList: Codable {
     }
 }
 
-struct ImageDescription: Codable, Hashable {
+struct ImageDescription: Decodable, Hashable {
     let id: Int
     let category, cocktailNameKo: String
     let imageURI: String

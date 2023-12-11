@@ -114,6 +114,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
     }
     
     //MARK: - Fetch Data
+    
     private func fetchData() {
         viewModel.fetchCocktailImageList() { 
             DispatchQueue.main.async { [weak self] in
