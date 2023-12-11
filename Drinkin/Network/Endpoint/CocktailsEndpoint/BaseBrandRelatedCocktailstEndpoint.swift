@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct MakeableCocktailListEndpoint: EndpointMakeable {
-    var baseURL: String = "https://e2071188-0508-48be-85bd-321a53477ca0.mock.pstmn.io"
+struct BaseBrandRelatedCocktailsEndpoint: EndpointMakeable {
+    var baseURL: String = "http://13.209.22.43:8000"
     
-    var path: String = "/cocktail"
+    var path: String = "/v1/base-brand-related-cocktails"
     
     var method: String = HTTPMethod.get.rawValue
     

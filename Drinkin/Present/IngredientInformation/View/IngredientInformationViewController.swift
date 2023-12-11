@@ -1,28 +1,20 @@
 //
-//  BaseBrandInformationViewController.swift
+//  IngredientInformationViewController.swift
 //  Drinkin
 //
-//  Created by kimseongjun on 2023/10/06.
+//  Created by kimseongjun on 2023/12/10.
 //
 
 import UIKit
 import SnapKit
 import Combine
 
-final class BaseBrandInformationViewController: UIViewController {
-    private var viewModel: BaseBrandInformationViewModel
-    var flowDelegate: BaseBrandInformationVCFlow?
+final class IngredientInformationViewController: UIViewController {
+    private var viewModel: IngredientInformationViewModel
+    var flowDelegate: IngredientInformationVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.alwaysBounceVertical = true
-        scrollView.showsHorizontalScrollIndicator = false
-        
-        return scrollView
-    }()
-    
-    private let brandImageView: UIImageView = {
+    private let ingredientImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         
@@ -44,30 +36,30 @@ final class BaseBrandInformationViewController: UIViewController {
         return label
     }()
     
-    private let classificationLabel: UILabel = {
+    private let purchaseLabel: UILabel = {
         let label = UILabel()
+        label.text = "구  매  처"
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
-        label.text = InformationStrings.classification
         
         return label
     }()
     
-    private let classificationDescriptionLabel: UILabel = {
+    private let purchaseLinkLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardBold, size: 15)
         
         return label
     }()
     
-    private let abvLabel: UILabel = {
+    private let expirationDateLabel: UILabel = {
         let label = UILabel()
+        label.text = "유통기한"
         label.font = UIFont(name: FontStrings.pretendardExtraBold, size: 15)
-        label.text = InformationStrings.abv
         
         return label
     }()
     
-    private let abvDescriptionLabel: UILabel = {
+    private let expirationDateDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontStrings.pretendardBold, size: 15)
         
@@ -82,7 +74,7 @@ final class BaseBrandInformationViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: FontStrings.pretendardBlack, size: 15)
         button.layer.borderWidth = 3
-        button.layer.borderColor = ColorPalette.buttonBorderColor
+        button.layer.borderColor = UIColor(red: 0.472, green: 0.465, blue: 0.453, alpha: 1).cgColor
         button.addTarget(self, action: #selector(tapRecommendCocktailButton), for: .touchUpInside)
         
         return button
@@ -90,12 +82,10 @@ final class BaseBrandInformationViewController: UIViewController {
     
     @objc
     private func tapRecommendCocktailButton() {
-        flowDelegate?.pushMakeableCocktailListVC(brandID: viewModel.brandID)
+        flowDelegate?.pushMakeableCocktailListVC(ingredientID: viewModel.ingredientID)
     }
     
-    //MARK: - Init
-    
-    init(viewModel: BaseBrandInformationViewModel) {
+    init(viewModel: IngredientInformationViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -104,27 +94,18 @@ final class BaseBrandInformationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - LifeCycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
         binding()
         errorBinding()
         configureUI()
-        showActivityIndicator()
         showImageViewActivityIndicator()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        AppCoordinator.tabBarController.tabBar.isHidden = true
-    }
-    
     //MARK: - Fetch Data
-    
     private func fetchData() {
-        viewModel.fetchBaseBrandDetail() { 
+        viewModel.fetchIngredientDetail {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.hideActivityIndicator()
@@ -132,30 +113,28 @@ final class BaseBrandInformationViewController: UIViewController {
         }
     }
     
-    //MARK: - ConfigureUI
-    
     private func configureUI() {
         view.backgroundColor = .white
         
         let safeArea = view.safeAreaLayoutGuide
-        let brandImageSize = view.bounds.width * 0.27
-        view.addSubview(brandImageView)
+        let ingredientImageSize = view.bounds.width * 0.27
+        view.addSubview(ingredientImageView)
         view.addSubview(titleLabel)
         view.addSubview(informationLabel)
-        view.addSubview(classificationLabel)
-        view.addSubview(classificationDescriptionLabel)
-        view.addSubview(abvLabel)
-        view.addSubview(abvDescriptionLabel)
+        view.addSubview(purchaseLabel)
+        view.addSubview(purchaseLinkLabel)
+        view.addSubview(expirationDateLabel)
+        view.addSubview(expirationDateDescriptionLabel)
         view.addSubview(recommendCocktailButton)
         
-        brandImageView.snp.makeConstraints {
-            $0.size.equalTo(brandImageSize)
+        ingredientImageView.snp.makeConstraints {
+            $0.size.equalTo(ingredientImageSize)
             $0.top.equalTo(safeArea.snp.top).offset(8)
             $0.centerX.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(brandImageView.snp.bottom).offset(12)
+            $0.top.equalTo(ingredientImageView.snp.bottom).offset(12)
             $0.centerX.equalToSuperview()
         }
         
@@ -164,56 +143,54 @@ final class BaseBrandInformationViewController: UIViewController {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        classificationLabel.snp.makeConstraints {
+        purchaseLabel.snp.makeConstraints {
             $0.top.equalTo(informationLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
         }
         
-        classificationDescriptionLabel.snp.makeConstraints{
-            $0.top.equalTo(classificationLabel.snp.top)
-            $0.leading.equalTo(classificationLabel.snp.trailing).offset(16)
+        purchaseLinkLabel.snp.makeConstraints{
+            $0.top.equalTo(purchaseLabel.snp.top)
+            $0.leading.equalTo(purchaseLabel.snp.trailing).offset(16)
         }
         
-        abvLabel.snp.makeConstraints {
-            $0.top.equalTo(classificationLabel.snp.bottom).offset(16)
+        expirationDateLabel.snp.makeConstraints {
+            $0.top.equalTo(purchaseLinkLabel.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
         }
         
-        abvDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(abvLabel.snp.top)
-            $0.leading.equalTo(abvLabel.snp.trailing).offset(16)
+        expirationDateDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(expirationDateLabel.snp.top)
+            $0.leading.equalTo(expirationDateLabel.snp.trailing).offset(16)
         }
         
         recommendCocktailButton.snp.makeConstraints {
             $0.height.equalTo(52)
             $0.leading.trailing.bottom.equalTo(safeArea)
-        
         }
     }
     
     private func showImageViewActivityIndicator() {
-        brandImageView.showActivityIndicator()
+        ingredientImageView.showActivityIndicator()
     }
     
-    //MARK: - Fill View
-    
-    private func fill(with brandDetail: BaseBrandDetail?) {
-        guard let brandDetail = brandDetail else { return }
-        titleLabel.text = brandDetail.baseBrandName
-        classificationDescriptionLabel.text = brandDetail.classification
-        abvDescriptionLabel.text = brandDetail.abv
-        brandImageView.load(urlString: brandDetail.imageURI) { [weak self] in
+    private func fill(with ingredientDetail: IngredientDetail?) {
+        guard let ingredientDetail = ingredientDetail else { return }
+        
+        ingredientImageView.load(urlString: ingredientDetail.imageURI) { [weak self] in
             guard let self = self else { return }
-            self.brandImageView.hideActivityIndicator()
+            self.ingredientImageView.hideActivityIndicator()
         }
+        titleLabel.text = ingredientDetail.ingredientName
+        purchaseLinkLabel.text = ingredientDetail.purchaseLink
+        expirationDateDescriptionLabel.text = ingredientDetail.expirationDate
     }
 }
 
 //MARK: - Binding
 
-extension BaseBrandInformationViewController {
+extension IngredientInformationViewController {
     private func binding() {
-        viewModel.baseBrandDetailPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel.ingredientDetailPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             
             self.fill(with: $0)
@@ -223,7 +200,7 @@ extension BaseBrandInformationViewController {
 
 //MARK: - Handling Error
 
-extension BaseBrandInformationViewController {
+extension IngredientInformationViewController {
     func errorBinding() {
         viewModel.errorHandlingPublisher
             .receive(on: RunLoop.main)

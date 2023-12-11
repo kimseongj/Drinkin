@@ -46,8 +46,12 @@ final class AppDIContainer {
         BaseBrandInformationDIContainer(provider: provider, brandID: brandID)
     }
     
-    func makeMakeableCocktailListDIContainer(brandID: Int) -> MakeableCocktailListDIContainer {
-        MakeableCocktailListDIContainer(provider: provider, brandID: brandID)
+    func makeIngredientInformationDIContainer(ingredientID: Int) -> IngredientInformationDIContainer {
+        IngredientInformationDIContainer(provider: provider, ingredientID: ingredientID)
+    }
+    
+    func makeMakeableCocktailListDIContainer(brandID: Int?, ingredientID: Int?) -> MakeableCocktailListDIContainer {
+        MakeableCocktailListDIContainer(provider: provider, brandID: brandID, ingredientID: ingredientID)
     }
     
     func makeLoginDIContainer() -> LoginDIContainer {

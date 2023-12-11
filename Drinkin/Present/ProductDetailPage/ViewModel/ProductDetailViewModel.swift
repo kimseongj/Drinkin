@@ -72,8 +72,9 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
                 },
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
-                    
                     self.cocktailDescription = $0
+                    self.cocktailDescription?.baseList = $0.baseList.sorted(by: { $0.hold && !$1.hold })
+                    self.cocktailDescription?.ingredientList = $0.ingredientList.sorted(by: { $0.hold && !$1.hold })
                     completion()
                 }
             ).store(in: &cancelBag)

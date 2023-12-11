@@ -14,16 +14,21 @@ protocol MakeableCocktailListVCFlow: AnyObject {
 final class MakeableCocktailListVCCoordinator: Coordinator, MakeableCocktailListVCFlow {
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
-    let baseBrandID: Int
+    let baseBrandID: Int?
+    let ingredientID: Int?
     
-    init(navigationController: UINavigationController, appDIContainer: AppDIContainer, baseBrandID: Int) {
+    init(navigationController: UINavigationController,
+         appDIContainer: AppDIContainer,
+         baseBrandID: Int?,
+         ingredientID: Int?) {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
         self.baseBrandID = baseBrandID
+        self.ingredientID = ingredientID
     }
     
     func start() {
-        let makeableCocktailListDIContainer = appDIContainer.makeMakeableCocktailListDIContainer(brandID: baseBrandID)
+        let makeableCocktailListDIContainer = appDIContainer.makeMakeableCocktailListDIContainer(brandID: baseBrandID, ingredientID: ingredientID)
         
         let makeableCocktailListViewController = makeableCocktailListDIContainer.makeMakeableCocktailListViewController()
         makeableCocktailListViewController.makeBlackBackBarButton()

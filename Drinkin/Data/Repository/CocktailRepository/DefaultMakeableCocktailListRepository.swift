@@ -10,20 +10,40 @@ import Combine
 
 final class DefaultMakeableCocktailListRepository: MakeableCocktailListRepository {
     let provider: Provider
-    var endpoint: EndpointMakeable
-    let brandID: Int
+    var baseBrandRelatedCocktailsEndpoint: EndpointMakeable
+    var ingredientRelatedCocktailsEndpoint: EndpointMakeable
+    let brandID: Int?
+    let ingredientID: Int?
     
     init(provider: Provider,
-         endpoint: EndpointMakeable,
-         brandID: Int) {
+         baseBrandRelatedCocktailsEndpoint: EndpointMakeable,
+         ingredientRelatedCocktailsEndpoint: EndpointMakeable,
+         brandID: Int?,
+         ingredientID: Int?) {
         self.provider = provider
-        self.endpoint = endpoint
+        self.baseBrandRelatedCocktailsEndpoint = baseBrandRelatedCocktailsEndpoint
+        self.ingredientRelatedCocktailsEndpoint = ingredientRelatedCocktailsEndpoint
         self.brandID = brandID
+        self.ingredientID = ingredientID
+    }
+    
+    func fetchbaseBrandRelatedCocktails() -> AnyPublisher<MakeableCocktailList, APIError> {
+        baseBrandRelatedCocktailsEndpoint.insertQuery(queryParameter: "id", queryValue: String(brandID!))
+        
+        return provider.fetchData(endpoint: baseBrandRelatedCocktailsEndpoint)
+    }
+    
+    func fetchIngredientRelatedCocktails() -> AnyPublisher<MakeableCocktailList, APIError> {
+        ingredientRelatedCocktailsEndpoint.insertQuery(queryParameter: "id", queryValue: String(ingredientID!))
+        
+        return provider.fetchData(endpoint: ingredientRelatedCocktailsEndpoint)
     }
     
     func fetchMakeableCocktails() -> AnyPublisher<MakeableCocktailList, APIError> {
-        //endpoint.insertPathParmeter(pathParameter: brandID.description)
-        
-        return provider.fetchData(endpoint: endpoint)
+        if brandID == nil {
+            return fetchIngredientRelatedCocktails()
+        } else {
+            return fetchbaseBrandRelatedCocktails()
+        }
     }
 }

@@ -14,8 +14,8 @@ struct CocktailDescription: Decodable {
     let description: String
     let recipeList: [String]
     let abv, level, sugarContent: String
-    let baseList: [DetailBase]
-    let ingredientList: [DetailIngredient]
+    var baseList: [DetailBase]
+    var ingredientList: [DetailIngredient]
     let toolList: [CocktailTool]
     let skillList: [CocktailSkill]
     let glassList: [CocktailGlass]
