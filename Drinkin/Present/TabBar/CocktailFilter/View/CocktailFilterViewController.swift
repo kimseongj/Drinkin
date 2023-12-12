@@ -16,13 +16,6 @@ final class CocktailFilterViewController: UIViewController {
     private var filterDataSource: UICollectionViewDiffableDataSource<Section, String>!
     private var cocktailDataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
     
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        
-        return stackView
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "칵테일 리스트"
@@ -49,6 +42,14 @@ final class CocktailFilterViewController: UIViewController {
         present(resetFilterPopupViewController, animated: true)
     }
     
+    private let searchBar: CustomSearchBar = {
+        let searchBar = CustomSearchBar()
+        searchBar.placeholder = "칵테일 검색하기"
+        
+        return searchBar
+    }()
+    
+    
     private let filterSelectionCollectionView: UICollectionView =  {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -68,6 +69,7 @@ final class CocktailFilterViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCompositionalLayout())
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(FilteredCocktailCell.self, forCellWithReuseIdentifier: FilteredCocktailCell.identifier)
+        collectionView.keyboardDismissMode = .onDrag
         
         return collectionView
     }()
@@ -98,6 +100,7 @@ final class CocktailFilterViewController: UIViewController {
         configureFilterSelectionCollectionView()
         configureFilteredCollectionView()
         makeSelectionFilterCollectionViewDisable()
+        configureSearchBarDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,7 +111,7 @@ final class CocktailFilterViewController: UIViewController {
     //MARK: - Fetch Data
     
     private func fetchData() {
-        viewModel.fetchCocktailList() { 
+        viewModel.fetchCocktailList() {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.hideActivityIndicator()
@@ -124,12 +127,12 @@ final class CocktailFilterViewController: UIViewController {
     //MARK: - ConfigureUI
     
     private func configureUI() {
-        let safeArea = view.safeAreaLayoutGuide
-        
         view.backgroundColor = .white
         
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(titleLabel)
         view.addSubview(resetFilterButton)
+        view.addSubview(searchBar)
         view.addSubview(filterSelectionCollectionView)
         view.addSubview(filteredCollectionView)
         
@@ -143,8 +146,13 @@ final class CocktailFilterViewController: UIViewController {
             $0.trailing.equalTo(safeArea.snp.trailing).offset(-16)
         }
         
+        searchBar.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
         filterSelectionCollectionView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.top.equalTo(searchBar.snp.bottom)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.height.equalTo(60)
@@ -164,6 +172,44 @@ final class CocktailFilterViewController: UIViewController {
 extension CocktailFilterViewController: ResetFilterDelegate {
     func resetFilter() {
         viewModel.clearAllFilter()
+    }
+}
+
+//MARK: - SearchBarDelegate
+
+extension CocktailFilterViewController: UISearchBarDelegate {
+    func configureSearchBarDelegate() {
+        searchBar.delegate = self
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.layer.borderColor = ColorPalette.themeColor.cgColor
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let text = searchBar.text else { return }
+        viewModel.searchCocktail(text: text)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        viewModel.searchCocktail(text: "")
+        dismissKeyboard()
+        searchBar.showsCancelButton = false
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.layer.borderColor = ColorPalette.buttonBorderColor
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        dismissKeyboard()
+    }
+    
+    func dismissKeyboard() {
+        searchBar.resignFirstResponder()
     }
 }
 

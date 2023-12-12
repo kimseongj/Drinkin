@@ -3,7 +3,7 @@ import Combine
 
 protocol CocktailFilterViewModelOutput {
     var errorHandlingPublisher: Published<APIError>.Publisher { get }
-    var filteredCocktailList: [CocktailPreview] { get }
+    var filteredCocktailList: [CocktailPreview] { get set }
     var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
     var textFilterTypeList: [String] { get }
     var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
@@ -18,6 +18,7 @@ protocol CocktailFilterViewModelInput {
     func fetchDetailFilter(filterType: FilterType) -> [String]
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int)
     func clearAllFilter()
+    func searchCocktail(text: String)
 }
 
 typealias CocktailFilterViewModel = CocktailFilterViewModelOutput & CocktailFilterViewModelInput
@@ -28,6 +29,8 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
+    
+    var currentFilteredCocktailList: [CocktailPreview] = []
     
     //MARK: - Init
     
@@ -100,6 +103,7 @@ extension DefaultCocktailFilterViewModel {
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
                     self.filteredCocktailList = $0.cocktailList.sorted(by: {$0.cocktailNameKo < $1.cocktailNameKo})
+                    self.currentFilteredCocktailList = self.filteredCocktailList
                     completion()
                 }
             ).store(in: &cancelBag)
@@ -194,5 +198,15 @@ extension DefaultCocktailFilterViewModel {
         
         filterCocktailListUsecase.clearAllFilter()
         fetchCocktailList { }
+    }
+    
+    func searchCocktail(text: String) {
+        filteredCocktailList = currentFilteredCocktailList.filter {
+            $0.cocktailNameKo.localizedStandardContains(text)
+        }
+        
+        if text == "" {
+            filteredCocktailList = currentFilteredCocktailList
+        }
     }
 }
