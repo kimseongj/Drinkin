@@ -11,6 +11,7 @@ import Combine
 protocol ItemSelectionViewModelInput {
     func fetchItemData(completion: @escaping () -> Void)
     func filterItems(itemCategory: String)
+    func searchItem(text: String)
     func selectItem(index: Int)
     func deselectItem(index: Int)
     func fetchSelectedItemList()
@@ -35,6 +36,7 @@ final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
     @Published var errorType: APIError = APIError.noError
     @Published var itemList: [Item] = []
     @Published var filteredItemList: [Item] = []
+    var currentFilteredItemList: [Item] = []
     var alreadySelectedItemList: [SelectedItem] = []
     var selectedItemList: [SelectedItem] = []
     
@@ -89,6 +91,7 @@ extension DefaultItemSelectiontViewModel {
                     self.itemFilterList = $0.itemFilterList
                     self.itemList = $0.itemList.sorted { $0.itemName < $1.itemName }
                     self.filteredItemList = $0.itemList.sorted { $0.itemName < $1.itemName }
+                    self.currentFilteredItemList = self.filteredItemList
                     self.fetchAlreadySelectedItemList(itemList: $0.itemList)
                     completion()
                 }
@@ -112,6 +115,17 @@ extension DefaultItemSelectiontViewModel {
             filteredItemList = []
         }
         filteredItemList = filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList)
+        currentFilteredItemList = filteredItemList
+    }
+    
+    func searchItem(text: String) {
+        filteredItemList = currentFilteredItemList.filter {
+            $0.itemName.localizedStandardContains(text)
+        }
+        
+        if text == "" {
+            filteredItemList = currentFilteredItemList
+        }
     }
 }
 
@@ -124,6 +138,10 @@ extension DefaultItemSelectiontViewModel {
         if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
             itemList[selectedItemIndex].hold = true
         }
+        
+        if let selectedItemIndex = currentFilteredItemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            currentFilteredItemList[selectedItemIndex].hold = true
+        }
     }
     
     func deselectItem(index: Int) {
@@ -131,6 +149,10 @@ extension DefaultItemSelectiontViewModel {
         
         if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
             itemList[selectedItemIndex].hold = false
+        }
+        
+        if let selectedItemIndex = currentFilteredItemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            currentFilteredItemList[selectedItemIndex].hold = false
         }
     }
 }
