@@ -27,8 +27,7 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCFlow {
     
     func start() {
         let productDetailDIContainer = appDIContainer.makeProductDetailDIContainer(cocktailID: cocktailID)
-        let productDetailViewModel =  productDetailDIContainer.makeProductDetailViewModel()
-        let productDetailViewController = productDetailDIContainer.makeProductDetailViewController(viewModel: productDetailViewModel)
+        let productDetailViewController = productDetailDIContainer.makeProductDetailViewController()
         
         productDetailViewController.flowDelegate = self
         productDetailViewController.cocktailInformationView.toolView.flowDelegate = self
