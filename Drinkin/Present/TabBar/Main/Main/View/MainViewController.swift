@@ -6,20 +6,25 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 final class MainViewController: UIViewController {
-    private var viewModel: CocktailRecommendViewModel
-    private let loginManager: LoginManager
+    private let viewModel: MainViewModel
+    private let cocktailRecommendViewModel: CocktailRecommendViewModel
     var flowDelegate: MainVCFlow?
     
-    private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: viewModel)
+    private var cancelBag: Set<AnyCancellable> = []
+    
+    private lazy var loggedinMainViewController = CocktailRecommendViewController(viewModel: cocktailRecommendViewModel)
     private let unloggedinMainViewController = UnloggedinMainViewController()
     
     //MARK: - Init
     
-    init(viewModel: CocktailRecommendViewModel, loginManager: LoginManager) {
+    init(viewModel: MainViewModel,
+         cocktailRecommendViewModel: CocktailRecommendViewModel) {
         self.viewModel = viewModel
-        self.loginManager = loginManager
+        self.cocktailRecommendViewModel = cocktailRecommendViewModel
+
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,23 +36,18 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureBackgroundColor()
+        configureUI()
+        authenticationBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         AppCoordinator.tabBarController.tabBar.isHidden = false
-        
-        if loginManager.isAuthenticated() {
-            fetchLoggedinMainView()
-        } else {
-            fetchUnloggedinMainView()
-        }
     }
     
     //MARK: - ConfigureUI
     
-    private func configureBackgroundColor() {
+    private func configureUI() {
         view.backgroundColor = .white
     }
 }
@@ -57,10 +57,10 @@ final class MainViewController: UIViewController {
 extension MainViewController {
     private func fetchUnloggedinMainView() {
         if self.children.contains(loggedinMainViewController) {
-                    loggedinMainViewController.removeFromParent()
-                    loggedinMainViewController.view.removeFromSuperview()
+            loggedinMainViewController.removeFromParent()
+            loggedinMainViewController.view.removeFromSuperview()
         }
-    
+        
         addChild(unloggedinMainViewController)
         configureUnloggedinMainView()
         unloggedinMainViewController.sendDelegate(flowDelegate)
@@ -81,8 +81,8 @@ extension MainViewController {
 extension MainViewController {
     private func fetchLoggedinMainView() {
         if self.children.contains(unloggedinMainViewController) {
-                    unloggedinMainViewController.removeFromParent()
-                    unloggedinMainViewController.view.removeFromSuperview()
+            unloggedinMainViewController.removeFromParent()
+            unloggedinMainViewController.view.removeFromSuperview()
         }
         
         addChild(loggedinMainViewController)
@@ -97,5 +97,20 @@ extension MainViewController {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-AppCoordinator.tabBarHeight)
         }
+    }
+}
+
+//MARK: - Authentication Binding
+
+extension MainViewController {
+    func authenticationBinding() {
+        viewModel.accessTokenStatusPublisher().receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            if $0 == true {
+                self.fetchLoggedinMainView()
+            }  else {
+                self.fetchUnloggedinMainView()
+            }
+        }.store(in: &cancelBag)
     }
 }
