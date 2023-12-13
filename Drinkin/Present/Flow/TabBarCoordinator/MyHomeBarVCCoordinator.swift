@@ -36,7 +36,8 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
     }
     
     func pushLoginSettingVC() {
-        let loginSettingVCCoordinator = LoginSettingVCCoordinator(navigationController: navigationController)
+        let loginSettingVCCoordinator = LoginSettingVCCoordinator(navigationController: navigationController,
+                                                                  appDIContainer: appDIContainer)
         loginSettingVCCoordinator.start()
     }
     
