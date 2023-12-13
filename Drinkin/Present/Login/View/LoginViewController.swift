@@ -298,7 +298,7 @@ extension LoginViewController {
             
             if $0 == true {
                 self.dismiss(animated: true)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.flowDelegate?.presentTriedCocktailSelectionVC()
                 }
             }

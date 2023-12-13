@@ -19,15 +19,15 @@ protocol LoginViewModel {
 }
 
 final class DefaultLoginViewModel: NSObject, ObservableObject, LoginViewModel {
-    private let loginRepository: LoginRepository
+    private let loginUsecase: LoginUsecase
     private let tokenManager = DefaultTokenManager()
     private var cancelBag: Set<AnyCancellable> = []
     lazy var authorizationController = ASAuthorizationController(authorizationRequests: [createRequest()])
     @Published var tokenExistence: Bool = false
     var tokenExistencePublisher: Published<Bool>.Publisher { $tokenExistence }
     
-    init(loginRepository: LoginRepository) {
-        self.loginRepository = loginRepository
+    init(loginUsecase: LoginUsecase) {
+        self.loginUsecase = loginUsecase
         super.init()
         createAccount()
     }
@@ -49,18 +49,8 @@ extension DefaultLoginViewModel {
                 }
                 else {
                     print("loginWithKakaoTalk() success.")
-                    
                     guard let accessToken = oauthToken?.accessToken else { return }
-                    
-                    self.loginRepository.kakaoLoginPublisher(accessToken: accessToken).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-                        print("\($0)")
-                        do {
-                            try self.tokenManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
-                            try self.tokenManager.saveToken(tokenType: TokenType.refreshToken, token: $0.refreshToken)
-                        } catch {
-                            
-                        }
-                    }).store(in: &self.cancelBag)
+                    self.loginUsecase.loginWithKakao(accessToken: accessToken)
                     self.tokenExistence = true
                 }
             }
@@ -73,22 +63,9 @@ extension DefaultLoginViewModel {
                 }
                 else {
                     print("loginWithKakaoAccount() success.")
-                    
                     guard let accessToken = oauthToken?.accessToken else { return }
-                    
-                    self.loginRepository.kakaoLoginPublisher(accessToken: accessToken).sink(receiveCompletion: { print("\($0)")}, receiveValue: { [self] in
-                        print("\($0)")
-                        do {
-                            try self.tokenManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
-                            try self.tokenManager.saveToken(tokenType: TokenType.refreshToken, token: $0.refreshToken)
-                        } catch {
-                            
-                        }
-                    }).store(in: &self.cancelBag)
+                    self.loginUsecase.loginWithKakao(accessToken: accessToken)
                     self.tokenExistence = true
-                    
-                    self.tokenExistence = true
-                    
                 }
             }
         }
@@ -118,35 +95,13 @@ extension DefaultLoginViewModel: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController,
                                  didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
-            // Apple ID
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            
-            // 계정 정보 가져오기
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            
-            print("User ID : \(userIdentifier)")
-            print("User Email : \(email ?? "")")
-            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            
             if let identityToken = appleIDCredential.identityToken,
-               let identityTokenString = String(data: identityToken, encoding: .utf8) {
-                print("identityToken: \(identityTokenString)")
+               let accessToken = String(data: identityToken, encoding: .utf8) {
                 
+                loginUsecase.loginWithApple(accessToken: accessToken)
                 
-                self.loginRepository.appleLoginPublisher(accessToken: identityTokenString).sink(receiveCompletion: { print("\($0)")}, receiveValue: {
-                    print("\($0)")
-                    do {
-                        try self.tokenManager.saveToken(tokenType: TokenType.accessToken, token: $0.accessToken)
-                        try self.tokenManager.saveToken(tokenType: TokenType.refreshToken, token: $0.refreshToken)
-                    } catch {
-                        
-                    }
-                    self.tokenExistence = true
-                }).store(in: &self.cancelBag)
-                
-                
+                self.tokenExistence = true
             }
             
         default:
