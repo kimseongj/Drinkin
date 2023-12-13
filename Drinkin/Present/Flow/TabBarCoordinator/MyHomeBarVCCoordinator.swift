@@ -14,7 +14,7 @@ protocol MyHomeBarVCFlow: AnyObject {
     func pushUserMadeCocktailListVC()
 }
 
-class HomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
+class MyHomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
