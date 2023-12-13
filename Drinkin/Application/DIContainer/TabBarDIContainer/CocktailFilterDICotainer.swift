@@ -8,12 +8,14 @@
 import Foundation
 
 final class CocktailFilterDICotainer {
-    let provider: Provider
-    let cocktailFilterEndpoint = CocktailFilterEndpoint()
-    let cocktailListEndpoint = CocktailsEndpoint()
+    private let provider: Provider
+    private let authenticationManager: AuthenticationManager
+    private let cocktailFilterEndpoint = CocktailFilterEndpoint()
+    private let cocktailListEndpoint = CocktailsEndpoint()
     
-    init(provider: Provider) {
+    init(provider: Provider, authenticationManager: AuthenticationManager) {
         self.provider = provider
+        self.authenticationManager = authenticationManager
     }
     
     //MARK: - CocktailFilter
@@ -37,7 +39,8 @@ final class CocktailFilterDICotainer {
     
     func makeCocktailFilterViewModel() -> CocktailFilterViewModel {
         DefaultCocktailFilterViewModel(cocktailFilterRepository: makeCocktailFilterRepository(),
-                                       filterCocktailListUsecase: makeFilterCocktailListUsecase())
+                                       filterCocktailListUsecase: makeFilterCocktailListUsecase(),
+                                       authenticationManager: authenticationManager)
     }
     
     func makeCocktailFilterViewController() -> CocktailFilterViewController {

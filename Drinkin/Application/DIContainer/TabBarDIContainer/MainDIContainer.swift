@@ -9,12 +9,16 @@ import Foundation
 
 final class MainDIContainer {
     private let provider: Provider
-    private let loginManager: LoginManager
+    private let authenticationManager: AuthenticationManager
     private let cocktailRecommendEndpoint = CocktailRecommendEndpoint()
     
-    init(provider: Provider, loginManager: LoginManager) {
+    init(provider: Provider, authenticationManager: AuthenticationManager) {
         self.provider = provider
-        self.loginManager = loginManager
+        self.authenticationManager = authenticationManager
+    }
+    
+    func makeMainViewModel() -> MainViewModel {
+        DefaultMainViewModel(authenticationManager: authenticationManager)
     }
     
     //MARK: - CocktailRecommend
@@ -31,7 +35,6 @@ final class MainDIContainer {
     //MARK: - MainViewController
     
     func makeMainViewController() -> MainViewController {
-        MainViewController(viewModel: makeCocktailRecommendViewModel(),
-                           loginManager: loginManager)
+        MainViewController(viewModel: makeMainViewModel(), cocktailRecommendViewModel: makeCocktailRecommendViewModel())
     }
 }

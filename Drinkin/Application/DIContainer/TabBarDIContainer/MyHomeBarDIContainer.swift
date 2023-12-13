@@ -9,13 +9,13 @@ import Foundation
 
 final class MyHomeBarDIContainer {
     private let provider: Provider
-    private let loginManager: LoginManager
+    private let authenticationManager: AuthenticationManager
     private let holdedItemEndpoint = HoldedItemEndpoint()
     private let deleteHoldedItemEndpoint = DeleteHoldedItemEndpoint()
     
-    init(provider: Provider, loginManager: LoginManager) {
+    init(provider: Provider, authenticationManager: AuthenticationManager) {
         self.provider = provider
-        self.loginManager = loginManager 
+        self.authenticationManager = authenticationManager
     }
     
     func makeHoldedItemRepository() -> HoldedItemRepository {
@@ -34,11 +34,12 @@ final class MyHomeBarDIContainer {
     }
     
     func makeMyHomeBarViewModel() -> MyHomeBarViewModel {
-        DefaultMyHomeBarViewModel(holdedItemRepository: makeHoldedItemRepository(), deleteItemUsecase: makeDeleteUsecase())
+        DefaultMyHomeBarViewModel(holdedItemRepository: makeHoldedItemRepository(),
+                                  deleteItemUsecase: makeDeleteUsecase(),
+                                  authenticationManager: authenticationManager)
     }
     
     func makeMyHomeBarViewController() -> MyHomeBarViewController {
-        MyHomeBarViewController(viewModel: makeMyHomeBarViewModel(),
-                                loginManager: loginManager)
+        MyHomeBarViewController(viewModel: makeMyHomeBarViewModel())
     }
 }

@@ -9,15 +9,15 @@ import Foundation
 
 final class ProductDetailDIContainer {
     private let provider: Provider
-    private let loginManager: LoginManager
+    private let authenticationManager: AuthenticationManager
     private let cocktailID: Int
     private let productDetailEndpoint = CocktailsEndpoint()
     private let updateUserMadeEndpoint = UpdateMadeCocktailEndpoint()
     private let updateBookmarkEndpoint = UpdateBookmarkCocktailEndpoint()
     
-    init(provider: Provider, loginManager: LoginManager, cocktailID: Int) {
+    init(provider: Provider, authenticationManager: AuthenticationManager, cocktailID: Int) {
         self.provider = provider
-        self.loginManager = loginManager
+        self.authenticationManager = authenticationManager
         self.cocktailID = cocktailID
     }
     
@@ -39,11 +39,11 @@ final class ProductDetailDIContainer {
     
     func makeProductDetailViewModel() -> ProductDetailViewModel {
         DefaultProductDetailViewModel(cocktailDetailRepository: makeCocktailDescriptionRepository(),
-                                      manageMarkingCocktailUsecase: makeManageMarkingCocktailUsecase())
+                                      manageMarkingCocktailUsecase: makeManageMarkingCocktailUsecase(),
+                                      authenticationManager: authenticationManager)
     }
     
-    func makeProductDetailViewController(viewModel: ProductDetailViewModel) -> ProductDetailViewController {
-        ProductDetailViewController(viewModel: viewModel,
-                                    loginManager: loginManager)
+    func makeProductDetailViewController() -> ProductDetailViewController {
+        ProductDetailViewController(viewModel: makeProductDetailViewModel())
     }
 }

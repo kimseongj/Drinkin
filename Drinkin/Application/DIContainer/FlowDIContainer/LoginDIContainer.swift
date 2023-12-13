@@ -9,11 +9,14 @@ import Foundation
 
 final class LoginDIContainer {
     let loginProvider: LoginProvider
+    let authenticationManager: AuthenticationManager
     let kakaoLoginEndpoint = KakaoAccessTokenConversionEndpoint()
     let appleLoginEndpoint = AppleAccessTokenConversionEndpoint()
     
-    init(loginProvider: LoginProvider) {
+    init(loginProvider: LoginProvider,
+         authenticationManager: AuthenticationManager) {
         self.loginProvider = loginProvider
+        self.authenticationManager = authenticationManager
     }
     
     func makeLoginRepository() -> LoginRepository {
@@ -22,8 +25,13 @@ final class LoginDIContainer {
                                       appleLoginEndpoint: appleLoginEndpoint)
     }
     
+    func makeLoginUsecase() -> LoginUsecase {
+        DefaultLoginUsecase(loginRepository: makeLoginRepository(),
+                            authenticationManager: authenticationManager)
+    }
+    
     func makeLoginViewModel() -> LoginViewModel {
-        DefaultLoginViewModel(loginRepository: makeLoginRepository())
+        DefaultLoginViewModel(loginUsecase: makeLoginUsecase())
     }
     
     func makeLoginViewController() -> LoginViewController {
