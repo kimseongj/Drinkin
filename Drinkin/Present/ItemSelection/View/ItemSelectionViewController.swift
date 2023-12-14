@@ -156,6 +156,8 @@ final class ItemSelectionViewController: UIViewController {
     }
 }
 
+//MARK: - SearchBar Delegate
+
 extension ItemSelectionViewController: UISearchBarDelegate {
     func configureSearchBarDelegate() {
         searchBar.delegate = self
@@ -189,6 +191,10 @@ extension ItemSelectionViewController: UISearchBarDelegate {
     
     func dismissKeyboard() {
         searchBar.resignFirstResponder()
+    }
+    
+    func stopSearchBar() {
+        searchBarCancelButtonClicked(searchBar)
     }
 }
 
@@ -306,6 +312,7 @@ extension ItemSelectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == itemFilterCollectionView {
             viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row].subType))
+            stopSearchBar()
         } else {
             if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
                 cell.presentHoldItem()
