@@ -11,7 +11,6 @@ import Combine
 
 final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
-    private let loginManager: LoginManager
     var flowDelegate: ProductDetailVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -34,37 +33,13 @@ final class ProductDetailViewController: UIViewController {
     let introductionView = IntroductionView()
     let cocktailInformationView = CocktailInformationView()
     
-    private lazy var markMadeCocktailButton: MarkMadeCocktailButton = {
-        let button = MarkMadeCocktailButton()
-        button.addTarget(self, action: #selector(tapMarkMadeCocktailButton), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    @objc
-    private func tapMarkMadeCocktailButton(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        viewModel.updateUserMadeCocktail()
-    }
-    
-    private lazy var bookmarkCocktailButton: BookmarkCocktailButton = {
-        let button = BookmarkCocktailButton()
-        button.addTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    @objc
-    private func tapBookmarkCocktailButton(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        viewModel.updateBookmarkCocktail()
-    }
+    private let markMadeCocktailButton = MarkMadeCocktailButton()
+    private let bookmarkCocktailButton = BookmarkCocktailButton()
     
     //MARK: - Init
     
-    init(viewModel: ProductDetailViewModel, loginManager: LoginManager) {
+    init(viewModel: ProductDetailViewModel) {
         self.viewModel = viewModel
-        self.loginManager = loginManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -82,6 +57,7 @@ final class ProductDetailViewController: UIViewController {
         configureUI()
         showActivityIndicator()
         sendDelegate()
+        authenticationBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,6 +127,39 @@ final class ProductDetailViewController: UIViewController {
     private func sendDelegate() {
         introductionView.configureDelegate(delegate: flowDelegate)
     }
+    
+    //MARK: - Login & Logout Button Action
+    
+    private func configureButtonAction(isAuthenticated: Bool) {
+        if isAuthenticated == true {
+            bookmarkCocktailButton.removeTarget(self, action: #selector(tapButtonWithRecommendLogin), for: .touchUpInside)
+            markMadeCocktailButton.removeTarget(self, action: #selector(tapButtonWithRecommendLogin), for: .touchUpInside)
+            bookmarkCocktailButton.addTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
+            markMadeCocktailButton.addTarget(self, action: #selector(tapMarkMadeCocktailButton), for: .touchUpInside)
+        } else {
+            bookmarkCocktailButton.removeTarget(self, action: #selector(tapBookmarkCocktailButton), for: .touchUpInside)
+            markMadeCocktailButton.removeTarget(self, action: #selector(tapMarkMadeCocktailButton), for: .touchUpInside)
+            bookmarkCocktailButton.addTarget(self, action: #selector(tapButtonWithRecommendLogin), for: .touchUpInside)
+            markMadeCocktailButton.addTarget(self, action: #selector(tapButtonWithRecommendLogin), for: .touchUpInside)
+        }
+    }
+    
+    @objc
+    private func tapMarkMadeCocktailButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        viewModel.updateUserMadeCocktail()
+    }
+    
+    @objc
+    private func tapBookmarkCocktailButton(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        viewModel.updateBookmarkCocktail()
+    }
+    
+    @objc
+    private func tapButtonWithRecommendLogin() {
+        self.showLoginRecommendAlert()
+    }
 }
 
 //MARK: - Binding
@@ -175,5 +184,16 @@ extension ProductDetailViewController {
                 guard let self = self else { return }
                 self.handlingError(errorType: $0)
             }).store(in: &cancelBag)
+    }
+}
+
+//MARK: - Authentication Binding
+
+extension ProductDetailViewController {
+    func authenticationBinding() {
+        viewModel.accessTokenStatusPublisher().receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            self.configureButtonAction(isAuthenticated: $0)
+        }.store(in: &cancelBag)
     }
 }

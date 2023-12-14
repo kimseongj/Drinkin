@@ -8,6 +8,12 @@
 import Foundation
 import Combine
 
+protocol ProductDetailViewModelOutput {
+    var errorHandlingPublisher: Published<APIError>.Publisher { get }
+    var cocktailDescriptionPublisher: Published< CocktailDescription?>.Publisher { get }
+    
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never>
+}
 
 protocol ProductDetailViewModelInput {
     func fetchDescription(completion: @escaping () -> Void)
@@ -15,16 +21,12 @@ protocol ProductDetailViewModelInput {
     func updateBookmarkCocktail()
 }
 
-protocol ProductDetailViewModelOutput {
-    var errorHandlingPublisher: Published<APIError>.Publisher { get }
-    var cocktailDescriptionPublisher: Published< CocktailDescription?>.Publisher { get }
-}
-
-typealias ProductDetailViewModel = ProductDetailViewModelInput & ProductDetailViewModelOutput
+typealias ProductDetailViewModel = ProductDetailViewModelOutput & ProductDetailViewModelInput
 
 final class DefaultProductDetailViewModel: ProductDetailViewModel {
     private let cocktailDetailRepository: CocktailDetailRepository
     private let manageMarkingCocktailUsecase: ManageMarkingCocktailUsecase
+    private let authenticationManager: AuthenticationManager
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
@@ -33,9 +35,11 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
     //MARK: - Init
     
     init(cocktailDetailRepository: CocktailDetailRepository,
-         manageMarkingCocktailUsecase: ManageMarkingCocktailUsecase) {
+         manageMarkingCocktailUsecase: ManageMarkingCocktailUsecase,
+         authenticationManager: AuthenticationManager) {
         self.cocktailDetailRepository = cocktailDetailRepository
         self.manageMarkingCocktailUsecase = manageMarkingCocktailUsecase
+        self.authenticationManager = authenticationManager
     }
     
     //MARK: - Output
@@ -43,6 +47,9 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var cocktailDescriptionPublisher: Published<CocktailDescription?>.Publisher { $cocktailDescription }
     
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never> {
+        return authenticationManager.accessTokenStatusPublisher()
+    }
     //MARK: - Input
     
     func fetchDescription(completion: @escaping () -> Void) {

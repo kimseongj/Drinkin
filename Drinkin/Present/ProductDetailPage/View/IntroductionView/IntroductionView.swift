@@ -29,7 +29,7 @@ final class IntroductionView: UIView {
         return label
     }()
     
-    private let cocktailTDescriptionLabel: UILabel = {
+    private let cocktailDescriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont(name: FontStrings.pretendardSemiBold, size: 14)
@@ -67,14 +67,6 @@ final class IntroductionView: UIView {
         return label
     }()
     
-    private let recipeStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 5
-        
-        return stackView
-    }()
-    
     //MARK: - Init
     
     override init(frame: CGRect) {
@@ -97,11 +89,11 @@ final class IntroductionView: UIView {
         
         self.addSubview(cocktailImageView)
         self.addSubview(cocktailTitleLabel)
-        self.addSubview(cocktailTDescriptionLabel)
+        self.addSubview(cocktailDescriptionLabel)
         self.addSubview(baseCollectionView)
         self.addSubview(ingredientCollectionView)
         self.addSubview(recipeTitleLabel)
-        self.addSubview(recipeStackView)
+        self.addSubview(recipeDescriptionLabel)
         
         cocktailImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
@@ -114,14 +106,14 @@ final class IntroductionView: UIView {
             $0.centerX.equalToSuperview()
         }
         
-        cocktailTDescriptionLabel.snp.makeConstraints {
+        cocktailDescriptionLabel.snp.makeConstraints {
             $0.top.equalTo(cocktailTitleLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
         }
         
         baseCollectionView.snp.makeConstraints {
-            $0.top.equalTo(cocktailTDescriptionLabel.snp.bottom).offset(20)
+            $0.top.equalTo(cocktailDescriptionLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
         }
@@ -137,8 +129,8 @@ final class IntroductionView: UIView {
             $0.leading.equalToSuperview().offset(16)
         }
         
-        recipeStackView.snp.makeConstraints {
-            $0.top.equalTo(recipeTitleLabel.snp.bottom).offset(12)
+        recipeDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(recipeTitleLabel.snp.bottom).offset(-10)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalToSuperview()
@@ -153,8 +145,8 @@ final class IntroductionView: UIView {
     
     func fill(with cocktailDesription: CocktailDescription) {
         cocktailTitleLabel.text = cocktailDesription.cocktailNameKo
-        cocktailTDescriptionLabel.text = cocktailDesription.description
-        fillRecipeStackView(with: cocktailDesription.recipeList)
+        cocktailDescriptionLabel.text = cocktailDesription.description
+        fillRecipeDescriptionLabel(with: cocktailDesription.recipeList)
         cocktailImageView.load(urlString: cocktailDesription.imageURI) { [weak self] in
             guard let self = self else { return }
             self.cocktailImageView.hideActivityIndicator()
@@ -164,14 +156,14 @@ final class IntroductionView: UIView {
         ingredientIDList = cocktailDesription.ingredientList.map { $0.id }
     }
     
-    func fillRecipeStackView(with recipeList: [String]) {
+    func fillRecipeDescriptionLabel(with recipeList: [String]) {
+        var recipeString = ""
+        
         recipeList.forEach {
-            let label = UILabel()
-            label.font = UIFont(name: FontStrings.pretendardBold, size: 15)
-            label.numberOfLines = 0
-            label.text = $0
-            recipeStackView.addArrangedSubview(label)
+            recipeString += "\n\n" + $0
         }
+        
+        recipeDescriptionLabel.text = recipeString
     }
 }
 
