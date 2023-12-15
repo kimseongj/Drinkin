@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import Combine
 
 protocol LoginSettingViewModel {
     func logout()
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never>
 }
 
 final class DefaultLoginSettingViewModel: LoginSettingViewModel {
@@ -16,6 +18,10 @@ final class DefaultLoginSettingViewModel: LoginSettingViewModel {
     
     init(authenticationManager: AuthenticationManager) {
         self.authenticationManager = authenticationManager
+    }
+    
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never> {
+        return authenticationManager.accessTokenStatusPublisher()
     }
     
     func logout() {

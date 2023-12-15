@@ -7,7 +7,11 @@
 
 import UIKit
 
-class LoginSettingVCCoordinator: Coordinator {
+protocol LoginSettingVCFlow {
+    func presentLoginVC()
+}
+
+class LoginSettingVCCoordinator: Coordinator, LoginSettingVCFlow {
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     
@@ -20,7 +24,14 @@ class LoginSettingVCCoordinator: Coordinator {
     func start() {
         let loginSettingDIContainer = appDIContainer.makeLoginSettingDIContainer()
         let loginSettingViewController = loginSettingDIContainer.makeLoginSettingViewController()
+        loginSettingViewController.flowDelegate = self
         
         navigationController.pushViewController(loginSettingViewController, animated: true)
+    }
+    
+    func presentLoginVC() {
+        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController,
+                                                    appDIContainer: appDIContainer)
+        loginVCCoordinator.start()
     }
 }
