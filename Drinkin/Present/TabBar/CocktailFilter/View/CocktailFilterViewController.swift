@@ -101,6 +101,7 @@ final class CocktailFilterViewController: UIViewController {
         configureFilteredCollectionView()
         makeSelectionFilterCollectionViewDisable()
         configureSearchBarDelegate()
+        authenticationBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,8 +211,23 @@ extension CocktailFilterViewController: UISearchBarDelegate {
     
     func dismissKeyboard() {
         searchBar.resignFirstResponder()
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.layer.borderColor = ColorPalette.buttonBorderColor
+        }
+    }
+    
+    func stopSearchBar() {
+        searchBarCancelButtonClicked(searchBar)
     }
 }
+
+//MARK: - StopSearchBarDelegate
+
+protocol StopSearchBarDelegate {
+    func stopSearchBar()
+}
+
+extension CocktailFilterViewController: StopSearchBarDelegate { }
 
 //MARK: - ConfigureCollectionView
 
@@ -338,10 +354,18 @@ extension CocktailFilterViewController {
 extension CocktailFilterViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filterSelectionCollectionView {
-            let cocktailFilterModalViewController = CocktailFilterModalViewController(filterType: viewModel.filterTypeList[indexPath.row], viewModel: viewModel)
-            cocktailFilterModalViewController.modalPresentationStyle = .overFullScreen
-            present(cocktailFilterModalViewController, animated: false)
+            if viewModel.isAuthenticated == false && viewModel.filterTypeList[indexPath.row] == .holdIngredient {
+                self.showLoginRecommendAlert()
+                
+            } else {
+                dismissKeyboard()
+                let cocktailFilterModalViewController = CocktailFilterModalViewController(filterType: viewModel.filterTypeList[indexPath.row], viewModel: viewModel, stopSearchBarDelegate: self)
+                cocktailFilterModalViewController.modalPresentationStyle = .overFullScreen
+                present(cocktailFilterModalViewController, animated: false)
+            }
+            
         } else {
+            dismissKeyboard()
             let cocktailID = viewModel.filteredCocktailList[indexPath.row].id
             flowDelegate?.pushProductDetailVCCoordinator(cocktailID: cocktailID)
         }
@@ -358,5 +382,20 @@ extension CocktailFilterViewController {
                 guard let self = self else { return }
                 self.handlingError(errorType: $0)
             }).store(in: &cancelBag)
+    }
+}
+
+//MARK: - Authentication Binding
+
+extension CocktailFilterViewController {
+    func authenticationBinding() {
+        viewModel.accessTokenStatusPublisher().receive(on: RunLoop.main).sink { [weak self] in
+            guard let self = self else { return }
+            if $0 == true {
+                self.viewModel.isAuthenticated = true
+            }  else {
+                self.viewModel.isAuthenticated = false
+            }
+        }.store(in: &cancelBag)
     }
 }

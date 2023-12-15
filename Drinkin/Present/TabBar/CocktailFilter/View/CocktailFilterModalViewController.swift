@@ -11,6 +11,7 @@ import SnapKit
 final class CocktailFilterModalViewController: UIViewController {
     private var viewModel: CocktailFilterViewModel
     private let filterType: FilterType
+    private let stopSearchBarDelegate: StopSearchBarDelegate
     
     private let contentView: UIView = {
         let view = UIView()
@@ -46,9 +47,12 @@ final class CocktailFilterModalViewController: UIViewController {
     
     //MARK: - Init
     
-    init(filterType: FilterType, viewModel: CocktailFilterViewModel) {
+    init(filterType: FilterType,
+         viewModel: CocktailFilterViewModel,
+         stopSearchBarDelegate: StopSearchBarDelegate) {
         self.filterType = filterType
         self.viewModel = viewModel
+        self.stopSearchBarDelegate = stopSearchBarDelegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -128,5 +132,7 @@ extension CocktailFilterModalViewController: UITableViewDelegate {
         tableView.cellForRow(at: indexPath)?.isSelected = true
         viewModel.selectedDetailFilterIndexPath = indexPath
         viewModel.insertDetailFilter(filterType: filterType, detailFilterIndex: indexPath.row)
+        
+        stopSearchBarDelegate.stopSearchBar()
     }
 }

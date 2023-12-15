@@ -10,6 +10,7 @@ import SnapKit
 
 protocol ResetFilterDelegate {
     func resetFilter()
+    func stopSearchBar()
 }
 
 final class ResetFilterPopupViewController: UIViewController {
@@ -76,6 +77,7 @@ final class ResetFilterPopupViewController: UIViewController {
     @objc
     private func tapResetButton() {
         delegate?.resetFilter()
+        delegate?.stopSearchBar()
         self.dismiss(animated: true)
     }
     

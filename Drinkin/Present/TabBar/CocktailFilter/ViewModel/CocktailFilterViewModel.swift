@@ -10,6 +10,9 @@ protocol CocktailFilterViewModelOutput {
     var filterTypeList: [FilterType] { get }
     var detailFilter: CocktailFilter? { get }
     var selectedDetailFilterIndexPath: IndexPath? { get set }
+    var isAuthenticated: Bool { get set }
+    
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never>
 }
 
 protocol CocktailFilterViewModelInput {
@@ -26,6 +29,7 @@ typealias CocktailFilterViewModel = CocktailFilterViewModelOutput & CocktailFilt
 final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     private let cocktailFilterRepository: CocktailFilterRepository
     private let filterCocktailListUsecase: FilterCocktailListUsecase
+    private let authenticationManager: AuthenticationManager
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
@@ -35,9 +39,11 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     //MARK: - Init
     
     init(cocktailFilterRepository: CocktailFilterRepository,
-         filterCocktailListUsecase: FilterCocktailListUsecase) {
+         filterCocktailListUsecase: FilterCocktailListUsecase,
+         authenticationManager: AuthenticationManager) {
         self.cocktailFilterRepository = cocktailFilterRepository
         self.filterCocktailListUsecase = filterCocktailListUsecase
+        self.authenticationManager = authenticationManager
     }
     
     //MARK: - Output
@@ -60,7 +66,14 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
                                         FilterType.ingredientQuantity]
     var detailFilter: CocktailFilter? = nil
     var selectedDetailFilterIndexPath: IndexPath?
+    
+    var isAuthenticated: Bool = false
+    
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never> {
+        return authenticationManager.accessTokenStatusPublisher()
     }
+}
+
 
 //MARK: - Input
 //MARK: - Fetch Data
