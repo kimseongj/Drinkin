@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 protocol AuthenticationManager {
-    func isAuthenticated() -> Bool
     func login(accessToken: String, refreshToken: String)
     func logout()
     func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never>
