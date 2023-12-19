@@ -119,8 +119,6 @@ final class MyHomeBarViewController: UIViewController {
         flowDelegate?.pushItemSelectionVC(syncDataDelegate: viewModel)
     }
     
-    private let changeableView = UIView()
-    
     private lazy var holdedItemCollectionView: UICollectionView = {
         let layout = UICollectionViewLayout()
         let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
@@ -386,6 +384,8 @@ extension MyHomeBarViewController {
             $0.trailing.equalToSuperview().offset(-16)
         }
         
+        savedCocktailListButton.snp.removeConstraints()
+        
         savedCocktailListButton.snp.makeConstraints {
             $0.top.equalTo(holdedItemCollectionView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
@@ -413,9 +413,9 @@ extension MyHomeBarViewController {
     }
     
     private func showAddItemView() {
-        stackView.addArrangedSubview(addItemView)
-        stackView.addArrangedSubview(savedCocktailListButton)
-        stackView.addArrangedSubview(userMadeCocktailListButton)
+        scrollView.addSubview(addItemView)
+        scrollView.addSubview(savedCocktailListButton)
+        scrollView.addSubview(userMadeCocktailListButton)
         addItemView.addSubview(addLabel1)
         addItemView.addSubview(addLabel2)
         addItemView.addSubview(largeAddButton)
@@ -442,6 +442,8 @@ extension MyHomeBarViewController {
             $0.width.equalTo(108)
             $0.bottom.equalToSuperview().offset(-32)
         }
+        
+        savedCocktailListButton.snp.removeConstraints()
         
         savedCocktailListButton.snp.makeConstraints {
             $0.top.equalTo(addItemView.snp.bottom)
