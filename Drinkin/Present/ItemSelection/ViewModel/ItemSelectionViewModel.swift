@@ -17,6 +17,7 @@ protocol ItemSelectionViewModelInput {
     func fetchSelectedItemList()
     func addSelectedItems(completion: @escaping () -> Void)
     func isSelectedItemChange() -> Bool
+    func makeDataChangedStatusTrue()
 }
 
 protocol ItemSelectionViewModelOutput {
@@ -31,6 +32,7 @@ typealias ItemSelectionViewModel = ItemSelectionViewModelInput & ItemSelectionVi
 final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
     private let filterItemUsecase: FilterItemUsecase
     private let addItemUsecase: AddItemUsecase
+    private let synchronizationManager: SynchronizationManager
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
@@ -50,10 +52,12 @@ final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
     //MARK: - Init
     
     init(filterItemUsecase: FilterItemUsecase,
-         addItemUsecase: AddItemUsecase
+         addItemUsecase: AddItemUsecase,
+         synchronizationManager: SynchronizationManager
     ) {
         self.filterItemUsecase = filterItemUsecase
         self.addItemUsecase = addItemUsecase
+        self.synchronizationManager = synchronizationManager
     }
 }
 
@@ -183,5 +187,13 @@ extension DefaultItemSelectiontViewModel {
         }.map {
             SelectedItem(type: $0.type, id: $0.id)
         }
+    }
+}
+
+//MARK: - Synchronizing
+
+extension DefaultItemSelectiontViewModel {
+    func makeDataChangedStatusTrue() {
+        synchronizationManager.isDataChanged()
     }
 }

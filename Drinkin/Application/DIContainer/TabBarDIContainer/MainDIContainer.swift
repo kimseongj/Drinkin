@@ -10,11 +10,15 @@ import Foundation
 final class MainDIContainer {
     private let provider: Provider
     private let authenticationManager: AuthenticationManager
+    private let synchronizationManager: SynchronizationManager
     private let cocktailRecommendEndpoint = CocktailRecommendEndpoint()
     
-    init(provider: Provider, authenticationManager: AuthenticationManager) {
+    init(provider: Provider,
+         authenticationManager: AuthenticationManager,
+         synchronizationManager: SynchronizationManager) {
         self.provider = provider
         self.authenticationManager = authenticationManager
+        self.synchronizationManager = synchronizationManager
     }
     
     func makeMainViewModel() -> MainViewModel {
@@ -29,7 +33,8 @@ final class MainDIContainer {
     }
     
     func makeCocktailRecommendViewModel() -> CocktailRecommendViewModel {
-        DefaultCocktailRecommendViewModel(cocktailBriefListRepository: makeCocktailBriefListRepository())
+        DefaultCocktailRecommendViewModel(cocktailBriefListRepository: makeCocktailBriefListRepository(),
+                                          synchronizationManager: synchronizationManager)
     }
     
     //MARK: - MainViewController

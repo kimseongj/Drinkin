@@ -8,8 +8,6 @@
 import Foundation
 import Combine
 
-
-
 protocol CocktailRecommendViewModelInput {
     func fetchBriefDescription(completion: @escaping () -> Void)
 }
@@ -23,6 +21,7 @@ typealias CocktailRecommendViewModel = CocktailRecommendViewModelInput & Cocktai
 
 class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
     private let cocktailBriefListRepository: CocktailBriefListRepository
+    private let synchronizationManager: SynchronizationManager
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
@@ -30,8 +29,12 @@ class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
     
     //MARK: - Init
     
-    init(cocktailBriefListRepository: CocktailBriefListRepository) {
+    init(cocktailBriefListRepository: CocktailBriefListRepository,
+         synchronizationManager: SynchronizationManager) {
         self.cocktailBriefListRepository = cocktailBriefListRepository
+        self.synchronizationManager = synchronizationManager
+        
+        synchronizeData()
     }
     
     //MARK: - Output
@@ -71,5 +74,22 @@ class DefaultCocktailRecommendViewModel: CocktailRecommendViewModel {
                     self.briefDescriptionList = $0.briefDescriptionList
                     completion()
                 }).store(in: &cancelBag)
+    }
+}
+
+//MARK: - Synchronizing
+
+extension DefaultCocktailRecommendViewModel {
+    func synchronizeData() {
+        synchronizationManager.dataChangeStatusPublisher()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] in
+                guard let self = self else { return }
+                if $0 == true {
+                    self.fetchBriefDescription {
+                        self.synchronizationManager.initialize()
+                    }
+                }
+            }.store(in: &cancelBag)
     }
 }

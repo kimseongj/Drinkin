@@ -146,6 +146,7 @@ final class ItemSelectionViewController: UIViewController {
             updateView.startAnimating()
             viewModel.addSelectedItems { [weak self] in
                 guard let self = self else { return }
+                self.viewModel.makeDataChangedStatusTrue()
                 self.updateView.isHidden = true
                 self.synchronizationDataDelegate?.synchronizationHoldedItem()
                 self.navigationController?.popViewController(animated: true)

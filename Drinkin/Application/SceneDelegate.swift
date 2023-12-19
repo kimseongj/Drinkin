@@ -12,12 +12,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
     let tokenManager = DefaultTokenManager()
+    let synchronizationManager = DefaultSynchronizationManager()
     lazy var provider = DefaultProvider(tokenManager: tokenManager)
     lazy var loginProvider = DefaultLoginProvider(tokenManager: tokenManager)
     lazy var authenticationManager = DefaultAuthenticationManager(tokenManager: tokenManager)
     lazy var appDIContainer = AppDIContainer(provider: provider,
                                              loginProvider: loginProvider,
-                                             authenticationManager: authenticationManager)
+                                             authenticationManager: authenticationManager,
+                                             synchronizationManager: synchronizationManager)
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }

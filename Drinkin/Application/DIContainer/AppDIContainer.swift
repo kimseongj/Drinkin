@@ -11,22 +11,27 @@ final class AppDIContainer {
     private let provider: Provider
     private let loginProvider: LoginProvider
     private let authenticationManager: AuthenticationManager
+    private let synchronizationManager: SynchronizationManager
     
     init(provider: Provider,
          loginProvider: LoginProvider,
-         authenticationManager: AuthenticationManager) {
+         authenticationManager: AuthenticationManager,
+         synchronizationManager: SynchronizationManager) {
         self.provider = provider
         self.loginProvider = loginProvider
         self.authenticationManager = authenticationManager
+        self.synchronizationManager = synchronizationManager
     }
     
     func makeMainDIContainer() -> MainDIContainer {
         MainDIContainer(provider: provider,
-                        authenticationManager: authenticationManager)
+                        authenticationManager: authenticationManager,
+                        synchronizationManager: synchronizationManager)
     }
     
     func makeTriedCocktailSelectionDIContainer() -> TriedCocktailSelectionDIContainer {
-        TriedCocktailSelectionDIContainer(provider: provider)
+        TriedCocktailSelectionDIContainer(provider: provider,
+                                          synchronizationManager: synchronizationManager)
     }
     
     func makeCocktailFilterDICotainer() -> CocktailFilterDICotainer {
@@ -76,7 +81,8 @@ final class AppDIContainer {
     }
     
     func makeItemSelectionDIContainer() -> ItemSelectionDIContainer {
-        ItemSelectionDIContainer(provider: provider)
+        ItemSelectionDIContainer(provider: provider,
+                                 synchronizationManager: synchronizationManager)
     }
     
     func makeSavedCocktailListDIContainer() -> SavedCocktailListDIContainer {
