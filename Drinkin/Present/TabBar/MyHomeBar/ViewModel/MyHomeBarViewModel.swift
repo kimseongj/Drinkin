@@ -14,8 +14,11 @@ protocol MyHomeBarViewModelInput {
 }
 
 protocol MyHomeBarViewModelOutput  {
+    var isAuthenticated: Bool { get }
     var errorHandlingPublisher: Published<APIError>.Publisher { get }
     var holdedItemListPublisher: Published<[HoldedItem]>.Publisher { get }
+    
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never>
 }
 
 protocol SyncDataDelegate {
@@ -27,6 +30,7 @@ typealias MyHomeBarViewModel = MyHomeBarViewModelInput & MyHomeBarViewModelOutpu
 class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     private let holdedItemRepository: HoldedItemRepository
     private let deleteItemUsecase: DeleteItemUsecase
+    private let authenticationManager: AuthenticationManager
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
@@ -34,15 +38,23 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     
     //MARK: - Init
     
-    init(holdedItemRepository: HoldedItemRepository, deleteItemUsecase: DeleteItemUsecase) {
+    init(holdedItemRepository: HoldedItemRepository,
+         deleteItemUsecase: DeleteItemUsecase,
+         authenticationManager: AuthenticationManager) {
         self.holdedItemRepository = holdedItemRepository
         self.deleteItemUsecase = deleteItemUsecase
+        self.authenticationManager = authenticationManager
     }
     
     //MARK: - Output
     
+    var isAuthenticated: Bool = false
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var holdedItemListPublisher: Published<[HoldedItem]>.Publisher { $holdedItemList }
+    
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never> {
+        return authenticationManager.accessTokenStatusPublisher()
+    }
     
     //MARK: - Input
     
