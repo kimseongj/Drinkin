@@ -10,18 +10,21 @@ import UIKit
 
 final class TriedCocktailSelectionDIContainer {
     let provider: Provider
+    private let synchronizationManager: SynchronizationManager
     let addTriedCocktailListEndpoint = AddTriedCocktailListEndpoint()
     let triedCocktailEndpoint = CocktailsEndpoint()
     
-    init(provider: Provider) {
+    init(provider: Provider,
+         synchronizationManager: SynchronizationManager) {
         self.provider = provider
+        self.synchronizationManager = synchronizationManager
     }
     
     //MARK: - FilterTriedCocktail
     
     func makeCoktailImageListRepository() -> CocktailImageListRepository {
         DefaultCocktailImageListRepository(provider: provider,
-                                                  endpoint: triedCocktailEndpoint)
+                                           endpoint: triedCocktailEndpoint)
     }
     
     func makeFilterTriedCocktailUsecase() -> FilterTriedCocktailUsecase {
@@ -32,7 +35,7 @@ final class TriedCocktailSelectionDIContainer {
     
     func makeAddtionRepository() -> AdditionRepository {
         DefaultAdditionRepository(provider: provider,
-                                         endpoint: addTriedCocktailListEndpoint)
+                                  endpoint: addTriedCocktailListEndpoint)
     }
     
     func makeAddTriedCocktailUsecase() -> AddTriedCocktailUsecase {
@@ -41,7 +44,8 @@ final class TriedCocktailSelectionDIContainer {
     
     func makeTriedCocktailSelectionViewModel() -> TriedCocktailSelectionViewModel {
         DefaultTriedCocktailSelectionViewModel(filterTriedCocktailUsecase: makeFilterTriedCocktailUsecase(),
-                                                      addTriedCocktailUsecase: makeAddTriedCocktailUsecase())
+                                               addTriedCocktailUsecase: makeAddTriedCocktailUsecase(),
+                                               synchronizationManager: synchronizationManager)
     }
     
     func makeTriedCocktailSelectionViewController() -> TriedCocktailSelectionViewController {
