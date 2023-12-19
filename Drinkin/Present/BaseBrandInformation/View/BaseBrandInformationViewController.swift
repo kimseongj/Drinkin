@@ -122,6 +122,7 @@ final class BaseBrandInformationViewController: UIViewController {
     }
     
     //MARK: - Fetch Data
+    
     private func fetchData() {
         viewModel.fetchBaseBrandDetail() { 
             DispatchQueue.main.async { [weak self] in

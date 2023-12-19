@@ -25,7 +25,8 @@ struct MakeableCocktail:Codable, Hashable {
     let sugarContentScore: Int
     
     enum CodingKeys: String, CodingKey {
-        case id, category
+        case id
+        case category = "base_name_ko"
         case imageURI = "image_uri"
         case cocktailName = "cocktail_name_ko"
         case levelScore = "level_score"

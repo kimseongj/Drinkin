@@ -11,11 +11,13 @@ import Combine
 protocol ItemSelectionViewModelInput {
     func fetchItemData(completion: @escaping () -> Void)
     func filterItems(itemCategory: String)
+    func searchItem(text: String)
     func selectItem(index: Int)
     func deselectItem(index: Int)
     func fetchSelectedItemList()
     func addSelectedItems(completion: @escaping () -> Void)
     func isSelectedItemChange() -> Bool
+    func makeDataChangedStatusTrue()
 }
 
 protocol ItemSelectionViewModelOutput {
@@ -30,11 +32,13 @@ typealias ItemSelectionViewModel = ItemSelectionViewModelInput & ItemSelectionVi
 final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
     private let filterItemUsecase: FilterItemUsecase
     private let addItemUsecase: AddItemUsecase
+    private let synchronizationManager: SynchronizationManager
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
     @Published var itemList: [Item] = []
     @Published var filteredItemList: [Item] = []
+    var currentFilteredItemList: [Item] = []
     var alreadySelectedItemList: [SelectedItem] = []
     var selectedItemList: [SelectedItem] = []
     
@@ -48,10 +52,12 @@ final class DefaultItemSelectiontViewModel: ItemSelectionViewModel {
     //MARK: - Init
     
     init(filterItemUsecase: FilterItemUsecase,
-         addItemUsecase: AddItemUsecase
+         addItemUsecase: AddItemUsecase,
+         synchronizationManager: SynchronizationManager
     ) {
         self.filterItemUsecase = filterItemUsecase
         self.addItemUsecase = addItemUsecase
+        self.synchronizationManager = synchronizationManager
     }
 }
 
@@ -89,6 +95,7 @@ extension DefaultItemSelectiontViewModel {
                     self.itemFilterList = $0.itemFilterList
                     self.itemList = $0.itemList.sorted { $0.itemName < $1.itemName }
                     self.filteredItemList = $0.itemList.sorted { $0.itemName < $1.itemName }
+                    self.currentFilteredItemList = self.filteredItemList
                     self.fetchAlreadySelectedItemList(itemList: $0.itemList)
                     completion()
                 }
@@ -112,6 +119,17 @@ extension DefaultItemSelectiontViewModel {
             filteredItemList = []
         }
         filteredItemList = filterItemUsecase.filterItem(itemCategory: itemCategory, itemList: itemList)
+        currentFilteredItemList = filteredItemList
+    }
+    
+    func searchItem(text: String) {
+        filteredItemList = currentFilteredItemList.filter {
+            $0.itemName.localizedStandardContains(text)
+        }
+        
+        if text == "" {
+            filteredItemList = currentFilteredItemList
+        }
     }
 }
 
@@ -124,6 +142,10 @@ extension DefaultItemSelectiontViewModel {
         if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
             itemList[selectedItemIndex].hold = true
         }
+        
+        if let selectedItemIndex = currentFilteredItemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            currentFilteredItemList[selectedItemIndex].hold = true
+        }
     }
     
     func deselectItem(index: Int) {
@@ -131,6 +153,10 @@ extension DefaultItemSelectiontViewModel {
         
         if let selectedItemIndex = itemList.firstIndex(where: { $0.itemName == selectedItemName }) {
             itemList[selectedItemIndex].hold = false
+        }
+        
+        if let selectedItemIndex = currentFilteredItemList.firstIndex(where: { $0.itemName == selectedItemName }) {
+            currentFilteredItemList[selectedItemIndex].hold = false
         }
     }
 }
@@ -161,5 +187,13 @@ extension DefaultItemSelectiontViewModel {
         }.map {
             SelectedItem(type: $0.type, id: $0.id)
         }
+    }
+}
+
+//MARK: - Synchronizing
+
+extension DefaultItemSelectiontViewModel {
+    func makeDataChangedStatusTrue() {
+        synchronizationManager.isDataChanged()
     }
 }

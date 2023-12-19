@@ -15,7 +15,6 @@ protocol CellDeleteButtonDelegate: AnyObject {
 
 final class MyHomeBarViewController: UIViewController {
     private var viewModel: MyHomeBarViewModel
-    private let loginManager: LoginManager
     var flowDelegate: MyHomeBarVCFlow?
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -120,6 +119,8 @@ final class MyHomeBarViewController: UIViewController {
         flowDelegate?.pushItemSelectionVC(syncDataDelegate: viewModel)
     }
     
+    private let changeableView = UIView()
+    
     private lazy var holdedItemCollectionView: UICollectionView = {
         let layout = UICollectionViewLayout()
         let collectionView = MutableSizeCollectionView(frame: .zero, collectionViewLayout: CollectionViewLeftAlignFlowLayout())
@@ -183,9 +184,8 @@ final class MyHomeBarViewController: UIViewController {
     
     //MARK: - Init
     
-    init(viewModel: MyHomeBarViewModel, loginManager: LoginManager) {
+    init(viewModel: MyHomeBarViewModel) {
         self.viewModel = viewModel
-        self.loginManager = loginManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -197,22 +197,16 @@ final class MyHomeBarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
-        binding()
         errorBinding()
         configureDataSource()
         configureUI()
-        showActivityIndicator()
         configureHoldedItemCollectionView()
+        authenticationBinding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if loginManager.isAuthenticated() {
-            configureLoggedinMyHomeBar()
-        } else {
-            configureUnloggedinMyHomeBar()
-        }
+        AppCoordinator.tabBarController.tabBar.isHidden = false
     }
     
     //MARK: - Fetch Data
@@ -230,8 +224,6 @@ final class MyHomeBarViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
-
-        let safeArea = view.safeAreaLayoutGuide
 
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
@@ -267,47 +259,6 @@ final class MyHomeBarViewController: UIViewController {
             $0.bottom.equalToSuperview()
         }
     }
-
-        private func configureAddItemView() {
-        stackView.addArrangedSubview(addItemView)
-        stackView.addArrangedSubview(savedCocktailListButton)
-        stackView.addArrangedSubview(userMadeCocktailListButton)
-        addItemView.addSubview(addLabel1)
-        addItemView.addSubview(addLabel2)
-        addItemView.addSubview(largeAddButton)
-
-        addItemView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-        }
-
-        addLabel1.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.centerX.equalToSuperview()
-        }
-
-        addLabel2.snp.makeConstraints {
-            $0.top.equalTo(addLabel1.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-        }
-
-        largeAddButton.snp.makeConstraints {
-            $0.top.equalTo(addLabel2.snp.bottom).offset(15)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(39)
-            $0.width.equalTo(108)
-            $0.bottom.equalToSuperview().offset(-32)
-        }
-
-        savedCocktailListButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(60)
-        }
-
-        userMadeCocktailListButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(60)
-        }
-    }
     
     private func configureListButton(title: String) -> UIButton {
         let button = UIButton()
@@ -335,6 +286,8 @@ final class MyHomeBarViewController: UIViewController {
     }
     
     private func configureLoggedinMyHomeBar() {
+        fetchData()
+        binding()
         largeAddButton.removeTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
         largeAddButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         savedCocktailListButton.removeTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
@@ -344,7 +297,7 @@ final class MyHomeBarViewController: UIViewController {
     }
     
     private func configureUnloggedinMyHomeBar() {
-//        configureAddItemView()
+        showAddItemView()
         largeAddButton.removeTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
         largeAddButton.addTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
         savedCocktailListButton.removeTarget(self, action: #selector(tapSavedCocktailListButton), for: .touchUpInside)
@@ -406,23 +359,18 @@ extension MyHomeBarViewController {
     private func binding() {
         viewModel.holdedItemListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
-//            if LoginManager.shared.isAuthenticated() {
-//                if $0.count == 0 {
-//                    self.showAddItemView()
-//                } else {
+                if $0.count == 0 {
+                    self.showAddItemView()
+                } else {
             self.showHoldedItemCollectionView(holdedItemList: $0)
-//                }
-//            }
+                }
         }.store(in: &cancelBag)
     }
     
     private func showHoldedItemCollectionView(holdedItemList: [HoldedItem]) {
-        introduceView.addSubview(smallAddButton)
         applySnapshot(holdedItemList: holdedItemList)
         
-//        stackView.addArrangedSubview(holdedItemCollectionView)
-//        stackView.addArrangedSubview(savedCocktailListButton)
-//        stackView.addArrangedSubview(userMadeCocktailListButton)
+        introduceView.addSubview(smallAddButton)
         scrollView.addSubview(holdedItemCollectionView)
         scrollView.addSubview(savedCocktailListButton)
         scrollView.addSubview(userMadeCocktailListButton)
@@ -539,5 +487,22 @@ extension MyHomeBarViewController {
                 guard let self = self else { return }
                 self.handlingError(errorType: $0)
             }).store(in: &cancelBag)
+    }
+}
+
+//MARK: - Authentication Binding
+
+extension MyHomeBarViewController {
+    func authenticationBinding() {
+        viewModel.accessTokenStatusPublisher()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] in
+            guard let self = self else { return }
+            if $0 == true {
+                self.configureLoggedinMyHomeBar()
+            } else {
+                self.configureUnloggedinMyHomeBar()
+            }
+            }.store(in: &cancelBag)
     }
 }

@@ -39,6 +39,13 @@ final class TriedCocktailSelectionViewController: UIViewController {
         return exitButton
     }()
     
+    private let searchBar: CustomSearchBar = {
+        let searchBar = CustomSearchBar()
+        searchBar.placeholder = "칵테일 검색하기"
+        
+        return searchBar
+    }()
+    
     private let categoryCollectionView: UICollectionView =  {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -106,6 +113,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         configureCocktailCollectionView()
         configureBaseTypeCollectionView()
         renewCompleteSelectionButton()
+        configureSearchBarDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,6 +141,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         view.addSubview(mainLabel)
         view.addSubview(subLabel)
         view.addSubview(exitButton)
+        view.addSubview(searchBar)
         view.addSubview(categoryCollectionView)
         view.addSubview(cocktailCollectionView)
         view.addSubview(completeSelectionButton)
@@ -153,8 +162,13 @@ final class TriedCocktailSelectionViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-22)
         }
         
+        searchBar.snp.makeConstraints {
+            $0.top.equalTo(subLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
         categoryCollectionView.snp.makeConstraints {
-            $0.top.equalTo(exitButton.snp.bottom).offset(20)
+            $0.top.equalTo(searchBar.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.height.equalTo(50)
@@ -207,9 +221,52 @@ final class TriedCocktailSelectionViewController: UIViewController {
         updateView.startAnimating()
         viewModel.addTriedCocktailList { [weak self] in
             guard let self = self else { return }
+            self.viewModel.makeDataChangedStatusTrue()
             self.updateView.isHidden = true
             self.dismiss(animated: true)
         }
+    }
+}
+
+//MARK: - SearchBar Delegate
+
+extension TriedCocktailSelectionViewController: UISearchBarDelegate {
+    func configureSearchBarDelegate() {
+        searchBar.delegate = self
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.layer.borderColor = ColorPalette.themeColor.cgColor
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let text = searchBar.text else { return }
+        viewModel.searchCocktail(text: text)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        viewModel.searchCocktail(text: "")
+        dismissKeyboard()
+        searchBar.showsCancelButton = false
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.layer.borderColor = ColorPalette.buttonBorderColor
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        dismissKeyboard()
+    }
+    
+    func dismissKeyboard() {
+        searchBar.resignFirstResponder()
+    }
+    
+    func stopSearchBar() {
+        searchBarCancelButtonClicked(searchBar)
     }
 }
 
@@ -333,6 +390,7 @@ extension TriedCocktailSelectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
             viewModel.filterCocktailList(cocktailCategoryIndex: indexPath.row)
+            stopSearchBar()
         } else {
             
             if let cell = cocktailCollectionView.cellForItem(at: indexPath) as? CocktailSelectionCell {

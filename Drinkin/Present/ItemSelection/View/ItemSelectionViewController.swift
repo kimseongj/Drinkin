@@ -16,6 +16,13 @@ final class ItemSelectionViewController: UIViewController {
     private var itemDataSource: UICollectionViewDiffableDataSource<Section, Item>!
     var synchronizationDataDelegate: SyncDataDelegate?
     
+    private let searchBar: CustomSearchBar = {
+        let searchBar = CustomSearchBar()
+        searchBar.placeholder = "재료 검색하기"
+        
+        return searchBar
+    }()
+    
     private let itemFilterCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -36,6 +43,7 @@ final class ItemSelectionViewController: UIViewController {
         collectionView.allowsMultipleSelection = true
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.identifier)
+        collectionView.keyboardDismissMode = .onDrag
         
         return collectionView
     }()
@@ -69,6 +77,7 @@ final class ItemSelectionViewController: UIViewController {
         showActivityIndicator()
         configureFilterCollectionView()
         configureItemCollectionView()
+        configureSearchBarDelegate()
     }
     
     //MARK: - Fetch Data
@@ -92,12 +101,18 @@ final class ItemSelectionViewController: UIViewController {
         view.backgroundColor = .white
         
         let safeArea = view.safeAreaLayoutGuide
+        view.addSubview(searchBar)
         view.addSubview(itemFilterCollectionView)
         view.addSubview(itemCollectionView)
         view.addSubview(updateView)
         
-        itemFilterCollectionView.snp.makeConstraints {
+        searchBar.snp.makeConstraints {
             $0.top.equalTo(safeArea.snp.top).offset(20)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        itemFilterCollectionView.snp.makeConstraints {
+            $0.top.equalTo(searchBar.snp.bottom)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.height.equalTo(60)
@@ -131,6 +146,7 @@ final class ItemSelectionViewController: UIViewController {
             updateView.startAnimating()
             viewModel.addSelectedItems { [weak self] in
                 guard let self = self else { return }
+                self.viewModel.makeDataChangedStatusTrue()
                 self.updateView.isHidden = true
                 self.synchronizationDataDelegate?.synchronizationHoldedItem()
                 self.navigationController?.popViewController(animated: true)
@@ -138,6 +154,48 @@ final class ItemSelectionViewController: UIViewController {
         } else {
             navigationController?.popViewController(animated: true)
         }
+    }
+}
+
+//MARK: - SearchBar Delegate
+
+extension ItemSelectionViewController: UISearchBarDelegate {
+    func configureSearchBarDelegate() {
+        searchBar.delegate = self
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.layer.borderColor = ColorPalette.themeColor.cgColor
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let text = searchBar.text else { return }
+        viewModel.searchItem(text: text)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        viewModel.searchItem(text: "")
+        dismissKeyboard()
+        searchBar.showsCancelButton = false
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.layer.borderColor = ColorPalette.buttonBorderColor
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        dismissKeyboard()
+    }
+    
+    func dismissKeyboard() {
+        searchBar.resignFirstResponder()
+    }
+    
+    func stopSearchBar() {
+        searchBarCancelButtonClicked(searchBar)
     }
 }
 
@@ -255,6 +313,7 @@ extension ItemSelectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == itemFilterCollectionView {
             viewModel.filterItems(itemCategory: (viewModel.itemFilterList[indexPath.row].subType))
+            stopSearchBar()
         } else {
             if let cell = itemCollectionView.cellForItem(at: indexPath) as? ItemCell {
                 cell.presentHoldItem()

@@ -8,9 +8,9 @@
 import Foundation
 
 struct AddTriedCocktailListEndpoint: EndpointMakeable {
-    var baseURL: String = "https://dcf60fad-ecb5-47f4-ad0b-fd8858f17237.mock.pstmn.io"
+    var baseURL: String = "http://13.209.22.43:8000"
     
-    var path: String = "/triedcocktail"
+    var path: String = "/v1/tried-cocktails"
                         
     var method: String = HTTPMethod.post.rawValue
     

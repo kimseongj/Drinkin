@@ -3,13 +3,16 @@ import Combine
 
 protocol CocktailFilterViewModelOutput {
     var errorHandlingPublisher: Published<APIError>.Publisher { get }
-    var filteredCocktailList: [CocktailPreview] { get }
+    var filteredCocktailList: [CocktailPreview] { get set }
     var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
     var textFilterTypeList: [String] { get }
     var textFilterTypeListPublisher: Published<[String]>.Publisher { get }
     var filterTypeList: [FilterType] { get }
     var detailFilter: CocktailFilter? { get }
     var selectedDetailFilterIndexPath: IndexPath? { get set }
+    var isAuthenticated: Bool { get set }
+    
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never>
 }
 
 protocol CocktailFilterViewModelInput {
@@ -18,6 +21,7 @@ protocol CocktailFilterViewModelInput {
     func fetchDetailFilter(filterType: FilterType) -> [String]
     func insertDetailFilter(filterType: FilterType, detailFilterIndex: Int)
     func clearAllFilter()
+    func searchCocktail(text: String)
 }
 
 typealias CocktailFilterViewModel = CocktailFilterViewModelOutput & CocktailFilterViewModelInput
@@ -25,16 +29,21 @@ typealias CocktailFilterViewModel = CocktailFilterViewModelOutput & CocktailFilt
 final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     private let cocktailFilterRepository: CocktailFilterRepository
     private let filterCocktailListUsecase: FilterCocktailListUsecase
+    private let authenticationManager: AuthenticationManager
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
     
+    var currentFilteredCocktailList: [CocktailPreview] = []
+    
     //MARK: - Init
     
     init(cocktailFilterRepository: CocktailFilterRepository,
-         filterCocktailListUsecase: FilterCocktailListUsecase) {
+         filterCocktailListUsecase: FilterCocktailListUsecase,
+         authenticationManager: AuthenticationManager) {
         self.cocktailFilterRepository = cocktailFilterRepository
         self.filterCocktailListUsecase = filterCocktailListUsecase
+        self.authenticationManager = authenticationManager
     }
     
     //MARK: - Output
@@ -57,7 +66,14 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
                                         FilterType.ingredientQuantity]
     var detailFilter: CocktailFilter? = nil
     var selectedDetailFilterIndexPath: IndexPath?
+    
+    var isAuthenticated: Bool = false
+    
+    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never> {
+        return authenticationManager.accessTokenStatusPublisher()
     }
+}
+
 
 //MARK: - Input
 //MARK: - Fetch Data
@@ -100,6 +116,7 @@ extension DefaultCocktailFilterViewModel {
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
                     self.filteredCocktailList = $0.cocktailList.sorted(by: {$0.cocktailNameKo < $1.cocktailNameKo})
+                    self.currentFilteredCocktailList = self.filteredCocktailList
                     completion()
                 }
             ).store(in: &cancelBag)
@@ -194,5 +211,15 @@ extension DefaultCocktailFilterViewModel {
         
         filterCocktailListUsecase.clearAllFilter()
         fetchCocktailList { }
+    }
+    
+    func searchCocktail(text: String) {
+        filteredCocktailList = currentFilteredCocktailList.filter {
+            $0.cocktailNameKo.localizedStandardContains(text)
+        }
+        
+        if text == "" {
+            filteredCocktailList = currentFilteredCocktailList
+        }
     }
 }

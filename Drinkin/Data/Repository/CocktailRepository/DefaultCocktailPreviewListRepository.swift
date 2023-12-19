@@ -20,8 +20,6 @@ final class DefaultCocktailPreviewListRepository: CocktailPreviewListRepository 
     }
     
     func fetchCocktailPreviewList() -> AnyPublisher<CocktailPreviewList, APIError> {
-        //endpoint.insertQuery(queryParameter: "id", queryValue: cocktailID.description)
-        
-        return provider.fetchData(endpoint: endpoint)
+        provider.fetchData(endpoint: endpoint)
     }
 }

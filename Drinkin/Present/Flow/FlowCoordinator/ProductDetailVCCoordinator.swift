@@ -8,6 +8,7 @@ import UIKit
 
 protocol ProductDetailVCFlow: AnyObject {
     func pushBaseInformationVC(baseID: Int)
+    func pushIngredientInformationVC(ingredientID: Int)
     func pushToolModalVC(toolID: Int)
     func pushSkillModalVC(skillID: Int)
     func pushGlassModalVC(glassID: Int)
@@ -26,8 +27,7 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCFlow {
     
     func start() {
         let productDetailDIContainer = appDIContainer.makeProductDetailDIContainer(cocktailID: cocktailID)
-        let productDetailViewModel =  productDetailDIContainer.makeProductDetailViewModel()
-        let productDetailViewController = productDetailDIContainer.makeProductDetailViewController(viewModel: productDetailViewModel)
+        let productDetailViewController = productDetailDIContainer.makeProductDetailViewController()
         
         productDetailViewController.flowDelegate = self
         productDetailViewController.cocktailInformationView.toolView.flowDelegate = self
@@ -43,6 +43,13 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCFlow {
                                                                         appDIContainer: appDIContainer,
                                                                         baseID: baseID)
         baseInformationVCCoordinator.start()
+    }
+    
+    func pushIngredientInformationVC(ingredientID: Int) {
+        let ingredientInformationVCCoordinator = IngredientInformationVCCoordinator(navigationController: navigationController,
+                                                                                    appDIContainer: appDIContainer,
+                                                                                    ingredientID: ingredientID)
+        ingredientInformationVCCoordinator.start()
     }
     
     func pushToolModalVC(toolID: Int) {

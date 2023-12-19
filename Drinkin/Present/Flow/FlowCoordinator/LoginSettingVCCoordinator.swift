@@ -7,17 +7,31 @@
 
 import UIKit
 
-class LoginSettingVCCoordinator: Coordinator {
+protocol LoginSettingVCFlow {
+    func presentLoginVC()
+}
+
+class LoginSettingVCCoordinator: Coordinator, LoginSettingVCFlow {
     var navigationController: UINavigationController
+    let appDIContainer: AppDIContainer
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController,
+         appDIContainer: AppDIContainer) {
         self.navigationController = navigationController
+        self.appDIContainer = appDIContainer
     }
     
     func start() {
-        //let loginSettingDIContainer = LoginSettingDIContainer()
-        let loginSettingViewController = LoginSettingViewController()
+        let loginSettingDIContainer = appDIContainer.makeLoginSettingDIContainer()
+        let loginSettingViewController = loginSettingDIContainer.makeLoginSettingViewController()
+        loginSettingViewController.flowDelegate = self
         
         navigationController.pushViewController(loginSettingViewController, animated: true)
+    }
+    
+    func presentLoginVC() {
+        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController,
+                                                    appDIContainer: appDIContainer)
+        loginVCCoordinator.start()
     }
 }

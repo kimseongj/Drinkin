@@ -10,18 +10,21 @@ import UIKit
 
 final class ItemSelectionDIContainer {
     let provider: Provider
+    private let synchronizationManager: SynchronizationManager
     let itemSelectionEndpoint = ItemSelectionEndpoint()
     let addItemEndpoint = AddItemEndpoint()
     
-    init(provider: Provider) {
+    init(provider: Provider,
+         synchronizationManager: SynchronizationManager) {
         self.provider = provider
+        self.synchronizationManager = synchronizationManager
     }
     
     //MARK: - filterItemUsecase
     func makeItemSelectionRepository() -> ItemRepository {
         DefaultItemSelectionRepository(provider: provider,
-                                     endpoint: itemSelectionEndpoint
-                                     )
+                                       endpoint: itemSelectionEndpoint
+        )
     }
     
     func makeFilterItemUsecase() -> FilterItemUsecase {
@@ -40,7 +43,8 @@ final class ItemSelectionDIContainer {
     
     func makeItemSelectionViewModel() -> ItemSelectionViewModel {
         DefaultItemSelectiontViewModel(filterItemUsecase: makeFilterItemUsecase(),
-                                        addItemUsecase: makeAddItemUsecase())
+                                       addItemUsecase: makeAddItemUsecase(),
+                                       synchronizationManager: synchronizationManager)
     }
     
     func makeItemSelectionViewController() -> ItemSelectionViewController {

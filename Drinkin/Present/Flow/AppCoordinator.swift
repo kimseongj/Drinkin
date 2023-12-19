@@ -39,9 +39,9 @@ class AppCoordinator: NSObject, Coordinator {
                                               image: ImageStorage.cocktailIcon?.withRenderingMode(.alwaysOriginal),
                                               selectedImage: ImageStorage.cocktailFillIcon?.withRenderingMode(.alwaysOriginal))
         
-        let homeBarTabBarItem = UITabBarItem(title: TabBarTitleStrings.myHomeBar,
-                                             image: ImageStorage.myBarIcon?.withRenderingMode(.alwaysOriginal),
-                                             selectedImage: ImageStorage.myBarFillIcon?.withRenderingMode(.alwaysOriginal))
+        let myHomeBarTabBarItem = UITabBarItem(title: TabBarTitleStrings.myHomeBar,
+                                               image: ImageStorage.myBarIcon?.withRenderingMode(.alwaysOriginal),
+                                               selectedImage: ImageStorage.myBarFillIcon?.withRenderingMode(.alwaysOriginal))
         
         let mainVCCoordinator = MainVCCoordinator(appDIContainer: appDIContainer)
         let mainViewController = mainVCCoordinator.startPush()
@@ -51,13 +51,13 @@ class AppCoordinator: NSObject, Coordinator {
         let cocktailViewController = cocktailFilterVCCoordinator.startPush()
         cocktailViewController.tabBarItem = cocktailTabBarItem
         
-        let homeBarVCCoordinator = HomeBarVCCoordinator(appDIContainer: appDIContainer)
-        let homeBarViewController = homeBarVCCoordinator.startPush()
-        homeBarViewController.tabBarItem = homeBarTabBarItem
+        let myHomeBarVCCoordinator = MyHomeBarVCCoordinator(appDIContainer: appDIContainer)
+        let myHomeBarViewController = myHomeBarVCCoordinator.startPush()
+        myHomeBarViewController.tabBarItem = myHomeBarTabBarItem
         
         AppCoordinator.tabBarController.viewControllers = [mainViewController,
-                                            cocktailViewController,
-                                            homeBarViewController]
+                                                           cocktailViewController,
+                                                           myHomeBarViewController]
         
         return AppCoordinator.tabBarController
     }

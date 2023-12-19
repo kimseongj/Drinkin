@@ -9,7 +9,6 @@ import UIKit
 
 protocol MainVCFlow: AnyObject {
     func presentLoginVC()
-    func pushTriedCocktailSelectionVC()
     func pushProductDetailVC(cocktailID: Int)
 }
 
@@ -39,12 +38,6 @@ class MainVCCoordinator: Coordinator, MainVCFlow {
         let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController,
                                                     appDIContainer: appDIContainer)
         loginVCCoordinator.start()
-    }
-    
-    func pushTriedCocktailSelectionVC() {
-        let triedCocktailSelectionViewCoordinator = TriedCocktailSelectionVCCoordinator(navigationController: navigationController,
-                                                                                        appDIContainer: appDIContainer)
-        triedCocktailSelectionViewCoordinator.start()
     }
     
     func pushProductDetailVC(cocktailID: Int) {

@@ -8,10 +8,20 @@
 import Foundation
 
 final class LoginSettingDIContainer {
-    let provider: Provider
+    private let provider: Provider
+    private let authenticationManager: AuthenticationManager
     
-    
-    init(provider: Provider) {
+    init(provider: Provider,
+         authenticationManager: AuthenticationManager) {
         self.provider = provider
+        self.authenticationManager = authenticationManager
+    }
+    
+    func makeLoginSettingViewModel() -> LoginSettingViewModel {
+        DefaultLoginSettingViewModel(authenticationManager: authenticationManager)
+    }
+    
+    func makeLoginSettingViewController() -> LoginSettingViewController {
+        LoginSettingViewController(viewModel: makeLoginSettingViewModel())
     }
 }

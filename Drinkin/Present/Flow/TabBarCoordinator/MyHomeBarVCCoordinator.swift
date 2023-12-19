@@ -14,7 +14,7 @@ protocol MyHomeBarVCFlow: AnyObject {
     func pushUserMadeCocktailListVC()
 }
 
-class HomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
+class MyHomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
     var navigationController: UINavigationController
     var appDIContainer: AppDIContainer
     
@@ -36,7 +36,8 @@ class HomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
     }
     
     func pushLoginSettingVC() {
-        let loginSettingVCCoordinator = LoginSettingVCCoordinator(navigationController: navigationController)
+        let loginSettingVCCoordinator = LoginSettingVCCoordinator(navigationController: navigationController,
+                                                                  appDIContainer: appDIContainer)
         loginSettingVCCoordinator.start()
     }
     
