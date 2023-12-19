@@ -14,7 +14,8 @@ protocol UserMadeCocktailListViewModelInput {
 
 protocol UserMadeCocktailListViewModelOutput {
     var errorHandlingPublisher: Published<APIError>.Publisher { get }
-    var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { get }
+    var cocktailList: [CocktailPreview] { get }
+    var cocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
 }
 
 typealias UserMadeCocktailListViewModel = UserMadeCocktailListViewModelInput & UserMadeCocktailListViewModelOutput
@@ -24,7 +25,7 @@ final class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel 
     private var cancelBag: Set<AnyCancellable> = []
     
     @Published var errorType: APIError = APIError.noError
-    @Published var previewDescriptionList: [CocktailPreview] = []
+    @Published var cocktailList: [CocktailPreview] = []
     
     //MARK: - Init
     init(userMadeCocktailListRepository: UserMadeCocktailListRepository) {
@@ -33,7 +34,7 @@ final class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel 
     
     //MARK: - Output
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
-    var previewDescriptionListPublisher: Published<[CocktailPreview]>.Publisher { $previewDescriptionList }
+    var cocktailListPublisher: Published<[CocktailPreview]>.Publisher { $cocktailList }
     
     //MARK: - Input
     func fetchCocktailPreviewDescription(completion: @escaping () -> Void) {
@@ -63,7 +64,7 @@ final class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel 
                 },
                 receiveValue: { [weak self] in
                     guard let self = self else { return }
-                    self.previewDescriptionList = $0.cocktailList
+                    self.cocktailList = $0.cocktailList
                     completion()
                 }
             ).store(in: &cancelBag)
