@@ -77,7 +77,6 @@
 		1C195FA52AEB91A900562E13 /* DefaultSkillDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C195FA42AEB91A900562E13 /* DefaultSkillDetailRepository.swift */; };
 		1C195FA72AEB91CD00562E13 /* DefaultGlassDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C195FA62AEB91CD00562E13 /* DefaultGlassDetailRepository.swift */; };
 		1C1E43262B28572900C22A2E /* LoginUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E43252B28572900C22A2E /* LoginUsecase.swift */; };
-		1C1E43282B28573100C22A2E /* LogoutUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E43272B28573100C22A2E /* LogoutUsecase.swift */; };
 		1C1E432B2B286F1400C22A2E /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E432A2B286F1400C22A2E /* MainViewModel.swift */; };
 		1C1E432F2B2951B200C22A2E /* LoginSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1E432E2B2951B200C22A2E /* LoginSettingViewModel.swift */; };
 		1C1F39BF2ADFFE420091A95B /* BaseBrandInformationVCCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1F39BE2ADFFE420091A95B /* BaseBrandInformationVCCoordinator.swift */; };
@@ -328,7 +327,6 @@
 		1C195FA42AEB91A900562E13 /* DefaultSkillDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSkillDetailRepository.swift; sourceTree = "<group>"; };
 		1C195FA62AEB91CD00562E13 /* DefaultGlassDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGlassDetailRepository.swift; sourceTree = "<group>"; };
 		1C1E43252B28572900C22A2E /* LoginUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUsecase.swift; sourceTree = "<group>"; };
-		1C1E43272B28573100C22A2E /* LogoutUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutUsecase.swift; sourceTree = "<group>"; };
 		1C1E432A2B286F1400C22A2E /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		1C1E432E2B2951B200C22A2E /* LoginSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSettingViewModel.swift; sourceTree = "<group>"; };
 		1C1F39BE2ADFFE420091A95B /* BaseBrandInformationVCCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBrandInformationVCCoordinator.swift; sourceTree = "<group>"; };
@@ -1639,7 +1637,6 @@
 				1CA969202A91D99E0076731B /* AddTriedCocktailUsecase.swift */,
 				1C0C10E32B24415F0043C46D /* DeleteItemUsecase.swift */,
 				1C1E43252B28572900C22A2E /* LoginUsecase.swift */,
-				1C1E43272B28573100C22A2E /* LogoutUsecase.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -1999,7 +1996,6 @@
 				1C0768AF2AC2A50A0003D4BF /* FontStrings.swift in Sources */,
 				1C7A10442A74F6FF009961A1 /* CocktailDescription.swift in Sources */,
 				1C1F39BF2ADFFE420091A95B /* BaseBrandInformationVCCoordinator.swift in Sources */,
-				1C1E43282B28573100C22A2E /* LogoutUsecase.swift in Sources */,
 				1C0768922ABEFCCD0003D4BF /* UIViewController + Extension.swift in Sources */,
 				1C0328E42ADE5078002E144E /* CocktailDetailRepository.swift in Sources */,
 				1CA969302AA044C70076731B /* HoldedItemCell.swift in Sources */,
