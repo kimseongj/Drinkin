@@ -56,23 +56,6 @@ final class MyHomeBarViewController: UIViewController {
         return label
     }()
     
-    private lazy var loginSettingButton: UIButton = {
-        let button = UIButton()
-        if let originalImage = ImageStorage.personCircleIcon {
-            let scaledImage = originalImage.withConfiguration(UIImage.SymbolConfiguration(pointSize: 36.0))
-            button.setImage(scaledImage, for: .normal)
-        }
-        button.tintColor = .black
-        button.addTarget(self, action: #selector(tapLoginSettingButton), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    @objc
-    private func tapLoginSettingButton() {
-        flowDelegate?.pushLoginSettingVC()
-    }
-    
     private lazy var addItemView = UIView()
     
     private lazy var addLabel1: UILabel = {
@@ -182,7 +165,6 @@ final class MyHomeBarViewController: UIViewController {
         scrollView.addSubview(stackView)
         stackView.addArrangedSubview(introduceView)
         introduceView.addSubview(titleLabel)
-        introduceView.addSubview(loginSettingButton)
         introduceView.addSubview(holdIngredientLabel)
         scrollView.addSubview(savedCocktailListButton)
         scrollView.addSubview(userMadeCocktailListButton)
@@ -204,13 +186,7 @@ final class MyHomeBarViewController: UIViewController {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
         }
-
-        loginSettingButton.snp.makeConstraints {
-            $0.centerY.equalTo(titleLabel)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.height.width.equalTo(28)
-        }
-
+        
         holdIngredientLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(34)
             $0.leading.equalToSuperview().offset(16)

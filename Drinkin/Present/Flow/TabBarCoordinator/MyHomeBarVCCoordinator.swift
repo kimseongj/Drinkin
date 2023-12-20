@@ -8,7 +8,6 @@
 import UIKit
 
 protocol MyHomeBarVCFlow: AnyObject {
-    func pushLoginSettingVC()
     func pushItemSelectionVC(syncDataDelegate: SyncDataDelegate)
     func pushSavedCocktailListVC()
     func pushUserMadeCocktailListVC()
@@ -34,12 +33,6 @@ class MyHomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
         navigationController.setViewControllers([myHomeBarViewController], animated: false)
         
         return navigationController
-    }
-    
-    func pushLoginSettingVC() {
-        let loginSettingVCCoordinator = LoginSettingVCCoordinator(navigationController: navigationController,
-                                                                  appDIContainer: appDIContainer)
-        loginSettingVCCoordinator.start()
     }
     
     func pushItemSelectionVC(syncDataDelegate: SyncDataDelegate) {
