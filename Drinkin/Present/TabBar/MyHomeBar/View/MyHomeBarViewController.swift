@@ -128,57 +128,11 @@ final class MyHomeBarViewController: UIViewController {
         return collectionView
     }()
     
-    private lazy var savedCocktailListButton: UIButton = {
-        let button = UIButton()
-        let titleLabel = UILabel()
-        titleLabel.text = "저장한 칵테일 목록"
-        titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
-        
-        let arrowImageView = UIImageView(image: ImageStorage.arrowIcon)
-        
-        button.addSubview(titleLabel)
-        button.addSubview(arrowImageView)
-        
-        titleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(15)
-        }
-        
-        arrowImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(-15)
-            $0.size.equalTo(30)
-        }
-        
-        return button
-    }()
-    
-    private lazy var userMadeCocktailListButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "내가 만든 칵테일 목록"
-        titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
-        
-        let arrowImageView = UIImageView(image: ImageStorage.arrowIcon)
-        
-        button.addSubview(arrowImageView)
-        button.addSubview(titleLabel)
-        
-        titleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(15)
-        }
-        
-        arrowImageView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(-15)
-            $0.size.equalTo(30)
-        }
-        
-        return button
-    }()
+    private lazy var savedCocktailListButton = configureListButton(title: "저장한 칵테일 목록")
+    private lazy var userMadeCocktailListButton = configureListButton(title: "내가 만든 칵테일 목록")
+    private lazy var loginButton = configureListButton(title: "로그인")
+    private lazy var logoutButton = configureListButton(title: "로그아웃")
+    private lazy var memberLeaveButton = configureListButton(title: "회원탈퇴")
     
     //MARK: - Init
     
@@ -199,6 +153,7 @@ final class MyHomeBarViewController: UIViewController {
         configureDataSource()
         configureUI()
         configureHoldedItemCollectionView()
+        configureButtonAction()
         authenticationBinding()
     }
     
@@ -229,6 +184,11 @@ final class MyHomeBarViewController: UIViewController {
         introduceView.addSubview(titleLabel)
         introduceView.addSubview(loginSettingButton)
         introduceView.addSubview(holdIngredientLabel)
+        scrollView.addSubview(savedCocktailListButton)
+        scrollView.addSubview(userMadeCocktailListButton)
+        scrollView.addSubview(loginButton)
+        scrollView.addSubview(logoutButton)
+        scrollView.addSubview(memberLeaveButton)
 
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -256,12 +216,30 @@ final class MyHomeBarViewController: UIViewController {
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview()
         }
+
+        loginButton.snp.makeConstraints {
+            $0.top.equalTo(userMadeCocktailListButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+        
+        logoutButton.snp.makeConstraints {
+            $0.top.equalTo(userMadeCocktailListButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(60)
+        }
+
+        memberLeaveButton.snp.makeConstraints {
+            $0.top.equalTo(logoutButton.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(60)
+        }
     }
     
     private func configureListButton(title: String) -> UIButton {
         let button = UIButton()
         let titleLabel = UILabel()
-        titleLabel.text = "title"
+        titleLabel.text = title
         titleLabel.font = UIFont(name: FontStrings.pretendardBold, size: 17)
         
         let arrowImageView = UIImageView(image: ImageStorage.arrowIcon)
@@ -292,6 +270,10 @@ final class MyHomeBarViewController: UIViewController {
         savedCocktailListButton.addTarget(self, action: #selector(tapSavedCocktailListButton), for: .touchUpInside)
         userMadeCocktailListButton.removeTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
         userMadeCocktailListButton.addTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
+        
+        loginButton.isHidden = true
+        logoutButton.isHidden = false
+        memberLeaveButton.isHidden = false
     }
     
     private func configureUnloggedinMyHomeBar() {
@@ -302,6 +284,10 @@ final class MyHomeBarViewController: UIViewController {
         savedCocktailListButton.addTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
         userMadeCocktailListButton.removeTarget(self, action: #selector(tapUserMadeCocktailListButton), for: .touchUpInside)
         userMadeCocktailListButton.addTarget(self, action: #selector(tapUnloggedinButton), for: .touchUpInside)
+        
+        loginButton.isHidden = false
+        logoutButton.isHidden = true
+        memberLeaveButton.isHidden = true
     }
     
     @objc
@@ -317,6 +303,44 @@ final class MyHomeBarViewController: UIViewController {
     @objc
     private func tapUnloggedinButton() {
         self.showLoginRecommendAlert()
+    }
+    
+    private func configureButtonAction() {
+        loginButton.addTarget(self, action: #selector(tapLoginButton), for: .touchUpInside)
+        logoutButton.addTarget(self, action: #selector(tapLogoutButton), for: .touchUpInside)
+        memberLeaveButton.addTarget(self, action: #selector(tapLeaveMemberButton), for: .touchUpInside)
+    }
+    
+    @objc
+    private func tapLoginButton() {
+        flowDelegate?.presentLoginVC()
+    }
+    
+    @objc
+    private func tapLogoutButton() {
+        let logoutAlert = makeLogoutAlert()
+        present(logoutAlert, animated: true, completion: nil)
+    }
+    
+    func makeLogoutAlert() -> UIAlertController {
+        let alertController = UIAlertController(title: "로그아웃하시겠습니까?", message: nil, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "예", style: .default) { _ in
+            self.viewModel.logout()
+            alertController.dismiss(animated: true)
+        }
+        
+        let dismissAction = UIAlertAction(title: "아니요", style: .cancel)
+        
+        alertController.addAction(okAction)
+        alertController.addAction(dismissAction)
+        
+        return alertController
+    }
+    
+    @objc
+    private func tapLeaveMemberButton() {
+        
     }
 }
 
@@ -370,8 +394,6 @@ extension MyHomeBarViewController {
         
         introduceView.addSubview(smallAddButton)
         scrollView.addSubview(holdedItemCollectionView)
-        scrollView.addSubview(savedCocktailListButton)
-        scrollView.addSubview(userMadeCocktailListButton)
         
         smallAddButton.snp.makeConstraints {
             $0.centerY.equalTo(holdIngredientLabel)
@@ -387,7 +409,7 @@ extension MyHomeBarViewController {
         savedCocktailListButton.snp.removeConstraints()
         
         savedCocktailListButton.snp.makeConstraints {
-            $0.top.equalTo(holdedItemCollectionView.snp.bottom)
+            $0.top.equalTo(holdedItemCollectionView.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(60)
         }
@@ -396,7 +418,6 @@ extension MyHomeBarViewController {
             $0.top.equalTo(savedCocktailListButton.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(60)
-            $0.bottom.equalToSuperview()
         }
         
         if holdedItemCollectionView.isHidden {
@@ -414,8 +435,6 @@ extension MyHomeBarViewController {
     
     private func showAddItemView() {
         scrollView.addSubview(addItemView)
-        scrollView.addSubview(savedCocktailListButton)
-        scrollView.addSubview(userMadeCocktailListButton)
         addItemView.addSubview(addLabel1)
         addItemView.addSubview(addLabel2)
         addItemView.addSubview(largeAddButton)

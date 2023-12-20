@@ -12,6 +12,7 @@ protocol MyHomeBarVCFlow: AnyObject {
     func pushItemSelectionVC(syncDataDelegate: SyncDataDelegate)
     func pushSavedCocktailListVC()
     func pushUserMadeCocktailListVC()
+    func presentLoginVC()
 }
 
 class MyHomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
@@ -58,6 +59,12 @@ class MyHomeBarVCCoordinator: Coordinator, MyHomeBarVCFlow {
         let userMadeCocktailListVCCoordinator = UserMadeCocktailListVCCoordinator(navigationController: navigationController,
                                                                                   appDIContainer: appDIContainer)
         userMadeCocktailListVCCoordinator.start()
+    }
+    
+    func presentLoginVC() {
+        let loginVCCoordinator = LoginVCCoordinator(navigationController: navigationController,
+                                                    appDIContainer: appDIContainer)
+        loginVCCoordinator.start()
     }
 }
 
