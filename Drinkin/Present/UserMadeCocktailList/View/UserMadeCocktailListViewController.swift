@@ -49,6 +49,11 @@ final class UserMadeCocktailListViewController: UIViewController {
         configureCocktailListCollectionView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppCoordinator.tabBarController.tabBar.isHidden = true
+    }
+    
     //MARK: - Fetch Data
     
     private func fetchData() {
