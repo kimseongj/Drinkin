@@ -244,7 +244,7 @@ final class LoginViewController: UIViewController {
         cocktailImageView.snp.makeConstraints {
             $0.size.equalTo(200)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(safeArea.snp.top).offset(40)
+            $0.top.equalTo(safeArea.snp.top).offset(80)
         }
         
         logoImageView.snp.makeConstraints {
