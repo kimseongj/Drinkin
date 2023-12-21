@@ -39,15 +39,15 @@ extension UIImageView {
 
 extension UIImageView {
     func showActivityIndicator(style: UIActivityIndicatorView.Style = .large) {
-            let indicator = UIActivityIndicatorView(style: style)
-            indicator.translatesAutoresizingMaskIntoConstraints = false
-            indicator.hidesWhenStopped = true
-            addSubview(indicator)
-
-            NSLayoutConstraint.activate([
-                indicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-                indicator.centerYAnchor.constraint(equalTo: centerYAnchor)
-            ])
+        let indicator = UIActivityIndicatorView(style: style)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        addSubview(indicator)
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
         indicator.startAnimating()
     }
     
