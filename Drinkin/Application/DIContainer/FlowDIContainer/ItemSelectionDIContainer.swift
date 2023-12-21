@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 final class ItemSelectionDIContainer {
-    let provider: Provider
+    private let provider: Provider
     private let synchronizationManager: SynchronizationManager
-    let itemSelectionEndpoint = ItemSelectionEndpoint()
-    let addItemEndpoint = AddItemEndpoint()
+    private let itemSelectionEndpoint = ItemSelectionEndpoint()
+    private let addItemEndpoint = AddItemEndpoint()
     
     init(provider: Provider,
          synchronizationManager: SynchronizationManager) {
@@ -21,6 +21,7 @@ final class ItemSelectionDIContainer {
     }
     
     //MARK: - filterItemUsecase
+    
     func makeItemSelectionRepository() -> ItemRepository {
         DefaultItemSelectionRepository(provider: provider,
                                        endpoint: itemSelectionEndpoint
@@ -32,6 +33,7 @@ final class ItemSelectionDIContainer {
     }
     
     //MARK: - AddItemUsecase
+    
     func makeAdditionRepository() -> AdditionRepository {
         DefaultAdditionRepository(provider: provider, endpoint: addItemEndpoint)
     }

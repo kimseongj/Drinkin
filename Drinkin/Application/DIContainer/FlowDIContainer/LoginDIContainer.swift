@@ -8,10 +8,10 @@
 import Foundation
 
 final class LoginDIContainer {
-    let loginProvider: LoginProvider
-    let authenticationManager: AuthenticationManager
-    let kakaoLoginEndpoint = KakaoAccessTokenConversionEndpoint()
-    let appleLoginEndpoint = AppleAccessTokenConversionEndpoint()
+    private let loginProvider: LoginProvider
+    private let authenticationManager: AuthenticationManager
+    private let kakaoLoginEndpoint = KakaoAccessTokenConversionEndpoint()
+    private let appleLoginEndpoint = AppleAccessTokenConversionEndpoint()
     
     init(loginProvider: LoginProvider,
          authenticationManager: AuthenticationManager) {

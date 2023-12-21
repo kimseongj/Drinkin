@@ -8,8 +8,8 @@
 import Foundation
 
 final class SavedCocktailListDIContainer {
-    let provider: Provider
-    let bookmarkCocktailListEndpoint = BookmarkCocktailListEndpoint()
+    private let provider: Provider
+    private let bookmarkCocktailListEndpoint = BookmarkCocktailListEndpoint()
 
     init(provider: Provider) {
         self.provider = provider

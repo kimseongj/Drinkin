@@ -8,11 +8,11 @@
 import Foundation
 
 final class MakeableCocktailListDIContainer {
-    let provider: Provider
-    let brandID: Int?
-    let ingredientID: Int?
-    let baseBrandRelatedCocktailsEndpoint = BaseBrandRelatedCocktailsEndpoint()
-    let ingredientRelatedCocktailsEndpoint = IngredientRelatedCocktailsEndpoint()
+    private let provider: Provider
+    private let brandID: Int?
+    private let ingredientID: Int?
+    private let baseBrandRelatedCocktailsEndpoint = BaseBrandRelatedCocktailsEndpoint()
+    private let ingredientRelatedCocktailsEndpoint = IngredientRelatedCocktailsEndpoint()
     
     init(provider: Provider, brandID: Int?, ingredientID: Int?) {
         self.provider = provider

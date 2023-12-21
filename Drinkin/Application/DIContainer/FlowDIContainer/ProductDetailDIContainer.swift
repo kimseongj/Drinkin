@@ -27,6 +27,8 @@ final class ProductDetailDIContainer {
                                                cocktailID: cocktailID)
     }
     
+    //MARK: - Cocktail Marking
+    
     func makeCocktailMarkingRepository() -> CocktailMarkingRepository {
         DefaultCocktailMarkingRepository(provider: provider,
                                          userMadeEndpoint: updateUserMadeEndpoint,
