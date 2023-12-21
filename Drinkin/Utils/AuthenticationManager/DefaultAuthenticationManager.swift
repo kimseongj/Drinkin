@@ -1,5 +1,5 @@
 //
-//  LoginManager.swift
+//  DefaultAuthenticationManager.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/11/21.
@@ -7,12 +7,6 @@
 
 import Foundation
 import Combine
-
-protocol AuthenticationManager {
-    func login(accessToken: String, refreshToken: String)
-    func logout()
-    func accessTokenStatusPublisher() -> AnyPublisher<Bool, Never>
-}
 
 final class DefaultAuthenticationManager: AuthenticationManager {
     private let tokenManager: TokenManager
