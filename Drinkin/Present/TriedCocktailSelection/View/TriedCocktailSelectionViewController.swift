@@ -164,7 +164,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         }
         
         searchBar.snp.makeConstraints {
-            $0.top.equalTo(subLabel.snp.bottom).offset(20)
+            $0.top.equalTo(subLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
         
