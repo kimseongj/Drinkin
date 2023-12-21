@@ -7,6 +7,8 @@
 
 import UIKit
 
+//MARK: - Image Load
+
 extension UIImageView {
     func load(urlString: String, completion: @escaping () -> Void) {
         let cacheKey = NSString(string: urlString)
@@ -32,6 +34,8 @@ extension UIImageView {
         }
     }
 }
+
+//MARK: - ActivityIndicator
 
 extension UIImageView {
     func showActivityIndicator(style: UIActivityIndicatorView.Style = .large) {
