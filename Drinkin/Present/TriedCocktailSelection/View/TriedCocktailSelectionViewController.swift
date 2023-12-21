@@ -72,6 +72,7 @@ final class TriedCocktailSelectionViewController: UIViewController {
         collectionView.contentInset = .zero
         collectionView.clipsToBounds = true
         collectionView.register(CocktailSelectionCell.self, forCellWithReuseIdentifier: CocktailSelectionCell.identifier)
+        collectionView.keyboardDismissMode = .onDrag
         
         return collectionView
     }()
