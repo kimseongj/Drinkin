@@ -7,12 +7,12 @@
 
 import UIKit
 
-public protocol IdentifierType {
+protocol IdentifierType {
     static var identifier: String { get }
 }
 
 extension IdentifierType {
-    public static var identifier: String {
+    static var identifier: String {
         return String(describing: self)
     }
 }
