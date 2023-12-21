@@ -12,6 +12,8 @@ import Combine
 
 final class SavedCocktailListViewController: UIViewController {
     private var viewModel: SavedCocktailListViewModel
+    var flowDelegate: SavedCocktailListVCFlow?
+    
     private var cancelBag: Set<AnyCancellable> = []
     private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
     
@@ -45,11 +47,17 @@ final class SavedCocktailListViewController: UIViewController {
         configureNavigationItemTitle()
         configureUI()
         showActivityIndicator()
+        configureCocktailListCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppCoordinator.tabBarController.tabBar.isHidden = true
     }
     
     //MARK: - Fetch Data
     private func fetchData() {
-        viewModel.fetchCocktailPreviewDescription() { 
+        viewModel.fetchCocktailPreviewDescription() {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.hideActivityIndicator()
@@ -78,6 +86,14 @@ final class SavedCocktailListViewController: UIViewController {
     }
 }
 
+//MARK: - Configure CollectionView
+
+extension SavedCocktailListViewController {
+    private func configureCocktailListCollectionView() {
+        cocktailListCollectionView.delegate = self
+    }
+}
+
 //MARK: - CocktailListCollectionView DiffableDataSource
 
 extension SavedCocktailListViewController {
@@ -103,7 +119,7 @@ extension SavedCocktailListViewController {
 
 extension SavedCocktailListViewController {
     private func binding() {
-        viewModel.previewDescriptionListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel.cocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return}
             
             self.applySnapshot(previewDescriptionList: $0)
@@ -130,6 +146,15 @@ extension SavedCocktailListViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+}
+
+//MARK: - CocktailListCollectionView Delegate
+
+extension SavedCocktailListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cocktailID = viewModel.cocktailList[indexPath.row].id
+        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
     }
 }
 

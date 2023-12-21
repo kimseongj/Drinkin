@@ -1,5 +1,5 @@
 //
-//  KeychainManager.swift
+//  DefaultTokenManager.swift
 //  Drinkin
 //
 //  Created by kimseongjun on 2023/07/18.
@@ -7,14 +7,9 @@
 
 import Foundation
 
-protocol TokenManager {
-    func saveToken(tokenType: TokenType, token: String) throws
-    func readToken(tokenType: TokenType) throws -> String?
-    func updateToken(tokenType: TokenType, token: String) throws
-    func deleteToken(tokenType: TokenType) throws
-}
-
 struct DefaultTokenManager: TokenManager {
+    //MARK: - Save Token
+    
     func saveToken(tokenType: TokenType, token: String) throws {
         let account = tokenType.description
         guard let password = token.data(using: String.Encoding.utf8) else { return }
@@ -34,6 +29,8 @@ struct DefaultTokenManager: TokenManager {
             throw KeychainError.unhandledError(status: status)
         }
     }
+    
+    //MARK: - Read Token
     
     func readToken(tokenType: TokenType) throws -> String? {
         let account = tokenType.description
@@ -65,6 +62,8 @@ struct DefaultTokenManager: TokenManager {
         return token
     }
     
+    //MARK: - Update Token
+    
     func updateToken(tokenType: TokenType, token: String) throws {
         let account = tokenType.description
         let password = token.data(using: String.Encoding.utf8)!
@@ -88,6 +87,8 @@ struct DefaultTokenManager: TokenManager {
             throw KeychainError.unhandledError(status: status)
         }
     }
+    
+    //MARK: - Delete Token
     
     func deleteToken(tokenType: TokenType) throws {
         let account = tokenType.description

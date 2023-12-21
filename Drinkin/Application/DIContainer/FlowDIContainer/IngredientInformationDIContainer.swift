@@ -8,9 +8,9 @@
 import Foundation
 
 final class IngredientInformationDIContainer {
-    let provider: Provider
-    let ingredientID: Int
-    let ingredientInformationEndpoint = IngredientInformationEndpoint()
+    private let provider: Provider
+    private let ingredientID: Int
+    private let ingredientInformationEndpoint = IngredientInformationEndpoint()
     
     init(provider: Provider,
          ingredientID: Int) {

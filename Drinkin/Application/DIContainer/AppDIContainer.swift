@@ -75,11 +75,6 @@ final class AppDIContainer {
                          authenticationManager: authenticationManager)
     }
     
-    func makeLoginSettingDIContainer() -> LoginSettingDIContainer {
-        LoginSettingDIContainer(provider: provider,
-                                authenticationManager: authenticationManager)
-    }
-    
     func makeItemSelectionDIContainer() -> ItemSelectionDIContainer {
         ItemSelectionDIContainer(provider: provider,
                                  synchronizationManager: synchronizationManager)

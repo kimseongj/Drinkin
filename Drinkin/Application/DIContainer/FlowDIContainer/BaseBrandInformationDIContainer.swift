@@ -8,9 +8,9 @@
 import Foundation
 
 final class BaseBrandInformationDIContainer {
-    let provider: Provider
-    let brandID: Int
-    let baseBrandInformationEndpoint = BaseBrandInformationEndpoint()
+    private let provider: Provider
+    private let brandID: Int
+    private let baseBrandInformationEndpoint = BaseBrandInformationEndpoint()
     
     init(provider: Provider, brandID: Int) {
         self.provider = provider

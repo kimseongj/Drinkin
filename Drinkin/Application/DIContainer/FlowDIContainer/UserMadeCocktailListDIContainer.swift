@@ -8,8 +8,8 @@
 import Foundation
 
 final class UserMadeCocktailListDIContainer {
-    let provider: Provider
-    let userMadeCocktailListEndpoint = UserMadeCocktailListEndpoint()
+    private let provider: Provider
+    private let userMadeCocktailListEndpoint = UserMadeCocktailListEndpoint()
     
     init(provider: Provider) {
         self.provider = provider

@@ -7,7 +7,11 @@
 
 import UIKit
 
-class UserMadeCocktailListVCCoordinator: Coordinator {
+protocol UserMadeCocktailListVCFlow {
+    func pushProductDetailVC(cocktailID: Int)
+}
+
+class UserMadeCocktailListVCCoordinator: Coordinator, UserMadeCocktailListVCFlow {
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     
@@ -19,7 +23,16 @@ class UserMadeCocktailListVCCoordinator: Coordinator {
     func start() {
         let userMadeCocktailListDIContainer = appDIContainer.makeUserMadeCocktailListDIContainer()
         let userMadeCocktailListViewController = userMadeCocktailListDIContainer.makeUserMadeCocktailListViewController()
+        userMadeCocktailListViewController.flowDelegate = self
+        userMadeCocktailListViewController.makeBlackBackBarButton()
         
         navigationController.pushViewController(userMadeCocktailListViewController, animated: true)
+    }
+    
+    func pushProductDetailVC(cocktailID: Int) {
+        let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController,
+                                                                    appDIContainer: appDIContainer,
+                                                                    cocktailID: cocktailID)
+        productDetailVCCoordinator.start()
     }
 }

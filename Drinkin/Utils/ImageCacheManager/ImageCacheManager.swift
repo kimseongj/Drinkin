@@ -14,6 +14,5 @@ final class ImageCacheManager {
 
     private init() {
         self.cache = NSCache<NSString, UIImage>()
-        self.cache.totalCostLimit = 1024 * 1024 * 50
     }
 }

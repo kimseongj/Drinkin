@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 final class TriedCocktailSelectionDIContainer {
-    let provider: Provider
+    private let provider: Provider
     private let synchronizationManager: SynchronizationManager
-    let addTriedCocktailListEndpoint = AddTriedCocktailListEndpoint()
-    let triedCocktailEndpoint = CocktailsEndpoint()
+    private let addTriedCocktailListEndpoint = AddTriedCocktailListEndpoint()
+    private let triedCocktailEndpoint = CocktailsEndpoint()
     
     init(provider: Provider,
          synchronizationManager: SynchronizationManager) {

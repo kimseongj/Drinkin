@@ -11,6 +11,8 @@ import Combine
 
 final class UserMadeCocktailListViewController: UIViewController {
     private var viewModel: UserMadeCocktailListViewModel
+    var flowDelegate: UserMadeCocktailListVCFlow?
+    
     private var cancelBag: Set<AnyCancellable> = []
     private var dataSource: UICollectionViewDiffableDataSource<Section, CocktailPreview>!
     
@@ -44,6 +46,12 @@ final class UserMadeCocktailListViewController: UIViewController {
         configureNavigationItemTitle()
         configureUI()
         showActivityIndicator()
+        configureCocktailListCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        AppCoordinator.tabBarController.tabBar.isHidden = true
     }
     
     //MARK: - Fetch Data
@@ -78,6 +86,14 @@ final class UserMadeCocktailListViewController: UIViewController {
     }
 }
 
+//MARK: - Configure CollectionView
+
+extension UserMadeCocktailListViewController {
+    private func configureCocktailListCollectionView() {
+        cocktailListCollectionView.delegate = self
+    }
+}
+
 //MARK: - CocktailListCollectionView DiffableDataSource
 
 extension UserMadeCocktailListViewController {
@@ -103,7 +119,7 @@ extension UserMadeCocktailListViewController {
 
 extension UserMadeCocktailListViewController {
     private func binding() {
-        viewModel.previewDescriptionListPublisher.receive(on: RunLoop.main).sink { [weak self] in
+        viewModel.cocktailListPublisher.receive(on: RunLoop.main).sink { [weak self] in
             guard let self = self else { return }
             self.applySnapshot(previewDescriptionList: $0)
         }.store(in: &cancelBag)
@@ -129,6 +145,15 @@ extension UserMadeCocktailListViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+}
+
+//MARK: - CocktailListCollectionView Delegate
+
+extension UserMadeCocktailListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cocktailID = viewModel.cocktailList[indexPath.row].id
+        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
     }
 }
 

@@ -73,6 +73,7 @@ final class CocktailFilterModalViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = ColorPalette.blackTransparencyColor
         
+        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(contentView)
         contentView.addSubview(filterTableView)
         contentView.addSubview(dismissButton)
@@ -90,7 +91,7 @@ final class CocktailFilterModalViewController: UIViewController {
         dismissButton.snp.makeConstraints {
             $0.top.equalTo(filterTableView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(safeArea.snp.bottom)
             $0.height.equalTo(60)
         }
     }

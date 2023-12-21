@@ -30,5 +30,3 @@ final class CustomSearchBar: UISearchBar {
         self.setValue("취소", forKey: "cancelButtonText")
     }
 }
-
-

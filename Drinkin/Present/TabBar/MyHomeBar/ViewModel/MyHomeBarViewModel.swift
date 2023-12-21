@@ -11,6 +11,7 @@ import Combine
 protocol MyHomeBarViewModelInput {
     func fetchHoldedItem(completion: @escaping () -> Void)
     func deleteHoldedItem(holdedItemName: String)
+    func logout()
 }
 
 protocol MyHomeBarViewModelOutput  {
@@ -126,6 +127,7 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     }
     
     //MARK: - SynchronizationDataDelegate
+    
     func synchronizationHoldedItem() {
         holdedItemRepository.fetchHoldedItem()
             .sink(
@@ -156,5 +158,10 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
                     self.holdedItemList = $0.holdedItemList
                 }
             ).store(in: &cancelBag)
+    }
+    
+    //MARK: - Logout
+    func logout() {
+        authenticationManager.logout()
     }
 }
