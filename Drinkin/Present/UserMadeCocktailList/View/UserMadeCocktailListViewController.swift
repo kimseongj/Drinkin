@@ -57,7 +57,7 @@ final class UserMadeCocktailListViewController: UIViewController {
     //MARK: - Fetch Data
     
     private func fetchData() {
-        viewModel.fetchCocktailPreviewDescription() { 
+        viewModel.fetchCocktailList() { 
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.hideActivityIndicator()
@@ -153,7 +153,7 @@ extension UserMadeCocktailListViewController {
 extension UserMadeCocktailListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cocktailID = viewModel.cocktailList[indexPath.row].id
-        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID)
+        flowDelegate?.pushProductDetailVC(cocktailID: cocktailID, syncUserMadeCocktailDelegate: viewModel)
     }
 }
 

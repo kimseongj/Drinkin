@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SavedCocktailListVCFlow {
-    func pushProductDetailVC(cocktailID: Int)
+    func pushProductDetailVC(cocktailID: Int, syncSavedCocktailDelegate: SyncSavedCocktailDelegate?)
 }
 
 class SavedCocktailListVCCoordinator: Coordinator, SavedCocktailListVCFlow {
@@ -19,7 +19,7 @@ class SavedCocktailListVCCoordinator: Coordinator, SavedCocktailListVCFlow {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
     }
-
+    
     func start() {
         let savedCocktailListDIContainer = appDIContainer.makeSavedCocktailListDIContainer()
         let savedCocktailListViewController = savedCocktailListDIContainer.makeSavedCocktailListViewController()
@@ -29,10 +29,11 @@ class SavedCocktailListVCCoordinator: Coordinator, SavedCocktailListVCFlow {
         navigationController.pushViewController(savedCocktailListViewController, animated: true)
     }
     
-    func pushProductDetailVC(cocktailID: Int) {
+    func pushProductDetailVC(cocktailID: Int, syncSavedCocktailDelegate: SyncSavedCocktailDelegate?) {
         let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController,
                                                                     appDIContainer: appDIContainer,
-                                                                    cocktailID: cocktailID)
+                                                                    cocktailID: cocktailID,
+                                                                    syncSavedCocktailDelegate: syncSavedCocktailDelegate)
         productDetailVCCoordinator.start()
     }
 }

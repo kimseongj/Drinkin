@@ -31,7 +31,7 @@ struct DefaultProvider: Provider {
             }
 
         } catch {
-            print("keychain Error")
+            print("No Token")
         }
         
         return URLSession.shared.dataTaskPublisher(for: request!)
@@ -63,7 +63,6 @@ struct DefaultProvider: Provider {
                 if case APIError.unauthorized = error {
                     return renewAccessTokenPublisher().flatMap { accessToken in
                         var newRequest = request
-                        print("\(accessToken)")
                         do {
                             try tokenManager.updateToken(tokenType: TokenType.accessToken, token: accessToken.accessToken)
                             
@@ -71,7 +70,7 @@ struct DefaultProvider: Provider {
                                 newRequest!.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
                             }
                         } catch {
-                            print("keychain Error")
+                            print("No Token")
                         }
                         
                         return URLSession.shared.dataTaskPublisher(for: newRequest!)
@@ -118,7 +117,7 @@ struct DefaultProvider: Provider {
             }
 
         } catch {
-            print("keychain Error")
+            print("No Token")
         }
         
         return URLSession.shared.dataTaskPublisher(for: request!)
@@ -156,7 +155,7 @@ struct DefaultProvider: Provider {
                             try tokenManager.updateToken(tokenType: TokenType.accessToken, token: accessToken.accessToken)
                             try newRequest!.setValue("Bearer \(String(describing: tokenManager.readToken(tokenType: TokenType.accessToken)))", forHTTPHeaderField: "Authorization")
                         } catch {
-                            print("keychain Error")
+                            print("No Token")
                         }
                         
                         return URLSession.shared.dataTaskPublisher(for: newRequest!)

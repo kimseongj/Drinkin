@@ -12,6 +12,8 @@ import Combine
 final class ProductDetailViewController: UIViewController {
     private var viewModel: ProductDetailViewModel
     var flowDelegate: ProductDetailVCFlow?
+    var syncUserMadeCocktailDelegate: SyncUserMadeCocktailDelegate?
+    var syncSavedCocktailDelegate: SyncSavedCocktailDelegate?
     private var cancelBag: Set<AnyCancellable> = []
     
     private let scrollView: UIScrollView = {
@@ -148,12 +150,14 @@ final class ProductDetailViewController: UIViewController {
     private func tapMarkMadeCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
         viewModel.updateUserMadeCocktail()
+        syncUserMadeCocktailDelegate?.synchronizeCocktails()
     }
     
     @objc
     private func tapBookmarkCocktailButton(_ sender: UIButton) {
         sender.isSelected.toggle()
         viewModel.updateBookmarkCocktail()
+        syncSavedCocktailDelegate?.synchronizeCocktails()
     }
     
     @objc

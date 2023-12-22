@@ -113,7 +113,9 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
                         return
                     }
                 },
-                receiveValue: { print($0) }
+                receiveValue: { _ in
+                    
+                }
             ).store(in: &cancelBag)
     }
     
@@ -143,7 +145,9 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
                         return
                     }
                 },
-                receiveValue: { print($0) }
+                receiveValue: { _ in
+                    
+                }
             ).store(in: &cancelBag)
     }
     
