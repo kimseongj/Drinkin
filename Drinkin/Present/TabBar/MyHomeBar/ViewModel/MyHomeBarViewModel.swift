@@ -119,8 +119,8 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
                         return
                     }
                 },
-                receiveValue: {
-                    print($0)
+                receiveValue: { _ in
+
                 }
             ).store(in: &cancelBag)
         }
