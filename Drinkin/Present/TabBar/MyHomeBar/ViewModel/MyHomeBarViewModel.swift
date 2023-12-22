@@ -129,35 +129,7 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     //MARK: - SynchronizationDataDelegate
     
     func synchronizationHoldedItem() {
-        holdedItemRepository.fetchHoldedItem()
-            .sink(
-                receiveCompletion: { [weak self] completion in
-                    guard let self = self else { return }
-                    switch completion {
-                    case .failure(let error):
-                        switch error {
-                        case .unauthorized:
-                            self.errorType = .unauthorized
-                        case .notFound:
-                            self.errorType = .notFound
-                        case .networkError(_):
-                            self.errorType = .networkError(error)
-                        case .decodingError:
-                            self.errorType = .decodingError
-                        case .refreshTokenExpired:
-                            self.errorType = .refreshTokenExpired
-                        case .noError:
-                            break
-                        }
-                    case .finished:
-                        return
-                    }
-                },
-                receiveValue: { [weak self] in
-                    guard let self = self else { return }
-                    self.holdedItemList = $0.holdedItemList
-                }
-            ).store(in: &cancelBag)
+        fetchHoldedItem { }
     }
     
     //MARK: - Logout
