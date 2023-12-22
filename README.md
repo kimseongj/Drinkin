@@ -50,7 +50,7 @@
 |칵테일 검색|재료 추가|마셔봤던 칵테일 선택|
 |:----:|:----:|:----:|
 |<img src="https://github.com/kimseongj/Drinkin/assets/88870642/d9a552bf-00b6-49da-963a-78c51ab02c2f" width=200>|<img src="https://github.com/kimseongj/Drinkin/assets/88870642/faeca8ce-5eba-48d6-afe1-b9f5963aafce" width=200>|<img src="https://github.com/kimseongj/Drinkin/assets/88870642/86d0a30b-c1a8-432d-85ea-a41d17eac4da" width=200>|
-|이용자가 보유한 재료를 확인하고 북마크한 칵테일, 로그인, 회원탈퇴를 관리합니다.|이용자가 보유한 재료를 필터링, 검색 기능을 통해 선택하거나 제거할 수 있습니다.|북마크된 칵테일을 리스트화해서 확인하고, 클릭시 칵테일 상세정보가 나옵니다.|
+
 
 
 
