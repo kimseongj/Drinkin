@@ -8,7 +8,7 @@
 import UIKit
 
 protocol UserMadeCocktailListVCFlow {
-    func pushProductDetailVC(cocktailID: Int)
+    func pushProductDetailVC(cocktailID: Int, syncUserMadeCocktailDelegate: SyncUserMadeCocktailDelegate?)
 }
 
 class UserMadeCocktailListVCCoordinator: Coordinator, UserMadeCocktailListVCFlow {
@@ -29,10 +29,11 @@ class UserMadeCocktailListVCCoordinator: Coordinator, UserMadeCocktailListVCFlow
         navigationController.pushViewController(userMadeCocktailListViewController, animated: true)
     }
     
-    func pushProductDetailVC(cocktailID: Int) {
+    func pushProductDetailVC(cocktailID: Int, syncUserMadeCocktailDelegate: SyncUserMadeCocktailDelegate?) {
         let productDetailVCCoordinator = ProductDetailVCCoordinator(navigationController: navigationController,
                                                                     appDIContainer: appDIContainer,
-                                                                    cocktailID: cocktailID)
+                                                                    cocktailID: cocktailID,
+                                                                    syncUserMadeCocktailDelegate: syncUserMadeCocktailDelegate)
         productDetailVCCoordinator.start()
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol SavedCocktailListViewModelInput {
-    func fetchCocktailPreviewDescription(completion: @escaping () -> Void)
+    func fetchCocktailList(completion: @escaping () -> Void)
 }
 
 protocol SavedCocktailListViewModelOutput {
@@ -18,7 +18,11 @@ protocol SavedCocktailListViewModelOutput {
     var cocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
 }
 
-typealias SavedCocktailListViewModel = SavedCocktailListViewModelInput & SavedCocktailListViewModelOutput
+protocol SyncSavedCocktailDelegate {
+    func synchronizeCocktails()
+}
+
+typealias SavedCocktailListViewModel = SavedCocktailListViewModelInput & SavedCocktailListViewModelOutput & SyncSavedCocktailDelegate
 
 final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     private let savedCocktailListRepository: SavedCocktailListRepository
@@ -37,7 +41,7 @@ final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
     var cocktailListPublisher: Published<[CocktailPreview]>.Publisher { $cocktailList }
     
     //MARK: - Input
-    func fetchCocktailPreviewDescription(completion: @escaping () -> Void) {
+    func fetchCocktailList(completion: @escaping () -> Void) {
         savedCocktailListRepository.fetchSavedCocktailList()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -68,5 +72,11 @@ final class DefaultSavedCocktailListViewModel: SavedCocktailListViewModel {
                     completion()
                 }
             ).store(in: &cancelBag)
+    }
+    
+    //MARK: - SyncUserMadeCocktailslDelegate
+    
+    func synchronizeCocktails() {
+        fetchCocktailList { }
     }
 }

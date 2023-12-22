@@ -18,11 +18,19 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCFlow {
     var navigationController: UINavigationController
     let appDIContainer: AppDIContainer
     var cocktailID: Int
+    var syncUserMadeCocktailDelegate: SyncUserMadeCocktailDelegate?
+    var syncSavedCocktailDelegate: SyncSavedCocktailDelegate?
     
-    init(navigationController: UINavigationController, appDIContainer: AppDIContainer, cocktailID: Int) {
+    init(navigationController: UINavigationController,
+         appDIContainer: AppDIContainer,
+         cocktailID: Int,
+         syncUserMadeCocktailDelegate: SyncUserMadeCocktailDelegate? = nil,
+         syncSavedCocktailDelegate: SyncSavedCocktailDelegate? = nil) {
         self.navigationController = navigationController
         self.appDIContainer = appDIContainer
         self.cocktailID = cocktailID
+        self.syncUserMadeCocktailDelegate = syncUserMadeCocktailDelegate
+        self.syncSavedCocktailDelegate = syncSavedCocktailDelegate
     }
     
     func start() {
@@ -33,6 +41,8 @@ class ProductDetailVCCoordinator: Coordinator, ProductDetailVCFlow {
         productDetailViewController.cocktailInformationView.toolView.flowDelegate = self
         productDetailViewController.cocktailInformationView.skillView.flowDelegate = self
         productDetailViewController.cocktailInformationView.glassView.flowDelegate = self
+        productDetailViewController.syncSavedCocktailDelegate = syncSavedCocktailDelegate
+        productDetailViewController.syncUserMadeCocktailDelegate = syncUserMadeCocktailDelegate
         productDetailViewController.makeBlackBackBarButton()
         
         navigationController.pushViewController(productDetailViewController, animated: true)

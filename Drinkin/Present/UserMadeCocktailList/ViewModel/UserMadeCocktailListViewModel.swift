@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol UserMadeCocktailListViewModelInput {
-    func fetchCocktailPreviewDescription(completion: @escaping () -> Void)
+    func fetchCocktailList(completion: @escaping () -> Void)
 }
 
 protocol UserMadeCocktailListViewModelOutput {
@@ -18,7 +18,11 @@ protocol UserMadeCocktailListViewModelOutput {
     var cocktailListPublisher: Published<[CocktailPreview]>.Publisher { get }
 }
 
-typealias UserMadeCocktailListViewModel = UserMadeCocktailListViewModelInput & UserMadeCocktailListViewModelOutput
+protocol SyncUserMadeCocktailDelegate {
+    func synchronizeCocktails()
+}
+
+typealias UserMadeCocktailListViewModel = UserMadeCocktailListViewModelInput & UserMadeCocktailListViewModelOutput & SyncUserMadeCocktailDelegate
 
 final class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel {
     private let userMadeCocktailListRepository: UserMadeCocktailListRepository
@@ -28,16 +32,19 @@ final class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel 
     @Published var cocktailList: [CocktailPreview] = []
     
     //MARK: - Init
+    
     init(userMadeCocktailListRepository: UserMadeCocktailListRepository) {
         self.userMadeCocktailListRepository = userMadeCocktailListRepository
     }
     
     //MARK: - Output
+    
     var errorHandlingPublisher: Published<APIError>.Publisher { $errorType }
     var cocktailListPublisher: Published<[CocktailPreview]>.Publisher { $cocktailList }
     
     //MARK: - Input
-    func fetchCocktailPreviewDescription(completion: @escaping () -> Void) {
+    
+    func fetchCocktailList(completion: @escaping () -> Void) {
         userMadeCocktailListRepository.fetchUserMadeCocktailList()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -68,5 +75,11 @@ final class DefaultUserMadeCocktailListViewModel: UserMadeCocktailListViewModel 
                     completion()
                 }
             ).store(in: &cancelBag)
+    }
+    
+    //MARK: - SyncUserMadeCocktailslDelegate
+    
+    func synchronizeCocktails() {
+        fetchCocktailList { }
     }
 }
