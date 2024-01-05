@@ -26,8 +26,41 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1CC82B562B3BE8450094B58E"
+               BuildableName = "DrinkinTests.xctest"
+               BlueprintName = "DrinkinTests"
+               ReferencedContainer = "container:Drinkin.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1CC82B632B3BEEC80094B58E"
+               BuildableName = "UsecaseUnitTests.xctest"
+               BlueprintName = "UsecaseUnitTests"
+               ReferencedContainer = "container:Drinkin.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1CC82B732B3C036C0094B58E"
+               BuildableName = "NetworkUnitTests.xctest"
+               BlueprintName = "NetworkUnitTests"
+               ReferencedContainer = "container:Drinkin.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
