@@ -150,5 +150,4 @@ final class DefaultProductDetailViewModel: ProductDetailViewModel {
                 }
             ).store(in: &cancelBag)
     }
-    
 }

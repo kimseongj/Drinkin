@@ -11,6 +11,14 @@ import UIKit
 
 extension UIImageView {
     func load(urlString: String, completion: @escaping () -> Void) {
+        if urlString == "https://drinkinv.s3.ap-northeast-2.amazonaws.com/<null>" {
+            self.hideActivityIndicator()
+            self.image = ImageStorage.rectangleIcon
+            self.tintColor = .systemGray5 
+            
+            return
+        }
+        
         let cacheKey = NSString(string: urlString)
         guard let imageURL = URL(string: urlString) else { return }
         
