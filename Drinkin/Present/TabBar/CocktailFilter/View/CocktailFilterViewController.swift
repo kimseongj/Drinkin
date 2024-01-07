@@ -354,16 +354,10 @@ extension CocktailFilterViewController {
 extension CocktailFilterViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == filterSelectionCollectionView {
-            if viewModel.isAuthenticated == false && viewModel.filterTypeList[indexPath.row] == .holdIngredient {
-                self.showLoginRecommendAlert()
-                
-            } else {
                 dismissKeyboard()
                 let cocktailFilterModalViewController = CocktailFilterModalViewController(filterType: viewModel.filterTypeList[indexPath.row], viewModel: viewModel, stopSearchBarDelegate: self)
                 cocktailFilterModalViewController.modalPresentationStyle = .overFullScreen
                 present(cocktailFilterModalViewController, animated: false)
-            }
-            
         } else {
             dismissKeyboard()
             let cocktailID = viewModel.filteredCocktailList[indexPath.row].id

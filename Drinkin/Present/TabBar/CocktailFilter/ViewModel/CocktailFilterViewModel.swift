@@ -52,14 +52,12 @@ final class DefaultCocktailFilterViewModel: CocktailFilterViewModel {
     @Published var filteredCocktailList: [CocktailPreview] = []
     var filteredCocktailListPublisher: Published<[CocktailPreview]>.Publisher { $filteredCocktailList }
     @Published var textFilterTypeList: [String] = [FilterType.category.descriptionko,
-                                                   FilterType.holdIngredient.descriptionko,
                                                    FilterType.level.descriptionko,
                                                    FilterType.abv.descriptionko,
                                                    FilterType.sugarContent.descriptionko,
                                                    FilterType.ingredientQuantity.descriptionko]
     var textFilterTypeListPublisher: Published<[String]>.Publisher { $textFilterTypeList }
     var filterTypeList: [FilterType] = [FilterType.category,
-                                        FilterType.holdIngredient,
                                         FilterType.level,
                                         FilterType.abv,
                                         FilterType.sugarContent,
@@ -163,8 +161,6 @@ extension DefaultCocktailFilterViewModel {
         switch filterType {
         case FilterType.category:
             return detailFilter.category
-        case .holdIngredient:
-            return detailFilter.holdIngredient
         case .level:
             return detailFilter.level
         case .abv:
