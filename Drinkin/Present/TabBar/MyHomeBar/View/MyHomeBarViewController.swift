@@ -316,7 +316,7 @@ final class MyHomeBarViewController: UIViewController {
     
     @objc
     private func tapLeaveMemberButton() {
-        
+        viewModel.withdraw()
     }
 }
 

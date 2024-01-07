@@ -12,6 +12,7 @@ final class MyHomeBarDIContainer {
     private let authenticationManager: AuthenticationManager
     private let holdedItemEndpoint = HoldedItemEndpoint()
     private let deleteHoldedItemEndpoint = DeleteHoldedItemEndpoint()
+    private let memberLeaveEndpoint = MemberLeaveEndpoint()
     
     init(provider: Provider, authenticationManager: AuthenticationManager) {
         self.provider = provider
@@ -33,9 +34,19 @@ final class MyHomeBarDIContainer {
         DefaultDeleteItemUsecase(deletionRepository: makeDeletionRepository())
     }
     
+    func makeMemberLeavelRepository() -> MemberLeaveRepository {
+        DefaultMemberLeaveRepository(provider: provider,
+                                     endpoint: memberLeaveEndpoint)
+    }
+    
+    func makeManagerMemberLeaveUsecase() -> ManagerMemberLeaveUsecase {
+        DefaultManagerMemberLeaveUsecase(memberLeaveRepository: makeMemberLeavelRepository())
+    }
+    
     func makeMyHomeBarViewModel() -> MyHomeBarViewModel {
         DefaultMyHomeBarViewModel(holdedItemRepository: makeHoldedItemRepository(),
                                   deleteItemUsecase: makeDeleteUsecase(),
+                                  managerMemberLeaveUsecase: makeManagerMemberLeaveUsecase(),
                                   authenticationManager: authenticationManager)
     }
     
