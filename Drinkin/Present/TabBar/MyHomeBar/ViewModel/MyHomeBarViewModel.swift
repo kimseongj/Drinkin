@@ -12,6 +12,7 @@ protocol MyHomeBarViewModelInput {
     func fetchHoldedItem(completion: @escaping () -> Void)
     func deleteHoldedItem(holdedItemName: String)
     func logout()
+    func withdraw()
 }
 
 protocol MyHomeBarViewModelOutput  {
@@ -31,6 +32,7 @@ typealias MyHomeBarViewModel = MyHomeBarViewModelInput & MyHomeBarViewModelOutpu
 class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     private let holdedItemRepository: HoldedItemRepository
     private let deleteItemUsecase: DeleteItemUsecase
+    private let managerMemberLeaveUsecase: ManagerMemberLeaveUsecase
     private let authenticationManager: AuthenticationManager
     private var cancelBag: Set<AnyCancellable> = []
     
@@ -41,9 +43,11 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     
     init(holdedItemRepository: HoldedItemRepository,
          deleteItemUsecase: DeleteItemUsecase,
+         managerMemberLeaveUsecase: ManagerMemberLeaveUsecase,
          authenticationManager: AuthenticationManager) {
         self.holdedItemRepository = holdedItemRepository
         self.deleteItemUsecase = deleteItemUsecase
+        self.managerMemberLeaveUsecase = managerMemberLeaveUsecase
         self.authenticationManager = authenticationManager
     }
     
@@ -135,5 +139,36 @@ class DefaultMyHomeBarViewModel: MyHomeBarViewModel {
     //MARK: - Logout
     func logout() {
         authenticationManager.logout()
+    }
+    
+    func withdraw() {
+        managerMemberLeaveUsecase.withdraw().sink(
+            receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
+                switch completion {
+                case .failure(let error):
+                    switch error {
+                    case .unauthorized:
+                        self.errorType = .unauthorized
+                    case .notFound:
+                        self.errorType = .notFound
+                    case .networkError(_):
+                        self.errorType = .networkError(error)
+                    case .decodingError:
+                        self.errorType = .decodingError
+                    case .refreshTokenExpired:
+                        self.errorType = .refreshTokenExpired
+                    case .noError:
+                        break
+                    }
+                case .finished:
+                    return
+                }
+            },
+            receiveValue: { [weak self] _ in
+                guard let self = self else { return }
+                self.logout()
+            }
+        ).store(in: &cancelBag)
     }
 }

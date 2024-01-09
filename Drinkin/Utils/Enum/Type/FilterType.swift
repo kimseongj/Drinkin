@@ -9,7 +9,6 @@ import Foundation
 
 enum FilterType {
     case category
-    case holdIngredient
     case level
     case abv
     case sugarContent
@@ -19,8 +18,6 @@ enum FilterType {
         switch self {
         case .category:
             return "category"
-        case .holdIngredient:
-            return "hold_ingredient"
         case .level:
             return "level"
         case .abv:
@@ -36,8 +33,6 @@ enum FilterType {
         switch self {
         case .category:
             return "전체 칵테일"
-        case .holdIngredient:
-            return "보유 재료"
         case .level:
             return "난이도"
         case .abv:
